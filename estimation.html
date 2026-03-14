@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulateur de revenus — ALPÉON</title>
+  <meta name="description" content="Estimez le potentiel locatif de votre bien alpin. Megève, Courchevel, Val Thorens, Tignes. Gratuit et sans engagement." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --stone:    #faf9f7;
+      --stone-2:  #f2ede7;
+      --stone-3:  #e4ddd4;
+      --stone-4:  #c8bfb2;
+      --ink:      #1c1b19;
+      --ink-2:    #3d3b37;
+      --ink-3:    #6b6a66;
+      --ink-4:    #9b9994;
+      --accent:   #a8956a;
+      --accent-2: #967f59;
+      --accent-light: rgba(168,149,106,0.09);
+      --error:    #a83232;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--stone);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════ HEADER (identical to index) ═══════════════ */
+
+    header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      height: 72px;
+      padding: 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.45s, border-color 0.45s;
+      background: transparent;
+    }
+
+    header.scrolled {
+      background: rgba(250,249,247,0.96);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--stone-3);
+    }
+
+    .logo {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      color: white;
+      line-height: 1;
+      transition: color 0.4s;
+    }
+
+    header.scrolled .logo-name { color: var(--ink); }
+
+    .logo-claim {
+      font-size: 0.48rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      line-height: 1;
+      transition: color 0.4s;
+    }
+
+    header.scrolled .logo-claim { color: var(--accent); }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .main-nav a {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.65);
+      transition: color 0.25s;
+    }
+
+    .main-nav a:hover { color: white; }
+    header.scrolled .main-nav a { color: var(--ink-3); }
+    header.scrolled .main-nav a:hover { color: var(--ink); }
+
+    .nav-cta {
+      border: 1px solid rgba(255,255,255,0.35) !important;
+      color: white !important;
+      padding: 9px 22px;
+      letter-spacing: 0.08em !important;
+      transition: background 0.2s, border-color 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: white !important;
+      color: var(--ink) !important;
+      border-color: white !important;
+    }
+
+    header.scrolled .nav-cta {
+      border-color: var(--ink) !important;
+      color: var(--ink) !important;
+    }
+
+    header.scrolled .nav-cta:hover {
+      background: var(--ink) !important;
+      color: white !important;
+    }
+
+    /* ═══════════════ HERO ═══════════════ */
+
+    .est-hero {
+      background: var(--ink);
+      padding: 0 60px;
+      height: 48vh;
+      min-height: 380px;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .est-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1548013146-72479768bada?w=1800&q=80')
+        center 55% / cover no-repeat;
+      opacity: 0.18;
+    }
+
+    .hero-body {
+      position: relative;
+      z-index: 1;
+      padding-bottom: 56px;
+      max-width: 760px;
+    }
+
+    .hero-breadcrumb {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 18px;
+    }
+
+    .hero-breadcrumb a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .hero-breadcrumb a:hover { color: var(--accent); }
+
+    .hero-breadcrumb span { margin: 0 8px; }
+
+    .est-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      color: white;
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      margin-bottom: 14px;
+    }
+
+    .est-hero h1 em { font-style: italic; color: rgba(255,255,255,0.6); }
+
+    .hero-note {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.65;
+    }
+
+    /* ═══════════════ CALCULATOR SECTION ═══════════════ */
+
+    .est-section {
+      padding: 72px 60px 100px;
+      background: var(--stone-2);
+    }
+
+    .est-wrap {
+      display: flex;
+      gap: 24px;
+      max-width: 1300px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+
+    /* ═══════════════ WIZARD CARD ═══════════════ */
+
+    .wizard {
+      flex: 1 1 580px;
+      background: var(--stone);
+      border: 1px solid var(--stone-3);
+    }
+
+    .wizard-top {
+      padding: 32px 40px 26px;
+      border-bottom: 1px solid var(--stone-3);
+    }
+
+    .wizard-label {
+      font-size: 0.56rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    /* PROGRESS */
+    .wizard-progress {
+      display: flex;
+      align-items: center;
+    }
+
+    .p-step {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-shrink: 0;
+    }
+
+    .p-line {
+      flex: 1;
+      height: 1px;
+      background: var(--stone-3);
+      min-width: 20px;
+      margin: 0 14px;
+      transition: background 0.4s;
+    }
+
+    .p-line.done { background: var(--accent); }
+
+    .p-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--stone-4);
+      line-height: 1;
+      min-width: 26px;
+      transition: color 0.3s;
+    }
+
+    .p-step.active .p-num,
+    .p-step.done .p-num { color: var(--ink); }
+
+    .p-step.done .p-num { color: var(--accent); }
+
+    .p-name {
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--stone-4);
+      white-space: nowrap;
+      transition: color 0.3s;
+    }
+
+    .p-step.active .p-name,
+    .p-step.done .p-name { color: var(--ink-3); }
+
+    /* WIZARD BODY */
+    .wizard-body {
+      padding: 32px 40px 8px;
+    }
+
+    .wstep { display: none; }
+    .wstep.active { display: block; }
+
+    /* FORM GROUPS */
+    .fg { margin-bottom: 28px; }
+
+    .fg-label {
+      display: block;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 10px;
+    }
+
+    .fg-label .req { color: var(--error); margin-left: 2px; }
+
+    /* UNDERLINE INPUTS */
+    .fi,
+    .fs {
+      width: 100%;
+      padding: 10px 0;
+      border: none;
+      border-bottom: 1.5px solid var(--stone-3);
+      border-radius: 0;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: transparent;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .fs {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239b9994' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      padding-right: 22px;
+    }
+
+    .fi:focus, .fs:focus { border-color: var(--accent); }
+    .fi.err, .fs.err { border-color: var(--error); }
+
+    .err-msg {
+      font-size: 0.68rem;
+      color: var(--error);
+      margin-top: 5px;
+      display: none;
+    }
+
+    .err-msg.show { display: block; }
+
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    /* RESORT TABS */
+    .resort-tabs {
+      display: flex;
+      border: 1px solid var(--stone-3);
+    }
+
+    .resort-tab {
+      flex: 1;
+      padding: 11px 4px;
+      border: none;
+      border-right: 1px solid var(--stone-3);
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--ink-3);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      text-align: center;
+    }
+
+    .resort-tab:last-child { border-right: none; }
+
+    .resort-tab.active {
+      background: var(--ink);
+      color: white;
+    }
+
+    .resort-tab:not(.active):hover {
+      background: var(--stone-2);
+      color: var(--ink);
+    }
+
+    /* SLIDER */
+    .slider-display {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+    }
+
+    .slider-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .slider-unit {
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      margin-bottom: 8px;
+    }
+
+    .slider-range {
+      font-size: 0.62rem;
+      color: var(--stone-4);
+      letter-spacing: 0.04em;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 1px;
+      background: var(--stone-3);
+      outline: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--ink);
+      border-radius: 0;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      background: var(--ink);
+      border-radius: 0;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* AMENITIES */
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--stone-3);
+    }
+
+    .am-item { display: block; position: relative; }
+
+    .am-item input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .am-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 14px;
+      border-right: 1px solid var(--stone-3);
+      border-bottom: 1px solid var(--stone-3);
+      cursor: pointer;
+      transition: background 0.12s;
+      user-select: none;
+    }
+
+    .am-item:nth-child(3n) .am-label { border-right: none; }
+    .am-item:nth-last-child(1) .am-label,
+    .am-item:nth-last-child(2) .am-label,
+    .am-item:nth-last-child(3) .am-label { border-bottom: none; }
+
+    .am-box {
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid var(--stone-3);
+      flex-shrink: 0;
+      position: relative;
+      transition: all 0.12s;
+    }
+
+    .am-item input:checked + .am-label .am-box {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .am-item input:checked + .am-label .am-box::after {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: -1px;
+      width: 5px;
+      height: 8px;
+      border: 1.5px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+
+    .am-text {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--ink-3);
+      transition: color 0.12s;
+    }
+
+    .am-item input:checked + .am-label { background: var(--accent-light); }
+    .am-item input:checked + .am-label .am-text { color: var(--ink); }
+    .am-label:hover { background: var(--stone-2); }
+
+    /* PHONE */
+    .phone-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .country-sel { width: 100px; flex-shrink: 0; }
+
+    /* CONFIRM SUMMARY */
+    .confirm-intro {
+      margin-bottom: 22px;
+    }
+
+    .confirm-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .confirm-sub {
+      font-size: 0.78rem;
+      color: var(--ink-3);
+      line-height: 1.6;
+    }
+
+    .summary-table {
+      background: var(--stone-2);
+      border: 1px solid var(--stone-3);
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: baseline;
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--stone-3);
+      gap: 16px;
+    }
+
+    .summary-row:last-child { border-bottom: none; }
+
+    .summary-key {
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      width: 110px;
+      flex-shrink: 0;
+    }
+
+    .summary-val {
+      font-size: 0.84rem;
+      color: var(--ink);
+    }
+
+    /* WIZARD FOOTER */
+    .wizard-foot {
+      padding: 16px 40px 32px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-back {
+      background: none;
+      border: 1px solid var(--stone-3);
+      color: var(--ink-3);
+      padding: 11px 20px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-back:hover { border-color: var(--ink); color: var(--ink); }
+
+    .btn-next {
+      flex: 1;
+      background: var(--ink);
+      color: white;
+      border: none;
+      padding: 13px 24px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-next:hover { background: var(--ink-2); }
+
+    .btn-submit {
+      flex: 1;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 13px 24px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-submit:hover { background: var(--accent-2); }
+
+    /* ═══════════════ RESULTS PANEL ═══════════════ */
+
+    .results-panel {
+      flex: 0 0 300px;
+      background: var(--ink);
+      position: sticky;
+      top: 88px;
+      color: white;
+    }
+
+    .res-top {
+      padding: 28px 28px 22px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .res-kicker {
+      font-size: 0.54rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .res-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: white;
+      line-height: 1.3;
+    }
+
+    .res-block {
+      padding: 22px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .res-period {
+      font-size: 0.54rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 8px;
+    }
+
+    .res-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      transition: filter 0.5s;
+      letter-spacing: -0.01em;
+    }
+
+    .res-amount.blurred {
+      filter: blur(7px);
+      pointer-events: none;
+    }
+
+    .res-note {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.22);
+      margin-top: 5px;
+    }
+
+    .res-footer {
+      padding: 22px 28px;
+    }
+
+    .res-badge {
+      border: 1px solid rgba(168,149,106,0.28);
+      padding: 14px 16px;
+      text-align: center;
+    }
+
+    .res-badge-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+
+    .res-badge-sub {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.4;
+    }
+
+    /* ═══════════════ MODAL ═══════════════ */
+
+    .modal-wrap {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(28,27,25,0.85);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-wrap.show { display: flex; }
+
+    .modal {
+      background: var(--stone);
+      border: 1px solid var(--stone-3);
+      padding: 44px;
+      max-width: 420px;
+      width: 90%;
+    }
+
+    .modal-kicker {
+      font-size: 0.56rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .modal-text {
+      font-size: 0.8rem;
+      color: var(--ink-3);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .modal-steps { display: flex; flex-direction: column; }
+
+    .modal-step {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--stone-3);
+      opacity: 0;
+      animation: fadeStep 0.4s ease forwards;
+    }
+
+    .modal-step:last-child { border-bottom: none; }
+    .modal-step:nth-child(1) { animation-delay: 0.25s; }
+    .modal-step:nth-child(2) { animation-delay: 0.8s; }
+    .modal-step:nth-child(3) { animation-delay: 1.35s; }
+
+    @keyframes fadeStep { to { opacity: 1; } }
+
+    .modal-step-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--accent);
+      min-width: 28px;
+      line-height: 1;
+    }
+
+    .modal-step-txt {
+      font-size: 0.8rem;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ═══════════════ FOOTER ═══════════════ */
+
+    footer {
+      background: #141210;
+      padding: 72px 60px 48px;
+    }
+
+    .footer-grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 32px;
+    }
+
+    .f-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      color: white;
+      margin-bottom: 3px;
+    }
+
+    .f-brand-claim {
+      font-size: 0.46rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .f-brand-desc {
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.28);
+      line-height: 1.7;
+      max-width: 240px;
+    }
+
+    .f-col-label {
+      font-size: 0.56rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+      margin-bottom: 18px;
+    }
+
+    .f-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+
+    .f-links a {
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.38);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .f-links a:hover { color: rgba(255,255,255,0.75); }
+
+    .footer-bottom {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.64rem;
+      color: rgba(255,255,255,0.16);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ═══════════════ RESPONSIVE ═══════════════ */
+
+    @media (max-width: 960px) {
+      header { padding: 0 24px; }
+      .main-nav { display: none; }
+      .est-hero { padding: 0 24px; }
+      .est-section { padding: 48px 24px 72px; }
+      .est-wrap { flex-direction: column; }
+      .results-panel { position: static; width: 100%; order: -1; flex: none; }
+      .wizard-top, .wizard-body, .wizard-foot { padding-left: 24px; padding-right: 24px; }
+      footer { padding: 56px 24px 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 560px) {
+      .est-hero h1 { font-size: 2rem; }
+      .resort-tabs { flex-wrap: wrap; }
+      .resort-tab { flex: 0 0 50%; border-bottom: 1px solid var(--stone-3); }
+      .resort-tab:nth-child(2), .resort-tab:nth-child(4) { border-right: none; }
+      .resort-tab:nth-child(3), .resort-tab:nth-child(4) { border-bottom: none; }
+      .f-row { grid-template-columns: 1fr; }
+      .amenities-grid { grid-template-columns: 1fr 1fr; }
+      .am-item:nth-child(3n) .am-label { border-right: 1px solid var(--stone-3); }
+      .am-item:nth-child(2n) .am-label { border-right: none; }
+      .am-item:nth-last-child(3) .am-label { border-bottom: 1px solid var(--stone-3); }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="siteHeader">
+    <a href="index.html" class="logo">
+      <span class="logo-name">ALPÉON</span>
+      <span class="logo-claim">Alpine Property Management</span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html#approach">Notre approche</a>
+      <a href="index.html#destinations">Destinations</a>
+      <a href="estimation.html" style="color:white;">Simulateur</a>
+      <a href="index.html#contact" class="nav-cta">Nous contacter</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="est-hero">
+    <div class="hero-body">
+      <div class="hero-breadcrumb">
+        <a href="index.html">ALPÉON</a>
+        <span>/</span>
+        Simulateur de revenus
+      </div>
+      <h1>Estimez le potentiel <em>locatif</em><br>de votre bien alpin</h1>
+      <p class="hero-note">Deux minutes suffiront. Gratuit et sans engagement.</p>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="est-section">
+    <div class="est-wrap">
+
+      <!-- WIZARD -->
+      <div class="wizard">
+        <div class="wizard-top">
+          <div class="wizard-label">Simulateur de revenus ALPÉON</div>
+          <div class="wizard-progress">
+            <div class="p-step active" data-step="1">
+              <span class="p-num">01</span>
+              <span class="p-name">Votre bien</span>
+            </div>
+            <div class="p-line" id="line-1-2"></div>
+            <div class="p-step" data-step="2">
+              <span class="p-num">02</span>
+              <span class="p-name">Contact</span>
+            </div>
+            <div class="p-line" id="line-2-3"></div>
+            <div class="p-step" data-step="3">
+              <span class="p-num">03</span>
+              <span class="p-name">Confirmation</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="estForm" novalidate>
+          <div class="wizard-body">
+
+            <!-- STEP 1 -->
+            <div class="wstep active" id="step1">
+
+              <div class="fg">
+                <label class="fg-label">Station <span class="req">*</span></label>
+                <div class="resort-tabs">
+                  <button type="button" class="resort-tab active" data-resort="megeve">Megève</button>
+                  <button type="button" class="resort-tab" data-resort="valthorens">Val Thorens</button>
+                  <button type="button" class="resort-tab" data-resort="courchevel">Courchevel</button>
+                  <button type="button" class="resort-tab" data-resort="tignes">Tignes</button>
+                </div>
+              </div>
+
+              <div class="fg">
+                <label class="fg-label" for="area">Surface habitable (m²) <span class="req">*</span></label>
+                <input type="number" id="area" class="fi" min="15" max="1500" placeholder="ex : 120" />
+                <div class="err-msg" id="err-area">Surface minimum 15 m²</div>
+              </div>
+
+              <div class="fg">
+                <label class="fg-label" for="quartier">Secteur / Quartier <span class="req">*</span></label>
+                <select id="quartier" class="fs">
+                  <option value="">Sélectionnez un secteur</option>
+                </select>
+                <div class="err-msg" id="err-quartier">Veuillez sélectionner un secteur</div>
+              </div>
+
+              <div class="fg">
+                <label class="fg-label">Capacité d'accueil</label>
+                <div class="slider-display">
+                  <div>
+                    <div class="slider-big" id="cap-display">8</div>
+                    <div class="slider-unit">Personnes</div>
+                  </div>
+                  <div class="slider-range">2 — 20</div>
+                </div>
+                <input type="range" id="capacity" min="2" max="20" value="8" step="1" />
+              </div>
+
+              <div class="fg">
+                <label class="fg-label" for="renov">État de rénovation <span class="req">*</span></label>
+                <select id="renov" class="fs">
+                  <option value="">Sélectionnez l'état</option>
+                  <option value="neuf" data-coeff="1.15">Neuf / Livraison récente</option>
+                  <option value="excellent" data-coeff="1.1">Excellent état (rénové récemment)</option>
+                  <option value="bon" data-coeff="1.0">Bon état</option>
+                  <option value="correct" data-coeff="0.9">État correct</option>
+                  <option value="travaux" data-coeff="0.8">Travaux à prévoir</option>
+                </select>
+                <div class="err-msg" id="err-renov">Veuillez sélectionner l'état de rénovation</div>
+              </div>
+
+              <div class="fg">
+                <label class="fg-label">Équipements premium</label>
+                <div class="amenities-grid">
+                  <label class="am-item">
+                    <input type="checkbox" name="amenities" value="piscine" />
+                    <div class="am-label"><span class="am-box"></span><span class="am-text">Piscine</span></div>
+                  </label>
+                  <label class="am-item">
+                    <input type="checkbox" name="amenities" value="jacuzzi" />
+                    <div class="am-label"><span class="am-box"></span><span class="am-text">Jacuzzi</span></div>
+                  </label>
+                  <label class="am-item">
+                    <input type="checkbox" name="amenities" value="sauna" />
+                    <div class="am-label"><span class="am-box"></span><span class="am-text">Sauna</span></div>
+                  </label>
+                  <label class="am-item">
+                    <input type="checkbox" name="amenities" value="hammam" />
+                    <div class="am-label"><span class="am-box"></span><span class="am-text">Hammam</span></div>
+                  </label>
+                  <label class="am-item">
+                    <input type="checkbox" name="amenities" value="cinema" />
+                    <div class="am-label"><span class="am-box"></span><span class="am-text">Cinéma</span></div>
+                  </label>
+                  <label class="am-item">
+                    <input type="checkbox" name="amenities" value="salle_sport" />
+                    <div class="am-label"><span class="am-box"></span><span class="am-text">Salle de sport</span></div>
+                  </label>
+                  <label class="am-item">
+                    <input type="checkbox" name="amenities" value="cheminee" />
+                    <div class="am-label"><span class="am-box"></span><span class="am-text">Cheminée</span></div>
+                  </label>
+                  <label class="am-item">
+                    <input type="checkbox" name="amenities" value="cave_vin" />
+                    <div class="am-label"><span class="am-box"></span><span class="am-text">Cave à vin</span></div>
+                  </label>
+                  <label class="am-item">
+                    <input type="checkbox" name="amenities" value="garage" />
+                    <div class="am-label"><span class="am-box"></span><span class="am-text">Garage</span></div>
+                  </label>
+                </div>
+              </div>
+
+            </div><!-- /step1 -->
+
+            <!-- STEP 2 -->
+            <div class="wstep" id="step2">
+
+              <div class="f-row">
+                <div class="fg">
+                  <label class="fg-label" for="firstName">Prénom <span class="req">*</span></label>
+                  <input type="text" id="firstName" class="fi" placeholder="Jean" autocomplete="given-name" />
+                </div>
+                <div class="fg">
+                  <label class="fg-label" for="lastName">Nom <span class="req">*</span></label>
+                  <input type="text" id="lastName" class="fi" placeholder="Dupont" autocomplete="family-name" />
+                  <div class="err-msg" id="err-name">Veuillez entrer votre nom</div>
+                </div>
+              </div>
+
+              <div class="fg">
+                <label class="fg-label" for="email">Adresse email <span class="req">*</span></label>
+                <input type="email" id="email" class="fi" placeholder="jean@exemple.com" autocomplete="email" />
+                <div class="err-msg" id="err-email">Adresse email invalide</div>
+              </div>
+
+              <div class="fg">
+                <label class="fg-label">Téléphone <span class="req">*</span></label>
+                <div class="phone-row">
+                  <select id="countryCode" class="fs country-sel">
+                    <option value="+33" data-digits="9">FR +33</option>
+                    <option value="+32" data-digits="9">BE +32</option>
+                    <option value="+41" data-digits="9">CH +41</option>
+                    <option value="+352" data-digits="6">LU +352</option>
+                    <option value="+44" data-digits="10">UK +44</option>
+                    <option value="+49" data-digits="10">DE +49</option>
+                    <option value="+39" data-digits="10">IT +39</option>
+                    <option value="+34" data-digits="9">ES +34</option>
+                    <option value="+1" data-digits="10">US +1</option>
+                    <option value="+971" data-digits="9">AE +971</option>
+                    <option value="+377" data-digits="8">MC +377</option>
+                    <option value="+31" data-digits="9">NL +31</option>
+                  </select>
+                  <input type="tel" id="phone" class="fi" placeholder="6 12 34 56 78" autocomplete="tel" style="flex:1;" />
+                </div>
+                <div class="err-msg" id="err-phone">Numéro de téléphone invalide</div>
+              </div>
+
+            </div><!-- /step2 -->
+
+            <!-- STEP 3 -->
+            <div class="wstep" id="step3">
+              <div class="confirm-intro">
+                <div class="confirm-title">Vérifiez vos informations</div>
+                <div class="confirm-sub">En soumettant, un expert ALPÉON vous contactera sous 24h pour affiner votre estimation et discuter de votre projet.</div>
+              </div>
+              <div class="summary-table" id="confirmSummary"></div>
+            </div><!-- /step3 -->
+
+          </div><!-- /wizard-body -->
+
+          <div class="wizard-foot">
+            <button type="button" class="btn-back" id="btnBack" style="display:none;">Retour</button>
+            <button type="button" class="btn-next" id="btnNext">Continuer</button>
+            <button type="submit" class="btn-submit" id="btnSubmit" style="display:none;">Obtenir mon estimation</button>
+          </div>
+        </form>
+      </div><!-- /wizard -->
+
+      <!-- RESULTS PANEL -->
+      <div class="results-panel">
+        <div class="res-top">
+          <div class="res-kicker">Estimation en temps réel</div>
+          <div class="res-title">Votre potentiel<br>locatif estimé</div>
+        </div>
+        <div class="res-block">
+          <div class="res-period">Revenu annuel estimé</div>
+          <div class="res-amount blurred" id="res-yearly">— €</div>
+          <div class="res-note">revenus nets attendus / an</div>
+        </div>
+        <div class="res-block">
+          <div class="res-period">Revenu mensuel moyen</div>
+          <div class="res-amount blurred" id="res-monthly">— €</div>
+          <div class="res-note">en moyenne sur l'année</div>
+        </div>
+        <div class="res-footer">
+          <div class="res-badge">
+            <div class="res-badge-title">Estimation gratuite</div>
+            <div class="res-badge-sub">Sans engagement ni obligation<br>de mise en gestion</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /est-wrap -->
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand-name">ALPÉON</div>
+        <div class="f-brand-claim">Alpine Property Management</div>
+        <p class="f-brand-desc">Opérateur premium de gestion locative courte durée dans les Alpes françaises.</p>
+      </div>
+      <div>
+        <div class="f-col-label">Destinations</div>
+        <ul class="f-links">
+          <li><a href="index.html#destinations">Megève</a></li>
+          <li><a href="index.html#destinations">Courchevel</a></li>
+          <li><a href="index.html#destinations">Val Thorens</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-label">Services</div>
+        <ul class="f-links">
+          <li><a href="index.html#approach">Gestion locative</a></li>
+          <li><a href="index.html#signature">ALPÉON Signature</a></li>
+          <li><a href="estimation.html">Simulateur de revenus</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-label">Contact</div>
+        <ul class="f-links">
+          <li><a href="tel:+33600000000">+33 6 00 00 00 00</a></li>
+          <li><a href="mailto:proprietaires@alpeon.fr">proprietaires@alpeon.fr</a></li>
+          <li><a href="index.html#contact">Nous contacter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ALPÉON. Tous droits réservés.</span>
+      <span>Estimation non contractuelle</span>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-wrap" id="successModal">
+    <div class="modal">
+      <div class="modal-kicker">Confirmation</div>
+      <div class="modal-title">Estimation envoyée</div>
+      <div class="modal-text">Un expert ALPÉON va vous contacter très prochainement pour affiner votre estimation et discuter de votre projet.</div>
+      <div class="modal-steps">
+        <div class="modal-step">
+          <span class="modal-step-n">01</span>
+          <span class="modal-step-txt">Dossier bien reçu</span>
+        </div>
+        <div class="modal-step">
+          <span class="modal-step-n">02</span>
+          <span class="modal-step-txt">Analyse de marché en cours</span>
+        </div>
+        <div class="modal-step">
+          <span class="modal-step-n">03</span>
+          <span class="modal-step-txt">Prise de contact sous 24h</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ═══════ RESORT CONFIG ═══════
+  const resortConfig = {
+    megeve: {
+      label: 'Megève', exponent: 0.60, base: 2250, multiplier: 1.0,
+      quartiers: [
+        { value: 'centre',      label: 'Centre-village',     coeff: 1.15 },
+        { value: 'mont_arbois', label: "Mont d'Arbois",      coeff: 1.12 },
+        { value: 'rochebrune',  label: 'Rochebrune',         coeff: 1.10 },
+        { value: 'jaillet',     label: 'Le Jaillet',         coeff: 1.05 },
+        { value: 'prairie',     label: 'La Prairie',         coeff: 1.02 },
+        { value: 'christomet',  label: 'Christomet',         coeff: 1.00 },
+        { value: 'demi_lune',   label: 'Demi-Lune',          coeff: 1.00 },
+        { value: 'other',       label: 'Autre / Périphérie', coeff: 0.95 },
+      ]
+    },
+    valthorens: {
+      label: 'Val Thorens', exponent: 1.0, base: 450, multiplier: 1.1,
+      quartiers: [
+        { value: 'caron',     label: 'Secteur Caron',      coeff: 1.10 },
+        { value: 'peclet',    label: 'Roc de Peclet',      coeff: 1.08 },
+        { value: 'village',   label: 'Le Village',         coeff: 1.05 },
+        { value: 'olympique', label: 'Quartier Olympique', coeff: 1.02 },
+        { value: 'balcons',   label: 'Les Balcons',        coeff: 1.00 },
+        { value: 'orelle',    label: 'Orelle',             coeff: 0.88 },
+      ]
+    },
+    courchevel: {
+      label: 'Courchevel', exponent: 0.65, base: 2800, multiplier: 1.0,
+      quartiers: [
+        { value: '1850',      label: 'Courchevel 1850',         coeff: 1.25 },
+        { value: '1650',      label: 'Moriond 1650',            coeff: 1.05 },
+        { value: '1550',      label: 'Courchevel Village 1550', coeff: 0.95 },
+        { value: '1300',      label: 'Le Praz 1300',            coeff: 0.85 },
+        { value: 'saint_bon', label: 'Saint-Bon',               coeff: 0.80 },
+      ]
+    },
+    tignes: {
+      label: 'Tignes', exponent: 1.0, base: 550, multiplier: 1.1,
+      quartiers: [
+        { value: 'val_claret', label: 'Val Claret',    coeff: 1.08 },
+        { value: 'lac',        label: 'Tignes-le-Lac', coeff: 1.05 },
+        { value: '1800',       label: 'Tignes 1800',   coeff: 0.95 },
+        { value: 'boisses',    label: 'Les Boisses',   coeff: 0.90 },
+        { value: 'brevieres',  label: 'Les Brévières', coeff: 0.88 },
+      ]
+    }
+  };
+
+  const capCoeffs = {
+    2:0.001,3:0.005,4:0.01,5:0.02,6:0.04,7:0.05,8:0.07,
+    9:0.08,10:0.1,11:0.11,12:0.13,13:0.14,14:0.16,
+    15:0.17,16:0.19,17:0.21,18:0.23,19:0.25,20:0.27
+  };
+
+  const amCoeffs = {
+    piscine:0.12, jacuzzi:0.07, sauna:0.05, hammam:0.04,
+    cinema:0.03, salle_sport:0.03, cheminee:0.02, cave_vin:0.02, garage:0.01
+  };
+
+  const amNames = {
+    piscine:'Piscine', jacuzzi:'Jacuzzi', sauna:'Sauna',
+    hammam:'Hammam', cinema:'Cinéma', salle_sport:'Salle de sport',
+    cheminee:'Cheminée', cave_vin:'Cave à vin', garage:'Garage'
+  };
+
+  let currentResort = 'megeve';
+
+  // Header scroll
+  const hdr = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+  hdr.classList.add('scrolled'); // always scrolled on this page (no full-height hero)
+
+  // Populate quartiers
+  function populateQuartiers(key) {
+    const cfg = resortConfig[key];
+    if (!cfg) return;
+    const sel = document.getElementById('quartier');
+    sel.innerHTML = '<option value="">Sélectionnez un secteur</option>';
+    cfg.quartiers.forEach(q => {
+      const o = document.createElement('option');
+      o.value = q.value;
+      o.textContent = q.label;
+      o.dataset.coeff = q.coeff;
+      sel.appendChild(o);
+    });
+  }
+
+  // Resort tabs
+  document.querySelectorAll('.resort-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.resort-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentResort = tab.dataset.resort;
+      populateQuartiers(currentResort);
+      updateResults();
+    });
+  });
+
+  // Amenities
+  const getAmenities = () =>
+    Array.from(document.querySelectorAll('input[name="amenities"]:checked')).map(c => c.value);
+
+  // Calculate
+  function calcRevenue() {
+    const area = parseFloat(document.getElementById('area').value) || 0;
+    const cap  = parseInt(document.getElementById('capacity').value) || 6;
+    const qSel = document.getElementById('quartier');
+    const qCoeff = qSel.selectedIndex > 0
+      ? parseFloat(qSel.options[qSel.selectedIndex].dataset.coeff || 1) : 1.0;
+    const rSel = document.getElementById('renov');
+    const rCoeff = rSel.selectedIndex > 0
+      ? parseFloat(rSel.options[rSel.selectedIndex].dataset.coeff || 1) : 1.0;
+    let amBonus = 0;
+    getAmenities().forEach(a => { amBonus += amCoeffs[a] || 0; });
+    const cfg = resortConfig[currentResort] || resortConfig.megeve;
+    const base = Math.pow(area, cfg.exponent) * cfg.base * (1 + (capCoeffs[cap] || 0.07));
+    const yearly = Math.round(base * qCoeff * rCoeff * (1 + amBonus) * cfg.multiplier);
+    return { yearly, monthly: Math.round(yearly / 12) };
+  }
+
+  function updateResults() {
+    const area = parseFloat(document.getElementById('area').value) || 0;
+    if (area < 15) return;
+    const { yearly, monthly } = calcRevenue();
+    document.getElementById('res-yearly').textContent = yearly.toLocaleString('fr-FR') + ' €';
+    document.getElementById('res-monthly').textContent = monthly.toLocaleString('fr-FR') + ' €';
+    document.getElementById('res-yearly').classList.add('blurred');
+    document.getElementById('res-monthly').classList.add('blurred');
+  }
+
+  // Listeners
+  document.getElementById('area').addEventListener('input', updateResults);
+  document.getElementById('quartier').addEventListener('change', updateResults);
+  document.getElementById('renov').addEventListener('change', updateResults);
+  document.querySelectorAll('input[name="amenities"]').forEach(c => c.addEventListener('change', updateResults));
+
+  // Slider
+  const capSlider = document.getElementById('capacity');
+  const capDisplay = document.getElementById('cap-display');
+  capSlider.addEventListener('input', () => {
+    capDisplay.textContent = capSlider.value;
+    updateResults();
+  });
+
+  populateQuartiers(currentResort);
+
+  // ═══════ WIZARD ═══════
+  let step = 1;
+
+  function setStep(n) {
+    for (let i = 1; i <= 3; i++) {
+      document.getElementById('step' + i).classList.toggle('active', i === n);
+      const ps = document.querySelector('.p-step[data-step="' + i + '"]');
+      ps.classList.remove('active', 'done');
+      if (i === n) ps.classList.add('active');
+      else if (i < n) ps.classList.add('done');
+    }
+    document.getElementById('line-1-2').classList.toggle('done', n > 1);
+    document.getElementById('line-2-3').classList.toggle('done', n > 2);
+    document.getElementById('btnBack').style.display   = n > 1 ? 'inline-block' : 'none';
+    document.getElementById('btnNext').style.display   = n < 3 ? 'inline-block' : 'none';
+    document.getElementById('btnSubmit').style.display = n === 3 ? 'inline-block' : 'none';
+    if (n === 3) buildSummary();
+    step = n;
+    window.scrollTo({ top: document.querySelector('.est-section').offsetTop - 84, behavior: 'smooth' });
+  }
+
+  function buildSummary() {
+    const qSel = document.getElementById('quartier');
+    const rSel = document.getElementById('renov');
+    const ams = getAmenities();
+    const rows = [
+      ['Station',      resortConfig[currentResort]?.label || currentResort],
+      ['Surface',      (document.getElementById('area').value || '—') + ' m²'],
+      ['Secteur',      qSel.selectedIndex > 0 ? qSel.options[qSel.selectedIndex].text : '—'],
+      ['Capacité',     capSlider.value + ' personnes'],
+      ['Rénovation',   rSel.selectedIndex > 0 ? rSel.options[rSel.selectedIndex].text : '—'],
+      ['Équipements',  ams.length > 0 ? ams.map(a => amNames[a] || a).join(', ') : 'Aucun'],
+      ['Prénom & Nom', [document.getElementById('firstName').value, document.getElementById('lastName').value].filter(Boolean).join(' ') || '—'],
+      ['Email',        document.getElementById('email').value || '—'],
+      ['Téléphone',    buildPhone()],
+    ];
+    document.getElementById('confirmSummary').innerHTML = rows.map(([k, v]) =>
+      `<div class="summary-row"><span class="summary-key">${k}</span><span class="summary-val">${v}</span></div>`
+    ).join('');
+  }
+
+  function validate1() {
+    let ok = true;
+    const area = parseFloat(document.getElementById('area').value);
+    if (!area || area < 15) {
+      document.getElementById('err-area').classList.add('show');
+      document.getElementById('area').classList.add('err');
+      ok = false;
+    } else {
+      document.getElementById('err-area').classList.remove('show');
+      document.getElementById('area').classList.remove('err');
+    }
+    if (!document.getElementById('quartier').value) {
+      document.getElementById('err-quartier').classList.add('show');
+      ok = false;
+    } else {
+      document.getElementById('err-quartier').classList.remove('show');
+    }
+    if (!document.getElementById('renov').value) {
+      document.getElementById('err-renov').classList.add('show');
+      ok = false;
+    } else {
+      document.getElementById('err-renov').classList.remove('show');
+    }
+    return ok;
+  }
+
+  function validate2() {
+    let ok = true;
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    if (firstName.length < 1 || lastName.length < 1) {
+      document.getElementById('err-name').classList.add('show');
+      ok = false;
+    } else {
+      document.getElementById('err-name').classList.remove('show');
+    }
+    const email = document.getElementById('email').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('err-email').classList.add('show');
+      document.getElementById('email').classList.add('err');
+      ok = false;
+    } else {
+      document.getElementById('err-email').classList.remove('show');
+      document.getElementById('email').classList.remove('err');
+    }
+    const raw = document.getElementById('phone').value.replace(/\D/g, '');
+    const cc  = document.getElementById('countryCode');
+    const exp = parseInt(cc.options[cc.selectedIndex]?.dataset.digits || '9');
+    if (raw.length < exp) {
+      document.getElementById('err-phone').classList.add('show');
+      ok = false;
+    } else {
+      document.getElementById('err-phone').classList.remove('show');
+    }
+    return ok;
+  }
+
+  function buildPhone() {
+    const cc = document.getElementById('countryCode').value;
+    let raw = document.getElementById('phone').value.replace(/\D/g, '');
+    if (cc === '+33' && raw.startsWith('0')) raw = raw.slice(1);
+    return cc + raw;
+  }
+
+  document.getElementById('btnNext').addEventListener('click', () => {
+    if (step === 1 && !validate1()) return;
+    if (step === 2 && !validate2()) return;
+    setStep(step + 1);
+  });
+
+  document.getElementById('btnBack').addEventListener('click', () => {
+    if (step > 1) setStep(step - 1);
+  });
+
+  // ═══════ SUBMIT ═══════
+  document.getElementById('estForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const qSel = document.getElementById('quartier');
+    const rSel = document.getElementById('renov');
+    const ams  = getAmenities();
+    const { yearly, monthly } = calcRevenue();
+    const fullName = [document.getElementById('firstName').value, document.getElementById('lastName').value].join(' ').trim();
+
+    const payload = {
+      quartier: qSel.selectedIndex > 0 ? qSel.options[qSel.selectedIndex].text : '',
+      surface:  parseFloat(document.getElementById('area').value),
+      capacity: parseInt(capSlider.value),
+      renovation: rSel.selectedIndex > 0 ? rSel.options[rSel.selectedIndex].text : '',
+      amenities: ams,
+      fullName,
+      email: document.getElementById('email').value.trim(),
+      phone: buildPhone(),
+      yearlyRevenue: yearly,
+      monthlyRevenue: monthly,
+      resort: currentResort,
+      resortLabel: resortConfig[currentResort]?.label || currentResort,
+      source: 'alpeon',
+    };
+
+    document.getElementById('res-yearly').classList.remove('blurred');
+    document.getElementById('res-monthly').classList.remove('blurred');
+    document.getElementById('successModal').classList.add('show');
+
+    try {
+      await fetch('proxy.php', {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } catch (_) { /* silent */ }
+
+    const p = new URLSearchParams({
+      yearly, monthly,
+      area: document.getElementById('area').value,
+      quartier: payload.quartier,
+      capacity: capSlider.value,
+      renovation: payload.renovation,
+      name: fullName,
+      amenities: ams.join(','),
+      resort: currentResort,
+      resortLabel: payload.resortLabel,
+    });
+
+    setTimeout(() => { window.location.href = 'resultats.html?' + p.toString(); }, 2600);
+  });
+  </script>
+</body>
+</html>
