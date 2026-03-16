@@ -242,16 +242,24 @@
       position: relative;
     }
 
-    /* Layout centré */
+    /* Layout 2 colonnes centré */
+    .est-wrap {
+      display: flex;
+      justify-content: center;
+    }
     .est-layout {
-      display: block;
+      display: grid;
+      grid-template-columns: minmax(0, 720px) 300px;
+      width: 100%;
+      max-width: 1100px;
+      min-height: 600px;
     }
     .est-main {
       padding: 64px 60px 100px;
+      border-right: 1px solid var(--stone-3);
     }
     .est-inner {
-      max-width: 720px;
-      margin: 0 auto;
+      max-width: 100%;
     }
 
     /* Sidebar sombre — estimation live */
@@ -1507,7 +1515,8 @@
 
   /* ─── Tablette : sidebar masquée ≤ 960px ─── */
   @media (max-width: 960px) {
-    .est-layout { grid-template-columns: 1fr; }
+    .est-wrap { display: block; }
+    .est-layout { grid-template-columns: 1fr; max-width: 100%; }
     .est-side { display: none; }
     .est-main { padding: 48px 52px 80px; }
   }
