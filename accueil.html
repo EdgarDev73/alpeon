@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accueil — ALPÉON</title>
+  <meta name="description" content="ALPÉON gère votre propriété alpine avec discrétion, excellence et transparence. 15 stations — Megève, Courchevel, Val Thorens, Val d'Isère et plus encore." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --stone:    #faf9f7;
+      --stone-2:  #f2ede7;
+      --stone-3:  #e4ddd4;
+      --stone-4:  #c8bfb2;
+      --ink:      #1c1b19;
+      --ink-2:    #3d3b37;
+      --ink-3:    #4a4845;
+      --ink-4:    #7a7873;
+      --accent:   #a8956a;
+      --accent-2: #967f59;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      color: var(--ink);
+      background: var(--stone);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════ HEADER ═══════════════════════════════ */
+
+    header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      height: 72px;
+      padding: 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.45s, border-color 0.45s;
+    }
+
+    header.scrolled {
+      background: rgba(250,249,247,0.96);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--stone-3);
+    }
+
+    .logo {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      color: white;
+      line-height: 1;
+      transition: color 0.4s;
+    }
+
+    header.scrolled .logo-name { color: var(--ink); }
+
+    .logo-claim {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      line-height: 1;
+      transition: color 0.4s;
+    }
+
+    header.scrolled .logo-claim { color: var(--accent); }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .main-nav a {
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.65);
+      transition: color 0.25s;
+    }
+
+    .main-nav a:hover { color: white; }
+
+    header.scrolled .main-nav a { color: var(--ink-3); }
+    header.scrolled .main-nav a:hover { color: var(--ink); }
+
+    .nav-cta {
+      border: 1px solid rgba(255,255,255,0.35) !important;
+      color: white !important;
+      padding: 9px 22px;
+      letter-spacing: 0.08em !important;
+      transition: background 0.2s, border-color 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: white !important;
+      color: var(--ink) !important;
+      border-color: white !important;
+    }
+
+    header.scrolled .nav-cta {
+      border-color: var(--ink) !important;
+      color: var(--ink) !important;
+    }
+
+    header.scrolled .nav-cta:hover {
+      background: var(--ink) !important;
+      color: white !important;
+    }
+
+    /* ═══════════════════════════════ HERO ═══════════════════════════════ */
+
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=2000&q=90')
+        center 40% / cover no-repeat;
+      transform: scale(1.03);
+      transition: transform 8s ease;
+    }
+
+    .hero.loaded .hero-bg { transform: scale(1); }
+
+    .hero-veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        165deg,
+        rgba(15,13,10,0.18) 0%,
+        rgba(15,13,10,0.55) 70%,
+        rgba(15,13,10,0.80) 100%
+      );
+    }
+
+    .hero-body {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 60px 80px;
+      max-width: 1300px;
+    }
+
+    .hero-kicker {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: white;
+      margin-bottom: 28px;
+      max-width: 760px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .hero-desc {
+      font-size: 0.97rem;
+      line-height: 1.78;
+      color: rgba(255,255,255,0.68);
+      max-width: 420px;
+      margin-bottom: 44px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn-fill {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      padding: 14px 36px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .btn-fill:hover { background: var(--accent-2); }
+
+    .btn-line {
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.55);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-line:hover { color: white; border-color: white; }
+
+    .hero-scroll-hint {
+      position: absolute;
+      z-index: 2;
+      bottom: 40px;
+      right: 60px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .scroll-rule { width: 44px; height: 1px; background: rgba(255,255,255,0.2); }
+
+    /* ═══════════════════════════════ INTRO ═══════════════════════════════ */
+
+    .intro {
+      padding: 104px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .intro-aside {
+      padding-top: 8px;
+    }
+
+    .aside-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .aside-rule {
+      width: 24px;
+      height: 1px;
+      background: var(--stone-3);
+      margin: 14px 0;
+    }
+
+    .aside-note {
+      font-size: 0.82rem;
+      color: var(--ink-3);
+      line-height: 1.7;
+    }
+
+    .intro-text {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.5rem, 2.8vw, 2.15rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+    }
+
+    .intro-text em {
+      font-style: italic;
+      color: var(--ink-3);
+    }
+
+    .intro-text strong {
+      font-weight: 500;
+      font-style: normal;
+      color: var(--ink);
+    }
+
+    /* ═══════════════════════════════ RULE ═══════════════════════════════ */
+
+    .hr { height: 1px; background: var(--stone-3); margin: 0 60px; }
+
+    /* ═══════════════════════════════ APPROACH ═══════════════════════════ */
+
+    .approach {
+      padding: 104px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 80px;
+      margin-bottom: 64px;
+      align-items: end;
+    }
+
+    .section-kicker {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 4px;
+    }
+
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--stone-3);
+      border: 1px solid var(--stone-3);
+    }
+
+    .approach-cell {
+      background: var(--stone);
+      padding: 48px 36px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cell-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--stone-3);
+      line-height: 1;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .cell-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    .cell-text {
+      font-size: 0.86rem;
+      color: var(--ink-2);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    /* ═══════════════════════════════ DESTINATIONS ═══════════════════════ */
+
+    .destinations {
+      background: var(--stone-2);
+      border-top: 1px solid var(--stone-3);
+      border-bottom: 1px solid var(--stone-3);
+    }
+
+    .destinations-inner {
+      padding: 104px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .destinations-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 64px;
+      align-items: end;
+    }
+
+    .destinations-header h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.16;
+      letter-spacing: -0.015em;
+    }
+
+    .destinations-header p {
+      font-size: 0.93rem;
+      color: var(--ink-2);
+      line-height: 1.75;
+    }
+
+    .dest-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--stone-3);
+      border: 1px solid var(--stone-3);
+    }
+
+    .dest-card { background: var(--stone-2); overflow: hidden; }
+
+    .dest-photo {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dest-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.75) brightness(0.92);
+      transition: transform 0.7s ease, filter 0.5s;
+    }
+
+    .dest-card:hover .dest-photo img {
+      transform: scale(1.05);
+      filter: saturate(1) brightness(0.98);
+    }
+
+    .dest-body { padding: 28px 28px 32px; }
+
+    .dest-altitude {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .dest-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+
+    .dest-desc {
+      font-size: 0.86rem;
+      color: var(--ink-2);
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════ PILLARS ═══════════════════════════ */
+
+    .pillars {
+      padding: 104px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .pillars-top {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 80px;
+      margin-bottom: 64px;
+      align-items: end;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--stone-3);
+      border: 1px solid var(--stone-3);
+    }
+
+    .pillar {
+      background: var(--stone);
+      padding: 52px 36px 44px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-word {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.1rem;
+      font-weight: 300;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .pillar-rule {
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .pillar-text {
+      font-size: 0.86rem;
+      color: var(--ink-2);
+      line-height: 1.75;
+    }
+
+    /* ═══════════════════════════════ SIGNATURE BAND ════════════════════ */
+
+    .signature-band {
+      background: var(--ink);
+      padding: 0 60px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .signature-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 360px;
+    }
+
+    .sig-left {
+      padding: 80px 80px 80px 0;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .sig-kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .sig-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: white;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+
+    .sig-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.7;
+    }
+
+    .sig-right {
+      padding: 80px 0 80px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .sig-feature {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .sig-feature:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .sig-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .sig-feat-text {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.6;
+    }
+
+    .sig-feat-text strong {
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ═══════════════════════════════ ESTIMATOR ════════════════════════ */
+
+    .estimator {
+      background: var(--stone-2);
+      border-top: 1px solid var(--stone-3);
+      border-bottom: 1px solid var(--stone-3);
+      padding: 100px 60px;
+    }
+
+    .estimator-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .estimator h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+      margin-bottom: 14px;
+    }
+
+    .estimator p {
+      font-size: 0.93rem;
+      color: var(--ink-2);
+      line-height: 1.75;
+    }
+
+    .estimator-panel {
+      background: var(--stone);
+      border: 1px solid var(--stone-3);
+      padding: 40px;
+    }
+
+    .est-panel-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--stone-3);
+    }
+
+    .est-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+
+    .est-feat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--stone-3);
+    }
+
+    .est-feat:last-child { border-bottom: none; }
+
+    .est-feat-mark {
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .est-feat-text {
+      font-size: 0.86rem;
+      color: var(--ink-2);
+    }
+
+    .btn-estimate {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      background: var(--ink);
+      color: white;
+      text-decoration: none;
+      padding: 14px 32px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .btn-estimate:hover { background: var(--ink-2); }
+
+    /* ═══════════════════════════════ CONTACT ═══════════════════════════ */
+
+    .contact {
+      padding: 104px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .contact-header {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 80px;
+      margin-bottom: 64px;
+      align-items: end;
+    }
+
+    .contact-body {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .info-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--stone-3);
+    }
+
+    .info-item:first-child { border-top: 1px solid var(--stone-3); }
+
+    .info-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+
+    .info-value a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.2s;
+    }
+
+    .info-value a:hover { color: var(--accent); }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .f-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .f-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .f-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    .f-group input,
+    .f-group select,
+    .f-group textarea {
+      border: none;
+      border-bottom: 1.5px solid var(--stone-3);
+      background: transparent;
+      padding: 10px 0;
+      font-size: 0.95rem;
+      font-family: 'Instrument Sans', sans-serif;
+      color: var(--ink);
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .f-group select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239b9994' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      padding-right: 22px;
+    }
+
+    .f-group input:focus,
+    .f-group select:focus,
+    .f-group textarea:focus { border-color: var(--accent); }
+
+    .f-group textarea { resize: none; height: 88px; }
+
+    .btn-send {
+      align-self: flex-start;
+      background: var(--ink);
+      color: white;
+      border: none;
+      padding: 13px 36px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'Instrument Sans', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-send:hover { background: var(--accent); }
+
+    /* ═══════════════════════════════ FOOTER ═══════════════════════════ */
+
+    footer {
+      background: #141210;
+      padding: 72px 60px 48px;
+    }
+
+    .footer-grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 32px;
+    }
+
+    .f-brand-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      color: white;
+      margin-bottom: 3px;
+    }
+
+    .f-brand-claim {
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .f-brand-desc {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.44);
+      line-height: 1.7;
+      max-width: 240px;
+    }
+
+    .f-col-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 18px;
+    }
+
+    .f-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+
+    .f-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.52);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .f-links a:hover { color: rgba(255,255,255,0.75); }
+
+    .footer-bottom {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.28);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* ═══════════════════════════════ RESPONSIVE ════════════════════════ */
+
+    @media (max-width: 1100px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 900px) {
+      header { padding: 0 24px; }
+      .main-nav { display: none; }
+
+      .hero-body { padding: 0 24px 60px; }
+      .hero-scroll-hint { right: 24px; display: none; }
+
+      .intro, .approach, .pillars, .contact { padding-left: 24px; padding-right: 24px; }
+      .intro { grid-template-columns: 1fr; gap: 20px; padding-top: 72px; padding-bottom: 72px; }
+      .hr { margin: 0 24px; }
+
+      .approach { padding-top: 72px; padding-bottom: 72px; }
+      .section-heading { grid-template-columns: 1fr; gap: 16px; }
+      .approach-grid { grid-template-columns: 1fr; }
+
+      .destinations-inner { padding: 72px 24px; }
+      .destinations-header { grid-template-columns: 1fr; gap: 20px; }
+      .dest-grid { grid-template-columns: 1fr; }
+
+      .pillars { padding-top: 72px; padding-bottom: 72px; }
+      .pillars-top { grid-template-columns: 1fr; gap: 16px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+
+      .signature-band { padding: 0 24px; }
+      .signature-inner { grid-template-columns: 1fr; }
+      .sig-left { padding: 64px 0 40px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .sig-right { padding: 40px 0 64px; }
+
+      .estimator { padding: 72px 24px; }
+      .estimator-inner { grid-template-columns: 1fr; gap: 44px; }
+
+      .contact { padding-top: 72px; padding-bottom: 72px; }
+      .contact-header { grid-template-columns: 1fr; gap: 16px; }
+      .contact-body { grid-template-columns: 1fr; gap: 44px; }
+
+      footer { padding: 56px 24px 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 540px) {
+      .hero h1 { font-size: 2.4rem; }
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .f-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    /* ═══════════════════════════════ STATS BAR ════════════════════════ */
+
+    .stats-bar {
+      background: var(--ink);
+      padding: 0 80px;
+    }
+
+    .stats-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-left: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .stat-item {
+      padding: 44px 40px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .stat-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════ TESTIMONIALS ════════════════════ */
+
+    .testimonials {
+      padding: 100px 80px;
+      background: var(--stone-2);
+    }
+
+    .testimonials-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .testi-kicker {
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 48px;
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--stone-3);
+    }
+
+    .testi-card {
+      background: var(--stone-2);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .testi-quote {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .testi-quote::before {
+      content: '"';
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 0;
+      vertical-align: -0.5em;
+      margin-right: 4px;
+    }
+
+    .testi-author {
+      border-top: 1px solid var(--stone-3);
+      padding-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .testi-name {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .testi-info {
+      font-size: 0.64rem;
+      color: var(--ink-4);
+      letter-spacing: 0.04em;
+    }
+
+    /* ═══════════════════════════════ DESTINATIONS (grid compact) ══════ */
+
+    .dest-map-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--stone-3);
+      margin-top: 48px;
+    }
+
+    .dest-region {
+      border-right: 1px solid var(--stone-3);
+    }
+
+    .dest-region:last-child { border-right: none; }
+
+    .dest-region-title {
+      font-size: 0.54rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      padding: 14px 20px;
+      background: var(--stone-2);
+      border-bottom: 1px solid var(--stone-3);
+    }
+
+    .dest-station {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--stone-3);
+      gap: 8px;
+      transition: background 0.15s;
+    }
+
+    .dest-station:last-child { border-bottom: none; }
+    .dest-station:hover { background: var(--stone-2); }
+
+    .dest-station-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .dest-station-alt {
+      font-size: 0.58rem;
+      color: var(--ink-4);
+      white-space: nowrap;
+    }
+
+    .dest-station.flagship .dest-station-name { color: var(--accent); }
+
+    .dest-flagship-tag {
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: white;
+      background: var(--accent);
+      padding: 2px 6px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .stats-bar { padding: 0 24px; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .testimonials { padding: 72px 24px; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .dest-map-grid { grid-template-columns: 1fr 1fr; }
+      .dest-region:nth-child(2) { border-right: none; }
+      .dest-region:nth-child(3) { border-right: 1px solid var(--stone-3); border-top: 1px solid var(--stone-3); }
+      .dest-region:nth-child(4) { border-right: none; border-top: 1px solid var(--stone-3); }
+    }
+
+    @media (max-width: 540px) {
+      .dest-map-grid { grid-template-columns: 1fr; }
+      .dest-region { border-right: none; border-bottom: 1px solid var(--stone-3); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <header id="siteHeader">
+    <a href="#" class="logo">
+      <span class="logo-name">ALPÉON</span>
+      <span class="logo-claim">Alpine Property Management</span>
+    </a>
+    <nav class="main-nav">
+      <a href="#approach">Notre approche</a>
+      <a href="#destinations">Destinations</a>
+      <a href="estimateur.html">Simulateur</a>
+      <a href="#contact" class="nav-cta">Nous contacter</a>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="hero" id="heroSection">
+    <div class="hero-bg"></div>
+    <div class="hero-veil"></div>
+    <div class="hero-body">
+      <div class="hero-kicker">Haute-Savoie &nbsp;&middot;&nbsp; Savoie &nbsp;&middot;&nbsp; Isère &nbsp;&middot;&nbsp; Hautes-Alpes</div>
+      <h1>La gestion locative<br><em>réinventée</em> pour les<br>Alpes françaises</h1>
+      <p class="hero-desc">ALPÉON confie à votre propriété le niveau de service et de discrétion qu'elle mérite. Une approche moderne, des standards exigeants.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-fill">Confier mon bien</a>
+        <a href="#estimateur" class="btn-line">Estimer mes revenus</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-rule"></div>
+      Découvrir
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STATS BAR ═══════════════════ -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">200<span style="font-size:1.8rem">+</span></div>
+        <div class="stat-label">Propriétaires<br>accompagnés</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">15</div>
+        <div class="stat-label">Stations alpines<br>couvertes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">98<span style="font-size:1.8rem">%</span></div>
+        <div class="stat-label">Taux de satisfaction<br>propriétaires</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">+32<span style="font-size:1.8rem">%</span></div>
+        <div class="stat-label">Revenus en plus<br>en moyenne</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ INTRO ═══════════════════ -->
+  <section>
+    <div class="intro">
+      <div class="intro-aside">
+        <div class="aside-label">Notre vision</div>
+        <div class="aside-rule"></div>
+        <div class="aside-note">Fondé pour répondre aux attentes d'une nouvelle génération de propriétaires alpins.</div>
+      </div>
+      <p class="intro-text">
+        Nous croyons que la gestion locative d'une propriété d'exception devrait être <em>aussi discrète que professionnelle</em>. ALPÉON est né de cette conviction&nbsp;: offrir aux propriétaires alpins un opérateur à la hauteur de leurs biens — <strong>transparent, rigoureux, et résolument moderne</strong>.
+      </p>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+
+  <!-- ═══════════════════ APPROACH ═══════════════════ -->
+  <section id="approach">
+    <div class="approach">
+      <div class="section-heading">
+        <div class="section-kicker">Notre approche</div>
+        <h2 class="section-title">Un cadre de gestion<br>complet et transparent</h2>
+      </div>
+      <div class="approach-grid">
+        <div class="approach-cell">
+          <div class="cell-num">01</div>
+          <div class="cell-title">Gestion transparente</div>
+          <div class="cell-text">Un espace propriétaire dédié en temps réel, des rapports mensuels détaillés, une communication directe avec votre gestionnaire. Vous gardez le contrôle — nous gérons l'opérationnel.</div>
+        </div>
+        <div class="approach-cell">
+          <div class="cell-num">02</div>
+          <div class="cell-title">Sélection rigoureuse</div>
+          <div class="cell-text">Chaque réservation est examinée individuellement. Nous appliquons des critères stricts pour garantir la sécurité de votre bien et la qualité de chaque séjour.</div>
+        </div>
+        <div class="approach-cell">
+          <div class="cell-num">03</div>
+          <div class="cell-title">Excellence opérationnelle</div>
+          <div class="cell-text">Coordination du ménage, maintenance préventive, accueil des locataires, gestion des services de conciergerie — chaque détail est orchestré avec précision.</div>
+        </div>
+        <div class="approach-cell">
+          <div class="cell-num">04</div>
+          <div class="cell-title">Stratégie tarifaire dynamique</div>
+          <div class="cell-text">Analyse continue du marché et ajustement des prix en temps réel pour maximiser votre taux d'occupation et vos revenus sur chaque saison.</div>
+        </div>
+        <div class="approach-cell">
+          <div class="cell-num">05</div>
+          <div class="cell-title">Distribution multi-canaux</div>
+          <div class="cell-text">Présence sur les plateformes premium — Airbnb Luxe, VRBO, Booking.com — ainsi que notre propre réseau de clients fidèles et d'agences partenaires internationales.</div>
+        </div>
+        <div class="approach-cell">
+          <div class="cell-num">06</div>
+          <div class="cell-title">Reporting & traçabilité</div>
+          <div class="cell-text">Historique complet de vos revenus, des dates de réservation et des bilans de séjour. Une visibilité totale, à tout moment, depuis n'importe où.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ DESTINATIONS ═══════════════════ -->
+  <section id="destinations" class="destinations">
+    <div class="destinations-inner">
+      <div class="destinations-header">
+        <div>
+          <div class="section-kicker" style="margin-bottom:18px;">Nos destinations</div>
+          <h2>15 stations alpines,<br>un seul niveau<br>d'exigence</h2>
+        </div>
+        <p>ALPÉON opère dans les stations les plus prisées des Alpes françaises — de la Haute-Savoie aux Hautes-Alpes. Chaque destination bénéficie d'une équipe locale dédiée, d'une connaissance fine du marché et de partenaires opérationnels soigneusement sélectionnés.</p>
+      </div>
+
+      <div class="dest-map-grid">
+
+        <!-- Haute-Savoie 74 -->
+        <div class="dest-region">
+          <div class="dest-region-title">Haute-Savoie &nbsp;74</div>
+          <div class="dest-station flagship">
+            <span class="dest-station-name">Megève</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span class="dest-station-alt">1 113 m</span>
+              <span class="dest-flagship-tag">Flagship</span>
+            </div>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Chamonix</span>
+            <span class="dest-station-alt">1 035 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Morzine</span>
+            <span class="dest-station-alt">1 000 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Avoriaz</span>
+            <span class="dest-station-alt">1 800 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">La Clusaz</span>
+            <span class="dest-station-alt">1 040 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Les Gets</span>
+            <span class="dest-station-alt">1 172 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Combloux</span>
+            <span class="dest-station-alt">1 070 m</span>
+          </div>
+        </div>
+
+        <!-- Savoie 73 — Les Trois Vallées -->
+        <div class="dest-region">
+          <div class="dest-region-title">Savoie 73 — Trois Vallées</div>
+          <div class="dest-station flagship">
+            <span class="dest-station-name">Courchevel</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span class="dest-station-alt">1 850 m</span>
+              <span class="dest-flagship-tag">Flagship</span>
+            </div>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Méribel</span>
+            <span class="dest-station-alt">1 450 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Val Thorens</span>
+            <span class="dest-station-alt">2 300 m</span>
+          </div>
+        </div>
+
+        <!-- Savoie 73 — Tarentaise -->
+        <div class="dest-region">
+          <div class="dest-region-title">Savoie 73 — Tarentaise</div>
+          <div class="dest-station">
+            <span class="dest-station-name">Val d'Isère</span>
+            <span class="dest-station-alt">1 850 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Tignes</span>
+            <span class="dest-station-alt">2 100 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Les Arcs</span>
+            <span class="dest-station-alt">1 600 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">La Plagne</span>
+            <span class="dest-station-alt">2 050 m</span>
+          </div>
+        </div>
+
+        <!-- Isère / Hautes-Alpes -->
+        <div class="dest-region">
+          <div class="dest-region-title">Isère 38 / Hautes-Alpes 05</div>
+          <div class="dest-station">
+            <span class="dest-station-name">L'Alpe d'Huez</span>
+            <span class="dest-station-alt">1 860 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Les 2 Alpes</span>
+            <span class="dest-station-alt">1 650 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Serre Chevalier</span>
+            <span class="dest-station-alt">1 350 m</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="testi-kicker">Ce que disent nos propriétaires</div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-quote">Depuis que j'ai confié mon chalet à ALPÉON, je n'ai plus à me soucier de rien. Les rapports mensuels sont clairs, la communication est irréprochable, et mes revenus ont augmenté de 28 % dès la première saison.</div>
+          <div class="testi-author">
+            <div class="testi-name">Sophie L.</div>
+            <div class="testi-info">Propriétaire d'un chalet à Megève · Client depuis 2022</div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">L'équipe ALPÉON a une connaissance du marché courchevelois vraiment pointue. Ils ont optimisé mes tarifs semaine par semaine et mon taux d'occupation n'a jamais été aussi élevé. Professionnalisme total.</div>
+          <div class="testi-author">
+            <div class="testi-name">Marc &amp; Isabelle D.</div>
+            <div class="testi-info">Propriétaires d'un appartement à Courchevel 1850 · Clients depuis 2021</div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">Ce qui m'a convaincu, c'est la transparence absolue. Je vois tout en temps réel — les réservations, les revenus, les comptes-rendus de séjour. Avec ALPÉON, je reste propriétaire à part entière de mon bien.</div>
+          <div class="testi-author">
+            <div class="testi-name">François M.</div>
+            <div class="testi-info">Propriétaire d'un penthouse à Val d'Isère · Client depuis 2023</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PILLARS ═══════════════════ -->
+  <section>
+    <div class="pillars">
+      <div class="pillars-top">
+        <div class="section-kicker">Les valeurs ALPÉON</div>
+        <h2 class="section-title">Trois mots qui définissent<br>notre engagement envers<br>chaque propriétaire</h2>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar">
+          <div class="pillar-word">Confiance</div>
+          <div class="pillar-rule"></div>
+          <div class="pillar-text">Votre propriété est notre responsabilité. Nous la gérons avec le même soin et la même exigence que si elle nous appartenait. Aucun compromis sur la qualité ou la sécurité.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-word">Expérience</div>
+          <div class="pillar-rule"></div>
+          <div class="pillar-text">Une connaissance profonde des marchés alpins, des cycles saisonniers, des comportements locataires et des leviers de performance qui font la différence entre un bien ordinaire et un bien qui performe.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-word">Discrétion</div>
+          <div class="pillar-rule"></div>
+          <div class="pillar-text">Confidentialité absolue sur vos revenus, votre patrimoine et votre identité. La discrétion est au cœur de chaque interaction, chaque document, chaque décision que nous prenons.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ SIGNATURE BAND ═══════════════════ -->
+  <div class="signature-band">
+    <div class="signature-inner">
+      <div class="sig-left">
+        <div class="sig-kicker">ALPÉON Signature</div>
+        <div class="sig-title">Le segment luxe<br>d'ALPÉON</div>
+        <p class="sig-sub">Pour les propriétés d'exception — chalets ultra-premium, penthouses, résidences architecturales — ALPÉON Signature offre un niveau de service encore plus personnalisé, avec une équipe dédiée et des standards hôteliers cinq étoiles.</p>
+      </div>
+      <div class="sig-right">
+        <div class="sig-feature">
+          <div class="sig-dot"></div>
+          <div class="sig-feat-text"><strong>Gestionnaire de compte exclusif</strong> — un interlocuteur unique disponible en permanence pour vous et vos locataires</div>
+        </div>
+        <div class="sig-feature">
+          <div class="sig-dot"></div>
+          <div class="sig-feat-text"><strong>Services de conciergerie privée</strong> — transferts, chefs à domicile, guides de montagne, activités sur mesure</div>
+        </div>
+        <div class="sig-feature">
+          <div class="sig-dot"></div>
+          <div class="sig-feat-text"><strong>Sélection de locataires renforcée</strong> — vérifications approfondies et cautions adaptées aux biens d'exception</div>
+        </div>
+        <div class="sig-feature">
+          <div class="sig-dot"></div>
+          <div class="sig-feat-text"><strong>Photographie et production éditoriale</strong> — mise en valeur visuelle de niveau magazine pour votre bien</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ ESTIMATOR ═══════════════════ -->
+  <section id="estimateur" class="estimator">
+    <div class="estimator-inner">
+      <div>
+        <div class="section-kicker" style="margin-bottom:16px;">Simulateur de revenus</div>
+        <h2>Découvrez le potentiel locatif de votre bien</h2>
+        <p>En deux minutes, obtenez une estimation personnalisée de vos revenus locatifs potentiels, calculée sur la base des données de marché réelles de chaque station alpine.</p>
+      </div>
+      <div class="estimator-panel">
+        <div class="est-panel-label">Ce que couvre le simulateur</div>
+        <div class="est-features">
+          <div class="est-feat">
+            <div class="est-feat-mark"></div>
+            <span class="est-feat-text">Estimation basée sur les données réelles de marché par station</span>
+          </div>
+          <div class="est-feat">
+            <div class="est-feat-mark"></div>
+            <span class="est-feat-text">15 stations alpines — Megève, Courchevel, Val d'Isère, Méribel et plus</span>
+          </div>
+          <div class="est-feat">
+            <div class="est-feat-mark"></div>
+            <span class="est-feat-text">Prise en compte de la surface, du quartier, de la capacité et des prestations</span>
+          </div>
+          <div class="est-feat">
+            <div class="est-feat-mark"></div>
+            <span class="est-feat-text">Résultat personnalisé en moins de 2 minutes</span>
+          </div>
+          <div class="est-feat">
+            <div class="est-feat-mark"></div>
+            <span class="est-feat-text">Gratuit et sans engagement</span>
+          </div>
+        </div>
+        <a href="estimateur.html" class="btn-estimate">Lancer le simulateur</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CONTACT ═══════════════════ -->
+  <section id="contact" class="contact">
+    <div class="contact-header">
+      <div class="section-kicker">Nous contacter</div>
+      <h2 class="section-title">Parlez-nous<br>de votre bien</h2>
+    </div>
+    <div class="contact-body">
+      <div class="contact-info">
+        <div class="info-item">
+          <div class="info-label">Téléphone</div>
+          <div class="info-value"><a href="tel:+33600000000">+33 6 00 00 00 00</a></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Email propriétaires</div>
+          <div class="info-value"><a href="mailto:proprietaires@alpeon.fr">proprietaires@alpeon.fr</a></div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Destinations</div>
+          <div class="info-value" style="font-size:0.78rem;line-height:1.7;">Megève &middot; Courchevel &middot; Val Thorens<br>Val d'Isère &middot; Méribel &middot; Chamonix &middot; +9</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Disponibilité</div>
+          <div class="info-value">Lun – Ven, 9h – 19h</div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="f-row">
+          <div class="f-group">
+            <label class="f-label">Prénom</label>
+            <input type="text" placeholder="Jean" />
+          </div>
+          <div class="f-group">
+            <label class="f-label">Nom</label>
+            <input type="text" placeholder="Dupont" />
+          </div>
+        </div>
+        <div class="f-row">
+          <div class="f-group">
+            <label class="f-label">Email</label>
+            <input type="email" placeholder="jean@exemple.com" />
+          </div>
+          <div class="f-group">
+            <label class="f-label">Téléphone</label>
+            <input type="tel" placeholder="+33 6 00 00 00 00" />
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">Type de bien</label>
+          <select>
+            <option value="">Sélectionnez...</option>
+            <option>Chalet de luxe</option>
+            <option>Chalet mid-range</option>
+            <option>Penthouse</option>
+            <option>Appartement premium</option>
+            <option>Résidence secondaire alpine</option>
+            <option>Bien d'investissement</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label class="f-label">Destination</label>
+          <select>
+            <option value="">Sélectionnez...</option>
+            <optgroup label="Haute-Savoie (74)">
+              <option>Megève</option>
+              <option>Chamonix</option>
+              <option>Morzine / Avoriaz</option>
+              <option>La Clusaz</option>
+              <option>Les Gets</option>
+              <option>Combloux</option>
+            </optgroup>
+            <optgroup label="Savoie (73) — Trois Vallées">
+              <option>Courchevel</option>
+              <option>Méribel</option>
+              <option>Val Thorens</option>
+            </optgroup>
+            <optgroup label="Savoie (73) — Tarentaise">
+              <option>Val d'Isère</option>
+              <option>Tignes</option>
+              <option>Les Arcs</option>
+              <option>La Plagne</option>
+            </optgroup>
+            <optgroup label="Isère / Hautes-Alpes">
+              <option>L'Alpe d'Huez</option>
+              <option>Les 2 Alpes</option>
+              <option>Serre Chevalier</option>
+            </optgroup>
+            <option value="autre">Autre destination alpine</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label class="f-label">Message</label>
+          <textarea placeholder="Décrivez brièvement votre bien et votre projet de mise en location..."></textarea>
+        </div>
+        <button class="btn-send">Envoyer ma demande</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand-name">ALPÉON</div>
+        <div class="f-brand-claim">Alpine Property Management</div>
+        <p class="f-brand-desc">Opérateur premium de gestion locative courte durée dans les Alpes françaises. Discrétion, excellence et transparence pour chaque propriétaire.</p>
+      </div>
+      <div>
+        <div class="f-col-label">Destinations</div>
+        <ul class="f-links">
+          <li><a href="#">Megève</a></li>
+          <li><a href="#">Courchevel</a></li>
+          <li><a href="#">Val d'Isère</a></li>
+          <li><a href="#">Méribel</a></li>
+          <li><a href="#">Val Thorens</a></li>
+          <li><a href="#">Chamonix</a></li>
+          <li><a href="#">+ 9 stations</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-label">Services</div>
+        <ul class="f-links">
+          <li><a href="#">Gestion locative</a></li>
+          <li><a href="#">ALPÉON Signature</a></li>
+          <li><a href="estimateur.html">Simulateur de revenus</a></li>
+          <li><a href="#">Propriétaires</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-label">Contact</div>
+        <ul class="f-links">
+          <li><a href="tel:+33600000000">+33 6 00 00 00 00</a></li>
+          <li><a href="mailto:proprietaires@alpeon.fr">proprietaires@alpeon.fr</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ALPÉON. Tous droits réservés.</span>
+      <span>Gestion locative alpine premium — 15 stations dans les Alpes françaises</span>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll state
+    const header = document.getElementById('siteHeader');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Hero subtle parallax on bg
+    const heroBg = document.querySelector('.hero-bg');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroBg.style.transform = `scale(1) translateY(${y * 0.22}px)`;
+      }
+    }, { passive: true });
+
+    // Fade-in sections on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.approach-cell, .pillar, .sig-feature, .est-feat, .testi-card, .stat-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Hero loaded animation
+    window.addEventListener('load', () => {
+      document.getElementById('heroSection').classList.add('loaded');
+    });
+  </script>
+</body>
+</html>
