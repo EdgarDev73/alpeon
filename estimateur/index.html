@@ -238,24 +238,21 @@
        ESTIMATEUR — WRAPPER & LAYOUT 2 COL
     ═══════════════════════════════════════ */
     .est-wrap {
-      background: #fff;
+      background: var(--stone-2);
       position: relative;
-    }
-
-    /* Layout 2 colonnes centré */
-    .est-wrap {
-      display: flex;
-      justify-content: center;
+      padding: 60px 40px 80px;
     }
     .est-layout {
       display: grid;
-      grid-template-columns: minmax(0, 720px) 300px;
-      width: 100%;
-      max-width: 1100px;
-      min-height: 600px;
+      grid-template-columns: 1fr 300px;
+      max-width: 1060px;
+      margin: 0 auto;
+      min-height: 560px;
+      box-shadow: 0 8px 48px rgba(28,27,25,.10);
     }
     .est-main {
-      padding: 64px 60px 100px;
+      padding: 56px 60px 88px;
+      background: #fff;
       border-right: 1px solid var(--stone-3);
     }
     .est-inner {
