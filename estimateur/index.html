@@ -126,7 +126,7 @@
     .si-bg {
       position: absolute;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=2000&q=90') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2000&q=90') center/cover no-repeat;
       transform: scale(1.04);
       transition: transform 1.2s cubic-bezier(.22,1,.36,1);
     }
@@ -242,18 +242,16 @@
       position: relative;
     }
 
-    /* Layout 2 colonnes : form + sidebar */
+    /* Layout centré */
     .est-layout {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      min-height: 600px;
+      display: block;
     }
     .est-main {
-      padding: 56px 64px 88px;
-      border-right: 1px solid var(--stone-3);
+      padding: 64px 60px 100px;
     }
     .est-inner {
-      max-width: 620px;
+      max-width: 720px;
+      margin: 0 auto;
     }
 
     /* Sidebar sombre — estimation live */
@@ -1673,7 +1671,7 @@
       <a href="/accueil#services">Services</a>
       <a href="/accueil#parc">Nos biens</a>
       <a href="/accueil#temoignages">Témoignages</a>
-      <a href="/estimateur" style="color:#fff;">Simulateur</a>
+      <a href="/estimateur" style="color:#fff;">Estimateur</a>
       <a href="/accueil#contact" class="nav-cta">Nous contacter</a>
     </nav>
   </header>
@@ -1683,31 +1681,13 @@
     <div class="si-bg"></div>
     <div class="si-veil"></div>
     <div class="si-content">
-      <span class="si-kicker">Simulateur de revenus</span>
+      <span class="si-kicker">Estimateur de revenus</span>
       <h1>Combien peut rapporter<br><em>votre bien en montagne ?</em></h1>
       <p>Notre outil d'estimation est construit sur les données réelles de 200+ propriétés alpines gérées par ALPÉON — chalets, appartements, résidences. Une estimation fiable en 2 minutes.</p>
       <a href="#estimateur" class="si-cta">
         Lancer la simulation
         <svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
       </a>
-    </div>
-    <div class="si-stats">
-      <div class="si-stat">
-        <div class="si-stat-val">200<span>+</span></div>
-        <div class="si-stat-label">Propriétés gérées</div>
-      </div>
-      <div class="si-stat">
-        <div class="si-stat-val">15</div>
-        <div class="si-stat-label">Stations couvertes</div>
-      </div>
-      <div class="si-stat">
-        <div class="si-stat-val"><span>+</span>32<span>%</span></div>
-        <div class="si-stat-label">Revenus vs gestion seule</div>
-      </div>
-      <div class="si-stat">
-        <div class="si-stat-val">98<span>%</span></div>
-        <div class="si-stat-label">Taux de satisfaction</div>
-      </div>
     </div>
   </section>
 
@@ -2015,7 +1995,7 @@
         <ul class="f-links">
           <li><a href="#">Gestion locative</a></li>
           <li><a href="#">ALPÉON Signature</a></li>
-          <li><a href="/estimateur">Simulateur de revenus</a></li>
+          <li><a href="/estimateur">Estimateur de revenus</a></li>
           <li><a href="#">Propriétaires</a></li>
         </ul>
       </div>
