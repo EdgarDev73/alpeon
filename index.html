@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALPÉON — Gestion Locative Alpine Premium</title>
-  <meta name="description" content="ALPÉON gère votre propriété alpine avec discrétion, excellence et transparence. Megève, Courchevel, Val Thorens." />
+  <meta name="description" content="ALPÉON gère votre propriété alpine avec discrétion, excellence et transparence. 15 stations — Megève, Courchevel, Val Thorens, Val d'Isère et plus encore." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -18,8 +18,8 @@
       --stone-4:  #c8bfb2;
       --ink:      #1c1b19;
       --ink-2:    #3d3b37;
-      --ink-3:    #6b6a66;
-      --ink-4:    #9b9994;
+      --ink-3:    #4a4845;
+      --ink-4:    #7a7873;
       --accent:   #a8956a;
       --accent-2: #967f59;
     }
@@ -28,7 +28,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Instrument Sans', sans-serif;
       color: var(--ink);
       background: var(--stone);
       overflow-x: hidden;
@@ -63,7 +63,7 @@
     }
 
     .logo-name {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: 1.45rem;
       font-weight: 400;
       letter-spacing: 0.28em;
@@ -75,7 +75,7 @@
     header.scrolled .logo-name { color: var(--ink); }
 
     .logo-claim {
-      font-size: 0.48rem;
+      font-size: 0.6rem;
       font-weight: 500;
       letter-spacing: 0.3em;
       text-transform: uppercase;
@@ -93,9 +93,9 @@
     }
 
     .main-nav a {
-      font-size: 0.68rem;
+      font-size: 0.74rem;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       text-decoration: none;
       color: rgba(255,255,255,0.65);
@@ -175,16 +175,16 @@
     }
 
     .hero-kicker {
-      font-size: 0.6rem;
+      font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.32em;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 20px;
     }
 
     .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(2.6rem, 6vw, 5.2rem);
       font-weight: 300;
       line-height: 1.1;
@@ -201,9 +201,9 @@
     }
 
     .hero-desc {
-      font-size: 0.88rem;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.55);
+      font-size: 0.97rem;
+      line-height: 1.78;
+      color: rgba(255,255,255,0.68);
       max-width: 420px;
       margin-bottom: 44px;
     }
@@ -221,9 +221,9 @@
       color: white;
       text-decoration: none;
       padding: 14px 36px;
-      font-size: 0.68rem;
+      font-size: 0.76rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: background 0.2s;
     }
@@ -231,9 +231,9 @@
     .btn-fill:hover { background: var(--accent-2); }
 
     .btn-line {
-      font-size: 0.68rem;
+      font-size: 0.76rem;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
       text-decoration: none;
       color: rgba(255,255,255,0.55);
@@ -252,8 +252,8 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 0.56rem;
-      letter-spacing: 0.24em;
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.3);
     }
@@ -277,9 +277,9 @@
     }
 
     .aside-label {
-      font-size: 0.58rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
     }
@@ -292,13 +292,13 @@
     }
 
     .aside-note {
-      font-size: 0.72rem;
-      color: var(--ink-4);
+      font-size: 0.82rem;
+      color: var(--ink-3);
       line-height: 1.7;
     }
 
     .intro-text {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(1.5rem, 2.8vw, 2.15rem);
       font-weight: 300;
       color: var(--ink);
@@ -338,16 +338,16 @@
     }
 
     .section-kicker {
-      font-size: 0.58rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
       padding-top: 4px;
     }
 
     .section-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 300;
       color: var(--ink);
@@ -371,7 +371,7 @@
     }
 
     .cell-num {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: 3.5rem;
       font-weight: 300;
       color: var(--stone-3);
@@ -381,7 +381,7 @@
     }
 
     .cell-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: 1.2rem;
       font-weight: 400;
       color: var(--ink);
@@ -390,8 +390,8 @@
     }
 
     .cell-text {
-      font-size: 0.76rem;
-      color: var(--ink-3);
+      font-size: 0.86rem;
+      color: var(--ink-2);
       line-height: 1.75;
       flex: 1;
     }
@@ -419,7 +419,7 @@
     }
 
     .destinations-header h2 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(2rem, 4vw, 3.2rem);
       font-weight: 300;
       color: var(--ink);
@@ -428,8 +428,8 @@
     }
 
     .destinations-header p {
-      font-size: 0.84rem;
-      color: var(--ink-3);
+      font-size: 0.93rem;
+      color: var(--ink-2);
       line-height: 1.75;
     }
 
@@ -466,15 +466,15 @@
     .dest-body { padding: 28px 28px 32px; }
 
     .dest-altitude {
-      font-size: 0.58rem;
-      letter-spacing: 0.22em;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 6px;
     }
 
     .dest-name {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: 1.5rem;
       font-weight: 400;
       color: var(--ink);
@@ -483,8 +483,8 @@
     }
 
     .dest-desc {
-      font-size: 0.76rem;
-      color: var(--ink-3);
+      font-size: 0.86rem;
+      color: var(--ink-2);
       line-height: 1.7;
     }
 
@@ -520,7 +520,7 @@
     }
 
     .pillar-word {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: 2.1rem;
       font-weight: 300;
       color: var(--ink);
@@ -536,8 +536,8 @@
     }
 
     .pillar-text {
-      font-size: 0.76rem;
-      color: var(--ink-3);
+      font-size: 0.86rem;
+      color: var(--ink-2);
       line-height: 1.75;
     }
 
@@ -566,15 +566,15 @@
     }
 
     .sig-kicker {
-      font-size: 0.58rem;
-      letter-spacing: 0.28em;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 18px;
     }
 
     .sig-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(1.8rem, 3vw, 2.6rem);
       font-weight: 300;
       color: white;
@@ -584,8 +584,8 @@
     }
 
     .sig-sub {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.35);
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.52);
       line-height: 1.7;
     }
 
@@ -616,8 +616,8 @@
     }
 
     .sig-feat-text {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.45);
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.58);
       line-height: 1.6;
     }
 
@@ -645,7 +645,7 @@
     }
 
     .estimator h2 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 300;
       color: var(--ink);
@@ -655,8 +655,8 @@
     }
 
     .estimator p {
-      font-size: 0.84rem;
-      color: var(--ink-3);
+      font-size: 0.93rem;
+      color: var(--ink-2);
       line-height: 1.75;
     }
 
@@ -667,9 +667,9 @@
     }
 
     .est-panel-label {
-      font-size: 0.58rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 24px;
@@ -702,8 +702,8 @@
     }
 
     .est-feat-text {
-      font-size: 0.76rem;
-      color: var(--ink-3);
+      font-size: 0.86rem;
+      color: var(--ink-2);
     }
 
     .btn-estimate {
@@ -714,9 +714,9 @@
       color: white;
       text-decoration: none;
       padding: 14px 32px;
-      font-size: 0.68rem;
+      font-size: 0.76rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: background 0.2s;
     }
@@ -760,11 +760,11 @@
     .info-item:first-child { border-top: 1px solid var(--stone-3); }
 
     .info-label {
-      font-size: 0.58rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
       margin-bottom: 5px;
     }
 
@@ -796,11 +796,11 @@
     .f-group { display: flex; flex-direction: column; gap: 6px; }
 
     .f-label {
-      font-size: 0.58rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--ink-4);
+      color: var(--ink-3);
     }
 
     .f-group input,
@@ -810,8 +810,8 @@
       border-bottom: 1.5px solid var(--stone-3);
       background: transparent;
       padding: 10px 0;
-      font-size: 0.88rem;
-      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-family: 'Instrument Sans', sans-serif;
       color: var(--ink);
       outline: none;
       width: 100%;
@@ -840,11 +840,11 @@
       color: white;
       border: none;
       padding: 13px 36px;
-      font-size: 0.68rem;
+      font-size: 0.76rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Instrument Sans', sans-serif;
       cursor: pointer;
       transition: background 0.2s;
     }
@@ -870,7 +870,7 @@
     }
 
     .f-brand-name {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Instrument Serif', serif;
       font-size: 1.35rem;
       font-weight: 400;
       letter-spacing: 0.24em;
@@ -879,34 +879,34 @@
     }
 
     .f-brand-claim {
-      font-size: 0.46rem;
-      letter-spacing: 0.28em;
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 18px;
     }
 
     .f-brand-desc {
-      font-size: 0.74rem;
-      color: rgba(255,255,255,0.28);
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.44);
       line-height: 1.7;
       max-width: 240px;
     }
 
     .f-col-label {
-      font-size: 0.56rem;
+      font-size: 0.68rem;
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.38);
       margin-bottom: 18px;
     }
 
     .f-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
 
     .f-links a {
-      font-size: 0.74rem;
-      color: rgba(255,255,255,0.38);
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.52);
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -919,8 +919,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.64rem;
-      color: rgba(255,255,255,0.16);
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.28);
       flex-wrap: wrap;
       gap: 8px;
     }
@@ -976,6 +976,202 @@
       .f-row { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 28px; }
     }
+
+    /* ═══════════════════════════════ STATS BAR ════════════════════════ */
+
+    .stats-bar {
+      background: var(--ink);
+      padding: 0 80px;
+    }
+
+    .stats-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-left: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .stat-item {
+      padding: 44px 40px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .stat-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════ TESTIMONIALS ════════════════════ */
+
+    .testimonials {
+      padding: 100px 80px;
+      background: var(--stone-2);
+    }
+
+    .testimonials-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .testi-kicker {
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 48px;
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--stone-3);
+    }
+
+    .testi-card {
+      background: var(--stone-2);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .testi-quote {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .testi-quote::before {
+      content: '"';
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 0;
+      vertical-align: -0.5em;
+      margin-right: 4px;
+    }
+
+    .testi-author {
+      border-top: 1px solid var(--stone-3);
+      padding-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .testi-name {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .testi-info {
+      font-size: 0.64rem;
+      color: var(--ink-4);
+      letter-spacing: 0.04em;
+    }
+
+    /* ═══════════════════════════════ DESTINATIONS (grid compact) ══════ */
+
+    .dest-map-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--stone-3);
+      margin-top: 48px;
+    }
+
+    .dest-region {
+      border-right: 1px solid var(--stone-3);
+    }
+
+    .dest-region:last-child { border-right: none; }
+
+    .dest-region-title {
+      font-size: 0.54rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-4);
+      padding: 14px 20px;
+      background: var(--stone-2);
+      border-bottom: 1px solid var(--stone-3);
+    }
+
+    .dest-station {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--stone-3);
+      gap: 8px;
+      transition: background 0.15s;
+    }
+
+    .dest-station:last-child { border-bottom: none; }
+    .dest-station:hover { background: var(--stone-2); }
+
+    .dest-station-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .dest-station-alt {
+      font-size: 0.58rem;
+      color: var(--ink-4);
+      white-space: nowrap;
+    }
+
+    .dest-station.flagship .dest-station-name { color: var(--accent); }
+
+    .dest-flagship-tag {
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: white;
+      background: var(--accent);
+      padding: 2px 6px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .stats-bar { padding: 0 24px; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .testimonials { padding: 72px 24px; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .dest-map-grid { grid-template-columns: 1fr 1fr; }
+      .dest-region:nth-child(2) { border-right: none; }
+      .dest-region:nth-child(3) { border-right: 1px solid var(--stone-3); border-top: 1px solid var(--stone-3); }
+      .dest-region:nth-child(4) { border-right: none; border-top: 1px solid var(--stone-3); }
+    }
+
+    @media (max-width: 540px) {
+      .dest-map-grid { grid-template-columns: 1fr; }
+      .dest-region { border-right: none; border-bottom: 1px solid var(--stone-3); }
+    }
   </style>
 </head>
 <body>
@@ -999,7 +1195,7 @@
     <div class="hero-bg"></div>
     <div class="hero-veil"></div>
     <div class="hero-body">
-      <div class="hero-kicker">Megève &nbsp;&middot;&nbsp; Courchevel &nbsp;&middot;&nbsp; Val Thorens</div>
+      <div class="hero-kicker">Haute-Savoie &nbsp;&middot;&nbsp; Savoie &nbsp;&middot;&nbsp; Isère &nbsp;&middot;&nbsp; Hautes-Alpes</div>
       <h1>La gestion locative<br><em>réinventée</em> pour les<br>Alpes françaises</h1>
       <p class="hero-desc">ALPÉON confie à votre propriété le niveau de service et de discrétion qu'elle mérite. Une approche moderne, des standards exigeants.</p>
       <div class="hero-actions">
@@ -1012,6 +1208,28 @@
       Découvrir
     </div>
   </section>
+
+  <!-- ═══════════════════ STATS BAR ═══════════════════ -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">200<span style="font-size:1.8rem">+</span></div>
+        <div class="stat-label">Propriétaires<br>accompagnés</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">15</div>
+        <div class="stat-label">Stations alpines<br>couvertes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">98<span style="font-size:1.8rem">%</span></div>
+        <div class="stat-label">Taux de satisfaction<br>propriétaires</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">+32<span style="font-size:1.8rem">%</span></div>
+        <div class="stat-label">Revenus en plus<br>en moyenne</div>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══════════════════ INTRO ═══════════════════ -->
   <section>
@@ -1077,51 +1295,135 @@
       <div class="destinations-header">
         <div>
           <div class="section-kicker" style="margin-bottom:18px;">Nos destinations</div>
-          <h2>Trois stations,<br>un même niveau<br>d'exigence</h2>
+          <h2>15 stations alpines,<br>un seul niveau<br>d'exigence</h2>
         </div>
-        <p>ALPÉON opère au cœur des stations les plus prisées des Alpes françaises. Chaque destination bénéficie d'une équipe locale dédiée, d'une connaissance fine du marché et de partenaires opérationnels soigneusement sélectionnés.</p>
+        <p>ALPÉON opère dans les stations les plus prisées des Alpes françaises — de la Haute-Savoie aux Hautes-Alpes. Chaque destination bénéficie d'une équipe locale dédiée, d'une connaissance fine du marché et de partenaires opérationnels soigneusement sélectionnés.</p>
       </div>
-      <div class="dest-grid">
-        <div class="dest-card">
-          <div class="dest-photo">
-            <img
-              src="https://images.unsplash.com/photo-1565992441121-4367c2967103?w=900&q=80"
-              alt="Megève"
-              loading="lazy"
-            />
+
+      <div class="dest-map-grid">
+
+        <!-- Haute-Savoie 74 -->
+        <div class="dest-region">
+          <div class="dest-region-title">Haute-Savoie &nbsp;74</div>
+          <div class="dest-station flagship">
+            <span class="dest-station-name">Megève</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span class="dest-station-alt">1 113 m</span>
+              <span class="dest-flagship-tag">Flagship</span>
+            </div>
           </div>
-          <div class="dest-body">
-            <div class="dest-altitude">Haute-Savoie &nbsp;·&nbsp; 1 113 m</div>
-            <div class="dest-name">Megève</div>
-            <div class="dest-desc">Référence du ski alpin français, Megève allie authenticité savoyarde et raffinement international. Chalets historiques, hôtels particuliers et appartements de prestige.</div>
+          <div class="dest-station">
+            <span class="dest-station-name">Chamonix</span>
+            <span class="dest-station-alt">1 035 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Morzine</span>
+            <span class="dest-station-alt">1 000 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Avoriaz</span>
+            <span class="dest-station-alt">1 800 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">La Clusaz</span>
+            <span class="dest-station-alt">1 040 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Les Gets</span>
+            <span class="dest-station-alt">1 172 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Combloux</span>
+            <span class="dest-station-alt">1 070 m</span>
           </div>
         </div>
-        <div class="dest-card">
-          <div class="dest-photo">
-            <img
-              src="https://images.unsplash.com/photo-1551524164-687a55dd1126?w=900&q=80"
-              alt="Courchevel"
-              loading="lazy"
-            />
+
+        <!-- Savoie 73 — Les Trois Vallées -->
+        <div class="dest-region">
+          <div class="dest-region-title">Savoie 73 — Trois Vallées</div>
+          <div class="dest-station flagship">
+            <span class="dest-station-name">Courchevel</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span class="dest-station-alt">1 850 m</span>
+              <span class="dest-flagship-tag">Flagship</span>
+            </div>
           </div>
-          <div class="dest-body">
-            <div class="dest-altitude">Savoie &nbsp;·&nbsp; 1 300 – 1 850 m</div>
-            <div class="dest-name">Courchevel</div>
-            <div class="dest-desc">Symbole du luxe alpin mondial, Courchevel attire une clientèle internationale fortunée. Chalets d'exception avec accès piste direct et services hôteliers sur mesure.</div>
+          <div class="dest-station">
+            <span class="dest-station-name">Méribel</span>
+            <span class="dest-station-alt">1 450 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Val Thorens</span>
+            <span class="dest-station-alt">2 300 m</span>
           </div>
         </div>
-        <div class="dest-card">
-          <div class="dest-photo">
-            <img
-              src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=900&q=80"
-              alt="Val Thorens"
-              loading="lazy"
-            />
+
+        <!-- Savoie 73 — Tarentaise -->
+        <div class="dest-region">
+          <div class="dest-region-title">Savoie 73 — Tarentaise</div>
+          <div class="dest-station">
+            <span class="dest-station-name">Val d'Isère</span>
+            <span class="dest-station-alt">1 850 m</span>
           </div>
-          <div class="dest-body">
-            <div class="dest-altitude">Savoie &nbsp;·&nbsp; 2 300 m</div>
-            <div class="dest-name">Val Thorens</div>
-            <div class="dest-desc">La plus haute station d'Europe, offrant l'un des plus grands domaines skiables du monde. Un marché locatif dynamique avec des rendements parmi les plus élevés des Alpes.</div>
+          <div class="dest-station">
+            <span class="dest-station-name">Tignes</span>
+            <span class="dest-station-alt">2 100 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Les Arcs</span>
+            <span class="dest-station-alt">1 600 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">La Plagne</span>
+            <span class="dest-station-alt">2 050 m</span>
+          </div>
+        </div>
+
+        <!-- Isère / Hautes-Alpes -->
+        <div class="dest-region">
+          <div class="dest-region-title">Isère 38 / Hautes-Alpes 05</div>
+          <div class="dest-station">
+            <span class="dest-station-name">L'Alpe d'Huez</span>
+            <span class="dest-station-alt">1 860 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Les 2 Alpes</span>
+            <span class="dest-station-alt">1 650 m</span>
+          </div>
+          <div class="dest-station">
+            <span class="dest-station-name">Serre Chevalier</span>
+            <span class="dest-station-alt">1 350 m</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="testi-kicker">Ce que disent nos propriétaires</div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-quote">Depuis que j'ai confié mon chalet à ALPÉON, je n'ai plus à me soucier de rien. Les rapports mensuels sont clairs, la communication est irréprochable, et mes revenus ont augmenté de 28 % dès la première saison.</div>
+          <div class="testi-author">
+            <div class="testi-name">Sophie L.</div>
+            <div class="testi-info">Propriétaire d'un chalet à Megève · Client depuis 2022</div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">L'équipe ALPÉON a une connaissance du marché courchevelois vraiment pointue. Ils ont optimisé mes tarifs semaine par semaine et mon taux d'occupation n'a jamais été aussi élevé. Professionnalisme total.</div>
+          <div class="testi-author">
+            <div class="testi-name">Marc &amp; Isabelle D.</div>
+            <div class="testi-info">Propriétaires d'un appartement à Courchevel 1850 · Clients depuis 2021</div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">Ce qui m'a convaincu, c'est la transparence absolue. Je vois tout en temps réel — les réservations, les revenus, les comptes-rendus de séjour. Avec ALPÉON, je reste propriétaire à part entière de mon bien.</div>
+          <div class="testi-author">
+            <div class="testi-name">François M.</div>
+            <div class="testi-info">Propriétaire d'un penthouse à Val d'Isère · Client depuis 2023</div>
           </div>
         </div>
       </div>
@@ -1197,15 +1499,15 @@
         <div class="est-features">
           <div class="est-feat">
             <div class="est-feat-mark"></div>
-            <span class="est-feat-text">Estimation basée sur les transactions réelles du marché</span>
+            <span class="est-feat-text">Estimation basée sur les données réelles de marché par station</span>
           </div>
           <div class="est-feat">
             <div class="est-feat-mark"></div>
-            <span class="est-feat-text">Megève, Courchevel, Val Thorens, Tignes</span>
+            <span class="est-feat-text">15 stations alpines — Megève, Courchevel, Val d'Isère, Méribel et plus</span>
           </div>
           <div class="est-feat">
             <div class="est-feat-mark"></div>
-            <span class="est-feat-text">Prise en compte de la surface, du quartier, de la capacité et des équipements</span>
+            <span class="est-feat-text">Prise en compte de la surface, du quartier, de la capacité et des prestations</span>
           </div>
           <div class="est-feat">
             <div class="est-feat-mark"></div>
@@ -1239,7 +1541,7 @@
         </div>
         <div class="info-item">
           <div class="info-label">Destinations</div>
-          <div class="info-value">Megève &middot; Courchevel &middot; Val Thorens</div>
+          <div class="info-value" style="font-size:0.78rem;line-height:1.7;">Megève &middot; Courchevel &middot; Val Thorens<br>Val d'Isère &middot; Méribel &middot; Chamonix &middot; +9</div>
         </div>
         <div class="info-item">
           <div class="info-label">Disponibilité</div>
@@ -1283,10 +1585,31 @@
           <label class="f-label">Destination</label>
           <select>
             <option value="">Sélectionnez...</option>
-            <option>Megève</option>
-            <option>Courchevel</option>
-            <option>Val Thorens</option>
-            <option>Autre destination alpine</option>
+            <optgroup label="Haute-Savoie (74)">
+              <option>Megève</option>
+              <option>Chamonix</option>
+              <option>Morzine / Avoriaz</option>
+              <option>La Clusaz</option>
+              <option>Les Gets</option>
+              <option>Combloux</option>
+            </optgroup>
+            <optgroup label="Savoie (73) — Trois Vallées">
+              <option>Courchevel</option>
+              <option>Méribel</option>
+              <option>Val Thorens</option>
+            </optgroup>
+            <optgroup label="Savoie (73) — Tarentaise">
+              <option>Val d'Isère</option>
+              <option>Tignes</option>
+              <option>Les Arcs</option>
+              <option>La Plagne</option>
+            </optgroup>
+            <optgroup label="Isère / Hautes-Alpes">
+              <option>L'Alpe d'Huez</option>
+              <option>Les 2 Alpes</option>
+              <option>Serre Chevalier</option>
+            </optgroup>
+            <option value="autre">Autre destination alpine</option>
           </select>
         </div>
         <div class="f-group">
@@ -1311,7 +1634,11 @@
         <ul class="f-links">
           <li><a href="#">Megève</a></li>
           <li><a href="#">Courchevel</a></li>
+          <li><a href="#">Val d'Isère</a></li>
+          <li><a href="#">Méribel</a></li>
           <li><a href="#">Val Thorens</a></li>
+          <li><a href="#">Chamonix</a></li>
+          <li><a href="#">+ 9 stations</a></li>
         </ul>
       </div>
       <div>
@@ -1334,8 +1661,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 ALPÉON. Tous droits réservés.</span>
-      <span>Gestion locative alpine premium — Megève &middot; Courchevel &middot; Val Thorens</span>
+      <span>© 2026 ALPÉON. Tous droits réservés.</span>
+      <span>Gestion locative alpine premium — 15 stations dans les Alpes françaises</span>
     </div>
   </footer>
 
@@ -1365,7 +1692,7 @@
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.approach-cell, .dest-card, .pillar, .sig-feature, .est-feat').forEach(el => {
+    document.querySelectorAll('.approach-cell, .pillar, .sig-feature, .est-feat, .testi-card, .stat-item').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(18px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
