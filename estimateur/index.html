@@ -1726,7 +1726,136 @@
 
     /* ── Popup appel ── */
     .callpop-wrap { bottom: 16px; right: 16px; }
+
+    /* ── Station picker mobile ── */
+    .sp-section { padding: 48px 0 40px; min-height: unset; }
+    .sp-inner { padding: 0 18px; }
+    .sp-header h1 { font-size: 1.9rem; }
+    .sp-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .sp-card { aspect-ratio: 3/2; }
+    .sp-name { font-size: 1.05rem; }
+    .sp-alt { font-size: .68rem; }
   }
+
+  /* ── Station Picker ── */
+  .sp-section {
+    background: var(--ink);
+    min-height: calc(100vh - 72px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .sp-inner {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 80px 40px 100px;
+  }
+  .sp-header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+  .sp-header .sec-kicker {
+    color: var(--accent);
+  }
+  .sp-header h1 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 2.8rem;
+    color: var(--stone);
+    font-weight: 400;
+    line-height: 1.15;
+    margin: 12px 0 16px;
+  }
+  .sp-header h1 em { color: #fff; font-style: italic; }
+  .sp-header p {
+    color: var(--ink-4);
+    font-size: .88rem;
+    letter-spacing: .04em;
+  }
+  .sp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .sp-card {
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 4/3;
+    transition: transform .35s cubic-bezier(.22,.68,0,1.2), box-shadow .3s;
+  }
+  .sp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 24px 48px rgba(0,0,0,.5);
+  }
+  .sp-card.sel {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  .sp-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform .5s ease, filter .3s;
+  }
+  .sp-card:hover .sp-img { transform: scale(1.06); filter: brightness(1.1); }
+  .sp-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,7,6,.88) 0%, rgba(8,7,6,.25) 55%, transparent 100%);
+  }
+  .sp-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sp-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.25rem;
+    color: #fff;
+    line-height: 1;
+  }
+  .sp-alt {
+    font-size: .70rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .sp-arrow {
+    position: absolute;
+    top: 50%; right: 18px;
+    transform: translateY(-50%) translateX(8px);
+    opacity: 0;
+    transition: opacity .25s, transform .25s;
+    color: #fff;
+  }
+  .sp-card:hover .sp-arrow {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+  /* Station chip dans le formulaire */
+  .est-station-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f3efe9;
+    border: 1px solid var(--stone-3);
+    border-radius: 2px;
+    padding: 6px 12px 6px 10px;
+    font-size: .75rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .est-station-chip:hover { background: var(--stone-3); }
+  .est-station-chip svg { width: 12px; height: 12px; stroke: var(--accent); stroke-width: 2; fill: none; }
   </style>
   <!-- Config locale (gitignorée — contient les secrets) -->
   <script src="/alpeon-config.js"></script>
@@ -1749,18 +1878,77 @@
     </nav>
   </header>
 
-  <!-- ═══ INTRO ═══ -->
-  <section class="sim-intro" id="simIntro">
-    <div class="si-bg"></div>
-    <div class="si-veil"></div>
-    <div class="si-content">
-      <span class="si-kicker">Estimateur de revenus</span>
-      <h1>Combien peut rapporter<br><em>votre bien en montagne ?</em></h1>
-      <p>Notre outil d'estimation est construit sur les données réelles de 200+ propriétés alpines gérées par ALPÉON — chalets, appartements, résidences. Une estimation fiable en 2 minutes.</p>
-      <a href="#estimateur" class="si-cta">
-        Lancer la simulation
-        <svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
-      </a>
+  <!-- ═══ STATION PICKER ═══ -->
+  <section class="sp-section" id="stationPick">
+    <div class="sp-inner">
+      <div class="sp-header">
+        <span class="sec-kicker">Estimateur de revenus</span>
+        <h1>Dans quelle station<br>se trouve <em>votre bien ?</em></h1>
+        <p>Sélectionnez votre destination pour démarrer l'estimation</p>
+      </div>
+      <div class="sp-grid">
+
+        <div class="sp-card" data-id="valthorens" onclick="pickStation('valthorens')">
+          <div class="sp-img" style="background-image:url('https://images.unsplash.com/photo-1551524559-8af4e6624178?w=900&q=80')"></div>
+          <div class="sp-overlay"></div>
+          <div class="sp-info">
+            <span class="sp-name">Val Thorens</span>
+            <span class="sp-alt">2 300 m · Savoie</span>
+          </div>
+          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </div>
+
+        <div class="sp-card" data-id="megeve" onclick="pickStation('megeve')">
+          <div class="sp-img" style="background-image:url('https://images.unsplash.com/photo-1520769945061-0a448c463865?w=900&q=80')"></div>
+          <div class="sp-overlay"></div>
+          <div class="sp-info">
+            <span class="sp-name">Megève</span>
+            <span class="sp-alt">1 113 m · Haute-Savoie</span>
+          </div>
+          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </div>
+
+        <div class="sp-card" data-id="courchevel" onclick="pickStation('courchevel')">
+          <div class="sp-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80')"></div>
+          <div class="sp-overlay"></div>
+          <div class="sp-info">
+            <span class="sp-name">Courchevel</span>
+            <span class="sp-alt">1 300 – 1 850 m · Savoie</span>
+          </div>
+          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </div>
+
+        <div class="sp-card" data-id="meribel" onclick="pickStation('meribel')">
+          <div class="sp-img" style="background-image:url('https://images.unsplash.com/photo-1478827217976-7214a0556393?w=900&q=80')"></div>
+          <div class="sp-overlay"></div>
+          <div class="sp-info">
+            <span class="sp-name">Méribel</span>
+            <span class="sp-alt">1 400 m · Savoie</span>
+          </div>
+          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </div>
+
+        <div class="sp-card" data-id="tignes" onclick="pickStation('tignes')">
+          <div class="sp-img" style="background-image:url('https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=900&q=80')"></div>
+          <div class="sp-overlay"></div>
+          <div class="sp-info">
+            <span class="sp-name">Tignes</span>
+            <span class="sp-alt">2 100 m · Savoie</span>
+          </div>
+          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </div>
+
+        <div class="sp-card" data-id="valdisere" onclick="pickStation('valdisere')">
+          <div class="sp-img" style="background-image:url('https://images.unsplash.com/photo-1443632864897-14973fa006cf?w=900&q=80')"></div>
+          <div class="sp-overlay"></div>
+          <div class="sp-info">
+            <span class="sp-name">Val d'Isère</span>
+            <span class="sp-alt">1 850 m · Savoie</span>
+          </div>
+          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -1772,29 +1960,32 @@
 
       <!-- Titre -->
       <div class="est-head">
-        <span class="sec-kicker">Estimation personnalisée</span>
-        <h2>4 questions pour connaître votre potentiel</h2>
+        <a class="est-station-chip" onclick="document.getElementById('stationPick').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
+          <span class="est-station-name">—</span>
+        </a>
+        <h2>3 questions pour affiner votre estimation</h2>
       </div>
 
       <!-- Step tracker -->
       <div class="est-track" id="estTrack">
-        <div class="et-step" data-s="1">
+        <div class="et-step" data-s="1" style="display:none">
           <div class="et-dot" id="etd1">1</div>
           <div class="et-label">Station</div>
         </div>
-        <div class="et-line" id="etl1"></div>
+        <div class="et-line" id="etl1" style="display:none"></div>
         <div class="et-step" data-s="2">
-          <div class="et-dot" id="etd2">2</div>
+          <div class="et-dot" id="etd2">1</div>
           <div class="et-label">Bien</div>
         </div>
         <div class="et-line" id="etl2"></div>
         <div class="et-step" data-s="3">
-          <div class="et-dot" id="etd3">3</div>
+          <div class="et-dot" id="etd3">2</div>
           <div class="et-label">Niveau</div>
         </div>
         <div class="et-line" id="etl3"></div>
         <div class="et-step" data-s="4">
-          <div class="et-dot" id="etd4">4</div>
+          <div class="et-dot" id="etd4">3</div>
           <div class="et-label">Contact</div>
         </div>
       </div>
@@ -2178,31 +2369,18 @@
     document.getElementById('simIntro').classList.add('loaded');
   });
 
-  /* ─── Smooth anchor ─── */
-  document.querySelector('.si-cta').addEventListener('click', e => {
-    e.preventDefault();
-    document.getElementById('estimateur').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  /* .si-cta supprimé (remplacé par le station picker) */
 
   /* ══════════════════════════════════════
      DONNÉES STATIONS
   ══════════════════════════════════════ */
   const STATIONS = [
-    { id:'alpedhuez',       label:"Alpe d'Huez",                 exp:0.75, ann:950,  mult:1.0, q:['Centre','Les Bergers','Huez village','Auris-en-Oisans','Oz-en-Oisans'] },
-    { id:'chamonix',        label:'Chamonix-Mont-Blanc',         exp:0.65, ann:1800, mult:1.0, q:['Centre village','Les Praz','Les Houches','Argentière','Les Bossons'] },
-    { id:'courchevel',      label:'Courchevel',                  exp:0.65, ann:2800, mult:1.0, q:['1850','1650 (Moriond)','1550','Le Praz (1300)','Saint-Bon'] },
-    { id:'flaine',          label:'Flaine',                      exp:0.90, ann:420,  mult:1.0, q:['Forum','Hameau','Montsoleil','Morillon','Samoëns'] },
-    { id:'lesgrandsmontets',label:'Grands-Montets / Argentière', exp:0.70, ann:1400, mult:1.0, q:['Centre Argentière','Le Tour','Montroc','Les Chosalets','Vallorcine'] },
-    { id:'laplagne',        label:'La Plagne',                   exp:0.90, ann:480,  mult:1.0, q:['Plagne Centre','Plagne Bellecôte','Aime 2000','Belle Plagne','Montchavin-Les Coches'] },
-    { id:'lesarcs',         label:'Les Arcs',                    exp:0.90, ann:520,  mult:1.0, q:['Arc 1950','Arc 2000','Arc 1800','Arc 1600','Peisey-Vallandry'] },
-    { id:'lestwoalpes',     label:'Les Deux Alpes',              exp:0.80, ann:800,  mult:1.0, q:['Centre','Le Jandri','Bons','Mont-de-Lans','Venosc'] },
-    { id:'megeve',          label:'Megève',                      exp:0.60, ann:2250, mult:1.0, q:['Centre','Mont d\'Arbois','Rochebrune','Combloux','Jaillet'] },
-    { id:'meribel',         label:'Méribel',                     exp:0.65, ann:2200, mult:1.0, q:['Centre','Les Allues','Méribel-Mottaret','Brides-les-Bains','Raffort'] },
-    { id:'saintgervais',    label:'Saint-Gervais-les-Bains',     exp:0.75, ann:850,  mult:1.0, q:['Centre','Le Bettex','Mont-Joly','Les Contamines','Saint-Nicolas'] },
-    { id:'tignes',          label:'Tignes',                      exp:1.00, ann:550,  mult:1.1, q:['Val Claret','Le Lac','Les Brévières','Les Boisses','Tignes-Le-Lavachet'] },
-    { id:'valdisere',       label:"Val d'Isère",                 exp:0.65, ann:2600, mult:1.0, q:["Centre val","La Daille","Le Fornet","Le Laisinant","La Légettaz"] },
-    { id:'valthorens',      label:'Val Thorens',                 exp:0.90, ann:950,  mult:1.1, q:['Centre','Les Balcons','Orelle','Fontcouverte','Saint-Martin-de-Belleville'] },
-    { id:'verbier',         label:'Verbier',                     exp:0.65, ann:2400, mult:1.0, q:['Centre','Les Ruinettes','La Tzoumaz','Verbier Village','Hameau'] },
+    { id:'courchevel', label:'Courchevel',  exp:0.65, ann:2800, mult:1.0, q:['1850','1650 (Moriond)','1550','Le Praz (1300)','Saint-Bon'] },
+    { id:'megeve',     label:'Megève',      exp:0.60, ann:2250, mult:1.0, q:['Centre','Mont d\'Arbois','Rochebrune','Combloux','Jaillet'] },
+    { id:'meribel',    label:'Méribel',     exp:0.65, ann:2200, mult:1.0, q:['Centre','Les Allues','Méribel-Mottaret','Brides-les-Bains','Raffort'] },
+    { id:'tignes',     label:'Tignes',      exp:1.00, ann:550,  mult:1.1, q:['Val Claret','Le Lac','Les Brévières','Les Boisses','Tignes-Le-Lavachet'] },
+    { id:'valdisere',  label:"Val d'Isère", exp:0.65, ann:2600, mult:1.0, q:["Centre val","La Daille","Le Fornet","Le Laisinant","La Légettaz"] },
+    { id:'valthorens', label:'Val Thorens', exp:0.90, ann:950,  mult:1.1, q:['Centre','Les Balcons','Orelle','Fontcouverte','Saint-Martin-de-Belleville'] },
   ];
 
   /* Coefficients capacité (nb couchages → coeff) */
@@ -2490,19 +2668,21 @@
         if (lineEl) lineEl.classList.add('done');
       } else if (i === step) {
         stepEl.classList.add('active');
-        dotEl.textContent = i;
+        dotEl.textContent = i - 1; /* step 2→1, 3→2, 4→3 */
       } else {
-        dotEl.textContent = i;
+        dotEl.textContent = i - 1;
         if (lineEl) lineEl.classList.remove('done');
       }
     }
-    document.getElementById('progressFill').style.width = (step / TOTAL * 100) + '%';
+    /* 3 étapes visibles : bien(2), niveau(3), contact(4) */
+    const visStep = step - 1; /* 1, 2, 3 */
+    document.getElementById('progressFill').style.width = (visStep / 3 * 100) + '%';
     const indEl = document.getElementById('stepInd');
-    if (indEl) indEl.textContent = `Étape ${step} sur ${TOTAL}`;
-    document.getElementById('btnBack').disabled = (step === 1);
+    if (indEl) indEl.textContent = `Étape ${visStep} sur 3`;
+    document.getElementById('btnBack').disabled = (step <= 2);
     const NEXT_LABELS = [
       '',
-      'Préciser mon bien →',
+      '',                           /* step 1 : jamais atteint */
       'Choisir le niveau →',
       'Révéler mon estimation →',
       'Obtenir mon estimation'
@@ -2556,7 +2736,32 @@
     if (step < TOTAL) { goTo(step + 1); return; }
     submit();
   }
-  function back() { if (step > 1) goTo(step - 1); }
+  function back() { if (step > 2) goTo(step - 1); }
+
+  /* ─── Sélection de la station depuis le picker ─── */
+  function pickStation(id) {
+    const station = STATIONS.find(s => s.id === id);
+    if (!station) return;
+    S.resortId    = station.id;
+    S.resortLabel = station.label;
+    S.resortExp   = station.exp;
+    S.resortAnn   = station.ann;
+    S.resortMult  = station.mult;
+    S.quartier    = null;
+    /* Highlight carte sélectionnée */
+    document.querySelectorAll('.sp-card').forEach(c => c.classList.remove('sel'));
+    const card = document.querySelector(`.sp-card[data-id="${id}"]`);
+    if (card) card.classList.add('sel');
+    /* Mettre à jour le chip station dans le formulaire */
+    document.querySelectorAll('.est-station-name').forEach(el => el.textContent = station.label);
+    /* Préparer le formulaire */
+    buildQuartiers();
+    updatePreview();
+    /* Entrer dans le formulaire à l'étape 2 */
+    document.getElementById('s' + step).classList.remove('active');
+    step = 1; /* goTo va correctement passer de 1 → 2 */
+    goTo(2);
+  }
 
   /* ══════════════════════════════════════
      SUBMIT — seul moment où les vrais
