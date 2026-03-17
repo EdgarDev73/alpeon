@@ -2565,24 +2565,31 @@
 
   function sendToZapier(r) {
     if (!ZAPIER_WEBHOOK || ZAPIER_WEBHOOK.startsWith('REMPLACE')) return;
+    const ETAT_FR   = { budget:'Entrée de gamme', correct:'Correct', standing:'Standing', prestige:'Prestige', luxe:'Luxe' };
+    const EQ_FR     = { spa:'Spa / Jacuzzi', ski:'Ski au pied', parking:'Parking privatif', terrasse:'Terrasse / balcon', cheminee:'Cheminée / poêle', concierge:'Conciergerie', sauna:'Sauna', piscine:'Piscine' };
     const payload = {
-      /* Contact */
-      prenom:     document.getElementById('cPrenom').value.trim(),
-      nom:        document.getElementById('cNom').value.trim(),
-      email:      document.getElementById('cEmail').value.trim(),
-      telephone:  document.getElementById('cTel').value.trim(),
-      /* Bien */
-      station:    S.resortLabel,
-      surface:    S.surface,
-      couchages:  S.couchages,
-      etat:       S.etat,
-      quartier:   S.quartier || '—',
-      equipements: [...S.equipements].join(', ') || '—',
-      /* Estimation */
-      revenu_annuel_estime: r ? r.yearly : null,
-      /* Meta */
-      source:     'estimateur-alpeon',
-      date:       new Date().toISOString()
+      /* ── Contact ── */
+      prenom:    document.getElementById('cPrenom').value.trim(),
+      nom:       document.getElementById('cNom').value.trim(),
+      email:     document.getElementById('cEmail').value.trim(),
+      telephone: document.getElementById('cTel').value.trim(),
+      /* ── Bien ── */
+      station:              S.resortLabel,
+      surface_m2:           S.surface,
+      capacite_personnes:   S.couchages,
+      etat:                 ETAT_FR[S.etat] || S.etat || '—',
+      quartier:             S.quartier || '—',
+      equipements:          [...S.equipements].map(e => EQ_FR[e] || e).join(', ') || '—',
+      /* ── Estimation ── */
+      revenu_annuel_estime:   r ? r.yearly  : null,
+      revenu_annuel_formate:  r ? fmt(r.yearly)  : '—',
+      revenu_mensuel_estime:  r ? r.monthly : null,
+      revenu_mensuel_formate: r ? fmt(r.monthly) : '—',
+      /* ── Meta ── */
+      source:       'estimateur-alpeon',
+      page_url:     window.location.href,
+      date_iso:     new Date().toISOString(),
+      date_lisible: new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
     };
     fetch(ZAPIER_WEBHOOK, {
       method:  'POST',
