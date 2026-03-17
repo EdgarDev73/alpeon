@@ -1728,6 +1728,8 @@
     .callpop-wrap { bottom: 16px; right: 16px; }
   }
   </style>
+  <!-- Config locale (gitignorée — contient les secrets) -->
+  <script src="/alpeon-config.js"></script>
 </head>
 
 <body>
@@ -2560,8 +2562,8 @@
      SUBMIT — seul moment où les vrais
      chiffres entrent dans le DOM
   ══════════════════════════════════════ */
-  /* ─── Webhook Zapier ─── */
-  const ZAPIER_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/18120855/2p3ow3x/';
+  /* ─── Webhook Zapier (URL chargée depuis alpeon-config.js, gitignorée) ─── */
+  const ZAPIER_WEBHOOK = (window.ALPEON_CONFIG && window.ALPEON_CONFIG.zapierWebhook) || '';
 
   function sendToZapier(r) {
     if (!ZAPIER_WEBHOOK || ZAPIER_WEBHOOK.startsWith('REMPLACE')) return;
