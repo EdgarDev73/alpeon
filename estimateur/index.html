@@ -1573,146 +1573,159 @@
   @media (max-width: 640px) {
 
     /* ── Header ── */
-    header {
-      padding: 0 18px;
-      height: 58px;
-    }
-    .logo-name { font-size: 1.1rem; }
+    header { padding: 0 18px; height: 56px; }
+    .logo-name { font-size: 1.05rem; }
     .logo-claim { display: none; }
     .main-nav a:not(.nav-cta) { display: none; }
-    .nav-cta { padding: 8px 16px; font-size: .70rem; letter-spacing: .07em; }
+    .nav-cta { padding: 8px 14px; font-size: .68rem; letter-spacing: .06em; }
 
     /* ── Hero ── */
-    .sim-intro { height: 64vh; min-height: 480px; max-height: none; }
-    .si-content { padding: 0 22px 72px; }
-    .si-content h1 { font-size: clamp(1.7rem, 6.5vw, 2.4rem); margin-bottom: 16px; line-height: 1.12; }
-    .si-content p { font-size: .85rem; margin-bottom: 24px; line-height: 1.65; }
-    .si-cta { padding: 14px 26px; font-size: .72rem; }
+    .sim-intro { height: 58vh; min-height: 420px; max-height: none; }
+    .si-content { padding: 0 20px 60px; }
+    .si-kicker { font-size: .60rem; margin-bottom: 14px; }
+    .si-content h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); margin-bottom: 14px; line-height: 1.1; }
+    .si-content p { font-size: .84rem; margin-bottom: 22px; line-height: 1.6; max-width: 100%; }
+    .si-cta { padding: 13px 24px; font-size: .70rem; width: 100%; justify-content: center; }
 
-    /* Stats : 2 × 2 grid */
-    .si-stats { flex-wrap: wrap; }
-    .si-stat {
-      flex: 0 0 50%;
-      padding: 10px 16px;
-      border-right: none !important;
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-    .si-stat:nth-child(odd)  { border-right: 1px solid rgba(255,255,255,.10) !important; }
-    .si-stat:nth-last-child(-n+2) { border-bottom: none; }
-    .si-stat-val { font-size: 1.25rem; }
-    .si-stat-label { font-size: .65rem; }
-
-    /* ── Estimateur ── */
-    .est-wrap { padding: 0 0 56px; }
-    .est-layout { grid-template-columns: 1fr; box-shadow: none; }
-    .est-main { padding: 32px 20px 60px; }
+    /* ── Estimateur wrapper ── */
+    .est-wrap { padding: 0 0 40px; background: var(--stone-2); }
+    .est-layout { grid-template-columns: 1fr; box-shadow: none; border-radius: 0; }
+    .est-main { padding: 28px 18px 36px; }
     .est-side { display: none; }
-    .est-head h2 { font-size: 1.6rem; }
-    .est-head { margin-bottom: 24px; }
-    .est-track { margin-bottom: 28px; padding-bottom: 24px; }
-    .et-dot { width: 26px; height: 26px; font-size: .60rem; }
-    .et-label { font-size: .56rem; letter-spacing: .04em; }
-    .et-line { margin: 0 4px; margin-bottom: 20px; }
 
-    /* ── Step question ── */
-    .step-hd h3 { font-size: 1.15rem; line-height: 1.3; }
-    .step { gap: 18px; }
+    /* ── En-tête section ── */
+    .est-head { margin-bottom: 20px; }
+    .est-head .sec-kicker { font-size: .60rem; }
+    .est-head h2 { font-size: 1.5rem; line-height: 1.2; }
+
+    /* ── Step tracker ── */
+    .est-track { margin-bottom: 24px; padding-bottom: 20px; }
+    .et-dot { width: 24px; height: 24px; font-size: .58rem; }
+    .et-label { font-size: .54rem; letter-spacing: .03em; }
+    .et-line { margin: 0 3px; margin-bottom: 18px; }
+
+    /* ── Question header ── */
+    .step-hd { padding-bottom: 16px; }
+    .step-hd h3 { font-size: 1.2rem; line-height: 1.25; }
+    .step { gap: 16px; }
 
     /* ── Surface slider ── */
-    .surface-row {
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-    .slider-val { text-align: left; font-size: 1.3rem; }
+    .surface-row { grid-template-columns: 1fr; gap: 8px; }
+    .slider-val { text-align: left; font-size: 1.4rem; }
+
+    /* ── Quartiers pills ── */
+    .q-pills { gap: 8px; }
+    .q-pill { padding: 9px 16px; font-size: .86rem; }
+
+    /* ── Couchages counter ── */
+    .counter-info strong { font-size: 1rem; }
+    .counter-info span { font-size: .86rem; }
+    .cnt-btn { width: 38px; height: 38px; }
 
     /* ── État → 1 colonne ── */
-    .etat-grid { grid-template-columns: 1fr; }
+    .etat-grid { grid-template-columns: 1fr; gap: 8px; }
     .e-card--full { grid-column: 1; }
+    .e-card { padding: 16px 18px; }
+    .e-card-title { font-size: .95rem; }
+    .e-card-sub { font-size: .84rem; }
+
+    /* ── Équipements → 1 colonne ── */
+    .eq-grid { grid-template-columns: 1fr; gap: 8px; }
 
     /* ── Contact form → 1 colonne ── */
-    .contact-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 12px; }
+    .inp { padding: 14px 16px; font-size: .95rem; }
+    .gdpr-label { font-size: .86rem; }
 
-    /* ── Step nav bar ── */
+    /* ── S6 locked box ── */
+    .s6-locked-box { flex-direction: row; gap: 12px; padding: 16px 18px; margin-bottom: 20px; }
+    .s6-lock-pulse { width: 36px; height: 36px; flex-shrink: 0; }
+    .s6-locked-txt h4 { font-size: .95rem; }
+    .s6-locked-txt p { font-size: .78rem; }
+    .s6-blurred-val { font-size: 1.3rem; }
+
+    /* ── Step nav bar — refonte mobile ── */
     .step-nav {
-      flex-wrap: wrap;
-      gap: 10px;
-      padding-top: 20px;
+      flex-direction: column;
+      gap: 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--stone-3);
     }
+    /* Ligne 1 : indicateur + barre */
     .sn-center {
       order: 1;
       width: 100%;
-      justify-content: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
     }
-    .sn-step-ind { white-space: nowrap; font-size: .72rem; }
-    .sn-progress { flex: 1; }
-    .sn-back {
-      order: 2;
-      flex: 0 0 auto;
-      padding: 14px 18px;
-      font-size: .72rem;
-    }
+    .sn-step-ind { font-size: .74rem; color: var(--ink-3); font-weight: 500; }
+    .sn-progress { flex: 1; max-width: none; margin-left: 12px; }
+    .sn-sep { display: none; }
+    /* Ligne 2 : bouton Suivant pleine largeur */
     .sn-next {
-      order: 3;
-      flex: 1;
+      order: 2;
+      width: 100%;
       text-align: center;
-      padding: 14px 12px;
-      font-size: .74rem;
-      letter-spacing: .06em;
-      white-space: normal;
-      line-height: 1.3;
+      padding: 16px 20px;
+      font-size: .78rem;
+      letter-spacing: .10em;
+      white-space: nowrap;
+      margin-bottom: 4px;
     }
-
-    /* ── Section Résultats ── */
-    .res-section { padding: 36px 20px 48px; }
-    .res-title { font-size: 1.5rem; }
-    .res-resort { margin-bottom: 28px; }
-    .res-num-block {
-      grid-template-columns: 1fr;
-      padding: 22px 20px;
-      gap: 14px;
+    /* Ligne 3 : Retour discret */
+    .sn-back {
+      order: 3;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      font-size: .72rem;
+      border-color: transparent;
+      color: var(--ink-4);
+      background: transparent;
     }
-    .res-num-val { font-size: 2.5rem; }
-    .res-num-badge { align-self: flex-start; }
+    .sn-back:not(:disabled):hover { border-color: transparent; background: transparent; color: var(--ink-3); }
 
-    /* Tableau versements */
-    .res-pay-table td { padding: 10px 0; font-size: .85rem; }
-    .res-pay-table td:last-child { font-size: 1rem; }
-
-    /* Récap → 2 × 2 */
-    .res-recap { grid-template-columns: 1fr 1fr; }
+    /* ── Résultats ── */
+    .res-section { padding: 32px 18px 44px; }
+    .res-kicker { font-size: .64rem; }
+    .res-title { font-size: 1.45rem; }
+    .res-resort { margin-bottom: 24px; font-size: .88rem; }
+    .res-num-block { grid-template-columns: 1fr; padding: 20px 18px; gap: 12px; }
+    .res-num-label { font-size: .64rem; }
+    .res-num-val { font-size: 2.6rem; }
+    .res-num-sub { font-size: .84rem; }
+    .res-num-badge { align-self: flex-start; font-size: .66rem; padding: 7px 12px; }
+    .res-video { margin-bottom: 32px; }
+    .res-recap { grid-template-columns: 1fr 1fr; gap: 8px; }
     .res-recap-item { padding: 12px 14px; }
+    .res-recap-item-label { font-size: .64rem; }
+    .res-recap-item-val { font-size: .95rem; }
+    .res-note { font-size: .78rem; margin-top: 24px; }
 
-    /* ── CTA ── */
-    .cta-inner { padding: 56px 24px; }
-    .cta-text h2 { font-size: 2rem; }
-    .cta-text p { font-size: .95rem; }
-    .cta-btn { width: 100%; justify-content: center; padding: 18px 28px; }
-    .cta-reassure { flex-wrap: wrap; gap: 12px; justify-content: center; }
+    /* ── CTA visite ── */
+    .cta-inner { padding: 52px 20px; gap: 0; }
+    .cta-kicker { font-size: .60rem; margin-bottom: 16px; }
+    .cta-text h2 { font-size: 1.9rem; margin-bottom: 14px; }
+    .cta-text p { font-size: .88rem; margin-bottom: 32px; }
+    .cta-btn { width: 100%; justify-content: center; padding: 17px 24px; font-size: .76rem; }
+    .cta-reassure { flex-wrap: wrap; gap: 10px; justify-content: center; font-size: .72rem; }
 
     /* ── Trust strip ── */
-    .trust-strip { padding: 48px 0 0; }
-    .trust-strip-inner { grid-template-columns: 1fr; gap: 1px; }
-    .trust-card { padding: 32px 24px; }
+    .trust-strip { padding: 40px 0 0; }
+    .trust-strip-inner { grid-template-columns: 1fr; gap: 0; }
+    .trust-card { padding: 28px 20px; border-top: 3px solid var(--accent); border-left: none; border-right: none; border-radius: 0; }
+    .trust-card + .trust-card { border-top-color: var(--stone-3); border-top-width: 1px; }
+    .trust-card-title { font-size: 1.05rem; }
+    .trust-card-desc { font-size: .86rem; }
 
     /* ── Footer ── */
-    footer { padding: 56px 24px 40px; }
-    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 6px; }
+    footer { padding: 48px 20px 36px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    .f-brand-desc { max-width: 100%; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 4px; font-size: .68rem; }
 
-    /* ── S6 locked box ── */
-    .s6-locked-box {
-      flex-direction: column;
-      text-align: center;
-      gap: 12px;
-      padding: 18px 20px;
-    }
-
-    /* ── S6 social proof ── */
-    .s6-social-proof {
-      flex-direction: column;
-      gap: 10px;
-      align-items: flex-start;
-    }
+    /* ── Popup appel ── */
+    .callpop-wrap { bottom: 16px; right: 16px; }
   }
   </style>
 </head>
