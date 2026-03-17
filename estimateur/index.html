@@ -248,7 +248,7 @@
       max-width: 1060px;
       margin: 0 auto;
       box-shadow: 0 8px 48px rgba(28,27,25,.10);
-      align-items: start;
+      align-items: stretch;
     }
     .est-main {
       padding: 56px 60px 48px;
@@ -267,8 +267,7 @@
       flex-direction: column;
       position: sticky;
       top: 72px;
-      align-self: start;
-      max-height: calc(100vh - 72px);
+      height: calc(100vh - 72px);
       overflow-y: auto;
     }
     .est-side-kicker {
@@ -1145,44 +1144,9 @@
       position: relative;
       width: 100%;
       aspect-ratio: 16/9;
-      background: var(--ink);
+      background: #000;
       border-radius: 4px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
-    .res-video-frame img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: .35;
-    }
-    .res-video-play {
-      position: relative;
-      z-index: 2;
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.15);
-      border: 2px solid rgba(255,255,255,.4);
-      display: flex; align-items: center; justify-content: center;
-      backdrop-filter: blur(4px);
-    }
-    .res-video-play svg {
-      width: 28px; height: 28px;
-      fill: #fff;
-      margin-left: 4px;
-    }
-    .res-video-caption {
-      position: relative;
-      z-index: 2;
-      font-size: .82rem;
-      color: rgba(255,255,255,.6);
-      letter-spacing: .08em;
     }
 
     /* Récap 4 colonnes */
@@ -2050,11 +2014,13 @@
       <div class="res-video">
         <div class="res-video-label">ALPÉON en action</div>
         <div class="res-video-frame">
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80" alt="ALPÉON - Gestion locative alpine" />
-          <div class="res-video-play">
-            <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>
-          </div>
-          <div class="res-video-caption">Vidéo de présentation — à venir</div>
+          <video
+            controls
+            preload="metadata"
+            poster="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;">
+            <source src="/assets/presentation-alpeon.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
