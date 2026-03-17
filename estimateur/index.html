@@ -2560,8 +2560,42 @@
      SUBMIT — seul moment où les vrais
      chiffres entrent dans le DOM
   ══════════════════════════════════════ */
+  /* ─── Webhook Zapier ─── */
+  const ZAPIER_WEBHOOK = 'https://hooks.zapier.com/hooks/catch/18120855/2p3ow3x/';
+
+  function sendToZapier(r) {
+    if (!ZAPIER_WEBHOOK || ZAPIER_WEBHOOK.startsWith('REMPLACE')) return;
+    const payload = {
+      /* Contact */
+      prenom:     document.getElementById('cPrenom').value.trim(),
+      nom:        document.getElementById('cNom').value.trim(),
+      email:      document.getElementById('cEmail').value.trim(),
+      telephone:  document.getElementById('cTel').value.trim(),
+      /* Bien */
+      station:    S.resortLabel,
+      surface:    S.surface,
+      couchages:  S.couchages,
+      etat:       S.etat,
+      quartier:   S.quartier || '—',
+      equipements: [...S.equipements].join(', ') || '—',
+      /* Estimation */
+      revenu_annuel_estime: r ? r.yearly : null,
+      /* Meta */
+      source:     'estimateur-alpeon',
+      date:       new Date().toISOString()
+    };
+    fetch(ZAPIER_WEBHOOK, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    }).catch(() => {}); /* silencieux — ne bloque pas l'UX */
+  }
+
   function submit() {
     const r = calc();
+
+    /* ── Envoi webhook Zapier ── */
+    sendToZapier(r);
 
     /* ── Réinitialiser les étapes ── */
     ['mStep1','mStep2','mStep3'].forEach(id =>
