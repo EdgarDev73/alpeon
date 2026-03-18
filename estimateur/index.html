@@ -111,6 +111,16 @@
     }
     header.scrolled .nav-cta:hover { background: var(--ink) !important; color: var(--stone) !important; }
 
+    .lang-switch { display:flex; align-items:center; gap:5px; margin-left:4px; }
+    .lang-btn { font-size:.6rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.4); transition:color .2s; }
+    .lang-btn:hover { color:rgba(255,255,255,.85); }
+    .lang-btn.active { color:rgba(255,255,255,.85); }
+    header.scrolled .lang-btn { color:var(--ink-4); }
+    header.scrolled .lang-btn.active { color:var(--ink); }
+    header.scrolled .lang-btn:hover { color:var(--ink); }
+    .lang-sep { font-size:.5rem; color:rgba(255,255,255,.2); }
+    header.scrolled .lang-sep { color:var(--stone-4); }
+
     /* ═══════════════════════════════════════
        INTRO HERO
     ═══════════════════════════════════════ */
@@ -1969,6 +1979,11 @@
       <a href="/accueil#temoignages">Témoignages</a>
       <a href="/estimateur" style="color:#fff;">Estimateur</a>
       <a href="/accueil#contact" class="nav-cta">Nous contacter</a>
+      <div class="lang-switch">
+        <a href="/estimateur" class="lang-btn active">FR</a>
+        <span class="lang-sep">|</span>
+        <a href="/en/estimateur" class="lang-btn">EN</a>
+      </div>
     </nav>
   </header>
 
