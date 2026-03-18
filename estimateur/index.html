@@ -240,20 +240,34 @@
     .est-wrap {
       background: var(--stone-2);
       position: relative;
-      padding: 60px 40px 80px;
+      padding: 20px 40px;
+      height: calc(100vh - 72px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* le formulaire conserve sa taille naturelle, centré */
+    }
+    .est-wrap.revealed {
+      animation: estReveal .55s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes estReveal {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .est-layout {
       display: grid;
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: 1fr 270px;
       max-width: 1060px;
+      width: 100%;
       margin: 0 auto;
       box-shadow: 0 8px 48px rgba(28,27,25,.10);
       align-items: stretch;
+      /* hauteur naturelle — pas d'étirement */
     }
     .est-main {
-      padding: 56px 60px 48px;
+      padding: 28px 48px;
       background: #fff;
       border-right: 1px solid var(--stone-3);
+      overflow-y: auto;  /* scroll interne si contenu trop long */
     }
     .est-inner {
       max-width: 100%;
@@ -262,12 +276,9 @@
     /* Sidebar sombre — estimation live */
     .est-side {
       background: #0f1319;
-      padding: 52px 36px 48px;
+      padding: 36px 32px 36px;
       display: flex;
       flex-direction: column;
-      position: sticky;
-      top: 72px;
-      max-height: calc(100vh - 72px);
       overflow-y: auto;
     }
     .est-side-kicker {
@@ -288,7 +299,7 @@
     }
     .est-side-val {
       font-family: 'Instrument Serif', serif;
-      font-size: 3rem;
+      font-size: 2.4rem;
       color: #fff;
       line-height: 1;
       margin-bottom: 6px;
@@ -339,7 +350,7 @@
 
     /* Titre de section */
     .est-head {
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
     .est-head .sec-kicker {
       display: inline-flex;
@@ -349,7 +360,7 @@
       letter-spacing: .18em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
     .est-head .sec-kicker::before {
       content: '';
@@ -360,7 +371,7 @@
     }
     .est-head h2 {
       font-family: 'Instrument Serif', serif;
-      font-size: 2.4rem;
+      font-size: 2rem;
       font-weight: 400;
       line-height: 1.15;
       color: var(--ink);
@@ -370,26 +381,26 @@
     .est-track {
       display: flex;
       align-items: center;
-      margin-bottom: 44px;
-      padding-bottom: 36px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
       border-bottom: 1px solid var(--stone-3);
     }
     .et-step {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 7px;
+      gap: 5px;
       position: relative;
     }
     .et-dot {
-      width: 36px; height: 36px;
+      width: 30px; height: 30px;
       border-radius: 50%;
       border: 1.5px solid var(--stone-3);
       background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: .72rem;
+      font-size: .68rem;
       font-weight: 600;
       color: var(--ink-4);
       transition: border-color .3s, background .3s, color .3s;
@@ -407,7 +418,7 @@
       color: #fff;
     }
     .et-label {
-      font-size: .66rem;
+      font-size: .60rem;
       letter-spacing: .10em;
       text-transform: uppercase;
       color: var(--ink-4);
@@ -420,7 +431,7 @@
       height: 1px;
       background: var(--stone-3);
       margin: 0 8px;
-      margin-bottom: 22px;
+      margin-bottom: 16px;
       transition: background .3s;
     }
     .et-line.done { background: var(--ink); }
@@ -433,7 +444,7 @@
     .step {
       display: none;
       flex-direction: column;
-      gap: 28px;
+      gap: 16px;
     }
     .step.active {
       display: flex;
@@ -445,11 +456,11 @@
     /* ─── Step header ─── */
     .step-hd {
       border-bottom: 1px solid var(--stone-3);
-      padding-bottom: 20px;
+      padding-bottom: 14px;
     }
     .step-hd h3 {
       font-family: 'Instrument Serif', serif;
-      font-size: 1.9rem;
+      font-size: 1.6rem;
       font-weight: 400;
       color: var(--ink);
       margin-bottom: 8px;
@@ -585,6 +596,41 @@
     }
     .slider-val span { font-family: 'Instrument Sans', sans-serif; font-size: .8rem; color: var(--ink-3); }
 
+    /* ─── Type de propriété pills ─── */
+    .type-prop-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .type-prop-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border: 1.5px solid var(--stone-3);
+      border-radius: 3px;
+      background: #fff;
+      font-size: .95rem;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: border-color .2s, background .2s, color .2s, transform .15s;
+      user-select: none;
+      flex: 1;
+      justify-content: center;
+      min-width: 130px;
+    }
+    .type-prop-pill:hover {
+      border-color: var(--accent);
+      background: var(--stone-2);
+      transform: translateY(-1px);
+    }
+    .type-prop-pill.sel {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+    .tpp-icon { font-size: 1.1rem; }
+
     /* ─── Quartiers pills ─── */
     .q-pills {
       display: flex;
@@ -608,6 +654,30 @@
       background: var(--accent);
       color: #fff;
     }
+
+    /* ─── Location picker (résidence / quartier) ─── */
+    .loc-pills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+    .loc-pill {
+      padding: 8px 12px;
+      border-radius: 3px;
+      border: 1.5px solid var(--stone-3);
+      background: #fff;
+      font-size: .80rem;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: border-color .2s, background .2s, color .2s;
+      user-select: none;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .loc-pill:hover { border-color: var(--accent); background: var(--stone-2); }
+    .loc-pill.sel   { border-color: var(--accent); background: var(--accent); color: #fff; }
 
     /* ─── Counter ─── */
     .counter-row {
@@ -1609,6 +1679,10 @@
     .step-hd h3 { font-size: 1.2rem; line-height: 1.25; }
     .step { gap: 16px; }
 
+    /* ── Type de propriété ── */
+    .type-prop-pills { flex-direction: column; gap: 8px; }
+    .type-prop-pill { min-width: unset; justify-content: flex-start; }
+
     /* ── Surface slider ── */
     .surface-row { grid-template-columns: 1fr; gap: 8px; }
     .slider-val { text-align: left; font-size: 1.4rem; }
@@ -1728,114 +1802,134 @@
     .callpop-wrap { bottom: 16px; right: 16px; }
 
     /* ── Station picker mobile ── */
-    .sp-section { padding: 48px 0 40px; min-height: unset; }
-    .sp-inner { padding: 0 18px; }
-    .sp-header h1 { font-size: 1.9rem; }
-    .sp-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .sp-card { aspect-ratio: 3/2; }
-    .sp-name { font-size: 1.05rem; }
-    .sp-alt { font-size: .68rem; }
+    .sp-inner { padding: 72px 14px 16px; }
+    .sp-header { margin-bottom: 18px; }
+    .sp-header h1 { font-size: 1.7rem; }
+    .sp-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .sp-name { font-size: 1.1rem; }
+    .sp-alt { font-size: .64rem; }
+  }
+
+  /* ══════════════════════════════════════
+     NAVIGATION DEUX PAGES
+  ══════════════════════════════════════ */
+  #stationPick {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    overflow-y: auto;
+    transition: opacity .4s ease, transform .45s cubic-bezier(.22,1,.36,1);
+  }
+  #stationPick.sp-hidden {
+    opacity: 0;
+    transform: scale(.97) translateY(-12px);
+    pointer-events: none;
+  }
+  #page-estimateur {
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    transform: translateX(100%);
+    transition: transform .55s cubic-bezier(.22,1,.36,1);
+    padding-top: 72px;
+    overflow-y: auto;
+  }
+  #page-estimateur.page-active {
+    transform: translateX(0);
   }
 
   /* ── Station Picker ── */
+  /* ── Station picker : remplit exactement l'écran ── */
   .sp-section {
     background: var(--ink);
-    min-height: calc(100vh - 72px);
+    height: 100%;           /* remplit #stationPick (position:fixed inset:0) */
     display: flex;
     flex-direction: column;
-    justify-content: center;
   }
   .sp-inner {
-    max-width: 1060px;
+    width: 100%;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 80px 40px 100px;
+    padding: 88px 40px 32px; /* 88 = 72px header + 16px air */
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
   }
   .sp-header {
     text-align: center;
-    margin-bottom: 52px;
+    margin-bottom: 28px;
+    flex-shrink: 0;
   }
-  .sp-header .sec-kicker {
-    color: var(--accent);
-  }
+  .sp-header .sec-kicker { color: var(--accent); }
   .sp-header h1 {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 2.8rem;
+    font-size: 2.6rem;
     color: var(--stone);
     font-weight: 400;
     line-height: 1.15;
-    margin: 12px 0 16px;
+    margin: 10px 0 12px;
   }
   .sp-header h1 em { color: #fff; font-style: italic; }
   .sp-header p {
     color: var(--ink-4);
-    font-size: .88rem;
+    font-size: .86rem;
     letter-spacing: .04em;
   }
   .sp-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr); /* 3 lignes égales */
+    gap: 12px;
+    flex: 1;     /* remplit la hauteur restante */
+    min-height: 0;
   }
   .sp-card {
     position: relative;
     border-radius: 3px;
     overflow: hidden;
     cursor: pointer;
-    aspect-ratio: 4/3;
-    transition: transform .35s cubic-bezier(.22,.68,0,1.2), box-shadow .3s;
+    /* pas d'aspect-ratio : remplit la cellule de la grille */
+    transition: box-shadow .25s;
   }
   .sp-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 24px 48px rgba(0,0,0,.5);
+    box-shadow: inset 0 0 0 2px var(--accent);
   }
   .sp-card.sel {
-    outline: 2px solid var(--accent);
-    outline-offset: -2px;
+    box-shadow: inset 0 0 0 2px var(--accent);
   }
   .sp-img {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
-    transition: transform .5s ease, filter .3s;
+    transition: transform .45s ease, filter .3s;
   }
-  .sp-card:hover .sp-img { transform: scale(1.06); filter: brightness(1.1); }
+  .sp-card:hover .sp-img { transform: scale(1.04); filter: brightness(1.1); }
   .sp-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(8,7,6,.88) 0%, rgba(8,7,6,.25) 55%, transparent 100%);
+    background: linear-gradient(to top, rgba(8,7,6,.85) 0%, rgba(8,7,6,.18) 55%, transparent 100%);
   }
   .sp-info {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    padding: 28px 20px 18px;
+    padding: 28px 24px 18px;
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
   .sp-name {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 1.25rem;
+    font-size: 1.6rem;
     color: #fff;
     line-height: 1;
   }
   .sp-alt {
-    font-size: .70rem;
-    letter-spacing: .12em;
+    font-size: .68rem;
+    letter-spacing: .14em;
     text-transform: uppercase;
     color: var(--accent);
-  }
-  .sp-arrow {
-    position: absolute;
-    top: 50%; right: 18px;
-    transform: translateY(-50%) translateX(8px);
-    opacity: 0;
-    transition: opacity .25s, transform .25s;
-    color: #fff;
-  }
-  .sp-card:hover .sp-arrow {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
   }
   /* Station chip dans le formulaire */
   .est-station-chip {
@@ -1895,7 +1989,6 @@
             <span class="sp-name">Val Thorens</span>
             <span class="sp-alt">2 300 m · Savoie</span>
           </div>
-          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </div>
 
         <div class="sp-card" data-id="megeve" onclick="pickStation('megeve')">
@@ -1905,7 +1998,6 @@
             <span class="sp-name">Megève</span>
             <span class="sp-alt">1 113 m · Haute-Savoie</span>
           </div>
-          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </div>
 
         <div class="sp-card" data-id="courchevel" onclick="pickStation('courchevel')">
@@ -1915,7 +2007,6 @@
             <span class="sp-name">Courchevel</span>
             <span class="sp-alt">1 300 – 1 850 m · Savoie</span>
           </div>
-          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </div>
 
         <div class="sp-card" data-id="meribel" onclick="pickStation('meribel')">
@@ -1925,7 +2016,6 @@
             <span class="sp-name">Méribel</span>
             <span class="sp-alt">1 400 m · Savoie</span>
           </div>
-          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </div>
 
         <div class="sp-card" data-id="tignes" onclick="pickStation('tignes')">
@@ -1935,7 +2025,6 @@
             <span class="sp-name">Tignes</span>
             <span class="sp-alt">2 100 m · Savoie</span>
           </div>
-          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </div>
 
         <div class="sp-card" data-id="valdisere" onclick="pickStation('valdisere')">
@@ -1945,14 +2034,14 @@
             <span class="sp-name">Val d'Isère</span>
             <span class="sp-alt">1 850 m · Savoie</span>
           </div>
-          <svg class="sp-arrow" viewBox="0 0 14 14" stroke="#fff" stroke-width="1.8" fill="none"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ═══ ESTIMATEUR ═══ -->
+  <!-- ═══ PAGE 2 : ESTIMATEUR ═══ -->
+  <div id="page-estimateur">
   <section class="est-wrap" id="estimateur">
   <div class="est-layout">
   <div class="est-main">
@@ -1960,7 +2049,7 @@
 
       <!-- Titre -->
       <div class="est-head">
-        <a class="est-station-chip" onclick="document.getElementById('stationPick').scrollIntoView({behavior:'smooth'})">
+        <a class="est-station-chip" onclick="backToStations()">
           <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
           <span class="est-station-name">—</span>
         </a>
@@ -2018,6 +2107,22 @@
             <h3>Parlez-nous de votre bien</h3>
           </div>
           <div>
+            <label class="field-label">Type de propriété</label>
+            <div class="type-prop-pills">
+              <div class="type-prop-pill" data-t="appartement" onclick="selTypeProp(this)">Appartement</div>
+              <div class="type-prop-pill" data-t="chalet" onclick="selTypeProp(this)">Chalet</div>
+              <div class="type-prop-pill" data-t="penthouse" onclick="selTypeProp(this)">Penthouse</div>
+            </div>
+            <p class="err-msg" id="errType">Veuillez sélectionner un type de propriété.</p>
+          </div>
+
+          <!-- Résidence (appartement/penthouse) ou Quartier (chalet) -->
+          <div id="locationPicker" style="display:none">
+            <label class="field-label" id="locationLabel">Résidence</label>
+            <div class="loc-pills" id="locationPills"></div>
+          </div>
+
+          <div>
             <label class="field-label">Surface habitable</label>
             <div class="surface-row">
               <div class="slider-wrap">
@@ -2051,27 +2156,22 @@
             <div class="e-card" data-e="budget" onclick="selEtat(this)">
               <div class="e-card-check"></div>
               <div class="e-card-title">Entrée de gamme</div>
-              <div class="e-card-sub">Fonctionnel, ameublement basique</div>
             </div>
             <div class="e-card" data-e="correct" onclick="selEtat(this)">
               <div class="e-card-check"></div>
               <div class="e-card-title">Correct</div>
-              <div class="e-card-sub">Bon état général, bien entretenu</div>
             </div>
             <div class="e-card" data-e="standing" onclick="selEtat(this)">
               <div class="e-card-check"></div>
               <div class="e-card-title">Standing</div>
-              <div class="e-card-sub">Bel intérieur, équipé avec soin</div>
             </div>
             <div class="e-card" data-e="prestige" onclick="selEtat(this)">
               <div class="e-card-check"></div>
               <div class="e-card-title">Prestige</div>
-              <div class="e-card-sub">Haut de gamme, matériaux nobles</div>
             </div>
             <div class="e-card e-card--full" data-e="luxe" onclick="selEtat(this)">
               <div class="e-card-check"></div>
               <div class="e-card-title">Luxe & exception</div>
-              <div class="e-card-sub">Architecture d'auteur, finitions d'exception</div>
             </div>
           </div>
           <p class="err-msg" id="err3">Veuillez sélectionner le niveau du bien.</p>
@@ -2311,6 +2411,7 @@
       <span>Gestion locative alpine premium — 15 stations dans les Alpes françaises</span>
     </div>
   </footer>
+  </div><!-- /page-estimateur -->
 
   <!-- ═══ POPUP APPEL ═══ -->
   <div class="callpop-wrap" id="callpop">
@@ -2358,15 +2459,48 @@
        JAVASCRIPT
   ═══════════════════════════════════════ -->
   <script>
+  /* ══════════════════════════════════════
+     NAVIGATION DEUX PAGES
+  ══════════════════════════════════════ */
+  function openEstimateurPage() {
+    const picker = document.getElementById('stationPick');
+    const page2  = document.getElementById('page-estimateur');
+    picker.classList.add('sp-hidden');
+    /* Forcer reflow pour que la transition démarre */
+    void page2.offsetWidth;
+    page2.classList.add('page-active');
+    page2.scrollTop = 0;
+    /* Header toujours visible (fond clair) sur page 2 */
+    hdr.classList.add('scrolled');
+  }
+
+  function backToStations() {
+    const picker = document.getElementById('stationPick');
+    const page2  = document.getElementById('page-estimateur');
+    page2.classList.remove('page-active');
+    picker.classList.remove('sp-hidden');
+    picker.scrollTop = 0;
+    /* Rétablir l'état transparent du header sur le picker */
+    hdr.classList.toggle('scrolled', picker.scrollTop > 40);
+  }
+
   /* ─── Header scroll ─── */
   const hdr = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => {
-    hdr.classList.toggle('scrolled', window.scrollY > 40);
+  /* Page 1 : window scroll (mais le picker est fixed donc scrollTop de l'élément) */
+  document.getElementById('stationPick').addEventListener('scroll', function() {
+    if (!document.getElementById('page-estimateur').classList.contains('page-active')) {
+      hdr.classList.toggle('scrolled', this.scrollTop > 40);
+    }
+  });
+  /* Page 2 : header toujours visible (fond clair), jamais transparent */
+  document.getElementById('page-estimateur').addEventListener('scroll', function() {
+    hdr.classList.add('scrolled');
   });
 
   /* ─── Intro parallax ─── */
   window.addEventListener('load', () => {
-    document.getElementById('simIntro').classList.add('loaded');
+    const simIntro = document.getElementById('simIntro');
+    if (simIntro) simIntro.classList.add('loaded');
   });
 
   /* .si-cta supprimé (remplacé par le station picker) */
@@ -2375,12 +2509,24 @@
      DONNÉES STATIONS
   ══════════════════════════════════════ */
   const STATIONS = [
-    { id:'courchevel', label:'Courchevel',  exp:0.65, ann:2800, mult:1.0, q:['1850','1650 (Moriond)','1550','Le Praz (1300)','Saint-Bon'] },
-    { id:'megeve',     label:'Megève',      exp:0.60, ann:2250, mult:1.0, q:['Centre','Mont d\'Arbois','Rochebrune','Combloux','Jaillet'] },
-    { id:'meribel',    label:'Méribel',     exp:0.65, ann:2200, mult:1.0, q:['Centre','Les Allues','Méribel-Mottaret','Brides-les-Bains','Raffort'] },
-    { id:'tignes',     label:'Tignes',      exp:1.00, ann:550,  mult:1.1, q:['Val Claret','Le Lac','Les Brévières','Les Boisses','Tignes-Le-Lavachet'] },
-    { id:'valdisere',  label:"Val d'Isère", exp:0.65, ann:2600, mult:1.0, q:["Centre val","La Daille","Le Fornet","Le Laisinant","La Légettaz"] },
-    { id:'valthorens', label:'Val Thorens', exp:0.90, ann:950,  mult:1.1, q:['Centre','Les Balcons','Orelle','Fontcouverte','Saint-Martin-de-Belleville'] },
+    { id:'courchevel', label:'Courchevel',  exp:0.65, ann:2800, mult:1.0,
+      q:['1850','1650 (Moriond)','1550','Le Praz (1300)','Saint-Bon'],
+      r:['Le Chamois','Le Pralong','Résidence du Jardin Alpin','Bârma Résidence','Résidence Alpamayor','Lou Rei','Les Grandes Bosses','La Fritillaire','Domaine de l\'Ariondaz','Les Cimes Blanches','Le Belvédère','Les Verdons','Autre / Indépendante'] },
+    { id:'megeve',     label:'Megève',      exp:0.60, ann:2250, mult:1.0,
+      q:['Centre','Mont d\'Arbois','Rochebrune','Combloux','Jaillet'],
+      r:['Silver Lodge','Les Mandarines','Le Hameau du Mont d\'Arbois','Le Nid du Mage','Les Chalets d\'Alexandrine','Chalet Dakota','L\'Altima','Le Ksar','La Croix du Bouchet','Le Sporting','Autre / Indépendante'] },
+    { id:'meribel',    label:'Méribel',     exp:0.65, ann:2200, mult:1.0,
+      q:['Centre','Les Allues','Méribel-Mottaret','Brides-les-Bains','Raffort'],
+      r:['Le Yéti','Bois des Ours','Le Belvédère','La Rimaye','Village de l\'Orée','Les Grands Chalets des Pistes','Le Hameau','Lac Bleu','Chalets Apsara','Les Ravines','Autre / Indépendante'] },
+    { id:'tignes',     label:'Tignes',      exp:1.00, ann:550,  mult:1.1,
+      q:['Val Claret','Le Lac','Les Brévières','Les Boisses','Tignes-Le-Lavachet'],
+      r:['Home Club','Le Palafour','Les Almes','Les Platières','Bec Rouge','Tour du Lac','Roches Rouges','Shamrock','Les Tufs','Les Tommeuses','Le Lavachet','Hameaux du Borsat','Autre / Indépendante'] },
+    { id:'valdisere',  label:"Val d'Isère", exp:0.65, ann:2600, mult:1.0,
+      q:["Centre val","La Daille","Le Fornet","Le Laisinant","La Légettaz"],
+      r:['Le Parc 1963','Choucas','L\'Atlas','Les Centaurées','Les Danaïdes','Le Chardon','Vail Lodge','Résidence Illaz','Les Chalets du Chevril','Le Berceau de l\'Aigle','Les Chalets du Fornet','Le Kandahar','Autre / Indépendante'] },
+    { id:'valthorens', label:'Val Thorens', exp:0.90, ann:950,  mult:1.1,
+      q:['Centre','Les Balcons','Soleil','Slalom'],
+      r:['Les Trois Vallées','Roche Blanche','Eskival','Olympic','Reine Blanche','Sérac','Vanoise','Les Hauts de Chavière','Lac Blanc','Les Névés','Le Péclet','Les Lauzières','Autre / Indépendante'] },
   ];
 
   /* Coefficients capacité (nb couchages → coeff) */
@@ -2399,6 +2545,7 @@
     resortId: null, resortLabel: '', resortExp: 1.0, resortAnn: 0, resortMult: 1.1,
     surface: 60, quartier: 'Centre', quartierMult: 1.0,
     couchages: 4,
+    typeBien: null,            /* 'appartement' | 'chalet' | 'penthouse' */
     etat: null,
     equipements: new Set(),
   };
@@ -2534,6 +2681,56 @@
   buildStationList();
 
   /* ══════════════════════════════════════
+     STEP 2 — Type de propriété
+  ══════════════════════════════════════ */
+  function selTypeProp(el) {
+    document.querySelectorAll('.type-prop-pill').forEach(p => p.classList.remove('sel'));
+    el.classList.add('sel');
+    S.typeBien = el.dataset.t;
+    /* Réinitialiser la sélection de localisation */
+    S.quartier = null; S.quartierMult = 1.0;
+    buildLocationPicker();
+    const labels = { appartement:'Appartement sélectionné.', chalet:'Chalet sélectionné.', penthouse:'Penthouse sélectionné.' };
+    showToast('toast2', `<strong>${labels[S.typeBien] || ''}</strong>`);
+    updatePreview();
+  }
+
+  function buildLocationPicker() {
+    const station  = STATIONS.find(s => s.id === S.resortId);
+    const picker   = document.getElementById('locationPicker');
+    const labelEl  = document.getElementById('locationLabel');
+    const pillsEl  = document.getElementById('locationPills');
+    if (!picker) return;
+    if (!S.typeBien || !station) { picker.style.display = 'none'; return; }
+
+    const isChalet = S.typeBien === 'chalet';
+    labelEl.textContent = isChalet ? 'Quartier' : 'Résidence';
+    picker.style.display = '';
+
+    const items = isChalet ? station.q : (station.r || []);
+    /* mults décroissants : premium → standard → accessible */
+    const MULTS = [1.15, 1.07, 1.0, 0.93, 0.87];
+
+    pillsEl.innerHTML = items.map((name, i) =>
+      `<div class="loc-pill" data-q="${name}" data-m="${MULTS[i] ?? 1.0}">${name}</div>`
+    ).join('');
+
+    pillsEl.querySelectorAll('.loc-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        pillsEl.querySelectorAll('.loc-pill').forEach(p => p.classList.remove('sel'));
+        pill.classList.add('sel');
+        S.quartier     = pill.dataset.q;
+        S.quartierMult = +pill.dataset.m;
+        updatePreview();
+        const bonus = S.quartierMult >= 1.1 ? '— emplacement premium, <strong>+15%</strong> sur l\'estimation.'
+                    : S.quartierMult >= 1.0 ? '— bon emplacement, dans la moyenne.'
+                    : '— emplacement standard, estimation ajustée.';
+        showToast('toast2', `<strong>${S.quartier}</strong> ${bonus}`);
+      });
+    });
+  }
+
+  /* ══════════════════════════════════════
      STEP 2 — Surface slider
   ══════════════════════════════════════ */
   const slSurface = document.getElementById('slSurface');
@@ -2547,6 +2744,7 @@
   function buildQuartiers() {
     const station = STATIONS.find(s => s.id === S.resortId);
     const container = document.getElementById('quartierPills');
+    if (!container) return;
     if (!station) { container.innerHTML = '<p style="color:var(--ink-4);font-size:.82rem;">Sélectionnez d\'abord une station.</p>'; return; }
 
     /* Heuristique simplifiée : on associe un mult aux quartiers */
@@ -2593,14 +2791,6 @@
     card.classList.add('sel');
     S.etat = card.dataset.e;
     updatePreview();
-    const msgs = {
-      budget:   'Base de référence — estimation initialisée à <strong>-20%</strong> du standard.',
-      correct:  'Bon état — <strong>-10%</strong> par rapport au niveau standing.',
-      standing: 'Standing — niveau de référence, le plus représenté dans notre parc.',
-      prestige: 'Prestige — <strong>+10%</strong> par rapport au standing. Top performance.',
-      luxe:     'Luxe — <strong>+15%</strong> — nos biens les mieux finis. Revenu maximal.'
-    };
-    showToast('toast3', msgs[card.dataset.e] || '');
     scheduleAutoAdvance(4, 680);
   }
 
@@ -2755,8 +2945,10 @@
     /* Mettre à jour le chip station dans le formulaire */
     document.querySelectorAll('.est-station-name').forEach(el => el.textContent = station.label);
     /* Préparer le formulaire */
-    buildQuartiers();
+    if (S.typeBien) buildLocationPicker();
     updatePreview();
+    /* Transition vers la page estimateur */
+    openEstimateurPage();
     /* Entrer dans le formulaire à l'étape 2 */
     document.getElementById('s' + step).classList.remove('active');
     step = 1; /* goTo va correctement passer de 1 → 2 */
@@ -2782,6 +2974,7 @@
       telephone: document.getElementById('cTel').value.trim(),
       /* ── Bien ── */
       station:              S.resortLabel,
+      type_bien:            S.typeBien || '—',
       surface_m2:           S.surface,
       capacite_personnes:   S.couchages,
       etat:                 ETAT_FR[S.etat] || S.etat || '—',
@@ -2869,8 +3062,10 @@
 
   function buildResRecap() {
     const etatLabels = { budget:'Entrée de gamme', correct:'Correct', standing:'Standing', prestige:'Prestige', luxe:'Luxe' };
+    const typeBienLabels = { appartement:'Appartement', chalet:'Chalet', penthouse:'Penthouse' };
     const items = [
       { label:'Station',    val: S.resortLabel },
+      { label:'Type',       val: typeBienLabels[S.typeBien] || '—' },
       { label:'Surface',    val: S.surface + ' m²' },
       { label:'Capacité',   val: S.couchages + ' personnes' },
       { label:'État',       val: etatLabels[S.etat] || '—' },
