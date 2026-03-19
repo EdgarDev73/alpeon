@@ -170,13 +170,14 @@
     .cs-opt:hover,.cs-opt.focused { background:var(--stone-2); }
     .cs-opt.selected { color:var(--accent); font-weight:500; }
     .cs-empty { padding:14px 16px; font-size:.85rem; color:var(--ink-4); }
-    .surface-row { display:grid; grid-template-columns:1fr auto; gap:20px; align-items:center; }
-    .slider-wrap { position:relative; }
-    input[type="range"] { -webkit-appearance:none; width:100%; height:3px; background:var(--stone-3); border-radius:2px; outline:none; }
-    input[type="range"]::-webkit-slider-thumb { -webkit-appearance:none; width:20px; height:20px; border-radius:50%; background:var(--accent); cursor:pointer; box-shadow:0 2px 8px rgba(168,149,106,.35); }
-    input[type="range"]::-moz-range-thumb { width:20px; height:20px; border-radius:50%; background:var(--accent); cursor:pointer; border:none; }
-    .slider-val { font-family:'Instrument Serif',serif; font-size:1.6rem; color:var(--ink); min-width:90px; text-align:right; }
-    .slider-val span { font-family:'Instrument Sans',sans-serif; font-size:.8rem; color:var(--ink-3); }
+    .surface-block { background: var(--stone-2); border: 1px solid var(--stone-3); border-radius: 3px; padding: 18px 20px 14px; }
+    .surf-display { text-align: center; margin-bottom: 18px; line-height: 1; }
+    .surf-num { font-family: 'Instrument Serif', serif; font-size: 2.8rem; color: var(--ink); letter-spacing: -.01em; }
+    .surf-unit { font-family: 'Instrument Sans', sans-serif; font-size: .9rem; color: var(--ink-3); margin-left: 5px; }
+    .surf-range { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 2px; outline: none; cursor: pointer; background: linear-gradient(to right, var(--accent) 2.4%, var(--stone-3) 2.4%); }
+    .surf-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 6px rgba(168,149,106,.45); }
+    .surf-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 6px rgba(168,149,106,.45); }
+    .surf-bounds { display: flex; justify-content: space-between; font-size: .68rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-4); margin-top: 8px; }
     .type-prop-pills { display:flex; gap:10px; flex-wrap:wrap; }
     .type-prop-pill { display:flex; align-items:center; gap:8px; padding:12px 22px; border:1.5px solid var(--stone-3); border-radius:3px; background:#fff; font-size:.95rem; color:var(--ink-2); cursor:pointer; transition:border-color .2s,background .2s,color .2s,transform .15s; user-select:none; flex:1; justify-content:center; min-width:130px; }
     .type-prop-pill:hover { border-color:var(--accent); background:var(--stone-2); transform:translateY(-1px); }
@@ -392,8 +393,7 @@
       .est-head h2 { font-size:1.5rem; }
       .type-prop-pills { flex-direction:column; gap:8px; }
       .type-prop-pill { min-width:unset; justify-content:flex-start; }
-      .surface-row { grid-template-columns:1fr; gap:8px; }
-      .slider-val { text-align:left; font-size:1.4rem; }
+      .surf-num { font-size: 2.2rem; }
       .etat-grid { grid-template-columns:1fr; gap:8px; }
       .e-card--full { grid-column:1; }
       .e-card { padding:16px 18px; }
@@ -651,11 +651,12 @@
 
           <div>
             <label class="field-label">Living area</label>
-            <div class="surface-row">
-              <div class="slider-wrap">
-                <input type="range" id="slSurface" min="15" max="300" value="60" step="5" />
+            <div class="surface-block">
+              <div class="surf-display">
+                <span class="surf-num" id="surfNum">60</span><span class="surf-unit">m²</span>
               </div>
-              <div class="slider-val" id="surfVal">60 <span>m²</span></div>
+              <input type="range" class="surf-range" id="slSurface" min="15" max="2000" value="60" step="5" />
+              <div class="surf-bounds"><span>15 m²</span><span>2 000 m²</span></div>
             </div>
           </div>
           <div>
@@ -1213,11 +1214,14 @@
 
   /* STEP 2 — Surface slider */
   const slSurface = document.getElementById('slSurface');
-  slSurface.addEventListener('input', () => {
-    S.surface = +slSurface.value;
-    document.getElementById('surfVal').innerHTML = `${S.surface} <span>m²</span>`;
-    updatePreview();
-  });
+  function updateSurf(v) {
+    S.surface = v;
+    document.getElementById('surfNum').textContent = v >= 1000 ? v.toLocaleString('fr-FR') : v;
+    const pct = (v - 15) / (2000 - 15) * 100;
+    slSurface.style.background = `linear-gradient(to right, var(--accent) ${pct}%, var(--stone-3) ${pct}%)`;
+  }
+  slSurface.addEventListener('input', () => { updateSurf(+slSurface.value); updatePreview(); });
+  updateSurf(+slSurface.value);
 
   function buildQuartiers() {
     const station   = STATIONS.find(s => s.id === S.resortId);
