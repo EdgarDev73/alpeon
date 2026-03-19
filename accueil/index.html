@@ -1182,6 +1182,26 @@
       .dest-map-grid { grid-template-columns: 1fr; }
       .dest-region { border-right: none; border-bottom: 1px solid var(--stone-3); }
     }
+
+    /* ── Mobile hamburger ── */
+    .mob-menu-btn { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; }
+    .mob-menu-btn span { display:block; height:1.5px; width:22px; background:#fff; transition:all .3s; border-radius:1px; }
+    header.scrolled .mob-menu-btn span { background:var(--ink); }
+    .mob-menu-btn.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+    .mob-menu-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .mob-menu-btn.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+    .mob-menu { position:fixed; inset:0; z-index:300; background:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s; display:flex; flex-direction:column; }
+    .mob-menu.open { opacity:1; pointer-events:all; }
+    .mob-menu-inner { display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; gap:44px; padding:20px; }
+    .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
+    .mob-nav a { font-family:'Instrument Serif',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
+    .mob-nav a:hover { color:#fff; }
+    .mob-nav-cta { font-family:'Instrument Sans',sans-serif !important; font-size:.76rem !important; letter-spacing:.14em !important; text-transform:uppercase !important; color:var(--accent) !important; border:1px solid var(--accent); padding:11px 28px; border-radius:2px; margin-top:4px; }
+    .mob-lang { display:flex; align-items:center; gap:14px; }
+    .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
+    .mob-lang-btn.active { color:rgba(255,255,255,.9); }
+    .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
+    @media (max-width: 900px) { .mob-menu-btn { display:flex; } }
   </style>
 </head>
 <body>
@@ -1202,8 +1222,25 @@
         <span class="lang-sep">|</span>
         <a href="/en/accueil" class="lang-btn">EN</a>
       </div>
+      <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
   </header>
+
+  <div class="mob-menu" id="mobMenu">
+    <div class="mob-menu-inner">
+      <nav class="mob-nav">
+        <a href="#approach">Notre approche</a>
+        <a href="#destinations">Destinations</a>
+        <a href="/estimateur">Estimateur</a>
+        <a href="#contact" class="mob-nav-cta">Nous contacter</a>
+      </nav>
+      <div class="mob-lang">
+        <a href="/accueil" class="mob-lang-btn active">FR</a>
+        <span class="mob-lang-sep">|</span>
+        <a href="/en/accueil" class="mob-lang-btn">EN</a>
+      </div>
+    </div>
+  </div>
 
   <!-- ═══════════════════ HERO ═══════════════════ -->
   <section class="hero" id="heroSection">
@@ -1682,6 +1719,16 @@
   </footer>
 
   <script>
+    // Mobile menu
+    (function(){
+      var btn = document.getElementById('mobMenuBtn');
+      var menu = document.getElementById('mobMenu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function(){ var o = menu.classList.toggle('open'); btn.classList.toggle('open', o); });
+      menu.querySelectorAll('.mob-nav a').forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); btn.classList.remove('open'); }); });
+      menu.addEventListener('click', function(e){ if (e.target === menu) { menu.classList.remove('open'); btn.classList.remove('open'); } });
+    })();
+
     // Header scroll state
     const header = document.getElementById('siteHeader');
     const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 60);

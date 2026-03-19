@@ -72,6 +72,25 @@
     .lang-sep { font-size:.5rem; color:rgba(255,255,255,.2); }
     header.scrolled .lang-sep { color:var(--stone-4); }
 
+    /* ── Mobile hamburger ── */
+    .mob-menu-btn { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; }
+    .mob-menu-btn span { display:block; height:1.5px; width:22px; background:#fff; transition:all .3s; border-radius:1px; }
+    header.scrolled .mob-menu-btn span { background:var(--ink); }
+    .mob-menu-btn.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+    .mob-menu-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .mob-menu-btn.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+    .mob-menu { position:fixed; inset:0; z-index:300; background:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s; display:flex; flex-direction:column; }
+    .mob-menu.open { opacity:1; pointer-events:all; }
+    .mob-menu-inner { display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; gap:44px; padding:20px; }
+    .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
+    .mob-nav a { font-family:'Instrument Serif',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
+    .mob-nav a:hover { color:#fff; }
+    .mob-nav-cta { font-family:'Instrument Sans',sans-serif !important; font-size:.76rem !important; letter-spacing:.14em !important; text-transform:uppercase !important; color:var(--accent) !important; border:1px solid var(--accent); padding:11px 28px; border-radius:2px; margin-top:4px; }
+    .mob-lang { display:flex; align-items:center; gap:14px; }
+    .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
+    .mob-lang-btn.active { color:rgba(255,255,255,.9); }
+    .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
+
     /* INTRO HERO */
     .sim-intro { position:relative; height:72vh; min-height:540px; max-height:800px; overflow:hidden; display:flex; align-items:flex-end; }
     .si-bg { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2000&q=90') center/cover no-repeat; transform:scale(1.04); transition:transform 1.2s cubic-bezier(.22,1,.36,1); }
@@ -356,7 +375,9 @@
       .logo-name { font-size:1.05rem; }
       .logo-claim { display:none; }
       .main-nav a:not(.nav-cta) { display:none; }
-      .nav-cta { padding:8px 14px; font-size:.68rem; letter-spacing:.06em; }
+      .nav-cta { display:none !important; }
+      .lang-switch { display:none; }
+      .mob-menu-btn { display:flex; }
       .sim-intro { height:58vh; min-height:420px; max-height:none; }
       .si-content { padding:0 20px 60px; }
       .si-content h1 { font-size:clamp(1.6rem,6vw,2.2rem); margin-bottom:14px; }
@@ -459,8 +480,25 @@
         <span class="lang-sep">|</span>
         <a href="/en/estimateur" class="lang-btn active">EN</a>
       </div>
+      <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
   </header>
+
+  <div class="mob-menu" id="mobMenu">
+    <div class="mob-menu-inner">
+      <nav class="mob-nav">
+        <a href="/en/accueil#services" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')">Services</a>
+        <a href="/en/accueil#destinations" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')">Destinations</a>
+        <a href="/en/estimateur" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')">Estimator</a>
+        <a href="/en/accueil#contact" class="mob-nav-cta">Contact us</a>
+      </nav>
+      <div class="mob-lang">
+        <a href="/estimateur" class="mob-lang-btn">FR</a>
+        <span class="mob-lang-sep">|</span>
+        <a href="/en/estimateur" class="mob-lang-btn active">EN</a>
+      </div>
+    </div>
+  </div>
 
   <!-- STATION PICKER -->
   <section class="sp-section" id="stationPick">
@@ -928,6 +966,15 @@
   </div>
 
   <script>
+  /* Mobile menu */
+  (function(){
+    var btn = document.getElementById('mobMenuBtn');
+    var menu = document.getElementById('mobMenu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function(){ var o = menu.classList.toggle('open'); btn.classList.toggle('open', o); });
+    menu.addEventListener('click', function(e){ if (e.target === menu) { menu.classList.remove('open'); btn.classList.remove('open'); } });
+  })();
+
   /* TWO-PAGE NAV */
   function openEstimateurPage() {
     const picker = document.getElementById('stationPick');
