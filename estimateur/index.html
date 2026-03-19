@@ -1668,10 +1668,11 @@
     .si-cta { padding: 13px 24px; font-size: .70rem; width: 100%; justify-content: center; }
 
     /* ── Estimateur wrapper ── */
-    .est-wrap { padding: 0 0 120px; background: var(--stone-2); }
+    .est-wrap { padding: 0 0 140px; background: var(--stone-2); height: auto; min-height: 0; }
     .est-layout { grid-template-columns: 1fr; box-shadow: none; border-radius: 0; }
-    .est-main { padding: 28px 18px 20px; overflow-y: visible; }
+    .est-main { padding: 24px 18px 0; overflow-y: visible; }
     .est-side { display: none; }
+    #page-estimateur { padding-top: 56px; }
     /* Masquer trust-strip et footer sur mobile (non pertinents dans le formulaire) */
     #page-estimateur .trust-strip,
     #page-estimateur footer { display: none; }

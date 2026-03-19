@@ -361,10 +361,11 @@
       .si-content { padding:0 20px 60px; }
       .si-content h1 { font-size:clamp(1.6rem,6vw,2.2rem); margin-bottom:14px; }
       .si-content p { font-size:.84rem; margin-bottom:22px; }
-      .est-wrap { padding:0 0 40px; background:var(--stone-2); }
+      .est-wrap { padding:0 0 140px; background:var(--stone-2); height:auto; min-height:0; }
       .est-layout { grid-template-columns:1fr; box-shadow:none; border-radius:0; }
-      .est-main { padding:28px 18px 36px; }
+      .est-main { padding:24px 18px 0; }
       .est-side { display:none; }
+      #page-estimateur { padding-top:56px; }
       .est-head h2 { font-size:1.5rem; }
       .type-prop-pills { flex-direction:column; gap:8px; }
       .type-prop-pill { min-width:unset; justify-content:flex-start; }
@@ -379,12 +380,12 @@
       .s6-lock-pulse { width:36px; height:36px; flex-shrink:0; }
       .s6-locked-txt h4 { font-size:.95rem; }
       .s6-blurred-val { font-size:1.3rem; }
-      .step-nav { flex-direction:column; gap:0; padding-top:24px; border-top:1px solid var(--stone-3); }
-      .sn-center { order:1; width:100%; justify-content:space-between; margin-bottom:12px; }
+      .step-nav { position:sticky; bottom:0; z-index:50; background:var(--stone); flex-direction:column; gap:0; padding:14px 18px max(18px, env(safe-area-inset-bottom)); border-top:1px solid var(--stone-3); box-shadow:0 -4px 24px rgba(28,27,25,.07); margin:0 -18px; }
+      .sn-center { order:1; width:100%; justify-content:space-between; margin-bottom:10px; }
       .sn-progress { flex:1; max-width:none; margin-left:12px; }
       .sn-sep { display:none; }
-      .sn-next { order:2; width:100%; text-align:center; padding:16px 20px; margin-bottom:4px; }
-      .sn-back { order:3; width:100%; text-align:center; padding:10px; border-color:transparent; color:var(--ink-4); background:transparent; }
+      .sn-next { order:2; width:100%; text-align:center; padding:15px 20px; font-size:.78rem; white-space:nowrap; margin-bottom:4px; }
+      .sn-back { order:3; width:100%; text-align:center; padding:8px; font-size:.72rem; border-color:transparent; color:var(--ink-4); background:transparent; }
       .sn-back:not(:disabled):hover { border-color:transparent; background:transparent; color:var(--ink-3); }
       .res-section { padding:32px 18px 44px; }
       .res-title { font-size:1.45rem; }
