@@ -848,12 +848,10 @@
       <div class="res-video">
         <div class="res-video-label">ALPÉON in action</div>
         <div class="res-video-frame">
-          <iframe id="resVideoIframe"
-            src="https://www.youtube.com/embed/zFlWoFj-wf4?modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white"
-            style="position:absolute;inset:0;width:100%;height:100%;border:none;"
-            allow="autoplay; fullscreen"
-            allowfullscreen>
-          </iframe>
+          <video id="resVideoEl" controls preload="metadata"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <source src="https://pub-6bd95243322d4d4796e576deeedfb362.r2.dev/Hugo%201%20(1).mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
       <div class="res-recap" id="resRecap"></div>
@@ -1464,8 +1462,8 @@
       setTimeout(() => { document.getElementById('callpop').classList.add('open'); }, 3500);
       /* Auto-play video after 5s */
       setTimeout(() => {
-        const iframe = document.getElementById('resVideoIframe');
-        if (iframe) iframe.src = 'https://www.youtube.com/embed/zFlWoFj-wf4?autoplay=1&mute=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&color=white';
+        const video = document.getElementById('resVideoEl');
+        if (video) video.play().catch(() => {});
       }, 5000);
     }, 4700);
   }
