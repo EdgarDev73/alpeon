@@ -511,6 +511,8 @@
     .mob-menu-btn.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
     .mob-menu { position:fixed; inset:0; z-index:300; background:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s; display:flex; flex-direction:column; }
     .mob-menu.open { opacity:1; pointer-events:all; }
+    .mob-close { position:absolute; top:14px; right:18px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); font-size:1.6rem; line-height:1; transition:color .2s; }
+    .mob-close:hover { color:#fff; }
     .mob-menu-inner { display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; gap:44px; padding:20px; }
     .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
     .mob-nav a { font-family:'Instrument Serif',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
@@ -546,6 +548,7 @@
   </header>
 
   <div class="mob-menu" id="mobMenu">
+    <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')" aria-label="Close">&#x2715;</button>
     <div class="mob-menu-inner">
       <nav class="mob-nav">
         <a href="#approach">Our approach</a>
