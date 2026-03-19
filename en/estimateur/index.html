@@ -119,7 +119,7 @@
     .est-wrap.revealed { animation:estReveal .55s cubic-bezier(.22,1,.36,1) both; }
     @keyframes estReveal { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
     .est-layout { display:grid; grid-template-columns:1fr 270px; max-width:1060px; width:100%; margin:0 auto; box-shadow:0 8px 48px rgba(28,27,25,.10); align-items:stretch; }
-    .est-main { padding:28px 48px; background:#fff; border-right:1px solid var(--stone-3); overflow-y:auto; }
+    .est-main { padding:28px 48px; background:#fff; border-right:1px solid var(--stone-3); overflow-y:auto; overscroll-behavior:contain; }
     .est-inner { max-width:100%; }
     .est-side { background:#0f1319; padding:36px 32px 36px; display:flex; flex-direction:column; overflow-y:auto; }
     .est-side-kicker { font-size:.64rem; letter-spacing:.20em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:28px; display:flex; align-items:center; gap:10px; }
@@ -387,9 +387,11 @@
       .si-content p { font-size:.84rem; margin-bottom:22px; }
       .est-wrap { padding:0 0 140px; background:var(--stone-2); height:auto; min-height:0; }
       .est-layout { grid-template-columns:1fr; box-shadow:none; border-radius:0; }
-      .est-main { padding:24px 18px 0; }
+      .est-main { padding:24px 18px 0; overflow-y:visible; }
       .est-side { display:none; }
-      #page-estimateur { padding-top:56px; }
+      #page-estimateur { padding-top:56px; overflow-y:auto; }
+      #page-estimateur .trust-strip,
+      #page-estimateur footer { display:none; }
       .est-head h2 { font-size:1.5rem; }
       .type-prop-pills { flex-direction:column; gap:8px; }
       .type-prop-pill { min-width:unset; justify-content:flex-start; }
@@ -435,7 +437,7 @@
     /* TWO-PAGE NAV */
     #stationPick { position:fixed; inset:0; z-index:20; overflow-y:auto; transition:opacity .4s ease,transform .45s cubic-bezier(.22,1,.36,1); }
     #stationPick.sp-hidden { opacity:0; transform:scale(.97) translateY(-12px); pointer-events:none; }
-    #page-estimateur { position:fixed; inset:0; z-index:15; transform:translateX(100%); transition:transform .55s cubic-bezier(.22,1,.36,1); padding-top:72px; overflow-y:auto; }
+    #page-estimateur { position:fixed; inset:0; z-index:15; transform:translateX(100%); transition:transform .55s cubic-bezier(.22,1,.36,1); padding-top:72px; overflow:hidden; }
     #page-estimateur.page-active { transform:translateX(0); }
 
     /* STATION PICKER */
