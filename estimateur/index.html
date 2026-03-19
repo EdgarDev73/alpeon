@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Estimateur — ALPÉON</title>
   <meta name="description" content="Estimez en 2 minutes le potentiel locatif de votre bien alpin. Basé sur les données réelles de 200+ propriétés gérées par ALPÉON dans 15 stations." />
 
@@ -1668,10 +1668,13 @@
     .si-cta { padding: 13px 24px; font-size: .70rem; width: 100%; justify-content: center; }
 
     /* ── Estimateur wrapper ── */
-    .est-wrap { padding: 0 0 40px; background: var(--stone-2); }
+    .est-wrap { padding: 0 0 120px; background: var(--stone-2); }
     .est-layout { grid-template-columns: 1fr; box-shadow: none; border-radius: 0; }
-    .est-main { padding: 28px 18px 36px; }
+    .est-main { padding: 28px 18px 20px; overflow-y: visible; }
     .est-side { display: none; }
+    /* Masquer trust-strip et footer sur mobile (non pertinents dans le formulaire) */
+    #page-estimateur .trust-strip,
+    #page-estimateur footer { display: none; }
 
     /* ── En-tête section ── */
     .est-head { margin-bottom: 20px; }
@@ -1728,19 +1731,25 @@
     .s6-locked-txt p { font-size: .78rem; }
     .s6-blurred-val { font-size: 1.3rem; }
 
-    /* ── Step nav bar — refonte mobile ── */
+    /* ── Step nav bar — sticky bas sur mobile ── */
     .step-nav {
+      position: sticky;
+      bottom: 0;
+      z-index: 50;
+      background: var(--stone);
       flex-direction: column;
       gap: 0;
-      padding-top: 24px;
+      padding: 14px 18px max(18px, env(safe-area-inset-bottom));
       border-top: 1px solid var(--stone-3);
+      box-shadow: 0 -4px 24px rgba(28,27,25,.07);
+      margin: 0 -18px;
     }
     /* Ligne 1 : indicateur + barre */
     .sn-center {
       order: 1;
       width: 100%;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .sn-step-ind { font-size: .74rem; color: var(--ink-3); font-weight: 500; }
     .sn-progress { flex: 1; max-width: none; margin-left: 12px; }
@@ -1750,7 +1759,7 @@
       order: 2;
       width: 100%;
       text-align: center;
-      padding: 16px 20px;
+      padding: 15px 20px;
       font-size: .78rem;
       letter-spacing: .10em;
       white-space: nowrap;
@@ -1761,7 +1770,7 @@
       order: 3;
       width: 100%;
       text-align: center;
-      padding: 10px;
+      padding: 8px;
       font-size: .72rem;
       border-color: transparent;
       color: var(--ink-4);
