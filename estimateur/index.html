@@ -1926,10 +1926,10 @@
   }
   .sp-header .sec-kicker { color: var(--accent); }
   .sp-header h1 {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: 'Instrument Sans', sans-serif;
     font-size: 2.6rem;
     color: var(--stone);
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.15;
     margin: 10px 0 12px;
   }
@@ -3142,6 +3142,9 @@
       const ctaSection = document.getElementById('cta-section');
       resSection.classList.add('visible');
       ctaSection.classList.add('visible');
+
+      /* ── Réactiver le scroll pour les résultats ── */
+      document.getElementById('page-estimateur').style.overflowY = 'auto';
 
       /* ── Masquer la nav du simulateur après soumission ── */
       document.querySelector('.step-nav').style.display = 'none';
