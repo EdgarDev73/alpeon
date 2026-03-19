@@ -2215,7 +2215,7 @@
               <div class="surf-display">
                 <span class="surf-num" id="surfNum">60</span><span class="surf-unit">m²</span>
               </div>
-              <input type="range" class="surf-range" id="slSurface" min="15" max="2000" value="60" step="5" />
+              <input type="range" class="surf-range" id="slSurface" min="0" max="365" value="45" step="1" />
               <div class="surf-bounds"><span>15 m²</span><span>2 000 m²</span></div>
             </div>
           </div>
@@ -2830,10 +2830,15 @@
      STEP 2 — Surface slider
   ══════════════════════════════════════ */
   const slSurface = document.getElementById('slSurface');
-  function updateSurf(v) {
+  function sliderToSurface(pos) {
+    pos = parseInt(pos);
+    return pos <= 185 ? 15 + pos : 200 + (pos - 185) * 10;
+  }
+  function updateSurf(pos) {
+    const v = sliderToSurface(pos);
     S.surface = v;
     document.getElementById('surfNum').textContent = v >= 1000 ? v.toLocaleString('fr-FR') : v;
-    const pct = (v - 15) / (2000 - 15) * 100;
+    const pct = pos / 365 * 100;
     slSurface.style.background = `linear-gradient(to right, var(--accent) ${pct}%, var(--stone-3) ${pct}%)`;
   }
   slSurface.addEventListener('input', () => { updateSurf(+slSurface.value); updatePreview(); });
