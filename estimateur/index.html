@@ -1782,8 +1782,6 @@
     header { padding: 0 18px; height: 56px; }
     .logo-name { font-size: 1.05rem; }
     .logo-claim { display: none; }
-    .main-nav a:not(.nav-cta) { display: none; }
-    .nav-cta { display: none !important; }
     .lang-switch { display: none; }
     .mob-menu-btn { display: flex; }
 
@@ -2100,6 +2098,18 @@
   }
   .est-station-chip:hover { background: var(--stone-3); }
   .est-station-chip svg { width: 12px; height: 12px; stroke: var(--accent); stroke-width: 2; fill: none; }
+  /* NAV DROPDOWN */
+  .nav-dropdown { position:relative; display:flex; align-items:center; cursor:pointer; }
+  .nav-dropdown > span { font-size:.74rem; font-weight:500; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.72); transition:color .3s; user-select:none; }
+  .nav-dropdown > span::after { content:''; display:inline-block; width:0; height:0; border-left:3.5px solid transparent; border-right:3.5px solid transparent; border-top:4px solid currentColor; margin-left:6px; vertical-align:middle; opacity:.7; }
+  header.scrolled .nav-dropdown > span { color:var(--ink-3); }
+  .nav-dd-menu { position:absolute; top:calc(100% + 16px); left:50%; transform:translateX(-50%) translateY(-6px); background:var(--ink); min-width:170px; padding:8px 0; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; border-top:2px solid var(--accent); }
+  .nav-dropdown:hover .nav-dd-menu { opacity:1; pointer-events:all; transform:translateX(-50%) translateY(0); }
+  .nav-dd-menu a { display:block; padding:11px 22px; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.72); text-decoration:none; transition:color .2s; white-space:nowrap; font-family:'Inter',sans-serif; }
+  .nav-dd-menu a:hover { color:#fff; }
+  /* Mobile dropdown sub-items */
+  .mob-nav-sub { font-size:1.3rem !important; color:rgba(255,255,255,.55) !important; padding-left:16px; position:relative; }
+  .mob-nav-sub::before { content:'—'; margin-right:8px; font-size:.9rem; color:var(--accent); }
   </style>
   <!-- Config locale (gitignorée — contient les secrets) -->
   <script src="/alpeon-config.js"></script>
@@ -2113,17 +2123,21 @@
       <span class="logo-name">ALPÉON</span>
     </a>
     <nav class="main-nav">
-      <a href="/accueil#services">Services</a>
-      <a href="/accueil#parc">Nos biens</a>
-      <a href="/accueil#temoignages">Témoignages</a>
-      <a href="/estimateur" style="color:#fff;">Estimateur</a>
-      <a href="/accueil#contact" class="nav-cta">Nous contacter</a>
-      <div class="lang-switch">
-        <a href="/estimateur" class="lang-btn active">FR</a>
-        <span class="lang-sep">|</span>
-        <a href="/en/estimateur" class="lang-btn">EN</a>
-      </div>
-    </nav>
+  <a href="/accueil">Accueil</a>
+  <div class="nav-dropdown">
+    <span>Destinations</span>
+    <div class="nav-dd-menu">
+      <a href="/accueil#destinations">Résidences</a>
+      <a href="/accueil#destinations">Signatures</a>
+    </div>
+  </div>
+  <a href="/estimateur">Estimateur</a>
+  <div class="lang-switch">
+    <a href="/estimateur" class="lang-btn active">FR</a>
+    <span class="lang-sep">|</span>
+    <a href="/en/estimateur" class="lang-btn">EN</a>
+  </div>
+</nav>
     <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   </header>
 
@@ -2131,12 +2145,11 @@
     <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')" aria-label="Fermer">&#x2715;</button>
     <div class="mob-menu-inner">
       <nav class="mob-nav">
-        <a href="/accueil#services" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')">Services</a>
-        <a href="/accueil#parc" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')">Nos biens</a>
-        <a href="/accueil#temoignages" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')">Témoignages</a>
-        <a href="/estimateur" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')">Estimateur</a>
-        <a href="/accueil#contact" class="mob-nav-cta">Nous contacter</a>
-      </nav>
+  <a href="/accueil">Accueil</a>
+  <a href="/accueil#destinations" class="mob-nav-sub">Résidences</a>
+  <a href="/accueil#destinations" class="mob-nav-sub">Signatures</a>
+  <a href="/estimateur">Estimateur</a>
+</nav>
       <div class="mob-lang">
         <a href="/estimateur" class="mob-lang-btn active">FR</a>
         <span class="mob-lang-sep">|</span>
