@@ -62,4 +62,24 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- FR Destinations -->
+  <url>
+    <loc>https://alpeon.fr/destinations/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/"/>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- EN Destinations -->
+  <url>
+    <loc>https://alpeon.fr/en/destinations/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/"/>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

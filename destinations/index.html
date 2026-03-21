@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destinations — Courchevel, Megève, Val d'Isère, Val Thorens | ALPÉON</title>
+  <meta name="description" content="ALPÉON opère dans les stations alpines les plus prestigieuses : Courchevel, Megève, Méribel, Tignes, Val d'Isère, Val Thorens. Découvrez nos destinations et estimez vos revenus locatifs." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://alpeon.fr/destinations/" />
+  <link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/" />
+  <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Destinations alpines | ALPÉON" />
+  <meta property="og:description" content="Courchevel, Megève, Méribel, Tignes, Val d'Isère, Val Thorens — gestion locative saisonnière dans les plus grandes stations des Alpes françaises." />
+  <meta property="og:url" content="https://alpeon.fr/destinations/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --stone:    #faf9f7;
+      --stone-2:  #f2efe9;
+      --stone-3:  #e5e0d8;
+      --stone-4:  #c8c1b5;
+      --ink:      #1c1b19;
+      --ink-3:    #4a4843;
+      --ink-4:    #7a7773;
+      --accent:   #a8956a;
+      --accent-2: #8a7a56;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--stone); color: var(--ink); line-height: 1.6; }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 72px;
+      background: transparent; transition: background .4s, box-shadow .4s;
+    }
+    header.scrolled { background: rgba(250,249,247,.97); box-shadow: 0 1px 0 var(--stone-3); backdrop-filter: blur(8px); }
+    .logo { display: flex; align-items: center; text-decoration: none; }
+    .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #fff; transition: color .4s; }
+    header.scrolled .logo-name { color: var(--ink); }
+    .main-nav { display: flex; align-items: center; gap: 36px; }
+    .main-nav a { font-size: .74rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; transition: color .3s; }
+    .main-nav a.active-link { color: #fff; }
+    .main-nav a:hover { color: #fff; }
+    header.scrolled .main-nav a { color: var(--ink-3); }
+    header.scrolled .main-nav a.active-link { color: var(--ink); }
+    header.scrolled .main-nav a:hover { color: var(--ink); }
+    .lang-switch { display: flex; align-items: center; gap: 8px; }
+    .lang-btn { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); text-decoration: none; transition: color .3s; }
+    .lang-btn.active { color: rgba(255,255,255,.9); }
+    header.scrolled .lang-btn { color: var(--ink-4); }
+    header.scrolled .lang-btn.active { color: var(--ink); }
+    .lang-sep { color: rgba(255,255,255,.2); font-size: .6rem; }
+    header.scrolled .lang-sep { color: var(--stone-4); }
+
+    /* Hamburger */
+    .mob-menu-btn { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; }
+    .mob-menu-btn span { display:block; height:1.5px; width:22px; background:#fff; transition:all .3s; border-radius:1px; }
+    header.scrolled .mob-menu-btn span { background:var(--ink); }
+    .mob-menu-btn.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+    .mob-menu-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .mob-menu-btn.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+    .mob-menu { position:fixed; inset:0; z-index:300; background:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s; display:flex; flex-direction:column; }
+    .mob-menu.open { opacity:1; pointer-events:all; }
+    .mob-close { position:absolute; top:14px; right:18px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); font-size:1.6rem; line-height:1; transition:color .2s; }
+    .mob-close:hover { color:#fff; }
+    .mob-menu-inner { display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; gap:44px; padding:20px; }
+    .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
+    .mob-nav a { font-family:'Cormorant Garamond',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
+    .mob-nav a:hover { color:#fff; }
+    .mob-lang { display:flex; align-items:center; gap:14px; }
+    .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
+    .mob-lang-btn.active { color:rgba(255,255,255,.9); }
+    .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
+    @media (max-width:900px) { .mob-menu-btn { display:flex; } .main-nav { display:none; } }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 72vh; min-height: 500px;
+      display: flex; align-items: flex-end; padding: 0 60px 72px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2000&q=90') center 40% / cover no-repeat;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,27,25,.88) 25%, rgba(28,27,25,.18) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .hero-kicker { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 4.5vw, 3.6rem); font-weight: 400; color: #fff; line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; }
+    .hero-desc { font-size: .95rem; color: rgba(255,255,255,.68); line-height: 1.72; max-width: 480px; }
+
+    /* ── INTRO ── */
+    .intro { padding: 80px 60px; background: var(--stone); display: flex; gap: 80px; align-items: flex-start; }
+    .intro-left { flex: 0 0 auto; }
+    .intro-num { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 300; color: var(--stone-3); line-height: 1; }
+    .intro-label { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+    .intro-right { flex: 1; }
+    .sec-kicker { font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .sec-kicker::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.15; margin-bottom: 20px; }
+    .sec-title em { font-style: italic; color: var(--accent); }
+    .sec-desc { font-size: .95rem; color: var(--ink-3); line-height: 1.75; max-width: 560px; }
+
+    /* ── STATIONS GRID ── */
+    .stations-section { padding: 0 60px 100px; background: var(--stone); }
+    .stations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    /* Featured first card spans 2 cols */
+    .station-card:first-child { grid-column: span 2; }
+
+    .station-card {
+      position: relative; overflow: hidden;
+      min-height: 520px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 40px 36px;
+      cursor: pointer; text-decoration: none;
+    }
+    .station-card::before {
+      content: ''; position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform .7s cubic-bezier(.25,.46,.45,.94);
+    }
+    .station-card:hover::before { transform: scale(1.05); }
+    .station-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,27,25,.92) 30%, rgba(28,27,25,.15) 100%);
+      transition: opacity .4s;
+    }
+    .station-card:hover::after { opacity: .85; }
+
+    /* station images */
+    .sc-courchevel::before  { background-image: url('https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=1400&q=85'); background-position: center 35%; }
+    .sc-megeve::before      { background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1000&q=85'); }
+    .sc-meribel::before     { background-image: url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1000&q=85'); }
+    .sc-tignes::before      { background-image: url('https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=1000&q=85'); background-position: center 30%; }
+    .sc-valdisere::before   { background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1000&q=85'); background-position: center 40%; }
+    .sc-valthorens::before  { background-image: url('https://images.unsplash.com/photo-1551524559-8af4e6624178?w=1200&q=85'); }
+
+    .station-content { position: relative; z-index: 2; }
+    .station-massif {
+      display: inline-block; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid rgba(168,149,106,.5); padding: 4px 10px; margin-bottom: 14px;
+    }
+    .station-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 400; color: #fff; line-height: 1; margin-bottom: 6px;
+    }
+    .station-card:first-child .station-name { font-size: 3rem; }
+    .station-altitude {
+      font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.48); margin-bottom: 18px;
+    }
+    .station-desc {
+      font-size: .86rem; color: rgba(255,255,255,.65); line-height: 1.65;
+      max-width: 380px; margin-bottom: 20px;
+    }
+    .station-card:first-child .station-desc { max-width: 520px; }
+    .station-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+    .station-tag {
+      font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(255,255,255,.5); background: rgba(255,255,255,.08);
+      padding: 4px 10px; border: 1px solid rgba(255,255,255,.12);
+    }
+    .station-quartiers { margin-bottom: 24px; }
+    .sq-label { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 8px; }
+    .sq-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sq-item { font-size: .75rem; color: rgba(255,255,255,.55); }
+    .sq-item + .sq-item::before { content: '·'; margin-right: 6px; color: rgba(255,255,255,.2); }
+    .station-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .7rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); text-decoration: none;
+      border-bottom: 1px solid rgba(168,149,106,.4); padding-bottom: 2px;
+      transition: color .3s, border-color .3s;
+    }
+    .station-cta:hover { color: #fff; border-color: rgba(255,255,255,.5); }
+    .station-cta svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .station-card:hover .station-cta svg { transform: translateX(3px); }
+
+    /* ── CTA SECTION ── */
+    .cta-section { background: var(--ink); padding: 100px 60px; text-align: center; }
+    .cta-section .sec-kicker { justify-content: center; }
+    .cta-section .sec-kicker::before { display: none; }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; color: #fff; line-height: 1.15; margin-bottom: 20px; }
+    .cta-title em { font-style: italic; color: var(--accent); }
+    .cta-desc { font-size: .95rem; color: rgba(255,255,255,.55); line-height: 1.75; max-width: 520px; margin: 0 auto 48px; }
+    .cta-actions { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; text-decoration: none; padding: 16px 40px; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: background .3s; }
+    .btn-primary:hover { background: var(--accent-2); }
+    .btn-outline-white { border: 1px solid rgba(255,255,255,.3); color: rgba(255,255,255,.75); text-decoration: none; padding: 16px 40px; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: border-color .3s, color .3s; display: inline-block; }
+    .btn-outline-white:hover { border-color: #fff; color: #fff; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.07); padding: 64px 60px 40px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .f-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 6px; }
+    .f-brand-claim { font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.42); line-height: 1.7; }
+    .f-col-label { font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 18px; }
+    .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .f-links a { font-size: .84rem; color: rgba(255,255,255,.58); text-decoration: none; transition: color .2s; }
+    .f-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 24px; display: flex; justify-content: space-between; font-size: .74rem; color: rgba(255,255,255,.25); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .stations-grid { grid-template-columns: 1fr 1fr; }
+      .station-card:first-child { grid-column: span 2; }
+      .intro { gap: 48px; }
+    }
+    @media (max-width: 768px) {
+      header { padding: 0 20px; }
+      .hero { padding: 0 24px 60px; }
+      .intro { padding: 60px 24px; flex-direction: column; gap: 24px; }
+      .intro-num { font-size: 4rem; }
+      .stations-section { padding: 0 0 64px; }
+      .stations-grid { grid-template-columns: 1fr; gap: 2px; }
+      .station-card:first-child { grid-column: span 1; }
+      .station-card { min-height: 440px; padding: 32px 24px; }
+      .station-card:first-child .station-name { font-size: 2.4rem; }
+      .cta-section { padding: 64px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="siteHeader">
+    <a href="/accueil" class="logo">
+      <span class="logo-name">ALPÉON</span>
+    </a>
+    <nav class="main-nav">
+      <a href="/accueil">Accueil</a>
+      <a href="/destinations" class="active-link">Destinations</a>
+      <a href="/proprietaires">Propriétaires</a>
+      <a href="/estimateur">Estimateur</a>
+      <div class="lang-switch">
+        <a href="/destinations" class="lang-btn active">FR</a>
+        <span class="lang-sep">|</span>
+        <a href="/en/destinations" class="lang-btn">EN</a>
+      </div>
+    </nav>
+    <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+
+  <div class="mob-menu" id="mobMenu">
+    <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')" aria-label="Fermer">&#x2715;</button>
+    <div class="mob-menu-inner">
+      <nav class="mob-nav">
+        <a href="/accueil">Accueil</a>
+        <a href="/destinations">Destinations</a>
+        <a href="/proprietaires">Propriétaires</a>
+        <a href="/estimateur">Estimateur</a>
+      </nav>
+      <div class="mob-lang">
+        <a href="/destinations" class="mob-lang-btn active">FR</a>
+        <span class="mob-lang-sep">|</span>
+        <a href="/en/destinations" class="mob-lang-btn">EN</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-kicker">Les stations ALPÉON</p>
+      <h1>6 destinations alpines<br>d'exception</h1>
+      <p class="hero-desc">Des stations les plus exclusives aux domaines les plus enneigés — ALPÉON gère votre bien là où la demande locative est la plus forte des Alpes françaises.</p>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <div class="intro-left">
+      <div class="intro-num">6</div>
+      <div class="intro-label">Stations</div>
+    </div>
+    <div class="intro-right">
+      <div class="sec-kicker">Notre présence</div>
+      <h2 class="sec-title">Un réseau sélectionné<br>au cœur des <em>meilleures stations</em></h2>
+      <p class="sec-desc">Courchevel, Megève, Méribel, Tignes, Val d'Isère, Val Thorens. Chaque station a été choisie pour la robustesse de sa demande locative, la qualité de son domaine skiable et le profil de sa clientèle internationale. ALPÉON y opère en connaissance fine du marché local.</p>
+    </div>
+  </div>
+
+  <!-- STATIONS GRID -->
+  <div class="stations-section">
+    <div class="stations-grid">
+
+      <!-- COURCHEVEL -->
+      <a class="station-card sc-courchevel" href="/estimateur">
+        <div class="station-content">
+          <span class="station-massif">Les 3 Vallées</span>
+          <div class="station-name">Courchevel</div>
+          <div class="station-altitude">1 300 — 1 850 m d'altitude</div>
+          <p class="station-desc">La référence mondiale du ski de luxe. Courchevel 1850 concentre la plus haute densité de chalets d'exception et de clients à fort pouvoir d'achat des Alpes. Un rendement locatif au sommet.</p>
+          <div class="station-tags">
+            <span class="station-tag">Prestige</span>
+            <span class="station-tag">3 Vallées</span>
+            <span class="station-tag">600 km de pistes</span>
+            <span class="station-tag">Clientèle internationale</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Quartiers</div>
+            <div class="sq-list">
+              <span class="sq-item">1850</span>
+              <span class="sq-item">1650 · Moriond</span>
+              <span class="sq-item">1550</span>
+              <span class="sq-item">Le Praz · 1300</span>
+              <span class="sq-item">Saint-Bon</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimer mon bien
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- MEGÈVE -->
+      <a class="station-card sc-megeve" href="/estimateur">
+        <div class="station-content">
+          <span class="station-massif">Mont-Blanc</span>
+          <div class="station-name">Megève</div>
+          <div class="station-altitude">1 113 m — village historique</div>
+          <p class="station-desc">L'élégance à la française. Village piéton au pied du Mont-Blanc, Megève attire une clientèle raffinée, gastronomique et fidèle, tout au long de la saison hivernale.</p>
+          <div class="station-tags">
+            <span class="station-tag">Village charmant</span>
+            <span class="station-tag">Mont-Blanc</span>
+            <span class="station-tag">Art de vivre</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Quartiers</div>
+            <div class="sq-list">
+              <span class="sq-item">Centre</span>
+              <span class="sq-item">Mont d'Arbois</span>
+              <span class="sq-item">Rochebrune</span>
+              <span class="sq-item">Combloux</span>
+              <span class="sq-item">Jaillet</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimer mon bien
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- MÉRIBEL -->
+      <a class="station-card sc-meribel" href="/estimateur">
+        <div class="station-content">
+          <span class="station-massif">Les 3 Vallées</span>
+          <div class="station-name">Méribel</div>
+          <div class="station-altitude">1 400 — 1 700 m d'altitude</div>
+          <p class="station-desc">Au cœur géographique et stratégique des 3 Vallées, Méribel conjugue architecture savoyarde authentique et accès direct à 600 km de pistes. Très prisée des familles britanniques et françaises.</p>
+          <div class="station-tags">
+            <span class="station-tag">Cœur des 3 Vallées</span>
+            <span class="station-tag">Familial</span>
+            <span class="station-tag">Architecture savoyarde</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Quartiers</div>
+            <div class="sq-list">
+              <span class="sq-item">Centre</span>
+              <span class="sq-item">Les Allues</span>
+              <span class="sq-item">Méribel-Mottaret</span>
+              <span class="sq-item">Brides-les-Bains</span>
+              <span class="sq-item">Raffort</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimer mon bien
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- TIGNES -->
+      <a class="station-card sc-tignes" href="/estimateur">
+        <div class="station-content">
+          <span class="station-massif">Espace Killy</span>
+          <div class="station-name">Tignes</div>
+          <div class="station-altitude">1 550 — 3 456 m — Glacier</div>
+          <p class="station-desc">La station de la saison la plus longue de France. Grâce à son glacier, Tignes garantit la neige de octobre à mai et attire une clientèle de skieurs passionnés, très fidèle d'une année sur l'autre.</p>
+          <div class="station-tags">
+            <span class="station-tag">Saison étendue</span>
+            <span class="station-tag">Glacier</span>
+            <span class="station-tag">Espace Killy</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Quartiers</div>
+            <div class="sq-list">
+              <span class="sq-item">Val Claret</span>
+              <span class="sq-item">Le Lac</span>
+              <span class="sq-item">Les Brévières</span>
+              <span class="sq-item">Les Boisses</span>
+              <span class="sq-item">Le Lavachet</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimer mon bien
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- VAL D'ISÈRE -->
+      <a class="station-card sc-valdisere" href="/estimateur">
+        <div class="station-content">
+          <span class="station-massif">Espace Killy</span>
+          <div class="station-name">Val d'Isère</div>
+          <div class="station-altitude">1 850 — 3 456 m d'altitude</div>
+          <p class="station-desc">L'une des plus grandes stations du monde, sur un seul versant. Val d'Isère rassemble les meilleurs skieurs mondiaux et une clientèle fortunée qui revient chaque saison. Rendement locatif parmi les plus élevés des Alpes.</p>
+          <div class="station-tags">
+            <span class="station-tag">Domaine d'excellence</span>
+            <span class="station-tag">Espace Killy</span>
+            <span class="station-tag">Haute altitude</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Quartiers</div>
+            <div class="sq-list">
+              <span class="sq-item">Centre-val</span>
+              <span class="sq-item">La Daille</span>
+              <span class="sq-item">Le Fornet</span>
+              <span class="sq-item">Le Laisinant</span>
+              <span class="sq-item">La Légettaz</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimer mon bien
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- VAL THORENS -->
+      <a class="station-card sc-valthorens" href="/estimateur">
+        <div class="station-content">
+          <span class="station-massif">Les 3 Vallées</span>
+          <div class="station-name">Val Thorens</div>
+          <div class="station-altitude">2 300 m — Plus haute station d'Europe</div>
+          <p class="station-desc">La plus haute station d'Europe garantit une neige irréprochable du début à la fin de saison. Val Thorens offre le taux d'occupation le plus élevé du portefeuille ALPÉON et un accès immédiat aux pistes depuis chaque résidence.</p>
+          <div class="station-tags">
+            <span class="station-tag">Neige garantie</span>
+            <span class="station-tag">3 Vallées</span>
+            <span class="station-tag">Ski au pied</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Quartiers</div>
+            <div class="sq-list">
+              <span class="sq-item">Centre</span>
+              <span class="sq-item">Les Balcons</span>
+              <span class="sq-item">Soleil</span>
+              <span class="sq-item">Slalom</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimer mon bien
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="sec-kicker" style="justify-content:center;"><span>Votre bien</span></div>
+    <h2 class="cta-title">Estimez le potentiel locatif<br>de votre <em>bien alpin</em></h2>
+    <p class="cta-desc">Notre simulateur calcule en 2 minutes une projection de revenus basée sur les données réelles de notre portefeuille — surface, station, standing et capacité d'accueil.</p>
+    <div class="cta-actions">
+      <a href="/estimateur" class="btn-primary">Lancer l'estimateur</a>
+      <a href="/proprietaires" class="btn-outline-white">Découvrir nos services</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand-name">ALPÉON</div>
+        <div class="f-brand-claim">Alpine Property Management</div>
+        <p class="f-brand-desc">Opérateur premium de gestion locative courte durée dans les Alpes françaises. Discrétion, excellence et transparence pour chaque propriétaire.</p>
+      </div>
+      <div>
+        <div class="f-col-label">Destinations</div>
+        <ul class="f-links">
+          <li><a href="/destinations">Courchevel</a></li>
+          <li><a href="/destinations">Megève</a></li>
+          <li><a href="/destinations">Val d'Isère</a></li>
+          <li><a href="/destinations">Val Thorens</a></li>
+          <li><a href="/destinations">Méribel</a></li>
+          <li><a href="/destinations">Tignes</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-label">Services</div>
+        <ul class="f-links">
+          <li><a href="/proprietaires">Propriétaires</a></li>
+          <li><a href="/proprietaires">ALPÉON Signatures</a></li>
+          <li><a href="/estimateur">Estimateur de revenus</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-label">Contact</div>
+        <ul class="f-links">
+          <li><a href="mailto:proprietaires@alpeon.fr">proprietaires@alpeon.fr</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ALPÉON. Tous droits réservés.</span>
+      <span>Gestion locative alpine premium — 15 stations dans les Alpes françaises</span>
+    </div>
+  </footer>
+
+  <script>
+    const hdr = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => { hdr.classList.toggle('scrolled', window.scrollY > 40); });
+    (function(){
+      var btn = document.getElementById('mobMenuBtn');
+      var menu = document.getElementById('mobMenu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function(){ var o = menu.classList.toggle('open'); btn.classList.toggle('open', o); });
+      menu.addEventListener('click', function(e){ if (e.target === menu) { menu.classList.remove('open'); btn.classList.remove('open'); } });
+    })();
+  </script>
+
+</body>
+</html>
