@@ -3,53 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- SEO -->
   <title>Alpine Property Management — Val Thorens, Megève, Courchevel | ALPÉON</title>
   <meta name="description" content="ALPÉON manages your alpine seasonal rental property in Val Thorens, Megève, Courchevel, Méribel, Tignes and Val d'Isère. Guaranteed revenue, discreet and transparent management." />
   <meta name="robots" content="index, follow" />
-  <meta name="keywords" content="alpine property management, ski chalet rental management, Val Thorens property manager, Megève rental agency, Courchevel property management, French Alps rental income" />
   <link rel="canonical" href="https://alpeon.fr/en/accueil/" />
   <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/accueil/" />
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/accueil/" />
   <link rel="alternate" hreflang="x-default" href="https://alpeon.fr/accueil/" />
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Professional Alpine Property Management | ALPÉON" />
-  <meta property="og:description" content="ALPÉON manages your seasonal rental property across 15 French Alps ski resorts. Guaranteed revenue, discreet and transparent management." />
+  <meta property="og:description" content="ALPÉON manages your seasonal rental property in the French Alps. Guaranteed revenue, discreet and transparent management." />
   <meta property="og:url" content="https://alpeon.fr/en/accueil/" />
-  <meta property="og:site_name" content="ALPÉON" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:locale:alternate" content="fr_FR" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Alpine Property Management | ALPÉON" />
-  <meta name="twitter:description" content="Seasonal rental management in Val Thorens, Megève, Courchevel and more. Guaranteed revenue." />
-
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "RealEstateAgent",
-    "@id": "https://alpeon.fr/#organization",
-    "name": "ALPÉON",
-    "url": "https://alpeon.fr",
-    "email": "proprietaires@alpeon.fr",
-    "description": "Professional alpine property management — seasonal ski rental across 15 French Alps resorts.",
-    "areaServed": [
-      { "@type": "Place", "name": "Val Thorens" },
-      { "@type": "Place", "name": "Megève" },
-      { "@type": "Place", "name": "Courchevel" },
-      { "@type": "Place", "name": "Méribel" },
-      { "@type": "Place", "name": "Tignes" },
-      { "@type": "Place", "name": "Val d'Isère" }
-    ],
-    "serviceType": ["Seasonal rental management", "Property management", "Alpine concierge"]
-  }
-  </script>
-
+  <meta property="og:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -57,496 +22,44 @@
   <style>
     :root {
       --stone:    #faf9f7;
-      --stone-2:  #f2ede7;
-      --stone-3:  #e4ddd4;
-      --stone-4:  #c8bfb2;
+      --stone-2:  #f2efe9;
+      --stone-3:  #e5e0d8;
+      --stone-4:  #c8c1b5;
       --ink:      #1c1b19;
-      --ink-2:    #3d3b37;
-      --ink-3:    #4a4845;
-      --ink-4:    #7a7873;
+      --ink-3:    #4a4843;
+      --ink-4:    #7a7773;
       --accent:   #a8956a;
-      --accent-2: #967f59;
+      --accent-2: #8a7a56;
     }
-
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--stone); color: var(--ink); line-height: 1.6; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--ink);
-      background: var(--stone);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ═══════════════════════════════ HEADER ═══════════════════════════════ */
-
+    /* ── HEADER ── */
     header {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 200;
-      height: 72px;
-      padding: 0 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: background 0.45s, border-color 0.45s;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 72px;
+      background: transparent; transition: background .4s, box-shadow .4s;
     }
-
-    header.scrolled {
-      background: rgba(250,249,247,0.96);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--stone-3);
-    }
-
-    .logo {
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .logo-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.45rem;
-      font-weight: 400;
-      letter-spacing: 0.28em;
-      color: white;
-      line-height: 1;
-      transition: color 0.4s;
-    }
-
+    header.scrolled { background: rgba(250,249,247,.97); box-shadow: 0 1px 0 var(--stone-3); backdrop-filter: blur(8px); }
+    .logo { display: flex; align-items: center; text-decoration: none; }
+    .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #fff; transition: color .4s; }
     header.scrolled .logo-name { color: var(--ink); }
-
-    .logo-claim {
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      line-height: 1;
-      transition: color 0.4s;
-    }
-
-    header.scrolled .logo-claim { color: var(--accent); }
-
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .main-nav a {
-      font-size: 0.74rem;
-      font-weight: 500;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: rgba(255,255,255,0.65);
-      transition: color 0.25s;
-    }
-
-    .main-nav a:hover { color: white; }
+    .main-nav { display: flex; align-items: center; gap: 36px; }
+    .main-nav a { font-size: .74rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; transition: color .3s; }
+    .main-nav a:hover { color: #fff; }
     header.scrolled .main-nav a { color: var(--ink-3); }
     header.scrolled .main-nav a:hover { color: var(--ink); }
-
-    .nav-cta {
-      border: 1px solid rgba(255,255,255,0.35) !important;
-      color: white !important;
-      padding: 9px 22px;
-      letter-spacing: 0.08em !important;
-      transition: background 0.2s, border-color 0.2s, color 0.2s !important;
-    }
-
-    .nav-cta:hover {
-      background: white !important;
-      color: var(--ink) !important;
-      border-color: white !important;
-    }
-
-    header.scrolled .nav-cta { border-color: var(--ink) !important; color: var(--ink) !important; }
-    header.scrolled .nav-cta:hover { background: var(--ink) !important; color: white !important; }
-
-    .lang-switch { display:flex; align-items:center; gap:5px; margin-left:4px; }
-    .lang-btn { font-size:.6rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.4); transition:color .2s; }
-    .lang-btn:hover { color:rgba(255,255,255,.85); }
-    .lang-btn.active { color:rgba(255,255,255,.85); }
-    header.scrolled .lang-btn { color:var(--ink-4); }
-    header.scrolled .lang-btn.active { color:var(--ink); }
-    header.scrolled .lang-btn:hover { color:var(--ink); }
-    .lang-sep { font-size:.5rem; color:rgba(255,255,255,.2); }
-    header.scrolled .lang-sep { color:var(--stone-4); }
-
-    /* ═══════════════════════════════ HERO ═══════════════════════════════ */
-
-    .hero { height: 100vh; min-height: 700px; position: relative; overflow: hidden; }
-
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=2000&q=90') center 40% / cover no-repeat;
-      transform: scale(1.03);
-      transition: transform 8s ease;
-    }
-
-    .hero.loaded .hero-bg { transform: scale(1); }
-
-    .hero-veil {
-      position: absolute; inset: 0;
-      background: linear-gradient(165deg, rgba(15,13,10,0.18) 0%, rgba(15,13,10,0.55) 70%, rgba(15,13,10,0.80) 100%);
-    }
-
-    .hero-body {
-      position: relative; z-index: 2; height: 100%;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 60px 80px; max-width: 1300px;
-    }
-
-    .hero-kicker {
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.26em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.6rem, 6vw, 5.2rem);
-      font-weight: 300; line-height: 1.1; letter-spacing: -0.015em;
-      color: white; margin-bottom: 28px; max-width: 760px;
-    }
-
-    .hero h1 em { font-style: italic; font-weight: 300; color: rgba(255,255,255,0.75); }
-
-    .hero-desc {
-      font-size: 0.97rem; line-height: 1.78; color: rgba(255,255,255,0.68);
-      max-width: 420px; margin-bottom: 44px;
-    }
-
-    .hero-actions { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-
-    .btn-fill {
-      display: inline-block; background: var(--accent); color: white;
-      text-decoration: none; padding: 14px 36px; font-size: 0.76rem;
-      font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s;
-    }
-
-    .btn-fill:hover { background: var(--accent-2); }
-
-    .btn-line {
-      font-size: 0.76rem; font-weight: 500; letter-spacing: 0.07em;
-      text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,0.55);
-      border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .btn-line:hover { color: white; border-color: white; }
-
-    .hero-scroll-hint {
-      position: absolute; z-index: 2; bottom: 40px; right: 60px;
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-    }
-
-    .scroll-rule { width: 44px; height: 1px; background: rgba(255,255,255,0.2); }
-
-    /* ═══════════════════════════════ STATS BAR ════════════════════════ */
-
-    .stats-bar { background: var(--ink); padding: 0 80px; }
-
-    .stats-inner {
-      max-width: 1300px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border-left: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .stat-item { padding: 44px 40px; border-right: 1px solid rgba(255,255,255,0.06); border-top: 1px solid rgba(255,255,255,0.06); }
-
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300;
-      color: var(--accent); line-height: 1; letter-spacing: -0.02em; margin-bottom: 8px;
-    }
-
-    .stat-label { font-size: 0.64rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); line-height: 1.5; }
-
-    /* ═══════════════════════════════ INTRO ═══════════════════════════════ */
-
-    .intro {
-      padding: 104px 60px; max-width: 1300px; margin: 0 auto;
-      display: grid; grid-template-columns: 220px 1fr; gap: 80px; align-items: start;
-    }
-
-    .intro-aside { padding-top: 8px; }
-
-    .aside-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
-
-    .aside-rule { width: 24px; height: 1px; background: var(--stone-3); margin: 14px 0; }
-
-    .aside-note { font-size: 0.82rem; color: var(--ink-3); line-height: 1.7; }
-
-    .intro-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.5rem, 2.8vw, 2.15rem);
-      font-weight: 300; color: var(--ink); line-height: 1.55; letter-spacing: -0.01em;
-    }
-
-    .intro-text em { font-style: italic; color: var(--ink-3); }
-    .intro-text strong { font-weight: 500; font-style: normal; color: var(--ink); }
-
-    .hr { height: 1px; background: var(--stone-3); margin: 0 60px; }
-
-    /* ═══════════════════════════════ APPROACH ═══════════════════════════ */
-
-    .approach { padding: 104px 60px; max-width: 1300px; margin: 0 auto; }
-
-    .section-heading { display: grid; grid-template-columns: 220px 1fr; gap: 80px; margin-bottom: 64px; align-items: end; }
-
-    .section-kicker { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); padding-top: 4px; }
-
-    .section-title {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 300; color: var(--ink); line-height: 1.18; letter-spacing: -0.015em;
-    }
-
-    .approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--stone-3); border: 1px solid var(--stone-3); }
-
-    .approach-cell { background: var(--stone); padding: 48px 36px 40px; display: flex; flex-direction: column; }
-
-    .cell-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--stone-3); line-height: 1; margin-bottom: 24px; letter-spacing: -0.02em; }
-
-    .cell-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 12px; }
-
-    .cell-text { font-size: 0.86rem; color: var(--ink-2); line-height: 1.75; flex: 1; }
-
-    /* ═══════════════════════════════ DESTINATIONS ═══════════════════════ */
-
-    .destinations { background: var(--stone-2); border-top: 1px solid var(--stone-3); border-bottom: 1px solid var(--stone-3); }
-
-    .destinations-inner { padding: 104px 60px; max-width: 1300px; margin: 0 auto; }
-
-    .destinations-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 64px; align-items: end; }
-
-    .destinations-header h2 {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 300; color: var(--ink); line-height: 1.16; letter-spacing: -0.015em;
-    }
-
-    .destinations-header p { font-size: 0.93rem; color: var(--ink-2); line-height: 1.75; }
-
-    .dest-map-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--stone-3); margin-top: 48px; }
-
-    .dest-region { border-right: 1px solid var(--stone-3); }
-    .dest-region:last-child { border-right: none; }
-
-    .dest-region-title { font-size: 0.54rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-4); padding: 14px 20px; background: var(--stone-2); border-bottom: 1px solid var(--stone-3); }
-
-    .dest-station { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid var(--stone-3); gap: 8px; transition: background 0.15s; }
-    .dest-station:last-child { border-bottom: none; }
-    .dest-station:hover { background: var(--stone-2); }
-
-    .dest-station-name { font-size: 0.8rem; font-weight: 500; color: var(--ink); }
-    .dest-station-alt { font-size: 0.58rem; color: var(--ink-4); white-space: nowrap; }
-    .dest-station.flagship .dest-station-name { color: var(--accent); }
-
-    .dest-flagship-tag { font-size: 0.5rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: white; background: var(--accent); padding: 2px 6px; flex-shrink: 0; }
-
-    /* ═══════════════════════════════ TESTIMONIALS ════════════════════ */
-
-    .testimonials { padding: 100px 80px; background: var(--stone-2); }
-    .testimonials-inner { max-width: 1300px; margin: 0 auto; }
-    .testi-kicker { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; }
-
-    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--stone-3); }
-
-    .testi-card { background: var(--stone-2); padding: 40px 36px; display: flex; flex-direction: column; gap: 20px; }
-
-    .testi-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.55; flex: 1; }
-
-    .testi-quote::before { content: '"'; font-size: 3rem; color: var(--accent); line-height: 0; vertical-align: -0.5em; margin-right: 4px; }
-
-    .testi-author { border-top: 1px solid var(--stone-3); padding-top: 18px; display: flex; flex-direction: column; gap: 3px; }
-
-    .testi-name { font-size: 0.76rem; font-weight: 600; color: var(--ink); }
-    .testi-info { font-size: 0.64rem; color: var(--ink-4); letter-spacing: 0.04em; }
-
-    /* ═══════════════════════════════ PILLARS ═══════════════════════════ */
-
-    .pillars { padding: 104px 60px; max-width: 1300px; margin: 0 auto; }
-
-    .pillars-top { display: grid; grid-template-columns: 220px 1fr; gap: 80px; margin-bottom: 64px; align-items: end; }
-
-    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--stone-3); border: 1px solid var(--stone-3); }
-
-    .pillar { background: var(--stone); padding: 52px 36px 44px; display: flex; flex-direction: column; }
-
-    .pillar-word { font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 300; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 20px; }
-
-    .pillar-rule { width: 24px; height: 1px; background: var(--accent); margin-bottom: 20px; }
-
-    .pillar-text { font-size: 0.86rem; color: var(--ink-2); line-height: 1.75; }
-
-    /* ═══════════════════════════════ SIGNATURE BAND ════════════════════ */
-
-    .signature-band { background: var(--ink); padding: 0 60px; border-top: 1px solid rgba(255,255,255,0.05); }
-
-    .signature-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; min-height: 360px; }
-
-    .sig-left { padding: 80px 80px 80px 0; border-right: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; justify-content: center; }
-
-    .sig-kicker { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
-
-    .sig-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; color: white; line-height: 1.18; letter-spacing: -0.01em; margin-bottom: 14px; }
-
-    .sig-sub { font-size: 0.9rem; color: rgba(255,255,255,0.52); line-height: 1.7; }
-
-    .sig-right { padding: 80px 0 80px 80px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
-
-    .sig-feature { display: flex; align-items: baseline; gap: 14px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .sig-feature:last-child { border-bottom: none; padding-bottom: 0; }
-
-    .sig-dot { width: 4px; height: 4px; background: var(--accent); flex-shrink: 0; margin-top: 6px; }
-
-    .sig-feat-text { font-size: 0.88rem; color: rgba(255,255,255,0.58); line-height: 1.6; }
-    .sig-feat-text strong { font-weight: 600; color: rgba(255,255,255,0.75); }
-
-    /* ═══════════════════════════════ ESTIMATOR ════════════════════════ */
-
-    .estimator { background: var(--stone-2); border-top: 1px solid var(--stone-3); border-bottom: 1px solid var(--stone-3); padding: 100px 60px; }
-
-    .estimator-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-
-    .estimator h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; color: var(--ink); line-height: 1.18; letter-spacing: -0.015em; margin-bottom: 14px; }
-
-    .estimator p { font-size: 0.93rem; color: var(--ink-2); line-height: 1.75; }
-
-    .estimator-panel { background: var(--stone); border: 1px solid var(--stone-3); padding: 40px; }
-
-    .est-panel-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--stone-3); }
-
-    .est-features { display: flex; flex-direction: column; gap: 0; margin-bottom: 32px; }
-
-    .est-feat { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--stone-3); }
-    .est-feat:last-child { border-bottom: none; }
-
-    .est-feat-mark { width: 4px; height: 4px; background: var(--accent); flex-shrink: 0; }
-    .est-feat-text { font-size: 0.86rem; color: var(--ink-2); }
-
-    .btn-estimate { display: inline-block; width: 100%; text-align: center; background: var(--ink); color: white; text-decoration: none; padding: 14px 32px; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; }
-    .btn-estimate:hover { background: var(--ink-2); }
-
-    /* ═══════════════════════════════ CONTACT ═══════════════════════════ */
-
-    .contact { padding: 104px 60px; max-width: 1300px; margin: 0 auto; }
-
-    .contact-header { display: grid; grid-template-columns: 220px 1fr; gap: 80px; margin-bottom: 64px; align-items: end; }
-
-    .contact-body { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
-
-    .contact-info { display: flex; flex-direction: column; gap: 0; }
-
-    .info-item { padding: 20px 0; border-bottom: 1px solid var(--stone-3); }
-    .info-item:first-child { border-top: 1px solid var(--stone-3); }
-
-    .info-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 5px; }
-
-    .info-value { font-size: 0.9rem; color: var(--ink); }
-    .info-value a { text-decoration: none; color: inherit; transition: color 0.2s; }
-    .info-value a:hover { color: var(--accent); }
-
-    .contact-form { display: flex; flex-direction: column; gap: 22px; }
-
-    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-    .f-group { display: flex; flex-direction: column; gap: 6px; }
-
-    .f-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
-
-    .f-group input, .f-group select, .f-group textarea {
-      border: none; border-bottom: 1.5px solid var(--stone-3); background: transparent;
-      padding: 10px 0; font-size: 0.95rem; font-family: 'Inter', sans-serif;
-      color: var(--ink); outline: none; width: 100%; transition: border-color 0.2s;
-      -webkit-appearance: none; appearance: none;
-    }
-
-    .f-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239b9994' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; padding-right: 22px; }
-
-    .f-group input:focus, .f-group select:focus, .f-group textarea:focus { border-color: var(--accent); }
-
-    .f-group textarea { resize: none; height: 88px; }
-
-    .btn-send { align-self: flex-start; background: var(--ink); color: white; border: none; padding: 13px 36px; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.2s; }
-    .btn-send:hover { background: var(--accent); }
-
-    /* ═══════════════════════════════ FOOTER ═══════════════════════════ */
-
-    footer { background: #141210; padding: 72px 60px 48px; }
-
-    .footer-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 60px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 32px; }
-
-    .f-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; letter-spacing: 0.24em; color: white; margin-bottom: 3px; }
-
-    .f-brand-claim { font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
-
-    .f-brand-desc { font-size: 0.82rem; color: rgba(255,255,255,0.44); line-height: 1.7; max-width: 240px; }
-
-    .f-col-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 18px; }
-
-    .f-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-
-    .f-links a { font-size: 0.82rem; color: rgba(255,255,255,0.52); text-decoration: none; transition: color 0.2s; }
-    .f-links a:hover { color: rgba(255,255,255,0.75); }
-
-    .footer-bottom { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; color: rgba(255,255,255,0.28); flex-wrap: wrap; gap: 8px; }
-
-    /* ═══════════════════════════════ RESPONSIVE ════════════════════════ */
-
-    @media (max-width: 1100px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; } }
-
-    @media (max-width: 900px) {
-      header { padding: 0 24px; }
-      .main-nav { display: none; }
-      .hero-body { padding: 0 24px 60px; }
-      .hero-scroll-hint { right: 24px; display: none; }
-      .intro, .approach, .pillars, .contact { padding-left: 24px; padding-right: 24px; }
-      .intro { grid-template-columns: 1fr; gap: 20px; padding-top: 72px; padding-bottom: 72px; }
-      .hr { margin: 0 24px; }
-      .approach { padding-top: 72px; padding-bottom: 72px; }
-      .section-heading { grid-template-columns: 1fr; gap: 16px; }
-      .approach-grid { grid-template-columns: 1fr; }
-      .destinations-inner { padding: 72px 24px; }
-      .destinations-header { grid-template-columns: 1fr; gap: 20px; }
-      .dest-map-grid { grid-template-columns: 1fr 1fr; }
-      .dest-region:nth-child(2) { border-right: none; }
-      .dest-region:nth-child(3) { border-right: 1px solid var(--stone-3); border-top: 1px solid var(--stone-3); }
-      .dest-region:nth-child(4) { border-right: none; border-top: 1px solid var(--stone-3); }
-      .pillars { padding-top: 72px; padding-bottom: 72px; }
-      .pillars-top { grid-template-columns: 1fr; gap: 16px; }
-      .pillars-grid { grid-template-columns: 1fr; }
-      .signature-band { padding: 0 24px; }
-      .signature-inner { grid-template-columns: 1fr; }
-      .sig-left { padding: 64px 0 40px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
-      .sig-right { padding: 40px 0 64px; }
-      .estimator { padding: 72px 24px; }
-      .estimator-inner { grid-template-columns: 1fr; gap: 44px; }
-      .contact { padding-top: 72px; padding-bottom: 72px; }
-      .contact-header { grid-template-columns: 1fr; gap: 16px; }
-      .contact-body { grid-template-columns: 1fr; gap: 44px; }
-      footer { padding: 56px 24px 40px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-      .stats-bar { padding: 0 24px; }
-      .stats-inner { grid-template-columns: 1fr 1fr; }
-      .testimonials { padding: 72px 24px; }
-      .testi-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 540px) {
-      .hero h1 { font-size: 2.4rem; }
-      .hero-actions { flex-direction: column; align-items: flex-start; gap: 20px; }
-      .f-row { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-      .dest-map-grid { grid-template-columns: 1fr; }
-      .dest-region { border-right: none; border-bottom: 1px solid var(--stone-3); }
-    }
-
-    /* ── Mobile hamburger ── */
+    .lang-switch { display: flex; align-items: center; gap: 8px; }
+    .lang-btn { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); text-decoration: none; transition: color .3s; }
+    .lang-btn.active { color: rgba(255,255,255,.9); }
+    header.scrolled .lang-btn { color: var(--ink-4); }
+    header.scrolled .lang-btn.active { color: var(--ink); }
+    .lang-sep { color: rgba(255,255,255,.2); font-size: .6rem; }
+    header.scrolled .lang-sep { color: var(--stone-4); }
+
+    /* Hamburger */
     .mob-menu-btn { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; }
     .mob-menu-btn span { display:block; height:1.5px; width:22px; background:#fff; transition:all .3s; border-radius:1px; }
     header.scrolled .mob-menu-btn span { background:var(--ink); }
@@ -561,32 +74,169 @@
     .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
     .mob-nav a { font-family:'Cormorant Garamond',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
     .mob-nav a:hover { color:#fff; }
-    .mob-nav-cta { font-family:'Inter',sans-serif !important; font-size:.76rem !important; letter-spacing:.14em !important; text-transform:uppercase !important; color:var(--accent) !important; border:1px solid var(--accent); padding:11px 28px; border-radius:2px; margin-top:4px; }
     .mob-lang { display:flex; align-items:center; gap:14px; }
     .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
     .mob-lang-btn.active { color:rgba(255,255,255,.9); }
     .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
-    @media (max-width: 900px) { .mob-menu-btn { display:flex; } }
+    @media (max-width:900px) { .mob-menu-btn { display:flex; } .main-nav { display:none; } }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 100vh; min-height: 640px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 60px 80px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2200&q=90') center 40% / cover no-repeat;
+      transform: scale(1.04);
+      animation: heroZoom 14s ease-out forwards;
+    }
+    @keyframes heroZoom { to { transform: scale(1); } }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,27,25,.82) 20%, rgba(28,27,25,.1) 65%, transparent 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 780px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+    .hero-eyebrow-line { width: 40px; height: 1px; background: var(--accent); }
+    .hero-eyebrow-text { font-size: .64rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 300; color: #fff; line-height: 1.05;
+      margin-bottom: 32px; letter-spacing: -.01em;
+    }
+    .hero h1 em { font-style: italic; font-weight: 300; }
+    .hero-sub { font-size: .92rem; color: rgba(255,255,255,.62); line-height: 1.72; max-width: 440px; margin-bottom: 48px; }
+    .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .btn-hero-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; text-decoration: none; padding: 15px 36px; font-size: .74rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: background .3s; }
+    .btn-hero-primary:hover { background: var(--accent-2); }
+    .btn-hero-ghost { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.65); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.25); padding-bottom: 2px; transition: color .3s, border-color .3s; }
+    .btn-hero-ghost:hover { color: #fff; border-color: rgba(255,255,255,.7); }
+    .hero-scroll { position: absolute; bottom: 36px; right: 60px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .hero-scroll-text { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); writing-mode: vertical-lr; }
+    .hero-scroll-line { width: 1px; height: 40px; background: rgba(255,255,255,.15); position: relative; overflow: hidden; }
+    .hero-scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,.5); animation: scrollLine 2s ease-in-out infinite; }
+    @keyframes scrollLine { to { top: 200%; } }
+
+    /* ── STATS BAR ── */
+    .stats-bar { background: var(--ink); display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.06); }
+    .stat-item { padding: 36px 40px; border-right: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 6px; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: #fff; line-height: 1; }
+    .stat-label { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+
+    /* ── INTRO SPLIT ── */
+    .intro { padding: 120px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+    .kicker { font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .kicker::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent); }
+    .intro-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.12; color: var(--ink); }
+    .intro-title em { font-style: italic; color: var(--accent); }
+    .intro-right { display: flex; flex-direction: column; gap: 28px; }
+    .intro-p { font-size: .95rem; color: var(--ink-3); line-height: 1.8; padding-top: 20px; border-top: 1px solid var(--stone-3); }
+    .intro-p:first-child { border-top: none; padding-top: 0; }
+    .intro-link { display: inline-flex; align-items: center; gap: 8px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); text-decoration: none; margin-top: 8px; }
+    .intro-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .intro-link:hover svg { transform: translateX(4px); }
+
+    /* ── DESTINATIONS STRIP ── */
+    .dest-section { background: var(--stone-2); padding: 0; overflow: hidden; }
+    .dest-header { padding: 72px 60px 48px; display: flex; align-items: flex-end; justify-content: space-between; }
+    .dest-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.12; }
+    .dest-header h2 em { font-style: italic; color: var(--accent); }
+    .dest-see-all { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-4); text-decoration: none; white-space: nowrap; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--stone-4); padding-bottom: 2px; transition: color .3s, border-color .3s; flex-shrink: 0; margin-bottom: 4px; }
+    .dest-see-all:hover { color: var(--ink); border-color: var(--ink); }
+    .dest-see-all svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .dest-see-all:hover svg { transform: translateX(3px); }
+    .dest-strip { display: flex; gap: 2px; }
+    .dest-card { position: relative; overflow: hidden; flex: 0 0 calc(100% / 3.4); height: 420px; text-decoration: none; }
+    .dest-card::before { content: ''; position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .6s cubic-bezier(.25,.46,.45,.94); }
+    .dest-card:hover::before { transform: scale(1.06); }
+    .dest-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(28,27,25,.88) 30%, rgba(28,27,25,.08) 100%); }
+    .dc-courchevel::before { background-image: url('https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=900&q=85'); background-position: center 35%; }
+    .dc-megeve::before     { background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=85'); }
+    .dc-meribel::before    { background-image: url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=700&q=85'); }
+    .dc-tignes::before     { background-image: url('https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=700&q=85'); background-position: center 25%; }
+    .dc-valdisere::before  { background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=85'); background-position: center 40%; }
+    .dc-valthorens::before { background-image: url('https://images.unsplash.com/photo-1551524559-8af4e6624178?w=700&q=85'); }
+    .dest-card-body { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; padding: 28px 24px; }
+    .dc-massif { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .dc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: #fff; line-height: 1; margin-bottom: 4px; }
+    .dc-alt { font-size: .65rem; letter-spacing: .1em; color: rgba(255,255,255,.38); }
+
+    /* ── CTA ESTIMATEUR ── */
+    .cta-est { background: var(--ink); padding: 110px 60px; display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; }
+    .cta-est-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 300; color: #fff; line-height: 1.1; }
+    .cta-est-title em { font-style: italic; }
+    .cta-est-title strong { font-weight: 500; color: var(--accent); font-style: normal; }
+    .cta-est-right { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; flex-shrink: 0; }
+    .cta-est-note { font-size: .78rem; color: rgba(255,255,255,.35); line-height: 1.6; max-width: 240px; }
+    .btn-cta-main { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: #fff; text-decoration: none; padding: 16px 40px; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: background .3s; white-space: nowrap; }
+    .btn-cta-main:hover { background: var(--accent-2); }
+    .btn-cta-main svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .btn-cta-main:hover svg { transform: translateX(4px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.06); padding: 64px 60px 36px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .f-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 6px; }
+    .f-brand-claim { font-size: .63rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.36); line-height: 1.72; }
+    .f-col-title { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 18px; }
+    .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .f-links a { font-size: .84rem; color: rgba(255,255,255,.52); text-decoration: none; transition: color .2s; }
+    .f-links a:hover { color: rgba(255,255,255,.9); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: .72rem; color: rgba(255,255,255,.22); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .intro { grid-template-columns: 1fr; gap: 48px; padding: 80px 60px; }
+      .cta-est { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      header { padding: 0 20px; }
+      .hero { padding: 0 24px 72px; }
+      .hero-scroll { display: none; }
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+      .stat-item { padding: 28px 24px; }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,.06); }
+      .stat-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,.06); border-right: none; }
+      .intro { padding: 64px 24px; gap: 40px; }
+      .dest-header { padding: 56px 24px 36px; flex-direction: column; align-items: flex-start; gap: 20px; }
+      .dest-strip { overflow-x: auto; padding-bottom: 2px; }
+      .dest-card { flex: 0 0 72vw; }
+      .cta-est { padding: 72px 24px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      footer { padding: 56px 24px 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .dest-card { flex: 0 0 82vw; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <!-- HEADER -->
   <header id="siteHeader">
     <a href="/en/accueil" class="logo">
       <span class="logo-name">ALPÉON</span>
     </a>
     <nav class="main-nav">
-  <a href="/en/accueil">Home</a>
-  <a href="/en/destinations">Destinations</a>
-  <a href="/en/proprietaires">Owners</a>
-  <a href="/en/estimateur">Estimator</a>
-  <div class="lang-switch">
-    <a href="/accueil" class="lang-btn">FR</a>
-    <span class="lang-sep">|</span>
-    <a href="/en/accueil" class="lang-btn active">EN</a>
-  </div>
-</nav>
+      <a href="/en/accueil">Home</a>
+      <a href="/en/destinations">Destinations</a>
+      <a href="/en/proprietaires">Owners</a>
+      <a href="/en/estimateur">Estimator</a>
+      <div class="lang-switch">
+        <a href="/accueil" class="lang-btn">FR</a>
+        <span class="lang-sep">|</span>
+        <a href="/en/accueil" class="lang-btn active">EN</a>
+      </div>
+    </nav>
     <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   </header>
 
@@ -594,11 +244,11 @@
     <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')" aria-label="Close">&#x2715;</button>
     <div class="mob-menu-inner">
       <nav class="mob-nav">
-  <a href="/en/accueil">Home</a>
-  <a href="/en/destinations">Destinations</a>
-  <a href="/en/proprietaires">Owners</a>
-  <a href="/en/estimateur">Estimator</a>
-</nav>
+        <a href="/en/accueil">Home</a>
+        <a href="/en/destinations">Destinations</a>
+        <a href="/en/proprietaires">Owners</a>
+        <a href="/en/estimateur">Estimator</a>
+      </nav>
       <div class="mob-lang">
         <a href="/accueil" class="mob-lang-btn">FR</a>
         <span class="mob-lang-sep">|</span>
@@ -607,420 +257,166 @@
     </div>
   </div>
 
-  <!-- ═══════════════════ HERO ═══════════════════ -->
-  <section class="hero" id="heroSection">
+  <!-- HERO -->
+  <section class="hero">
     <div class="hero-bg"></div>
-    <div class="hero-veil"></div>
-    <div class="hero-body">
-      <div class="hero-kicker">Haute-Savoie &nbsp;&middot;&nbsp; Savoie &nbsp;&middot;&nbsp; Isère &nbsp;&middot;&nbsp; Hautes-Alpes</div>
-      <h1>Property management<br><em>reinvented</em> for the<br>French Alps</h1>
-      <p class="hero-desc">ALPÉON delivers the level of service and discretion your property deserves. A modern approach, uncompromising standards.</p>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        <span class="hero-eyebrow-text">Alpine property management</span>
+      </div>
+      <h1>Excellence<br>in service of<br><em>your property</em></h1>
+      <p class="hero-sub">ALPÉON manages your property across the finest French Alpine resorts. Guaranteed income, uncompromising management.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-fill">Entrust my property</a>
-        <a href="#estimateur" class="btn-line">Estimate my revenue</a>
+        <a href="/en/estimateur" class="btn-hero-primary">Estimate my income</a>
+        <a href="/en/proprietaires" class="btn-hero-ghost">Our owner services</a>
       </div>
     </div>
-    <div class="hero-scroll-hint">
-      <div class="scroll-rule"></div>
-      Discover
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-text">Scroll</span>
     </div>
   </section>
 
-  <!-- ═══════════════════ STATS BAR ═══════════════════ -->
+  <!-- STATS -->
   <div class="stats-bar">
-    <div class="stats-inner">
-      <div class="stat-item">
-        <div class="stat-num">200<span style="font-size:1.8rem">+</span></div>
-        <div class="stat-label">Owners<br>supported</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">15</div>
-        <div class="stat-label">Alpine resorts<br>covered</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">98<span style="font-size:1.8rem">%</span></div>
-        <div class="stat-label">Owner satisfaction<br>rate</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">+32<span style="font-size:1.8rem">%</span></div>
-        <div class="stat-label">More revenue<br>on average</div>
-      </div>
+    <div class="stat-item">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">Properties managed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Alpine resorts</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">98%</div>
+      <div class="stat-label">Satisfied owners</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Guaranteed income</div>
     </div>
   </div>
 
-  <!-- ═══════════════════ INTRO ═══════════════════ -->
-  <section>
-    <div class="intro">
-      <div class="intro-aside">
-        <div class="aside-label">Our vision</div>
-        <div class="aside-rule"></div>
-        <div class="aside-note">Founded to meet the expectations of a new generation of alpine property owners.</div>
-      </div>
-      <p class="intro-text">
-        We believe that managing an exceptional property should be <em>as discreet as it is professional</em>. ALPÉON was born from this conviction: to offer alpine owners an operator truly worthy of their properties — <strong>transparent, rigorous, and resolutely modern</strong>.
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="intro-left">
+      <div class="kicker">Our approach</div>
+      <h2 class="intro-title">Your property deserves<br>management <em>without compromise</em></h2>
+    </div>
+    <div class="intro-right">
+      <p class="intro-p">ALPÉON is a premium short-term rental management operator in the French Alps. We handle the entire chain — from listing to guest check-in, from maintenance to key handover.</p>
+      <p class="intro-p">Every property is managed as if it were our own: with rigour, discretion and one single objective — maximise your income while preserving your asset.
+        <a href="/en/proprietaires" class="intro-link">Discover our packages
+          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
       </p>
     </div>
   </section>
 
-  <div class="hr"></div>
-
-  <!-- ═══════════════════ APPROACH ═══════════════════ -->
-  <section id="approach">
-    <div class="approach">
-      <div class="section-heading">
-        <div class="section-kicker">Our approach</div>
-        <h2 class="section-title">A complete, transparent<br>management framework</h2>
+  <!-- DESTINATIONS -->
+  <section class="dest-section">
+    <div class="dest-header">
+      <div class="dest-header-left">
+        <div class="kicker">Our resorts</div>
+        <h2>6 exceptional <em>alpine destinations</em></h2>
       </div>
-      <div class="approach-grid">
-        <div class="approach-cell">
-          <div class="cell-num">01</div>
-          <div class="cell-title">Full transparency</div>
-          <div class="cell-text">A dedicated owner portal with real-time data, detailed monthly reports, and direct communication with your property manager. You stay in control — we handle operations.</div>
+      <a href="/en/destinations" class="dest-see-all">
+        View all destinations
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+    <div class="dest-strip">
+      <a class="dest-card dc-courchevel" href="/en/destinations">
+        <div class="dest-card-body">
+          <div class="dc-massif">Les 3 Vallées</div>
+          <div class="dc-name">Courchevel</div>
+          <div class="dc-alt">1,300 — 1,850 m</div>
         </div>
-        <div class="approach-cell">
-          <div class="cell-num">02</div>
-          <div class="cell-title">Rigorous guest selection</div>
-          <div class="cell-text">Every booking is individually reviewed. We apply strict criteria to ensure the safety of your property and the quality of every stay.</div>
+      </a>
+      <a class="dest-card dc-megeve" href="/en/destinations">
+        <div class="dest-card-body">
+          <div class="dc-massif">Mont-Blanc</div>
+          <div class="dc-name">Megève</div>
+          <div class="dc-alt">1,113 m</div>
         </div>
-        <div class="approach-cell">
-          <div class="cell-num">03</div>
-          <div class="cell-title">Operational excellence</div>
-          <div class="cell-text">Housekeeping coordination, preventive maintenance, guest welcome, concierge services — every detail is orchestrated with precision.</div>
+      </a>
+      <a class="dest-card dc-meribel" href="/en/destinations">
+        <div class="dest-card-body">
+          <div class="dc-massif">Les 3 Vallées</div>
+          <div class="dc-name">Méribel</div>
+          <div class="dc-alt">1,400 — 1,700 m</div>
         </div>
-        <div class="approach-cell">
-          <div class="cell-num">04</div>
-          <div class="cell-title">Dynamic pricing strategy</div>
-          <div class="cell-text">Continuous market analysis and real-time rate adjustments to maximise your occupancy rate and revenue each season.</div>
+      </a>
+      <a class="dest-card dc-tignes" href="/en/destinations">
+        <div class="dest-card-body">
+          <div class="dc-massif">Espace Killy</div>
+          <div class="dc-name">Tignes</div>
+          <div class="dc-alt">1,550 — 3,456 m</div>
         </div>
-        <div class="approach-cell">
-          <div class="cell-num">05</div>
-          <div class="cell-title">Multi-channel distribution</div>
-          <div class="cell-text">Presence on premium platforms — Airbnb Luxe, VRBO, Booking.com — as well as our own loyal client network and international partner agencies.</div>
+      </a>
+      <a class="dest-card dc-valdisere" href="/en/destinations">
+        <div class="dest-card-body">
+          <div class="dc-massif">Espace Killy</div>
+          <div class="dc-name">Val d'Isère</div>
+          <div class="dc-alt">1,850 m</div>
         </div>
-        <div class="approach-cell">
-          <div class="cell-num">06</div>
-          <div class="cell-title">Reporting &amp; traceability</div>
-          <div class="cell-text">Complete history of your revenue, booking dates and stay reports. Full visibility, at any time, from anywhere.</div>
+      </a>
+      <a class="dest-card dc-valthorens" href="/en/destinations">
+        <div class="dest-card-body">
+          <div class="dc-massif">Les 3 Vallées</div>
+          <div class="dc-name">Val Thorens</div>
+          <div class="dc-alt">2,300 m · Highest resort in Europe</div>
         </div>
-      </div>
+      </a>
     </div>
   </section>
 
-  <!-- ═══════════════════ DESTINATIONS ═══════════════════ -->
-  <section id="destinations" class="destinations">
-    <div class="destinations-inner">
-      <div class="destinations-header">
-        <div>
-          <div class="section-kicker" style="margin-bottom:18px;">Our destinations</div>
-          <h2>15 alpine resorts,<br>one standard<br>of excellence</h2>
-        </div>
-        <p>ALPÉON operates in the most sought-after resorts in the French Alps — from Haute-Savoie to the Hautes-Alpes. Each destination benefits from a dedicated local team, deep market knowledge, and carefully selected operational partners.</p>
-      </div>
-
-      <div class="dest-map-grid">
-        <div class="dest-region">
-          <div class="dest-region-title">Haute-Savoie &nbsp;74</div>
-          <div class="dest-station flagship">
-            <span class="dest-station-name">Megève</span>
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span class="dest-station-alt">1,113 m</span>
-              <span class="dest-flagship-tag">Flagship</span>
-            </div>
-          </div>
-          <div class="dest-station"><span class="dest-station-name">Chamonix</span><span class="dest-station-alt">1,035 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">Morzine</span><span class="dest-station-alt">1,000 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">Avoriaz</span><span class="dest-station-alt">1,800 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">La Clusaz</span><span class="dest-station-alt">1,040 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">Les Gets</span><span class="dest-station-alt">1,172 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">Combloux</span><span class="dest-station-alt">1,070 m</span></div>
-        </div>
-
-        <div class="dest-region">
-          <div class="dest-region-title">Savoie 73 — Trois Vallées</div>
-          <div class="dest-station flagship">
-            <span class="dest-station-name">Courchevel</span>
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span class="dest-station-alt">1,850 m</span>
-              <span class="dest-flagship-tag">Flagship</span>
-            </div>
-          </div>
-          <div class="dest-station"><span class="dest-station-name">Méribel</span><span class="dest-station-alt">1,450 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">Val Thorens</span><span class="dest-station-alt">2,300 m</span></div>
-        </div>
-
-        <div class="dest-region">
-          <div class="dest-region-title">Savoie 73 — Tarentaise</div>
-          <div class="dest-station"><span class="dest-station-name">Val d'Isère</span><span class="dest-station-alt">1,850 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">Tignes</span><span class="dest-station-alt">2,100 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">Les Arcs</span><span class="dest-station-alt">1,600 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">La Plagne</span><span class="dest-station-alt">2,050 m</span></div>
-        </div>
-
-        <div class="dest-region">
-          <div class="dest-region-title">Isère 38 / Hautes-Alpes 05</div>
-          <div class="dest-station"><span class="dest-station-name">L'Alpe d'Huez</span><span class="dest-station-alt">1,860 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">Les 2 Alpes</span><span class="dest-station-alt">1,650 m</span></div>
-          <div class="dest-station"><span class="dest-station-name">Serre Chevalier</span><span class="dest-station-alt">1,350 m</span></div>
-        </div>
-      </div>
+  <!-- CTA ESTIMATEUR -->
+  <section class="cta-est">
+    <div class="cta-est-title">
+      Estimate the potential<br>of <em>your property</em><br>in <strong>2 minutes</strong>
+    </div>
+    <div class="cta-est-right">
+      <p class="cta-est-note">Based on real data from our portfolio — surface area, resort, condition and capacity.</p>
+      <a href="/en/estimateur" class="btn-cta-main">
+        Launch the estimator
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
     </div>
   </section>
 
-  <!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
-  <section class="testimonials" id="temoignages">
-    <div class="testimonials-inner">
-      <div class="testi-kicker">What our owners say</div>
-      <div class="testi-grid">
-        <div class="testi-card">
-          <div class="testi-quote">Since entrusting my chalet to ALPÉON, I haven't had to worry about a thing. The monthly reports are clear, communication is impeccable, and my revenue increased by 28% in the very first season.</div>
-          <div class="testi-author">
-            <div class="testi-name">Sophie L.</div>
-            <div class="testi-info">Chalet owner in Megève · Client since 2022</div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-quote">The ALPÉON team has truly deep knowledge of the Courchevel market. They optimised my rates week by week and my occupancy rate has never been higher. Total professionalism.</div>
-          <div class="testi-author">
-            <div class="testi-name">Marc &amp; Isabelle D.</div>
-            <div class="testi-info">Apartment owners in Courchevel 1850 · Clients since 2021</div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-quote">What convinced me was complete transparency. I can see everything in real time — bookings, revenue, stay reports. With ALPÉON, I remain the full owner of my property.</div>
-          <div class="testi-author">
-            <div class="testi-name">François M.</div>
-            <div class="testi-info">Penthouse owner in Val d'Isère · Client since 2023</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ PILLARS ═══════════════════ -->
-  <section>
-    <div class="pillars">
-      <div class="pillars-top">
-        <div class="section-kicker">ALPÉON values</div>
-        <h2 class="section-title">Three words that define<br>our commitment to<br>every owner</h2>
-      </div>
-      <div class="pillars-grid">
-        <div class="pillar">
-          <div class="pillar-word">Trust</div>
-          <div class="pillar-rule"></div>
-          <div class="pillar-text">Your property is our responsibility. We manage it with the same care and exacting standards as if it were our own. No compromise on quality or security.</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-word">Expertise</div>
-          <div class="pillar-rule"></div>
-          <div class="pillar-text">Deep knowledge of alpine markets, seasonal cycles, guest behaviour and performance levers that make the difference between an ordinary property and a high-performing one.</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-word">Discretion</div>
-          <div class="pillar-rule"></div>
-          <div class="pillar-text">Absolute confidentiality over your revenue, your assets and your identity. Discretion is at the heart of every interaction, every document, every decision we make.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ SIGNATURE BAND ═══════════════════ -->
-  <div class="signature-band">
-    <div class="signature-inner">
-      <div class="sig-left">
-        <div class="sig-kicker">ALPÉON Signature</div>
-        <div class="sig-title">The luxury tier<br>of ALPÉON</div>
-        <p class="sig-sub">For exceptional properties — ultra-premium chalets, penthouses, architectural residences — ALPÉON Signature offers an even more personalised level of service, with a dedicated team and five-star hotel standards.</p>
-      </div>
-      <div class="sig-right">
-        <div class="sig-feature">
-          <div class="sig-dot"></div>
-          <div class="sig-feat-text"><strong>Exclusive account manager</strong> — a single point of contact available at all times for you and your guests</div>
-        </div>
-        <div class="sig-feature">
-          <div class="sig-dot"></div>
-          <div class="sig-feat-text"><strong>Private concierge services</strong> — transfers, private chefs, mountain guides, bespoke activities</div>
-        </div>
-        <div class="sig-feature">
-          <div class="sig-dot"></div>
-          <div class="sig-feat-text"><strong>Enhanced guest screening</strong> — thorough background checks and deposits tailored to exceptional properties</div>
-        </div>
-        <div class="sig-feature">
-          <div class="sig-dot"></div>
-          <div class="sig-feat-text"><strong>Photography &amp; editorial production</strong> — magazine-quality visual presentation of your property</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════ ESTIMATOR ═══════════════════ -->
-  <section id="estimateur" class="estimator">
-    <div class="estimator-inner">
-      <div>
-        <div class="section-kicker" style="margin-bottom:16px;">Revenue Estimator</div>
-        <h2>Discover your property's rental potential</h2>
-        <p>In two minutes, get a personalised estimate of your potential rental income, calculated using real market data for each alpine resort.</p>
-      </div>
-      <div class="estimator-panel">
-        <div class="est-panel-label">What the estimator covers</div>
-        <div class="est-features">
-          <div class="est-feat">
-            <div class="est-feat-mark"></div>
-            <span class="est-feat-text">Estimate based on real market data by resort</span>
-          </div>
-          <div class="est-feat">
-            <div class="est-feat-mark"></div>
-            <span class="est-feat-text">15 alpine resorts — Megève, Courchevel, Val d'Isère, Méribel and more</span>
-          </div>
-          <div class="est-feat">
-            <div class="est-feat-mark"></div>
-            <span class="est-feat-text">Takes into account size, location, capacity and amenities</span>
-          </div>
-          <div class="est-feat">
-            <div class="est-feat-mark"></div>
-            <span class="est-feat-text">Personalised result in under 2 minutes</span>
-          </div>
-          <div class="est-feat">
-            <div class="est-feat-mark"></div>
-            <span class="est-feat-text">Free and no commitment</span>
-          </div>
-        </div>
-        <a href="/en/estimateur" class="btn-estimate">Launch the estimator</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ CONTACT ═══════════════════ -->
-  <section id="contact" class="contact">
-    <div class="contact-header">
-      <div class="section-kicker">Contact us</div>
-      <h2 class="section-title">Tell us about<br>your property</h2>
-    </div>
-    <div class="contact-body">
-      <div class="contact-info">
-        <div class="info-item">
-          <div class="info-label">Phone</div>
-          <div class="info-value"><a href="tel:+33600000000">+33 6 00 00 00 00</a></div>
-        </div>
-        <div class="info-item">
-          <div class="info-label">Owner email</div>
-          <div class="info-value"><a href="mailto:proprietaires@alpeon.fr">proprietaires@alpeon.fr</a></div>
-        </div>
-        <div class="info-item">
-          <div class="info-label">Destinations</div>
-          <div class="info-value" style="font-size:0.78rem;line-height:1.7;">Megève &middot; Courchevel &middot; Val Thorens<br>Val d'Isère &middot; Méribel &middot; Chamonix &middot; +9</div>
-        </div>
-        <div class="info-item">
-          <div class="info-label">Availability</div>
-          <div class="info-value">Mon – Fri, 9am – 7pm</div>
-        </div>
-      </div>
-      <div class="contact-form">
-        <div class="f-row">
-          <div class="f-group">
-            <label class="f-label">First name</label>
-            <input type="text" placeholder="John" />
-          </div>
-          <div class="f-group">
-            <label class="f-label">Last name</label>
-            <input type="text" placeholder="Smith" />
-          </div>
-        </div>
-        <div class="f-row">
-          <div class="f-group">
-            <label class="f-label">Email</label>
-            <input type="email" placeholder="john@example.com" />
-          </div>
-          <div class="f-group">
-            <label class="f-label">Phone</label>
-            <input type="tel" placeholder="+44 7700 900000" />
-          </div>
-        </div>
-        <div class="f-group">
-          <label class="f-label">Property type</label>
-          <select>
-            <option value="">Select...</option>
-            <option>Luxury chalet</option>
-            <option>Mid-range chalet</option>
-            <option>Penthouse</option>
-            <option>Premium apartment</option>
-            <option>Alpine second home</option>
-            <option>Investment property</option>
-          </select>
-        </div>
-        <div class="f-group">
-          <label class="f-label">Destination</label>
-          <select>
-            <option value="">Select...</option>
-            <optgroup label="Haute-Savoie (74)">
-              <option>Megève</option>
-              <option>Chamonix</option>
-              <option>Morzine / Avoriaz</option>
-              <option>La Clusaz</option>
-              <option>Les Gets</option>
-              <option>Combloux</option>
-            </optgroup>
-            <optgroup label="Savoie (73) — Trois Vallées">
-              <option>Courchevel</option>
-              <option>Méribel</option>
-              <option>Val Thorens</option>
-            </optgroup>
-            <optgroup label="Savoie (73) — Tarentaise">
-              <option>Val d'Isère</option>
-              <option>Tignes</option>
-              <option>Les Arcs</option>
-              <option>La Plagne</option>
-            </optgroup>
-            <optgroup label="Isère / Hautes-Alpes">
-              <option>L'Alpe d'Huez</option>
-              <option>Les 2 Alpes</option>
-              <option>Serre Chevalier</option>
-            </optgroup>
-            <option value="autre">Other alpine destination</option>
-          </select>
-        </div>
-        <div class="f-group">
-          <label class="f-label">Message</label>
-          <textarea placeholder="Briefly describe your property and your rental project..."></textarea>
-        </div>
-        <button class="btn-send">Send my enquiry</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ FOOTER ═══════════════════ -->
-  <footer>
-    <div class="footer-grid">
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-top">
       <div>
         <div class="f-brand-name">ALPÉON</div>
         <div class="f-brand-claim">Alpine Property Management</div>
-        <p class="f-brand-desc">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency for every owner.</p>
+        <p class="f-brand-desc">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency.</p>
       </div>
       <div>
-        <div class="f-col-label">Destinations</div>
+        <div class="f-col-title">Destinations</div>
         <ul class="f-links">
-          <li><a href="#">Megève</a></li>
-          <li><a href="#">Courchevel</a></li>
-          <li><a href="#">Val d'Isère</a></li>
-          <li><a href="#">Méribel</a></li>
-          <li><a href="#">Val Thorens</a></li>
-          <li><a href="#">Chamonix</a></li>
-          <li><a href="#">+ 9 resorts</a></li>
+          <li><a href="/en/destinations">Courchevel</a></li>
+          <li><a href="/en/destinations">Megève</a></li>
+          <li><a href="/en/destinations">Val d'Isère</a></li>
+          <li><a href="/en/destinations">Val Thorens</a></li>
+          <li><a href="/en/destinations">Méribel · Tignes</a></li>
         </ul>
       </div>
       <div>
-        <div class="f-col-label">Services</div>
+        <div class="f-col-title">Services</div>
         <ul class="f-links">
-          <li><a href="#">Property Management</a></li>
-          <li><a href="#">ALPÉON Signature</a></li>
+          <li><a href="/en/proprietaires">Owners</a></li>
+          <li><a href="/en/proprietaires">ALPÉON Signatures</a></li>
           <li><a href="/en/estimateur">Revenue Estimator</a></li>
-          <li><a href="#">For Owners</a></li>
         </ul>
       </div>
       <div>
-        <div class="f-col-label">Contact</div>
+        <div class="f-col-title">Contact</div>
         <ul class="f-links">
-          <li><a href="tel:+33600000000">+33 6 00 00 00 00</a></li>
-          <li><a href="mailto:proprietaires@alpeon.fr">proprietaires@alpeon.fr</a></li>
+          <li><a href="mailto:owners@alpeon.fr">owners@alpeon.fr</a></li>
           <li><a href="#">Legal notice</a></li>
           <li><a href="#">Privacy policy</a></li>
         </ul>
@@ -1028,51 +424,21 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 ALPÉON. All rights reserved.</span>
-      <span>Premium alpine property management — 15 resorts in the French Alps</span>
+      <span>Premium alpine rental management · French Alps</span>
     </div>
   </footer>
 
   <script>
-    // Mobile menu
+    const hdr = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => { hdr.classList.toggle('scrolled', window.scrollY > 40); });
     (function(){
       var btn = document.getElementById('mobMenuBtn');
       var menu = document.getElementById('mobMenu');
       if (!btn || !menu) return;
       btn.addEventListener('click', function(){ var o = menu.classList.toggle('open'); btn.classList.toggle('open', o); });
-      menu.querySelectorAll('.mob-nav a').forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); btn.classList.remove('open'); }); });
       menu.addEventListener('click', function(e){ if (e.target === menu) { menu.classList.remove('open'); btn.classList.remove('open'); } });
     })();
-
-    const header = document.getElementById('siteHeader');
-    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    const heroBg = document.querySelector('.hero-bg');
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (y < window.innerHeight) heroBg.style.transform = `scale(1) translateY(${y * 0.22}px)`;
-    }, { passive: true });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.opacity = '1';
-          e.target.style.transform = 'translateY(0)';
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.approach-cell, .pillar, .sig-feature, .est-feat, .testi-card, .stat-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(18px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-
-    window.addEventListener('load', () => {
-      document.getElementById('heroSection').classList.add('loaded');
-    });
   </script>
+
 </body>
 </html>
