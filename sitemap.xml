@@ -82,4 +82,24 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- FR Réserver -->
+  <url>
+    <loc>https://alpeon.fr/reserver/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/reserver/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/reserver/"/>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- EN Réserver -->
+  <url>
+    <loc>https://alpeon.fr/en/reserver/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/reserver/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/reserver/"/>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book — Alpine Apartments & Chalets | ALPÉON</title>
+  <meta name="description" content="Browse and book our exceptional alpine properties in Courchevel, Megève, Méribel, Tignes, Val d'Isère and Val Thorens. Premium apartments and chalets." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://alpeon.fr/en/reserver/" />
+  <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/reserver/" />
+  <link rel="alternate" hreflang="fr" href="https://alpeon.fr/reserver/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Our Alpine Properties | ALPÉON" />
+  <meta property="og:description" content="Exceptional apartments and chalets in Courchevel, Megève, Val d'Isère, Val Thorens, Méribel and Tignes." />
+  <meta property="og:url" content="https://alpeon.fr/en/reserver/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=1200&q=85" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --stone:#faf9f7; --stone-2:#f2efe9; --stone-3:#e5e0d8; --stone-4:#c8c1b5; --ink:#1c1b19; --ink-3:#4a4843; --ink-4:#7a7773; --accent:#a8956a; --accent-2:#8a7a56; }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--stone); color:var(--ink); line-height:1.6; }
+    header { position:fixed; top:0; left:0; right:0; z-index:200; display:flex; align-items:center; justify-content:space-between; padding:0 48px; height:72px; background:transparent; transition:background .4s,box-shadow .4s; }
+    header.scrolled { background:rgba(250,249,247,.97); box-shadow:0 1px 0 var(--stone-3); backdrop-filter:blur(8px); }
+    .logo { display:flex; align-items:center; text-decoration:none; }
+    .logo-name { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:#fff; transition:color .4s; }
+    header.scrolled .logo-name { color:var(--ink); }
+    .main-nav { display:flex; align-items:center; gap:32px; }
+    .main-nav a { font-size:.72rem; font-weight:500; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.72); text-decoration:none; transition:color .3s; }
+    .main-nav a.active-link { color:#fff; }
+    .main-nav a:hover { color:#fff; }
+    header.scrolled .main-nav a { color:var(--ink-3); }
+    header.scrolled .main-nav a.active-link { color:var(--ink); }
+    header.scrolled .main-nav a:hover { color:var(--ink); }
+    .lang-switch { display:flex; align-items:center; gap:8px; }
+    .lang-btn { font-size:.68rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.4); text-decoration:none; transition:color .3s; }
+    .lang-btn.active { color:rgba(255,255,255,.9); }
+    header.scrolled .lang-btn { color:var(--ink-4); }
+    header.scrolled .lang-btn.active { color:var(--ink); }
+    .lang-sep { color:rgba(255,255,255,.2); font-size:.6rem; }
+    header.scrolled .lang-sep { color:var(--stone-4); }
+    .mob-menu-btn { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; }
+    .mob-menu-btn span { display:block; height:1.5px; width:22px; background:#fff; transition:all .3s; border-radius:1px; }
+    header.scrolled .mob-menu-btn span { background:var(--ink); }
+    .mob-menu-btn.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+    .mob-menu-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .mob-menu-btn.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+    .mob-menu { position:fixed; inset:0; z-index:300; background:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s; display:flex; flex-direction:column; }
+    .mob-menu.open { opacity:1; pointer-events:all; }
+    .mob-close { position:absolute; top:14px; right:18px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); font-size:1.6rem; line-height:1; transition:color .2s; }
+    .mob-close:hover { color:#fff; }
+    .mob-menu-inner { display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; gap:44px; padding:20px; }
+    .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
+    .mob-nav a { font-family:'Cormorant Garamond',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
+    .mob-nav a:hover { color:#fff; }
+    .mob-lang { display:flex; align-items:center; gap:14px; }
+    .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
+    .mob-lang-btn.active { color:rgba(255,255,255,.9); }
+    .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
+    @media (max-width:900px) { .mob-menu-btn { display:flex; } .main-nav { display:none; } }
+    .hero { position:relative; height:44vh; min-height:340px; display:flex; flex-direction:column; justify-content:flex-end; padding:0 60px 0; overflow:hidden; }
+    .hero::before { content:''; position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=2000&q=85') center 35%/cover no-repeat; }
+    .hero::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(28,27,25,.9) 15%,rgba(28,27,25,.3) 70%,rgba(28,27,25,.15) 100%); }
+    .hero-content { position:relative; z-index:2; padding-bottom:48px; }
+    .hero-kicker { font-size:.64rem; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+    .hero-kicker::before { content:''; display:inline-block; width:28px; height:1px; background:var(--accent); }
+    .hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,4vw,3.2rem); font-weight:300; color:#fff; line-height:1.08; }
+    .hero h1 em { font-style:italic; }
+    .filter-bar { position:sticky; top:72px; z-index:100; background:#fff; border-bottom:1px solid var(--stone-3); box-shadow:0 2px 16px rgba(28,27,25,.06); padding:0 60px; }
+    .filter-inner { display:flex; align-items:center; height:64px; flex-wrap:nowrap; overflow-x:auto; }
+    .filter-group { display:flex; align-items:center; border-right:1px solid var(--stone-3); padding:0 24px; height:100%; flex-shrink:0; }
+    .filter-group:first-child { padding-left:0; }
+    .filter-group:last-child { border-right:none; }
+    .filter-label { font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-4); white-space:nowrap; margin-right:12px; flex-shrink:0; }
+    .filter-pills { display:flex; gap:6px; flex-wrap:nowrap; }
+    .filter-pill { font-size:.7rem; font-weight:500; letter-spacing:.06em; padding:5px 14px; border:1px solid var(--stone-3); background:none; cursor:pointer; color:var(--ink-3); transition:all .2s; white-space:nowrap; border-radius:2px; }
+    .filter-pill:hover { border-color:var(--accent); color:var(--accent); }
+    .filter-pill.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+    .filter-count { margin-left:auto; flex-shrink:0; padding-left:24px; font-size:.72rem; color:var(--ink-4); white-space:nowrap; }
+    .filter-count strong { color:var(--ink); font-weight:600; }
+    .main-content { padding:56px 60px 100px; }
+    .no-results { display:none; text-align:center; padding:80px 20px; grid-column:1/-1; }
+    .no-results.visible { display:block; }
+    .no-results h3 { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:400; color:var(--ink-3); margin-bottom:10px; }
+    .no-results p { font-size:.88rem; color:var(--ink-4); }
+    .prop-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+    .prop-card { background:#fff; border:1px solid var(--stone-3); overflow:hidden; transition:box-shadow .3s,transform .3s; display:flex; flex-direction:column; }
+    .prop-card:hover { box-shadow:0 12px 40px rgba(28,27,25,.1); transform:translateY(-3px); }
+    .prop-card.hidden { display:none; }
+    .prop-card.fadeIn { animation:fadeIn .3s ease-out; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .prop-img { position:relative; height:240px; overflow:hidden; }
+    .prop-img img { width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.25,.46,.45,.94); }
+    .prop-card:hover .prop-img img { transform:scale(1.05); }
+    .prop-type-badge { position:absolute; top:14px; left:14px; font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; background:rgba(28,27,25,.72); color:rgba(255,255,255,.9); padding:4px 10px; backdrop-filter:blur(4px); }
+    .prop-station-badge { position:absolute; top:14px; right:14px; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; background:var(--accent); color:#fff; padding:4px 10px; }
+    .prop-body { padding:22px 22px 18px; flex:1; display:flex; flex-direction:column; }
+    .prop-massif { font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-4); margin-bottom:6px; }
+    .prop-name { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:500; color:var(--ink); line-height:1.2; margin-bottom:10px; }
+    .prop-meta { display:flex; align-items:center; font-size:.72rem; color:var(--ink-4); margin-bottom:16px; flex-wrap:wrap; }
+    .prop-meta-item { display:flex; align-items:center; gap:5px; }
+    .prop-meta-sep { margin:0 8px; color:var(--stone-4); }
+    .prop-meta svg { width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:1.8; }
+    .prop-amenities { display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+    .prop-amenity { display:flex; align-items:center; gap:5px; font-size:.68rem; color:var(--ink-4); }
+    .prop-amenity svg { width:13px; height:13px; stroke:var(--accent); fill:none; stroke-width:1.5; flex-shrink:0; }
+    .prop-footer { margin-top:auto; padding-top:16px; border-top:1px solid var(--stone-3); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .prop-price-from { font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-4); }
+    .prop-price-amount { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:500; color:var(--ink); line-height:1; }
+    .prop-price-unit { font-size:.65rem; color:var(--ink-4); margin-left:2px; }
+    .btn-inquiry { display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:#fff; text-decoration:none; padding:10px 20px; font-size:.68rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; transition:background .3s; white-space:nowrap; flex-shrink:0; }
+    .btn-inquiry:hover { background:var(--accent); }
+    .btn-inquiry svg { width:11px; height:11px; stroke:currentColor; fill:none; stroke-width:2; transition:transform .3s; }
+    .btn-inquiry:hover svg { transform:translateX(3px); }
+    .owner-cta { margin-top:80px; padding:56px 60px; background:var(--ink); display:flex; align-items:center; justify-content:space-between; gap:48px; }
+    .owner-cta-kicker { font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+    .owner-cta-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:400; color:#fff; line-height:1.2; }
+    .owner-cta-title em { font-style:italic; }
+    .btn-owner { display:inline-flex; align-items:center; gap:10px; border:1px solid rgba(255,255,255,.3); color:rgba(255,255,255,.8); text-decoration:none; padding:14px 32px; font-size:.74rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; transition:border-color .3s,color .3s; white-space:nowrap; flex-shrink:0; }
+    .btn-owner:hover { border-color:#fff; color:#fff; }
+    .btn-owner svg { width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2; transition:transform .3s; }
+    .btn-owner:hover svg { transform:translateX(3px); }
+    footer { background:var(--ink); border-top:1px solid rgba(255,255,255,.06); padding:64px 60px 36px; }
+    .footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; margin-bottom:48px; }
+    .f-brand-name { font-family:'Cormorant Garamond',serif; font-size:1.3rem; letter-spacing:.14em; text-transform:uppercase; color:#fff; margin-bottom:6px; }
+    .f-brand-claim { font-size:.63rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:16px; }
+    .f-brand-desc { font-size:.82rem; color:rgba(255,255,255,.36); line-height:1.72; }
+    .f-col-title { font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.28); margin-bottom:18px; }
+    .f-links { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .f-links a { font-size:.84rem; color:rgba(255,255,255,.52); text-decoration:none; transition:color .2s; }
+    .f-links a:hover { color:rgba(255,255,255,.9); }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,.06); padding-top:24px; display:flex; justify-content:space-between; font-size:.72rem; color:rgba(255,255,255,.22); }
+    @media (max-width:1100px) { .prop-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:768px) {
+      header { padding:0 20px; } .hero { padding:0 24px 0; } .hero-content { padding-bottom:40px; }
+      .filter-bar { padding:0 20px; top:64px; } .filter-inner { height:auto; padding:12px 0; flex-wrap:wrap; }
+      .filter-group { border-right:none; border-bottom:1px solid var(--stone-3); padding:8px 0; width:100%; }
+      .filter-group:last-child { border-bottom:none; } .filter-count { padding-left:0; padding-top:8px; border-top:1px solid var(--stone-3); width:100%; }
+      .main-content { padding:40px 20px 64px; } .prop-grid { grid-template-columns:1fr; gap:16px; }
+      .owner-cta { flex-direction:column; align-items:flex-start; padding:48px 24px; }
+      footer { padding:56px 24px 32px; } .footer-top { grid-template-columns:1fr 1fr; gap:32px; }
+      .footer-bottom { flex-direction:column; gap:8px; }
+    }
+    @media (max-width:480px) { .footer-top { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+  <header id="siteHeader">
+    <a href="/en/accueil" class="logo"><span class="logo-name">ALPÉON</span></a>
+    <nav class="main-nav">
+      <a href="/en/accueil">Home</a>
+      <a href="/en/destinations">Destinations</a>
+      <a href="/en/reserver" class="active-link">Book</a>
+      <a href="/en/proprietaires">Owners</a>
+      <a href="/en/estimateur">Estimator</a>
+      <div class="lang-switch">
+        <a href="/reserver" class="lang-btn">FR</a>
+        <span class="lang-sep">|</span>
+        <a href="/en/reserver" class="lang-btn active">EN</a>
+      </div>
+    </nav>
+    <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+
+  <div class="mob-menu" id="mobMenu">
+    <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')" aria-label="Close">&#x2715;</button>
+    <div class="mob-menu-inner">
+      <nav class="mob-nav">
+        <a href="/en/accueil">Home</a>
+        <a href="/en/destinations">Destinations</a>
+        <a href="/en/reserver">Book</a>
+        <a href="/en/proprietaires">Owners</a>
+        <a href="/en/estimateur">Estimator</a>
+      </nav>
+      <div class="mob-lang">
+        <a href="/reserver" class="mob-lang-btn">FR</a>
+        <span class="mob-lang-sep">|</span>
+        <a href="/en/reserver" class="mob-lang-btn active">EN</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-kicker">Our properties</p>
+      <h1>Apartments & chalets<br><em>of distinction</em></h1>
+    </div>
+  </section>
+
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-inner">
+      <div class="filter-group">
+        <span class="filter-label">Resort</span>
+        <div class="filter-pills">
+          <button class="filter-pill active" data-filter="station" data-value="all">All</button>
+          <button class="filter-pill" data-filter="station" data-value="courchevel">Courchevel</button>
+          <button class="filter-pill" data-filter="station" data-value="megeve">Megève</button>
+          <button class="filter-pill" data-filter="station" data-value="meribel">Méribel</button>
+          <button class="filter-pill" data-filter="station" data-value="tignes">Tignes</button>
+          <button class="filter-pill" data-filter="station" data-value="valdisere">Val d'Isère</button>
+          <button class="filter-pill" data-filter="station" data-value="valthorens">Val Thorens</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Type</span>
+        <div class="filter-pills">
+          <button class="filter-pill active" data-filter="type" data-value="all">All</button>
+          <button class="filter-pill" data-filter="type" data-value="appartement">Apartment</button>
+          <button class="filter-pill" data-filter="type" data-value="chalet">Chalet</button>
+          <button class="filter-pill" data-filter="type" data-value="penthouse">Penthouse</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">Capacity</span>
+        <div class="filter-pills">
+          <button class="filter-pill active" data-filter="cap" data-value="all">All</button>
+          <button class="filter-pill" data-filter="cap" data-value="2">2 guests</button>
+          <button class="filter-pill" data-filter="cap" data-value="4">4 guests</button>
+          <button class="filter-pill" data-filter="cap" data-value="6">6 guests</button>
+          <button class="filter-pill" data-filter="cap" data-value="8">8+ guests</button>
+        </div>
+      </div>
+      <div class="filter-count"><strong id="countNum">13</strong> properties available</div>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="prop-grid" id="propGrid">
+      <div class="no-results" id="noResults">
+        <div style="font-size:2.5rem;margin-bottom:16px;opacity:.3">⛷</div>
+        <h3>No properties found</h3>
+        <p>Try different search criteria or contact us directly.</p>
+      </div>
+
+      <article class="prop-card fadeIn" data-station="courchevel" data-type="chalet" data-cap="10">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80" alt="Chalet Le Chamois" loading="lazy"/><span class="prop-type-badge">Chalet</span><span class="prop-station-badge">Courchevel</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Les 3 Vallées · 1850</div>
+          <h2 class="prop-name">Chalet Le Chamois</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 180 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 10 guests</span><span class="prop-meta-sep">·</span><span>5 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski-in ski-out</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Spa & hammam</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Fireplace</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€12,000</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Chalet Le Chamois" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="courchevel" data-type="appartement" data-cap="6">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80" alt="Les Grandes Bosses" loading="lazy"/><span class="prop-type-badge">Apartment</span><span class="prop-station-badge">Courchevel</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Les 3 Vallées · 1650 Moriond</div>
+          <h2 class="prop-name">Les Grandes Bosses</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 95 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 6 guests</span><span class="prop-meta-sep">·</span><span>3 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Slopes nearby</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Parking</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Fireplace</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€4,500</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Les Grandes Bosses" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="courchevel" data-type="penthouse" data-cap="4">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="Penthouse Le Belvédère" loading="lazy"/><span class="prop-type-badge">Penthouse</span><span class="prop-station-badge">Courchevel</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Les 3 Vallées · 1850</div>
+          <h2 class="prop-name">Penthouse Le Belvédère</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 120 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 guests</span><span class="prop-meta-sep">·</span><span>2 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Panoramic view</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Private spa</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Concierge</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€7,000</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Penthouse Le Belvédère" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="megeve" data-type="chalet" data-cap="10">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=700&q=80" alt="Chalet Dakota" loading="lazy"/><span class="prop-type-badge">Chalet</span><span class="prop-station-badge">Megève</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Mont-Blanc · Centre</div>
+          <h2 class="prop-name">Chalet Dakota</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 240 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 12 guests</span><span class="prop-meta-sep">·</span><span>6 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Mont-Blanc view</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Indoor pool</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Fireplace</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€9,500</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Chalet Dakota" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="megeve" data-type="appartement" data-cap="4">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=700&q=80" alt="Silver Lodge" loading="lazy"/><span class="prop-type-badge">Apartment</span><span class="prop-station-badge">Megève</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Mont-Blanc · Mont d'Arbois</div>
+          <h2 class="prop-name">Silver Lodge</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 65 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 guests</span><span class="prop-meta-sep">·</span><span>2 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski-in ski-out</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Terrace</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Concierge</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€2,800</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Silver Lodge" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="meribel" data-type="appartement" data-cap="6">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1603512500383-b8f36f8a4b70?w=700&q=80" alt="Le Yéti" loading="lazy"/><span class="prop-type-badge">Apartment</span><span class="prop-station-badge">Méribel</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Les 3 Vallées · Centre</div>
+          <h2 class="prop-name">Le Yéti</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 80 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 6 guests</span><span class="prop-meta-sep">·</span><span>3 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski-in ski-out</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Fireplace</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Terrace</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€3,200</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Le Yéti" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="meribel" data-type="chalet" data-cap="8">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=80" alt="Chalet Apsara" loading="lazy"/><span class="prop-type-badge">Chalet</span><span class="prop-station-badge">Méribel</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Les 3 Vallées · Les Allues</div>
+          <h2 class="prop-name">Chalet Apsara</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 160 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 8 guests</span><span class="prop-meta-sep">·</span><span>4 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Sauna</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Fireplace</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Garage</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€6,800</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Chalet Apsara" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="tignes" data-type="appartement" data-cap="6">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=700&q=80" alt="Home Club" loading="lazy"/><span class="prop-type-badge">Apartment</span><span class="prop-station-badge">Tignes</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Espace Killy · Val Claret</div>
+          <h2 class="prop-name">Home Club</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 75 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 6 guests</span><span class="prop-meta-sep">·</span><span>3 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski-in ski-out</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Shared pool</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Balcony</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€2,600</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Home Club" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="tignes" data-type="appartement" data-cap="2">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=700&q=80" alt="Le Palafour" loading="lazy"/><span class="prop-type-badge">Apartment</span><span class="prop-station-badge">Tignes</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Espace Killy · Le Lac</div>
+          <h2 class="prop-name">Le Palafour</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 45 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 2 guests</span><span class="prop-meta-sep">·</span><span>1 bedroom</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Lake view</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Balcony</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Glacier skiing</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€1,400</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Le Palafour" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="valdisere" data-type="chalet" data-cap="10">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=700&q=80" alt="Chalet Les Centaurées" loading="lazy"/><span class="prop-type-badge">Chalet</span><span class="prop-station-badge">Val d'Isère</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Espace Killy · Le Fornet</div>
+          <h2 class="prop-name">Chalet Les Centaurées</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 200 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 10 guests</span><span class="prop-meta-sep">·</span><span>5 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Spa & jacuzzi</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Fireplace</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Concierge</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€11,000</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Chalet Les Centaurées" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="valdisere" data-type="appartement" data-cap="4">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=80" alt="Le Chardon" loading="lazy"/><span class="prop-type-badge">Apartment</span><span class="prop-station-badge">Val d'Isère</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Espace Killy · Town centre</div>
+          <h2 class="prop-name">Le Chardon</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 55 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 guests</span><span class="prop-meta-sep">·</span><span>2 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Village access</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> South balcony</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Parking</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€3,400</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Le Chardon" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="valthorens" data-type="appartement" data-cap="4">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?w=700&q=80" alt="Lac Blanc" loading="lazy"/><span class="prop-type-badge">Apartment</span><span class="prop-station-badge">Val Thorens</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Les 3 Vallées · Centre</div>
+          <h2 class="prop-name">Lac Blanc</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 60 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 guests</span><span class="prop-meta-sep">·</span><span>2 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski-in ski-out</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> 2,300 m altitude</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Terrace</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€2,200</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Lac Blanc" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="prop-card fadeIn" data-station="valthorens" data-type="appartement" data-cap="6">
+        <div class="prop-img"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=700&q=80" alt="Sérac" loading="lazy"/><span class="prop-type-badge">Apartment</span><span class="prop-station-badge">Val Thorens</span></div>
+        <div class="prop-body">
+          <div class="prop-massif">Les 3 Vallées · Slalom</div>
+          <h2 class="prop-name">Sérac</h2>
+          <div class="prop-meta"><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 85 m²</span><span class="prop-meta-sep">·</span><span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 6 guests</span><span class="prop-meta-sep">·</span><span>3 bedrooms</span></div>
+          <div class="prop-amenities"><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski-in ski-out</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Sauna</span><span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Slopes view</span></div>
+          <div class="prop-footer"><div class="prop-price"><div class="prop-price-from">from</div><span class="prop-price-amount">€3,100</span><span class="prop-price-unit">/week</span></div><a href="mailto:reservations@alpeon.fr?subject=Enquiry — Sérac" class="btn-inquiry">Enquire <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="owner-cta">
+      <div>
+        <div class="owner-cta-kicker">Are you a property owner?</div>
+        <div class="owner-cta-title">Entrust your alpine property<br>to <em>ALPÉON</em></div>
+      </div>
+      <a href="/en/proprietaires" class="btn-owner">Discover our services <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div><div class="f-brand-name">ALPÉON</div><div class="f-brand-claim">Alpine Property Management</div><p class="f-brand-desc">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency.</p></div>
+      <div><div class="f-col-title">Destinations</div><ul class="f-links"><li><a href="/en/destinations">Courchevel</a></li><li><a href="/en/destinations">Megève</a></li><li><a href="/en/destinations">Val d'Isère</a></li><li><a href="/en/destinations">Val Thorens</a></li><li><a href="/en/destinations">Méribel · Tignes</a></li></ul></div>
+      <div><div class="f-col-title">Services</div><ul class="f-links"><li><a href="/en/proprietaires">Owners</a></li><li><a href="/en/reserver">Book a property</a></li><li><a href="/en/estimateur">Revenue Estimator</a></li></ul></div>
+      <div><div class="f-col-title">Contact</div><ul class="f-links"><li><a href="mailto:reservations@alpeon.fr">reservations@alpeon.fr</a></li><li><a href="mailto:owners@alpeon.fr">owners@alpeon.fr</a></li><li><a href="#">Legal notice</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 ALPÉON. All rights reserved.</span><span>Premium alpine rental management · French Alps</span></div>
+  </footer>
+
+  <script>
+    const hdr = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => { hdr.classList.toggle('scrolled', window.scrollY > 40); });
+    (function(){ var btn=document.getElementById('mobMenuBtn'),menu=document.getElementById('mobMenu'); if(!btn||!menu)return; btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.classList.toggle('open',o);}); menu.addEventListener('click',function(e){if(e.target===menu){menu.classList.remove('open');btn.classList.remove('open');}}); })();
+    const state={station:'all',type:'all',cap:'all'};
+    const cards=document.querySelectorAll('.prop-card');
+    const noResults=document.getElementById('noResults');
+    const countNum=document.getElementById('countNum');
+    function applyFilters(){
+      let visible=0;
+      cards.forEach(card=>{
+        const mS=state.station==='all'||card.dataset.station===state.station;
+        const mT=state.type==='all'||card.dataset.type===state.type;
+        const mC=state.cap==='all'||(state.cap==='2'&&card.dataset.cap==='2')||(state.cap==='4'&&card.dataset.cap==='4')||(state.cap==='6'&&card.dataset.cap==='6')||(state.cap==='8'&&parseInt(card.dataset.cap)>=8);
+        if(mS&&mT&&mC){card.classList.remove('hidden');card.classList.add('fadeIn');visible++;}
+        else{card.classList.add('hidden');card.classList.remove('fadeIn');}
+      });
+      countNum.textContent=visible;
+      noResults.classList.toggle('visible',visible===0);
+    }
+    document.querySelectorAll('.filter-pill').forEach(pill=>{
+      pill.addEventListener('click',function(){
+        const f=this.dataset.filter,v=this.dataset.value;
+        state[f]=v;
+        document.querySelectorAll(`[data-filter="${f}"]`).forEach(p=>p.classList.remove('active'));
+        this.classList.add('active');
+        applyFilters();
+      });
+    });
+  </script>
+</body>
+</html>
