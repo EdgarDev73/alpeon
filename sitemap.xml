@@ -42,4 +42,24 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- FR Propriétaires -->
+  <url>
+    <loc>https://alpeon.fr/proprietaires/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/proprietaires/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/proprietaires/"/>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- EN Propriétaires -->
+  <url>
+    <loc>https://alpeon.fr/en/proprietaires/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/proprietaires/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/proprietaires/"/>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
