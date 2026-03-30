@@ -275,6 +275,22 @@
     .loc-pill { padding:8px 12px; border-radius:3px; border:1.5px solid var(--stone-3); background:#fff; font-size:.80rem; color:var(--ink-2); cursor:pointer; transition:border-color .2s,background .2s,color .2s; user-select:none; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .loc-pill:hover { border-color:var(--accent); background:var(--stone-2); }
     .loc-pill.sel { border-color:var(--accent); background:var(--accent); color:#fff; }
+    .loc-select {
+      width: 100%;
+      padding: 10px 36px 10px 14px;
+      border: 1.5px solid var(--stone-3);
+      border-radius: 3px;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c8c1b5' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 12px center;
+      font-family: 'Inter', sans-serif;
+      font-size: .85rem;
+      color: var(--ink);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color .2s;
+    }
+    .loc-select:focus { border-color: var(--accent); }
     .counter-row { display:flex; align-items:center; justify-content:space-between; gap:24px; }
     .counter-info { flex:1; }
     .counter-info strong { display:block; font-size:1.1rem; font-weight:600; color:var(--ink); margin-bottom:4px; }
@@ -1292,23 +1308,45 @@
     const MULTS = [1.15, 1.07, 1.0, 0.93, 0.87];
     const mults = (!isChalet && station.rm) ? station.rm : MULTS;
 
-    pillsEl.innerHTML = items.map((name, i) =>
-      `<div class="loc-pill" data-q="${name}" data-m="${mults[i] ?? 1.0}">${name}</div>`
-    ).join('');
-
-    pillsEl.querySelectorAll('.loc-pill').forEach(pill => {
-      pill.addEventListener('click', () => {
-        pillsEl.querySelectorAll('.loc-pill').forEach(p => p.classList.remove('sel'));
-        pill.classList.add('sel');
-        S.quartier     = pill.dataset.q;
-        S.quartierMult = +pill.dataset.m;
+    if (!isChalet) {
+      /* ── Dropdown select for residences ── */
+      pillsEl.innerHTML = `<select class="loc-select" id="locationSelect">
+        <option value="" data-m="1">— Select a residence —</option>
+        ${items.map((name, i) => `<option value="${name}" data-m="${mults[i] ?? 1.0}">${name}</option>`).join('')}
+      </select>`;
+      const sel = document.getElementById('locationSelect');
+      if (S.quartier) sel.value = S.quartier;
+      sel.addEventListener('change', () => {
+        const opt = sel.options[sel.selectedIndex];
+        S.quartier     = opt.value;
+        S.quartierMult = S.quartier ? +opt.dataset.m : 1.0;
         updatePreview();
-        const bonus = S.quartierMult >= 1.1 ? '— premium location, <strong>+15%</strong> on your estimate.'
-                    : S.quartierMult >= 1.0 ? '— good location, within the average.'
-                    : '— standard location, estimate adjusted.';
-        showToast('toast2', `<strong>${S.quartier}</strong> ${bonus}`);
+        if (S.quartier) {
+          const bonus = S.quartierMult >= 1.1 ? '— premium location, <strong>+15%</strong> on your estimate.'
+                      : S.quartierMult >= 1.0 ? '— good location, within the average.'
+                      : '— standard location, estimate adjusted.';
+          showToast('toast2', `<strong>${S.quartier}</strong> ${bonus}`);
+        }
       });
-    });
+    } else {
+      /* ── Pills for areas (chalet) ── */
+      pillsEl.innerHTML = items.map((name, i) =>
+        `<div class="loc-pill" data-q="${name}" data-m="${mults[i] ?? 1.0}">${name}</div>`
+      ).join('');
+      pillsEl.querySelectorAll('.loc-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          pillsEl.querySelectorAll('.loc-pill').forEach(p => p.classList.remove('sel'));
+          pill.classList.add('sel');
+          S.quartier     = pill.dataset.q;
+          S.quartierMult = +pill.dataset.m;
+          updatePreview();
+          const bonus = S.quartierMult >= 1.1 ? '— premium location, <strong>+15%</strong> on your estimate.'
+                      : S.quartierMult >= 1.0 ? '— good location, within the average.'
+                      : '— standard location, estimate adjusted.';
+          showToast('toast2', `<strong>${S.quartier}</strong> ${bonus}`);
+        });
+      });
+    }
   }
 
   /* STEP 2 — Surface slider */
