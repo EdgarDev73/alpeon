@@ -1162,7 +1162,20 @@
     if (S.resortId === 'valthorens') {
       const VT_RENO = { budget:0.9, correct:1.0, standing:1.05, prestige:1.1, luxe:1.1 };
       const coefReno = VT_RENO[S.etat] || 1.0;
-      const coefRes  = S.quartierMult || 1.0;
+      if (S.typeBien === 'chalet') {
+        /* ── Chalet regression model ── */
+        const hamam    = S.equipements.has('sauna')    ? 1 : 0;
+        const piscine  = S.equipements.has('piscine')  ? 1 : 0;
+        const jacuzzi  = S.equipements.has('spa')      ? 1 : 0;
+        const cheminee = S.equipements.has('cheminee') ? 1 : 0;
+        const yearly = -274000 + 233 * S.surface - 500 * S.couchages
+                     + 265000 * coefReno
+                     + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee;
+        const y = Math.round(Math.max(yearly, 0));
+        return { yearly: y, monthly: Math.round(y / 12) };
+      }
+      /* ── Apartment/penthouse regression model ── */
+      const coefRes = S.quartierMult || 1.0;
       const yearly = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * coefReno) * 0.9;
       const y = Math.round(Math.max(yearly, 0));
       return { yearly: y, monthly: Math.round(y / 12) };
@@ -1186,8 +1199,13 @@
     if (!S.resortAnn) return null;
     /* ── Val Thorens teaser ── */
     if (S.resortId === 'valthorens') {
-      const coefRes = S.quartierMult || 1.0;
-      const rough = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * 1.0) * 0.9 * 0.92;
+      let rough;
+      if (S.typeBien === 'chalet') {
+        rough = (-274000 + 233 * S.surface - 500 * S.couchages + 265000 * 1.0) * 0.92;
+      } else {
+        const coefRes = S.quartierMult || 1.0;
+        rough = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * 1.0) * 0.9 * 0.92;
+      }
       return Math.round(Math.max(rough, 0) / 1000) * 1000;
     }
     const capCoeff = CAP_COEFF[S.couchages] ?? CAP_COEFF[10];
