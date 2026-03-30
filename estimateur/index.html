@@ -3162,13 +3162,12 @@
       surface_m2:           S.surface,
       capacite_personnes:   S.couchages,
       etat:                 ETAT_FR[S.etat] || S.etat || '—',
-      quartier:             S.quartier || '—',
+      quartier:             S.typeBien === 'chalet' ? (S.quartier || '—') : '—',
+      residence:            S.typeBien !== 'chalet' ? (S.quartier || '—') : '—',
       equipements:          [...S.equipements].map(e => EQ_FR[e] || e).join(', ') || '—',
       /* ── Estimation ── */
-      revenu_annuel_estime:   r ? r.yearly  : null,
-      revenu_annuel_formate:  r ? fmt(r.yearly)  : '—',
-      revenu_mensuel_estime:  r ? r.monthly : null,
-      revenu_mensuel_formate: r ? fmt(r.monthly) : '—',
+      revenu_annuel_estime:  r ? r.yearly : null,
+      revenu_annuel_formate: r ? fmt(r.yearly) : '—',
       /* ── Meta ── */
       source:       'estimateur-alpeon',
       page_url:     window.location.href,
