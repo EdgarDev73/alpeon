@@ -2700,9 +2700,10 @@
     { id:'valdisere',  label:"Val d'Isère", exp:0.65, ann:2600, mult:1.0,
       q:["Centre val","La Daille","Le Fornet","Le Laisinant","La Légettaz"],
       r:['Le Parc 1963','Choucas','L\'Atlas','Les Centaurées','Les Danaïdes','Le Chardon','Vail Lodge','Résidence Illaz','Les Chalets du Chevril','Le Berceau de l\'Aigle','Les Chalets du Fornet','Le Kandahar','Autre / Indépendante'] },
-    { id:'valthorens', label:'Val Thorens', exp:0.90, ann:950,  mult:1.1,
+    { id:'valthorens', label:'Val Thorens', exp:0.90, ann:950, mult:1.1,
       q:['Centre','Les Balcons','Soleil','Slalom'],
-      r:['Les Trois Vallées','Roche Blanche','Eskival','Olympic','Reine Blanche','Sérac','Vanoise','Les Hauts de Chavière','Lac Blanc','Les Névés','Le Péclet','Les Lauzières','Autre / Indépendante'] },
+      r:['3 Vallées','Altineige','Ancolies','Arcelle','Arche','Beau Soleil','Chalet Altitude','Chalet Bouquetin','Chalet Daphnés','Chalet Mouflon','Chalet Selaou','Chalet Val2400','Chalets des Balcons',"Chamois d'Or",'Cheval Blanc','Cimes de Caron','Club Hotel','Cristallo','Cuzco','Diamant','Dôme de Polset','Eskival','Éterlous','Gébroulaz','Glaciers','Grand Cairn','Gyapète','Hameau du Kashmir','Hauts de Chavière','Hauts de Vanoise','Hermine','Joker','Lac Blanc','Lac du Lou','Lauzières','Lizum','Lombarde','Machu','Manaslu','Montagnettes Lombarde','Montagnettes Soleil','Montagnettes Valbel','Montana Plein Sud','Montana Premier','Montana Valbel','Nazca','Neiges Éternelles','Nèvés','Niverolles','Olympiades','Olympic','Oxalys','Pichu','Portillo','Reine Blanche','Roc de Peclet I','Roc de Peclet II','Roche Blanche','Rosael','Sabot de Vénus','Saponaire','Schuss','Sérac','Silveralp','Tikal','Tourotel','Val Chavière','Valériane','Valset','Vanoise','Zénith','Émeraude','Balcons','Autre / Indépendante'],
+      rm:[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.1,1.05,1.1,1.1,1.0,1.0,1.0,1.0,1.0,0.9,1.0,0.85,1.15,1.0,1.0,1.0,0.9,0.95,1.0,1.0,1.0,1.0,1.0,1.05,1.0,1.0,1.0,1.0,1.0,1.1,0.9,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.8,1.0,0.8,1.0,0.9,1.0,1.0,0.8,1.0,1.0,1.0,1.0,1.0,1.1,1.1,1.0,1.0,1.0,1.03,1.03,1.0,1.0,1.0,1.0,1.0,1.0,1.1,0.95,1.0] },
   ];
 
   /* Coefficients capacité (nb couchages → coeff) */
@@ -2738,6 +2739,15 @@
   ─── */
   function calc() {
     if (!S.resortAnn || !S.etat) return null;
+    /* ── Modèle régression Val Thorens ── */
+    if (S.resortId === 'valthorens') {
+      const VT_RENO = { budget:0.9, correct:1.0, standing:1.05, prestige:1.1, luxe:1.1 };
+      const coefReno = VT_RENO[S.etat] || 1.0;
+      const coefRes  = S.quartierMult || 1.0;
+      const yearly = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * coefReno) * 0.9;
+      const y = Math.round(Math.max(yearly, 0));
+      return { yearly: y, monthly: Math.round(y / 12) };
+    }
     const capCoeff = CAP_COEFF[S.couchages] ?? CAP_COEFF[10];
     const etatM    = ETAT_MULT[S.etat] || 1;
     const quartM   = S.quartierMult;
@@ -2756,6 +2766,12 @@
   /* ─── Teaser approximatif (valeur arrondie ±20%, jamais le vrai chiffre) ─── */
   function getTeaser() {
     if (!S.resortAnn) return null;
+    /* ── Teaser Val Thorens ── */
+    if (S.resortId === 'valthorens') {
+      const coefRes = S.quartierMult || 1.0;
+      const rough = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * 1.0) * 0.9 * 0.92;
+      return Math.round(Math.max(rough, 0) / 1000) * 1000;
+    }
     const capCoeff = CAP_COEFF[S.couchages] ?? CAP_COEFF[10];
     const rough = Math.pow(S.surface, S.resortExp)
                 * S.resortAnn
@@ -2884,11 +2900,11 @@
     picker.style.display = '';
 
     const items = isChalet ? station.q : (station.r || []);
-    /* mults décroissants : premium → standard → accessible */
     const MULTS = [1.15, 1.07, 1.0, 0.93, 0.87];
+    const mults = (!isChalet && station.rm) ? station.rm : MULTS;
 
     pillsEl.innerHTML = items.map((name, i) =>
-      `<div class="loc-pill" data-q="${name}" data-m="${MULTS[i] ?? 1.0}">${name}</div>`
+      `<div class="loc-pill" data-q="${name}" data-m="${mults[i] ?? 1.0}">${name}</div>`
     ).join('');
 
     pillsEl.querySelectorAll('.loc-pill').forEach(pill => {
