@@ -2777,6 +2777,27 @@
       const y = Math.round(Math.max(yearly, 0));
       return { yearly: y, monthly: Math.round(y / 12) };
     }
+    /* ── Modèle régression Megève ── */
+    if (S.resortId === 'megeve') {
+      const MG_RENO = { budget:0.9, correct:1.0, standing:1.05, prestige:1.1, luxe:1.1 };
+      const coefReno = MG_RENO[S.etat] || 1.0;
+      if (S.typeBien === 'chalet') {
+        /* ── Même régression chalet que Val Thorens ── */
+        const hamam    = S.equipements.has('sauna')    ? 1 : 0;
+        const piscine  = S.equipements.has('piscine')  ? 1 : 0;
+        const jacuzzi  = S.equipements.has('spa')      ? 1 : 0;
+        const cheminee = S.equipements.has('cheminee') ? 1 : 0;
+        const yearly = -274000 + 233 * S.surface - 500 * S.couchages
+                     + 265000 * coefReno
+                     + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee;
+        const y = Math.round(Math.max(yearly, 0));
+        return { yearly: y, monthly: Math.round(y / 12) };
+      }
+      /* ── Appartement/penthouse Megève : formule VT sans coef résidence × 1,2 ── */
+      const yearly = (-82243.33 + 32288.22 + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * coefReno) * 0.9 * 1.2;
+      const y = Math.round(Math.max(yearly, 0));
+      return { yearly: y, monthly: Math.round(y / 12) };
+    }
     const capCoeff = CAP_COEFF[S.couchages] ?? CAP_COEFF[10];
     const etatM    = ETAT_MULT[S.etat] || 1;
     const quartM   = S.quartierMult;
@@ -2803,6 +2824,15 @@
       } else {
         const coefRes = S.quartierMult || 1.0;
         rough = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * 1.0) * 0.9 * 0.92;
+      }
+      return Math.round(Math.max(rough, 0) / 1000) * 1000;
+    }
+    if (S.resortId === 'megeve') {
+      let rough;
+      if (S.typeBien === 'chalet') {
+        rough = (-274000 + 233 * S.surface - 500 * S.couchages + 265000 * 1.0) * 0.92;
+      } else {
+        rough = (-82243.33 + 32288.22 + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * 1.0) * 0.9 * 1.2 * 0.92;
       }
       return Math.round(Math.max(rough, 0) / 1000) * 1000;
     }
