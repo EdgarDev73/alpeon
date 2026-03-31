@@ -797,6 +797,61 @@
               </div>
             </div>
           </div>
+          <!-- Chalet equipment — visible only when chalet is selected -->
+          <div id="chaletEquipSection" style="display:none">
+            <label class="field-label">Premium amenities</label>
+            <div class="eq-grid">
+              <div class="eq-card" data-eq="sauna" onclick="toggleEq(this)">
+                <div class="eq-icon">🧖</div>
+                <div class="eq-text">
+                  <div class="eq-title">Sauna / Hammam</div>
+                  <div class="eq-sub">+€5,000/yr</div>
+                </div>
+                <div class="eq-check"></div>
+              </div>
+              <div class="eq-card" data-eq="piscine" onclick="toggleEq(this)">
+                <div class="eq-icon">🏊</div>
+                <div class="eq-text">
+                  <div class="eq-title">Indoor pool</div>
+                  <div class="eq-sub">+€10,000/yr</div>
+                </div>
+                <div class="eq-check"></div>
+              </div>
+              <div class="eq-card" data-eq="spa" onclick="toggleEq(this)">
+                <div class="eq-icon">💆</div>
+                <div class="eq-text">
+                  <div class="eq-title">Spa / Jacuzzi</div>
+                  <div class="eq-sub">+€2,000/yr</div>
+                </div>
+                <div class="eq-check"></div>
+              </div>
+              <div class="eq-card" data-eq="cheminee" onclick="toggleEq(this)">
+                <div class="eq-icon">🔥</div>
+                <div class="eq-text">
+                  <div class="eq-title">Fireplace / Stove</div>
+                  <div class="eq-sub">+€500/yr</div>
+                </div>
+                <div class="eq-check"></div>
+              </div>
+              <div class="eq-card" data-eq="salle" onclick="toggleEq(this)">
+                <div class="eq-icon">🏋️</div>
+                <div class="eq-text">
+                  <div class="eq-title">Gym / Fitness room</div>
+                  <div class="eq-sub">+€2,000/yr</div>
+                </div>
+                <div class="eq-check"></div>
+              </div>
+              <div class="eq-card" data-eq="cinema" onclick="toggleEq(this)">
+                <div class="eq-icon">🎬</div>
+                <div class="eq-text">
+                  <div class="eq-title">Home cinema</div>
+                  <div class="eq-sub">+€1,000/yr</div>
+                </div>
+                <div class="eq-check"></div>
+              </div>
+            </div>
+          </div>
+
           <div class="step-toast" id="toast2"></div>
         </div>
 
@@ -1167,7 +1222,7 @@
     17:0.21,18:0.23,19:0.25,20:0.27
   };
   const ETAT_MULT = { budget:0.80, correct:0.90, standing:1.00, prestige:1.10, luxe:1.15 };
-  const EQ_BONUS  = { spa:0.07, ski:0.03, parking:0.01, terrasse:0.02, cheminee:0.02, concierge:0.03, sauna:0.05, piscine:0.12 };
+  const EQ_BONUS  = { spa:0.07, ski:0.03, parking:0.01, terrasse:0.02, cheminee:0.02, concierge:0.03, sauna:0.05, piscine:0.12, salle:0.03, cinema:0.02 };
 
   const S = {
     resortId:null, resortLabel:'', resortExp:1.0, resortAnn:0, resortMult:1.1,
@@ -1190,13 +1245,16 @@
       const coefReno = VT_RENO[S.etat] || 1.0;
       if (S.typeBien === 'chalet') {
         /* ── Chalet regression model ── */
-        const hamam    = S.equipements.has('sauna')    ? 1 : 0;
-        const piscine  = S.equipements.has('piscine')  ? 1 : 0;
-        const jacuzzi  = S.equipements.has('spa')      ? 1 : 0;
-        const cheminee = S.equipements.has('cheminee') ? 1 : 0;
+        const hamam      = S.equipements.has('sauna')    ? 1 : 0;
+        const piscine    = S.equipements.has('piscine')  ? 1 : 0;
+        const jacuzzi    = S.equipements.has('spa')      ? 1 : 0;
+        const cheminee   = S.equipements.has('cheminee') ? 1 : 0;
+        const salle      = S.equipements.has('salle')    ? 1 : 0;
+        const cinema     = S.equipements.has('cinema')   ? 1 : 0;
         const yearly = -274000 + 233 * S.surface - 500 * S.couchages
                      + 265000 * coefReno
-                     + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee;
+                     + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee
+                     + 2000 * salle + 1000 * cinema;
         const y = Math.round(Math.max(yearly, 0));
         return { yearly: y, monthly: Math.round(y / 12) };
       }
@@ -1212,13 +1270,16 @@
       const coefReno = MG_RENO[S.etat] || 1.0;
       if (S.typeBien === 'chalet') {
         /* ── Same chalet regression as Val Thorens ── */
-        const hamam    = S.equipements.has('sauna')    ? 1 : 0;
-        const piscine  = S.equipements.has('piscine')  ? 1 : 0;
-        const jacuzzi  = S.equipements.has('spa')      ? 1 : 0;
-        const cheminee = S.equipements.has('cheminee') ? 1 : 0;
+        const hamam      = S.equipements.has('sauna')    ? 1 : 0;
+        const piscine    = S.equipements.has('piscine')  ? 1 : 0;
+        const jacuzzi    = S.equipements.has('spa')      ? 1 : 0;
+        const cheminee   = S.equipements.has('cheminee') ? 1 : 0;
+        const salle      = S.equipements.has('salle')    ? 1 : 0;
+        const cinema     = S.equipements.has('cinema')   ? 1 : 0;
         const yearly = -274000 + 233 * S.surface - 500 * S.couchages
                      + 265000 * coefReno
-                     + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee;
+                     + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee
+                     + 2000 * salle + 1000 * cinema;
         const y = Math.round(Math.max(yearly, 0));
         return { yearly: y, monthly: Math.round(y / 12) };
       }
@@ -1359,8 +1420,14 @@
     document.querySelectorAll('.type-prop-pill').forEach(p => p.classList.remove('sel'));
     el.classList.add('sel');
     S.typeBien = el.dataset.t;
+    /* Reset location and equipment */
     S.quartier = null; S.quartierMult = 1.0;
+    S.equipements = new Set();
+    document.querySelectorAll('.eq-card.sel').forEach(c => c.classList.remove('sel'));
     buildLocationPicker();
+    /* Show/hide chalet equipment section */
+    const equipSec = document.getElementById('chaletEquipSection');
+    if (equipSec) equipSec.style.display = S.typeBien === 'chalet' ? '' : 'none';
     const labels = { appartement:'Apartment selected.', chalet:'Chalet selected.', penthouse:'Penthouse selected.' };
     showToast('toast2', `<strong>${labels[S.typeBien] || ''}</strong>`);
     updatePreview();
@@ -1494,17 +1561,21 @@
       card.classList.add('sel');
     }
     updatePreview();
-    const EQ_LABELS = { spa:'Spa / Jacuzzi', ski:'Ski-in/ski-out', parking:'Private parking', terrasse:'Terrace / balcony', cheminee:'Fireplace / stove', concierge:'Concierge services', sauna:'Sauna', piscine:'Swimming pool' };
-    const EQ_PCT    = { spa:7, ski:3, parking:1, terrasse:2, cheminee:2, concierge:3, sauna:5, piscine:12 };
+    const EQ_LABELS = { spa:'Spa / Jacuzzi', ski:'Ski-in/ski-out', parking:'Private parking', terrasse:'Terrace / balcony', cheminee:'Fireplace / stove', concierge:'Concierge services', sauna:'Sauna / Hammam', piscine:'Indoor pool', salle:'Gym / Fitness room', cinema:'Home cinema' };
+    const EQ_EUR    = { sauna:5000, piscine:10000, spa:2000, cheminee:500, salle:2000, cinema:1000 };
+    const EQ_PCT    = { spa:7, ski:3, parking:1, terrasse:2, cheminee:2, concierge:3, sauna:5, piscine:12, salle:3, cinema:2 };
+    const isChaletModel = S.typeBien === 'chalet' && (S.resortId === 'valthorens' || S.resortId === 'megeve');
+    const impact = isChaletModel && EQ_EUR[eq]
+      ? `+€${EQ_EUR[eq].toLocaleString('en-GB')}/yr`
+      : `+${EQ_PCT[eq] || 0}%`;
     if (!wasSelected) {
-      showToast('toast5', `<strong>${EQ_LABELS[eq]}</strong> added — <strong>+${EQ_PCT[eq] || 0}%</strong> to your estimate.`);
+      showToast('toast2', `<strong>${EQ_LABELS[eq]}</strong> added — <strong>${impact}</strong> to your estimated rent.`);
     } else {
       const cnt = S.equipements.size;
-      showToast('toast5', cnt > 0
+      showToast('toast2', cnt > 0
         ? `<strong>${EQ_LABELS[eq]}</strong> removed · ${cnt} amenit${cnt > 1 ? 'ies' : 'y'} selected.`
         : `<strong>${EQ_LABELS[eq]}</strong> removed.`);
     }
-    scheduleAutoAdvance(6, 2500);
   }
 
   /* AUTO-ADVANCE */
@@ -1623,7 +1694,7 @@
   function sendToZapier(r) {
     if (!ZAPIER_WEBHOOK || ZAPIER_WEBHOOK.startsWith('REMPLACE')) return;
     const ETAT_EN = { budget:'Budget', correct:'Standard', standing:'Good', prestige:'Prestige', luxe:'Luxury' };
-    const EQ_EN   = { spa:'Spa / Jacuzzi', ski:'Ski-in/ski-out', parking:'Private parking', terrasse:'Terrace / balcony', cheminee:'Fireplace / stove', concierge:'Concierge services', sauna:'Sauna', piscine:'Swimming pool' };
+    const EQ_EN   = { spa:'Spa / Jacuzzi', ski:'Ski-in/ski-out', parking:'Private parking', terrasse:'Terrace / balcony', cheminee:'Fireplace / stove', concierge:'Concierge services', sauna:'Sauna / Hammam', piscine:'Indoor pool', salle:'Gym / Fitness room', cinema:'Home cinema' };
     const payload = {
       prenom:    document.getElementById('cPrenom').value.trim(),
       nom:       document.getElementById('cNom').value.trim(),
