@@ -28,29 +28,45 @@
   <meta name="twitter:title" content="Rental Income Calculator | ALPÉON" />
   <meta name="twitter:description" content="Estimate your ski property rental income in 2 min — Val Thorens, Megève, Courchevel and more. Real data, free." />
 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Estimate my ski property rental income — Free | ALPÉON" />
+  <meta name="twitter:description" content="How much does your ski chalet or apartment earn? Get a personalised estimate in 2 min — Val Thorens, Megève, Courchevel and more. Free." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85" />
+
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://alpeon.fr/en/accueil/" },
+          { "@type": "ListItem", "position": 2, "name": "Rental Income Estimator", "item": "https://alpeon.fr/en/estimateur/" }
+        ]
+      },
+      {
         "@type": "WebApplication",
         "name": "ALPÉON Rental Income Estimator",
         "url": "https://alpeon.fr/en/estimateur/",
-        "description": "Free tool to estimate rental income for alpine ski properties in the French Alps.",
+        "description": "Free tool to estimate rental income for alpine ski apartments and chalets in the French Alps. Based on real data from 200+ managed properties.",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web",
         "inLanguage": "en",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "featureList": ["Free estimate", "2-minute result", "Real market data", "6 Alpine resorts"],
         "provider": { "@type": "RealEstateAgent", "@id": "https://alpeon.fr/#organization" }
       },
       {
-        "@type": "RealEstateAgent",
+        "@type": ["RealEstateAgent", "LocalBusiness"],
         "@id": "https://alpeon.fr/#organization",
         "name": "ALPÉON",
         "url": "https://alpeon.fr",
         "email": "proprietaires@alpeon.fr",
-        "description": "Professional alpine property management — seasonal ski rental in 15 French Alps resorts.",
+        "description": "Alpine seasonal rental management. Fixed guaranteed rent for property owners in Val Thorens, Megève, Courchevel, Méribel, Tignes and Val d'Isère.",
+        "priceRange": "€€€€",
+        "knowsAbout": ["Seasonal ski rental management", "Mountain chalet rental", "Alpine property investment", "Luxury alpine concierge"],
         "areaServed": [
           { "@type": "Place", "name": "Val Thorens", "address": { "@type": "PostalAddress", "addressRegion": "Savoie", "addressCountry": "FR" } },
           { "@type": "Place", "name": "Megève", "address": { "@type": "PostalAddress", "addressRegion": "Haute-Savoie", "addressCountry": "FR" } },
@@ -59,30 +75,40 @@
           { "@type": "Place", "name": "Tignes", "address": { "@type": "PostalAddress", "addressRegion": "Savoie", "addressCountry": "FR" } },
           { "@type": "Place", "name": "Val d'Isère", "address": { "@type": "PostalAddress", "addressRegion": "Savoie", "addressCountry": "FR" } }
         ],
-        "serviceType": ["Seasonal rental management", "Property management", "Alpine concierge"]
+        "serviceType": ["Seasonal rental management", "Alpine property management", "Luxury concierge", "Guaranteed rent for owners"]
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
+            "name": "How much can a ski apartment earn from seasonal rental?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Rental income from a ski apartment depends on several factors: the resort (Val Thorens, Megève, Courchevel…), surface area, sleeping capacity, renovation condition and residence. As a guide, a well-located 50 m² apartment in Val Thorens can generate between €20,000 and €45,000 per winter season. ALPÉON provides a precise, personalised estimate in 2 minutes based on real data from its portfolio of 200+ managed properties." }
+          },
+          {
+            "@type": "Question",
             "name": "How does ALPÉON calculate the rental income estimate?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The estimate is based on real performance data from 200+ properties managed by ALPÉON in the French Alps, cross-referenced with your property's surface area, type, resort, condition and sleeping capacity." }
+            "acceptedAnswer": { "@type": "Answer", "text": "ALPÉON's estimate is based on a regression model calibrated on real performance data from managed properties in each resort. The calculation considers floor area, sleeping capacity, property type (apartment, chalet, penthouse), renovation condition, residence or area, and amenities (spa, pool, ski-in/ski-out…). The result is an estimated annual rent, independent of occupancy rates." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the rental yield of a ski chalet in the French Alps?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Gross rental yields for ski chalets typically range from 3% to 8% depending on location and amenities. A well-equipped 200 m² chalet in Megève or Val Thorens (pool, sauna, fireplace) can exceed €80,000 in annual income. ALPÉON guarantees a fixed rent to the owner regardless of occupancy, securing returns whatever the season." }
           },
           {
             "@type": "Question",
             "name": "Which Alpine ski resorts does ALPÉON operate in?",
-            "acceptedAnswer": { "@type": "Answer", "text": "ALPÉON manages seasonal rental properties in Val Thorens, Megève, Courchevel, Méribel, Tignes, Val d'Isère and 9 other French Alps resorts." }
+            "acceptedAnswer": { "@type": "Answer", "text": "ALPÉON manages seasonal rental properties in Val Thorens, Megève, Courchevel, Méribel, Tignes and Val d'Isère — six of the most sought-after resorts in the French Alps, combining an international high-end clientele with some of Europe's highest occupancy rates during the ski season." }
           },
           {
             "@type": "Question",
             "name": "Is the rental income estimate free?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes, ALPÉON's rental estimator is completely free and with no commitment. You get your revenue projection in under 2 minutes." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, ALPÉON's rental estimator is completely free, requires no registration and comes with no commitment. You get your annual rent projection in under 2 minutes, directly online." }
           },
           {
             "@type": "Question",
-            "name": "What is the average rental income for a property in Val Thorens or Megève?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Income varies based on surface area, condition and sleeping capacity. ALPÉON provides a personalised estimate based on real alpine market data." }
+            "name": "What is a guaranteed fixed rent for property owners?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A guaranteed fixed rent is a model offered by ALPÉON where the owner receives a fixed monthly payment regardless of the property's occupancy rate or market conditions. ALPÉON bears all commercial risk. The amount is contractually set before the season, giving the owner complete visibility and total peace of mind." }
           }
         ]
       }

@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <!-- SEO -->
-  <title>Simulateur de revenus locatifs — Val Thorens, Megève, Courchevel | ALPÉON</title>
-  <meta name="description" content="Calculez gratuitement vos revenus locatifs à Val Thorens, Megève, Courchevel, Méribel, Tignes ou Val d'Isère. Résultat en 2 min, basé sur les données réelles de 200+ biens gérés." />
+  <title>Estimer mes revenus locatifs ski — Gratuit, 2 min | Val Thorens, Megève, Courchevel | ALPÉON</title>
+  <meta name="description" content="Combien rapporte votre chalet ou appartement de ski ? Estimez gratuitement vos revenus locatifs à Val Thorens, Megève, Courchevel, Méribel, Tignes ou Val d'Isère. Résultat personnalisé en 2 min, basé sur 200+ biens gérés." />
   <meta name="robots" content="index, follow" />
-  <meta name="keywords" content="estimation revenus locatifs, simulateur loyer saisonnier, rendement locatif Val Thorens, revenus location Megève, gestion locative Courchevel, investissement immobilier alpin, louer appartement ski" />
+  <meta name="keywords" content="estimation revenus locatifs ski, simulateur loyer saisonnier chalet, combien rapporte un appartement de ski, rendement locatif Val Thorens, revenus location saisonnière Megève, loyer chalet Courchevel, rentabilité investissement immobilier montagne, gestion locative alpin, location saisonnière ski Méribel, revenus locatifs Tignes Val d'Isère, louer appartement station ski" />
   <link rel="canonical" href="https://alpeon.fr/estimateur/" />
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/" />
   <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/estimateur/" />
@@ -16,17 +16,19 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Simulateur de revenus locatifs alpins | ALPÉON" />
-  <meta property="og:description" content="Calculez gratuitement vos revenus locatifs à Val Thorens, Megève, Courchevel, Méribel, Tignes ou Val d'Isère. Résultat immédiat, sans engagement." />
+  <meta property="og:title" content="Estimer mes revenus locatifs ski — Gratuit & Immédiat | ALPÉON" />
+  <meta property="og:description" content="Combien rapporte votre bien en station de ski ? Résultat personnalisé en 2 minutes, basé sur les données réelles de 200+ biens gérés par ALPÉON." />
   <meta property="og:url" content="https://alpeon.fr/estimateur/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85" />
   <meta property="og:site_name" content="ALPÉON" />
   <meta property="og:locale" content="fr_FR" />
   <meta property="og:locale:alternate" content="en_GB" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Simulateur de revenus locatifs | ALPÉON" />
-  <meta name="twitter:description" content="Calculez vos revenus locatifs en 2 min — Val Thorens, Megève, Courchevel et plus. Données réelles, gratuit." />
+  <meta name="twitter:title" content="Estimer mes revenus locatifs ski — Gratuit | ALPÉON" />
+  <meta name="twitter:description" content="Combien rapporte votre chalet ou appartement de ski ? Résultat en 2 min — Val Thorens, Megève, Courchevel, Méribel, Tignes, Val d'Isère. Gratuit." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85" />
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -34,23 +36,33 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://alpeon.fr/accueil/" },
+          { "@type": "ListItem", "position": 2, "name": "Estimateur de revenus locatifs", "item": "https://alpeon.fr/estimateur/" }
+        ]
+      },
+      {
         "@type": "WebApplication",
         "name": "Simulateur de revenus locatifs ALPÉON",
         "url": "https://alpeon.fr/estimateur/",
-        "description": "Outil gratuit pour estimer les revenus locatifs d'un bien immobilier dans les stations alpines françaises.",
+        "description": "Outil gratuit pour estimer les revenus locatifs d'un appartement ou chalet en station de ski dans les Alpes françaises. Basé sur les données réelles de 200+ biens gérés.",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web",
         "inLanguage": "fr",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "featureList": ["Estimation gratuite", "Résultat en 2 minutes", "Données réelles de marché", "6 stations alpines"],
         "provider": { "@type": "RealEstateAgent", "@id": "https://alpeon.fr/#organization" }
       },
       {
-        "@type": "RealEstateAgent",
+        "@type": ["RealEstateAgent", "LocalBusiness"],
         "@id": "https://alpeon.fr/#organization",
         "name": "ALPÉON",
         "url": "https://alpeon.fr",
         "email": "proprietaires@alpeon.fr",
-        "description": "Gestion locative alpine professionnelle — location saisonnière de ski dans 15 stations des Alpes françaises.",
+        "description": "Gestionnaire de biens en location saisonnière alpine. Loyer fixe garanti pour les propriétaires à Val Thorens, Megève, Courchevel, Méribel, Tignes et Val d'Isère.",
+        "priceRange": "€€€€",
+        "knowsAbout": ["Gestion locative saisonnière ski", "Location chalet de montagne", "Investissement immobilier alpin", "Conciergerie alpine de luxe"],
         "areaServed": [
           { "@type": "Place", "name": "Val Thorens", "address": { "@type": "PostalAddress", "addressRegion": "Savoie", "addressCountry": "FR" } },
           { "@type": "Place", "name": "Megève", "address": { "@type": "PostalAddress", "addressRegion": "Haute-Savoie", "addressCountry": "FR" } },
@@ -59,30 +71,45 @@
           { "@type": "Place", "name": "Tignes", "address": { "@type": "PostalAddress", "addressRegion": "Savoie", "addressCountry": "FR" } },
           { "@type": "Place", "name": "Val d'Isère", "address": { "@type": "PostalAddress", "addressRegion": "Savoie", "addressCountry": "FR" } }
         ],
-        "serviceType": ["Gestion de location saisonnière", "Gestion immobilière", "Conciergerie alpine"]
+        "serviceType": ["Gestion de location saisonnière", "Gestion immobilière alpine", "Conciergerie de luxe", "Loyer garanti propriétaire"]
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
+            "name": "Combien peut rapporter un appartement de ski en location saisonnière ?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Les revenus locatifs d'un appartement de ski dépendent de plusieurs facteurs : la station (Val Thorens, Megève, Courchevel…), la surface, la capacité d'accueil, l'état de rénovation et la résidence. À titre indicatif, un appartement de 50 m² bien situé à Val Thorens peut générer entre 20 000 et 45 000 € par saison hivernale. ALPÉON vous fournit une estimation précise et personnalisée en 2 minutes, basée sur les données réelles de son portefeuille de 200+ biens gérés." }
+          },
+          {
+            "@type": "Question",
             "name": "Comment ALPÉON calcule-t-il l'estimation de revenus locatifs ?",
-            "acceptedAnswer": { "@type": "Answer", "text": "L'estimation est basée sur les données réelles de performance des 200+ propriétés gérées par ALPÉON dans les Alpes françaises, croisées avec la surface, le type de bien, la station, le standing et la capacité d'accueil." }
+            "acceptedAnswer": { "@type": "Answer", "text": "L'estimation ALPÉON repose sur un modèle de régression calibré sur les données réelles de performance des biens gérés dans chaque station. Le calcul prend en compte la surface habitable, le nombre de couchages, le type de bien (appartement, chalet, penthouse), l'état de rénovation, la résidence ou le quartier, ainsi que les équipements présents (spa, piscine, ski au pied…). Le résultat est un loyer annuel estimé, indépendant du taux d'occupation." }
+          },
+          {
+            "@type": "Question",
+            "name": "Quelle est la rentabilité d'un chalet en location saisonnière à la montagne ?",
+            "acceptedAnswer": { "@type": "Answer", "text": "La rentabilité brute d'un chalet en location saisonnière en station de ski est généralement comprise entre 3 % et 8 % selon la localisation et les prestations. Un chalet de 200 m² à Megève ou Val Thorens, bien équipé (piscine, sauna, cheminée), peut dépasser 80 000 € de revenus annuels. ALPÉON garantit un loyer fixe au propriétaire, indépendamment du taux de remplissage, ce qui sécurise le rendement quelle que soit la saison." }
           },
           {
             "@type": "Question",
             "name": "Dans quelles stations alpines ALPÉON opère-t-il ?",
-            "acceptedAnswer": { "@type": "Answer", "text": "ALPÉON gère des biens en location saisonnière à Val Thorens, Megève, Courchevel, Méribel, Tignes, Val d'Isère et dans 9 autres stations des Alpes françaises." }
+            "acceptedAnswer": { "@type": "Answer", "text": "ALPÉON gère des biens en location saisonnière à Val Thorens, Megève, Courchevel, Méribel, Tignes et Val d'Isère — six des stations les plus prisées des Alpes françaises. Ces destinations combinent une clientèle internationale exigeante et des taux d'occupation parmi les plus élevés d'Europe en saison hivernale." }
           },
           {
             "@type": "Question",
             "name": "L'estimation de revenus locatifs est-elle gratuite ?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Oui, l'estimateur ALPÉON est entièrement gratuit et sans engagement. Vous obtenez votre projection de revenus en moins de 2 minutes." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Oui, l'estimateur ALPÉON est entièrement gratuit, sans inscription et sans engagement. Vous obtenez votre projection de loyer annuel en moins de 2 minutes, directement en ligne." }
           },
           {
             "@type": "Question",
-            "name": "Quel est le revenu locatif moyen à Val Thorens ou Megève ?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Les revenus varient selon la surface, le standing et la capacité du bien. ALPÉON vous fournit une estimation personnalisée basée sur les données réelles du marché alpin." }
+            "name": "Qu'est-ce que le loyer garanti pour un propriétaire en location saisonnière ?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Le loyer garanti est une formule proposée par ALPÉON dans laquelle le propriétaire perçoit un loyer fixe chaque mois, indépendamment du taux d'occupation du bien et des conditions du marché. C'est ALPÉON qui porte le risque commercial. Le montant est fixé contractuellement avant la saison, offrant une visibilité totale et une tranquillité d'esprit absolue pour le propriétaire." }
+          },
+          {
+            "@type": "Question",
+            "name": "Faut-il confier son bien à un gestionnaire locatif en station de ski ?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Confier son bien à un gestionnaire locatif spécialisé comme ALPÉON présente plusieurs avantages : gestion complète de A à Z (réservations, accueil, ménage, maintenance), accès à une clientèle premium internationale, optimisation des tarifs, et loyer garanti indépendant du marché. Le propriétaire bénéficie des revenus locatifs sans aucune contrainte opérationnelle, tout en conservant la jouissance de son bien hors saison." }
           }
         ]
       }

@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "ALPÉON",
+      "name": "alpeon",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["live-server", "/Users/edgarvernet/claude/alpeon", "--port=8086", "--no-browser"],
-      "port": 8086
+      "runtimeArgs": ["serve", ".", "-p", "3000", "--no-clipboard"],
+      "port": 3000
     }
   ]
 }

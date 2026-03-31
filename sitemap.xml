@@ -7,7 +7,7 @@
     <loc>https://alpeon.fr/accueil/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/accueil/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/accueil/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -17,7 +17,7 @@
     <loc>https://alpeon.fr/estimateur/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/estimateur/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -27,7 +27,7 @@
     <loc>https://alpeon.fr/en/accueil/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/accueil/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/accueil/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -37,7 +37,7 @@
     <loc>https://alpeon.fr/en/estimateur/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/estimateur/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -47,7 +47,7 @@
     <loc>https://alpeon.fr/proprietaires/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/proprietaires/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/proprietaires/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -57,7 +57,7 @@
     <loc>https://alpeon.fr/en/proprietaires/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/proprietaires/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/proprietaires/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -67,7 +67,7 @@
     <loc>https://alpeon.fr/destinations/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -77,7 +77,7 @@
     <loc>https://alpeon.fr/en/destinations/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -87,7 +87,7 @@
     <loc>https://alpeon.fr/reserver/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/reserver/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/reserver/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -97,7 +97,7 @@
     <loc>https://alpeon.fr/en/reserver/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/reserver/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/reserver/"/>
-    <lastmod>2026-03-20</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
