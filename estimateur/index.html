@@ -2771,13 +2771,13 @@
     { id:'megeve',     label:'Megève',      exp:0.60, ann:2250, mult:1.0,
       q:['Centre','Mont d\'Arbois','Rochebrune','Combloux','Jaillet'],
       r:['Silver Lodge','Les Mandarines','Le Hameau du Mont d\'Arbois','Le Nid du Mage','Les Chalets d\'Alexandrine','Chalet Dakota','L\'Altima','Le Ksar','La Croix du Bouchet','Le Sporting','Autre / Indépendante'] },
-    { id:'meribel',    label:'Méribel',     exp:0.65, ann:2200, mult:1.0,
+    { id:'meribel',    label:'Méribel',     exp:0.65, ann:2170, mult:1.0,
       q:['Centre','Les Allues','Méribel-Mottaret','Brides-les-Bains','Raffort'],
       r:['Le Yéti','Bois des Ours','Le Belvédère','La Rimaye','Village de l\'Orée','Les Grands Chalets des Pistes','Le Hameau','Lac Bleu','Chalets Apsara','Les Ravines','Autre / Indépendante'] },
-    { id:'tignes',     label:'Tignes',      exp:1.00, ann:550,  mult:1.1,
+    { id:'tignes',     label:'Tignes',      exp:0.90, ann:950,  mult:1.1,
       q:['Val Claret','Le Lac','Les Brévières','Les Boisses','Tignes-Le-Lavachet'],
       r:['Home Club','Le Palafour','Les Almes','Les Platières','Bec Rouge','Tour du Lac','Roches Rouges','Shamrock','Les Tufs','Les Tommeuses','Le Lavachet','Hameaux du Borsat','Autre / Indépendante'] },
-    { id:'valdisere',  label:"Val d'Isère", exp:0.65, ann:2600, mult:1.0,
+    { id:'valdisere',  label:"Val d'Isère", exp:0.90, ann:950,  mult:1.1,
       q:["Centre val","La Daille","Le Fornet","Le Laisinant","La Légettaz"],
       r:['Le Parc 1963','Choucas','L\'Atlas','Les Centaurées','Les Danaïdes','Le Chardon','Vail Lodge','Résidence Illaz','Les Chalets du Chevril','Le Berceau de l\'Aigle','Les Chalets du Fornet','Le Kandahar','Autre / Indépendante'] },
     { id:'valthorens', label:'Val Thorens', exp:0.90, ann:950, mult:1.1,
@@ -2844,6 +2844,52 @@
       const y = Math.round(Math.max(yearly, 0));
       return { yearly: y, monthly: Math.round(y / 12) };
     }
+    /* ── Modèle régression Tignes — identique Val Thorens ── */
+    if (S.resortId === 'tignes') {
+      const VT_RENO = { budget:0.9, correct:1.0, standing:1.05, prestige:1.1, luxe:1.1 };
+      const coefReno = VT_RENO[S.etat] || 1.0;
+      if (S.typeBien === 'chalet') {
+        const hamam      = S.equipements.has('sauna')    ? 1 : 0;
+        const piscine    = S.equipements.has('piscine')  ? 1 : 0;
+        const jacuzzi    = S.equipements.has('spa')      ? 1 : 0;
+        const cheminee   = S.equipements.has('cheminee') ? 1 : 0;
+        const salle      = S.equipements.has('salle')    ? 1 : 0;
+        const cinema     = S.equipements.has('cinema')   ? 1 : 0;
+        const base = -274000 + 233 * S.surface - 500 * S.couchages
+                   + 265000 * coefReno
+                   + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee
+                   + 2000 * salle + 1000 * cinema;
+        const y = Math.round(Math.max(base, 0));
+        return { yearly: y, monthly: Math.round(y / 12) };
+      }
+      const coefRes = S.quartierMult || 1.0;
+      const yearly = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * coefReno) * 0.9;
+      const y = Math.round(Math.max(yearly, 0));
+      return { yearly: y, monthly: Math.round(y / 12) };
+    }
+    /* ── Modèle régression Val d'Isère — identique Val Thorens ── */
+    if (S.resortId === 'valdisere') {
+      const VT_RENO = { budget:0.9, correct:1.0, standing:1.05, prestige:1.1, luxe:1.1 };
+      const coefReno = VT_RENO[S.etat] || 1.0;
+      if (S.typeBien === 'chalet') {
+        const hamam      = S.equipements.has('sauna')    ? 1 : 0;
+        const piscine    = S.equipements.has('piscine')  ? 1 : 0;
+        const jacuzzi    = S.equipements.has('spa')      ? 1 : 0;
+        const cheminee   = S.equipements.has('cheminee') ? 1 : 0;
+        const salle      = S.equipements.has('salle')    ? 1 : 0;
+        const cinema     = S.equipements.has('cinema')   ? 1 : 0;
+        const base = -274000 + 233 * S.surface - 500 * S.couchages
+                   + 265000 * coefReno
+                   + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee
+                   + 2000 * salle + 1000 * cinema;
+        const y = Math.round(Math.max(base, 0));
+        return { yearly: y, monthly: Math.round(y / 12) };
+      }
+      const coefRes = S.quartierMult || 1.0;
+      const yearly = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * coefReno) * 0.9;
+      const y = Math.round(Math.max(yearly, 0));
+      return { yearly: y, monthly: Math.round(y / 12) };
+    }
     /* ── Modèle régression Megève ── */
     if (S.resortId === 'megeve') {
       /* Niveaux rénovation calés sur l'Excel (0.9→1.15), luxe différencié de prestige */
@@ -2889,6 +2935,16 @@
     if (!S.resortAnn) return null;
     /* ── Teaser Val Thorens ── */
     if (S.resortId === 'valthorens') {
+      let rough;
+      if (S.typeBien === 'chalet') {
+        rough = (-274000 + 233 * S.surface - 500 * S.couchages + 265000 * 1.0) * 0.92;
+      } else {
+        const coefRes = S.quartierMult || 1.0;
+        rough = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * 1.0) * 0.9 * 0.92;
+      }
+      return Math.round(Math.max(rough, 0) / 1000) * 1000;
+    }
+    if (S.resortId === 'tignes' || S.resortId === 'valdisere') {
       let rough;
       if (S.typeBien === 'chalet') {
         rough = (-274000 + 233 * S.surface - 500 * S.couchages + 265000 * 1.0) * 0.92;
