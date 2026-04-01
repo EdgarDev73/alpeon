@@ -2946,7 +2946,7 @@
       const MG_RENO = { budget:0.9, correct:1.0, standing:1.05, prestige:1.1, luxe:1.15 };
       const coefReno = MG_RENO[S.etat] || 1.0;
       if (S.typeBien === 'chalet') {
-        /* ── Régression chalet Megève : formule VT × 1.075 (prime station) ── */
+        /* ── Régression chalet Megève : formule VT × 1.53 (prime station) ── */
         const hamam      = S.equipements.has('sauna')    ? 1 : 0;
         const piscine    = S.equipements.has('piscine')  ? 1 : 0;
         const jacuzzi    = S.equipements.has('spa')      ? 1 : 0;
@@ -2957,7 +2957,7 @@
                    + 265000 * coefReno
                    + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee
                    + 2000 * salle + 1000 * cinema;
-        const y = Math.round(Math.max(base * 1.075, 0));
+        const y = Math.round(Math.max(base * 1.53, 0));
         return { yearly: y, monthly: Math.round(y / 12) };
       }
       /* ── Appartement/penthouse Megève : régression VT × 0.9 × 1.1 ── */
@@ -3029,7 +3029,7 @@
     if (S.resortId === 'megeve') {
       let rough;
       if (S.typeBien === 'chalet') {
-        rough = (-274000 + 233 * S.surface - 500 * S.couchages + 265000 * 1.0) * 1.075 * 0.92;
+        rough = (-274000 + 233 * S.surface - 500 * S.couchages + 265000 * 1.0) * 1.53 * 0.92;
       } else {
         rough = (-82243.33 + 32288.22 + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * 1.0) * 0.9 * 1.1 * 0.92;
       }
