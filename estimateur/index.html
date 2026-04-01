@@ -2844,6 +2844,56 @@
       const y = Math.round(Math.max(yearly, 0));
       return { yearly: y, monthly: Math.round(y / 12) };
     }
+    /* ── Modèle régression Courchevel ── */
+    if (S.resortId === 'courchevel') {
+      const VT_RENO = { budget:0.9, correct:1.0, standing:1.05, prestige:1.1, luxe:1.15 };
+      const coefReno = VT_RENO[S.etat] || 1.0;
+      if (S.typeBien === 'chalet') {
+        /* ── Chalet Courchevel : formule chalet × 1.3 ── */
+        const hamam      = S.equipements.has('sauna')    ? 1 : 0;
+        const piscine    = S.equipements.has('piscine')  ? 1 : 0;
+        const jacuzzi    = S.equipements.has('spa')      ? 1 : 0;
+        const cheminee   = S.equipements.has('cheminee') ? 1 : 0;
+        const salle      = S.equipements.has('salle')    ? 1 : 0;
+        const cinema     = S.equipements.has('cinema')   ? 1 : 0;
+        const base = -274000 + 233 * S.surface - 500 * S.couchages
+                   + 265000 * coefReno
+                   + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee
+                   + 2000 * salle + 1000 * cinema;
+        const y = Math.round(Math.max(base * 1.3, 0));
+        return { yearly: y, monthly: Math.round(y / 12) };
+      }
+      /* ── Appart/penthouse Courchevel : régression VT × 0.917 ── */
+      const coefRes = S.quartierMult || 1.0;
+      const yearly = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * coefReno) * 0.9 * 0.917;
+      const y = Math.round(Math.max(yearly, 0));
+      return { yearly: y, monthly: Math.round(y / 12) };
+    }
+    /* ── Modèle régression Méribel ── */
+    if (S.resortId === 'meribel') {
+      const VT_RENO = { budget:0.9, correct:1.0, standing:1.05, prestige:1.1, luxe:1.15 };
+      const coefReno = VT_RENO[S.etat] || 1.0;
+      if (S.typeBien === 'chalet') {
+        /* ── Chalet Méribel : formule chalet × 1.3 ── */
+        const hamam      = S.equipements.has('sauna')    ? 1 : 0;
+        const piscine    = S.equipements.has('piscine')  ? 1 : 0;
+        const jacuzzi    = S.equipements.has('spa')      ? 1 : 0;
+        const cheminee   = S.equipements.has('cheminee') ? 1 : 0;
+        const salle      = S.equipements.has('salle')    ? 1 : 0;
+        const cinema     = S.equipements.has('cinema')   ? 1 : 0;
+        const base = -274000 + 233 * S.surface - 500 * S.couchages
+                   + 265000 * coefReno
+                   + 5000 * hamam + 10000 * piscine + 2000 * jacuzzi + 500 * cheminee
+                   + 2000 * salle + 1000 * cinema;
+        const y = Math.round(Math.max(base * 1.3, 0));
+        return { yearly: y, monthly: Math.round(y / 12) };
+      }
+      /* ── Appart/penthouse Méribel : régression VT × 0.9 ── */
+      const coefRes = S.quartierMult || 1.0;
+      const yearly = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * coefReno) * 0.9;
+      const y = Math.round(Math.max(yearly, 0));
+      return { yearly: y, monthly: Math.round(y / 12) };
+    }
     /* ── Modèle régression Tignes — identique Val Thorens ── */
     if (S.resortId === 'tignes') {
       const VT_RENO = { budget:0.9, correct:1.0, standing:1.05, prestige:1.1, luxe:1.1 };
@@ -2933,6 +2983,28 @@
   /* ─── Teaser approximatif (valeur arrondie ±20%, jamais le vrai chiffre) ─── */
   function getTeaser() {
     if (!S.resortAnn) return null;
+    /* ── Teaser Courchevel ── */
+    if (S.resortId === 'courchevel') {
+      let rough;
+      if (S.typeBien === 'chalet') {
+        rough = (-274000 + 233 * S.surface - 500 * S.couchages + 265000 * 1.0) * 1.3 * 0.92;
+      } else {
+        const coefRes = S.quartierMult || 1.0;
+        rough = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * 1.0) * 0.9 * 0.917 * 0.92;
+      }
+      return Math.round(Math.max(rough, 0) / 1000) * 1000;
+    }
+    /* ── Teaser Méribel ── */
+    if (S.resortId === 'meribel') {
+      let rough;
+      if (S.typeBien === 'chalet') {
+        rough = (-274000 + 233 * S.surface - 500 * S.couchages + 265000 * 1.0) * 1.3 * 0.92;
+      } else {
+        const coefRes = S.quartierMult || 1.0;
+        rough = (-82243.33 + 32288.22 * coefRes + 680.43 * S.surface + 504.01 * S.couchages + 48561.46 * 1.0) * 0.9 * 0.92;
+      }
+      return Math.round(Math.max(rough, 0) / 1000) * 1000;
+    }
     /* ── Teaser Val Thorens ── */
     if (S.resortId === 'valthorens') {
       let rough;
