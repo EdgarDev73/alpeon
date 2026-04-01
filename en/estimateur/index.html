@@ -1383,7 +1383,7 @@
         document.getElementById('csDisplay').classList.remove('open');
         updatePreview();
         showToast('toast1', `<strong>${S.resortLabel}</strong> selected.`);
-        scheduleAutoAdvance(2, 680);
+        scheduleAutoAdvance(2, 1500);
       });
     });
   }
@@ -1517,7 +1517,7 @@
         updatePreview();
         const qBonus = S.quartierMult >= 1.1 ? '— premium location, <strong>+18% on your estimate</strong>.' : S.quartierMult >= 1.0 ? '— good location, above the average.' : '— standard location, estimate adjusted.';
         showToast('toast2', `<strong>${S.quartier}</strong> ${qBonus}`);
-        scheduleAutoAdvance(3, 680);
+        scheduleAutoAdvance(3, 1500);
       });
     });
   }
@@ -1529,7 +1529,7 @@
     S[cfg.key] = Math.min(cfg.max, Math.max(cfg.min, S[cfg.key] + delta));
     document.getElementById(cfg.el).textContent = S[cfg.key];
     updatePreview();
-    scheduleAutoAdvance(3, 1800);
+    scheduleAutoAdvance(3, 2800);
   }
 
   /* STEP 3 — Condition */
@@ -1538,7 +1538,7 @@
     card.classList.add('sel');
     S.etat = card.dataset.e;
     updatePreview();
-    scheduleAutoAdvance(4, 680);
+    scheduleAutoAdvance(4, 1500);
   }
 
   /* STEP 4 — Amenities */
