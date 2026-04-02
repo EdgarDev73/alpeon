@@ -797,9 +797,41 @@
               </div>
             </div>
           </div>
-          <!-- Chalet equipment — visible only when chalet is selected -->
+          <div class="step-toast" id="toast2"></div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step" id="s3">
+          <div class="step-hd">
+            <h3>How is your interior?</h3>
+          </div>
+          <div class="etat-grid">
+            <div class="e-card" data-e="budget" onclick="selEtat(this)">
+              <div class="e-card-check"></div>
+              <div class="e-card-title">Budget</div>
+            </div>
+            <div class="e-card" data-e="correct" onclick="selEtat(this)">
+              <div class="e-card-check"></div>
+              <div class="e-card-title">Standard</div>
+            </div>
+            <div class="e-card" data-e="standing" onclick="selEtat(this)">
+              <div class="e-card-check"></div>
+              <div class="e-card-title">Good</div>
+            </div>
+            <div class="e-card" data-e="prestige" onclick="selEtat(this)">
+              <div class="e-card-check"></div>
+              <div class="e-card-title">Prestige</div>
+            </div>
+            <div class="e-card e-card--full" data-e="luxe" onclick="selEtat(this)">
+              <div class="e-card-check"></div>
+              <div class="e-card-title">Luxury &amp; exceptional</div>
+            </div>
+          </div>
+          <p class="err-msg" id="err3">Please select a property level.</p>
+
+          <!-- Chalet amenities — visible only when type = chalet -->
           <div id="chaletEquipSection" style="display:none">
-            <label class="field-label">Amenities</label>
+            <label class="field-label" style="margin-top:24px;display:block">Amenities</label>
             <div class="eq-grid">
               <div class="eq-card" data-eq="sauna" onclick="toggleEq(this)">
                 <div class="eq-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="14" height="9" rx="1.5"/><path d="M7 8V6a3 3 0 016 0v2"/><path d="M10 12v2"/></svg></div>
@@ -834,37 +866,6 @@
             </div>
           </div>
 
-          <div class="step-toast" id="toast2"></div>
-        </div>
-
-        <!-- STEP 3 -->
-        <div class="step" id="s3">
-          <div class="step-hd">
-            <h3>How is your interior?</h3>
-          </div>
-          <div class="etat-grid">
-            <div class="e-card" data-e="budget" onclick="selEtat(this)">
-              <div class="e-card-check"></div>
-              <div class="e-card-title">Budget</div>
-            </div>
-            <div class="e-card" data-e="correct" onclick="selEtat(this)">
-              <div class="e-card-check"></div>
-              <div class="e-card-title">Standard</div>
-            </div>
-            <div class="e-card" data-e="standing" onclick="selEtat(this)">
-              <div class="e-card-check"></div>
-              <div class="e-card-title">Good</div>
-            </div>
-            <div class="e-card" data-e="prestige" onclick="selEtat(this)">
-              <div class="e-card-check"></div>
-              <div class="e-card-title">Prestige</div>
-            </div>
-            <div class="e-card e-card--full" data-e="luxe" onclick="selEtat(this)">
-              <div class="e-card-check"></div>
-              <div class="e-card-title">Luxury &amp; exceptional</div>
-            </div>
-          </div>
-          <p class="err-msg" id="err3">Please select a property level.</p>
           <div class="step-toast" id="toast3"></div>
         </div>
 
