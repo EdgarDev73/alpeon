@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- A: left leg thick -->
+  <path d="M50 6 L10 94" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+  <!-- A: right leg thin -->
+  <path d="M50 6 L86 94" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <!-- A: crossbar -->
+  <path d="M25 60 L70 60" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Alpine swoosh main -->
+  <path d="M4 72 C 18 34, 46 24, 98 32" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Swoosh echo -->
+  <path d="M6 81 C 22 46, 50 36, 98 44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+</svg>

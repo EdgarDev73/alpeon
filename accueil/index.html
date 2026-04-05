@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/assets/logo/alpeon-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/logo/alpeon-icon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestion locative alpine — Val Thorens, Megève, Courchevel | ALPÉON</title>
   <meta name="description" content="ALPÉON gère votre bien en location saisonnière à Val Thorens, Megève, Courchevel, Méribel, Tignes et Val d'Isère. Loyer fixe garanti chaque mois, gestion discrète et transparente." />
@@ -24,546 +26,1142 @@
   {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://alpeon.fr/accueil/" }
-        ]
-      },
+      { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://alpeon.fr/accueil/" }] },
       {
         "@type": ["RealEstateAgent", "LocalBusiness"],
         "@id": "https://alpeon.fr/#organization",
-        "name": "ALPÉON",
-        "url": "https://alpeon.fr",
-        "email": "proprietaires@alpeon.fr",
-        "description": "Gestionnaire premium de biens en location saisonnière alpine. Loyer fixe et garanti pour les propriétaires, indépendant du marché et des performances. Val Thorens, Megève, Courchevel, Méribel, Tignes, Val d'Isère.",
+        "name": "ALPÉON", "url": "https://alpeon.fr", "email": "proprietaires@alpeon.fr",
+        "description": "Gestionnaire premium de biens en location saisonnière alpine. Loyer fixe et garanti pour les propriétaires.",
         "priceRange": "€€€€",
-        "knowsAbout": ["Gestion locative saisonnière ski", "Location chalet de montagne", "Loyer garanti propriétaire", "Investissement immobilier alpin", "Conciergerie alpine de luxe"],
-        "areaServed": [
-          { "@type": "Place", "name": "Val Thorens" },
-          { "@type": "Place", "name": "Megève" },
-          { "@type": "Place", "name": "Courchevel" },
-          { "@type": "Place", "name": "Méribel" },
-          { "@type": "Place", "name": "Tignes" },
-          { "@type": "Place", "name": "Val d'Isère" }
-        ],
-        "serviceType": ["Gestion locative saisonnière", "Loyer garanti propriétaire", "Conciergerie alpine", "Gestion immobilière ski"],
-        "sameAs": ["https://alpeon.fr/accueil/"]
+        "areaServed": [{"@type":"Place","name":"Val Thorens"},{"@type":"Place","name":"Megève"},{"@type":"Place","name":"Courchevel"},{"@type":"Place","name":"Méribel"},{"@type":"Place","name":"Tignes"},{"@type":"Place","name":"Val d'Isère"}]
       }
     ]
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Lora:ital,wght@1,400;1,500&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    :root {
-      --stone:    #faf9f7;
-      --stone-2:  #f2efe9;
-      --stone-3:  #e5e0d8;
-      --stone-4:  #c8c1b5;
-      --ink:      #1c1b19;
-      --ink-3:    #4a4843;
-      --ink-4:    #7a7773;
-      --accent:   #a8956a;
-      --accent-2: #8a7a56;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--stone); color: var(--ink); line-height: 1.6; }
+/* @@NAV-START@@ */
+  :root { --nav-h: 72px; }
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+    height: var(--nav-h); background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background .35s ease, border-color .35s ease;
+  }
+  .site-header.scrolled {
+    background: rgba(18,30,20,.97);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(232,203,160,.1);
+  }
+  .site-header-inner {
+    max-width: 1400px; margin: 0 auto;
+    padding: 0 2.5rem; height: var(--nav-h); display: flex; align-items: center;
+  }
+  .site-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .site-logo img { height: 64px; width: auto; display: block; }
+  .site-nav { display: flex; align-items: center; gap: 2rem; margin-left: auto; }
+  .site-nav-link {
+    color: rgba(250,254,255,.75); font-size: .72rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    position: relative; padding-bottom: 3px; transition: color .2s; white-space: nowrap;
+  }
+  .site-nav-link::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1.5px; background: #C9A97A;
+    transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
+  }
+  .site-nav-link:hover { color: #fff; }
+  .site-nav-link.active { color: #C9A97A; }
+  .site-nav-link.active::after, .site-nav-link:hover::after { transform: scaleX(1); }
+  .site-header-right { display: flex; align-items: center; gap: 1.25rem; margin-left: 2.5rem; flex-shrink: 0; }
+  .site-lang { display: flex; align-items: center; gap: .35rem; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
+  .site-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-lang a.active { color: #C9A97A; }
+  .site-lang span { color: rgba(250,254,255,.15); font-size: .5rem; }
+  .site-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; background: none; border: none; cursor: pointer; padding: 0; }
+  .site-burger span { display: block; height: 1.5px; background: rgba(250,254,255,.75); border-radius: 2px; transition: all .25s; }
+  .site-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .site-burger.open span:nth-child(2) { opacity: 0; }
+  .site-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .site-mobile-menu {
+    display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    background: rgba(18,30,20,.98); backdrop-filter: blur(14px);
+    flex-direction: column; padding: 2rem 2rem 3rem; z-index: 299;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .site-mobile-menu.open { opacity: 1; pointer-events: all; }
+  .site-mobile-link {
+    color: rgba(250,254,255,.6); font-size: 1.1rem; font-weight: 300;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    padding: 1rem 0; border-bottom: 1px solid rgba(250,254,255,.06); transition: color .2s;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .site-mobile-link:hover, .site-mobile-link.active { color: #C9A97A; }
+  .site-mobile-lang { display: flex; gap: .5rem; align-items: center; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,254,255,.3); margin-top: 1.5rem; }
+  .site-mobile-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-mobile-lang a.active { color: #C9A97A; }
+  @media (max-width: 900px) {
+    .site-nav, .site-lang { display: none; }
+    .site-burger { display: flex; }
+    .site-mobile-menu { display: flex; }
+    .site-header-inner { padding: 0 1.25rem; }
+  }
+  /* @@NAV-END@@ */
+  
 
-    /* ── HEADER ── */
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 72px;
-      background: transparent; transition: background .4s, box-shadow .4s;
+    /* ─────────────────────────────────────────────
+       TOKENS
+    ───────────────────────────────────────────── */
+    :root {
+      --green:   #2C3D30;
+      --green-d: #223028;
+      --gold:    #E8CBA0;
+      --gold-d:  #D4B48A;
+      --white:   #FAFEFF;
+      --black:   #111111;
+      --mid:     #4A5C4E;
+      --muted:   rgba(44,61,48,.45);
+      --border:  rgba(44,61,48,.12);
+
+      --font-sans:   'Poppins', sans-serif;
+      --font-serif:  'Cormorant Garamond', serif;
+      --font-italic: 'Lora', serif;
+
+      --nav-h: 76px;
+      --max:   1380px;
+      --pad:   clamp(24px, 5vw, 80px);
     }
-    header.scrolled { background: rgba(250,249,247,.97); box-shadow: 0 1px 0 var(--stone-3); backdrop-filter: blur(8px); }
-    .logo { display: flex; align-items: center; text-decoration: none; }
-    .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #fff; transition: color .4s; }
-    header.scrolled .logo-name { color: var(--ink); }
-    .main-nav { display: flex; align-items: center; gap: 36px; }
-    .main-nav a { font-size: .74rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; transition: color .3s; }
-    .main-nav a:hover { color: #fff; }
-    header.scrolled .main-nav a { color: var(--ink-3); }
-    header.scrolled .main-nav a:hover { color: var(--ink); }
-    .lang-switch { display: flex; align-items: center; gap: 8px; }
-    .lang-btn { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); text-decoration: none; transition: color .3s; }
-    .lang-btn.active { color: rgba(255,255,255,.9); }
-    header.scrolled .lang-btn { color: var(--ink-4); }
-    header.scrolled .lang-btn.active { color: var(--ink); }
-    .lang-sep { color: rgba(255,255,255,.2); font-size: .6rem; }
-    header.scrolled .lang-sep { color: var(--stone-4); }
+
+    /* ─────────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─────────────────────────────────────────────
+       UTILS
+    ───────────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-sans);
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────────────────────────
+       LOGO MARK SVG
+    ───────────────────────────────────────────── */
+    .logo-svg { width: 44px; height: 38px; flex-shrink: 0; }
+
+    /* ─────────────────────────────────────────────
+       NAVIGATION
+    ───────────────────────────────────────────── */
+    
+    
+    
+
+    /* Logo */
+    
+    
+
+    /* Links */
+    
+    
+    
+    
+    
+
+    /* Lang */
+    
+    
+    
+    
 
     /* Hamburger */
-    .mob-menu-btn { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; }
-    .mob-menu-btn span { display:block; height:1.5px; width:22px; background:#fff; transition:all .3s; border-radius:1px; }
-    header.scrolled .mob-menu-btn span { background:var(--ink); }
-    .mob-menu-btn.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-    .mob-menu-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-    .mob-menu-btn.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-    .mob-menu { position:fixed; inset:0; z-index:300; background:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s; display:flex; flex-direction:column; }
-    .mob-menu.open { opacity:1; pointer-events:all; }
-    .mob-close { position:absolute; top:14px; right:18px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); font-size:1.6rem; line-height:1; transition:color .2s; }
-    .mob-close:hover { color:#fff; }
-    .mob-menu-inner { display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; gap:44px; padding:20px; }
-    .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
-    .mob-nav a { font-family:'Cormorant Garamond',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
-    .mob-nav a:hover { color:#fff; }
-    .mob-lang { display:flex; align-items:center; gap:14px; }
-    .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
-    .mob-lang-btn.active { color:rgba(255,255,255,.9); }
-    .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
-    @media (max-width:900px) { .mob-menu-btn { display:flex; } .main-nav { display:none; } }
+    
+    
+    
+    
+    
 
-    /* ── HERO ── */
+    /* Mobile drawer */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    @media (max-width: 900px) {
+      
+      
+    }
+
+    /* ─────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────── */
     .hero {
-      position: relative; height: 100vh; min-height: 640px;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 60px 80px;
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      align-items: flex-end;
       overflow: hidden;
     }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2200&q=90') center 40% / cover no-repeat;
-      transform: scale(1.04);
-      animation: heroZoom 14s ease-out forwards;
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2400&q=90')
+        center 38% / cover no-repeat;
+      transform: scale(1.05);
+      animation: heroZoom 16s cubic-bezier(.25,.46,.45,.94) forwards;
     }
     @keyframes heroZoom { to { transform: scale(1); } }
+
     .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(28,27,25,.82) 20%, rgba(28,27,25,.1) 65%, transparent 100%);
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          170deg,
+          transparent 35%,
+          rgba(22,34,24,.6) 65%,
+          rgba(18,28,20,.92) 100%
+        );
     }
-    .hero-content { position: relative; z-index: 2; max-width: 780px; }
-    .hero-eyebrow {
-      display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
+    /* subtle vignette top */
+    .hero-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(18,28,20,.25) 0%, transparent 30%);
     }
-    .hero-eyebrow-line { width: 40px; height: 1px; background: var(--accent); }
-    .hero-eyebrow-text { font-size: .64rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 6vw, 5rem);
-      font-weight: 300; color: #fff; line-height: 1.05;
+
+    .hero-body {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding-bottom: clamp(64px, 8vh, 110px);
+    }
+    .hero-body .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: flex-end;
+      gap: 40px;
+    }
+    .hero-left {}
+    .hero-eyebrow { margin-bottom: 28px; }
+    .hero-h1 {
+      font-family: var(--font-sans);
+      font-size: clamp(2.8rem, 5.2vw, 5rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.04;
+      letter-spacing: -.02em;
+      margin-bottom: 36px;
+    }
+    .hero-h1 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+      font-size: 1.04em;
+      letter-spacing: .01em;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--gold);
+      color: var(--green-d);
+      padding: 16px 38px;
+      font-family: var(--font-sans);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      transition: background .3s, transform .2s;
+    }
+    .btn-primary:hover {
+      background: var(--gold-d);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(250,254,255,.65);
+      border-bottom: 1px solid rgba(250,254,255,.25);
+      padding-bottom: 3px;
+      transition: color .3s, border-color .3s;
+    }
+    .btn-ghost:hover {
+      color: var(--white);
+      border-color: rgba(250,254,255,.6);
+    }
+
+    /* Hero right — guarantee card */
+    .hero-card {
+      border: 1px solid rgba(232,203,160,.25);
+      background: rgba(22,34,24,.55);
+      backdrop-filter: blur(16px);
+      padding: 36px 40px;
+      max-width: 360px;
+      margin-left: auto;
+    }
+    .hero-card-num {
+      font-family: var(--font-serif);
+      font-size: 3.8rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .hero-card-label {
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(250,254,255,.5);
+      margin-bottom: 24px;
+    }
+    .hero-card-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(232,203,160,.35);
+      margin-bottom: 20px;
+    }
+    .hero-card-text {
+      font-size: .82rem;
+      font-weight: 300;
+      color: rgba(250,254,255,.65);
+      line-height: 1.75;
+    }
+
+    /* scroll line */
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px; right: var(--pad);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-scroll span {
+      font-size: .55rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(250,254,255,.28);
+      writing-mode: vertical-lr;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: rgba(250,254,255,.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%; left: 0;
+      width: 100%; height: 100%;
+      background: var(--gold);
+      opacity: .6;
+      animation: scrollPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { to { top: 200%; } }
+
+    /* ─────────────────────────────────────────────
+       STATS
+    ───────────────────────────────────────────── */
+    .stats {
+      background: var(--green);
+    }
+    .stats .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat {
+      padding: 44px 48px;
+      border-right: 1px solid rgba(250,254,255,.08);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-l {
+      font-size: .62rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(250,254,255,.42);
+    }
+
+    /* ─────────────────────────────────────────────
+       PROMISE — white split
+    ───────────────────────────────────────────── */
+    /* ── MARQUES ── */
+    .marques { background: var(--green-d); padding: clamp(64px, 8vw, 100px) 0; }
+    .marques-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .marque-card {
+      position: relative; overflow: hidden; min-height: 420px;
+      display: flex; align-items: flex-end; text-decoration: none;
+      background-size: cover; background-position: center;
+      transition: opacity .3s;
+    }
+    .marque-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(20,30,22,.92) 30%, rgba(20,30,22,.35) 100%);
+      transition: opacity .4s;
+    }
+    .marque-card:hover::after { opacity: .7; }
+    .marque-residences { background-image: url('https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=1200&q=85'); }
+    .marque-signatures { background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=85'); }
+    .marque-inner { position: relative; z-index: 2; padding: 44px 48px; }
+    .marque-logo { height: 80px; width: auto; display: block; margin-bottom: 18px; }
+    .marque-desc { font-size: .88rem; color: rgba(250,254,255,.7); line-height: 1.7; max-width: 340px; margin-bottom: 20px; }
+    .marque-link { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    @media (max-width: 640px) {
+      .marques-grid { grid-template-columns: 1fr; }
+      .marque-card { min-height: 340px; }
+    }
+
+    .promise {
+      background: var(--white);
+      padding: clamp(80px, 10vw, 140px) 0;
+    }
+    .promise .container {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: clamp(60px, 8vw, 120px);
+      align-items: start;
+    }
+    .promise-left { position: sticky; top: calc(var(--nav-h) + 40px); }
+    .promise-eyebrow { margin-bottom: 24px; }
+    .promise-h2 {
+      font-family: var(--font-sans);
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--black);
+      letter-spacing: -.02em;
       margin-bottom: 32px;
+    }
+    .promise-h2 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--green);
+      font-size: 1.05em;
+    }
+    .promise-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--green);
+      border-bottom: 1px solid var(--green);
+      padding-bottom: 3px;
+      transition: opacity .3s;
+    }
+    .promise-link:hover { opacity: .65; }
+    .promise-link svg { width: 13px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .promise-link:hover svg { transform: translateX(4px); }
+
+    .promise-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .promise-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 28px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .promise-item:first-child { border-top: 1px solid var(--border); }
+    .promise-num {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold-d);
+      line-height: 1;
+      padding-top: 4px;
+    }
+    .promise-item-title {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 10px;
       letter-spacing: -.01em;
     }
-    .hero h1 em { font-style: italic; font-weight: 300; }
-    .hero-sub {
-      font-size: .92rem; color: rgba(255,255,255,.62);
-      line-height: 1.72; max-width: 440px; margin-bottom: 48px;
-    }
-    .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .btn-hero-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--accent); color: #fff; text-decoration: none;
-      padding: 15px 36px; font-size: .74rem; font-weight: 500;
-      letter-spacing: .14em; text-transform: uppercase;
-      transition: background .3s;
-    }
-    .btn-hero-primary:hover { background: var(--accent-2); }
-    .btn-hero-ghost {
-      font-size: .74rem; letter-spacing: .12em; text-transform: uppercase;
-      color: rgba(255,255,255,.65); text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,.25); padding-bottom: 2px;
-      transition: color .3s, border-color .3s;
-    }
-    .btn-hero-ghost:hover { color: #fff; border-color: rgba(255,255,255,.7); }
-
-    /* scroll indicator */
-    .hero-scroll {
-      position: absolute; bottom: 36px; right: 60px; z-index: 2;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-    }
-    .hero-scroll-text { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); writing-mode: vertical-lr; }
-    .hero-scroll-line { width: 1px; height: 40px; background: rgba(255,255,255,.15); position: relative; overflow: hidden; }
-    .hero-scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,.5); animation: scrollLine 2s ease-in-out infinite; }
-    @keyframes scrollLine { to { top: 200%; } }
-
-    /* ── STATS BAR ── */
-    .stats-bar {
-      background: var(--ink);
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-    .stat-item {
-      padding: 36px 40px;
-      border-right: 1px solid rgba(255,255,255,.06);
-      display: flex; flex-direction: column; gap: 6px;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.6rem; font-weight: 300; color: #fff; line-height: 1;
-    }
-    .stat-label {
-      font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
-      color: rgba(255,255,255,.35);
+    .promise-item-text {
+      font-size: .88rem;
+      font-weight: 300;
+      color: #505850;
+      line-height: 1.8;
     }
 
-    /* ── INTRO SPLIT ── */
-    .intro {
-      padding: 120px 60px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+    /* ─────────────────────────────────────────────
+       DESTINATIONS
+    ───────────────────────────────────────────── */
+    .destinations {
+      background: var(--green);
+      padding: clamp(80px, 10vw, 130px) 0 0;
+      overflow: hidden;
+    }
+    .destinations-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+    }
+    .destinations-h2 {
+      font-family: var(--font-sans);
+      font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -.015em;
+      margin-top: 20px;
+    }
+    .destinations-h2 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+      font-size: 1.05em;
+    }
+    .destinations-all {
+      display: inline-flex;
       align-items: center;
-    }
-    .intro-left {}
-    .kicker {
-      font-size: .62rem; letter-spacing: .24em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 20px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .kicker::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent); }
-    .intro-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 3.5vw, 3rem);
-      font-weight: 400; line-height: 1.12; color: var(--ink);
-      margin-bottom: 0;
-    }
-    .intro-title em { font-style: italic; color: var(--accent); }
-    .intro-right { display: flex; flex-direction: column; gap: 28px; }
-    .intro-p {
-      font-size: .95rem; color: var(--ink-3); line-height: 1.8;
-      padding-top: 20px; border-top: 1px solid var(--stone-3);
-    }
-    .intro-p:first-child { border-top: none; padding-top: 0; }
-    .intro-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--accent); text-decoration: none;
-      margin-top: 8px;
-    }
-    .intro-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
-    .intro-link:hover svg { transform: translateX(4px); }
-
-    /* ── DESTINATIONS STRIP ── */
-    .dest-section { background: var(--stone-2); padding: 0; overflow: hidden; }
-    .dest-header {
-      padding: 72px 60px 48px;
-      display: flex; align-items: flex-end; justify-content: space-between;
-    }
-    .dest-header-left {}
-    .dest-header h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.9rem, 3vw, 2.6rem);
-      font-weight: 400; line-height: 1.12;
-    }
-    .dest-header h2 em { font-style: italic; color: var(--accent); }
-    .dest-see-all {
-      font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--ink-4); text-decoration: none; white-space: nowrap;
-      display: flex; align-items: center; gap: 8px;
-      border-bottom: 1px solid var(--stone-4); padding-bottom: 2px;
+      gap: 10px;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(250,254,255,.5);
+      border-bottom: 1px solid rgba(250,254,255,.2);
+      padding-bottom: 3px;
       transition: color .3s, border-color .3s;
-      flex-shrink: 0; margin-bottom: 4px;
+      white-space: nowrap;
+      margin-bottom: 5px;
+      flex-shrink: 0;
     }
-    .dest-see-all:hover { color: var(--ink); border-color: var(--ink); }
-    .dest-see-all svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
-    .dest-see-all:hover svg { transform: translateX(3px); }
+    .destinations-all:hover { color: var(--gold); border-color: var(--gold); }
+    .destinations-all svg { width: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .destinations-all:hover svg { transform: translateX(4px); }
 
-    /* horizontal scroll strip */
-    .dest-strip {
-      display: flex; gap: 2px;
-      padding-bottom: 0;
+    /* Card grid */
+    .dest-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
     }
     .dest-card {
-      position: relative; overflow: hidden;
-      flex: 0 0 calc(100% / 3.4);
-      height: 420px;
-      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      height: 460px;
+      display: block;
     }
-    .dest-card::before {
-      content: ''; position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+    .dest-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform .7s cubic-bezier(.25,.46,.45,.94);
     }
-    .dest-card:hover::before { transform: scale(1.06); }
-    .dest-card::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(28,27,25,.88) 30%, rgba(28,27,25,.08) 100%);
+    .dest-card:hover .dest-card-bg { transform: scale(1.07); }
+    .dest-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(18,28,20,.92) 25%, rgba(18,28,20,.05) 70%);
+      transition: opacity .4s;
     }
-    .dc-courchevel::before { background-image: url('https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=900&q=85'); background-position: center 35%; }
-    .dc-megeve::before     { background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=85'); }
-    .dc-meribel::before    { background-image: url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=700&q=85'); }
-    .dc-tignes::before     { background-image: url('https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=700&q=85'); background-position: center 25%; }
-    .dc-valdisere::before  { background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=85'); background-position: center 40%; }
-    .dc-valthorens::before { background-image: url('https://images.unsplash.com/photo-1551524559-8af4e6624178?w=700&q=85'); }
+    .dest-card:hover .dest-card-overlay { opacity: .8; }
     .dest-card-body {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      height: 100%; padding: 28px 24px;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 22px 30px;
+      z-index: 2;
     }
-    .dc-massif {
-      font-size: .58rem; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 6px;
+    .dest-massif {
+      font-size: .56rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
     }
-    .dc-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.7rem; font-weight: 400; color: #fff; line-height: 1;
-      margin-bottom: 4px;
+    .dest-name {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
     }
-    .dc-alt {
-      font-size: .65rem; letter-spacing: .1em; color: rgba(255,255,255,.38);
+    .dest-alt {
+      font-size: .62rem;
+      color: rgba(250,254,255,.38);
+      letter-spacing: .06em;
+    }
+    .dest-card-arrow {
+      position: absolute;
+      top: 22px; right: 22px;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(232,203,160,.25);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .35s, transform .35s;
+      z-index: 2;
+    }
+    .dest-card-arrow svg { width: 14px; stroke: var(--gold); fill: none; stroke-width: 2; }
+    .dest-card:hover .dest-card-arrow { opacity: 1; transform: translateY(0); }
+
+    .dc-courchevel .dest-card-bg { background-image: url('https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=700&q=85'); background-position: center 35%; }
+    .dc-megeve .dest-card-bg     { background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=85'); }
+    .dc-meribel .dest-card-bg    { background-image: url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=700&q=85'); }
+    .dc-tignes .dest-card-bg     { background-image: url('https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=700&q=85'); background-position: center 25%; }
+    .dc-valdisere .dest-card-bg  { background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=85'); background-position: center 40%; }
+    .dc-valthorens .dest-card-bg { background-image: url('https://images.unsplash.com/photo-1551524559-8af4e6624178?w=700&q=85'); }
+
+    /* ─────────────────────────────────────────────
+       CTA ESTIMATEUR
+    ───────────────────────────────────────────── */
+    .cta {
+      background: var(--green);
+      border-top: 1px solid rgba(250,254,255,.08);
+      padding: clamp(80px, 10vw, 130px) 0;
+    }
+    .cta .container {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
+    }
+    .cta-h2 {
+      font-family: var(--font-sans);
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+    .cta-h2 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+      font-size: 1.05em;
+    }
+    .cta-h2 strong {
+      color: var(--gold);
+      font-style: normal;
+    }
+    .cta-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .cta-note {
+      font-size: .78rem;
+      font-weight: 300;
+      color: rgba(250,254,255,.4);
+      line-height: 1.7;
+      max-width: 220px;
     }
 
-    /* ── CTA ESTIMATEUR ── */
-    .cta-est {
-      background: var(--ink);
-      padding: 110px 60px;
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 80px; align-items: center;
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      padding: clamp(64px, 8vw, 96px) 0 0;
     }
-    .cta-est-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 4vw, 3.4rem);
-      font-weight: 300; color: #fff; line-height: 1.1;
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 56px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid rgba(250,254,255,.07);
     }
-    .cta-est-title em { font-style: italic; }
-    .cta-est-title strong { font-weight: 500; color: var(--accent); font-style: normal; }
-    .cta-est-right { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; flex-shrink: 0; }
-    .cta-est-note {
-      font-size: .78rem; color: rgba(255,255,255,.35); line-height: 1.6; max-width: 240px;
+    .footer-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
     }
-    .btn-cta-main {
-      display: inline-flex; align-items: center; gap: 12px;
-      background: var(--accent); color: #fff; text-decoration: none;
-      padding: 16px 40px; font-size: .76rem; font-weight: 500;
-      letter-spacing: .14em; text-transform: uppercase;
-      transition: background .3s; white-space: nowrap;
+    .footer-brand-name {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 300;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--white);
     }
-    .btn-cta-main:hover { background: var(--accent-2); }
-    .btn-cta-main svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
-    .btn-cta-main:hover svg { transform: translateX(4px); }
-
-    /* ── FOOTER ── */
-    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.06); padding: 64px 60px 36px; }
-    .footer-top {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px; margin-bottom: 48px;
+    .footer-brand-claim {
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      opacity: .8;
     }
-    .f-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 6px; }
-    .f-brand-claim { font-size: .63rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-    .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.36); line-height: 1.72; }
-    .f-col-title { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 18px; }
-    .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .f-links a { font-size: .84rem; color: rgba(255,255,255,.52); text-decoration: none; transition: color .2s; }
-    .f-links a:hover { color: rgba(255,255,255,.9); }
+    .footer-brand-text {
+      font-size: .82rem;
+      font-weight: 300;
+      color: rgba(250,254,255,.32);
+      line-height: 1.8;
+      max-width: 280px;
+    }
+    .footer-col-title {
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(250,254,255,.22);
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-links a {
+      font-size: .84rem;
+      font-weight: 300;
+      color: rgba(250,254,255,.48);
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
     .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,.06); padding-top: 24px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: .72rem; color: rgba(255,255,255,.22);
+      padding: 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom span {
+      font-size: .7rem;
+      color: rgba(250,254,255,.2);
     }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .intro { grid-template-columns: 1fr; gap: 48px; padding: 80px 60px; }
-      .cta-est { grid-template-columns: 1fr; gap: 40px; }
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .hero-body .container { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .promise .container { grid-template-columns: 1fr; gap: 48px; }
+      .promise-left { position: static; }
+      .dest-grid { grid-template-columns: repeat(3, 1fr); }
+      .cta .container { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
     @media (max-width: 768px) {
-      header { padding: 0 20px; }
-      .hero { padding: 0 24px 72px; }
-      .hero-scroll { display: none; }
-      .stats-bar { grid-template-columns: 1fr 1fr; }
-      .stat-item { padding: 28px 24px; }
-      .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,.06); }
-      .stat-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,.06); border-right: none; }
-      .intro { padding: 64px 24px; gap: 40px; }
-      .dest-header { padding: 56px 24px 36px; flex-direction: column; align-items: flex-start; gap: 20px; }
-      .dest-strip { overflow-x: auto; padding-bottom: 2px; }
-      .dest-card { flex: 0 0 72vw; }
-      .cta-est { padding: 72px 24px; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; padding: 0; }
-      footer { padding: 56px 24px 32px; }
+      :root { --nav-h: 64px; }
+      .stats .container { grid-template-columns: 1fr 1fr; }
+      .stat { padding: 32px 28px; }
+      .stat:nth-child(2) { border-right: none; }
+      .stat:nth-child(3) { border-top: 1px solid rgba(250,254,255,.08); }
+      .stat:nth-child(4) { border-top: 1px solid rgba(250,254,255,.08); border-right: none; }
+      .dest-grid { grid-template-columns: 1fr 1fr; }
+      .dest-card { height: 300px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
     }
-    @media (max-width: 480px) {
-      .stats-bar { grid-template-columns: 1fr 1fr; }
-      .footer-top { grid-template-columns: 1fr; }
-      .dest-card { flex: 0 0 82vw; }
+    @media (max-width: 520px) {
+      .dest-grid { grid-template-columns: 1fr; }
+      .dest-card { height: 260px; }
     }
+  
+  /* ═══════════════════════════════════════════════
+     SITE HEADER — standard unifié toutes pages
+  ═══════════════════════════════════════════════ */
+  
+
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header id="siteHeader">
-    <a href="/accueil" class="logo">
-      <span class="logo-name">ALPÉON</span>
+<header class="site-header" id="site-header">
+  <div class="site-header-inner">
+    <a href="/accueil" class="site-logo">
+      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON">
     </a>
-    <nav class="main-nav">
-      <a href="/accueil">Accueil</a>
-      <a href="/destinations">Destinations</a>
-      <a href="/proprietaires">Propriétaires</a>
-      <a href="/estimateur">Estimateur</a>
-      <div class="lang-switch">
-        <a href="/accueil" class="lang-btn active">FR</a>
-        <span class="lang-sep">|</span>
-        <a href="/en/accueil" class="lang-btn">EN</a>
-      </div>
+    <nav class="site-nav">
+      <a href="/accueil" class="site-nav-link active">Accueil</a>
+      <a href="/destinations" class="site-nav-link">Destinations</a>
+      <a href="/reserver" class="site-nav-link">Réserver</a>
+      <a href="/proprietaires" class="site-nav-link">Propriétaires</a>
+      <a href="/estimateur" class="site-nav-link">Estimateur</a>
     </nav>
-    <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
-  </header>
+    <div class="site-header-right">
+      <div class="site-lang">
+        <a href="/accueil" class="active">FR</a>
+        <span>|</span>
+        <a href="/en/accueil">EN</a>
+      </div>
+      <button class="site-burger" id="site-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="site-mobile-menu" id="site-mobile-menu">
+    <a href="/accueil" class="site-mobile-link active">Accueil</a>
+    <a href="/destinations" class="site-mobile-link">Destinations</a>
+    <a href="/reserver" class="site-mobile-link">Réserver</a>
+    <a href="/proprietaires" class="site-mobile-link">Propriétaires</a>
+    <a href="/estimateur" class="site-mobile-link">Estimateur</a>
+    <div class="site-mobile-lang">
+      <a href="/accueil" class="active">FR</a><span>|</span><a href="/en/accueil">EN</a>
+    </div>
+  </div>
+</header>
+<script>
+function toggleMobileMenu(){
+  const menu = document.getElementById('site-mobile-menu');
+  const burger = document.getElementById('site-burger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+</script>
 
-  <div class="mob-menu" id="mobMenu">
-    <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')" aria-label="Fermer">&#x2715;</button>
-    <div class="mob-menu-inner">
-      <nav class="mob-nav">
-        <a href="/accueil">Accueil</a>
-        <a href="/destinations">Destinations</a>
-        <a href="/proprietaires">Propriétaires</a>
-        <a href="/estimateur">Estimateur</a>
-      </nav>
-      <div class="mob-lang">
-        <a href="/accueil" class="mob-lang-btn active">FR</a>
-        <span class="mob-lang-sep">|</span>
-        <a href="/en/accueil" class="mob-lang-btn">EN</a>
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-body">
+    <div class="container">
+      <div class="hero-left">
+        <div class="hero-eyebrow eyebrow">Gestion locative alpine</div>
+        <h1 class="hero-h1">
+          L'excellence<br>
+          au service de<br>
+          <em>votre bien</em>
+        </h1>
+        <div class="hero-actions">
+          <a href="/estimateur" class="btn-primary">
+            Calculer mon loyer garanti
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+          <a href="/proprietaires" class="btn-ghost">Nos services propriétaires</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-num">100%</div>
+        <div class="hero-card-label">Loyer fixe garanti</div>
+        <div class="hero-card-divider"></div>
+        <p class="hero-card-text">Indépendant du taux d'occupation, des conditions météo et des aléas du marché. Versé le même jour chaque mois.</p>
       </div>
     </div>
   </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-line"></span>
-        <span class="hero-eyebrow-text">Gestion locative alpine</span>
-      </div>
-      <h1>L'excellence<br>au service de<br><em>votre bien</em></h1>
-      <p class="hero-sub">ALPÉON gère votre propriété dans les plus grandes stations des Alpes françaises. Loyer fixe garanti chaque mois, indépendant du marché.</p>
-      <div class="hero-actions">
-        <a href="/estimateur" class="btn-hero-primary">Calculer mon loyer garanti</a>
-        <a href="/proprietaires" class="btn-hero-ghost">Nos services propriétaires</a>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <div class="hero-scroll-line"></div>
-      <span class="hero-scroll-text">Défiler</span>
-    </div>
-  </section>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Défiler</span>
+  </div>
+</section>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-num">200+</div>
-      <div class="stat-label">Biens gérés</div>
+
+<!-- ═══════════════════════════════════════════
+     STATS
+═══════════════════════════════════════════ -->
+<div class="stats">
+  <div class="container">
+    <div class="stat">
+      <div class="stat-n">200+</div>
+      <div class="stat-l">Biens gérés</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Stations alpines</div>
+    <div class="stat">
+      <div class="stat-n">6</div>
+      <div class="stat-l">Stations alpines</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-num">98%</div>
-      <div class="stat-label">Propriétaires satisfaits</div>
+    <div class="stat">
+      <div class="stat-n">98%</div>
+      <div class="stat-l">Propriétaires satisfaits</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-num">100%</div>
-      <div class="stat-label">Loyer fixe garanti</div>
+    <div class="stat">
+      <div class="stat-n">100%</div>
+      <div class="stat-l">Loyer fixe garanti</div>
     </div>
   </div>
+</div>
 
-  <!-- INTRO -->
-  <section class="intro">
-    <div class="intro-left">
-      <div class="kicker">Notre approche</div>
-      <h2 class="intro-title">Votre bien mérite<br>une gestion <em>sans compromis</em></h2>
-    </div>
-    <div class="intro-right">
-      <p class="intro-p">ALPÉON est un opérateur premium de gestion locative courte durée dans les Alpes françaises. Nous prenons en charge l'intégralité de la chaîne — de la mise en marché à l'accueil des locataires, de la maintenance à la remise des clés.</p>
-      <p class="intro-p">Chaque bien est géré comme s'il était le nôtre : avec rigueur, discrétion et un seul objectif — vous verser un loyer fixe et garanti chaque mois, quelles que soient les conditions du marché.
-        <a href="/proprietaires" class="intro-link">Découvrir nos formules
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </a>
-      </p>
-    </div>
-  </section>
 
-  <!-- DESTINATIONS -->
-  <section class="dest-section">
-    <div class="dest-header">
-      <div class="dest-header-left">
-        <div class="kicker">Nos stations</div>
-        <h2>6 destinations alpines <em>d'exception</em></h2>
+<!-- ═══════════════════════════════════════════
+     PROMISE
+═══════════════════════════════════════════ -->
+<section class="promise">
+  <div class="container">
+    <div class="promise-left">
+      <div class="promise-eyebrow eyebrow">Notre approche</div>
+      <h2 class="promise-h2">
+        Votre bien mérite<br>
+        une gestion<br>
+        <em>sans compromis</em>
+      </h2>
+      <a href="/proprietaires" class="promise-link">
+        Découvrir nos formules
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+
+    <div class="promise-right">
+      <div class="promise-item">
+        <div class="promise-num">01</div>
+        <div>
+          <div class="promise-item-title">Loyer fixe garanti chaque mois</div>
+          <p class="promise-item-text">Vous percevez un loyer défini contractuellement, indépendant du nombre de nuits louées, des annulations ou des variations saisonnières. Zéro aléa.</p>
+        </div>
       </div>
-      <a href="/destinations" class="dest-see-all">
+      <div class="promise-item">
+        <div class="promise-num">02</div>
+        <div>
+          <div class="promise-item-title">Gestion intégrale de A à Z</div>
+          <p class="promise-item-text">Mise en marché, accueil des locataires, ménage, maintenance, comptabilité — nous gérons l'intégralité de la chaîne avec rigueur et discrétion.</p>
+        </div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-num">03</div>
+        <div>
+          <div class="promise-item-title">Un interlocuteur unique, toujours disponible</div>
+          <p class="promise-item-text">Un gestionnaire dédié connaît votre bien dans ses moindres détails. Vous ne recevez qu'un seul rapport mensuel, clair et complet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     MARQUES
+═══════════════════════════════════════════ -->
+<section class="marques">
+  <div class="container">
+    <div class="marques-grid">
+      <a href="/proprietaires#offres" class="marque-card marque-residences">
+        <div class="marque-inner">
+          <img src="/assets/logo/logo-residences-gold.svg" alt="ALPÉON Résidences" class="marque-logo">
+          <p class="marque-desc">Gestion locative complète pour appartements et chalets de station. Loyer garanti, zéro contrainte.</p>
+          <span class="marque-link">Découvrir →</span>
+        </div>
+      </a>
+      <a href="/proprietaires#offres" class="marque-card marque-signatures">
+        <div class="marque-inner">
+          <img src="/assets/logo/logo-signatures-gold.svg" alt="ALPÉON Signatures" class="marque-logo">
+          <p class="marque-desc">Conciergerie sur-mesure et gestion premium pour les propriétés d'exception. Prestations 5 étoiles.</p>
+          <span class="marque-link">Découvrir →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     DESTINATIONS
+═══════════════════════════════════════════ -->
+<section class="destinations">
+  <div class="container">
+    <div class="destinations-head">
+      <div>
+        <div class="eyebrow">Nos stations</div>
+        <h2 class="destinations-h2">6 destinations alpines <em>d'exception</em></h2>
+      </div>
+      <a href="/destinations" class="destinations-all">
         Voir toutes les destinations
         <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
-    <div class="dest-strip">
-      <a class="dest-card dc-courchevel" href="/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Les 3 Vallées</div>
-          <div class="dc-name">Courchevel</div>
-          <div class="dc-alt">1 300 — 1 850 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-megeve" href="/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Mont-Blanc</div>
-          <div class="dc-name">Megève</div>
-          <div class="dc-alt">1 113 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-meribel" href="/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Les 3 Vallées</div>
-          <div class="dc-name">Méribel</div>
-          <div class="dc-alt">1 400 — 1 700 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-tignes" href="/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Espace Killy</div>
-          <div class="dc-name">Tignes</div>
-          <div class="dc-alt">1 550 — 3 456 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-valdisere" href="/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Espace Killy</div>
-          <div class="dc-name">Val d'Isère</div>
-          <div class="dc-alt">1 850 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-valthorens" href="/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Les 3 Vallées</div>
-          <div class="dc-name">Val Thorens</div>
-          <div class="dc-alt">2 300 m · Plus haute station d'Europe</div>
-        </div>
-      </a>
-    </div>
-  </section>
+  </div>
 
-  <!-- CTA ESTIMATEUR -->
-  <section class="cta-est">
-    <div class="cta-est-title">
-      Estimez le potentiel<br>de <em>votre bien</em><br>en <strong>2 minutes</strong>
-    </div>
-    <div class="cta-est-right">
-      <p class="cta-est-note">Calcul basé sur les données réelles de notre portefeuille — surface, station, standing, capacité.</p>
-      <a href="/estimateur" class="btn-cta-main">
-        Lancer l'estimateur
+  <div class="dest-grid">
+    <a class="dest-card dc-courchevel" href="/destinations">
+      <div class="dest-card-bg"></div>
+      <div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow">
         <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </div>
+      <div class="dest-card-body">
+        <div class="dest-massif">Les 3 Vallées</div>
+        <div class="dest-name">Courchevel</div>
+        <div class="dest-alt">1 300 — 1 850 m</div>
+      </div>
+    </a>
+    <a class="dest-card dc-megeve" href="/destinations">
+      <div class="dest-card-bg"></div>
+      <div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow">
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </div>
+      <div class="dest-card-body">
+        <div class="dest-massif">Mont-Blanc</div>
+        <div class="dest-name">Megève</div>
+        <div class="dest-alt">1 113 m</div>
+      </div>
+    </a>
+    <a class="dest-card dc-meribel" href="/destinations">
+      <div class="dest-card-bg"></div>
+      <div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow">
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </div>
+      <div class="dest-card-body">
+        <div class="dest-massif">Les 3 Vallées</div>
+        <div class="dest-name">Méribel</div>
+        <div class="dest-alt">1 400 — 1 700 m</div>
+      </div>
+    </a>
+    <a class="dest-card dc-tignes" href="/destinations">
+      <div class="dest-card-bg"></div>
+      <div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow">
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </div>
+      <div class="dest-card-body">
+        <div class="dest-massif">Espace Killy</div>
+        <div class="dest-name">Tignes</div>
+        <div class="dest-alt">1 550 — 3 456 m</div>
+      </div>
+    </a>
+    <a class="dest-card dc-valdisere" href="/destinations">
+      <div class="dest-card-bg"></div>
+      <div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow">
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </div>
+      <div class="dest-card-body">
+        <div class="dest-massif">Espace Killy</div>
+        <div class="dest-name">Val d'Isère</div>
+        <div class="dest-alt">1 850 m</div>
+      </div>
+    </a>
+    <a class="dest-card dc-valthorens" href="/destinations">
+      <div class="dest-card-bg"></div>
+      <div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow">
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </div>
+      <div class="dest-card-body">
+        <div class="dest-massif">Les 3 Vallées</div>
+        <div class="dest-name">Val Thorens</div>
+        <div class="dest-alt">2 300 m</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CTA ESTIMATEUR
+═══════════════════════════════════════════ -->
+<section class="cta">
+  <div class="container">
+    <h2 class="cta-h2">
+      Estimez le potentiel<br>
+      de <em>votre bien</em> en<br>
+      <strong>2 minutes</strong>
+    </h2>
+    <div class="cta-right">
+      <p class="cta-note">Calcul basé sur les données réelles de notre portefeuille — surface, station, standing, capacité.</p>
+      <a href="/estimateur" class="btn-primary">
+        Lancer l'estimateur
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer id="contact">
-    <div class="footer-top">
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
       <div>
-        <div class="f-brand-name">ALPÉON</div>
-        <div class="f-brand-claim">Alpine Property Management</div>
-        <p class="f-brand-desc">Opérateur premium de gestion locative courte durée dans les Alpes françaises. Discrétion, excellence et transparence.</p>
+        <div class="footer-brand-logo">
+          <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="120" style="height:120px;width:auto;display:block;margin-bottom:4px">
+        </div>
+        <div class="footer-brand-claim">Alpine Property Management</div>
+        <p class="footer-brand-text">Opérateur premium de gestion locative courte durée dans les Alpes françaises. Discrétion, excellence et transparence.</p>
       </div>
+
       <div>
-        <div class="f-col-title">Destinations</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Destinations</div>
+        <ul class="footer-links">
           <li><a href="/destinations">Courchevel</a></li>
           <li><a href="/destinations">Megève</a></li>
           <li><a href="/destinations">Val d'Isère</a></li>
@@ -571,17 +1169,19 @@
           <li><a href="/destinations">Méribel · Tignes</a></li>
         </ul>
       </div>
+
       <div>
-        <div class="f-col-title">Services</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
           <li><a href="/proprietaires">Propriétaires</a></li>
           <li><a href="/proprietaires">ALPÉON Signatures</a></li>
           <li><a href="/estimateur">Estimateur de revenus</a></li>
         </ul>
       </div>
+
       <div>
-        <div class="f-col-title">Contact</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Contact & Légal</div>
+        <ul class="footer-links">
           <li><a href="mailto:proprietaires@alpeon.fr">proprietaires@alpeon.fr</a></li>
           <li><a href="/mentions-legales">Mentions légales</a></li>
           <li><a href="/politique-confidentialite">Politique de confidentialité</a></li>
@@ -589,23 +1189,22 @@
         </ul>
       </div>
     </div>
+
     <div class="footer-bottom">
       <span>© 2026 ALPÉON. Tous droits réservés.</span>
       <span>Gestion locative alpine premium · Alpes françaises</span>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    const hdr = document.getElementById('siteHeader');
-    window.addEventListener('scroll', () => { hdr.classList.toggle('scrolled', window.scrollY > 40); });
-    (function(){
-      var btn = document.getElementById('mobMenuBtn');
-      var menu = document.getElementById('mobMenu');
-      if (!btn || !menu) return;
-      btn.addEventListener('click', function(){ var o = menu.classList.toggle('open'); btn.classList.toggle('open', o); });
-      menu.addEventListener('click', function(e){ if (e.target === menu) { menu.classList.remove('open'); btn.classList.remove('open'); } });
-    })();
-  </script>
-
+<script id="nav-scroll-js">
+(function(){
+  var h=document.getElementById('site-header');
+  if(!h)return;
+  function u(){h.classList.toggle('scrolled',window.scrollY>40);}
+  window.addEventListener('scroll',u,{passive:true});
+  u();
+})();
+</script>
 </body>
 </html>

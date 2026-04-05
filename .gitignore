@@ -1,2 +1,4 @@
 assets/presentation-alpeon.mp4
 .DS_Store
+.env.local
+.env

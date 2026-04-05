@@ -1,894 +1,631 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Réserver — Appartements & Chalets alpins | ALPÉON</title>
-  <meta name="description" content="Découvrez et réservez nos propriétés alpines d'exception à Courchevel, Megève, Méribel, Tignes, Val d'Isère et Val Thorens. Appartements et chalets de prestige." />
-  <meta name="robots" content="index, follow" />
-  <meta name="keywords" content="louer chalet ski Courchevel, appartement luxe Megève saison, location chalet Val Thorens hiver, louer penthouse Méribel, chalet ski Val d'Isère location, appartement ski Tignes, location saisonnière prestige Alpes, chalet privatif station ski" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Appartements & Chalets alpins de prestige | ALPÉON" />
-  <meta name="twitter:description" content="Découvrez nos propriétés alpines à Courchevel, Megève, Méribel, Tignes, Val d'Isère et Val Thorens. Appartements et chalets d'exception." />
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=1200&q=85" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://alpeon.fr/accueil/" },
-          { "@type": "ListItem", "position": 2, "name": "Réserver", "item": "https://alpeon.fr/reserver/" }
-        ]
-      }
-    ]
-  }
-  </script>
-  <link rel="canonical" href="https://alpeon.fr/reserver/" />
-  <link rel="alternate" hreflang="fr" href="https://alpeon.fr/reserver/" />
-  <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/reserver/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Nos propriétés alpines | ALPÉON" />
-  <meta property="og:description" content="Appartements et chalets d'exception à Courchevel, Megève, Val d'Isère, Val Thorens, Méribel et Tignes." />
-  <meta property="og:url" content="https://alpeon.fr/reserver/" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=1200&q=85" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo/alpeon-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/logo/alpeon-icon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réserver — Propriétés alpines d'exception | ALPÉON</title>
+  <meta name="description" content="Chalets, appartements et penthouses dans les plus grandes stations alpines. Courchevel, Megève, Val d'Isère, Val Thorens, Méribel, Tignes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+/* @@NAV-START@@ */
+  :root { --nav-h: 72px; }
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+    height: var(--nav-h); background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background .35s ease, border-color .35s ease;
+  }
+  .site-header.scrolled {
+    background: rgba(18,30,20,.97);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(232,203,160,.1);
+  }
+  .site-header-inner {
+    max-width: 1400px; margin: 0 auto;
+    padding: 0 2.5rem; height: var(--nav-h); display: flex; align-items: center;
+  }
+  .site-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .site-logo img { height: 64px; width: auto; display: block; }
+  .site-nav { display: flex; align-items: center; gap: 2rem; margin-left: auto; }
+  .site-nav-link {
+    color: rgba(250,254,255,.75); font-size: .72rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    position: relative; padding-bottom: 3px; transition: color .2s; white-space: nowrap;
+  }
+  .site-nav-link::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1.5px; background: #C9A97A;
+    transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
+  }
+  .site-nav-link:hover { color: #fff; }
+  .site-nav-link.active { color: #C9A97A; }
+  .site-nav-link.active::after, .site-nav-link:hover::after { transform: scaleX(1); }
+  .site-header-right { display: flex; align-items: center; gap: 1.25rem; margin-left: 2.5rem; flex-shrink: 0; }
+  .site-lang { display: flex; align-items: center; gap: .35rem; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
+  .site-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-lang a.active { color: #C9A97A; }
+  .site-lang span { color: rgba(250,254,255,.15); font-size: .5rem; }
+  .site-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; background: none; border: none; cursor: pointer; padding: 0; }
+  .site-burger span { display: block; height: 1.5px; background: rgba(250,254,255,.75); border-radius: 2px; transition: all .25s; }
+  .site-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .site-burger.open span:nth-child(2) { opacity: 0; }
+  .site-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .site-mobile-menu {
+    display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    background: rgba(18,30,20,.98); backdrop-filter: blur(14px);
+    flex-direction: column; padding: 2rem 2rem 3rem; z-index: 299;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .site-mobile-menu.open { opacity: 1; pointer-events: all; }
+  .site-mobile-link {
+    color: rgba(250,254,255,.6); font-size: 1.1rem; font-weight: 300;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    padding: 1rem 0; border-bottom: 1px solid rgba(250,254,255,.06); transition: color .2s;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .site-mobile-link:hover, .site-mobile-link.active { color: #C9A97A; }
+  .site-mobile-lang { display: flex; gap: .5rem; align-items: center; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,254,255,.3); margin-top: 1.5rem; }
+  .site-mobile-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-mobile-lang a.active { color: #C9A97A; }
+  @media (max-width: 900px) {
+    .site-nav, .site-lang { display: none; }
+    .site-burger { display: flex; }
+    .site-mobile-menu { display: flex; }
+    .site-header-inner { padding: 0 1.25rem; }
+  }
+  /* @@NAV-END@@ */
+  
+
     :root {
-      --stone:    #faf9f7;
-      --stone-2:  #f2efe9;
-      --stone-3:  #e5e0d8;
-      --stone-4:  #c8c1b5;
-      --ink:      #1c1b19;
-      --ink-3:    #4a4843;
-      --ink-4:    #7a7773;
-      --accent:   #a8956a;
-      --accent-2: #8a7a56;
+      --green:   #2C3D30;
+      --green-d: #1a2820;
+      --green-l: #3d5442;
+      --gold:    #E8CBA0;
+      --gold-d:  #C9A97A;
+      --white:   #FAFEFF;
+      --off:     #F7F5F1;
+      --stone:   #EDE9E2;
+      --stone-2: #D8D2C8;
+      --ink:     #111111;
+      --ink-2:   #444444;
+      --ink-3:   #888888;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Inter', system-ui, sans-serif;
+      --nav-h: 72px;
+      --max: 1340px;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--stone); color: var(--ink); line-height: 1.6; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth }
+    body { font-family: var(--font-sans); background: var(--white); color: var(--ink); -webkit-font-smoothing: antialiased }
 
-    /* ── HEADER ── */
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 72px;
-      background: transparent; transition: background .4s, box-shadow .4s;
-    }
-    header.scrolled { background: rgba(250,249,247,.97); box-shadow: 0 1px 0 var(--stone-3); backdrop-filter: blur(8px); }
-    .logo { display: flex; align-items: center; text-decoration: none; }
-    .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #fff; transition: color .4s; }
-    header.scrolled .logo-name { color: var(--ink); }
-    .main-nav { display: flex; align-items: center; gap: 32px; }
-    .main-nav a { font-size: .72rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; transition: color .3s; }
-    .main-nav a.active-link { color: #fff; }
-    .main-nav a:hover { color: #fff; }
-    header.scrolled .main-nav a { color: var(--ink-3); }
-    header.scrolled .main-nav a.active-link { color: var(--ink); }
-    header.scrolled .main-nav a:hover { color: var(--ink); }
-    .lang-switch { display: flex; align-items: center; gap: 8px; }
-    .lang-btn { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); text-decoration: none; transition: color .3s; }
-    .lang-btn.active { color: rgba(255,255,255,.9); }
-    header.scrolled .lang-btn { color: var(--ink-4); }
-    header.scrolled .lang-btn.active { color: var(--ink); }
-    .lang-sep { color: rgba(255,255,255,.2); font-size: .6rem; }
-    header.scrolled .lang-sep { color: var(--stone-4); }
+    /* ── NAV ── */
+    
+    
+    
+    
+    
+    
+    
+    
 
-    /* Hamburger */
-    .mob-menu-btn { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; }
-    .mob-menu-btn span { display:block; height:1.5px; width:22px; background:#fff; transition:all .3s; border-radius:1px; }
-    header.scrolled .mob-menu-btn span { background:var(--ink); }
-    .mob-menu-btn.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-    .mob-menu-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-    .mob-menu-btn.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-    .mob-menu { position:fixed; inset:0; z-index:300; background:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s; display:flex; flex-direction:column; }
-    .mob-menu.open { opacity:1; pointer-events:all; }
-    .mob-close { position:absolute; top:14px; right:18px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); font-size:1.6rem; line-height:1; transition:color .2s; }
-    .mob-close:hover { color:#fff; }
-    .mob-menu-inner { display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; gap:44px; padding:20px; }
-    .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
-    .mob-nav a { font-family:'Cormorant Garamond',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
-    .mob-nav a:hover { color:#fff; }
-    .mob-lang { display:flex; align-items:center; gap:14px; }
-    .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
-    .mob-lang-btn.active { color:rgba(255,255,255,.9); }
-    .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
-    @media (max-width:900px) { .mob-menu-btn { display:flex; } .main-nav { display:none; } }
-
-    /* ── HERO COMPACT ── */
+    /* ── HERO ── */
     .hero {
-      position: relative; height: 44vh; min-height: 340px;
+      margin-top: var(--nav-h);
+      height: 58vh; min-height: 380px;
+      position: relative; overflow: hidden;
       display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 60px 0;
-      overflow: hidden;
     }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=2000&q=85') center 35% / cover no-repeat;
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1800&q=80') center/cover no-repeat;
     }
-    .hero::after {
+    .hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(28,27,25,.9) 15%, rgba(28,27,25,.3) 70%, rgba(28,27,25,.15) 100%);
+      background: linear-gradient(to top, rgba(14,22,16,.88) 0%, rgba(14,22,16,.4) 55%, rgba(14,22,16,.15) 100%);
     }
     .hero-content {
       position: relative; z-index: 2;
-      padding-bottom: 48px;
+      max-width: var(--max); margin: 0 auto; width: 100%;
+      padding: 0 3rem 3.5rem;
     }
-    .hero-kicker { font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
-    .hero-kicker::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent); }
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 300; color: #fff; line-height: 1.08;
+    .hero-kicker {
+      font-size: .68rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .75rem;
     }
-    .hero h1 em { font-style: italic; }
+    .hero-kicker::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold) }
+    .hero-h1 {
+      font-family: var(--font-serif); font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 300; line-height: 1.05; color: var(--white);
+    }
+    .hero-h1 em { color: var(--gold); font-style: italic }
+    .hero-sub {
+      margin-top: 1rem; font-size: .88rem; font-weight: 300;
+      color: rgba(250,254,255,.6); letter-spacing: .04em;
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--green-d); border-bottom: 1px solid rgba(232,203,160,.12);
+    }
+    .trust-inner {
+      max-width: var(--max); margin: 0 auto; padding: 0 3rem;
+      display: flex; align-items: stretch; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: .65rem;
+      padding: 1rem 2.25rem 1rem 0;
+      font-size: .72rem; font-weight: 400; letter-spacing: .06em;
+      color: rgba(250,254,255,.55); white-space: nowrap;
+      border-right: 1px solid rgba(250,254,255,.1); margin-right: 2.25rem;
+    }
+    .trust-item:last-child { border-right: none; margin-right: 0 }
+    .trust-item strong { color: var(--gold); font-weight: 600 }
+    .trust-icon { color: var(--gold); flex-shrink: 0 }
 
     /* ── FILTER BAR ── */
     .filter-bar {
-      position: sticky; top: 72px; z-index: 100;
-      background: #fff;
-      border-bottom: 1px solid var(--stone-3);
-      box-shadow: 0 2px 16px rgba(28,27,25,.06);
-      padding: 0 60px;
+      background: var(--white); position: sticky; top: var(--nav-h); z-index: 100;
+      box-shadow: 0 2px 24px rgba(0,0,0,.06);
+      border-bottom: 1px solid var(--stone);
     }
     .filter-inner {
-      display: flex; align-items: center; gap: 0;
-      height: 64px; flex-wrap: nowrap; overflow-x: auto;
+      max-width: var(--max); margin: 0 auto; padding: .9rem 3rem;
+      display: flex; align-items: center; gap: 0; flex-wrap: wrap;
     }
     .filter-group {
-      display: flex; align-items: center; gap: 0;
-      border-right: 1px solid var(--stone-3);
-      padding: 0 24px; height: 100%; flex-shrink: 0;
+      display: flex; align-items: center; gap: .6rem;
+      padding-right: 1.75rem; margin-right: 1.75rem;
+      border-right: 1px solid var(--stone);
     }
-    .filter-group:first-child { padding-left: 0; }
-    .filter-group:last-child { border-right: none; }
+    .filter-group:last-of-type { border-right: none }
     .filter-label {
-      font-size: .6rem; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--ink-4); white-space: nowrap; margin-right: 12px; flex-shrink: 0;
+      font-size: .65rem; font-weight: 600; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
     }
-    .filter-pills { display: flex; gap: 6px; flex-wrap: nowrap; }
-    .filter-pill {
-      font-size: .7rem; font-weight: 500; letter-spacing: .06em;
-      padding: 5px 14px; border: 1px solid var(--stone-3);
-      background: none; cursor: pointer; color: var(--ink-3);
-      transition: all .2s; white-space: nowrap; border-radius: 2px;
+    .filter-select {
+      border: none; border-bottom: 1.5px solid var(--stone-2);
+      padding: .3rem 1.6rem .3rem 0; font-family: var(--font-sans);
+      font-size: .82rem; font-weight: 400; color: var(--ink);
+      background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right .2rem center;
+      cursor: pointer; outline: none; appearance: none;
+      transition: border-color .2s;
     }
-    .filter-pill:hover { border-color: var(--accent); color: var(--accent); }
-    .filter-pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .filter-select:focus { border-bottom-color: var(--green) }
+    .filter-actions { margin-left: auto; display: flex; align-items: center; gap: 1rem }
     .filter-count {
-      margin-left: auto; flex-shrink: 0; padding-left: 24px;
-      font-size: .72rem; color: var(--ink-4); white-space: nowrap;
+      font-size: .72rem; font-weight: 600; color: var(--green);
+      background: #EBF0EC; border-radius: 20px; padding: .3rem 1rem;
+      white-space: nowrap;
     }
-    .filter-count strong { color: var(--ink); font-weight: 600; }
-
-    /* ── MAIN CONTENT ── */
-    .main-content { padding: 56px 60px 100px; }
-
-    /* No results */
-    .no-results {
-      display: none; text-align: center; padding: 80px 20px;
-      grid-column: 1 / -1;
+    .filter-reset {
+      font-size: .72rem; color: var(--ink-3); text-decoration: underline;
+      text-underline-offset: 3px; cursor: pointer; border: none;
+      background: none; font-family: var(--font-sans); transition: color .2s;
     }
-    .no-results.visible { display: block; }
-    .no-results-icon { font-size: 2.5rem; margin-bottom: 16px; opacity: .3; }
-    .no-results h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--ink-3); margin-bottom: 10px; }
-    .no-results p { font-size: .88rem; color: var(--ink-4); }
+    .filter-reset:hover { color: var(--green) }
 
-    /* ── PROPERTIES GRID ── */
-    .prop-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+    /* ── GRID ── */
+    .grid-wrap {
+      max-width: var(--max); margin: 0 auto;
+      padding: 3.5rem 3rem 6rem;
+    }
+    .grid-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 2.5rem; padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--stone);
+    }
+    .grid-title {
+      font-family: var(--font-serif); font-size: 1.6rem; font-weight: 300;
+      color: var(--ink); letter-spacing: .01em;
+    }
+    .grid-title em { font-style: italic; color: var(--green-l) }
+    .grid-sort {
+      font-size: .72rem; color: var(--ink-3); border: none; background: none;
+      font-family: var(--font-sans); cursor: pointer; display: flex; align-items: center; gap: .4rem;
+    }
+    .property-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
     }
 
+    /* ── CARD ── */
     .prop-card {
-      background: #fff;
-      border: 1px solid var(--stone-3);
-      overflow: hidden;
-      transition: box-shadow .3s, transform .3s;
-      display: flex; flex-direction: column;
+      cursor: pointer; text-decoration: none; display: flex; flex-direction: column;
+      background: var(--white); transition: transform .3s, box-shadow .3s;
+      border-radius: 2px; overflow: hidden;
     }
-    .prop-card:hover { box-shadow: 0 12px 40px rgba(28,27,25,.1); transform: translateY(-3px); }
-    .prop-card.hidden { display: none; }
-    .prop-card.fadeIn { animation: fadeIn .3s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* card image */
-    .prop-img {
-      position: relative; height: 240px; overflow: hidden;
+    .prop-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,.12) }
+    .prop-photo {
+      position: relative; aspect-ratio: 3/2; overflow: hidden; background: var(--stone);
     }
-    .prop-img img {
+    .prop-photo img {
       width: 100%; height: 100%; object-fit: cover;
-      transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+      transition: transform .6s ease;
     }
-    .prop-card:hover .prop-img img { transform: scale(1.05); }
-    .prop-type-badge {
-      position: absolute; top: 14px; left: 14px;
-      font-size: .58rem; letter-spacing: .16em; text-transform: uppercase;
-      background: rgba(28,27,25,.72); color: rgba(255,255,255,.9);
-      padding: 4px 10px; backdrop-filter: blur(4px);
+    .prop-card:hover .prop-photo img { transform: scale(1.06) }
+    .prop-photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.45) 0%, transparent 50%);
+      pointer-events: none;
     }
-    .prop-station-badge {
-      position: absolute; top: 14px; right: 14px;
-      font-size: .58rem; letter-spacing: .14em; text-transform: uppercase;
-      background: var(--accent); color: #fff;
-      padding: 4px 10px;
+    .prop-station {
+      position: absolute; bottom: .9rem; left: .9rem; z-index: 2;
+      display: flex; align-items: center; gap: .35rem;
     }
-
-    /* card body */
-    .prop-body { padding: 22px 22px 18px; flex: 1; display: flex; flex-direction: column; }
-    .prop-massif { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 6px; }
+    .badge-city {
+      font-size: .6rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      background: rgba(26,40,32,.85); color: var(--gold);
+      padding: .3rem .65rem; backdrop-filter: blur(8px);
+    }
+    .badge-area {
+      font-size: .58rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      background: rgba(0,0,0,.5); color: rgba(255,255,255,.8);
+      padding: .3rem .6rem; backdrop-filter: blur(8px);
+    }
+    .badge-prestige {
+      position: absolute; top: .9rem; right: .9rem; z-index: 2;
+      font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      background: var(--gold); color: var(--green-d);
+      padding: .28rem .65rem;
+    }
+    .prop-body { padding: 1.4rem 1.5rem 1.1rem; flex: 1; display: flex; flex-direction: column }
+    .prop-type {
+      font-size: .62rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: .45rem;
+    }
     .prop-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; font-weight: 500; color: var(--ink);
-      line-height: 1.2; margin-bottom: 10px;
+      font-family: var(--font-serif); font-size: 1.3rem; font-weight: 400;
+      color: var(--ink); line-height: 1.2; margin-bottom: .8rem;
     }
-    .prop-meta {
-      display: flex; align-items: center; gap: 0;
-      font-size: .72rem; color: var(--ink-4);
-      margin-bottom: 16px; flex-wrap: wrap;
+    .prop-specs {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      font-size: .72rem; color: var(--ink-3); margin-bottom: .9rem;
     }
-    .prop-meta-item { display: flex; align-items: center; gap: 5px; }
-    .prop-meta-sep { margin: 0 8px; color: var(--stone-4); }
-    .prop-meta svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.8; }
-    .prop-amenities {
-      display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+    .prop-spec { display: flex; align-items: center; gap: .3rem }
+    .prop-divider { width: 1px; height: 10px; background: var(--stone-2) }
+    .prop-amenities { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: auto }
+    .amenity-tag {
+      font-size: .63rem; font-weight: 500; color: var(--green);
+      background: #EBF0EC; padding: .22rem .65rem; white-space: nowrap;
+      letter-spacing: .04em;
     }
-    .prop-amenity {
-      display: flex; align-items: center; gap: 5px;
-      font-size: .68rem; color: var(--ink-4);
+    .prop-foot {
+      margin-top: 1.2rem; padding-top: 1.1rem;
+      border-top: 1px solid var(--stone);
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .prop-amenity svg { width: 13px; height: 13px; stroke: var(--accent); fill: none; stroke-width: 1.5; flex-shrink: 0; }
-
-    /* card footer */
-    .prop-footer {
-      margin-top: auto;
-      padding-top: 16px; border-top: 1px solid var(--stone-3);
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    }
-    .prop-price { }
-    .prop-price-from { font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-4); }
-    .prop-price-amount {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem; font-weight: 500; color: var(--ink);
+    .prop-price-from { font-size: .62rem; color: var(--ink-3); letter-spacing: .06em; text-transform: uppercase }
+    .prop-price-val {
+      font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; color: var(--ink);
       line-height: 1;
     }
-    .prop-price-unit { font-size: .65rem; color: var(--ink-4); margin-left: 2px; }
-    .btn-inquiry {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--ink); color: #fff; text-decoration: none;
-      padding: 10px 20px; font-size: .68rem; font-weight: 500;
-      letter-spacing: .12em; text-transform: uppercase;
-      transition: background .3s; white-space: nowrap; flex-shrink: 0;
+    .prop-price-unit { font-size: .68rem; color: var(--ink-3); font-family: var(--font-sans) }
+    .prop-rating { display: flex; flex-direction: column; align-items: flex-end; gap: .15rem }
+    .prop-stars { display: flex; gap: 1px; color: var(--gold-d) }
+    .prop-reviews { font-size: .62rem; color: var(--ink-3) }
+    .prop-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.1rem; padding: .85rem 1.5rem;
+      background: var(--green); color: var(--gold);
+      font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      transition: background .2s;
     }
-    .btn-inquiry:hover { background: var(--accent); }
-    .btn-inquiry svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
-    .btn-inquiry:hover svg { transform: translateX(3px); }
+    .prop-card:hover .prop-cta { background: var(--green-l) }
 
-    /* ── OWNER CTA ── */
-    .owner-cta {
-      margin-top: 80px; padding: 56px 60px;
-      background: var(--ink);
-      display: flex; align-items: center; justify-content: space-between; gap: 48px;
+    /* ── SKELETON ── */
+    @keyframes shimmer { 0%,100%{opacity:.5} 50%{opacity:1} }
+    .skel { animation: shimmer 1.6s ease-in-out infinite; border-radius: 2px; overflow: hidden }
+    .skel-photo { aspect-ratio: 3/2; background: var(--stone) }
+    .skel-body { padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .75rem }
+    .skel-line { height: .8rem; border-radius: 2px; background: var(--stone) }
+    .skel-line.w80{width:80%} .skel-line.w60{width:60%} .skel-line.w40{width:40%}
+
+    /* ── EMPTY ── */
+    .empty-state {
+      text-align: center; padding: 6rem 2rem; display: none; grid-column: 1/-1;
     }
-    .owner-cta-left {}
-    .owner-cta-kicker { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-    .owner-cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 400; color: #fff; line-height: 1.2; }
-    .owner-cta-title em { font-style: italic; }
-    .btn-owner {
-      display: inline-flex; align-items: center; gap: 10px;
-      border: 1px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8);
-      text-decoration: none; padding: 14px 32px;
-      font-size: .74rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
-      transition: border-color .3s, color .3s; white-space: nowrap; flex-shrink: 0;
+    .empty-state.visible { display: block }
+    .empty-icon { font-size: 3rem; margin-bottom: 1.5rem; opacity: .3 }
+    .empty-state h3 {
+      font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300;
+      color: var(--green); margin-bottom: .75rem;
     }
-    .btn-owner:hover { border-color: #fff; color: #fff; }
-    .btn-owner svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
-    .btn-owner:hover svg { transform: translateX(3px); }
+    .empty-state p { color: var(--ink-3); font-size: .88rem; margin-bottom: 2rem }
+    .empty-btn {
+      background: transparent; border: 1.5px solid var(--green); color: var(--green);
+      padding: .7rem 2rem; font-family: var(--font-sans); font-size: .75rem;
+      font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer;
+      transition: all .2s;
+    }
+    .empty-btn:hover { background: var(--green); color: var(--gold) }
+
+    /* ── REASSURANCE ── */
+    .reassurance {
+      background: var(--off); border-top: 1px solid var(--stone);
+      border-bottom: 1px solid var(--stone);
+      padding: 4.5rem 3rem;
+    }
+    .reassurance-inner {
+      max-width: var(--max); margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem;
+    }
+    .ra-item { text-align: center }
+    .ra-icon { margin: 0 auto 1rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--white); border-radius: 50%; box-shadow: 0 2px 12px rgba(0,0,0,.06); color: var(--green) }
+    .ra-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: .35rem }
+    .ra-desc { font-size: .78rem; color: var(--ink-3); line-height: 1.65; max-width: 200px; margin: 0 auto }
+
+    /* ── CTA PROPRIO ── */
+    .cta-proprio {
+      background: var(--green-d);
+      padding: 6rem 3rem;
+    }
+    .cta-proprio-inner {
+      max-width: 760px; margin: 0 auto; text-align: center;
+    }
+    .cta-kicker {
+      font-size: .68rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase;
+      color: rgba(232,203,160,.6); margin-bottom: 1.25rem;
+    }
+    .cta-h2 {
+      font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 1.25rem;
+    }
+    .cta-h2 em { font-style: italic; color: var(--gold) }
+    .cta-desc { font-size: .9rem; color: rgba(250,254,255,.5); line-height: 1.75; margin-bottom: 2.5rem }
+    .cta-btn {
+      display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+      padding: .95rem 3rem; font-size: .75rem; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase; text-decoration: none;
+      transition: all .25s;
+    }
+    .cta-btn:hover { background: var(--gold); color: var(--green-d) }
 
     /* ── FOOTER ── */
-    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.06); padding: 64px 60px 36px; }
-    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-    .f-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 6px; }
-    .f-brand-claim { font-size: .63rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-    .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.36); line-height: 1.72; }
-    .f-col-title { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 18px; }
-    .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .f-links a { font-size: .84rem; color: rgba(255,255,255,.52); text-decoration: none; transition: color .2s; }
-    .f-links a:hover { color: rgba(255,255,255,.9); }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 24px; display: flex; justify-content: space-between; font-size: .72rem; color: rgba(255,255,255,.22); }
+    footer { background: var(--ink); padding: clamp(64px, 8vw, 96px) 0 0 }
+    .footer-grid {
+      display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 56px; padding-bottom: 64px;
+      border-bottom: 1px solid rgba(250,254,255,.07);
+    }
+    .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 14px }
+    .footer-brand-claim { font-size: .6rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; opacity: .8 }
+    .footer-brand-text { font-size: .82rem; font-weight: 300; color: rgba(250,254,255,.32); line-height: 1.8; max-width: 280px }
+    .footer-col-title { font-size: .6rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 20px }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px }
+    .footer-links a { font-size: .84rem; font-weight: 300; color: rgba(250,254,255,.48); text-decoration: none; transition: color .2s }
+    .footer-links a:hover { color: var(--gold) }
+    .footer-bottom { padding: 28px 0; display: flex; justify-content: space-between; align-items: center }
+    .footer-bottom span { font-size: .7rem; color: rgba(250,254,255,.2) }
+    @media (max-width: 1100px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px } }
+    @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr } }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1100px) { .prop-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 768px) {
-      header { padding: 0 20px; }
-      .hero { padding: 0 24px 0; }
-      .hero-content { padding-bottom: 40px; }
-      .filter-bar { padding: 0 20px; top: 64px; }
-      .filter-inner { gap: 0; height: auto; padding: 12px 0; flex-wrap: wrap; }
-      .filter-group { border-right: none; border-bottom: 1px solid var(--stone-3); padding: 8px 0; width: 100%; }
-      .filter-group:last-child { border-bottom: none; }
-      .filter-count { padding-left: 0; padding-top: 8px; border-top: 1px solid var(--stone-3); width: 100%; }
-      .main-content { padding: 40px 20px 64px; }
-      .prop-grid { grid-template-columns: 1fr; gap: 16px; }
-      .owner-cta { flex-direction: column; align-items: flex-start; padding: 48px 24px; }
-      footer { padding: 56px 24px 32px; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; gap: 8px; }
+    @media (max-width: 1100px) { .property-grid { grid-template-columns: repeat(2,1fr) } .reassurance-inner { grid-template-columns: repeat(2,1fr) } }
+    @media (max-width: 700px) {
+      
+      .hero-content { padding: 0 1.25rem 2.5rem }
+      .filter-inner { padding: .85rem 1.25rem; gap: .75rem }
+      .filter-group { padding-right: 1rem; margin-right: 1rem }
+      .grid-wrap { padding: 2rem 1.25rem 4rem }
+      .property-grid { grid-template-columns: 1fr; gap: 1.75rem }
+      .reassurance { padding: 3rem 1.25rem }
+      .reassurance-inner { grid-template-columns: 1fr 1fr; gap: 1.75rem }
+      .cta-proprio { padding: 4rem 1.25rem }
+      footer { padding: 3rem 1.25rem 2rem }
+      .footer-links { margin-left: 0 }
+      .trust-inner { flex-wrap: wrap; gap: 0 }
+      .trust-item { padding: .65rem 0; border-right: none; margin-right: 0; width: 50% }
     }
     @media (max-width: 480px) {
-      .footer-top { grid-template-columns: 1fr; }
+      .property-grid { grid-template-columns: 1fr }
+      .reassurance-inner { grid-template-columns: 1fr }
     }
+  
+  /* ═══════════════════════════════════════════════
+     SITE HEADER — standard unifié toutes pages
+  ═══════════════════════════════════════════════ */
+  
+
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header id="siteHeader">
-    <a href="/accueil" class="logo"><span class="logo-name">ALPÉON</span></a>
-    <nav class="main-nav">
-      <a href="/accueil">Accueil</a>
-      <a href="/destinations">Destinations</a>
-      <a href="/reserver" class="active-link">Réserver</a>
-      <a href="/proprietaires">Propriétaires</a>
-      <a href="/estimateur">Estimateur</a>
-      <div class="lang-switch">
-        <a href="/reserver" class="lang-btn active">FR</a>
-        <span class="lang-sep">|</span>
-        <a href="/en/reserver" class="lang-btn">EN</a>
-      </div>
+<!-- ── NAV ── -->
+<header class="site-header" id="site-header">
+  <div class="site-header-inner">
+    <a href="/accueil" class="site-logo">
+      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON">
+    </a>
+    <nav class="site-nav">
+      <a href="/accueil" class="site-nav-link">Accueil</a>
+      <a href="/destinations" class="site-nav-link">Destinations</a>
+      <a href="/reserver" class="site-nav-link active">Réserver</a>
+      <a href="/proprietaires" class="site-nav-link">Propriétaires</a>
+      <a href="/estimateur" class="site-nav-link">Estimateur</a>
     </nav>
-    <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
-  </header>
-
-  <div class="mob-menu" id="mobMenu">
-    <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')" aria-label="Fermer">&#x2715;</button>
-    <div class="mob-menu-inner">
-      <nav class="mob-nav">
-        <a href="/accueil">Accueil</a>
-        <a href="/destinations">Destinations</a>
-        <a href="/reserver">Réserver</a>
-        <a href="/proprietaires">Propriétaires</a>
-        <a href="/estimateur">Estimateur</a>
-      </nav>
-      <div class="mob-lang">
-        <a href="/reserver" class="mob-lang-btn active">FR</a>
-        <span class="mob-lang-sep">|</span>
-        <a href="/en/reserver" class="mob-lang-btn">EN</a>
+    <div class="site-header-right">
+      <div class="site-lang">
+        <a href="/reserver" class="active">FR</a>
+        <span>|</span>
+        <a href="/en/reserver">EN</a>
       </div>
+      <button class="site-burger" id="site-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-kicker">Nos propriétés</p>
-      <h1>Appartements & chalets<br><em>d'exception</em></h1>
-    </div>
-  </section>
-
-  <!-- FILTER BAR -->
-  <div class="filter-bar" id="filterBar">
-    <div class="filter-inner">
-      <div class="filter-group">
-        <span class="filter-label">Station</span>
-        <div class="filter-pills" id="filterStation">
-          <button class="filter-pill active" data-filter="station" data-value="all">Toutes</button>
-          <button class="filter-pill" data-filter="station" data-value="courchevel">Courchevel</button>
-          <button class="filter-pill" data-filter="station" data-value="megeve">Megève</button>
-          <button class="filter-pill" data-filter="station" data-value="meribel">Méribel</button>
-          <button class="filter-pill" data-filter="station" data-value="tignes">Tignes</button>
-          <button class="filter-pill" data-filter="station" data-value="valdisere">Val d'Isère</button>
-          <button class="filter-pill" data-filter="station" data-value="valthorens">Val Thorens</button>
-        </div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">Type</span>
-        <div class="filter-pills" id="filterType">
-          <button class="filter-pill active" data-filter="type" data-value="all">Tous</button>
-          <button class="filter-pill" data-filter="type" data-value="appartement">Appartement</button>
-          <button class="filter-pill" data-filter="type" data-value="chalet">Chalet</button>
-          <button class="filter-pill" data-filter="type" data-value="penthouse">Penthouse</button>
-        </div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">Capacité</span>
-        <div class="filter-pills" id="filterCap">
-          <button class="filter-pill active" data-filter="cap" data-value="all">Tous</button>
-          <button class="filter-pill" data-filter="cap" data-value="2">2 pers.</button>
-          <button class="filter-pill" data-filter="cap" data-value="4">4 pers.</button>
-          <button class="filter-pill" data-filter="cap" data-value="6">6 pers.</button>
-          <button class="filter-pill" data-filter="cap" data-value="8">8+ pers.</button>
-        </div>
-      </div>
-      <div class="filter-count"><strong id="countNum">13</strong> biens disponibles</div>
+  <div class="site-mobile-menu" id="site-mobile-menu">
+    <a href="/accueil" class="site-mobile-link">Accueil</a>
+    <a href="/destinations" class="site-mobile-link">Destinations</a>
+    <a href="/reserver" class="site-mobile-link active">Réserver</a>
+    <a href="/proprietaires" class="site-mobile-link">Propriétaires</a>
+    <a href="/estimateur" class="site-mobile-link">Estimateur</a>
+    <div class="site-mobile-lang">
+      <a href="/reserver" class="active">FR</a><span>|</span><a href="/en/reserver">EN</a>
     </div>
   </div>
+</header>
+<script>
+function toggleMobileMenu(){
+  const menu = document.getElementById('site-mobile-menu');
+  const burger = document.getElementById('site-burger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+</script>
 
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
-    <div class="prop-grid" id="propGrid">
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-kicker">Catalogue · Saison 2025–2026</p>
+    <h1 class="hero-h1">Propriétés alpines<br><em>d'exception</em></h1>
+    <p class="hero-sub">Courchevel · Megève · Val d'Isère · Val Thorens · Méribel · Tignes</p>
+  </div>
+</section>
 
-      <!-- No results message -->
-      <div class="no-results" id="noResults">
-        <div class="no-results-icon">⛷</div>
-        <h3>Aucun bien trouvé</h3>
-        <p>Essayez d'autres critères de recherche ou contactez-nous directement.</p>
-      </div>
-
-      <!-- CARD 1: Chalet Le Chamois — Courchevel 1850 -->
-      <article class="prop-card fadeIn" data-station="courchevel" data-type="chalet" data-cap="10">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80" alt="Chalet Le Chamois, Courchevel" loading="lazy" />
-          <span class="prop-type-badge">Chalet</span>
-          <span class="prop-station-badge">Courchevel</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Les 3 Vallées · 1850</div>
-          <h2 class="prop-name">Chalet Le Chamois</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 180 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 10 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">5 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski au pied</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg> Spa & hammam</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Cheminée</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">12 000 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Chalet Le Chamois" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 2: Appt Les Grandes Bosses — Courchevel 1650 -->
-      <article class="prop-card fadeIn" data-station="courchevel" data-type="appartement" data-cap="6">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=700&q=80" alt="Les Grandes Bosses, Courchevel" loading="lazy" />
-          <span class="prop-type-badge">Appartement</span>
-          <span class="prop-station-badge">Courchevel</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Les 3 Vallées · 1650 Moriond</div>
-          <h2 class="prop-name">Les Grandes Bosses</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 95 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 6 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">3 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Pistes proches</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Parking</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Cheminée</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">4 500 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Les Grandes Bosses" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 3: Penthouse Le Belvédère — Courchevel 1850 -->
-      <article class="prop-card fadeIn" data-station="courchevel" data-type="penthouse" data-cap="4">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="Penthouse Le Belvédère, Courchevel" loading="lazy" />
-          <span class="prop-type-badge">Penthouse</span>
-          <span class="prop-station-badge">Courchevel</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Les 3 Vallées · 1850</div>
-          <h2 class="prop-name">Penthouse Le Belvédère</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 120 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">2 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Vue panoramique</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Spa privatif</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Conciergerie</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">7 000 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Penthouse Le Belvédère" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 4: Chalet Dakota — Megève -->
-      <article class="prop-card fadeIn" data-station="megeve" data-type="chalet" data-cap="10">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=700&q=80" alt="Chalet Dakota, Megève" loading="lazy" />
-          <span class="prop-type-badge">Chalet</span>
-          <span class="prop-station-badge">Megève</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Mont-Blanc · Centre</div>
-          <h2 class="prop-name">Chalet Dakota</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 240 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 12 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">6 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Vue Mont-Blanc</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Piscine intérieure</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Cheminée</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">9 500 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Chalet Dakota" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 5: Silver Lodge — Megève -->
-      <article class="prop-card fadeIn" data-station="megeve" data-type="appartement" data-cap="4">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=700&q=80" alt="Silver Lodge, Megève" loading="lazy" />
-          <span class="prop-type-badge">Appartement</span>
-          <span class="prop-station-badge">Megève</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Mont-Blanc · Mont d'Arbois</div>
-          <h2 class="prop-name">Silver Lodge</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 65 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">2 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski au pied</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Terrasse</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Conciergerie</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">2 800 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Silver Lodge" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 6: Le Yéti — Méribel -->
-      <article class="prop-card fadeIn" data-station="meribel" data-type="appartement" data-cap="6">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1603512500383-b8f36f8a4b70?w=700&q=80" alt="Le Yéti, Méribel" loading="lazy" />
-          <span class="prop-type-badge">Appartement</span>
-          <span class="prop-station-badge">Méribel</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Les 3 Vallées · Centre</div>
-          <h2 class="prop-name">Le Yéti</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 80 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 6 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">3 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski au pied</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Cheminée</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Terrasse</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">3 200 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Le Yéti" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 7: Chalet Apsara — Méribel -->
-      <article class="prop-card fadeIn" data-station="meribel" data-type="chalet" data-cap="8">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=80" alt="Chalet Apsara, Méribel" loading="lazy" />
-          <span class="prop-type-badge">Chalet</span>
-          <span class="prop-station-badge">Méribel</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Les 3 Vallées · Les Allues</div>
-          <h2 class="prop-name">Chalet Apsara</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 160 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 8 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">4 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Sauna</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Cheminée</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Parking</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">6 800 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Chalet Apsara" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 8: Home Club — Tignes -->
-      <article class="prop-card fadeIn" data-station="tignes" data-type="appartement" data-cap="6">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=700&q=80" alt="Home Club, Tignes" loading="lazy" />
-          <span class="prop-type-badge">Appartement</span>
-          <span class="prop-station-badge">Tignes</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Espace Killy · Val Claret</div>
-          <h2 class="prop-name">Home Club</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 75 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 6 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">3 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski au pied</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Piscine collective</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Terrasse</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">2 600 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Home Club" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 9: Le Palafour — Tignes -->
-      <article class="prop-card fadeIn" data-station="tignes" data-type="appartement" data-cap="2">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=700&q=80" alt="Le Palafour, Tignes" loading="lazy" />
-          <span class="prop-type-badge">Appartement</span>
-          <span class="prop-station-badge">Tignes</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Espace Killy · Le Lac</div>
-          <h2 class="prop-name">Le Palafour</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 45 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 2 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">1 chambre</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Vue lac</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Balcon</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Glacier ski</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">1 400 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Le Palafour" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 10: Chalet Les Centaurées — Val d'Isère -->
-      <article class="prop-card fadeIn" data-station="valdisere" data-type="chalet" data-cap="10">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=700&q=80" alt="Chalet Les Centaurées, Val d'Isère" loading="lazy" />
-          <span class="prop-type-badge">Chalet</span>
-          <span class="prop-station-badge">Val d'Isère</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Espace Killy · Le Fornet</div>
-          <h2 class="prop-name">Chalet Les Centaurées</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 200 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 10 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">5 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Spa & jacuzzi</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Cheminée</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Conciergerie</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">11 000 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Chalet Les Centaurées" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 11: Le Chardon — Val d'Isère -->
-      <article class="prop-card fadeIn" data-station="valdisere" data-type="appartement" data-cap="4">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=80" alt="Le Chardon, Val d'Isère" loading="lazy" />
-          <span class="prop-type-badge">Appartement</span>
-          <span class="prop-station-badge">Val d'Isère</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Espace Killy · Centre-val</div>
-          <h2 class="prop-name">Le Chardon</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 55 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">2 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Village à pied</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Balcon sud</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Parking</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">3 400 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Le Chardon" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 12: Lac Blanc — Val Thorens -->
-      <article class="prop-card fadeIn" data-station="valthorens" data-type="appartement" data-cap="4">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?w=700&q=80" alt="Lac Blanc, Val Thorens" loading="lazy" />
-          <span class="prop-type-badge">Appartement</span>
-          <span class="prop-station-badge">Val Thorens</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Les 3 Vallées · Centre</div>
-          <h2 class="prop-name">Lac Blanc</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 60 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 4 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">2 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski au pied</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> 2 300 m altitude</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg> Terrasse</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">2 200 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Lac Blanc" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- CARD 13: Sérac — Val Thorens -->
-      <article class="prop-card fadeIn" data-station="valthorens" data-type="appartement" data-cap="6">
-        <div class="prop-img">
-          <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=700&q=80" alt="Sérac, Val Thorens" loading="lazy" />
-          <span class="prop-type-badge">Appartement</span>
-          <span class="prop-station-badge">Val Thorens</span>
-        </div>
-        <div class="prop-body">
-          <div class="prop-massif">Les 3 Vallées · Slalom</div>
-          <h2 class="prop-name">Sérac</h2>
-          <div class="prop-meta">
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> 85 m²</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> 6 personnes</span>
-            <span class="prop-meta-sep">·</span>
-            <span class="prop-meta-item">3 chambres</span>
-          </div>
-          <div class="prop-amenities">
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M3 17l5-10 4 6 3-4 6 8"/></svg> Ski au pied</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg> Sauna</span>
-            <span class="prop-amenity"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 11.5a4 4 0 0 1 8 0"/></svg> Vue pistes</span>
-          </div>
-          <div class="prop-footer">
-            <div class="prop-price">
-              <div class="prop-price-from">à partir de</div>
-              <span class="prop-price-amount">3 100 €</span><span class="prop-price-unit">/sem.</span>
-            </div>
-            <a href="mailto:reservations@alpeon.fr?subject=Demande — Sérac" class="btn-inquiry">
-              Demander <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-          </div>
-        </div>
-      </article>
-
-    </div><!-- /prop-grid -->
-
-    <!-- OWNER CTA -->
-    <div class="owner-cta">
-      <div class="owner-cta-left">
-        <div class="owner-cta-kicker">Vous êtes propriétaire ?</div>
-        <div class="owner-cta-title">Confiez votre bien alpin<br>à <em>ALPÉON</em></div>
-      </div>
-      <a href="/proprietaires" class="btn-owner">
-        Découvrir nos services
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </a>
+<!-- ── TRUST BAR ── -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <svg class="trust-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Biens vérifiés &amp; sélectionnés
     </div>
+    <div class="trust-item">
+      <svg class="trust-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Note moyenne <strong>4.9 / 5</strong>
+    </div>
+    <div class="trust-item">
+      <svg class="trust-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Disponibilités en temps réel
+    </div>
+    <div class="trust-item">
+      <svg class="trust-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.13 1 .39 1.98.77 2.91a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.17-1.17a2 2 0 012.11-.45c.93.38 1.91.64 2.91.77A2 2 0 0122 16.92z"/></svg>
+      Conciergerie disponible 7j/7
+    </div>
+  </div>
+</div>
 
-  </main>
+<!-- ── FILTER BAR ── -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <div class="filter-group">
+      <label class="filter-label" for="f-station">Destination</label>
+      <select class="filter-select" id="f-station">
+        <option value="all">Toutes les stations</option>
+        <option value="courchevel">Courchevel</option>
+        <option value="megeve">Megève</option>
+        <option value="meribel">Méribel</option>
+        <option value="tignes">Tignes</option>
+        <option value="valdisere">Val d'Isère</option>
+        <option value="valthorens">Val Thorens</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label" for="f-type">Type de bien</label>
+      <select class="filter-select" id="f-type">
+        <option value="all">Tous types</option>
+        <option value="appartement">Appartement</option>
+        <option value="chalet">Chalet</option>
+        <option value="penthouse">Penthouse</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label class="filter-label" for="f-guests">Voyageurs</label>
+      <select class="filter-select" id="f-guests">
+        <option value="all">Tous</option>
+        <option value="2">2 pers. min.</option>
+        <option value="4">4 pers. min.</option>
+        <option value="6">6 pers. min.</option>
+        <option value="8+">8 pers. +</option>
+      </select>
+    </div>
+    <div class="filter-actions">
+      <button class="filter-reset" id="btn-reset" style="display:none" onclick="resetFilters()">Effacer</button>
+      <div class="filter-count" id="filter-count">— biens</div>
+    </div>
+  </div>
+</div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-top">
-      <div>
-        <div class="f-brand-name">ALPÉON</div>
-        <div class="f-brand-claim">Alpine Property Management</div>
-        <p class="f-brand-desc">Opérateur premium de gestion locative courte durée dans les Alpes françaises. Discrétion, excellence et transparence.</p>
+<!-- ── GRID ── -->
+<div class="grid-wrap">
+  <div class="grid-header">
+    <h2 class="grid-title">Notre sélection <em>alpine</em></h2>
+  </div>
+  <div class="property-grid" id="property-grid">
+    <!-- skeletons injected by JS -->
+  </div>
+  <div class="empty-state" id="empty-state">
+    <div class="empty-icon">⛰</div>
+    <h3>Aucun bien trouvé</h3>
+    <p>Élargissez vos critères ou explorez l'ensemble de nos destinations.</p>
+    <button class="empty-btn" onclick="resetFilters()">Voir tous les biens</button>
+  </div>
+</div>
+
+<!-- ── REASSURANCE ── -->
+<section class="reassurance">
+  <div class="reassurance-inner">
+    <div class="ra-item">
+      <div class="ra-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
+      <div class="ra-title">Biens certifiés</div>
+      <p class="ra-desc">Chaque propriété est inspectée et homologuée par nos équipes avant d'intégrer notre catalogue.</p>
+    </div>
+    <div class="ra-item">
+      <div class="ra-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="ra-title">Accueil personnalisé</div>
+      <p class="ra-desc">Un hôte dédié vous accueille sur place et reste disponible tout au long de votre séjour.</p>
+    </div>
+    <div class="ra-item">
+      <div class="ra-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <div class="ra-title">Paiement sécurisé</div>
+      <p class="ra-desc">Transactions chiffrées, paiement en plusieurs fois disponible. Annulation souple sur sélection de biens.</p>
+    </div>
+    <div class="ra-item">
+      <div class="ra-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="ra-title">Réponse sous 2h</div>
+      <p class="ra-desc">Notre équipe de conciergerie répond à toute demande en moins de deux heures, 7 jours sur 7.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA PROPRIO ── -->
+<section class="cta-proprio">
+  <div class="cta-proprio-inner">
+    <p class="cta-kicker">Vous êtes propriétaire</p>
+    <h2 class="cta-h2">Votre bien mérite<br>une gestion <em>sans compromis</em></h2>
+    <p class="cta-desc">Confiez-nous votre chalet ou appartement alpin. Loyer fixe garanti chaque mois, gestion intégrale, clientèle sélectionnée.</p>
+    <a href="/proprietaires" class="cta-btn">Découvrir notre offre</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
       <div>
-        <div class="f-col-title">Destinations</div>
-        <ul class="f-links">
+        <div class="footer-brand-logo">
+          <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="120" style="height:120px;width:auto;display:block;margin-bottom:4px">
+        </div>
+        <div class="footer-brand-claim">Alpine Property Management</div>
+        <p class="footer-brand-text">Opérateur premium de gestion locative courte durée dans les Alpes françaises. Discrétion, excellence et transparence.</p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Destinations</div>
+        <ul class="footer-links">
           <li><a href="/destinations">Courchevel</a></li>
           <li><a href="/destinations">Megève</a></li>
           <li><a href="/destinations">Val d'Isère</a></li>
@@ -896,85 +633,191 @@
           <li><a href="/destinations">Méribel · Tignes</a></li>
         </ul>
       </div>
+
       <div>
-        <div class="f-col-title">Services</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
           <li><a href="/proprietaires">Propriétaires</a></li>
-          <li><a href="/reserver">Réserver un bien</a></li>
+          <li><a href="/proprietaires">ALPÉON Signatures</a></li>
           <li><a href="/estimateur">Estimateur de revenus</a></li>
         </ul>
       </div>
+
       <div>
-        <div class="f-col-title">Contact</div>
-        <ul class="f-links">
-          <li><a href="mailto:reservations@alpeon.fr">reservations@alpeon.fr</a></li>
+        <div class="footer-col-title">Contact & Légal</div>
+        <ul class="footer-links">
           <li><a href="mailto:proprietaires@alpeon.fr">proprietaires@alpeon.fr</a></li>
           <li><a href="/mentions-legales">Mentions légales</a></li>
+          <li><a href="/politique-confidentialite">Politique de confidentialité</a></li>
+          <li><a href="/cgv">Conditions générales</a></li>
         </ul>
       </div>
     </div>
+
     <div class="footer-bottom">
       <span>© 2026 ALPÉON. Tous droits réservés.</span>
       <span>Gestion locative alpine premium · Alpes françaises</span>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    /* ── Header scroll ── */
-    const hdr = document.getElementById('siteHeader');
-    window.addEventListener('scroll', () => { hdr.classList.toggle('scrolled', window.scrollY > 40); });
+<script>
+const AMENITY_FR = {
+  'Dishwasher':'Lave-vaisselle','Dryer':'Sèche-linge','Washer':'Machine à laver',
+  'Elevator':'Ascenseur','Gym':'Salle de sport','Sauna':'Sauna','Pool':'Piscine',
+  'Hot tub':'Jacuzzi','Fireplace':'Cheminée','fireplace':'Cheminée',
+  'Ski In':'Ski in/out','Family/kid friendly':'Familles','Wireless Internet':'Wifi',
+  'Free parking on premises':'Parking','Cinema':'Cinéma privé',
+  'Air conditioning':'Climatisation','Breakfast':'Petit-déjeuner',
+};
 
-    /* ── Hamburger ── */
-    (function(){
-      var btn = document.getElementById('mobMenuBtn');
-      var menu = document.getElementById('mobMenu');
-      if (!btn || !menu) return;
-      btn.addEventListener('click', function(){ var o = menu.classList.toggle('open'); btn.classList.toggle('open', o); });
-      menu.addEventListener('click', function(e){ if (e.target === menu) { menu.classList.remove('open'); btn.classList.remove('open'); } });
-    })();
+function norm(s){ return s.toLowerCase().replace(/['\s-]/g,'').replace(/[éèê]/g,'e').replace(/[àâ]/g,'a').replace(/[îï]/g,'i').replace(/[ôö]/g,'o').replace(/[ùû]/g,'u') }
 
-    /* ── Filter engine ── */
-    const state = { station: 'all', type: 'all', cap: 'all' };
-    const cards = document.querySelectorAll('.prop-card');
-    const noResults = document.getElementById('noResults');
-    const countNum = document.getElementById('countNum');
+function stars(rating){
+  if(!rating) return '';
+  const full = Math.round(rating);
+  return Array.from({length:5},(_,i)=>`<svg width="10" height="10" viewBox="0 0 24 24" fill="${i<full?'#C9A97A':'none'}" stroke="#C9A97A" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`).join('');
+}
 
-    function applyFilters() {
-      let visible = 0;
-      cards.forEach(card => {
-        const matchStation = state.station === 'all' || card.dataset.station === state.station;
-        const matchType    = state.type    === 'all' || card.dataset.type    === state.type;
-        const matchCap = state.cap === 'all' ||
-          (state.cap === '2' && card.dataset.cap === '2') ||
-          (state.cap === '4' && card.dataset.cap === '4') ||
-          (state.cap === '6' && card.dataset.cap === '6') ||
-          (state.cap === '8' && parseInt(card.dataset.cap) >= 8);
+let all = [], filtered = [];
 
-        if (matchStation && matchType && matchCap) {
-          card.classList.remove('hidden');
-          card.classList.add('fadeIn');
-          visible++;
-        } else {
-          card.classList.add('hidden');
-          card.classList.remove('fadeIn');
-        }
-      });
-      countNum.textContent = visible;
-      noResults.classList.toggle('visible', visible === 0);
+function card(p){
+  const typeLabel = p.propertyType === 'chalet' ? 'Chalet' : p.propertyType === 'penthouse' ? 'Penthouse' : 'Appartement';
+  const amenities = (p.amenities||[]).slice(0,3).map(a=>`<span class="amenity-tag">${AMENITY_FR[a]||a}</span>`).join('');
+  const prestige = (p.tags||[]).includes('Prestige') ? `<span class="badge-prestige">Prestige</span>` : '';
+  const area = p.area ? `<span class="badge-area">${p.area}</span>` : '';
+  const priceStr = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR') + ' €' : 'Sur devis';
+  const ratingBlock = p.rating > 0 ? `
+    <div class="prop-rating">
+      <div class="prop-stars">${stars(p.rating)}</div>
+      <div class="prop-reviews">${p.reviewsCount > 0 ? p.reviewsCount + ' avis' : ''}</div>
+    </div>` : '';
+
+  return `<a class="prop-card" href="/propriete/?id=${p.id}">
+    <div class="prop-photo">
+      <img src="${p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70'}" alt="${p.title}" loading="lazy">
+      <div class="prop-photo-overlay"></div>
+      <div class="prop-station">
+        <span class="badge-city">${p.city}</span>
+        ${area}
+      </div>
+      ${prestige}
+    </div>
+    <div class="prop-body">
+      <div class="prop-type">${typeLabel}</div>
+      <h3 class="prop-name">${p.title}</h3>
+      <div class="prop-specs">
+        <span class="prop-spec">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          ${p.guests} pers.
+        </span>
+        <div class="prop-divider"></div>
+        <span class="prop-spec">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
+          ${p.bedrooms} ch.
+        </span>
+        ${p.bathrooms ? `<div class="prop-divider"></div><span class="prop-spec"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a4 4 0 01-4 4H7a4 4 0 01-4-4v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h3v2.25"/></svg>${p.bathrooms} sdb.</span>` : ''}
+      </div>
+      <div class="prop-amenities">${amenities}</div>
+      <div class="prop-foot">
+        <div>
+          <div class="prop-price-from">À partir de</div>
+          <div class="prop-price-val">${priceStr}</div>
+          ${p.priceFrom ? '<div class="prop-price-unit">/ nuit</div>' : ''}
+        </div>
+        ${ratingBlock}
+      </div>
+    </div>
+    <div class="prop-cta">
+      <span>Découvrir ce bien</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>`;
+}
+
+function skel(n){
+  return Array.from({length:n},()=>`
+    <div class="skel">
+      <div class="skel-photo"></div>
+      <div class="skel-body">
+        <div class="skel-line w40" style="height:.5rem;margin-bottom:.2rem"></div>
+        <div class="skel-line w80"></div>
+        <div class="skel-line w60" style="height:.6rem;margin-top:.4rem"></div>
+        <div class="skel-line w40" style="height:.6rem"></div>
+      </div>
+    </div>`).join('');
+}
+
+function render(list){
+  const grid = document.getElementById('property-grid');
+  const empty = document.getElementById('empty-state');
+  const count = document.getElementById('filter-count');
+  if(!list.length){
+    grid.innerHTML = '';
+    empty.classList.add('visible');
+    count.textContent = '0 bien';
+    return;
+  }
+  empty.classList.remove('visible');
+  count.textContent = `${list.length} bien${list.length>1?'s':''}`;
+  grid.innerHTML = list.map(card).join('');
+}
+
+async function load(){
+  document.getElementById('property-grid').innerHTML = skel(6);
+  try{
+    const r = await fetch('/api/properties');
+    if(!r.ok) throw new Error('Erreur ' + r.status);
+    const {properties} = await r.json();
+    all = properties;
+    filtered = [...properties];
+    render(all);
+  } catch(e){
+    document.getElementById('property-grid').innerHTML = '';
+    const empty = document.getElementById('empty-state');
+    empty.classList.add('visible');
+    empty.innerHTML = `<div class="empty-icon">⚠</div><h3>Impossible de charger</h3><p>${e.message}</p><button class="empty-btn" onclick="load()">Réessayer</button>`;
+  }
+}
+
+function applyFilters(){
+  const station = document.getElementById('f-station').value;
+  const type    = document.getElementById('f-type').value;
+  const guests  = document.getElementById('f-guests').value;
+  const active  = station!=='all' || type!=='all' || guests!=='all';
+  document.getElementById('btn-reset').style.display = active ? 'inline-block' : 'none';
+  filtered = all.filter(p=>{
+    if(station !== 'all' && norm(p.city) !== station) return false;
+    if(type !== 'all' && p.propertyType !== type) return false;
+    if(guests !== 'all'){
+      const n = parseInt(guests);
+      if(guests === '8+'){ if(p.guests < 8) return false }
+      else { if(p.guests < n) return false }
     }
+    return true;
+  });
+  render(filtered);
+}
 
-    document.querySelectorAll('.filter-pill').forEach(pill => {
-      pill.addEventListener('click', function() {
-        const filter = this.dataset.filter;
-        const value  = this.dataset.value;
-        state[filter] = value;
-        /* update active pill in same group */
-        document.querySelectorAll(`[data-filter="${filter}"]`).forEach(p => p.classList.remove('active'));
-        this.classList.add('active');
-        applyFilters();
-      });
-    });
-  </script>
+function resetFilters(){
+  ['f-station','f-type','f-guests'].forEach(id => document.getElementById(id).value = 'all');
+  applyFilters();
+}
 
+document.getElementById('f-station').addEventListener('change', applyFilters);
+document.getElementById('f-type').addEventListener('change', applyFilters);
+document.getElementById('f-guests').addEventListener('change', applyFilters);
+load();
+</script>
+
+<script id="nav-scroll-js">
+(function(){
+  var h=document.getElementById('site-header');
+  if(!h)return;
+  function u(){h.classList.toggle('scrolled',window.scrollY>40);}
+  window.addEventListener('scroll',u,{passive:true});
+  u();
+})();
+</script>
 </body>
 </html>

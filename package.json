@@ -1,0 +1,13 @@
+{
+  "name": "alpeon",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": "18.x" },
+  "scripts": {
+    "dev": "node server.js",
+    "deploy": "vercel --prod"
+  },
+  "devDependencies": {
+    "vercel": "latest"
+  }
+}
