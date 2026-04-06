@@ -102,8 +102,10 @@
     
 
     /* GALLERY */
-    .gallery{margin-top:0;display:grid;grid-template-columns:2fr 1fr;grid-template-rows:55vh 55vh;gap:4px;max-height:none;overflow:hidden}
+    .gallery{margin-top:0;display:grid;grid-template-columns:2fr 1fr;grid-template-rows:30vh 30vh;gap:4px;overflow:hidden}
     .gallery-main{grid-row:1/3;position:relative;overflow:hidden;cursor:pointer}
+    /* Dégradé noir → transparent depuis le haut (lisibilité nav) */
+    .gallery-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,.15) 40%, transparent 70%);pointer-events:none}
     .gallery-main img,.gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
     .gallery-main:hover img,.gallery-thumb:hover img{transform:scale(1.04)}
     .gallery-thumb{position:relative;overflow:hidden;cursor:pointer}
@@ -155,7 +157,11 @@
     /* SECTIONS */
     .prop-section{margin-top:2rem}
     .prop-section-title{font-family:var(--font-serif);font-style:italic;font-size:1.2rem;font-weight:400;color:var(--green);border-bottom:1px solid var(--gold-d);padding-bottom:.6rem;margin-bottom:1.2rem}
-    .prop-desc{font-size:.88rem;line-height:1.8;color:#374151;white-space:pre-line}
+    .prop-desc{font-size:.82rem;line-height:1.65;color:#374151;white-space:pre-line;max-height:110px;overflow:hidden;position:relative}
+    .prop-desc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:36px;background:linear-gradient(transparent,var(--white))}
+    .prop-desc.expanded{max-height:none}
+    .prop-desc.expanded::after{display:none}
+    .prop-desc-toggle{background:none;border:none;font-size:.74rem;color:var(--green);cursor:pointer;font-family:var(--font-sans);font-weight:600;letter-spacing:.06em;padding:0;margin-top:.5rem;text-decoration:underline}
 
     /* DESCRIPTION (backward compat) */
     .section{margin-top:2rem}
@@ -169,12 +175,12 @@
     .amenity-item svg{flex-shrink:0;color:var(--gold-d)}
 
     /* RIGHT COLUMN — BOOKING CARD */
-    .booking-card{position:sticky;top:88px;background:var(--white);border:1px solid var(--stone-2);border-radius:8px;box-shadow:0 4px 40px rgba(44,61,48,.12),0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+    .booking-card{position:sticky;top:88px;background:var(--white);border:1px solid var(--stone-2);border-radius:8px;box-shadow:0 4px 40px rgba(44,61,48,.12),0 1px 3px rgba(0,0,0,.06);overflow:hidden;max-height:calc(100vh - 108px);display:flex;flex-direction:column}
+    .booking-body{flex:1;overflow-y:auto;padding:1.5rem 1.75rem;}
     .booking-card-header{background:var(--green);padding:1.5rem 1.75rem;position:relative}
     .booking-card-header::after{content:'';position:absolute;bottom:0;left:1.75rem;right:1.75rem;height:1px;background:rgba(232,203,160,.2)}
     .booking-price{font-size:.75rem;color:rgba(232,203,160,0.7);font-weight:500;letter-spacing:.08em;text-transform:uppercase}
     .booking-price strong{display:block;font-family:'Lora',serif;font-style:italic;font-size:2.2rem;font-weight:300;color:var(--gold);line-height:1;margin-top:.15rem}
-    .booking-body{padding:1.5rem 1.75rem}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
     .form-group{display:flex;flex-direction:column;gap:.3rem}
     .form-label{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
@@ -219,8 +225,8 @@
 
     @media(max-width:1024px){
       .detail-layout{grid-template-columns:1fr;gap:2rem}
-      .booking-card{position:static}
-      .gallery{grid-template-rows:40vh 40vh}
+      .booking-card{position:static;max-height:none;overflow:hidden}
+      .gallery{grid-template-rows:25vh 25vh}
     }
     @media(max-width:640px){
       .gallery{grid-template-columns:1fr;grid-template-rows:50vw}
@@ -683,6 +689,14 @@ function renderGallery(p){
     </div>`;
 }
 
+function toggleDesc(){
+  const el = document.getElementById('prop-desc-text');
+  const btn = el && el.nextElementSibling;
+  if(!el) return;
+  const expanded = el.classList.toggle('expanded');
+  if(btn) btn.textContent = expanded ? 'Voir moins' : 'Voir plus';
+}
+
 function renderDetail(p){
   document.title = `${p.title} — ALPÉON`;
   document.getElementById('bc-title').textContent = p.title;
@@ -729,7 +743,7 @@ function renderDetail(p){
 
     <div class="prop-divider"></div>
 
-    ${desc ? `<div class="prop-section"><h2 class="prop-section-title">À propos</h2><p class="prop-desc">${desc}</p></div>` : ''}
+    ${desc ? `<div class="prop-section"><h2 class="prop-section-title">À propos</h2><p class="prop-desc" id="prop-desc-text">${desc}</p><button class="prop-desc-toggle" onclick="toggleDesc()">Voir plus</button></div>` : ''}
 
     ${amenHtml ? `
     <div class="prop-divider"></div>
