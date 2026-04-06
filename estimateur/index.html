@@ -440,7 +440,20 @@
       display: flex;
       flex-direction: column;
       justify-content: center; /* le formulaire conserve sa taille naturelle, centré */
+      overflow: hidden;
     }
+    #est-bg-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity .6s ease;
+      filter: blur(2px) saturate(.85);
+      transform: scale(1.04); /* hide blur edges */
+      pointer-events: none;
+    }
+    #est-bg-img.loaded { opacity: .2; }
     .est-wrap.revealed {
       animation: estReveal .55s cubic-bezier(.22,1,.36,1) both;
     }
@@ -2464,6 +2477,7 @@
   <!-- ═══ PAGE 2 : ESTIMATEUR ═══ -->
   <div id="page-estimateur">
   <section class="est-wrap" id="estimateur">
+  <div id="est-bg-img"></div>
   <div class="est-layout">
   <div class="est-main">
     <div class="est-inner">
@@ -3573,6 +3587,21 @@
     /* Préparer le formulaire */
     if (S.typeBien) buildLocationPicker();
     updatePreview();
+    /* Fond de page : photo de la station */
+    const STATION_IMGS = {
+      valthorens: '/assets/images/dest-valthorens.jpg',
+      megeve:     '/assets/images/dest-megeve.webp',
+      courchevel: '/assets/images/dest-courchevel.webp',
+      meribel:    '/assets/images/dest-meribel.jpg',
+      tignes:     '/assets/images/dest-tignes.png',
+      valdisere:  '/assets/images/dest-valdisere.jpg',
+    };
+    const estBg = document.getElementById('est-bg-img');
+    if (estBg && STATION_IMGS[id]) {
+      estBg.classList.remove('loaded');
+      estBg.style.backgroundImage = `url('${STATION_IMGS[id]}')`;
+      requestAnimationFrame(() => requestAnimationFrame(() => estBg.classList.add('loaded')));
+    }
     /* Transition vers la page estimateur */
     openEstimateurPage();
     /* Entrer dans le formulaire à l'étape 2 */
