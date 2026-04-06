@@ -1006,14 +1006,6 @@ function setView(v){
   }
 }
 
-// Deterministic offset from property id (no random, stable across renders)
-function idToOffset(id){
-  let h = 0;
-  for(let i=0;i<(id||'').length;i++) h = (Math.imul(31,h)+id.charCodeAt(i))|0;
-  const lat = ((h & 0xFFFF) / 0xFFFF - 0.5) * 0.018;
-  const lng = (((h >> 16) & 0xFFFF) / 0xFFFF - 0.5) * 0.018;
-  return [lat, lng];
-}
 
 function renderMap(){
   const mapWrap = document.getElementById('map-wrap');
@@ -1042,9 +1034,7 @@ function renderMap(){
 
   items.forEach((p, i) => {
     const n = i + 1;
-    const base = getPropCoords(p.city);
-    const off = idToOffset(p.id);
-    const coords = [base[0]+off[0], base[1]+off[1]];
+    const coords = getPropCoords(p.city);
     const img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
     const price = p.priceFrom ? `${p.priceFrom.toLocaleString('fr-FR')} € / nuit` : 'Sur devis';
 
