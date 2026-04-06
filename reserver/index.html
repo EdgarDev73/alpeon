@@ -1050,7 +1050,9 @@ function renderMap(){
   items.forEach((p, i) => {
     const n = i + 1;
     // Spread markers in a circle around city centre (no real address exposed)
-    const coords = getCitySpreadCoords(p.city, cityIndex[p.city]?.idx++ ?? 0, cityIndex[p.city]?.total ?? 1);
+    const ci = cityIndex[p.city] || {idx:0, total:1};
+    const spreadIdx = ci.idx; ci.idx++;
+    const coords = getCitySpreadCoords(p.city, spreadIdx, ci.total);
     const img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
     const price = p.priceFrom ? `${p.priceFrom.toLocaleString('fr-FR')} € / nuit` : 'Sur devis';
 
