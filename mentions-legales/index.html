@@ -305,12 +305,11 @@
   .hdr-phone-btn:hover { background: rgba(232,203,160,.2); }
   .hdr-phone-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
   .hdr-phone-dropdown {
-    display: none; position: absolute; top: calc(100% + 10px); right: 0;
+    display: none; position: absolute; top: 100%; right: 0; padding-top: 6px;
     background: #1a2a1e; border: 1px solid rgba(232,203,160,.15);
     border-radius: 8px; min-width: 220px; overflow: hidden;
     box-shadow: 0 16px 48px rgba(0,0,0,.45); z-index: 900;
   }
-  .hdr-phone-wrap:hover .hdr-phone-dropdown,
   .hdr-phone-wrap.open .hdr-phone-dropdown { display: block; }
   .hdr-phone-item {
     display: flex; align-items: center; gap: 12px;
