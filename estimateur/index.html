@@ -2823,6 +2823,12 @@
   window.addEventListener('load', () => {
     const simIntro = document.getElementById('simIntro');
     if (simIntro) simIntro.classList.add('loaded');
+    // Pre-select station from URL param: /estimateur?station=courchevel
+    const urlStation = new URLSearchParams(window.location.search).get('station');
+    if (urlStation) {
+      const match = STATIONS.find(s => s.id === urlStation.toLowerCase());
+      if (match) pickStation(match.id);
+    }
   });
 
   /* .si-cta supprimé (remplacé par le station picker) */
