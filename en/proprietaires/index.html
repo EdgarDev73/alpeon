@@ -6,51 +6,84 @@
   <link rel="icon" type="image/png" sizes="180x180" href="/assets/logo/favicon-180.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/favicon-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Property Owners — Entrust your Alpine Property | ALPÉON</title>
-  <meta name="description" content="Entrust your alpine property to ALPÉON. Seasonal rental management in Val Thorens, Megève, Courchevel. Fixed guaranteed rent every month, independent of the market." />
+  <title>Owners — Entrust your alpine property | ALPÉON</title>
+  <meta name="description" content="Entrust your alpine property to ALPÉON. Seasonal rental management in Val Thorens, Megève, Courchevel. Guaranteed fixed rent every month, independent of the market." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://alpeon.fr/en/proprietaires/" />
-  <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/proprietaires/" />
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/proprietaires/" />
-  <!-- OG -->
-  <meta name="keywords" content="ski property rental management, guaranteed rent alpine chalet, entrust property ski resort, Val Thorens property owner, Megève chalet rental manager, Courchevel apartment management, French Alps seasonal rental income, fixed guaranteed rent ski property" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Property Owners — Fixed Guaranteed Rent | ALPÉON" />
-  <meta name="twitter:description" content="Fixed guaranteed rent every month, independent of market conditions. Entrust your alpine property to ALPÉON." />
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=1200&q=85" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://alpeon.fr/en/accueil/" },
-          { "@type": "ListItem", "position": 2, "name": "Property Owners", "item": "https://alpeon.fr/en/proprietaires/" }
-        ]
-      },
-      {
-        "@type": "Service",
-        "name": "Alpine Seasonal Rental Management",
-        "provider": { "@type": "RealEstateAgent", "@id": "https://alpeon.fr/#organization" },
-        "description": "Full-service rental management for alpine property owners. Fixed guaranteed rent independent of the market, complete management of bookings, guest welcome, housekeeping and maintenance.",
-        "areaServed": ["Val Thorens", "Megève", "Courchevel", "Méribel", "Tignes", "Val d'Isère"],
-        "serviceType": "Seasonal rental management",
-        "offers": { "@type": "Offer", "description": "Fixed guaranteed rent — independent of occupancy rates and market conditions" }
-      }
-    ]
-  }
-  </script>
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Property Owners — Fixed Guaranteed Rent | ALPÉON" />
-  <meta property="og:description" content="Fixed guaranteed rent, professional management and full transparency. Discover ALPÉON's services for alpine property owners." />
-  <meta property="og:url" content="https://alpeon.fr/en/proprietaires/" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=1200&q=85" />
-  <!-- Fonts -->
+  <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/proprietaires/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet" />
   <style>
+/* @@NAV-START@@ */
+  :root { --nav-h: 88px; }
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+    height: var(--nav-h); background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background .35s ease, border-color .35s ease;
+  }
+  .site-header.scrolled {
+    background: rgba(18,30,20,.97);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(232,203,160,.1);
+  }
+  .site-header-inner {
+    max-width: 1400px; margin: 0 auto;
+    padding: 0 2.5rem; height: var(--nav-h); display: flex; align-items: center;
+  }
+  .site-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .site-logo img { height: 64px; width: auto; display: block; }
+  .site-nav { display: flex; align-items: center; gap: 2rem; margin-left: auto; }
+  .site-nav-link {
+    color: rgba(250,254,255,.75); font-size: .72rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    position: relative; padding-bottom: 3px; transition: color .2s; white-space: nowrap;
+  }
+  .site-nav-link::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1.5px; background: #C9A97A;
+    transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
+  }
+  .site-nav-link:hover { color: #fff; }
+  .site-nav-link.active { color: #C9A97A; }
+  .site-nav-link.active::after, .site-nav-link:hover::after { transform: scaleX(1); }
+  .site-header-right { display: flex; align-items: center; gap: 1.25rem; margin-left: 2.5rem; flex-shrink: 0; }
+  .site-lang { display: flex; align-items: center; gap: .35rem; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
+  .site-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-lang a.active { color: #C9A97A; }
+  .site-lang span { color: rgba(250,254,255,.15); font-size: .5rem; }
+  .site-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; background: none; border: none; cursor: pointer; padding: 0; }
+  .site-burger span { display: block; height: 1.5px; background: rgba(250,254,255,.75); border-radius: 2px; transition: all .25s; }
+  .site-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .site-burger.open span:nth-child(2) { opacity: 0; }
+  .site-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .site-mobile-menu {
+    display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    background: rgba(18,30,20,.98); backdrop-filter: blur(14px);
+    flex-direction: column; padding: 2rem 2rem 3rem; z-index: 299;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .site-mobile-menu.open { opacity: 1; pointer-events: all; }
+  .site-mobile-link {
+    color: rgba(250,254,255,.6); font-size: 1.1rem; font-weight: 300;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    padding: 1rem 0; border-bottom: 1px solid rgba(250,254,255,.06); transition: color .2s;
+    font-family: 'Lora', serif;
+  }
+  .site-mobile-link:hover, .site-mobile-link.active { color: #C9A97A; }
+  .site-mobile-lang { display: flex; gap: .5rem; align-items: center; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,254,255,.3); margin-top: 1.5rem; }
+  .site-mobile-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-mobile-lang a.active { color: #C9A97A; }
+  @media (max-width: 900px) {
+    .site-nav, .site-lang { display: none; }
+    .site-burger { display: flex; }
+    .site-mobile-menu { display: flex; }
+    .site-header-inner { padding: 0 1.25rem; }
+  }
+  /* @@NAV-END@@ */
+
     :root {
       --stone:    #faf9f7;
       --stone-2:  #f2efe9;
@@ -63,55 +96,13 @@
       --accent-2: #8a7a56;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--stone); color: var(--ink); line-height: 1.6; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Poppins', sans-serif; background: var(--stone); color: var(--ink); line-height: 1.6; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
 
-    /* ── HEADER ── */
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 72px;
-      background: transparent; transition: background .4s, box-shadow .4s;
-    }
-    header.scrolled { background: rgba(250,249,247,.97); box-shadow: 0 1px 0 var(--stone-3); backdrop-filter: blur(8px); }
-    .logo { display: flex; align-items: center; text-decoration: none; }
-    .logo-name { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #fff; transition: color .4s; }
-    header.scrolled .logo-name { color: var(--ink); }
-    .main-nav { display: flex; align-items: center; gap: 36px; }
-    .main-nav a { font-size: .74rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; transition: color .3s; }
-    .main-nav a:hover { color: #fff; }
-    header.scrolled .main-nav a { color: var(--ink-3); }
-    header.scrolled .main-nav a:hover { color: var(--ink); }
-    .lang-switch { display: flex; align-items: center; gap: 8px; }
-    .lang-btn { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); text-decoration: none; transition: color .3s; }
-    .lang-btn.active { color: rgba(255,255,255,.9); }
-    header.scrolled .lang-btn { color: var(--ink-4); }
-    header.scrolled .lang-btn.active { color: var(--ink); }
-    .lang-sep { color: rgba(255,255,255,.2); font-size: .6rem; }
-    header.scrolled .lang-sep { color: var(--stone-4); }
-
-    /* Hamburger mobile */
-    .mob-menu-btn { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; }
-    .mob-menu-btn span { display:block; height:1.5px; width:22px; background:#fff; transition:all .3s; border-radius:1px; }
-    header.scrolled .mob-menu-btn span { background:var(--ink); }
-    .mob-menu-btn.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-    .mob-menu-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-    .mob-menu-btn.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-    .mob-menu { position:fixed; inset:0; z-index:300; background:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s; display:flex; flex-direction:column; }
-    .mob-menu.open { opacity:1; pointer-events:all; }
-    .mob-close { position:absolute; top:14px; right:18px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); font-size:1.6rem; line-height:1; transition:color .2s; }
-    .mob-close:hover { color:#fff; }
-    .mob-menu-inner { display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; gap:44px; padding:20px; }
-    .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
-    .mob-nav a { font-family:'Lora',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
-    .mob-nav a:hover { color:#fff; }
-    .mob-lang { display:flex; align-items:center; gap:14px; }
-    .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
-    .mob-lang-btn.active { color:rgba(255,255,255,.9); }
-    .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
-    @media (max-width:900px) { .mob-menu-btn { display:flex; } .main-nav { display:none; } }
-
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       position: relative; height: 100vh; min-height: 600px;
       display: flex; align-items: flex-end; padding: 0 60px 80px;
@@ -119,7 +110,7 @@
     }
     .hero::before {
       content: ''; position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=2000&q=90') center 60% / cover no-repeat;
+      background: url('/assets/images/hero-reserver.jpg') center 60% / cover no-repeat;
     }
     .hero::after {
       content: ''; position: absolute; inset: 0;
@@ -136,13 +127,13 @@
     .btn-ghost { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.3); padding-bottom: 2px; transition: color .3s, border-color .3s; }
     .btn-ghost:hover { color: #fff; border-color: #fff; }
 
-    /* ── STATS ── */
+    /* STATS */
     .stats { background: var(--ink); padding: 40px 60px; display: flex; justify-content: center; gap: 80px; }
     .stat { text-align: center; }
     .stat-num { font-family: 'Lora', serif; font-size: 2.4rem; font-weight: 400; color: #fff; line-height: 1; }
     .stat-label { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-top: 6px; }
 
-    /* ── SECTION BASE ── */
+    /* SECTION BASE */
     section { padding: 100px 60px; }
     .sec-kicker { font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
     .sec-kicker::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
@@ -150,16 +141,13 @@
     .sec-title em { font-style: italic; color: var(--accent); }
     .sec-desc { font-size: .95rem; color: var(--ink-3); line-height: 1.75; max-width: 560px; }
 
-    /* ── OFFRES ── */
+    /* OFFRES */
     .offres { background: var(--stone); }
     .offres-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 64px; }
-    .offre-card {
-      position: relative; overflow: hidden; min-height: 500px;
-      display: flex; flex-direction: column; justify-content: flex-end; padding: 48px 44px;
-    }
+    .offre-card { position: relative; overflow: hidden; min-height: 500px; display: flex; flex-direction: column; justify-content: flex-end; padding: 48px 44px; }
     .offre-card::before { content: ''; position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .6s; }
     .offre-card:hover::before { transform: scale(1.04); }
-    .offre-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(28,27,25,.9) 40%, rgba(28,27,25,.2) 100%); }
+    .offre-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.6) 40%, rgba(0,0,0,.1) 75%, transparent 100%); }
     .offre-residences::before { background-image: url('/assets/images/residence.JPG'); }
     .offre-signatures::before { background-image: url('/assets/images/signature.jpg'); }
     .offre-content { position: relative; z-index: 2; }
@@ -168,7 +156,7 @@
     .offre-desc { font-size: .88rem; color: rgba(255,255,255,.7); line-height: 1.65; margin-bottom: 24px; max-width: 380px; }
     .offre-link { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
 
-    /* ── PROCESS ── */
+    /* PROCESS */
     .process { background: var(--stone-2); }
     .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 64px; }
     .process-step { position: relative; padding-top: 32px; border-top: 2px solid var(--stone-3); }
@@ -178,7 +166,7 @@
     .step-title { font-family: 'Lora', serif; font-size: 1.25rem; font-weight: 500; color: var(--ink); margin-bottom: 12px; line-height: 1.2; }
     .step-desc { font-size: .85rem; color: var(--ink-3); line-height: 1.7; }
 
-    /* ── ENGAGEMENTS ── */
+    /* ENGAGEMENTS */
     .engagements { background: var(--stone); }
     .eng-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px; }
     .eng-card { padding: 36px 32px; background: #fff; border: 1px solid var(--stone-3); border-top: 3px solid var(--accent); }
@@ -187,7 +175,7 @@
     .eng-title { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
     .eng-desc { font-size: .87rem; color: var(--ink-3); line-height: 1.7; }
 
-    /* ── CTA ── */
+    /* CTA */
     .cta-section { background: var(--ink); padding: 100px 60px; text-align: center; }
     .cta-section .sec-kicker { justify-content: center; }
     .cta-section .sec-kicker::before { display: none; }
@@ -199,32 +187,45 @@
     .btn-outline-white { border: 1px solid rgba(255,255,255,.35); color: rgba(255,255,255,.8); text-decoration: none; padding: 16px 40px; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: border-color .3s, color .3s; display: inline-block; }
     .btn-outline-white:hover { border-color: #fff; color: #fff; }
 
-    /* ── FOOTER ── */
-    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.07); padding: 64px 60px 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-    .f-brand-name { font-family: 'Lora', serif; font-size: 1.4rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 6px; }
-    .f-brand-claim { font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-    .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.42); line-height: 1.7; }
-    .f-col-label { font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 18px; }
-    .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .f-links a { font-size: .84rem; color: rgba(255,255,255,.58); text-decoration: none; transition: color .2s; }
-    .f-links a:hover { color: #fff; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 24px; display: flex; justify-content: space-between; font-size: .74rem; color: rgba(255,255,255,.25); }
+    /* FOOTER */
+    footer { background: #0d1410; padding: clamp(56px,7vw,88px) 0 0; }
+    .container { width: 100%; max-width: 1380px; margin: 0 auto; padding: 0 clamp(24px,5vw,80px); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(250,254,255,.07); }
+    .footer-brand-logo { margin-bottom: 14px; }
+    .footer-brand-claim { font-size: .58rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #E8CBA0; margin-bottom: 16px; opacity: .85; }
+    .footer-brand-text { font-size: .81rem; font-weight: 300; color: rgba(250,254,255,.32); line-height: 1.8; max-width: 270px; }
+    .footer-col-title { font-size: .58rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 18px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a { font-size: .83rem; font-weight: 300; color: rgba(250,254,255,.48); transition: color .2s; text-decoration: none; }
+    .footer-links a:hover { color: #E8CBA0; }
+    .footer-lower { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; padding: 40px 0 48px; border-bottom: 1px solid rgba(250,254,255,.07); }
+    .footer-socials { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
+    .footer-social-link { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(250,254,255,.15); color: rgba(250,254,255,.48); transition: all .2s; }
+    .footer-social-link:hover { border-color: #E8CBA0; color: #E8CBA0; background: rgba(232,203,160,.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
+    .nl-form { display: flex; gap: 8px; margin-top: 4px; }
+    .nl-input { flex: 1; border: 1px solid rgba(250,254,255,.12); border-radius: 4px; background: rgba(250,254,255,.05); color: #fff; padding: .55rem .85rem; font-size: .8rem; font-family: inherit; outline: none; transition: border-color .2s; }
+    .nl-input::placeholder { color: rgba(250,254,255,.25); }
+    .nl-input:focus { border-color: rgba(232,203,160,.45); }
+    .nl-btn { background: #E8CBA0; color: #1a2a1e; border: none; border-radius: 4px; padding: .55rem 1.1rem; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: opacity .2s; font-family: inherit; }
+    .nl-btn:hover { opacity: .85; }
+    .nl-msg { font-size: .73rem; margin-top: .5rem; min-height: 1em; }
+    .nl-msg.ok { color: #86efac; } .nl-msg.err { color: #fca5a5; }
+    .footer-bottom { padding: 24px 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .process-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    /* RESPONSIVE */
+    @media (max-width: 1024px) { .process-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } .footer-lower { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
-      header { padding: 0 20px; }
+      :root { --nav-h: 72px; }
       section { padding: 64px 24px; }
       .hero { padding: 0 24px 60px; }
       .stats { padding: 32px 24px; gap: 32px; flex-wrap: wrap; }
       .offres-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
       .eng-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
       .cta-section { padding: 64px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 8px; }
     }
     @media (max-width: 480px) {
@@ -232,228 +233,282 @@
       .footer-grid { grid-template-columns: 1fr; }
       .hero h1 { font-size: 2.2rem; }
     }
+
+  .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
+  .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.55)}
+  .wa-btn svg{width:26px;height:26px;fill:#fff}
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header id="siteHeader">
-    <a href="/en/accueil" class="logo">
-      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="80" style="height:80px;width:auto;display:block;margin-top:10px">
+<header class="site-header" id="site-header">
+  <div class="site-header-inner">
+    <a href="/en/accueil" class="site-logo">
+      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON">
     </a>
-    <nav class="main-nav">
-      <a href="/en/accueil">Home</a>
-      <a href="/en/destinations">Destinations</a><a href="/en/reserver">Book</a>
-      <a href="/en/proprietaires">Owners</a>
-      <a href="/en/estimateur">Estimator</a>
-      <div class="lang-switch">
-        <a href="/proprietaires" class="lang-btn">FR</a>
-        <span class="lang-sep">|</span>
-        <a href="/en/proprietaires" class="lang-btn active">EN</a>
-      </div>
+    <nav class="site-nav">
+      <a href="/en/accueil" class="site-nav-link">Home</a>
+      <a href="/en/destinations" class="site-nav-link">Destinations</a>
+      <a href="/en/reserver" class="site-nav-link">Book</a>
+      <a href="/en/proprietaires" class="site-nav-link active">Owners</a>
+      <a href="/en/estimateur" class="site-nav-link">Estimator</a>
+      <a href="/en/about" class="site-nav-link">About</a>
     </nav>
-    <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
-  </header>
+    <div class="site-header-right">
+      <div class="site-lang">
+        <a href="/proprietaires">FR</a>
+        <span>|</span>
+        <a href="/en/proprietaires" class="active">EN</a>
+      </div>
+      <button class="site-burger" id="site-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="site-mobile-menu" id="site-mobile-menu">
+    <a href="/en/accueil" class="site-mobile-link">Home</a>
+    <a href="/en/destinations" class="site-mobile-link">Destinations</a>
+    <a href="/en/reserver" class="site-mobile-link">Book</a>
+    <a href="/en/proprietaires" class="site-mobile-link active">Owners</a>
+    <a href="/en/estimateur" class="site-mobile-link">Estimator</a>
+    <a href="/en/about" class="site-mobile-link">About</a>
+    <div class="site-mobile-lang">
+      <a href="/proprietaires">FR</a><span>|</span><a href="/en/proprietaires" class="active">EN</a>
+    </div>
+  </div>
+</header>
+<script>
+function toggleMobileMenu(){
+  const menu = document.getElementById('site-mobile-menu');
+  const burger = document.getElementById('site-burger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+</script>
 
-  <div class="mob-menu" id="mobMenu">
-    <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')" aria-label="Close">&#x2715;</button>
-    <div class="mob-menu-inner">
-      <nav class="mob-nav">
-        <a href="/en/accueil">Home</a>
-        <a href="/en/destinations">Destinations</a><a href="/en/reserver">Book</a>
-        <a href="/en/proprietaires">Owners</a>
-        <a href="/en/estimateur">Estimator</a>
-      </nav>
-      <div class="mob-lang">
-        <a href="/proprietaires" class="mob-lang-btn">FR</a>
-        <span class="mob-lang-sep">|</span>
-        <a href="/en/proprietaires" class="mob-lang-btn active">EN</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-kicker">For property owners</p>
+    <h1>Entrust your alpine property<br>to <em>passionate experts</em></h1>
+    <p class="hero-desc">We manage your property as if it were our own — with rigour, discretion and a single objective: to guarantee you a fixed rent every month, independent of the market and our performance.</p>
+    <div class="hero-actions">
+      <a href="/en/estimateur" class="btn-primary">Estimate my income</a>
+      <a href="#process" class="btn-ghost">How it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Properties managed</div></div>
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label">Alpine resorts</div></div>
+  <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Satisfied owners</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Guaranteed fixed rent</div></div>
+</div>
+
+<!-- OFFRES -->
+<section class="offres" id="offres">
+  <div class="sec-kicker">Our plans</div>
+  <h2 class="sec-title">Two levels of excellence,<br>one <em>shared ambition</em></h2>
+  <p class="sec-desc">Whether your property is a resort apartment or an exceptional chalet, ALPÉON has a plan tailored for it.</p>
+  <div class="offres-grid">
+    <div class="offre-card offre-residences">
+      <div class="offre-content">
+        <img src="/assets/logo/logo-residences-gold.svg" alt="ALPÉON Résidences" style="height:72px;width:auto;display:block;margin-bottom:20px">
+        <h3 class="offre-title">Professional<br>rental management</h3>
+        <p class="offre-desc">Complete management of your apartment or chalet — reservations, guest reception, cleaning, maintenance and monthly reporting.</p>
+        <a href="/en/estimateur" class="offre-link">Estimate my income →</a>
+      </div>
+    </div>
+    <div class="offre-card offre-signatures">
+      <div class="offre-content">
+        <img src="/assets/logo/logo-signatures-gold.svg" alt="ALPÉON Signatures" style="height:72px;width:auto;display:block;margin-bottom:20px">
+        <h3 class="offre-title">Excellence for<br>exceptional properties</h3>
+        <p class="offre-desc">For premium properties that deserve bespoke treatment — high-end concierge, curated clientele, 5-star services.</p>
+        <a href="/en/accueil#contact" class="offre-link">Contact us →</a>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-kicker">For property owners</p>
-      <h1>Entrust your alpine property<br>to <em>passionate experts</em></h1>
-      <p class="hero-desc">We manage your property as if it were our own — with rigour, discretion and one single goal: guarantee you a fixed monthly rent, independent of market conditions and our own performance.</p>
-      <div class="hero-actions">
-        <a href="/en/estimateur" class="btn-primary">Estimate my income</a>
-        <a href="#process" class="btn-ghost">How it works</a>
-      </div>
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="sec-kicker">How it works</div>
+  <h2 class="sec-title">From first contact<br>to your <em>first income</em></h2>
+  <p class="sec-desc">Simple and transparent support, from A to Z.</p>
+  <div class="process-grid">
+    <div class="process-step active-step">
+      <div class="step-num">01</div>
+      <h3 class="step-title">Free estimation</h3>
+      <p class="step-desc">Use our simulator to find out the amount of your guaranteed rent in 2 minutes, calculated from real data in our portfolio.</p>
     </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Properties managed</div></div>
-    <div class="stat"><div class="stat-num">15</div><div class="stat-label">Alpine resorts</div></div>
-    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Satisfied owners</div></div>
-    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Fixed guaranteed rent</div></div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <h3 class="step-title">Property visit & audit</h3>
+      <p class="step-desc">An ALPÉON advisor visits your property to refine the estimate and propose the most suitable plan for you.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <h3 class="step-title">Listing & launch</h3>
+      <p class="step-desc">We prepare your property (professional photography, listings, dynamic pricing) and begin welcoming your guests.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <h3 class="step-title">Fixed rent & reporting</h3>
+      <p class="step-desc">Your fixed rent is paid every month, whether your property is occupied or not. Your owner dashboard gives you complete real-time visibility.</p>
+    </div>
   </div>
+</section>
 
-  <!-- OFFRES -->
-  <section class="offres" id="offres">
-    <div class="sec-kicker">Our packages</div>
-    <h2 class="sec-title">Two levels of excellence,<br>one <em>shared ambition</em></h2>
-    <p class="sec-desc">Whether your property is a resort apartment or an exceptional chalet, ALPÉON has a package crafted for it.</p>
-    <div class="offres-grid">
-      <div class="offre-card offre-residences">
-        <div class="offre-content">
-          <span class="offre-badge">ALPÉON Résidences</span>
-          <h3 class="offre-title">Professional<br>rental management</h3>
-          <p class="offre-desc">Full management of your apartment or chalet — bookings, guest welcome, housekeeping, maintenance and monthly reporting.</p>
-          <a href="/en/estimateur" class="offre-link">Estimate my income →</a>
-        </div>
-      </div>
-      <div class="offre-card offre-signatures">
-        <div class="offre-content">
-          <span class="offre-badge">ALPÉON Signatures</span>
-          <h3 class="offre-title">Excellence for<br>exceptional properties</h3>
-          <p class="offre-desc">For premium properties that deserve bespoke treatment — high-end concierge, selected clientele, 5-star services.</p>
-          <a href="/en/accueil#contact" class="offre-link">Contact us →</a>
-        </div>
-      </div>
+<!-- ENGAGEMENTS -->
+<section class="engagements" id="engagements">
+  <div class="sec-kicker">Our commitments</div>
+  <h2 class="sec-title">What we <em>guarantee</em> you</h2>
+  <p class="sec-desc">At ALPÉON, every commitment is contractual. No vague promises — measurable results.</p>
+  <div class="eng-grid">
+    <div class="eng-card">
+      <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3 class="eng-title">Fixed & guaranteed rent</h3>
+      <p class="eng-desc">Your rent is set contractually and paid every month, regardless of occupancy rate and market conditions. Zero uncertainty, zero surprises.</p>
     </div>
-  </section>
-
-  <!-- PROCESS -->
-  <section class="process" id="process">
-    <div class="sec-kicker">How it works</div>
-    <h2 class="sec-title">From first contact<br>to your <em>first earnings</em></h2>
-    <p class="sec-desc">A simple, transparent journey from start to finish.</p>
-    <div class="process-grid">
-      <div class="process-step active-step">
-        <div class="step-num">01</div>
-        <h3 class="step-title">Free estimate</h3>
-        <p class="step-desc">Use our simulator to find out your guaranteed fixed rent in 2 minutes, calculated from real data across our portfolio.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
-        <h3 class="step-title">Property visit & audit</h3>
-        <p class="step-desc">An ALPÉON advisor visits your property, refines the estimate and proposes the most suitable package for you.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
-        <h3 class="step-title">Listing & letting</h3>
-        <p class="step-desc">We prepare your property (professional photography, listings, dynamic pricing) and start welcoming your guests.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <h3 class="step-title">Fixed rent & reporting</h3>
-        <p class="step-desc">Your fixed rent is paid every month, whether your property is occupied or not. Your owner dashboard gives you complete real-time visibility.</p>
-      </div>
+    <div class="eng-card">
+      <div class="eng-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+      <h3 class="eng-title">7-day availability</h3>
+      <p class="eng-desc">Our team is reachable at all times to handle any situation — technical emergency, guest request, owner question.</p>
     </div>
-  </section>
-
-  <!-- ENGAGEMENTS -->
-  <section class="engagements" id="engagements">
-    <div class="sec-kicker">Our commitments</div>
-    <h2 class="sec-title">What we <em>guarantee</em> you</h2>
-    <p class="sec-desc">At ALPÉON, every commitment is contractual. No vague promises — measurable results.</p>
-    <div class="eng-grid">
-      <div class="eng-card">
-        <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3 class="eng-title">Fixed & guaranteed rent</h3>
-        <p class="eng-desc">Your rent is set contractually and paid every month, regardless of occupancy rates or market conditions. Zero uncertainty, zero surprises.</p>
-      </div>
-      <div class="eng-card">
-        <div class="eng-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-        <h3 class="eng-title">Available 7 days a week</h3>
-        <p class="eng-desc">Our team is reachable at all times to handle any situation — technical emergency, guest request or owner query.</p>
-      </div>
-      <div class="eng-card">
-        <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-        <h3 class="eng-title">Full transparency</h3>
-        <p class="eng-desc">Real-time access to your owner portal: bookings, income, maintenance logs, documents. No surprises at month-end.</p>
-      </div>
-      <div class="eng-card">
-        <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <h3 class="eng-title">Property upkeep</h3>
-        <p class="eng-desc">Your property is maintained to our strict standards — professional cleaning, systematic inventories, equipment monitoring.</p>
-      </div>
-      <div class="eng-card">
-        <div class="eng-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3 class="eng-title">Maximised occupancy</h3>
-        <p class="eng-desc">Our dynamic pricing algorithm maximises your property's occupancy rate — we carry the commercial risk, not you.</p>
-      </div>
-      <div class="eng-card">
-        <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3 class="eng-title">Guest screening</h3>
-        <p class="eng-desc">We rigorously vet profiles to welcome only qualified guests who respect your property and your neighbours.</p>
-      </div>
+    <div class="eng-card">
+      <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <h3 class="eng-title">Total transparency</h3>
+      <p class="eng-desc">Real-time access to your owner portal: reservations, income, maintenance, documents. No surprises at the end of the month.</p>
     </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="sec-kicker">Ready to start?</div>
-    <h2 class="sec-title" style="color:#fff;">Discover the potential of <em style="color:var(--accent);">your property</em></h2>
-    <p class="sec-desc">Find out your guaranteed fixed rent in 2 minutes. Free, no commitment, calculated from real data across our portfolio.</p>
-    <div class="cta-actions">
-      <a href="/en/estimateur" class="btn-white">Calculate my guaranteed rent</a>
-      <a href="/en/accueil#contact" class="btn-outline-white">Speak to an advisor</a>
+    <div class="eng-card">
+      <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <h3 class="eng-title">Property maintenance</h3>
+      <p class="eng-desc">Your property is maintained to our strict standards — professional cleaning, systematic check-in/check-out, equipment monitoring.</p>
     </div>
-  </section>
+    <div class="eng-card">
+      <div class="eng-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h3 class="eng-title">Maximised occupancy</h3>
+      <p class="eng-desc">Our dynamic pricing algorithm maximises your property's occupancy rate — we bear the commercial risk, not you.</p>
+    </div>
+    <div class="eng-card">
+      <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3 class="eng-title">Guest selection</h3>
+      <p class="eng-desc">We rigorously vet guest profiles to only welcome qualified guests who respect your property and your neighbours.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
+<!-- CTA -->
+<section class="cta-section">
+  <div class="sec-kicker">Ready to start?</div>
+  <h2 class="sec-title" style="color:#fff;">Discover the potential of <em style="color:var(--accent);">your property</em></h2>
+  <p class="sec-desc">Get the amount of your guaranteed rent in 2 minutes. Free, no commitment, calculated from real data in our portfolio.</p>
+  <div class="cta-actions">
+    <a href="/en/estimateur" class="btn-white">Calculate my guaranteed rent</a>
+    <a href="/en/accueil#contact" class="btn-outline-white">Speak to an advisor</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container">
     <div class="footer-grid">
       <div>
-        <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="120" style="height:120px;width:auto;display:block;margin-bottom:4px">
-        <div class="f-brand-claim">Alpine Property Management</div>
-        <p class="f-brand-desc">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency for every owner.</p>
+        <div class="footer-brand-logo">
+          <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="110" style="height:110px;width:auto;display:block">
+        </div>
+        <div class="footer-brand-claim">Alpine Property Management</div>
+        <p class="footer-brand-text">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency.</p>
       </div>
       <div>
-        <div class="f-col-label">Destinations</div>
-        <ul class="f-links">
-          <li><a href="#">Megève</a></li>
-          <li><a href="#">Courchevel</a></li>
-          <li><a href="#">Val d'Isère</a></li>
-          <li><a href="#">Val Thorens</a></li>
-          <li><a href="#">Méribel</a></li>
-          <li><a href="#">+ 10 resorts</a></li>
+        <div class="footer-col-title">Destinations</div>
+        <ul class="footer-links">
+          <li><a href="/en/destinations">Courchevel</a></li>
+          <li><a href="/en/destinations">Megève</a></li>
+          <li><a href="/en/destinations">Val d'Isère</a></li>
+          <li><a href="/en/destinations">Val Thorens</a></li>
+          <li><a href="/en/destinations">Méribel</a></li>
+          <li><a href="/en/destinations">Tignes</a></li>
         </ul>
       </div>
       <div>
-        <div class="f-col-label">Services</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
           <li><a href="/en/proprietaires">Owners</a></li>
-          <li><a href="#">ALPÉON Signatures</a></li>
-          <li><a href="/en/estimateur">Revenue Estimator</a></li>
+          <li><a href="/en/proprietaires">ALPÉON Signatures</a></li>
+          <li><a href="/en/estimateur">Revenue estimator</a></li>
+          <li><a href="/en/about">About</a></li>
+          <li><a href="/en/faq">FAQ</a></li>
         </ul>
       </div>
       <div>
-        <div class="f-col-label">Contact</div>
-        <ul class="f-links">
-          <li><a href="mailto:owners@alpeon.fr">owners@alpeon.fr</a></li>
+        <div class="footer-col-title">Contact &amp; Legal</div>
+        <ul class="footer-links">
+          <li><a href="mailto:reservations@alpeon.fr">reservations@alpeon.fr</a></li>
+          <li><a href="https://www.instagram.com/alpeon_residences?igsh=MWkyNmN2czIweml4Ng==" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="/mentions-legales">Legal notice</a></li>
           <li><a href="/politique-confidentialite">Privacy policy</a></li>
           <li><a href="/cgv">General terms</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 ALPÉON. All rights reserved.</span>
-      <span>Premium alpine rental management — 15 French Alpine resorts</span>
+
+    <div class="footer-lower">
+      <div>
+        <div class="footer-col-title">Social media</div>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/alpeon_residences?igsh=MWkyNmN2czIweml4Ng==" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Newsletter</div>
+        <p style="font-size:.78rem;color:rgba(250,254,255,.35);line-height:1.6;margin-bottom:.75rem">Nouvelles propriétés, offres de saison et actualités alpines.</p>
+        <form class="nl-form" onsubmit="submitNewsletter(event)">
+          <input class="nl-input" type="email" id="nl-email" placeholder="votre@email.fr" required>
+          <button class="nl-btn" type="submit">S'inscrire</button>
+        </form>
+        <p class="nl-msg" id="nl-msg"></p>
+      </div>
     </div>
-  </footer>
 
-  <script>
-    // Header scroll
-    const hdr = document.getElementById('siteHeader');
-    window.addEventListener('scroll', () => { hdr.classList.toggle('scrolled', window.scrollY > 40); });
+    <div class="footer-bottom">
+      <span>© 2026 ALPÉON · All rights reserved</span>
+      <span>Premium alpine property management · French Alps</span>
+    </div>
+  </div>
+</footer>
 
-    // Hamburger
-    (function(){
-      var btn = document.getElementById('mobMenuBtn');
-      var menu = document.getElementById('mobMenu');
-      if (!btn || !menu) return;
-      btn.addEventListener('click', function(){ var o = menu.classList.toggle('open'); btn.classList.toggle('open', o); });
-      menu.addEventListener('click', function(e){ if (e.target === menu) { menu.classList.remove('open'); btn.classList.remove('open'); } });
-    })();
-  </script>
-
+<script id="nav-scroll-js">
+(function(){
+  var h=document.getElementById('site-header');
+  if(!h)return;
+  function u(){h.classList.toggle('scrolled',window.scrollY>40);}
+  window.addEventListener('scroll',u,{passive:true});
+  u();
+})();
+</script>
+<script>
+async function submitNewsletter(e){
+  e.preventDefault();
+  const email = document.getElementById('nl-email').value.trim();
+  const msg = document.getElementById('nl-msg');
+  if(!email){ msg.textContent='Entrez votre email.'; msg.className='nl-msg err'; return; }
+  msg.textContent='Inscription…'; msg.className='nl-msg';
+  try{
+    const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const d = await r.json();
+    if(d.ok){ msg.textContent='✓ Merci, vous êtes inscrit !'; msg.className='nl-msg ok'; document.getElementById('nl-email').value=''; }
+    else { msg.textContent=d.error||'Erreur, réessayez.'; msg.className='nl-msg err'; }
+  }catch(e){ msg.textContent='Erreur réseau.'; msg.className='nl-msg err'; }
+}
+</script>
+<a class="wa-btn" href="https://wa.me/33765254926" target="_blank" rel="noopener" aria-label="Contact WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 </body>
 </html>
