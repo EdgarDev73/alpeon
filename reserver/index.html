@@ -9,6 +9,8 @@
   <meta name="description" content="Chalets, appartements et penthouses dans les plus grandes stations alpines. Courchevel, Megève, Val d'Isère, Val Thorens, Méribel, Tignes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Lora:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
 /* @@NAV-START@@ */
   :root { --nav-h: 72px; }
@@ -455,6 +457,32 @@
   ═══════════════════════════════════════════════ */
   
 
+  .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
+  .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.55)}
+  .wa-btn svg{width:26px;height:26px;fill:#fff}
+  .prop-fav{position:absolute;top:.6rem;right:.6rem;z-index:2;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.88);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;backdrop-filter:blur(4px)}
+  .prop-fav:hover{transform:scale(1.12);background:#fff}
+  .prop-fav svg{width:16px;height:16px;stroke:#6b7280;fill:none;transition:stroke .2s,fill .2s}
+  .prop-fav.active svg{stroke:#e11d48;fill:#e11d48}
+
+  /* VIEW TOGGLE */
+  .view-toggle{display:flex;border:1.5px solid var(--stone-3);border-radius:4px;overflow:hidden;flex-shrink:0}
+  .view-btn{padding:.42rem .85rem;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;background:var(--white);color:#6b7280;cursor:pointer;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:.35rem;transition:background .15s,color .15s}
+  .view-btn.active{background:var(--green);color:var(--gold)}
+  .view-btn svg{width:13px;height:13px}
+
+  /* MAP */
+  #map-wrap{display:none;height:calc(100vh - 180px);min-height:500px;border-radius:8px;overflow:hidden;margin-bottom:3rem}
+  #map-wrap.visible{display:block}
+  .leaflet-popup-content-wrapper{border-radius:6px;padding:0;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.18)}
+  .leaflet-popup-content{margin:0;width:220px !important}
+  .map-popup-img{width:100%;height:110px;object-fit:cover;display:block}
+  .map-popup-body{padding:.65rem .85rem .8rem}
+  .map-popup-station{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E8CBA0;background:#2C3D30;display:inline-block;padding:.1rem .45rem;border-radius:20px;margin-bottom:.35rem}
+  .map-popup-name{font-family:Georgia,serif;font-style:italic;font-size:.9rem;font-weight:300;color:#111;line-height:1.2;margin-bottom:.3rem}
+  .map-popup-price{font-size:.75rem;color:#2C3D30;font-weight:600;margin-bottom:.55rem}
+  .map-popup-link{display:block;text-align:center;background:#2C3D30;color:#E8CBA0;text-decoration:none;border-radius:4px;padding:.38rem;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Poppins',sans-serif;transition:background .2s}
+  .map-popup-link:hover{background:#3d5442}
   </style>
 </head>
 <body>
@@ -471,6 +499,7 @@
       <a href="/reserver" class="site-nav-link active">Réserver</a>
       <a href="/proprietaires" class="site-nav-link">Propriétaires</a>
       <a href="/estimateur" class="site-nav-link">Estimateur</a>
+      <a href="/about" class="site-nav-link">À propos</a>
     </nav>
     <div class="site-header-right">
       <div class="site-lang">
@@ -489,6 +518,7 @@
     <a href="/reserver" class="site-mobile-link active">Réserver</a>
     <a href="/proprietaires" class="site-mobile-link">Propriétaires</a>
     <a href="/estimateur" class="site-mobile-link">Estimateur</a>
+    <a href="/about" class="site-mobile-link">À propos</a>
     <div class="site-mobile-lang">
       <a href="/reserver" class="active">FR</a><span>|</span><a href="/en/reserver">EN</a>
     </div>
@@ -584,6 +614,16 @@ function toggleMobileMenu(){
     <div class="filter-actions">
       <button class="filter-reset" id="btn-reset" style="display:none" onclick="resetFilters()">Effacer</button>
       <div class="filter-count" id="filter-count">— biens</div>
+      <div class="view-toggle">
+        <button class="view-btn active" id="btn-list" onclick="setView('list')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          Liste
+        </button>
+        <button class="view-btn" id="btn-map" onclick="setView('map')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          Carte
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -602,6 +642,7 @@ function toggleMobileMenu(){
     <p>Élargissez vos critères ou explorez l'ensemble de nos destinations.</p>
     <button class="empty-btn" onclick="resetFilters()">Voir tous les biens</button>
   </div>
+  <div id="map-wrap"></div>
 </div>
 
 <!-- ── REASSURANCE ── -->
@@ -677,6 +718,8 @@ function toggleMobileMenu(){
           <li><a href="/proprietaires">Propriétaires</a></li>
           <li><a href="/proprietaires">ALPÉON Signatures</a></li>
           <li><a href="/estimateur">Estimateur de revenus</a></li>
+          <li><a href="/about">À propos</a></li>
+          <li><a href="/faq">FAQ</a></li>
         </ul>
       </div>
 
@@ -718,6 +761,21 @@ function stars(rating){
 
 let all = [], filtered = [];
 
+  const FAV_KEY = 'alpeon_favs';
+  function getFavs(){ try{ return JSON.parse(localStorage.getItem(FAV_KEY)||'[]'); }catch(e){ return []; } }
+  function toggleFav(id, el){
+    let favs = getFavs();
+    const idx = favs.indexOf(id);
+    if(idx>=0){ favs.splice(idx,1); el.classList.remove('active'); }
+    else { favs.push(id); el.classList.add('active'); }
+    localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+  }
+  function initFavBtns(){
+    document.querySelectorAll('[data-fav-id]').forEach(btn=>{
+      if(getFavs().includes(btn.dataset.favId)) btn.classList.add('active');
+    });
+  }
+
   function card(p){
     const typeLabel = p.propertyType==='chalet'?'Chalet':p.propertyType==='penthouse'?'Penthouse':'Appartement';
     const prestige = (p.tags||[]).includes('Prestige') ? `<span class="badge-prestige">Prestige</span>` : '';
@@ -737,6 +795,9 @@ let all = [], filtered = [];
         <div class="prop-photo-overlay"></div>
         <div class="prop-station"><span class="badge-city">${p.city}</span>${p.area?`<span class="badge-area">${p.area}</span>`:''}</div>
         ${prestige}
+        <button class="prop-fav" data-fav-id="${p.id}" onclick="event.preventDefault();toggleFav('${p.id}',this)" aria-label="Sauvegarder">
+          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
       </div>
       <div class="prop-body">
         <div class="prop-type">${typeLabel}</div>
@@ -790,6 +851,7 @@ function render(list){
   empty.classList.remove('visible');
   count.textContent = `${list.length} bien${list.length>1?'s':''}`;
   grid.innerHTML = list.map(card).join('');
+  initFavBtns();
 }
 
 async function load(){
@@ -844,6 +906,7 @@ function applyFilters(){
     return true;
   });
   render(filtered);
+  if(currentView === 'map') renderMap();
 }
 
 function resetFilters(){
@@ -858,6 +921,85 @@ document.getElementById('f-station').addEventListener('change', applyFilters);
 document.getElementById('f-type').addEventListener('change', applyFilters);
 document.getElementById('f-guests').addEventListener('change', applyFilters);
 load();
+
+let leafletMap = null;
+let currentView = 'list';
+
+const STATION_COORDS = {
+  'courchevel': [45.4153, 6.6350],
+  'megeve':     [45.8565, 6.6162],
+  'megève':     [45.8565, 6.6162],
+  'meribel':    [45.4013, 6.5641],
+  'méribel':    [45.4013, 6.5641],
+  'tignes':     [45.4689, 6.9083],
+  "val d'isere":[45.4478, 6.9779],
+  "val d'isère":[45.4478, 6.9779],
+  'val thorens':[45.2982, 6.5841],
+};
+
+function getPropCoords(city){
+  const k = (city||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['\s]/g,'');
+  for(const [key, val] of Object.entries(STATION_COORDS)){
+    const nk = key.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['\s]/g,'');
+    if(k===nk||k.includes(nk)||nk.includes(k)) return val;
+  }
+  return [45.5, 6.7];
+}
+
+function setView(v){
+  currentView = v;
+  const grid = document.getElementById('property-grid');
+  const mapWrap = document.getElementById('map-wrap');
+  const btnList = document.getElementById('btn-list');
+  const btnMap = document.getElementById('btn-map');
+  if(v==='map'){
+    if(grid) grid.style.display='none';
+    if(mapWrap) mapWrap.classList.add('visible');
+    btnList.classList.remove('active'); btnMap.classList.add('active');
+    renderMap();
+  } else {
+    if(grid) grid.style.display='';
+    if(mapWrap) mapWrap.classList.remove('visible');
+    btnList.classList.add('active'); btnMap.classList.remove('active');
+  }
+}
+
+function renderMap(){
+  const mapWrap = document.getElementById('map-wrap');
+  if(!mapWrap) return;
+  if(!leafletMap){
+    leafletMap = L.map('map-wrap').setView([45.5, 6.7], 9);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap',
+      maxZoom: 18,
+    }).addTo(leafletMap);
+  } else {
+    leafletMap.eachLayer(l=>{ if(l instanceof L.Marker) leafletMap.removeLayer(l); });
+  }
+  const items = typeof filtered !== 'undefined' ? filtered : (typeof all !== 'undefined' ? all : []);
+  items.forEach(p => {
+    const base = getPropCoords(p.city);
+    const coords = [base[0]+(Math.random()-.5)*.012, base[1]+(Math.random()-.5)*.012];
+    const icon = L.divIcon({
+      className:'',
+      html:`<div style="background:#2C3D30;color:#E8CBA0;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;font-family:sans-serif;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)">${p.priceFrom?p.priceFrom.toLocaleString('fr-FR')+' €':'?'}</div>`,
+      iconAnchor:[30,14],
+    });
+    const img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
+    const price = p.priceFrom ? `À partir de ${p.priceFrom.toLocaleString('fr-FR')} € / nuit` : 'Sur devis';
+    const popup = `<div>
+      <img class="map-popup-img" src="${img}" alt="${p.title}" loading="lazy">
+      <div class="map-popup-body">
+        <span class="map-popup-station">${p.city}</span>
+        <div class="map-popup-name">${p.title}</div>
+        <div class="map-popup-price">${price}</div>
+        <a class="map-popup-link" href="/propriete?id=${p.id}">Voir le bien</a>
+      </div>
+    </div>`;
+    L.marker(coords, {icon}).addTo(leafletMap).bindPopup(popup, {maxWidth:220});
+  });
+  setTimeout(()=>leafletMap.invalidateSize(), 50);
+}
 </script>
 
 <script id="nav-scroll-js">
@@ -869,5 +1011,8 @@ load();
   u();
 })();
 </script>
+<a class="wa-btn" href="https://wa.me/33765254926" target="_blank" rel="noopener" aria-label="Contact WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 </body>
 </html>
