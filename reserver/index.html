@@ -471,18 +471,34 @@
   .view-btn.active{background:var(--green);color:var(--gold)}
   .view-btn svg{width:13px;height:13px}
 
-  /* MAP */
-  #map-wrap{display:none;height:calc(100vh - 180px);min-height:500px;border-radius:8px;overflow:hidden;margin-bottom:3rem}
-  #map-wrap.visible{display:block}
+  /* MAP — layout Booking.com */
+  #map-wrap{display:none;height:calc(100vh - 160px);min-height:560px;margin-bottom:3rem;border-radius:8px;overflow:hidden;border:1px solid var(--stone-2)}
+  #map-wrap.visible{display:flex}
+  /* Liste gauche */
+  #map-list{width:360px;flex-shrink:0;overflow-y:auto;background:#fff;border-right:1px solid var(--stone-2)}
+  #map-list-header{padding:.75rem 1rem;border-bottom:1px solid var(--stone-2);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;position:sticky;top:0;background:#fff;z-index:1}
+  .ml-item{display:flex;gap:.75rem;padding:.75rem 1rem;border-bottom:1px solid var(--stone-2);cursor:pointer;transition:background .15s;text-decoration:none;color:inherit}
+  .ml-item:hover,.ml-item.active{background:var(--stone-1)}
+  .ml-num{width:22px;height:22px;border-radius:50%;background:var(--green);color:var(--gold);font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .ml-item.active .ml-num{background:var(--gold);color:var(--green)}
+  .ml-img{width:72px;height:56px;border-radius:4px;object-fit:cover;flex-shrink:0}
+  .ml-body{flex:1;min-width:0}
+  .ml-station{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);margin-bottom:.15rem}
+  .ml-name{font-family:Georgia,serif;font-style:italic;font-size:.82rem;font-weight:300;color:#111;line-height:1.25;margin-bottom:.25rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ml-meta{font-size:.68rem;color:#6b7280}
+  .ml-price{font-size:.75rem;font-weight:600;color:var(--green);margin-top:.2rem}
+  /* Canvas carte */
+  #map-canvas{flex:1;min-width:0}
+  /* Popup */
   .leaflet-popup-content-wrapper{border-radius:6px;padding:0;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.18)}
-  .leaflet-popup-content{margin:0;width:220px !important}
-  .map-popup-img{width:100%;height:110px;object-fit:cover;display:block}
-  .map-popup-body{padding:.65rem .85rem .8rem}
-  .map-popup-station{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E8CBA0;background:#2C3D30;display:inline-block;padding:.1rem .45rem;border-radius:20px;margin-bottom:.35rem}
-  .map-popup-name{font-family:Georgia,serif;font-style:italic;font-size:.9rem;font-weight:300;color:#111;line-height:1.2;margin-bottom:.3rem}
-  .map-popup-price{font-size:.75rem;color:#2C3D30;font-weight:600;margin-bottom:.55rem}
-  .map-popup-link{display:block;text-align:center;background:#2C3D30;color:#E8CBA0;text-decoration:none;border-radius:4px;padding:.38rem;font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Poppins',sans-serif;transition:background .2s}
+  .leaflet-popup-content{margin:0;width:200px !important}
+  .map-popup-img{width:100%;height:100px;object-fit:cover;display:block}
+  .map-popup-body{padding:.55rem .75rem .7rem}
+  .map-popup-name{font-family:Georgia,serif;font-style:italic;font-size:.85rem;font-weight:300;color:#111;line-height:1.2;margin-bottom:.25rem}
+  .map-popup-price{font-size:.72rem;color:var(--green);font-weight:600;margin-bottom:.45rem}
+  .map-popup-link{display:block;text-align:center;background:#2C3D30;color:#E8CBA0;text-decoration:none;border-radius:4px;padding:.35rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Poppins',sans-serif;transition:background .2s}
   .map-popup-link:hover{background:#3d5442}
+  @media(max-width:768px){#map-list{width:280px}}
   </style>
 </head>
 <body>
@@ -642,7 +658,12 @@ function toggleMobileMenu(){
     <p>Élargissez vos critères ou explorez l'ensemble de nos destinations.</p>
     <button class="empty-btn" onclick="resetFilters()">Voir tous les biens</button>
   </div>
-  <div id="map-wrap"></div>
+  <div id="map-wrap">
+    <div id="map-list">
+      <div id="map-list-header">0 biens affichés</div>
+    </div>
+    <div id="map-canvas"></div>
+  </div>
 </div>
 
 <!-- ── REASSURANCE ── -->
@@ -964,11 +985,15 @@ function setView(v){
   }
 }
 
+// Store stable coords per property id to avoid jitter on re-render
+const _propCoords = {};
+
 function renderMap(){
   const mapWrap = document.getElementById('map-wrap');
   if(!mapWrap) return;
+
   if(!leafletMap){
-    leafletMap = L.map('map-wrap').setView([45.5, 6.7], 9);
+    leafletMap = L.map('map-canvas').setView([45.5, 6.7], 9);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap',
       maxZoom: 18,
@@ -976,28 +1001,81 @@ function renderMap(){
   } else {
     leafletMap.eachLayer(l=>{ if(l instanceof L.Marker) leafletMap.removeLayer(l); });
   }
+
   const items = typeof filtered !== 'undefined' ? filtered : (typeof all !== 'undefined' ? all : []);
-  items.forEach(p => {
-    const base = getPropCoords(p.city);
-    const coords = [base[0]+(Math.random()-.5)*.012, base[1]+(Math.random()-.5)*.012];
+  const markers = [];
+
+  // Build list
+  const listEl = document.getElementById('map-list');
+  const header = document.getElementById('map-list-header');
+  if(header) header.textContent = `${items.length} bien${items.length>1?'s':''} affiché${items.length>1?'s':''}`;
+  // Remove old items (keep header)
+  listEl.querySelectorAll('.ml-item').forEach(el=>el.remove());
+
+  items.forEach((p, i) => {
+    const n = i + 1;
+    // Stable coords
+    if(!_propCoords[p.id]){
+      const base = getPropCoords(p.city);
+      _propCoords[p.id] = [base[0]+(Math.random()-.5)*.012, base[1]+(Math.random()-.5)*.012];
+    }
+    const coords = _propCoords[p.id];
+    const img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
+    const price = p.priceFrom ? `${p.priceFrom.toLocaleString('fr-FR')} € / nuit` : 'Sur devis';
+
+    // Numbered marker
     const icon = L.divIcon({
       className:'',
-      html:`<div style="background:#2C3D30;color:#E8CBA0;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;font-family:sans-serif;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.25)">${p.priceFrom?p.priceFrom.toLocaleString('fr-FR')+' €':'?'}</div>`,
-      iconAnchor:[30,14],
+      html:`<div style="width:26px;height:26px;border-radius:50%;background:#2C3D30;color:#E8CBA0;font-size:11px;font-weight:700;font-family:sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3);border:2px solid #fff">${n}</div>`,
+      iconSize:[26,26],
+      iconAnchor:[13,13],
     });
-    const img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
-    const price = p.priceFrom ? `À partir de ${p.priceFrom.toLocaleString('fr-FR')} € / nuit` : 'Sur devis';
+
     const popup = `<div>
       <img class="map-popup-img" src="${img}" alt="${p.title}" loading="lazy">
       <div class="map-popup-body">
-        <span class="map-popup-station">${p.city}</span>
-        <div class="map-popup-name">${p.title}</div>
+        <div class="map-popup-name">${n}. ${p.title}</div>
         <div class="map-popup-price">${price}</div>
         <a class="map-popup-link" href="/propriete?id=${p.id}">Voir le bien</a>
       </div>
     </div>`;
-    L.marker(coords, {icon}).addTo(leafletMap).bindPopup(popup, {maxWidth:220});
+
+    const marker = L.marker(coords, {icon}).addTo(leafletMap).bindPopup(popup, {maxWidth:200});
+    markers.push(marker);
+
+    // List item
+    const item = document.createElement('a');
+    item.className = 'ml-item';
+    item.href = `/propriete?id=${p.id}`;
+    item.dataset.idx = i;
+    item.innerHTML = `
+      <div class="ml-num">${n}</div>
+      <img class="ml-img" src="${img}" alt="${p.title}" loading="lazy">
+      <div class="ml-body">
+        <div class="ml-station">${p.city}</div>
+        <div class="ml-name">${p.title}</div>
+        <div class="ml-meta">${p.guests} pers · ${p.bedrooms} ch.</div>
+        <div class="ml-price">${price}</div>
+      </div>`;
+
+    // Hover list → open popup + highlight
+    item.addEventListener('mouseenter', ()=>{
+      document.querySelectorAll('.ml-item').forEach(el=>el.classList.remove('active'));
+      item.classList.add('active');
+      marker.openPopup();
+    });
+    item.addEventListener('click', e=>{ e.preventDefault(); marker.openPopup(); leafletMap.panTo(coords); });
+
+    listEl.appendChild(item);
+
+    // Click marker → highlight list item
+    marker.on('click', ()=>{
+      document.querySelectorAll('.ml-item').forEach(el=>el.classList.remove('active'));
+      item.classList.add('active');
+      item.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
   });
+
   setTimeout(()=>leafletMap.invalidateSize(), 50);
 }
 </script>
