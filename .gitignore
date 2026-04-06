@@ -3,3 +3,5 @@ assets/presentation-alpeon.mp4
 .env.local
 .env
 api/_lib/.token_cache.json
+node_modules/
+.claude/

@@ -8,7 +8,7 @@
   <title>Réserver — Propriétés alpines d'exception | ALPÉON</title>
   <meta name="description" content="Chalets, appartements et penthouses dans les plus grandes stations alpines. Courchevel, Megève, Val d'Isère, Val Thorens, Méribel, Tignes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
 /* @@NAV-START@@ */
   :root { --nav-h: 72px; }
@@ -64,7 +64,7 @@
     color: rgba(250,254,255,.6); font-size: 1.1rem; font-weight: 300;
     letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
     padding: 1rem 0; border-bottom: 1px solid rgba(250,254,255,.06); transition: color .2s;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Lora', serif;
   }
   .site-mobile-link:hover, .site-mobile-link.active { color: #C9A97A; }
   .site-mobile-lang { display: flex; gap: .5rem; align-items: center; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,254,255,.3); margin-top: 1.5rem; }
@@ -92,7 +92,7 @@
       --ink:     #111111;
       --ink-2:   #444444;
       --ink-3:   #888888;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-serif: 'Lora', Georgia, serif;
       --font-sans:  'Inter', system-ui, sans-serif;
       --nav-h: 72px;
       --max: 1340px;
@@ -113,18 +113,18 @@
 
     /* ── HERO ── */
     .hero {
-      margin-top: var(--nav-h);
-      height: 58vh; min-height: 380px;
+      margin-top: 0;
+      height: 100vh; min-height: 600px;
       position: relative; overflow: hidden;
       display: flex; flex-direction: column; justify-content: flex-end;
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1800&q=80') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=2400&q=90') center/cover no-repeat;
     }
     .hero-bg::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(14,22,16,.88) 0%, rgba(14,22,16,.4) 55%, rgba(14,22,16,.15) 100%);
+      background: linear-gradient(to top, rgba(14,22,16,.92) 0%, rgba(14,22,16,.45) 50%, rgba(14,22,16,.2) 100%);
     }
     .hero-content {
       position: relative; z-index: 2;
@@ -138,7 +138,7 @@
     }
     .hero-kicker::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold) }
     .hero-h1 {
-      font-family: var(--font-serif); font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-family: var(--font-serif); font-style: italic; font-size: clamp(2.6rem, 5vw, 4.2rem);
       font-weight: 300; line-height: 1.05; color: var(--white);
     }
     .hero-h1 em { color: var(--gold); font-style: italic }
@@ -219,7 +219,7 @@
       border-bottom: 1px solid var(--stone);
     }
     .grid-title {
-      font-family: var(--font-serif); font-size: 1.6rem; font-weight: 300;
+      font-family: var(--font-serif); font-style: italic; font-size: 1.6rem; font-weight: 300;
       color: var(--ink); letter-spacing: .01em;
     }
     .grid-title em { font-style: italic; color: var(--green-l) }
@@ -277,7 +277,7 @@
       color: var(--ink-3); margin-bottom: .45rem;
     }
     .prop-name {
-      font-family: var(--font-serif); font-size: 1.3rem; font-weight: 400;
+      font-family: var(--font-serif); font-style: italic; font-size: 1.3rem; font-weight: 400;
       color: var(--ink); line-height: 1.2; margin-bottom: .8rem;
     }
     .prop-specs {
@@ -299,7 +299,7 @@
     }
     .prop-price-from { font-size: .62rem; color: var(--ink-3); letter-spacing: .06em; text-transform: uppercase }
     .prop-price-val {
-      font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; color: var(--ink);
+      font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; font-weight: 400; color: var(--ink);
       line-height: 1;
     }
     .prop-price-unit { font-size: .68rem; color: var(--ink-3); font-family: var(--font-sans) }
@@ -330,7 +330,7 @@
     .empty-state.visible { display: block }
     .empty-icon { font-size: 3rem; margin-bottom: 1.5rem; opacity: .3 }
     .empty-state h3 {
-      font-family: var(--font-serif); font-size: 1.8rem; font-weight: 300;
+      font-family: var(--font-serif); font-style: italic; font-size: 1.8rem; font-weight: 300;
       color: var(--green); margin-bottom: .75rem;
     }
     .empty-state p { color: var(--ink-3); font-size: .88rem; margin-bottom: 2rem }
@@ -354,7 +354,7 @@
     }
     .ra-item { text-align: center }
     .ra-icon { margin: 0 auto 1rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--white); border-radius: 50%; box-shadow: 0 2px 12px rgba(0,0,0,.06); color: var(--green) }
-    .ra-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: .35rem }
+    .ra-title { font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: .35rem }
     .ra-desc { font-size: .78rem; color: var(--ink-3); line-height: 1.65; max-width: 200px; margin: 0 auto }
 
     /* ── CTA PROPRIO ── */
@@ -370,7 +370,7 @@
       color: rgba(232,203,160,.6); margin-bottom: 1.25rem;
     }
     .cta-h2 {
-      font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 3rem);
+      font-family: var(--font-serif); font-style: italic; font-size: clamp(2rem, 3.5vw, 3rem);
       font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 1.25rem;
     }
     .cta-h2 em { font-style: italic; color: var(--gold) }
