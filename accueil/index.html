@@ -607,6 +607,7 @@
     .destinations {
       background: var(--stone, #F5F3EF);
       padding: clamp(80px, 10vw, 120px) 0 clamp(60px, 8vw, 100px);
+      overflow: hidden;
     }
     .destinations-head {
       display: flex;
@@ -846,7 +847,7 @@
       .hero-body .container { grid-template-columns: 1fr; }
       .hero-card { display: none; }
       .promise .container { grid-template-columns: 1fr; gap: 48px; }
-      .promise-left { position: static; }
+      .promise-left { position: sticky; top: calc(var(--nav-h) + 24px); align-self: start; }
       .dest-grid { grid-template-columns: repeat(3, 1fr); }
       .cta .container { grid-template-columns: 1fr; gap: 40px; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
