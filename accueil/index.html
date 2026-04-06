@@ -1324,7 +1324,7 @@ async function submitNlPopup(){
     const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email, source:'popup-10pct'})});
     const d = await r.json();
     if(d.ok){
-      msg.innerHTML = '✓ Merci ! Votre code <strong>ALPE10</strong> vous a été envoyé par email.';
+      msg.textContent = '✓ Merci ! Votre code de réduction vous a été envoyé par email.';
       msg.className = 'nl-popup-msg ok';
       localStorage.setItem('alpeon_nl_seen','1');
       setTimeout(closeNlPopup, 4000);
