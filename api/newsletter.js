@@ -1,5 +1,37 @@
 const nodemailer = require('nodemailer');
 
+/* ── Brevo Contacts API ── */
+async function addBrevoContact(email, source) {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) return { skipped: true };
+
+  const res = await fetch('https://api.brevo.com/v3/contacts', {
+    method: 'POST',
+    headers: {
+      'api-key': apiKey,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+      email,
+      updateEnabled: true,                     // update if already exists
+      listIds: [process.env.BREVO_LIST_ID ? parseInt(process.env.BREVO_LIST_ID) : 2],
+      attributes: {
+        SOURCE: source || 'footer',
+        SIGNUP_DATE: new Date().toISOString().slice(0, 10),
+      },
+    }),
+  });
+
+  // 204 = created, 400 with "Contact already exist" = ok (updateEnabled)
+  const text = await res.text();
+  const data = text ? JSON.parse(text) : {};
+  if (!res.ok && res.status !== 204) {
+    console.warn('[newsletter] Brevo contact error:', res.status, text);
+  }
+  return { status: res.status, data };
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -10,6 +42,12 @@ module.exports = async (req, res) => {
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Adresse email invalide.' });
   }
+
+  // 1) Store in Brevo contacts list (non-blocking on failure)
+  const brevoResult = await addBrevoContact(email, source).catch(e => {
+    console.warn('[newsletter] Brevo API unreachable:', e.message);
+    return { error: e.message };
+  });
 
   const dev = !process.env.EMAIL_HOST;
   if (!dev) {
@@ -22,15 +60,15 @@ module.exports = async (req, res) => {
 
     const isPopup = source === 'popup-10pct';
 
-    // Notification interne
+    // 2) Notification interne
     await transporter.sendMail({
       from: process.env.EMAIL_FROM || 'ALPÉON <reservations@alpeon.fr>',
       to: 'reservations@alpeon.fr',
       subject: `Nouvelle inscription newsletter — ${email}`,
-      text: `Nouvelle inscription newsletter : ${email}\nSource : ${source || 'footer'}\nDate : ${new Date().toLocaleString('fr-FR')}`,
+      text: `Nouvelle inscription newsletter : ${email}\nSource : ${source || 'footer'}\nDate : ${new Date().toLocaleString('fr-FR')}\nBrevo : ${JSON.stringify(brevoResult)}`,
     });
 
-    // Email de bienvenue à l'inscrit
+    // 3) Email de bienvenue à l'inscrit
     await transporter.sendMail({
       from: process.env.EMAIL_FROM || 'ALPÉON <reservations@alpeon.fr>',
       to: email,
