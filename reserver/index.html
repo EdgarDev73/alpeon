@@ -497,6 +497,10 @@
   /* Canvas carte */
   #map-canvas{flex:1;min-width:0}
   /* Popup */
+  /* Keep all Leaflet UI below nav(700) and filter(600) */
+  .leaflet-top,.leaflet-bottom{z-index:500!important}
+  .leaflet-popup-pane{z-index:520!important}
+  .leaflet-marker-pane{z-index:510!important}
   .leaflet-popup-content-wrapper{border-radius:6px;padding:0;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.18)}
   .leaflet-popup-content{margin:0;width:200px !important}
   .map-popup-img{width:100%;height:100px;object-fit:cover;display:block}
