@@ -102,7 +102,7 @@
     
 
     /* GALLERY */
-    .gallery{margin-top:72px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:320px 200px;gap:4px;max-height:520px;overflow:hidden}
+    .gallery{margin-top:0;display:grid;grid-template-columns:2fr 1fr;grid-template-rows:55vh 55vh;gap:4px;max-height:none;overflow:hidden}
     .gallery-main{grid-row:1/3;position:relative;overflow:hidden;cursor:pointer}
     .gallery-main img,.gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
     .gallery-main:hover img,.gallery-thumb:hover img{transform:scale(1.04)}
@@ -112,16 +112,32 @@
     .gallery-see-all:hover{background:var(--green);color:var(--gold)}
 
     /* BREADCRUMB */
-    .breadcrumb{max-width:1280px;margin:0 auto;padding:1.25rem 2.5rem .5rem;font-size:.75rem;color:#6b7280}
+    .breadcrumb{max-width:1360px;margin:0 auto;padding:2rem 2.5rem 1rem;font-size:.75rem;color:#6b7280}
     .breadcrumb a{color:#6b7280;text-decoration:none;transition:color .2s}
     .breadcrumb a:hover{color:var(--green)}
     .breadcrumb span{margin:0 .4rem;color:var(--stone-3)}
 
     /* MAIN LAYOUT */
-    .detail-layout{max-width:1280px;margin:0 auto;padding:0 2.5rem 5rem;display:grid;grid-template-columns:1fr 380px;gap:3.5rem;align-items:start}
+    .detail-layout{max-width:1360px;margin:0 auto;padding:0 2.5rem 6rem;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:start}
 
     /* LEFT COLUMN */
     .detail-left{}
+
+    /* PREMIUM PROPERTY HEADER */
+    .prop-location-bar{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem}
+    .plb-badge{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);background:var(--green);padding:.3rem .75rem;border-radius:20px}
+    .plb-rating{font-size:.8rem;color:var(--gold-d);display:flex;align-items:center;gap:.25rem}
+    .prop-title{font-family:var(--font-serif);font-style:italic;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;color:#1a1a1a;line-height:1.05;margin:.5rem 0 1.5rem}
+    .prop-specs{display:flex;align-items:center;background:var(--stone-1);padding:1rem 1.5rem;border-radius:4px;margin-bottom:.5rem}
+    .spec-item{display:flex;align-items:center;gap:.45rem;padding:0 1.25rem;flex:1;justify-content:center}
+    .spec-item:first-child{padding-left:0}
+    .spec-item:last-child{padding-right:0}
+    .spec-icon{font-size:1.1rem;line-height:1}
+    .spec-val{font-size:1.05rem;font-weight:600;color:var(--green)}
+    .spec-lbl{font-size:.68rem;color:#6b7280;letter-spacing:.06em;text-transform:uppercase}
+    .spec-sep{width:1px;height:2rem;background:var(--stone-3)}
+
+    /* Backward compat old classes */
     .detail-header{margin-bottom:1.5rem}
     .detail-badges{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem}
     .badge{font-size:.64rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;border-radius:20px}
@@ -133,22 +149,32 @@
     .meta-sep{color:var(--stone-3)}
     .rating-star{color:var(--gold-d)}
 
-    /* DESCRIPTION */
+    /* ELEGANT DIVIDER */
+    .prop-divider{height:1px;background:linear-gradient(to right, transparent, var(--stone-3), transparent);margin:2rem 0}
+
+    /* SECTIONS */
+    .prop-section{margin-top:2rem}
+    .prop-section-title{font-family:var(--font-serif);font-style:italic;font-size:1.2rem;font-weight:400;color:var(--green);border-bottom:1px solid var(--gold-d);padding-bottom:.6rem;margin-bottom:1.2rem}
+    .prop-desc{font-size:.88rem;line-height:1.8;color:#374151;white-space:pre-line}
+
+    /* DESCRIPTION (backward compat) */
     .section{margin-top:2rem}
     .section-title{font-family:var(--font-serif);font-size:1.25rem;font-weight:400;color:var(--black);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px solid var(--stone-2)}
     .detail-desc{font-size:.88rem;line-height:1.8;color:#374151;white-space:pre-line}
 
     /* AMENITIES */
-    .amenities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
-    .amenity-item{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:#374151;padding:.45rem .6rem;background:var(--stone-1);border-radius:var(--radius)}
-    .amenity-item svg{flex-shrink:0;color:var(--green)}
+    .amenities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+    .amenity-item{display:flex;align-items:center;gap:.55rem;font-size:.8rem;color:#374151;padding:.7rem .8rem;background:var(--stone-1);border:1px solid var(--stone-2);border-radius:6px;transition:border-color .2s}
+    .amenity-item:hover{border-color:var(--green)}
+    .amenity-item svg{flex-shrink:0;color:var(--gold-d)}
 
     /* RIGHT COLUMN — BOOKING CARD */
-    .booking-card{position:sticky;top:88px;background:var(--white);border:1.5px solid var(--stone-2);border-radius:var(--radius);box-shadow:var(--shadow-lg);overflow:hidden}
-    .booking-card-header{background:var(--green);padding:1.25rem 1.5rem}
-    .booking-price{font-family:var(--font-serif);font-size:.85rem;color:var(--gold);opacity:.8}
-    .booking-price strong{font-size:1.75rem;font-weight:400;color:var(--gold);opacity:1}
-    .booking-body{padding:1.5rem}
+    .booking-card{position:sticky;top:88px;background:var(--white);border:1px solid var(--stone-2);border-radius:8px;box-shadow:0 4px 40px rgba(44,61,48,.12),0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+    .booking-card-header{background:var(--green);padding:1.5rem 1.75rem;position:relative}
+    .booking-card-header::after{content:'';position:absolute;bottom:0;left:1.75rem;right:1.75rem;height:1px;background:rgba(232,203,160,.2)}
+    .booking-price{font-size:.75rem;color:rgba(232,203,160,0.7);font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+    .booking-price strong{display:block;font-family:'Lora',serif;font-style:italic;font-size:2.2rem;font-weight:300;color:var(--gold);line-height:1;margin-top:.15rem}
+    .booking-body{padding:1.5rem 1.75rem}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
     .form-group{display:flex;flex-direction:column;gap:.3rem}
     .form-label{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
@@ -194,14 +220,14 @@
     @media(max-width:1024px){
       .detail-layout{grid-template-columns:1fr;gap:2rem}
       .booking-card{position:static}
-      .gallery{grid-template-rows:260px 160px}
+      .gallery{grid-template-rows:40vh 40vh}
     }
     @media(max-width:640px){
-      
-      .gallery{grid-template-columns:1fr;grid-template-rows:260px}
+      .gallery{grid-template-columns:1fr;grid-template-rows:50vw}
       .gallery-thumb{display:none}
       .gallery-main{grid-row:1}
-      .detail-layout{padding:0 1.25rem 4rem}
+      .prop-specs{gap:0;flex-wrap:wrap}
+      .detail-layout{padding:0 1.25rem 5rem}
       .breadcrumb{padding:1rem 1.25rem .5rem}
       .amenities-grid{grid-template-columns:repeat(2,1fr)}
       .form-row{grid-template-columns:1fr}
@@ -407,7 +433,7 @@ function toggleMobileMenu(){
 </script>
 
 <!-- Gallery skeleton while loading -->
-<div id="gallery-wrap" class="gallery" style="margin-top:72px">
+<div id="gallery-wrap" class="gallery">
   <div class="skel-block skeleton" style="grid-row:1/3"></div>
   <div class="skel-block skeleton"></div>
   <div class="skel-block skeleton"></div>
@@ -430,7 +456,7 @@ function toggleMobileMenu(){
   <!-- RIGHT — BOOKING -->
   <div class="booking-card" id="booking-card">
     <div class="booking-card-header">
-      <div class="booking-price">À partir de <strong id="bk-price">—</strong><span id="bk-unit"> € / nuit</span></div>
+      <div class="booking-price">À partir de<strong id="bk-price">—</strong><span id="bk-unit" style="font-family:var(--font-sans);font-size:.75rem;font-style:normal;font-weight:500;color:rgba(232,203,160,0.7);display:block;margin-top:.1rem;letter-spacing:.06em"> € / nuit</span></div>
     </div>
     <div class="booking-body">
 
@@ -661,9 +687,9 @@ function renderDetail(p){
   document.title = `${p.title} — ALPÉON`;
   document.getElementById('bc-title').textContent = p.title;
 
-  const area = p.area ? ` · ${p.area}` : '';
-  const tags = (p.tags||[]).map(t=>`<span class="badge badge-tag">${t}</span>`).join('');
-  const stars = p.rating ? `<span class="rating-star">★</span> ${p.rating.toFixed(1)} (${p.reviewsCount} avis)` : '';
+  const area = p.area ? p.area : '';
+  const locationLabel = area ? `${p.city} · ${area}` : p.city;
+  const stars = p.rating ? `<span style="color:var(--gold-d)">★</span> ${p.rating.toFixed(1)} <span style="color:#9ca3af">(${p.reviewsCount} avis)</span>` : '';
 
   const allAm = (p.allAmenities || p.amenities || []);
   const amenHtml = allAm.map(a => {
@@ -674,20 +700,40 @@ function renderDetail(p){
   const desc = (p.fullDescription || p.summary || '').trim();
 
   document.getElementById('detail-left').innerHTML = `
-    <div class="detail-header">
-      <div class="detail-badges"><span class="badge badge-station">${p.city}${area}</span>${tags}</div>
-      <h1 class="detail-title">${p.title}</h1>
-      <div class="detail-meta">
-        <span class="meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> ${p.guests} personnes</span>
-        <span class="meta-sep">·</span>
-        <span class="meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v5M2 22V11a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v11M6 9h12"/></svg> ${p.bedrooms} chambre${p.bedrooms>1?'s':''}</span>
-        <span class="meta-sep">·</span>
-        <span class="meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 6h7a5 5 0 0 1 5 5v7H4V6z"/></svg> ${p.bathrooms} salle${p.bathrooms>1?'s':''} de bain</span>
-        ${stars ? `<span class="meta-sep">·</span><span class="meta-item">${stars}</span>` : ''}
+    <div class="prop-location-bar">
+      <span class="plb-badge">${locationLabel}</span>
+      ${stars ? `<div class="plb-rating">${stars}</div>` : ''}
+    </div>
+
+    <h1 class="prop-title">${p.title}</h1>
+
+    <div class="prop-specs">
+      <div class="spec-item">
+        <span class="spec-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <span class="spec-val">${p.guests}</span>
+        <span class="spec-lbl">voyageurs</span>
+      </div>
+      <div class="spec-sep"></div>
+      <div class="spec-item">
+        <span class="spec-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v5M2 22V11a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v11M6 9h12"/></svg></span>
+        <span class="spec-val">${p.bedrooms}</span>
+        <span class="spec-lbl">chambre${p.bedrooms>1?'s':''}</span>
+      </div>
+      <div class="spec-sep"></div>
+      <div class="spec-item">
+        <span class="spec-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 6h7a5 5 0 0 1 5 5v7H4V6z"/></svg></span>
+        <span class="spec-val">${p.bathrooms}</span>
+        <span class="spec-lbl">salle${p.bathrooms>1?'s':''} de bain</span>
       </div>
     </div>
-    ${desc ? `<div class="section"><h2 class="section-title">Description</h2><p class="detail-desc">${desc}</p></div>` : ''}
-    ${amenHtml ? `<div class="section"><h2 class="section-title">Équipements</h2><div class="amenities-grid">${amenHtml}</div></div>` : ''}
+
+    <div class="prop-divider"></div>
+
+    ${desc ? `<div class="prop-section"><h2 class="prop-section-title">À propos</h2><p class="prop-desc">${desc}</p></div>` : ''}
+
+    ${amenHtml ? `
+    <div class="prop-divider"></div>
+    <div class="prop-section"><h2 class="prop-section-title">Équipements</h2><div class="amenities-grid">${amenHtml}</div></div>` : ''}
   `;
 
   // Booking card
