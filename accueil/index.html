@@ -575,21 +575,21 @@
     ───────────────────────────────────────────── */
     /* ── DESTINATIONS redesign ─────────────────────── */
     .destinations {
-      background: var(--green);
-      padding: clamp(80px, 10vw, 120px) 0 0;
+      background: var(--stone, #F5F3EF);
+      padding: clamp(80px, 10vw, 120px) 0 clamp(60px, 8vw, 100px);
     }
     .destinations-head {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      margin-bottom: 52px;
-      padding: 0 var(--page-pad, 3rem);
+      margin-bottom: 48px;
+      padding: 0 clamp(1.5rem, 4vw, 5rem);
     }
     .destinations-h2 {
       font-family: var(--font-sans);
       font-size: clamp(1.8rem, 2.8vw, 2.6rem);
       font-weight: 600;
-      color: var(--white);
+      color: var(--ink, #1a1a1a);
       line-height: 1.1;
       letter-spacing: -.015em;
       margin-top: 16px;
@@ -598,26 +598,26 @@
       font-family: var(--font-italic);
       font-style: italic;
       font-weight: 400;
-      color: var(--gold);
+      color: var(--green, #2C3D30);
     }
     .destinations-all {
       display: inline-flex; align-items: center; gap: 10px;
       font-size: .68rem; font-weight: 500; letter-spacing: .14em;
-      text-transform: uppercase; color: rgba(250,254,255,.5);
-      border-bottom: 1px solid rgba(250,254,255,.2);
+      text-transform: uppercase; color: rgba(30,40,30,.45);
+      border-bottom: 1px solid rgba(30,40,30,.2);
       padding-bottom: 3px; transition: color .3s, border-color .3s;
       white-space: nowrap; margin-bottom: 5px; flex-shrink: 0;
     }
-    .destinations-all:hover { color: var(--gold); border-color: var(--gold); }
+    .destinations-all:hover { color: var(--green, #2C3D30); border-color: var(--green, #2C3D30); }
     .destinations-all svg { width: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
     .destinations-all:hover svg { transform: translateX(4px); }
 
     /* ── Mosaic grid ── */
-    .dest-mosaic { display: grid; gap: 3px; }
+    .dest-mosaic { display: grid; gap: 12px; padding: 0 clamp(1.5rem, 4vw, 5rem); }
     /* Row 1: 1 large (2fr) + 2 medium (1fr each) */
-    .dest-row-1 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3px; height: 480px; }
+    .dest-row-1 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 12px; height: 480px; }
     /* Row 2: 3 equal */
-    .dest-row-2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; height: 320px; }
+    .dest-row-2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 320px; }
 
     .dest-card {
       position: relative; overflow: hidden; display: block; height: 100%;
@@ -1146,7 +1146,7 @@ function toggleMobileMenu(){
 <section class="destinations">
   <div class="destinations-head">
     <div>
-      <div class="eyebrow" style="color:rgba(232,203,160,.6)">Nos stations</div>
+      <div class="eyebrow">Nos stations</div>
       <h2 class="destinations-h2">6 destinations alpines <em>d'exception</em></h2>
     </div>
     <a href="/destinations" class="destinations-all">
