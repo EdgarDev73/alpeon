@@ -33,6 +33,12 @@ function _saveTokenCache() {
 }
 
 async function getToken() {
+  // 1) Static token from env var (set manually via Vercel dashboard to avoid OAuth rate limits)
+  if (process.env.GUESTY_ACCESS_TOKEN) {
+    return process.env.GUESTY_ACCESS_TOKEN;
+  }
+
+  // 2) In-memory / file cache
   _loadTokenCache();
   if (_cachedToken && Date.now() < _tokenExpiry - 300_000) return _cachedToken;
 
@@ -40,10 +46,10 @@ async function getToken() {
   const secret = process.env.GUESTY_CLIENT_SECRET;
   if (!id || !secret) throw new Error('Missing GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET');
 
-  // Retry up to 4 times with exponential backoff (handles 429 rate-limit on Vercel cold starts)
+  // 3) OAuth with retry + backoff (handles 429 on Vercel cold-start bursts)
   let lastErr;
-  for (let attempt = 0; attempt < 4; attempt++) {
-    if (attempt > 0) await new Promise(r => setTimeout(r, 500 * Math.pow(2, attempt - 1)));
+  for (let attempt = 0; attempt < 5; attempt++) {
+    if (attempt > 0) await new Promise(r => setTimeout(r, 1000 * Math.pow(2, attempt - 1)));
     const res = await fetch(OAUTH_URL, {
       method:  'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

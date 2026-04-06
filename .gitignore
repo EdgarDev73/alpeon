@@ -5,3 +5,4 @@ assets/presentation-alpeon.mp4
 api/_lib/.token_cache.json
 node_modules/
 .claude/
+.vercel
