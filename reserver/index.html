@@ -471,15 +471,15 @@
   .view-btn.active{background:var(--green);color:var(--gold)}
   .view-btn svg{width:13px;height:13px}
 
-  /* MAP — layout Booking.com, fixed sous la filter bar */
-  #map-wrap{display:none;border-radius:0;overflow:hidden}
+  /* MAP — layout Booking.com */
+  #map-wrap{display:none;overflow:hidden;border-radius:0}
   #map-wrap.visible{
     display:flex;
-    position:fixed;
-    left:0;right:0;bottom:0;
-    top:calc(var(--nav-h) + 58px); /* nav + filter bar */
-    z-index:50;
+    height:calc(100vh - var(--nav-h) - 58px);
+    min-height:480px;
+    margin:0 -3rem;
     border-top:1px solid var(--stone-2);
+    border-bottom:1px solid var(--stone-2);
   }
   /* Liste gauche */
   #map-list{width:360px;flex-shrink:0;overflow-y:auto;background:#fff;border-right:1px solid var(--stone-2)}
@@ -982,22 +982,22 @@ function setView(v){
   const btnMap = document.getElementById('btn-map');
   const gridHeader = document.querySelector('.grid-header');
   const emptyState = document.getElementById('empty-state');
+  const gridWrap = document.querySelector('.grid-wrap');
   if(v==='map'){
     if(grid) grid.style.display='none';
     if(gridHeader) gridHeader.style.display='none';
     if(emptyState) emptyState.style.display='none';
-    document.body.style.overflow='hidden';
+    if(gridWrap){ gridWrap.style.paddingTop='0'; gridWrap.style.paddingBottom='0'; }
     if(mapWrap) mapWrap.classList.add('visible');
     btnList.classList.remove('active'); btnMap.classList.add('active');
-    // Adjust top dynamically based on actual filter bar height
-    const fb = document.querySelector('.filter-bar');
-    if(fb && mapWrap) mapWrap.style.top = (fb.getBoundingClientRect().bottom) + 'px';
     renderMap();
+    // Scroll to top of map
+    window.scrollTo({top: document.querySelector('.filter-bar')?.offsetTop || 0, behavior:'smooth'});
   } else {
     if(grid) grid.style.display='';
     if(gridHeader) gridHeader.style.display='';
-    document.body.style.overflow='';
-    if(mapWrap){ mapWrap.classList.remove('visible'); mapWrap.style.top=''; }
+    if(gridWrap){ gridWrap.style.paddingTop=''; gridWrap.style.paddingBottom=''; }
+    if(mapWrap) mapWrap.classList.remove('visible');
     btnList.classList.add('active'); btnMap.classList.remove('active');
   }
 }
