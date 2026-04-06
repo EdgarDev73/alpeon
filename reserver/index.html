@@ -1006,13 +1006,13 @@ function setView(v){
   }
 }
 
-// Spread N markers in a circle around city centre (~400m radius)
-function getCitySpreadCoords(city, idx, total){
-  const [lat, lng] = getPropCoords(city);
-  if(total <= 1) return [lat, lng];
-  const R = 0.004; // ~400m in degrees
-  const angle = (2 * Math.PI / total) * idx - Math.PI/2;
-  return [lat + R * Math.cos(angle), lng + R * Math.sin(angle)];
+// Deterministic offset from property id (no random, stable across renders)
+function idToOffset(id){
+  let h = 0;
+  for(let i=0;i<(id||'').length;i++) h = (Math.imul(31,h)+id.charCodeAt(i))|0;
+  const lat = ((h & 0xFFFF) / 0xFFFF - 0.5) * 0.018;
+  const lng = (((h >> 16) & 0xFFFF) / 0xFFFF - 0.5) * 0.018;
+  return [lat, lng];
 }
 
 function renderMap(){
@@ -1032,13 +1032,6 @@ function renderMap(){
   const items = typeof filtered !== 'undefined' ? filtered : (typeof all !== 'undefined' ? all : []);
   const markers = [];
 
-  // Pre-compute city counts for circular spread
-  const cityCount = {};
-  items.forEach(p => { cityCount[p.city] = (cityCount[p.city]||0)+1; });
-  const cityIndex = {};
-  items.forEach(p => {
-    if(!cityIndex[p.city]) cityIndex[p.city] = { idx:0, total: cityCount[p.city] };
-  });
 
   // Build list
   const listEl = document.getElementById('map-list');
@@ -1049,10 +1042,9 @@ function renderMap(){
 
   items.forEach((p, i) => {
     const n = i + 1;
-    // Spread markers in a circle around city centre (no real address exposed)
-    const ci = cityIndex[p.city] || {idx:0, total:1};
-    const spreadIdx = ci.idx; ci.idx++;
-    const coords = getCitySpreadCoords(p.city, spreadIdx, ci.total);
+    const base = getPropCoords(p.city);
+    const off = idToOffset(p.id);
+    const coords = [base[0]+off[0], base[1]+off[1]];
     const img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
     const price = p.priceFrom ? `${p.priceFrom.toLocaleString('fr-FR')} € / nuit` : 'Sur devis';
 
