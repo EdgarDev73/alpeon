@@ -472,8 +472,8 @@
   .view-btn svg{width:13px;height:13px}
 
   /* MAP — layout Booking.com */
-  #map-wrap{display:none;height:calc(100vh - 160px);min-height:560px;margin-bottom:3rem;border-radius:8px;overflow:hidden;border:1px solid var(--stone-2)}
-  #map-wrap.visible{display:flex}
+  #map-wrap{display:none;height:calc(100vh - 132px);min-height:520px;border-radius:0;overflow:hidden;border-top:1px solid var(--stone-2)}
+  #map-wrap.visible{display:flex;margin:-3.5rem -3rem 0}
   /* Liste gauche */
   #map-list{width:360px;flex-shrink:0;overflow-y:auto;background:#fff;border-right:1px solid var(--stone-2)}
   #map-list-header{padding:.75rem 1rem;border-bottom:1px solid var(--stone-2);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;position:sticky;top:0;background:#fff;z-index:1}
@@ -973,13 +973,18 @@ function setView(v){
   const mapWrap = document.getElementById('map-wrap');
   const btnList = document.getElementById('btn-list');
   const btnMap = document.getElementById('btn-map');
+  const gridHeader = document.querySelector('.grid-header');
+  const emptyState = document.getElementById('empty-state');
   if(v==='map'){
     if(grid) grid.style.display='none';
+    if(gridHeader) gridHeader.style.display='none';
+    if(emptyState) emptyState.style.display='none';
     if(mapWrap) mapWrap.classList.add('visible');
     btnList.classList.remove('active'); btnMap.classList.add('active');
     renderMap();
   } else {
     if(grid) grid.style.display='';
+    if(gridHeader) gridHeader.style.display='';
     if(mapWrap) mapWrap.classList.remove('visible');
     btnList.classList.add('active'); btnMap.classList.remove('active');
   }
