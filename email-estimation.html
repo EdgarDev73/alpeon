@@ -158,5 +158,12 @@
     </tr>
   </table>
 
+<script>
+document.addEventListener('click', function(e){
+  document.querySelectorAll('.hdr-phone-wrap.open').forEach(function(w){
+    if(!w.contains(e.target)) w.classList.remove('open');
+  });
+});
+</script>
 </body>
 </html>
