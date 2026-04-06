@@ -127,6 +127,9 @@
   }
 
   /* ─── HERO (fond vert) ─── */
+  .page-hero { background: url('/assets/images/hero-reserver.jpg') center/cover no-repeat; position:relative; }
+  .page-hero::after { content:''; position:absolute; inset:0; background:linear-gradient(160deg,rgba(18,30,20,.55),rgba(18,30,20,.75)); }
+  .page-hero-body { position:relative; z-index:1; }
   .page-hero {
     background: var(--green);
     min-height: 42vh;
