@@ -319,10 +319,44 @@
     .bk-success-text{font-size:.82rem;color:#374151;line-height:1.65;margin-bottom:1rem}
     .bk-success-ref{font-size:.72rem;background:var(--stone-1);padding:.5rem .85rem;border-radius:var(--radius);color:var(--green);font-weight:600;letter-spacing:.06em}
   
+  /* ── CONTACT MODAL ── */
+    .modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(17,17,17,.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:1.5rem}
+    .modal-overlay.open{display:flex}
+    .modal-box{background:#FAFEFF;border-radius:8px;width:100%;max-width:480px;box-shadow:0 24px 80px rgba(0,0,0,.22);overflow:hidden;animation:modalIn .22s ease}
+    @keyframes modalIn{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
+    .modal-header{background:#2C3D30;padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+    .modal-title{font-family:'Lora',serif;font-style:italic;font-size:1.1rem;font-weight:400;color:#E8CBA0}
+    .modal-close{background:none;border:none;color:rgba(232,203,160,.6);font-size:1.6rem;cursor:pointer;line-height:1;padding:0;transition:color .2s}
+    .modal-close:hover{color:#E8CBA0}
+    .modal-body{padding:1.4rem}
+    .modal-prop-badge{background:#f5f3ef;border-radius:4px;padding:.45rem .7rem;font-size:.78rem;color:#2C3D30;margin-bottom:1rem;border-left:3px solid #E8CBA0}
+    .modal-field{margin-bottom:.75rem}
+    .modal-field label{display:block;font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#2C3D30;margin-bottom:.28rem}
+    .modal-field input,.modal-field textarea{width:100%;box-sizing:border-box;border:1.5px solid #ddd;border-radius:4px;padding:.52rem .72rem;font-family:'Poppins',sans-serif;font-size:.84rem;color:#111;background:#fff;outline:none;transition:border-color .2s;resize:vertical}
+    .modal-field input:focus,.modal-field textarea:focus{border-color:#2C3D30}
+    .modal-field textarea{min-height:88px}
+    .modal-row2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+    .btn-modal-send{width:100%;background:#2C3D30;color:#E8CBA0;border:none;border-radius:4px;padding:.78rem;font-family:'Poppins',sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;margin-top:.3rem;transition:background .2s}
+    .btn-modal-send:hover:not(:disabled){background:#3a5040}
+    .btn-modal-send:disabled{opacity:.5;cursor:not-allowed}
+    .modal-fb{font-size:.78rem;text-align:center;margin-top:.5rem;min-height:1.2em}
+    .modal-fb.ok{color:#166534}.modal-fb.err{color:#b91c1c}
+    /* ── ASK QUESTION BTN ── */
+    .btn-ask{width:100%;background:transparent;border:1.5px solid #ddd;border-radius:4px;padding:.58rem;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#2C3D30;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.45rem;margin-bottom:.9rem;transition:border-color .2s,background .2s}
+    .btn-ask:hover{border-color:#2C3D30;background:#f5f3ef}
+    /* ── STICKY MOBILE BAR ── */
+    .sticky-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:#2C3D30;padding:.8rem 1.4rem;box-shadow:0 -4px 20px rgba(0,0,0,.15);align-items:center;justify-content:space-between;gap:1rem}
+    .sticky-bar-price{color:#E8CBA0;line-height:1.15}
+    .sticky-bar-price small{font-size:.65rem;opacity:.7;display:block}
+    .sticky-bar-price strong{font-family:'Lora',serif;font-style:italic;font-size:1.35rem;font-weight:400}
+    .sticky-bar-btn{background:#E8CBA0;color:#2C3D30;border:none;border-radius:3px;padding:.65rem 1.4rem;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s}
+    .sticky-bar-btn:hover{background:#f0d8b0}
+    @media(max-width:1024px){.sticky-bar{display:flex}body{padding-bottom:72px}}
+
   /* ═══════════════════════════════════════════════
      SITE HEADER — standard unifié toutes pages
   ═══════════════════════════════════════════════ */
-  
+
 
   </style>
 </head>
@@ -399,6 +433,11 @@ function toggleMobileMenu(){
       <div class="booking-price">À partir de <strong id="bk-price">—</strong><span id="bk-unit"> € / nuit</span></div>
     </div>
     <div class="booking-body">
+
+      <button class="btn-ask" onclick="openContactModal()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        A question? Contact us
+      </button>
 
       <!-- Step indicator -->
       <div class="bk-steps" id="bk-steps">
@@ -656,6 +695,7 @@ function renderDetail(p){
   document.getElementById('bk-max-label').textContent = `pers. (max ${p.guests})`;
   guestsCount = Math.min(2, p.guests);
   document.getElementById('bk-guests-count').textContent = guestsCount;
+  updateStickyBar(p.priceFrom);
 }
 
 // ── BOOKING STATE ──
@@ -1256,6 +1296,54 @@ async function loadProperty(){
 }
 
 loadProperty();
+
+  // ── CONTACT MODAL ──
+  function openContactModal(){
+    if(prop) document.getElementById('modal-prop-name').textContent = prop.title || 'ALPÉON Property';
+    document.getElementById('contact-modal').classList.add('open');
+    document.body.style.overflow='hidden';
+    document.getElementById('modal-fb').textContent='';
+    document.getElementById('modal-fb').className='modal-fb';
+    document.getElementById('btn-modal-send').disabled=false;
+    document.getElementById('btn-modal-send').textContent='Send enquiry';
+  }
+  function closeContactModal(){
+    document.getElementById('contact-modal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+  async function submitContact(){
+    const btn=document.getElementById('btn-modal-send');
+    const fb=document.getElementById('modal-fb');
+    const fn=document.getElementById('m-fn').value.trim();
+    const ln=document.getElementById('m-ln').value.trim();
+    const em=document.getElementById('m-em').value.trim();
+    const ph=document.getElementById('m-ph').value.trim();
+    const msg=document.getElementById('m-msg').value.trim();
+    fb.textContent=''; fb.className='modal-fb';
+    if(!fn||!ln||!em||!msg){fb.textContent='Please fill in all required fields.';fb.className='modal-fb err';return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){fb.textContent='Invalid email address.';fb.className='modal-fb err';return;}
+    btn.disabled=true; btn.textContent='Sending…';
+    try{
+      const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({firstName:fn,lastName:ln,email:em,phone:ph,message:msg,propertyName:prop?.title||''})});
+      const d=await r.json();
+      if(!r.ok) throw new Error(d.error||'Server error');
+      fb.textContent='Message sent. Our team will reply within 2 hours.'; fb.className='modal-fb ok';
+      btn.textContent='Sent ✓';
+      setTimeout(closeContactModal,2800);
+    }catch(e){
+      fb.textContent=e.message||'An error occurred. Please try again.'; fb.className='modal-fb err';
+      btn.disabled=false; btn.textContent='Send enquiry';
+    }
+  }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeContactModal();});
+
+  // ── STICKY PRICE BAR ──
+  // Called after prop is loaded in renderDetail
+  function updateStickyBar(price){
+    const el=document.getElementById('sticky-price-val');
+    if(el && price) el.textContent=price.toLocaleString('fr-FR');
+  }
 </script>
 
 <script id="nav-scroll-js">
@@ -1267,5 +1355,37 @@ loadProperty();
   u();
 })();
 </script>
+  <!-- STICKY MOBILE BAR -->
+  <div class="sticky-bar" id="sticky-bar">
+    <div class="sticky-bar-price">
+      <small>From</small>
+      <strong id="sticky-price-val">—</strong> <small style="display:inline;font-size:.7rem">€ / night</small>
+    </div>
+    <button class="sticky-bar-btn" onclick="document.getElementById('booking-card')?.scrollIntoView({behavior:'smooth'})">Book this property</button>
+  </div>
+
+  <!-- CONTACT MODAL -->
+  <div class="modal-overlay" id="contact-modal" onclick="if(event.target===this)closeContactModal()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">A question about this property?</div>
+        <button class="modal-close" onclick="closeContactModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-prop-badge" id="modal-prop-name">ALPÉON Property</div>
+        <div class="modal-row2">
+          <div class="modal-field"><label>First name *</label><input id="m-fn" type="text" placeholder="John" autocomplete="given-name"></div>
+          <div class="modal-field"><label>Last name *</label><input id="m-ln" type="text" placeholder="Smith" autocomplete="family-name"></div>
+        </div>
+        <div class="modal-row2">
+          <div class="modal-field"><label>Email *</label><input id="m-em" type="email" placeholder="john@example.com"></div>
+          <div class="modal-field"><label>Phone</label><input id="m-ph" type="tel" placeholder="+33 6 00 00 00 00"></div>
+        </div>
+        <div class="modal-field"><label>Message *</label><textarea id="m-msg" placeholder="I would like to know more about..."></textarea></div>
+        <button class="btn-modal-send" id="btn-modal-send" onclick="submitContact()">Send enquiry</button>
+        <p class="modal-fb" id="modal-fb"></p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

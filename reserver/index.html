@@ -8,7 +8,7 @@
   <title>Réserver — Propriétés alpines d'exception | ALPÉON</title>
   <meta name="description" content="Chalets, appartements et penthouses dans les plus grandes stations alpines. Courchevel, Megève, Val d'Isère, Val Thorens, Méribel, Tignes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Lora:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
   <style>
 /* @@NAV-START@@ */
   :root { --nav-h: 72px; }
@@ -93,7 +93,7 @@
       --ink-2:   #444444;
       --ink-3:   #888888;
       --font-serif: 'Lora', Georgia, serif;
-      --font-sans:  'Inter', system-ui, sans-serif;
+      --font-sans:  'Poppins', system-ui, sans-serif;
       --nav-h: 72px;
       --max: 1340px;
     }
@@ -207,6 +207,32 @@
       background: none; font-family: var(--font-sans); transition: color .2s;
     }
     .filter-reset:hover { color: var(--green) }
+
+    /* ── PRICE SLIDER ── */
+    .price-wrap { display:flex; flex-direction:column; gap:.3rem; min-width:160px }
+    .price-track { position:relative; height:3px; background:#ddd; border-radius:2px; margin:.6rem 0 .2rem }
+    .price-fill  { position:absolute; height:100%; background:#2C3D30; border-radius:2px }
+    .price-track input[type=range] {
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:100%; height:14px; margin:0; opacity:0; cursor:pointer; pointer-events:none;
+    }
+    .price-track input[type=range]:nth-child(2) { pointer-events:all }
+    .price-track input[type=range]:nth-child(3) { pointer-events:all }
+    .price-thumb {
+      position:absolute; top:50%; transform:translate(-50%,-50%);
+      width:13px; height:13px; background:#fff; border:2px solid #2C3D30;
+      border-radius:50%; pointer-events:none;
+    }
+    .price-labels { display:flex; justify-content:space-between; font-size:.62rem; color:#888 }
+    .price-labels b { color:#2C3D30; font-weight:600 }
+
+    /* ── AMENITY ICONS ON CARD ── */
+    .prop-amenity-row { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem }
+    .prop-amenity-chip {
+      display:flex; align-items:center; gap:.25rem;
+      font-size:.6rem; color:#555; background:#f4f4f2;
+      padding:.18rem .5rem; border-radius:3px; white-space:nowrap;
+    }
 
     /* ── GRID ── */
     .grid-wrap {
@@ -544,6 +570,17 @@ function toggleMobileMenu(){
         <option value="8+">8 pers. +</option>
       </select>
     </div>
+    <div class="filter-group price-wrap" id="price-filter-group">
+      <label class="filter-label">Prix / nuit</label>
+      <div class="price-track" id="price-track">
+        <div class="price-fill" id="price-fill"></div>
+        <div class="price-thumb" id="thumb-min"></div>
+        <div class="price-thumb" id="thumb-max"></div>
+        <input type="range" id="f-price-min" min="0" max="10000" step="100" value="0" oninput="syncPriceSlider()">
+        <input type="range" id="f-price-max" min="0" max="10000" step="100" value="10000" oninput="syncPriceSlider()">
+      </div>
+      <div class="price-labels"><span><b id="lbl-min">0</b> €</span><span><b id="lbl-max">10 000+</b> €</span></div>
+    </div>
     <div class="filter-actions">
       <button class="filter-reset" id="btn-reset" style="display:none" onclick="resetFilters()">Effacer</button>
       <div class="filter-count" id="filter-count">— biens</div>
@@ -681,59 +718,51 @@ function stars(rating){
 
 let all = [], filtered = [];
 
-function card(p){
-  const typeLabel = p.propertyType === 'chalet' ? 'Chalet' : p.propertyType === 'penthouse' ? 'Penthouse' : 'Appartement';
-  const amenities = (p.amenities||[]).slice(0,3).map(a=>`<span class="amenity-tag">${AMENITY_FR[a]||a}</span>`).join('');
-  const prestige = (p.tags||[]).includes('Prestige') ? `<span class="badge-prestige">Prestige</span>` : '';
-  const area = p.area ? `<span class="badge-area">${p.area}</span>` : '';
-  const priceStr = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR') + ' €' : 'Sur devis';
-  const ratingBlock = p.rating > 0 ? `
-    <div class="prop-rating">
-      <div class="prop-stars">${stars(p.rating)}</div>
-      <div class="prop-reviews">${p.reviewsCount > 0 ? p.reviewsCount + ' avis' : ''}</div>
-    </div>` : '';
-
-  return `<a class="prop-card" href="/propriete/?id=${p.id}">
-    <div class="prop-photo">
-      <img src="${p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70'}" alt="${p.title}" loading="lazy">
-      <div class="prop-photo-overlay"></div>
-      <div class="prop-station">
-        <span class="badge-city">${p.city}</span>
-        ${area}
+  function card(p){
+    const typeLabel = p.propertyType==='chalet'?'Chalet':p.propertyType==='penthouse'?'Penthouse':'Appartement';
+    const prestige = (p.tags||[]).includes('Prestige') ? `<span class="badge-prestige">Prestige</span>` : '';
+    const priceStr = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' €' : 'Sur devis';
+    const ratingBlock = p.rating>0 ? `<div class="prop-rating"><div class="prop-stars">${stars(p.rating)}</div>${p.reviewsCount>0?`<div class="prop-reviews">${p.reviewsCount} avis</div>`:''}</div>` : '';
+    const iGuests=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
+    const iBed=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 4v16M22 4v16M2 8h20M2 12h20"/></svg>`;
+    const iBath=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6 C9 4.3 7.7 3 6 3 4.3 3 3 4.3 3 6v6h18v-2a4 4 0 0 0-4-4H9z"/><path d="M5 18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4H5v4z"/></svg>`;
+    // Amenity chips — top 3
+    const TOP_AM = ['Ski in/out','Sauna','Piscine','Jacuzzi','Cheminée','Vue montagne','Parking','Wifi'];
+    const translated = (p.amenities||[]).map(a=>AMENITY_FR[a]||a);
+    const chips = TOP_AM.filter(a=>translated.includes(a)).slice(0,3)
+      .map(a=>`<span class="prop-amenity-chip"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2C3D30" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>${a}</span>`).join('');
+    return `<a class="prop-card" href="/propriete/?id=${p.id}">
+      <div class="prop-photo">
+        <img src="${p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70'}" alt="${p.title}" loading="lazy">
+        <div class="prop-photo-overlay"></div>
+        <div class="prop-station"><span class="badge-city">${p.city}</span>${p.area?`<span class="badge-area">${p.area}</span>`:''}</div>
+        ${prestige}
       </div>
-      ${prestige}
-    </div>
-    <div class="prop-body">
-      <div class="prop-type">${typeLabel}</div>
-      <h3 class="prop-name">${p.title}</h3>
-      <div class="prop-specs">
-        <span class="prop-spec">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          ${p.guests} pers.
-        </span>
-        <div class="prop-divider"></div>
-        <span class="prop-spec">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg>
-          ${p.bedrooms} ch.
-        </span>
-        ${p.bathrooms ? `<div class="prop-divider"></div><span class="prop-spec"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16a1 1 0 011 1v3a4 4 0 01-4 4H7a4 4 0 01-4-4v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h3v2.25"/></svg>${p.bathrooms} sdb.</span>` : ''}
-      </div>
-      <div class="prop-amenities">${amenities}</div>
-      <div class="prop-foot">
-        <div>
-          <div class="prop-price-from">À partir de</div>
-          <div class="prop-price-val">${priceStr}</div>
-          ${p.priceFrom ? '<div class="prop-price-unit">/ nuit</div>' : ''}
+      <div class="prop-body">
+        <div class="prop-type">${typeLabel}</div>
+        <h3 class="prop-name">${p.title}</h3>
+        <div class="prop-specs">
+          <span class="prop-spec">${iGuests} ${p.guests} pers.</span>
+          <div class="prop-divider"></div>
+          <span class="prop-spec">${iBed} ${p.bedrooms} ch.</span>
+          ${p.bathrooms?`<div class="prop-divider"></div><span class="prop-spec">${iBath} ${p.bathrooms} sdb.`:''}
         </div>
-        ${ratingBlock}
+        ${chips?`<div class="prop-amenity-row">${chips}</div>`:''}
+        <div class="prop-foot">
+          <div>
+            <div class="prop-price-from">À partir de</div>
+            <div class="prop-price-val">${priceStr}</div>
+            ${p.priceFrom?'<div class="prop-price-unit">/ nuit</div>':''}
+          </div>
+          ${ratingBlock}
+        </div>
       </div>
-    </div>
-    <div class="prop-cta">
-      <span>Découvrir ce bien</span>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </div>
-  </a>`;
-}
+      <div class="prop-cta">
+        <span>Découvrir ce bien</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </a>`;
+  }
 
 function skel(n){
   return Array.from({length:n},()=>`
@@ -780,11 +809,27 @@ async function load(){
   }
 }
 
+  function syncPriceSlider(){
+    const mn=parseInt(document.getElementById('f-price-min').value);
+    const mx=parseInt(document.getElementById('f-price-max').value);
+    const safe_mn=Math.min(mn,mx-500);
+    document.getElementById('f-price-min').value=safe_mn;
+    const pct=v=>(v/10000*100)+'%';
+    document.getElementById('price-fill').style.cssText=`left:${pct(safe_mn)};width:${pct(mx-safe_mn)}`;
+    document.getElementById('thumb-min').style.left=pct(safe_mn);
+    document.getElementById('thumb-max').style.left=pct(mx);
+    document.getElementById('lbl-min').textContent=safe_mn.toLocaleString('fr-FR');
+    document.getElementById('lbl-max').textContent=mx>=10000?'10 000+':mx.toLocaleString('fr-FR');
+    applyFilters();
+  }
+
 function applyFilters(){
   const station = document.getElementById('f-station').value;
   const type    = document.getElementById('f-type').value;
   const guests  = document.getElementById('f-guests').value;
-  const active  = station!=='all' || type!=='all' || guests!=='all';
+  const priceMin=parseInt(document.getElementById('f-price-min')?.value||0);
+  const priceMax=parseInt(document.getElementById('f-price-max')?.value||10000);
+  const active  = station!=='all' || type!=='all' || guests!=='all' || priceMin>0 || priceMax<10000;
   document.getElementById('btn-reset').style.display = active ? 'inline-block' : 'none';
   filtered = all.filter(p=>{
     if(station !== 'all' && norm(p.city) !== station) return false;
@@ -794,6 +839,8 @@ function applyFilters(){
       if(guests === '8+'){ if(p.guests < 8) return false }
       else { if(p.guests < n) return false }
     }
+    if(p.priceFrom && priceMax<10000 && p.priceFrom>priceMax) return false;
+    if(p.priceFrom && p.priceFrom<priceMin) return false;
     return true;
   });
   render(filtered);
@@ -801,6 +848,9 @@ function applyFilters(){
 
 function resetFilters(){
   ['f-station','f-type','f-guests'].forEach(id => document.getElementById(id).value = 'all');
+  const pMin=document.getElementById('f-price-min');
+  const pMax=document.getElementById('f-price-max');
+  if(pMin){pMin.value=0;pMax.value=10000;syncPriceSlider();}
   applyFilters();
 }
 
