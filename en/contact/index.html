@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="/assets/logo/favicon-180.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/favicon-180.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact us — ALPÉON</title>
+  <meta name="description" content="Contact the ALPÉON team — reservations, stay support, property management or general enquiries." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://alpeon.fr/en/contact/" />
+  <link rel="alternate" hreflang="fr" href="https://alpeon.fr/contact/" />
+  <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/contact/" />
+  <link rel="alternate" hreflang="x-default" href="https://alpeon.fr/contact/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+  /* ─── TOKENS ─── */
+  :root {
+    --green:   #2C3D30;
+    --green-d: #223028;
+    --gold:    #E8CBA0;
+    --gold-d:  #D4B48A;
+    --white:   #FAFEFF;
+    --stone-1: #F5F3EF;
+    --stone-2: #EAE6DF;
+    --stone-3: #D5CFC4;
+    --black:   #111111;
+    --mid:     #4A5C4E;
+    --border:  rgba(44,61,48,.12);
+    --font-sans:  'Poppins', sans-serif;
+    --font-serif: 'Lora', serif;
+    --nav-h: 88px;
+    --max:   1380px;
+    --pad:   clamp(24px, 5vw, 80px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--font-sans); font-weight: 300; background: var(--white); color: var(--black); line-height: 1.6; overflow-x: hidden; }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+
+  .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+  /* ─── NAV ─── */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+    height: var(--nav-h); background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background .35s ease, border-color .35s ease;
+  }
+  .site-header.scrolled {
+    background: rgba(18,30,20,.97);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(232,203,160,.1);
+  }
+  .site-header-inner {
+    max-width: 1400px; margin: 0 auto;
+    padding: 0 2.5rem; height: var(--nav-h); display: flex; align-items: center;
+  }
+  .site-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .site-logo img { height: 64px; width: auto; display: block; }
+  .site-nav { display: flex; align-items: center; gap: 2rem; margin-left: auto; }
+  .site-nav-link {
+    color: rgba(250,254,255,.75); font-size: .85rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    position: relative; padding-bottom: 3px; transition: color .2s; white-space: nowrap;
+  }
+  .site-nav-link::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1.5px; background: #C9A97A;
+    transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
+  }
+  .site-nav-link:hover { color: #fff; }
+  .site-nav-link.active { color: #C9A97A; }
+  .site-nav-link.active::after, .site-nav-link:hover::after { transform: scaleX(1); }
+  .site-header-right { display: flex; align-items: center; gap: 1.25rem; margin-left: 2.5rem; flex-shrink: 0; }
+  .site-lang { display: flex; align-items: center; gap: .35rem; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
+  .site-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-lang a.active { color: #C9A97A; }
+  .site-lang span { color: rgba(250,254,255,.15); font-size: .5rem; }
+  .site-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; background: none; border: none; cursor: pointer; padding: 0; }
+  .site-burger span { display: block; height: 1.5px; background: rgba(250,254,255,.75); border-radius: 2px; transition: all .25s; }
+  .site-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .site-burger.open span:nth-child(2) { opacity: 0; }
+  .site-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .site-mobile-menu {
+    display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    background: rgba(18,30,20,.98); backdrop-filter: blur(14px);
+    flex-direction: column; padding: 2rem 2rem 3rem; z-index: 299;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .site-mobile-menu.open { opacity: 1; pointer-events: all; }
+  .site-mobile-link {
+    color: rgba(250,254,255,.6); font-size: 1.1rem; font-weight: 300;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    padding: 1rem 0; border-bottom: 1px solid rgba(250,254,255,.06); transition: color .2s;
+    font-family: 'Lora', serif;
+  }
+  .site-mobile-link:hover, .site-mobile-link.active { color: #C9A97A; }
+  .site-mobile-lang { display: flex; gap: .5rem; align-items: center; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,254,255,.3); margin-top: 1.5rem; }
+  .site-mobile-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-mobile-lang a.active { color: #C9A97A; }
+  @media (max-width: 900px) {
+    .site-nav, .site-lang { display: none; }
+    .site-burger { display: flex; }
+    .site-mobile-menu { display: flex; }
+    .site-header-inner { padding: 0 1.25rem; }
+    .site-logo img { height: 48px; }
+  }
+
+  /* ─── HEADER PHONE ─── */
+  .hdr-phone-wrap { position: relative; }
+  .hdr-phone-btn {
+    display: flex; align-items: center;
+    background: none; border: none;
+    padding: .35rem;
+    color: rgba(232,203,160,.55); cursor: pointer;
+    transition: color .2s; flex-shrink: 0;
+  }
+  .hdr-phone-btn:hover { color: var(--gold,#E8CBA0); }
+  .hdr-phone-btn svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.75; flex-shrink: 0; }
+  .hdr-phone-dropdown {
+    display: none; position: absolute; top: 100%; right: 0; padding-top: 6px;
+    background: #1a2a1e; border: 1px solid rgba(232,203,160,.15);
+    border-radius: 8px; min-width: 260px; overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,.45); z-index: 900;
+  }
+  .hdr-phone-wrap.open .hdr-phone-dropdown { display: block; }
+  .hdr-phone-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 18px; color: rgba(250,254,255,.75);
+    font-size: .82rem; transition: background .2s; text-decoration: none;
+    white-space: nowrap;
+  }
+  .hdr-phone-item:hover { background: rgba(232,203,160,.08); color: var(--gold,#E8CBA0); }
+  .hdr-phone-item + .hdr-phone-item { border-top: 1px solid rgba(250,254,255,.07); }
+  .hdr-phone-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .hdr-phone-item .hdr-phone-icon-tel { stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* ─── HERO ─── */
+  .page-hero {
+    position: relative; height: 42vh; min-height: 320px;
+    display: flex; align-items: center; overflow: hidden;
+  }
+  .page-hero-img {
+    position: absolute; inset: 0;
+    background: url('/assets/images/hero-reserver.jpg') center center / cover no-repeat;
+  }
+  .page-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(170deg, rgba(18,30,20,.45) 0%, rgba(18,30,20,.72) 100%);
+  }
+  .page-hero-body { position: relative; z-index: 2; width: 100%; padding-top: var(--nav-h); }
+  .page-hero-title {
+    font-family: var(--font-serif); font-style: italic; font-weight: 400;
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem); color: var(--white); line-height: 1.1; margin-bottom: .6rem;
+  }
+  .page-hero-sub {
+    font-family: var(--font-sans); font-weight: 300;
+    font-size: clamp(.9rem, 1.4vw, 1.1rem); color: var(--gold); letter-spacing: .06em;
+  }
+
+  /* ─── CONTACT CARDS ─── */
+  .contact-section { padding: clamp(56px, 8vw, 96px) 0; background: var(--stone-1); }
+  .contact-intro {
+    text-align: center; margin-bottom: clamp(40px, 5vw, 64px);
+  }
+  .contact-intro-title {
+    font-family: var(--font-serif); font-style: italic; font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--green); margin-bottom: .75rem;
+  }
+  .contact-intro-sub {
+    font-size: clamp(.88rem, 1.2vw, 1rem); font-weight: 300;
+    color: rgba(44,61,48,.65); max-width: 520px; margin: 0 auto; line-height: 1.8;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(16px, 2.5vw, 28px);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .contact-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: clamp(28px, 3.5vw, 44px);
+    border: 1px solid var(--stone-2);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: box-shadow .25s, transform .25s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .contact-card:hover {
+    box-shadow: 0 8px 40px rgba(44,61,48,.12);
+    transform: translateY(-3px);
+  }
+  .contact-card-icon {
+    width: 44px; height: 44px;
+    background: var(--stone-1);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--green); flex-shrink: 0;
+  }
+  .contact-card-icon svg { width: 22px; height: 22px; }
+  .contact-card-label {
+    font-size: .68rem; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--gold-d);
+  }
+  .contact-card-title {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem); color: var(--green); line-height: 1.2;
+  }
+  .contact-card-desc {
+    font-size: .875rem; font-weight: 300; color: rgba(44,61,48,.65); line-height: 1.75;
+    flex: 1;
+  }
+  .contact-card-email {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: .78rem; font-weight: 500; letter-spacing: .04em;
+    color: var(--green); margin-top: 4px;
+    border-bottom: 1px solid var(--stone-3); padding-bottom: 1px;
+    transition: color .2s, border-color .2s;
+  }
+  .contact-card:hover .contact-card-email {
+    color: var(--gold-d); border-color: var(--gold-d);
+  }
+  .contact-card-email svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  @media (max-width: 640px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--green); color: rgba(250,254,255,.6);
+    padding: clamp(48px,7vw,80px) 0 0;
+    font-size: .82rem; line-height: 1.7;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px); padding-bottom: clamp(40px, 6vw, 64px);
+    border-bottom: 1px solid rgba(250,254,255,.08);
+  }
+  .footer-brand-logo { margin-bottom: 14px; }
+  .footer-brand-claim {
+    font-size: .65rem; font-weight: 600; letter-spacing: .2em;
+    text-transform: uppercase; color: rgba(232,203,160,.5); margin-bottom: 12px;
+  }
+  .footer-brand-text { font-size: .8rem; line-height: 1.8; color: rgba(250,254,255,.35); max-width: 280px; }
+  .footer-col-title {
+    font-size: .62rem; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: rgba(232,203,160,.55); margin-bottom: 14px;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a { color: rgba(250,254,255,.45); font-size: .8rem; transition: color .2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-lower {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 48px);
+    padding: clamp(32px, 4vw, 48px) 0;
+    border-bottom: 1px solid rgba(250,254,255,.08);
+  }
+  .footer-socials { display: flex; gap: 12px; margin-top: 4px; }
+  .footer-social-link {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(250,254,255,.06); display: flex; align-items: center; justify-content: center;
+    transition: background .2s; color: rgba(250,254,255,.5);
+  }
+  .footer-social-link:hover { background: rgba(232,203,160,.15); color: var(--gold); }
+  .footer-social-link svg { width: 15px; height: 15px; fill: currentColor; }
+  .footer-social-wa svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .nl-form { display: flex; gap: 8px; margin-top: 4px; }
+  .nl-input {
+    flex: 1; background: rgba(250,254,255,.06); border: 1px solid rgba(250,254,255,.1);
+    border-radius: 5px; padding: .55rem .9rem; color: rgba(250,254,255,.8);
+    font-size: .78rem; font-family: var(--font-sans); outline: none;
+    transition: border-color .2s;
+  }
+  .nl-input::placeholder { color: rgba(250,254,255,.25); }
+  .nl-input:focus { border-color: rgba(232,203,160,.4); }
+  .nl-btn {
+    background: var(--gold); color: var(--green); border: none; border-radius: 5px;
+    padding: .55rem 1.1rem; font-size: .72rem; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; cursor: pointer; transition: background .2s; white-space: nowrap;
+    font-family: var(--font-sans);
+  }
+  .nl-btn:hover { background: var(--gold-d); }
+  .nl-msg { font-size: .72rem; margin-top: 6px; color: rgba(232,203,160,.7); min-height: 1em; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0; gap: 12px; flex-wrap: wrap;
+  }
+  .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
+  @media(max-width:1024px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } .footer-lower{ grid-template-columns:1fr; } }
+  @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; } .footer-bottom{ flex-direction:column; text-align:center; } }
+
+  /* ─── WIDGET ─── */
+  .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#2C3D30;box-shadow:0 4px 20px rgba(44,61,48,.45);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
+  .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(44,61,48,.6)}
+  .wa-btn svg{width:26px;height:26px}
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="site-header">
+  <div class="site-header-inner">
+    <a href="/en/accueil" class="site-logo">
+      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON">
+    </a>
+    <nav class="site-nav">
+      <a href="/en/accueil" class="site-nav-link">Home</a>
+      <a href="/en/destinations" class="site-nav-link">Destinations</a>
+      <a href="/en/reserver" class="site-nav-link">Book</a>
+      <a href="/en/proprietaires" class="site-nav-link">Owners</a>
+      <a href="/en/estimateur" class="site-nav-link">Estimator</a>
+      <a href="/en/about" class="site-nav-link">About</a>
+    </nav>
+    <div class="site-header-right">
+      <div class="hdr-phone-wrap">
+        <button class="hdr-phone-btn" onclick="this.closest('.hdr-phone-wrap').classList.toggle('open')">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </button>
+        <div class="hdr-phone-dropdown">
+          <a href="tel:+33970703991" class="hdr-phone-item">
+            <svg class="hdr-phone-icon-tel" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Call us
+          </a>
+          <a href="sms:+33765254926" class="hdr-phone-item">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="site-lang">
+        <a href="/contact">FR</a>
+        <span>|</span>
+        <a href="/en/contact" class="active">EN</a>
+      </div>
+      <button class="site-burger" id="site-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="site-mobile-menu" id="site-mobile-menu">
+    <a href="/en/accueil" class="site-mobile-link">Home</a>
+    <a href="/en/destinations" class="site-mobile-link">Destinations</a>
+    <a href="/en/reserver" class="site-mobile-link">Book</a>
+    <a href="/en/proprietaires" class="site-mobile-link">Owners</a>
+    <a href="/en/estimateur" class="site-mobile-link">Estimator</a>
+    <a href="/en/about" class="site-mobile-link">About</a>
+    <div class="site-mobile-lang">
+      <a href="/contact">FR</a><span>|</span><a href="/en/contact" class="active">EN</a>
+    </div>
+  </div>
+</header>
+<script>
+function toggleMobileMenu(){
+  const menu = document.getElementById('site-mobile-menu');
+  const burger = document.getElementById('site-burger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+</script>
+
+<!-- ═══ HERO ═══ -->
+<section class="page-hero">
+  <div class="page-hero-img"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-body">
+    <div class="container">
+      <h1 class="page-hero-title">Contact us</h1>
+      <p class="page-hero-sub">Our team is here for you</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT CARDS ═══ -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-intro">
+      <h2 class="contact-intro-title">How can we help you?</h2>
+      <p class="contact-intro-sub">Select the service matching your request to contact the right team directly.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- Support -->
+      <a href="mailto:support@alpeon.fr" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+          </svg>
+        </div>
+        <div class="contact-card-label">Support</div>
+        <div class="contact-card-title">Help with a stay</div>
+        <p class="contact-card-desc">A question during your stay, an incident or complaint to report? Our support team responds quickly.</p>
+        <span class="contact-card-email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          support@alpeon.fr
+        </span>
+      </a>
+
+      <!-- Reservations -->
+      <a href="mailto:reservations@alpeon.fr" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <div class="contact-card-label">Reservations</div>
+        <div class="contact-card-title">Booking request</div>
+        <p class="contact-card-desc">Want to book one of our properties or need information on availability and rates? Write to our reservations team.</p>
+        <span class="contact-card-email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          reservations@alpeon.fr
+        </span>
+      </a>
+
+      <!-- Owners -->
+      <a href="mailto:proprietaires@alpeon.fr" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="contact-card-label">Owners</div>
+        <div class="contact-card-title">Property management</div>
+        <p class="contact-card-desc">A question about the management of your property, rental income or your contract with ALPÉON? Your dedicated manager will respond.</p>
+        <span class="contact-card-email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          proprietaires@alpeon.fr
+        </span>
+      </a>
+
+      <!-- General contact -->
+      <a href="mailto:contact@alpeon.fr" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="contact-card-label">Contact</div>
+        <div class="contact-card-title">Any other request</div>
+        <p class="contact-card-desc">Press, partnerships, general questions or any other topic. We will get back to you as soon as possible.</p>
+        <span class="contact-card-email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          contact@alpeon.fr
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="110" style="height:110px;width:auto;display:block">
+        </div>
+        <div class="footer-brand-claim">Alpine Property Management</div>
+        <p class="footer-brand-text">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Destinations</div>
+        <ul class="footer-links">
+          <li><a href="/en/destinations">Courchevel</a></li>
+          <li><a href="/en/destinations">Megève</a></li>
+          <li><a href="/en/destinations">Val d'Isère</a></li>
+          <li><a href="/en/destinations">Val Thorens</a></li>
+          <li><a href="/en/destinations">Méribel</a></li>
+          <li><a href="/en/destinations">Tignes</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="/en/proprietaires">Owners</a></li>
+          <li><a href="/en/proprietaires">ALPÉON Signatures</a></li>
+          <li><a href="/en/estimateur">Revenue estimator</a></li>
+          <li><a href="/en/about">About</a></li>
+          <li><a href="/en/faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+33970703991">Call us</a></li>
+          <li><a href="/en/contact">Send us an email</a></li>
+          <li><a href="sms:+33765254926">WhatsApp</a></li>
+        </ul>
+        <div style="margin-top:20px">
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="/mentions-legales">Legal notice</a></li>
+            <li><a href="/politique-confidentialite">Privacy policy</a></li>
+            <li><a href="/cgv">General terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-lower">
+      <div>
+        <div class="footer-col-title">Social media</div>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/alpeon_residences?igsh=MWkyNmN2czIweml4Ng==" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/jupiter-residences1/?viewAsMember=true" target="_blank" rel="noopener" class="footer-social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="sms:+33765254926" class="footer-social-link footer-social-wa" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Newsletter</div>
+        <p style="font-size:.78rem;color:rgba(250,254,255,.35);line-height:1.6;margin-bottom:.75rem">New properties, seasonal offers and alpine news.</p>
+        <form class="nl-form" onsubmit="submitNewsletter(event)">
+          <input class="nl-input" type="email" id="nl-email" placeholder="your@email.com" required>
+          <button class="nl-btn" type="submit">Subscribe</button>
+        </form>
+        <p class="nl-msg" id="nl-msg"></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 ALPÉON. All rights reserved.</span>
+      <span>Premium alpine property management · French Alps</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-btn" href="sms:+33765254926" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</a>
+
+<script id="nav-scroll-js">
+(function(){
+  var h=document.getElementById('site-header');
+  if(!h)return;
+  function u(){h.classList.toggle('scrolled',window.scrollY>40);}
+  window.addEventListener('scroll',u,{passive:true});
+  u();
+})();
+</script>
+
+<script>
+// Close phone dropdown on outside click
+document.addEventListener('click', function(e) {
+  document.querySelectorAll('.hdr-phone-wrap.open').forEach(function(wrap) {
+    if (!wrap.contains(e.target)) wrap.classList.remove('open');
+  });
+});
+
+async function submitNewsletter(e) {
+  e.preventDefault();
+  const email = document.getElementById('nl-email').value;
+  const msg = document.getElementById('nl-msg');
+  msg.textContent = '';
+  try {
+    const r = await fetch('/api/newsletter', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({email, source:'footer'})
+    });
+    const d = await r.json();
+    msg.textContent = r.ok ? 'Subscription confirmed, thank you!' : (d.error || 'Error, please try again.');
+  } catch { msg.textContent = 'Network error, please try again.'; }
+}
+</script>
+
+</body>
+</html>
