@@ -486,6 +486,7 @@
     .promise {
       background: var(--white);
       padding: clamp(80px, 10vw, 140px) 0;
+      overflow: visible;
     }
     .promise .container {
       display: grid;
@@ -493,7 +494,11 @@
       gap: clamp(60px, 8vw, 120px);
       align-items: start;
     }
-    .promise-left { position: sticky; top: calc(var(--nav-h) + 40px); }
+    .promise-left {
+      position: sticky;
+      top: calc(var(--nav-h) + 40px);
+      align-self: start;
+    }
     .promise-eyebrow { margin-bottom: 24px; }
     .promise-h2 {
       font-family: var(--font-sans);
@@ -568,127 +573,117 @@
     /* ─────────────────────────────────────────────
        DESTINATIONS
     ───────────────────────────────────────────── */
+    /* ── DESTINATIONS redesign ─────────────────────── */
     .destinations {
       background: var(--green);
-      padding: clamp(80px, 10vw, 130px) 0 0;
-      overflow: hidden;
+      padding: clamp(80px, 10vw, 120px) 0 0;
     }
     .destinations-head {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      margin-bottom: 56px;
+      margin-bottom: 52px;
+      padding: 0 var(--page-pad, 3rem);
     }
     .destinations-h2 {
       font-family: var(--font-sans);
-      font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+      font-size: clamp(1.8rem, 2.8vw, 2.6rem);
       font-weight: 600;
       color: var(--white);
       line-height: 1.1;
       letter-spacing: -.015em;
-      margin-top: 20px;
+      margin-top: 16px;
     }
     .destinations-h2 em {
       font-family: var(--font-italic);
       font-style: italic;
       font-weight: 400;
       color: var(--gold);
-      font-size: 1.05em;
     }
     .destinations-all {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .68rem;
-      font-weight: 500;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: rgba(250,254,255,.5);
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .68rem; font-weight: 500; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(250,254,255,.5);
       border-bottom: 1px solid rgba(250,254,255,.2);
-      padding-bottom: 3px;
-      transition: color .3s, border-color .3s;
-      white-space: nowrap;
-      margin-bottom: 5px;
-      flex-shrink: 0;
+      padding-bottom: 3px; transition: color .3s, border-color .3s;
+      white-space: nowrap; margin-bottom: 5px; flex-shrink: 0;
     }
     .destinations-all:hover { color: var(--gold); border-color: var(--gold); }
     .destinations-all svg { width: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
     .destinations-all:hover svg { transform: translateX(4px); }
 
-    /* Card grid */
-    .dest-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 2px;
-    }
+    /* ── Mosaic grid ── */
+    .dest-mosaic { display: grid; gap: 3px; }
+    /* Row 1: 1 large (2fr) + 2 medium (1fr each) */
+    .dest-row-1 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3px; height: 480px; }
+    /* Row 2: 3 equal */
+    .dest-row-2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; height: 320px; }
+
     .dest-card {
-      position: relative;
-      overflow: hidden;
-      height: 460px;
-      display: block;
+      position: relative; overflow: hidden; display: block; height: 100%;
     }
     .dest-card-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      transition: transform .7s cubic-bezier(.25,.46,.45,.94);
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform .8s cubic-bezier(.25,.46,.45,.94);
     }
-    .dest-card:hover .dest-card-bg { transform: scale(1.07); }
+    .dest-card:hover .dest-card-bg { transform: scale(1.06); }
     .dest-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(18,28,20,.92) 25%, rgba(18,28,20,.05) 70%);
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(10,18,12,.08) 0%, rgba(10,18,12,.75) 65%, rgba(10,18,12,.92) 100%);
       transition: opacity .4s;
     }
-    .dest-card:hover .dest-card-overlay { opacity: .8; }
+    .dest-card:hover .dest-card-overlay { opacity: .88; }
     .dest-card-body {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 28px 22px 30px;
-      z-index: 2;
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 28px 28px 32px; z-index: 2;
     }
     .dest-massif {
-      font-size: .56rem;
-      font-weight: 500;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 8px;
+      font-size: .55rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+      opacity: .9;
     }
     .dest-name {
       font-family: var(--font-serif); font-style: italic;
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1;
-      margin-bottom: 6px;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      font-weight: 400; color: var(--white); line-height: 1; margin-bottom: 8px;
     }
+    .dest-row-1 .dest-card:first-child .dest-name { font-size: clamp(2rem, 2.8vw, 2.8rem); }
     .dest-alt {
-      font-size: .62rem;
-      color: rgba(250,254,255,.38);
-      letter-spacing: .06em;
+      font-size: .6rem; color: rgba(250,254,255,.35); letter-spacing: .08em;
     }
-    .dest-card-arrow {
-      position: absolute;
-      top: 22px; right: 22px;
-      width: 36px; height: 36px;
-      border: 1px solid rgba(232,203,160,.25);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0;
+    .dest-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .65rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold);
+      margin-top: 16px; opacity: 0;
       transform: translateY(6px);
       transition: opacity .35s, transform .35s;
-      z-index: 2;
     }
-    .dest-card-arrow svg { width: 14px; stroke: var(--gold); fill: none; stroke-width: 2; }
-    .dest-card:hover .dest-card-arrow { opacity: 1; transform: translateY(0); }
+    .dest-cta svg { width: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .dest-card:hover .dest-cta { opacity: 1; transform: translateY(0); }
+    .dest-card:hover .dest-cta svg { transform: translateX(3px); }
 
+    /* station-specific backgrounds */
     .dc-courchevel .dest-card-bg { background-image: url('/assets/images/dest-courchevel.webp'); background-position: center 40%; }
     .dc-megeve .dest-card-bg     { background-image: url('/assets/images/dest-megeve.webp'); background-position: center 50%; }
     .dc-meribel .dest-card-bg    { background-image: url('/assets/images/dest-meribel.jpg'); background-position: center 50%; }
     .dc-tignes .dest-card-bg     { background-image: url('/assets/images/dest-tignes.png'); background-position: center 40%; }
     .dc-valdisere .dest-card-bg  { background-image: url('/assets/images/dest-valdisere.jpg'); background-position: center 40%; }
     .dc-valthorens .dest-card-bg { background-image: url('/assets/images/dest-valthorens.jpg'); background-position: center 50%; }
+
+    @media(max-width:900px){
+      .dest-row-1 { grid-template-columns: 1fr 1fr; height: auto; }
+      .dest-row-1 .dest-card { height: 300px; }
+      .dest-row-1 .dest-card:first-child { grid-column: 1 / -1; height: 380px; }
+      .dest-row-2 { grid-template-columns: 1fr 1fr 1fr; }
+      .dest-row-2 .dest-card { height: 220px; }
+    }
+    @media(max-width:600px){
+      .dest-row-1, .dest-row-2 { grid-template-columns: 1fr; }
+      .dest-row-1 .dest-card, .dest-row-2 .dest-card { height: 240px; }
+      .dest-row-1 .dest-card:first-child { height: 300px; }
+    }
 
     /* ─────────────────────────────────────────────
        CTA ESTIMATEUR
@@ -1149,93 +1144,85 @@ function toggleMobileMenu(){
      DESTINATIONS
 ═══════════════════════════════════════════ -->
 <section class="destinations">
-  <div class="container">
-    <div class="destinations-head">
-      <div>
-        <div class="eyebrow">Nos stations</div>
-        <h2 class="destinations-h2">6 destinations alpines <em>d'exception</em></h2>
-      </div>
-      <a href="/destinations" class="destinations-all">
-        Voir toutes les destinations
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </a>
+  <div class="destinations-head">
+    <div>
+      <div class="eyebrow" style="color:rgba(232,203,160,.6)">Nos stations</div>
+      <h2 class="destinations-h2">6 destinations alpines <em>d'exception</em></h2>
     </div>
+    <a href="/destinations" class="destinations-all">
+      Voir toutes les destinations
+      <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
   </div>
 
-  <div class="dest-grid">
-    <a class="dest-card dc-courchevel" href="/destinations">
-      <div class="dest-card-bg"></div>
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-arrow">
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </div>
-      <div class="dest-card-body">
-        <div class="dest-massif">Les 3 Vallées</div>
-        <div class="dest-name">Courchevel</div>
-        <div class="dest-alt">1 300 — 1 850 m</div>
-      </div>
-    </a>
-    <a class="dest-card dc-megeve" href="/destinations">
-      <div class="dest-card-bg"></div>
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-arrow">
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </div>
-      <div class="dest-card-body">
-        <div class="dest-massif">Mont-Blanc</div>
-        <div class="dest-name">Megève</div>
-        <div class="dest-alt">1 113 m</div>
-      </div>
-    </a>
-    <a class="dest-card dc-meribel" href="/destinations">
-      <div class="dest-card-bg"></div>
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-arrow">
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </div>
-      <div class="dest-card-body">
-        <div class="dest-massif">Les 3 Vallées</div>
-        <div class="dest-name">Méribel</div>
-        <div class="dest-alt">1 400 — 1 700 m</div>
-      </div>
-    </a>
-    <a class="dest-card dc-tignes" href="/destinations">
-      <div class="dest-card-bg"></div>
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-arrow">
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </div>
-      <div class="dest-card-body">
-        <div class="dest-massif">Espace Killy</div>
-        <div class="dest-name">Tignes</div>
-        <div class="dest-alt">1 550 — 3 456 m</div>
-      </div>
-    </a>
-    <a class="dest-card dc-valdisere" href="/destinations">
-      <div class="dest-card-bg"></div>
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-arrow">
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </div>
-      <div class="dest-card-body">
-        <div class="dest-massif">Espace Killy</div>
-        <div class="dest-name">Val d'Isère</div>
-        <div class="dest-alt">1 850 m</div>
-      </div>
-    </a>
-    <a class="dest-card dc-valthorens" href="/destinations">
-      <div class="dest-card-bg"></div>
-      <div class="dest-card-overlay"></div>
-      <div class="dest-card-arrow">
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </div>
-      <div class="dest-card-body">
-        <div class="dest-massif">Les 3 Vallées</div>
-        <div class="dest-name">Val Thorens</div>
-        <div class="dest-alt">2 300 m</div>
-      </div>
-    </a>
-  </div>
+  <div class="dest-mosaic">
+    <!-- Row 1 : Courchevel (large) + Val d'Isère + Megève -->
+    <div class="dest-row-1">
+      <a class="dest-card dc-courchevel" href="/destinations">
+        <div class="dest-card-bg"></div>
+        <div class="dest-card-overlay"></div>
+        <div class="dest-card-body">
+          <div class="dest-massif">Les 3 Vallées</div>
+          <div class="dest-name">Courchevel</div>
+          <div class="dest-alt">1 300 — 1 850 m</div>
+          <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+      <a class="dest-card dc-valdisere" href="/destinations">
+        <div class="dest-card-bg"></div>
+        <div class="dest-card-overlay"></div>
+        <div class="dest-card-body">
+          <div class="dest-massif">Espace Killy</div>
+          <div class="dest-name">Val d'Isère</div>
+          <div class="dest-alt">1 850 m</div>
+          <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+      <a class="dest-card dc-megeve" href="/destinations">
+        <div class="dest-card-bg"></div>
+        <div class="dest-card-overlay"></div>
+        <div class="dest-card-body">
+          <div class="dest-massif">Mont-Blanc</div>
+          <div class="dest-name">Megève</div>
+          <div class="dest-alt">1 113 m</div>
+          <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+    </div>
+    <!-- Row 2 : Méribel + Tignes + Val Thorens -->
+    <div class="dest-row-2">
+      <a class="dest-card dc-meribel" href="/destinations">
+        <div class="dest-card-bg"></div>
+        <div class="dest-card-overlay"></div>
+        <div class="dest-card-body">
+          <div class="dest-massif">Les 3 Vallées</div>
+          <div class="dest-name">Méribel</div>
+          <div class="dest-alt">1 400 — 1 700 m</div>
+          <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+      <a class="dest-card dc-tignes" href="/destinations">
+        <div class="dest-card-bg"></div>
+        <div class="dest-card-overlay"></div>
+        <div class="dest-card-body">
+          <div class="dest-massif">Espace Killy</div>
+          <div class="dest-name">Tignes</div>
+          <div class="dest-alt">1 550 — 3 456 m</div>
+          <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+      <a class="dest-card dc-valthorens" href="/destinations">
+        <div class="dest-card-bg"></div>
+        <div class="dest-card-overlay"></div>
+        <div class="dest-card-body">
+          <div class="dest-massif">Les 3 Vallées</div>
+          <div class="dest-name">Val Thorens</div>
+          <div class="dest-alt">2 300 m</div>
+          <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+        </div>
+      </a>
+    </div><!-- end row-2 -->
+  </div><!-- end dest-mosaic -->
 </section>
 
 
