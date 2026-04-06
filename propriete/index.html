@@ -169,10 +169,27 @@
     .detail-desc{font-size:.88rem;line-height:1.8;color:#374151;white-space:pre-line}
 
     /* AMENITIES */
-    .amenities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
-    .amenity-item{display:flex;align-items:center;gap:.55rem;font-size:.8rem;color:#374151;padding:.7rem .8rem;background:var(--stone-1);border:1px solid var(--stone-2);border-radius:6px;transition:border-color .2s}
+    .amenities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+    .amenity-item{display:flex;align-items:center;gap:.5rem;font-size:.76rem;color:#374151;padding:.55rem .7rem;background:var(--stone-1);border:1px solid var(--stone-2);border-radius:6px;transition:border-color .2s}
     .amenity-item:hover{border-color:var(--green)}
-    .amenity-item svg{flex-shrink:0;color:var(--gold-d)}
+    .amenity-item svg{flex-shrink:0;color:var(--gold-d);width:14px;height:14px}
+    .amen-hidden{display:none}
+    .btn-amen-toggle{margin-top:.75rem;background:none;border:1.5px solid var(--stone-3);border-radius:4px;padding:.4rem 1rem;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--green);cursor:pointer;font-family:var(--font-sans);transition:all .2s}
+    .btn-amen-toggle:hover{border-color:var(--green);background:var(--stone-1)}
+
+    /* RECOMMENDATIONS */
+    .reco-section{margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--stone-2)}
+    .reco-title{font-family:var(--font-serif);font-style:italic;font-size:1.2rem;font-weight:400;color:var(--green);border-bottom:1px solid var(--gold-d);padding-bottom:.6rem;margin-bottom:1.5rem}
+    .reco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+    .reco-card{border:1px solid var(--stone-2);border-radius:6px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .2s;text-decoration:none;color:inherit;display:block;background:var(--white)}
+    .reco-card:hover{box-shadow:0 6px 28px rgba(44,61,48,.13);transform:translateY(-2px)}
+    .reco-img{width:100%;height:140px;object-fit:cover;display:block}
+    .reco-body{padding:.75rem .9rem .9rem}
+    .reco-station{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d);background:var(--green);display:inline-block;padding:.15rem .5rem;border-radius:20px;margin-bottom:.45rem}
+    .reco-name{font-family:var(--font-serif);font-style:italic;font-size:.95rem;font-weight:300;color:var(--black);line-height:1.2;margin-bottom:.4rem}
+    .reco-meta{font-size:.7rem;color:#6b7280;display:flex;gap:.5rem;align-items:center}
+    .reco-price{margin-top:.55rem;font-size:.78rem;color:var(--green);font-weight:600}
+    .reco-skeleton{background:var(--stone-2);border-radius:6px;height:220px;animation:shimmer 1.5s infinite}
 
     /* RIGHT COLUMN — BOOKING CARD */
     .booking-card{position:sticky;top:88px;background:var(--white);border:1px solid var(--stone-2);border-radius:8px;box-shadow:0 4px 40px rgba(44,61,48,.12),0 1px 3px rgba(0,0,0,.06);overflow:hidden;max-height:calc(100vh - 108px);display:flex;flex-direction:column}
@@ -237,6 +254,8 @@
       .breadcrumb{padding:1rem 1.25rem .5rem}
       .amenities-grid{grid-template-columns:repeat(2,1fr)}
       .form-row{grid-template-columns:1fr}
+      .reco-grid{grid-template-columns:1fr}
+      #reco-section{padding-left:1.25rem;padding-right:1.25rem}
     }
 
     /* ── MULTI-STEP BOOKING ── */
@@ -606,6 +625,9 @@ function toggleMobileMenu(){
   </div>
 </div>
 
+<!-- Recommendations -->
+<div id="reco-section" style="max-width:1360px;margin:0 auto;padding:0 2.5rem 4rem"></div>
+
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <button class="lb-close" onclick="closeLightbox()">&times;</button>
@@ -689,6 +711,64 @@ function renderGallery(p){
     </div>`;
 }
 
+function toggleAmen(){
+  const hidden = document.querySelectorAll('.amen-hidden');
+  const btn = document.getElementById('btn-amen');
+  const isHidden = hidden.length && hidden[0].style.display === '';
+  if(isHidden || !hidden[0].classList.contains('amen-hidden')){
+    // currently visible → hide
+    hidden.forEach(el=>el.classList.add('amen-hidden'));
+    if(btn) btn.textContent = `Voir les ${hidden.length} équipements supplémentaires`;
+  } else {
+    hidden.forEach(el=>el.classList.remove('amen-hidden'));
+    if(btn) btn.textContent = 'Réduire les équipements';
+  }
+}
+
+async function loadRecommendations(p){
+  const wrap = document.getElementById('reco-section');
+  if(!wrap) return;
+  // Show skeleton while loading
+  wrap.innerHTML = `<div class="reco-section">
+    <h2 class="reco-title">Vous aimerez aussi</h2>
+    <div class="reco-grid">
+      <div class="reco-skeleton"></div><div class="reco-skeleton"></div><div class="reco-skeleton"></div>
+    </div>
+  </div>`;
+  try{
+    // Fetch same city first, then any
+    const r = await fetch(`/api/properties?limit=12`);
+    if(!r.ok) throw new Error();
+    const {properties} = await r.json();
+    // Sort: same city first, then exclude current
+    const others = properties.filter(x => x.id !== p.id);
+    const sameCity = others.filter(x => x.city === p.city);
+    const rest = others.filter(x => x.city !== p.city);
+    const picks = [...sameCity, ...rest].slice(0,3);
+    if(!picks.length){ wrap.innerHTML=''; return; }
+    const cards = picks.map(x => {
+      const img = x.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=600&q=70';
+      const price = x.priceFrom ? `À partir de ${x.priceFrom.toLocaleString('fr-FR')} € / nuit` : 'Sur devis';
+      return `<a class="reco-card" href="/propriete?id=${x.id}">
+        <img class="reco-img" src="${img}" alt="${x.title}" loading="lazy">
+        <div class="reco-body">
+          <span class="reco-station">${x.city}</span>
+          <div class="reco-name">${x.title}</div>
+          <div class="reco-meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> ${x.guests} pers.
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v5M2 22V11a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v11M6 9h12"/></svg> ${x.bedrooms} ch.
+          </div>
+          <div class="reco-price">${price}</div>
+        </div>
+      </a>`;
+    }).join('');
+    wrap.innerHTML = `<div class="reco-section">
+      <h2 class="reco-title">Vous aimerez aussi</h2>
+      <div class="reco-grid">${cards}</div>
+    </div>`;
+  } catch(e){ wrap.innerHTML=''; }
+}
+
 function toggleDesc(){
   const el = document.getElementById('prop-desc-text');
   const btn = el && el.nextElementSibling;
@@ -706,10 +786,15 @@ function renderDetail(p){
   const stars = p.rating ? `<span style="color:var(--gold-d)">★</span> ${p.rating.toFixed(1)} <span style="color:#9ca3af">(${p.reviewsCount} avis)</span>` : '';
 
   const allAm = (p.allAmenities || p.amenities || []);
-  const amenHtml = allAm.map(a => {
+  const SHOW_AM = 6;
+  const amenHtml = allAm.map((a, i) => {
     const fr = AMENITY_FR[a] || a;
-    return `<div class="amenity-item">${getIcon(fr)}<span>${fr}</span></div>`;
+    const hidden = i >= SHOW_AM ? ' amen-hidden' : '';
+    return `<div class="amenity-item${hidden}">${getIcon(fr)}<span>${fr}</span></div>`;
   }).join('');
+  const amenToggle = allAm.length > SHOW_AM
+    ? `<button class="btn-amen-toggle" id="btn-amen" onclick="toggleAmen()">Voir les ${allAm.length - SHOW_AM} équipements supplémentaires</button>`
+    : '';
 
   const desc = (p.fullDescription || p.summary || '').trim();
 
@@ -747,7 +832,11 @@ function renderDetail(p){
 
     ${amenHtml ? `
     <div class="prop-divider"></div>
-    <div class="prop-section"><h2 class="prop-section-title">Équipements</h2><div class="amenities-grid">${amenHtml}</div></div>` : ''}
+    <div class="prop-section">
+      <h2 class="prop-section-title">Équipements</h2>
+      <div class="amenities-grid">${amenHtml}</div>
+      ${amenToggle}
+    </div>` : ''}
   `;
 
   // Booking card
@@ -1347,6 +1436,7 @@ async function loadProperty(){
     prop = property;
     renderGallery(prop);
     renderDetail(prop);
+    loadRecommendations(prop);
     initCalendar();
     loadCalendar(prop.id);
     loadMonthRates();
