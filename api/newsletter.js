@@ -63,7 +63,7 @@ module.exports = async (req, res) => {
     // 2) Notification interne
     await transporter.sendMail({
       from: process.env.EMAIL_FROM || 'ALPÉON <reservations@alpeon.fr>',
-      to: 'reservations@alpeon.fr',
+      to: 'marketing@alpeon.fr',
       subject: `Nouvelle inscription newsletter — ${email}`,
       text: `Nouvelle inscription newsletter : ${email}\nSource : ${source || 'footer'}\nDate : ${new Date().toLocaleString('fr-FR')}\nBrevo : ${JSON.stringify(brevoResult)}`,
     });
@@ -72,7 +72,7 @@ module.exports = async (req, res) => {
     await transporter.sendMail({
       from: process.env.EMAIL_FROM || 'ALPÉON <reservations@alpeon.fr>',
       to: email,
-      subject: isPopup ? 'Votre code -10% ALPÉON — ALPE10' : 'Bienvenue chez ALPÉON',
+      subject: isPopup ? 'Votre code -10% ALPÉON — ALPEON10' : 'Bienvenue chez ALPÉON',
       html: `<!DOCTYPE html>
 <html lang="fr">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -118,7 +118,7 @@ module.exports = async (req, res) => {
           <tr>
             <td style="background:#F5F3EF;border:2px dashed #D5CFC4;border-radius:6px;padding:20px;text-align:center">
               <p style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#6b7280;margin:0 0 8px">Votre code de réduction</p>
-              <p style="font-family:Georgia,serif;font-size:28px;font-weight:400;color:#2C3D30;letter-spacing:.12em;margin:0">ALPE10</p>
+              <p style="font-family:Georgia,serif;font-size:28px;font-weight:400;color:#2C3D30;letter-spacing:.12em;margin:0">ALPEON10</p>
               <p style="font-size:11px;color:#9ca3af;margin:8px 0 0">À saisir lors de votre réservation sur alpeon.fr</p>
             </td>
           </tr>
