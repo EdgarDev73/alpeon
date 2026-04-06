@@ -7,436 +7,548 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/favicon-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alpine Property Management — Val Thorens, Megève, Courchevel | ALPÉON</title>
-  <meta name="description" content="ALPÉON manages your alpine seasonal rental property in Val Thorens, Megève, Courchevel, Méribel, Tignes and Val d'Isère. Fixed guaranteed rent every month, independent of the market." />
+  <meta name="description" content="ALPÉON manages your property for short-term rental in Val Thorens, Megève, Courchevel, Méribel, Tignes and Val d'Isère. Guaranteed fixed rent every month, discreet and transparent management." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://alpeon.fr/en/accueil/" />
-  <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/accueil/" />
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/accueil/" />
+  <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/accueil/" />
   <link rel="alternate" hreflang="x-default" href="https://alpeon.fr/accueil/" />
-  <meta name="keywords" content="alpine property management, ski chalet rental management, guaranteed rent ski property, Megève property manager, Courchevel rental management, Val Thorens apartment management, French Alps seasonal rental, ski property investment income, entrust property alpine resort" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Alpine Property Management — Fixed Guaranteed Rent | ALPÉON" />
-  <meta property="og:description" content="ALPÉON manages your seasonal rental property in the French Alps. Fixed guaranteed rent every month, independent of market conditions." />
+  <meta property="og:title" content="Alpine Property Management — Guaranteed Fixed Rent | ALPÉON" />
+  <meta property="og:description" content="ALPÉON manages your property for short-term rental in the French Alps. Guaranteed fixed rent every month, independent of the market." />
   <meta property="og:url" content="https://alpeon.fr/en/accueil/" />
   <meta property="og:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Alpine Property Management — Guaranteed Rent | ALPÉON" />
-  <meta name="twitter:description" content="Fixed guaranteed rent every month, independent of the market. ALPÉON manages your property in Val Thorens, Megève, Courchevel, Méribel, Tignes and Val d'Isère." />
+  <meta name="twitter:description" content="Guaranteed fixed rent every month, independent of the market. ALPÉON manages your property in Val Thorens, Megève, Courchevel, Méribel, Tignes and Val d'Isère." />
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://alpeon.fr/en/accueil/" }
-        ]
-      },
-      {
-        "@type": ["RealEstateAgent", "LocalBusiness"],
-        "@id": "https://alpeon.fr/#organization",
-        "name": "ALPÉON",
-        "url": "https://alpeon.fr",
-        "email": "proprietaires@alpeon.fr",
-        "description": "Premium alpine seasonal rental management. Fixed guaranteed rent for property owners, independent of market conditions. Val Thorens, Megève, Courchevel, Méribel, Tignes, Val d'Isère.",
-        "priceRange": "€€€€",
-        "areaServed": [
-          { "@type": "Place", "name": "Val Thorens" },
-          { "@type": "Place", "name": "Megève" },
-          { "@type": "Place", "name": "Courchevel" },
-          { "@type": "Place", "name": "Méribel" },
-          { "@type": "Place", "name": "Tignes" },
-          { "@type": "Place", "name": "Val d'Isère" }
-        ],
-        "serviceType": ["Seasonal rental management", "Guaranteed rent for owners", "Alpine concierge", "Ski property management"]
-      }
-    ]
-  }
-  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet" />
 
   <style>
+/* @@NAV-START@@ */
+  :root { --nav-h: 88px; }
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+    height: var(--nav-h); background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background .35s ease, border-color .35s ease;
+  }
+  .site-header.scrolled {
+    background: rgba(18,30,20,.97);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(232,203,160,.1);
+  }
+  .site-header-inner {
+    max-width: 1400px; margin: 0 auto;
+    padding: 0 2.5rem; height: var(--nav-h); display: flex; align-items: center;
+  }
+  .site-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+  .site-logo img { height: 64px; width: auto; display: block; }
+  .site-nav { display: flex; align-items: center; gap: 2rem; margin-left: auto; }
+  .site-nav-link {
+    color: rgba(250,254,255,.75); font-size: .72rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    position: relative; padding-bottom: 3px; transition: color .2s; white-space: nowrap;
+  }
+  .site-nav-link::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1.5px; background: #C9A97A;
+    transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
+  }
+  .site-nav-link:hover { color: #fff; }
+  .site-nav-link.active { color: #C9A97A; }
+  .site-nav-link.active::after, .site-nav-link:hover::after { transform: scaleX(1); }
+  .site-header-right { display: flex; align-items: center; gap: 1.25rem; margin-left: 2.5rem; flex-shrink: 0; }
+  .site-lang { display: flex; align-items: center; gap: .35rem; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
+  .site-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-lang a.active { color: #C9A97A; }
+  .site-lang span { color: rgba(250,254,255,.15); font-size: .5rem; }
+  .site-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 28px; height: 28px; background: none; border: none; cursor: pointer; padding: 0; }
+  .site-burger span { display: block; height: 1.5px; background: rgba(250,254,255,.75); border-radius: 2px; transition: all .25s; }
+  .site-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .site-burger.open span:nth-child(2) { opacity: 0; }
+  .site-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .site-mobile-menu {
+    display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    background: rgba(18,30,20,.98); backdrop-filter: blur(14px);
+    flex-direction: column; padding: 2rem 2rem 3rem; z-index: 299;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .site-mobile-menu.open { opacity: 1; pointer-events: all; }
+  .site-mobile-link {
+    color: rgba(250,254,255,.6); font-size: 1.1rem; font-weight: 300;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    padding: 1rem 0; border-bottom: 1px solid rgba(250,254,255,.06); transition: color .2s;
+    font-family: 'Lora', serif;
+  }
+  .site-mobile-link:hover, .site-mobile-link.active { color: #C9A97A; }
+  .site-mobile-lang { display: flex; gap: .5rem; align-items: center; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,254,255,.3); margin-top: 1.5rem; }
+  .site-mobile-lang a { color: rgba(250,254,255,.35); text-decoration: none; transition: color .2s; }
+  .site-mobile-lang a.active { color: #C9A97A; }
+  @media (max-width: 900px) {
+    .site-nav, .site-lang { display: none; }
+    .site-burger { display: flex; }
+    .site-mobile-menu { display: flex; }
+    .site-header-inner { padding: 0 1.25rem; }
+  }
+  /* @@NAV-END@@ */
+
     :root {
-      --stone:    #faf9f7;
-      --stone-2:  #f2efe9;
-      --stone-3:  #e5e0d8;
-      --stone-4:  #c8c1b5;
-      --ink:      #1c1b19;
-      --ink-3:    #4a4843;
-      --ink-4:    #7a7773;
-      --accent:   #a8956a;
-      --accent-2: #8a7a56;
+      --green:   #2C3D30;
+      --green-d: #223028;
+      --gold:    #E8CBA0;
+      --gold-d:  #D4B48A;
+      --white:   #FAFEFF;
+      --black:   #111111;
+      --mid:     #4A5C4E;
+      --muted:   rgba(44,61,48,.45);
+      --border:  rgba(44,61,48,.12);
+      --font-sans:   'Poppins', sans-serif;
+      --font-serif:  'Lora', serif;
+      --font-italic: 'Lora', serif;
+      --nav-h: 88px;
+      --max:   1380px;
+      --pad:   clamp(24px, 5vw, 80px);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--stone); color: var(--ink); line-height: 1.6; }
-
-    /* ── HEADER ── */
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 72px;
-      background: transparent; transition: background .4s, box-shadow .4s;
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font-sans); font-weight: 300; background: var(--white); color: var(--black); line-height: 1.6; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-family: var(--font-sans); font-size: .65rem; font-weight: 500;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
     }
-    header.scrolled { background: rgba(250,249,247,.97); box-shadow: 0 1px 0 var(--stone-3); backdrop-filter: blur(8px); }
-    .logo { display: flex; align-items: center; text-decoration: none; }
-    .logo-name { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #fff; transition: color .4s; }
-    header.scrolled .logo-name { color: var(--ink); }
-    .main-nav { display: flex; align-items: center; gap: 36px; }
-    .main-nav a { font-size: .74rem; font-weight: 500; letter-spacing: .10em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; transition: color .3s; }
-    .main-nav a:hover { color: #fff; }
-    header.scrolled .main-nav a { color: var(--ink-3); }
-    header.scrolled .main-nav a:hover { color: var(--ink); }
-    .lang-switch { display: flex; align-items: center; gap: 8px; }
-    .lang-btn { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.4); text-decoration: none; transition: color .3s; }
-    .lang-btn.active { color: rgba(255,255,255,.9); }
-    header.scrolled .lang-btn { color: var(--ink-4); }
-    header.scrolled .lang-btn.active { color: var(--ink); }
-    .lang-sep { color: rgba(255,255,255,.2); font-size: .6rem; }
-    header.scrolled .lang-sep { color: var(--stone-4); }
+    .eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); flex-shrink: 0; }
 
-    /* Hamburger */
-    .mob-menu-btn { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:none; cursor:pointer; padding:4px; }
-    .mob-menu-btn span { display:block; height:1.5px; width:22px; background:#fff; transition:all .3s; border-radius:1px; }
-    header.scrolled .mob-menu-btn span { background:var(--ink); }
-    .mob-menu-btn.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-    .mob-menu-btn.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-    .mob-menu-btn.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-    .mob-menu { position:fixed; inset:0; z-index:300; background:var(--ink); opacity:0; pointer-events:none; transition:opacity .35s; display:flex; flex-direction:column; }
-    .mob-menu.open { opacity:1; pointer-events:all; }
-    .mob-close { position:absolute; top:14px; right:18px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); font-size:1.6rem; line-height:1; transition:color .2s; }
-    .mob-close:hover { color:#fff; }
-    .mob-menu-inner { display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; gap:44px; padding:20px; }
-    .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
-    .mob-nav a { font-family:'Lora',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
-    .mob-nav a:hover { color:#fff; }
-    .mob-lang { display:flex; align-items:center; gap:14px; }
-    .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
-    .mob-lang-btn.active { color:rgba(255,255,255,.9); }
-    .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
-    @media (max-width:900px) { .mob-menu-btn { display:flex; } .main-nav { display:none; } }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative; height: 100vh; min-height: 600px;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 60px 80px;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2200&q=90') center 40% / cover no-repeat;
-      transform: scale(1.04);
-      animation: heroZoom 14s ease-out forwards;
-    }
+    /* HERO */
+    .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: flex-end; overflow: hidden; }
+    .hero-img { position: absolute; inset: 0; background: url('/assets/images/hero-accueil.jpg') center 50% / cover no-repeat; transform: scale(1.05); animation: heroZoom 16s cubic-bezier(.25,.46,.45,.94) forwards; }
     @keyframes heroZoom { to { transform: scale(1); } }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(28,27,25,.82) 20%, rgba(28,27,25,.1) 65%, transparent 100%);
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 780px; }
-    .hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
-    .hero-eyebrow-line { width: 40px; height: 1px; background: var(--accent); }
-    .hero-eyebrow-text { font-size: .64rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
-    .hero h1 {
-      font-family: 'Lora', serif;
-      font-size: clamp(3rem, 6vw, 5rem);
-      font-weight: 300; color: #fff; line-height: 1.05;
-      margin-bottom: 32px; letter-spacing: -.01em;
-    }
-    .hero h1 em { font-style: italic; font-weight: 300; }
-    .hero-sub { font-size: .92rem; color: rgba(255,255,255,.62); line-height: 1.72; max-width: 440px; margin-bottom: 48px; }
-    .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .btn-hero-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; text-decoration: none; padding: 15px 36px; font-size: .74rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: background .3s; }
-    .btn-hero-primary:hover { background: var(--accent-2); }
-    .btn-hero-ghost { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.65); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.25); padding-bottom: 2px; transition: color .3s, border-color .3s; }
-    .btn-hero-ghost:hover { color: #fff; border-color: rgba(255,255,255,.7); }
-    .hero-scroll { position: absolute; bottom: 36px; right: 60px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .hero-scroll-text { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); writing-mode: vertical-lr; }
-    .hero-scroll-line { width: 1px; height: 40px; background: rgba(255,255,255,.15); position: relative; overflow: hidden; }
-    .hero-scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,.5); animation: scrollLine 2s ease-in-out infinite; }
-    @keyframes scrollLine { to { top: 200%; } }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(170deg, transparent 35%, rgba(22,34,24,.6) 65%, rgba(18,28,20,.92) 100%); }
+    .hero-overlay::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(18,28,20,.25) 0%, transparent 30%); }
+    .hero-body { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(64px, 8vh, 110px); }
+    .hero-body .container { display: grid; grid-template-columns: 1fr 1fr; align-items: flex-end; gap: 40px; }
+    .hero-eyebrow { margin-bottom: 28px; }
+    .hero-h1 { font-family: var(--font-sans); font-size: clamp(2.8rem, 5.2vw, 5rem); font-weight: 600; color: var(--white); line-height: 1.04; letter-spacing: -.02em; margin-bottom: 36px; }
+    .hero-h1 em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--gold); font-size: 1.04em; letter-spacing: .01em; }
+    .hero-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 12px; background: var(--gold); color: var(--green-d); padding: 16px 38px; font-family: var(--font-sans); font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; transition: background .3s, transform .2s; }
+    .btn-primary:hover { background: var(--gold-d); transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(250,254,255,.65); border-bottom: 1px solid rgba(250,254,255,.25); padding-bottom: 3px; transition: color .3s, border-color .3s; }
+    .btn-ghost:hover { color: var(--white); border-color: rgba(250,254,255,.6); }
+    .hero-card { border: 1px solid rgba(232,203,160,.25); background: rgba(22,34,24,.55); backdrop-filter: blur(16px); padding: 36px 40px; max-width: 360px; margin-left: auto; }
+    .hero-card-num { font-family: var(--font-serif); font-style: italic; font-size: 3.8rem; font-weight: 400; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+    .hero-card-label { font-size: .65rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(250,254,255,.5); margin-bottom: 24px; }
+    .hero-card-divider { width: 40px; height: 1px; background: rgba(232,203,160,.35); margin-bottom: 20px; }
+    .hero-card-text { font-size: .82rem; font-weight: 300; color: rgba(250,254,255,.65); line-height: 1.75; }
+    .hero-scroll { position: absolute; bottom: 40px; right: var(--pad); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .hero-scroll span { font-size: .55rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(250,254,255,.28); writing-mode: vertical-lr; }
+    .hero-scroll-line { width: 1px; height: 48px; background: rgba(250,254,255,.12); position: relative; overflow: hidden; }
+    .hero-scroll-line::after { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: var(--gold); opacity: .6; animation: scrollPulse 2.4s ease-in-out infinite; }
+    @keyframes scrollPulse { to { top: 200%; } }
 
-    /* ── STATS BAR ── */
-    .stats-bar { background: var(--ink); display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.06); }
-    .stat-item { padding: 36px 40px; border-right: 1px solid rgba(255,255,255,.06); display: flex; flex-direction: column; gap: 6px; }
-    .stat-item:last-child { border-right: none; }
-    .stat-num { font-family: 'Lora', serif; font-size: 2.6rem; font-weight: 300; color: #fff; line-height: 1; }
-    .stat-label { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+    /* STATS */
+    .stats { background: var(--green); }
+    .stats .container { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat { padding: 44px 48px; border-right: 1px solid rgba(250,254,255,.08); display: flex; flex-direction: column; gap: 8px; }
+    .stat:last-child { border-right: none; }
+    .stat-n { font-family: var(--font-serif); font-style: italic; font-size: 3rem; font-weight: 400; color: var(--gold); line-height: 1; }
+    .stat-l { font-size: .62rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: rgba(250,254,255,.42); }
 
-    /* ── INTRO SPLIT ── */
-    .intro { padding: 120px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-    .kicker { font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-    .kicker::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent); }
-    .intro-title { font-family: 'Lora', serif; font-size: clamp(2.2rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.12; color: var(--ink); }
-    .intro-title em { font-style: italic; color: var(--accent); }
-    .intro-right { display: flex; flex-direction: column; gap: 28px; }
-    .intro-p { font-size: .95rem; color: var(--ink-3); line-height: 1.8; padding-top: 20px; border-top: 1px solid var(--stone-3); }
-    .intro-p:first-child { border-top: none; padding-top: 0; }
-    .intro-link { display: inline-flex; align-items: center; gap: 8px; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); text-decoration: none; margin-top: 8px; }
-    .intro-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
-    .intro-link:hover svg { transform: translateX(4px); }
+    /* MARQUES */
+    .marques { background: var(--green-d); padding: clamp(64px, 8vw, 100px) 0; }
+    .marques-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .marque-card { position: relative; overflow: hidden; min-height: 420px; display: flex; align-items: flex-end; text-decoration: none; background-size: cover; background-position: center; transition: opacity .3s; }
+    .marque-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.6) 40%, rgba(0,0,0,.1) 75%, transparent 100%); transition: opacity .4s; }
+    .marque-card:hover::after { opacity: .85; }
+    .marque-residences { background-image: url('/assets/images/residence.JPG'); }
+    .marque-signatures { background-image: url('/assets/images/signature.jpg'); }
+    .marque-inner { position: relative; z-index: 2; padding: 44px 48px; }
+    .marque-logo { height: 80px; width: auto; display: block; margin-bottom: 18px; }
+    .marque-desc { font-size: .88rem; color: rgba(250,254,255,.7); line-height: 1.7; max-width: 340px; margin-bottom: 20px; }
+    .marque-link { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    @media (max-width: 640px) { .marques-grid { grid-template-columns: 1fr; } .marque-card { min-height: 340px; } }
 
-    /* ── DESTINATIONS STRIP ── */
-    .dest-section { background: var(--stone-2); padding: 0; overflow: hidden; }
-    .dest-header { padding: 72px 60px 48px; display: flex; align-items: flex-end; justify-content: space-between; }
-    .dest-header h2 { font-family: 'Lora', serif; font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.12; }
-    .dest-header h2 em { font-style: italic; color: var(--accent); }
-    .dest-see-all { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-4); text-decoration: none; white-space: nowrap; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--stone-4); padding-bottom: 2px; transition: color .3s, border-color .3s; flex-shrink: 0; margin-bottom: 4px; }
-    .dest-see-all:hover { color: var(--ink); border-color: var(--ink); }
-    .dest-see-all svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
-    .dest-see-all:hover svg { transform: translateX(3px); }
-    .dest-strip { display: flex; gap: 2px; }
-    .dest-card { position: relative; overflow: hidden; flex: 0 0 calc(100% / 3.4); height: 420px; text-decoration: none; }
-    .dest-card::before { content: ''; position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .6s cubic-bezier(.25,.46,.45,.94); }
-    .dest-card:hover::before { transform: scale(1.06); }
-    .dest-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(28,27,25,.88) 30%, rgba(28,27,25,.08) 100%); }
-    .dc-courchevel::before { background-image: url('https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=900&q=85'); background-position: center 35%; }
-    .dc-megeve::before     { background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=700&q=85'); }
-    .dc-meribel::before    { background-image: url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=700&q=85'); }
-    .dc-tignes::before     { background-image: url('https://images.unsplash.com/photo-1520209759809-a9bcb6cb3241?w=700&q=85'); background-position: center 25%; }
-    .dc-valdisere::before  { background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=85'); background-position: center 40%; }
-    .dc-valthorens::before { background-image: url('https://images.unsplash.com/photo-1551524559-8af4e6624178?w=700&q=85'); }
-    .dest-card-body { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; padding: 28px 24px; }
-    .dc-massif { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-    .dc-name { font-family: 'Lora', serif; font-size: 1.7rem; font-weight: 400; color: #fff; line-height: 1; margin-bottom: 4px; }
-    .dc-alt { font-size: .65rem; letter-spacing: .1em; color: rgba(255,255,255,.38); }
+    /* PROMISE */
+    .promise { background: var(--white); padding: clamp(80px, 10vw, 140px) 0; }
+    .promise .container { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(60px, 8vw, 120px); align-items: start; }
+    .promise-left { position: sticky; top: calc(var(--nav-h) + 40px); }
+    .promise-eyebrow { margin-bottom: 24px; }
+    .promise-h2 { font-family: var(--font-sans); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 600; line-height: 1.1; color: var(--black); letter-spacing: -.02em; margin-bottom: 32px; }
+    .promise-h2 em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--green); font-size: 1.05em; }
+    .promise-link { display: inline-flex; align-items: center; gap: 10px; font-size: .7rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--green); border-bottom: 1px solid var(--green); padding-bottom: 3px; transition: opacity .3s; }
+    .promise-link:hover { opacity: .65; }
+    .promise-link svg { width: 13px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .promise-link:hover svg { transform: translateX(4px); }
+    .promise-right { display: flex; flex-direction: column; gap: 0; }
+    .promise-item { display: grid; grid-template-columns: 56px 1fr; gap: 28px; padding: 36px 0; border-bottom: 1px solid var(--border); align-items: start; }
+    .promise-item:first-child { border-top: 1px solid var(--border); }
+    .promise-num { font-family: var(--font-serif); font-style: italic; font-size: 2rem; font-weight: 300; color: var(--gold-d); line-height: 1; padding-top: 4px; }
+    .promise-item-title { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; color: var(--black); margin-bottom: 10px; letter-spacing: -.01em; }
+    .promise-item-text { font-size: .88rem; font-weight: 300; color: #505850; line-height: 1.8; }
 
-    /* ── CTA ESTIMATEUR ── */
-    .cta-est { background: var(--ink); padding: 110px 60px; display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; }
-    .cta-est-title { font-family: 'Lora', serif; font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 300; color: #fff; line-height: 1.1; }
-    .cta-est-title em { font-style: italic; }
-    .cta-est-title strong { font-weight: 500; color: var(--accent); font-style: normal; }
-    .cta-est-right { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; flex-shrink: 0; }
-    .cta-est-note { font-size: .78rem; color: rgba(255,255,255,.35); line-height: 1.6; max-width: 240px; }
-    .btn-cta-main { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: #fff; text-decoration: none; padding: 16px 40px; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: background .3s; white-space: nowrap; }
-    .btn-cta-main:hover { background: var(--accent-2); }
-    .btn-cta-main svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
-    .btn-cta-main:hover svg { transform: translateX(4px); }
+    /* DESTINATIONS */
+    .destinations { background: var(--green); padding: clamp(80px, 10vw, 130px) 0 0; overflow: hidden; }
+    .destinations-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px; }
+    .destinations-h2 { font-family: var(--font-sans); font-size: clamp(1.8rem, 2.8vw, 2.5rem); font-weight: 600; color: var(--white); line-height: 1.1; letter-spacing: -.015em; margin-top: 20px; }
+    .destinations-h2 em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--gold); font-size: 1.05em; }
+    .destinations-all { display: inline-flex; align-items: center; gap: 10px; font-size: .68rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: rgba(250,254,255,.5); border-bottom: 1px solid rgba(250,254,255,.2); padding-bottom: 3px; transition: color .3s, border-color .3s; white-space: nowrap; margin-bottom: 5px; flex-shrink: 0; }
+    .destinations-all:hover { color: var(--gold); border-color: var(--gold); }
+    .destinations-all svg { width: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .destinations-all:hover svg { transform: translateX(4px); }
+    .dest-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; }
+    .dest-card { position: relative; overflow: hidden; height: 460px; display: block; }
+    .dest-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .7s cubic-bezier(.25,.46,.45,.94); }
+    .dest-card:hover .dest-card-bg { transform: scale(1.07); }
+    .dest-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,28,20,.92) 25%, rgba(18,28,20,.05) 70%); transition: opacity .4s; }
+    .dest-card:hover .dest-card-overlay { opacity: .8; }
+    .dest-card-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 22px 30px; z-index: 2; }
+    .dest-massif { font-size: .56rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .dest-name { font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; font-weight: 400; color: var(--white); line-height: 1; margin-bottom: 6px; }
+    .dest-alt { font-size: .62rem; color: rgba(250,254,255,.38); letter-spacing: .06em; }
+    .dest-card-arrow { position: absolute; top: 22px; right: 22px; width: 36px; height: 36px; border: 1px solid rgba(232,203,160,.25); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .35s; z-index: 2; }
+    .dest-card-arrow svg { width: 14px; stroke: var(--gold); fill: none; stroke-width: 2; }
+    .dest-card:hover .dest-card-arrow { opacity: 1; transform: translateY(0); }
+    .dc-courchevel .dest-card-bg { background-image: url('/assets/images/dest-courchevel.webp'); background-position: center 40%; }
+    .dc-megeve .dest-card-bg     { background-image: url('/assets/images/dest-megeve.webp'); background-position: center 50%; }
+    .dc-meribel .dest-card-bg    { background-image: url('/assets/images/dest-meribel.jpg'); background-position: center 50%; }
+    .dc-tignes .dest-card-bg     { background-image: url('/assets/images/dest-tignes.png'); background-position: center 40%; }
+    .dc-valdisere .dest-card-bg  { background-image: url('/assets/images/dest-valdisere.jpg'); background-position: center 40%; }
+    .dc-valthorens .dest-card-bg { background-image: url('/assets/images/dest-valthorens.jpg'); background-position: center 50%; }
 
-    /* ── FOOTER ── */
-    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.06); padding: 64px 60px 36px; }
-    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-    .f-brand-name { font-family: 'Lora', serif; font-size: 1.3rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 6px; }
-    .f-brand-claim { font-size: .63rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-    .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.36); line-height: 1.72; }
-    .f-col-title { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 18px; }
-    .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .f-links a { font-size: .84rem; color: rgba(255,255,255,.52); text-decoration: none; transition: color .2s; }
-    .f-links a:hover { color: rgba(255,255,255,.9); }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.06); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: .72rem; color: rgba(255,255,255,.22); }
+    /* CTA */
+    .cta { background: var(--green); border-top: 1px solid rgba(250,254,255,.08); padding: clamp(80px, 10vw, 130px) 0; }
+    .cta .container { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; }
+    .cta-h2 { font-family: var(--font-sans); font-size: clamp(2.2rem, 4vw, 3.6rem); font-weight: 600; color: var(--white); line-height: 1.05; letter-spacing: -.02em; }
+    .cta-h2 em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--gold); font-size: 1.05em; }
+    .cta-h2 strong { color: var(--gold); font-style: normal; }
+    .cta-right { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; flex-shrink: 0; }
+    .cta-note { font-size: .78rem; font-weight: 300; color: rgba(250,254,255,.4); line-height: 1.7; max-width: 220px; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .intro { grid-template-columns: 1fr; gap: 48px; padding: 80px 60px; }
-      .cta-est { grid-template-columns: 1fr; gap: 40px; }
+    /* FOOTER */
+    footer { background: var(--black); padding: clamp(64px, 8vw, 96px) 0 0; }
+    .footer-grid { display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 64px; border-bottom: 1px solid rgba(250,254,255,.07); }
+    .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .footer-brand-claim { font-size: .6rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; opacity: .8; }
+    .footer-brand-text { font-size: .82rem; font-weight: 300; color: rgba(250,254,255,.32); line-height: 1.8; max-width: 280px; }
+    .footer-col-title { font-size: .6rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a { font-size: .84rem; font-weight: 300; color: rgba(250,254,255,.48); transition: color .2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { padding: 28px 0; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom span { font-size: .7rem; color: rgba(250,254,255,.2); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .hero-body .container { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .promise .container { grid-template-columns: 1fr; gap: 48px; }
+      .promise-left { position: static; }
+      .dest-grid { grid-template-columns: repeat(3, 1fr); }
+      .cta .container { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
     @media (max-width: 768px) {
-      header { padding: 0 20px; }
-      .hero { padding: 0 24px 72px; }
-      .hero-scroll { display: none; }
-      .stats-bar { grid-template-columns: 1fr 1fr; }
-      .stat-item { padding: 28px 24px; }
-      .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,.06); }
-      .stat-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,.06); border-right: none; }
-      .intro { padding: 64px 24px; gap: 40px; }
-      .dest-header { padding: 56px 24px 36px; flex-direction: column; align-items: flex-start; gap: 20px; }
-      .dest-strip { overflow-x: auto; padding-bottom: 2px; }
-      .dest-card { flex: 0 0 72vw; }
-      .cta-est { padding: 72px 24px; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
-      footer { padding: 56px 24px 32px; }
+      :root { --nav-h: 72px; }
+      .stats .container { grid-template-columns: 1fr 1fr; }
+      .stat { padding: 32px 28px; }
+      .stat:nth-child(2) { border-right: none; }
+      .stat:nth-child(3) { border-top: 1px solid rgba(250,254,255,.08); }
+      .stat:nth-child(4) { border-top: 1px solid rgba(250,254,255,.08); border-right: none; }
+      .dest-grid { grid-template-columns: 1fr 1fr; }
+      .dest-card { height: 300px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
     }
-    @media (max-width: 480px) {
-      .footer-top { grid-template-columns: 1fr; }
-      .dest-card { flex: 0 0 82vw; }
+    @media (max-width: 520px) {
+      .dest-grid { grid-template-columns: 1fr; }
+      .dest-card { height: 260px; }
     }
+
+  .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
+  .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.55)}
+  .wa-btn svg{width:26px;height:26px;fill:#fff}
+  .nl-form{display:flex;gap:.5rem;margin-top:.85rem;flex-wrap:wrap}
+  .nl-input{flex:1;min-width:180px;background:rgba(255,255,255,.07);border:1px solid rgba(232,203,160,.2);border-radius:4px;padding:.55rem .85rem;font-family:'Poppins',sans-serif;font-size:.8rem;color:#fff;outline:none;transition:border-color .2s}
+  .nl-input::placeholder{color:rgba(255,255,255,.3)}
+  .nl-input:focus{border-color:rgba(232,203,160,.5)}
+  .nl-btn{background:var(--gold,#E8CBA0);color:#2C3D30;border:none;border-radius:4px;padding:.55rem 1.1rem;font-family:'Poppins',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s}
+  .nl-btn:hover{background:#d4b48a}
+  .nl-msg{font-size:.72rem;margin-top:.4rem;min-height:1em}
+  .nl-msg.ok{color:#86efac}.nl-msg.err{color:#fca5a5}
+  .nl-popup-overlay{display:none;position:fixed;inset:0;z-index:800;background:rgba(17,17,17,.6);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1.5rem}
+  .nl-popup-overlay.open{display:flex;animation:nlFadeIn .3s ease}
+  @keyframes nlFadeIn{from{opacity:0}to{opacity:1}}
+  .nl-popup{background:#fff;border-radius:10px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.28);animation:nlSlideUp .35s ease}
+  @keyframes nlSlideUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+  .nl-popup-hero{background:var(--green,#2C3D30);padding:2.5rem 2.5rem 2rem;position:relative;text-align:center}
+  .nl-popup-badge{display:inline-block;background:var(--gold,#E8CBA0);color:#2C3D30;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.3rem .9rem;border-radius:20px;margin-bottom:1.1rem}
+  .nl-popup-offer{font-family:'Lora',serif;font-style:italic;font-size:2.6rem;font-weight:300;color:var(--gold,#E8CBA0);line-height:1;margin-bottom:.4rem}
+  .nl-popup-offer span{font-size:1.1rem;vertical-align:super;font-family:'Poppins',sans-serif;font-style:normal;font-weight:500}
+  .nl-popup-tagline{font-size:.82rem;color:rgba(232,203,160,.7);font-weight:300}
+  .nl-popup-close{position:absolute;top:.85rem;right:.9rem;background:none;border:none;color:rgba(232,203,160,.5);font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s;padding:.25rem}
+  .nl-popup-close:hover{color:var(--gold,#E8CBA0)}
+  .nl-popup-body{padding:1.75rem 2rem 2rem}
+  .nl-popup-title{font-family:'Lora',serif;font-style:italic;font-size:1.3rem;font-weight:300;color:#1a1a1a;margin-bottom:.4rem}
+  .nl-popup-sub{font-size:.8rem;color:#6b7280;line-height:1.6;margin-bottom:1.4rem}
+  .nl-popup-form{display:flex;gap:.6rem}
+  .nl-popup-input{flex:1;border:1.5px solid #ddd;border-radius:5px;padding:.65rem .9rem;font-family:'Poppins',sans-serif;font-size:.84rem;color:#111;outline:none;transition:border-color .2s}
+  .nl-popup-input:focus{border-color:#2C3D30}
+  .nl-popup-btn{background:#2C3D30;color:#E8CBA0;border:none;border-radius:5px;padding:.65rem 1.3rem;font-family:'Poppins',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s}
+  .nl-popup-btn:hover:not(:disabled){background:#3d5442}
+  .nl-popup-btn:disabled{opacity:.5;cursor:not-allowed}
+  .nl-popup-msg{font-size:.75rem;margin-top:.6rem;min-height:1em;text-align:center}
+  .nl-popup-msg.ok{color:#166534}.nl-popup-msg.err{color:#b91c1c}
+  .nl-popup-legal{font-size:.65rem;color:#9ca3af;text-align:center;margin-top:.85rem;line-height:1.5}
+  @media(max-width:480px){.nl-popup-form{flex-direction:column}.nl-popup-offer{font-size:2rem}}
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header id="siteHeader">
-    <a href="/en/accueil" class="logo">
-      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="80" style="height:80px;width:auto;display:block;margin-top:10px">
+<header class="site-header" id="site-header">
+  <div class="site-header-inner">
+    <a href="/en/accueil" class="site-logo">
+      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON">
     </a>
-    <nav class="main-nav">
-      <a href="/en/accueil">Home</a>
-      <a href="/en/destinations">Destinations</a>
-      <a href="/en/proprietaires">Owners</a>
-      <a href="/en/estimateur">Estimator</a>
-      <div class="lang-switch">
-        <a href="/accueil" class="lang-btn">FR</a>
-        <span class="lang-sep">|</span>
-        <a href="/en/accueil" class="lang-btn active">EN</a>
-      </div>
+    <nav class="site-nav">
+      <a href="/en/accueil" class="site-nav-link active">Home</a>
+      <a href="/en/destinations" class="site-nav-link">Destinations</a>
+      <a href="/en/reserver" class="site-nav-link">Book</a>
+      <a href="/en/proprietaires" class="site-nav-link">Owners</a>
+      <a href="/en/estimateur" class="site-nav-link">Estimator</a>
+      <a href="/en/about" class="site-nav-link">About</a>
     </nav>
-    <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
-  </header>
+    <div class="site-header-right">
+      <div class="site-lang">
+        <a href="/accueil">FR</a>
+        <span>|</span>
+        <a href="/en/accueil" class="active">EN</a>
+      </div>
+      <button class="site-burger" id="site-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="site-mobile-menu" id="site-mobile-menu">
+    <a href="/en/accueil" class="site-mobile-link active">Home</a>
+    <a href="/en/destinations" class="site-mobile-link">Destinations</a>
+    <a href="/en/reserver" class="site-mobile-link">Book</a>
+    <a href="/en/proprietaires" class="site-mobile-link">Owners</a>
+    <a href="/en/estimateur" class="site-mobile-link">Estimator</a>
+    <a href="/en/about" class="site-mobile-link">About</a>
+    <div class="site-mobile-lang">
+      <a href="/accueil">FR</a><span>|</span><a href="/en/accueil" class="active">EN</a>
+    </div>
+  </div>
+</header>
+<script>
+function toggleMobileMenu(){
+  const menu = document.getElementById('site-mobile-menu');
+  const burger = document.getElementById('site-burger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+</script>
 
-  <div class="mob-menu" id="mobMenu">
-    <button class="mob-close" onclick="document.getElementById('mobMenu').classList.remove('open');document.getElementById('mobMenuBtn').classList.remove('open')" aria-label="Close">&#x2715;</button>
-    <div class="mob-menu-inner">
-      <nav class="mob-nav">
-        <a href="/en/accueil">Home</a>
-        <a href="/en/destinations">Destinations</a>
-        <a href="/en/proprietaires">Owners</a>
-        <a href="/en/estimateur">Estimator</a>
-      </nav>
-      <div class="mob-lang">
-        <a href="/accueil" class="mob-lang-btn">FR</a>
-        <span class="mob-lang-sep">|</span>
-        <a href="/en/accueil" class="mob-lang-btn active">EN</a>
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <div class="container">
+      <div class="hero-left">
+        <div class="hero-eyebrow eyebrow">Alpine Property Management</div>
+        <h1 class="hero-h1">
+          Excellence<br>
+          at the service of<br>
+          <em>your property</em>
+        </h1>
+        <div class="hero-actions">
+          <a href="/en/estimateur" class="btn-primary">
+            Calculate my guaranteed rent
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+          <a href="/en/proprietaires" class="btn-ghost">Our owner services</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-num">100%</div>
+        <div class="hero-card-label">Guaranteed fixed rent</div>
+        <div class="hero-card-divider"></div>
+        <p class="hero-card-text">Independent of occupancy rates, weather conditions and market fluctuations. Paid on the same day each month.</p>
       </div>
     </div>
   </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-line"></span>
-        <span class="hero-eyebrow-text">Alpine property management</span>
-      </div>
-      <h1>Excellence<br>in service of<br><em>your property</em></h1>
-      <p class="hero-sub">ALPÉON manages your property across the finest French Alpine resorts. Fixed rent guaranteed every month, independent of the market.</p>
-      <div class="hero-actions">
-        <a href="/en/estimateur" class="btn-hero-primary">Calculate my guaranteed rent</a>
-        <a href="/en/proprietaires" class="btn-hero-ghost">Our owner services</a>
-      </div>
+<div class="stats">
+  <div class="container">
+    <div class="stat">
+      <div class="stat-n">200+</div>
+      <div class="stat-l">Properties managed</div>
     </div>
-    <div class="hero-scroll">
-      <div class="hero-scroll-line"></div>
-      <span class="hero-scroll-text">Scroll</span>
+    <div class="stat">
+      <div class="stat-n">6</div>
+      <div class="stat-l">Alpine resorts</div>
     </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-num">200+</div>
-      <div class="stat-label">Properties managed</div>
+    <div class="stat">
+      <div class="stat-n">98%</div>
+      <div class="stat-l">Satisfied owners</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Alpine resorts</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">98%</div>
-      <div class="stat-label">Satisfied owners</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">100%</div>
-      <div class="stat-label">Fixed guaranteed rent</div>
+    <div class="stat">
+      <div class="stat-n">100%</div>
+      <div class="stat-l">Guaranteed fixed rent</div>
     </div>
   </div>
+</div>
 
-  <!-- INTRO -->
-  <section class="intro">
-    <div class="intro-left">
-      <div class="kicker">Our approach</div>
-      <h2 class="intro-title">Your property deserves<br>management <em>without compromise</em></h2>
+<section class="promise">
+  <div class="container">
+    <div class="promise-left">
+      <div class="promise-eyebrow eyebrow">Our approach</div>
+      <h2 class="promise-h2">
+        Your property deserves<br>
+        management<br>
+        <em>without compromise</em>
+      </h2>
+      <a href="/en/proprietaires" class="promise-link">
+        Discover our plans
+        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
     </div>
-    <div class="intro-right">
-      <p class="intro-p">ALPÉON is a premium short-term rental management operator in the French Alps. We handle the entire chain — from listing to guest check-in, from maintenance to key handover.</p>
-      <p class="intro-p">Every property is managed as if it were our own: with rigour, discretion and one single objective — pay you a fixed, guaranteed rent every month, regardless of market conditions.
-        <a href="/en/proprietaires" class="intro-link">Discover our packages
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </a>
-      </p>
-    </div>
-  </section>
-
-  <!-- DESTINATIONS -->
-  <section class="dest-section">
-    <div class="dest-header">
-      <div class="dest-header-left">
-        <div class="kicker">Our resorts</div>
-        <h2>6 exceptional <em>alpine destinations</em></h2>
+    <div class="promise-right">
+      <div class="promise-item">
+        <div class="promise-num">01</div>
+        <div>
+          <div class="promise-item-title">Guaranteed fixed rent every month</div>
+          <p class="promise-item-text">You receive a contractually defined rent, independent of the number of nights rented, cancellations or seasonal variations. Zero uncertainty.</p>
+        </div>
       </div>
-      <a href="/en/destinations" class="dest-see-all">
+      <div class="promise-item">
+        <div class="promise-num">02</div>
+        <div>
+          <div class="promise-item-title">Complete management from A to Z</div>
+          <p class="promise-item-text">Marketing, guest reception, cleaning, maintenance, accounting — we manage the entire chain with rigour and discretion.</p>
+        </div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-num">03</div>
+        <div>
+          <div class="promise-item-title">A single point of contact, always available</div>
+          <p class="promise-item-text">A dedicated manager knows your property in every detail. You receive just one monthly report, clear and comprehensive.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="marques">
+  <div class="container">
+    <div class="marques-grid">
+      <a href="/en/proprietaires#offres" class="marque-card marque-residences">
+        <div class="marque-inner">
+          <img src="/assets/logo/logo-residences-gold.svg" alt="ALPÉON Résidences" class="marque-logo">
+          <p class="marque-desc">Complete rental management for resort apartments and chalets. Guaranteed rent, zero hassle.</p>
+          <span class="marque-link">Discover →</span>
+        </div>
+      </a>
+      <a href="/en/proprietaires#offres" class="marque-card marque-signatures">
+        <div class="marque-inner">
+          <img src="/assets/logo/logo-signatures-gold.svg" alt="ALPÉON Signatures" class="marque-logo">
+          <p class="marque-desc">Bespoke concierge service and premium management for exceptional properties. 5-star service.</p>
+          <span class="marque-link">Discover →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="destinations">
+  <div class="container">
+    <div class="destinations-head">
+      <div>
+        <div class="eyebrow">Our resorts</div>
+        <h2 class="destinations-h2">6 exceptional <em>alpine destinations</em></h2>
+      </div>
+      <a href="/en/destinations" class="destinations-all">
         View all destinations
         <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
-    <div class="dest-strip">
-      <a class="dest-card dc-courchevel" href="/en/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Les 3 Vallées</div>
-          <div class="dc-name">Courchevel</div>
-          <div class="dc-alt">1,300 — 1,850 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-megeve" href="/en/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Mont-Blanc</div>
-          <div class="dc-name">Megève</div>
-          <div class="dc-alt">1,113 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-meribel" href="/en/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Les 3 Vallées</div>
-          <div class="dc-name">Méribel</div>
-          <div class="dc-alt">1,400 — 1,700 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-tignes" href="/en/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Espace Killy</div>
-          <div class="dc-name">Tignes</div>
-          <div class="dc-alt">1,550 — 3,456 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-valdisere" href="/en/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Espace Killy</div>
-          <div class="dc-name">Val d'Isère</div>
-          <div class="dc-alt">1,850 m</div>
-        </div>
-      </a>
-      <a class="dest-card dc-valthorens" href="/en/destinations">
-        <div class="dest-card-body">
-          <div class="dc-massif">Les 3 Vallées</div>
-          <div class="dc-name">Val Thorens</div>
-          <div class="dc-alt">2,300 m · Highest resort in Europe</div>
-        </div>
-      </a>
-    </div>
-  </section>
+  </div>
+  <div class="dest-grid">
+    <a class="dest-card dc-courchevel" href="/en/destinations">
+      <div class="dest-card-bg"></div><div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <div class="dest-card-body"><div class="dest-massif">Les 3 Vallées</div><div class="dest-name">Courchevel</div><div class="dest-alt">1 300 — 1 850 m</div></div>
+    </a>
+    <a class="dest-card dc-megeve" href="/en/destinations">
+      <div class="dest-card-bg"></div><div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <div class="dest-card-body"><div class="dest-massif">Mont-Blanc</div><div class="dest-name">Megève</div><div class="dest-alt">1 113 m</div></div>
+    </a>
+    <a class="dest-card dc-meribel" href="/en/destinations">
+      <div class="dest-card-bg"></div><div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <div class="dest-card-body"><div class="dest-massif">Les 3 Vallées</div><div class="dest-name">Méribel</div><div class="dest-alt">1 400 — 1 700 m</div></div>
+    </a>
+    <a class="dest-card dc-tignes" href="/en/destinations">
+      <div class="dest-card-bg"></div><div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <div class="dest-card-body"><div class="dest-massif">Espace Killy</div><div class="dest-name">Tignes</div><div class="dest-alt">1 550 — 3 456 m</div></div>
+    </a>
+    <a class="dest-card dc-valdisere" href="/en/destinations">
+      <div class="dest-card-bg"></div><div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <div class="dest-card-body"><div class="dest-massif">Espace Killy</div><div class="dest-name">Val d'Isère</div><div class="dest-alt">1 850 m</div></div>
+    </a>
+    <a class="dest-card dc-valthorens" href="/en/destinations">
+      <div class="dest-card-bg"></div><div class="dest-card-overlay"></div>
+      <div class="dest-card-arrow"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
+      <div class="dest-card-body"><div class="dest-massif">Les 3 Vallées</div><div class="dest-name">Val Thorens</div><div class="dest-alt">2 300 m</div></div>
+    </a>
+  </div>
+</section>
 
-  <!-- CTA ESTIMATEUR -->
-  <section class="cta-est">
-    <div class="cta-est-title">
-      Estimate the potential<br>of <em>your property</em><br>in <strong>2 minutes</strong>
-    </div>
-    <div class="cta-est-right">
-      <p class="cta-est-note">Based on real data from our portfolio — surface area, resort, condition and capacity.</p>
-      <a href="/en/estimateur" class="btn-cta-main">
+<section class="cta">
+  <div class="container">
+    <h2 class="cta-h2">
+      Estimate the potential<br>
+      of <em>your property</em> in<br>
+      <strong>2 minutes</strong>
+    </h2>
+    <div class="cta-right">
+      <p class="cta-note">Calculation based on real data from our portfolio — surface area, resort, quality level, capacity.</p>
+      <a href="/en/estimateur" class="btn-primary">
         Launch the estimator
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer id="contact">
-    <div class="footer-top">
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
       <div>
-        <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="120" style="height:120px;width:auto;display:block;margin-bottom:4px">
-        <div class="f-brand-claim">Alpine Property Management</div>
-        <p class="f-brand-desc">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency.</p>
+        <div class="footer-brand-logo">
+          <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="120" style="height:120px;width:auto;display:block;margin-bottom:4px">
+        </div>
+        <div class="footer-brand-claim">Alpine Property Management</div>
+        <p class="footer-brand-text">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency.</p>
       </div>
       <div>
-        <div class="f-col-title">Destinations</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Destinations</div>
+        <ul class="footer-links">
           <li><a href="/en/destinations">Courchevel</a></li>
           <li><a href="/en/destinations">Megève</a></li>
           <li><a href="/en/destinations">Val d'Isère</a></li>
@@ -445,40 +557,129 @@
         </ul>
       </div>
       <div>
-        <div class="f-col-title">Services</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
           <li><a href="/en/proprietaires">Owners</a></li>
           <li><a href="/en/proprietaires">ALPÉON Signatures</a></li>
-          <li><a href="/en/estimateur">Revenue Estimator</a></li>
+          <li><a href="/en/estimateur">Revenue estimator</a></li>
+          <li><a href="/en/about">About</a></li>
+          <li><a href="/en/faq">FAQ</a></li>
         </ul>
       </div>
       <div>
-        <div class="f-col-title">Contact</div>
-        <ul class="f-links">
-          <li><a href="mailto:owners@alpeon.fr">owners@alpeon.fr</a></li>
+        <div class="footer-col-title">Contact &amp; Legal</div>
+        <ul class="footer-links">
+          <li><a href="mailto:reservations@alpeon.fr">reservations@alpeon.fr</a></li>
+          <li><a href="https://www.instagram.com/alpeon_residences?igsh=MWkyNmN2czIweml4Ng==" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="/mentions-legales">Legal notice</a></li>
           <li><a href="/politique-confidentialite">Privacy policy</a></li>
           <li><a href="/cgv">General terms</a></li>
         </ul>
       </div>
+      <div>
+        <div class="footer-col-title">Newsletter</div>
+        <p style="font-size:.78rem;color:rgba(250,254,255,.45);line-height:1.6;margin-bottom:.5rem">Nouvelles propriétés, offres de saison et actualités alpines.</p>
+        <form class="nl-form" onsubmit="submitNewsletter(event)">
+          <input class="nl-input" type="email" id="nl-email" placeholder="votre@email.fr" required>
+          <button class="nl-btn" type="submit">S'inscrire</button>
+        </form>
+        <p class="nl-msg" id="nl-msg"></p>
+      </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 ALPÉON. All rights reserved.</span>
-      <span>Premium alpine rental management · French Alps</span>
+      <span>© 2026 ALPÉON · All rights reserved</span>
+      <span>Premium alpine property management · French Alps</span>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    const hdr = document.getElementById('siteHeader');
-    window.addEventListener('scroll', () => { hdr.classList.toggle('scrolled', window.scrollY > 40); });
-    (function(){
-      var btn = document.getElementById('mobMenuBtn');
-      var menu = document.getElementById('mobMenu');
-      if (!btn || !menu) return;
-      btn.addEventListener('click', function(){ var o = menu.classList.toggle('open'); btn.classList.toggle('open', o); });
-      menu.addEventListener('click', function(e){ if (e.target === menu) { menu.classList.remove('open'); btn.classList.remove('open'); } });
-    })();
-  </script>
+<script id="nav-scroll-js">
+(function(){
+  var h=document.getElementById('site-header');
+  if(!h)return;
+  function u(){h.classList.toggle('scrolled',window.scrollY>40);}
+  window.addEventListener('scroll',u,{passive:true});
+  u();
+})();
+</script>
+<script>
+async function submitNewsletter(e){
+  e.preventDefault();
+  const email = document.getElementById('nl-email').value.trim();
+  const msg = document.getElementById('nl-msg');
+  if(!email){ msg.textContent='Entrez votre email.'; msg.className='nl-msg err'; return; }
+  msg.textContent='Inscription…'; msg.className='nl-msg';
+  try{
+    const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const d = await r.json();
+    if(d.ok){ msg.textContent='✓ Merci, vous êtes inscrit !'; msg.className='nl-msg ok'; document.getElementById('nl-email').value=''; }
+    else { msg.textContent=d.error||'Erreur, réessayez.'; msg.className='nl-msg err'; }
+  }catch(e){ msg.textContent='Erreur réseau.'; msg.className='nl-msg err'; }
+}
+</script>
+<!-- Newsletter popup — stays in French per design -->
+<div class="nl-popup-overlay" id="nl-popup-overlay" onclick="if(event.target===this)closeNlPopup()">
+  <div class="nl-popup">
+    <div class="nl-popup-hero">
+      <button class="nl-popup-close" onclick="closeNlPopup()" aria-label="Fermer">&times;</button>
+      <div class="nl-popup-badge">Offre exclusive</div>
+      <div class="nl-popup-offer"><span>-</span>10<span>%</span></div>
+      <div class="nl-popup-tagline">sur votre premier séjour ALPÉON</div>
+    </div>
+    <div class="nl-popup-body">
+      <div class="nl-popup-title">Rejoignez la communauté ALPÉON</div>
+      <p class="nl-popup-sub">Inscrivez-vous à notre newsletter et recevez votre code de réduction de 10% ainsi que nos nouvelles propriétés et offres de saison en avant-première.</p>
+      <div class="nl-popup-form">
+        <input class="nl-popup-input" type="email" id="nl-popup-email" placeholder="votre@email.fr" autocomplete="email">
+        <button class="nl-popup-btn" id="nl-popup-btn" onclick="submitNlPopup()">J'en profite</button>
+      </div>
+      <p class="nl-popup-msg" id="nl-popup-msg"></p>
+      <p class="nl-popup-legal">En vous inscrivant, vous acceptez de recevoir nos communications. Désabonnement possible à tout moment.</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const KEY = 'alpeon_nl_seen';
+  if(localStorage.getItem(KEY)) return;
+  setTimeout(()=>{ document.getElementById('nl-popup-overlay').classList.add('open'); }, 3000);
+})();
+function closeNlPopup(){
+  document.getElementById('nl-popup-overlay').classList.remove('open');
+  localStorage.setItem('alpeon_nl_seen','1');
+}
+async function submitNlPopup(){
+  const email = document.getElementById('nl-popup-email').value.trim();
+  const msg = document.getElementById('nl-popup-msg');
+  const btn = document.getElementById('nl-popup-btn');
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    msg.textContent = 'Entrez une adresse email valide.'; msg.className = 'nl-popup-msg err'; return;
+  }
+  btn.disabled = true; btn.textContent = '…';
+  try{
+    const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email, source:'popup-10pct'})});
+    const d = await r.json();
+    if(d.ok){
+      msg.textContent = '✓ Merci ! Votre code de réduction vous a été envoyé par email.';
+      msg.className = 'nl-popup-msg ok';
+      localStorage.setItem('alpeon_nl_seen','1');
+      setTimeout(closeNlPopup, 4000);
+    } else {
+      msg.textContent = d.error || 'Une erreur est survenue.';
+      msg.className = 'nl-popup-msg err';
+      btn.disabled = false; btn.textContent = "J'en profite";
+    }
+  } catch(e){
+    msg.textContent = 'Erreur réseau, réessayez.'; msg.className = 'nl-popup-msg err';
+    btn.disabled = false; btn.textContent = "J'en profite";
+  }
+}
+document.getElementById('nl-popup-email')?.addEventListener('keydown', e=>{ if(e.key==='Enter') submitNlPopup(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNlPopup(); });
+</script>
 
+<a class="wa-btn" href="https://wa.me/33765254926" target="_blank" rel="noopener" aria-label="Contact WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 </body>
 </html>
