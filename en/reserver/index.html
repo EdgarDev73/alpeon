@@ -16,7 +16,7 @@
 /* @@NAV-START@@ */
   :root { --nav-h: 88px; }
   .site-header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 700;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
     height: var(--nav-h); background: transparent;
     border-bottom: 1px solid transparent;
     transition: background .35s ease, border-color .35s ease;
@@ -78,8 +78,8 @@
     .site-burger { display: flex; }
     .site-mobile-menu { display: flex; }
     .site-header-inner { padding: 0 1.25rem; }
+    .site-logo img { height: 48px; }
   }
-  @media (max-width: 768px) { :root { --nav-h: 72px; } }
   /* ── Header phone dropdown ── */
   .hdr-phone-wrap { position: relative; }
   .hdr-phone-btn {
