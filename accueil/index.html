@@ -859,6 +859,32 @@
   .nl-btn:hover{background:#d4b48a}
   .nl-msg{font-size:.72rem;margin-top:.4rem;min-height:1em}
   .nl-msg.ok{color:#86efac}.nl-msg.err{color:#fca5a5}
+  /* ── NEWSLETTER POPUP ── */
+  .nl-popup-overlay{display:none;position:fixed;inset:0;z-index:800;background:rgba(17,17,17,.6);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1.5rem}
+  .nl-popup-overlay.open{display:flex;animation:nlFadeIn .3s ease}
+  @keyframes nlFadeIn{from{opacity:0}to{opacity:1}}
+  .nl-popup{background:#fff;border-radius:10px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.28);animation:nlSlideUp .35s ease}
+  @keyframes nlSlideUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+  .nl-popup-hero{background:var(--green,#2C3D30);padding:2.5rem 2.5rem 2rem;position:relative;text-align:center}
+  .nl-popup-badge{display:inline-block;background:var(--gold,#E8CBA0);color:#2C3D30;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.3rem .9rem;border-radius:20px;margin-bottom:1.1rem}
+  .nl-popup-offer{font-family:'Lora',serif;font-style:italic;font-size:2.6rem;font-weight:300;color:var(--gold,#E8CBA0);line-height:1;margin-bottom:.4rem}
+  .nl-popup-offer span{font-size:1.1rem;vertical-align:super;font-family:'Poppins',sans-serif;font-style:normal;font-weight:500}
+  .nl-popup-tagline{font-size:.82rem;color:rgba(232,203,160,.7);font-weight:300}
+  .nl-popup-close{position:absolute;top:.85rem;right:.9rem;background:none;border:none;color:rgba(232,203,160,.5);font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s;padding:.25rem}
+  .nl-popup-close:hover{color:var(--gold,#E8CBA0)}
+  .nl-popup-body{padding:1.75rem 2rem 2rem}
+  .nl-popup-title{font-family:'Lora',serif;font-style:italic;font-size:1.3rem;font-weight:300;color:#1a1a1a;margin-bottom:.4rem}
+  .nl-popup-sub{font-size:.8rem;color:#6b7280;line-height:1.6;margin-bottom:1.4rem}
+  .nl-popup-form{display:flex;gap:.6rem}
+  .nl-popup-input{flex:1;border:1.5px solid #ddd;border-radius:5px;padding:.65rem .9rem;font-family:'Poppins',sans-serif;font-size:.84rem;color:#111;outline:none;transition:border-color .2s}
+  .nl-popup-input:focus{border-color:#2C3D30}
+  .nl-popup-btn{background:#2C3D30;color:#E8CBA0;border:none;border-radius:5px;padding:.65rem 1.3rem;font-family:'Poppins',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s}
+  .nl-popup-btn:hover:not(:disabled){background:#3d5442}
+  .nl-popup-btn:disabled{opacity:.5;cursor:not-allowed}
+  .nl-popup-msg{font-size:.75rem;margin-top:.6rem;min-height:1em;text-align:center}
+  .nl-popup-msg.ok{color:#166534}.nl-popup-msg.err{color:#b91c1c}
+  .nl-popup-legal{font-size:.65rem;color:#9ca3af;text-align:center;margin-top:.85rem;line-height:1.5}
+  @media(max-width:480px){.nl-popup-form{flex-direction:column}.nl-popup-offer{font-size:2rem}}
   </style>
 </head>
 <body>
@@ -1247,6 +1273,75 @@ async function submitNewsletter(e){
   }catch(e){ msg.textContent='Erreur réseau.'; msg.className='nl-msg err'; }
 }
 </script>
+<!-- Newsletter popup -->
+<div class="nl-popup-overlay" id="nl-popup-overlay" onclick="if(event.target===this)closeNlPopup()">
+  <div class="nl-popup">
+    <div class="nl-popup-hero">
+      <button class="nl-popup-close" onclick="closeNlPopup()" aria-label="Fermer">&times;</button>
+      <div class="nl-popup-badge">Offre exclusive</div>
+      <div class="nl-popup-offer"><span>-</span>10<span>%</span></div>
+      <div class="nl-popup-tagline">sur votre premier séjour ALPÉON</div>
+    </div>
+    <div class="nl-popup-body">
+      <div class="nl-popup-title">Rejoignez la communauté ALPÉON</div>
+      <p class="nl-popup-sub">Inscrivez-vous à notre newsletter et recevez votre code de réduction de 10% ainsi que nos nouvelles propriétés et offres de saison en avant-première.</p>
+      <div class="nl-popup-form">
+        <input class="nl-popup-input" type="email" id="nl-popup-email" placeholder="votre@email.fr" autocomplete="email">
+        <button class="nl-popup-btn" id="nl-popup-btn" onclick="submitNlPopup()">J'en profite</button>
+      </div>
+      <p class="nl-popup-msg" id="nl-popup-msg"></p>
+      <p class="nl-popup-legal">En vous inscrivant, vous acceptez de recevoir nos communications. Désabonnement possible à tout moment.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const KEY = 'alpeon_nl_seen';
+  if(localStorage.getItem(KEY)) return;
+  setTimeout(()=>{
+    document.getElementById('nl-popup-overlay').classList.add('open');
+  }, 3000);
+})();
+
+function closeNlPopup(){
+  document.getElementById('nl-popup-overlay').classList.remove('open');
+  localStorage.setItem('alpeon_nl_seen','1');
+}
+
+async function submitNlPopup(){
+  const email = document.getElementById('nl-popup-email').value.trim();
+  const msg = document.getElementById('nl-popup-msg');
+  const btn = document.getElementById('nl-popup-btn');
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    msg.textContent = 'Entrez une adresse email valide.';
+    msg.className = 'nl-popup-msg err';
+    return;
+  }
+  btn.disabled = true; btn.textContent = '…';
+  try{
+    const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email, source:'popup-10pct'})});
+    const d = await r.json();
+    if(d.ok){
+      msg.innerHTML = '✓ Merci ! Votre code <strong>ALPE10</strong> vous a été envoyé par email.';
+      msg.className = 'nl-popup-msg ok';
+      localStorage.setItem('alpeon_nl_seen','1');
+      setTimeout(closeNlPopup, 4000);
+    } else {
+      msg.textContent = d.error || 'Une erreur est survenue.';
+      msg.className = 'nl-popup-msg err';
+      btn.disabled = false; btn.textContent = "J'en profite";
+    }
+  } catch(e){
+    msg.textContent = 'Erreur réseau, réessayez.';
+    msg.className = 'nl-popup-msg err';
+    btn.disabled = false; btn.textContent = "J'en profite";
+  }
+}
+document.getElementById('nl-popup-email')?.addEventListener('keydown', e=>{ if(e.key==='Enter') submitNlPopup(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNlPopup(); });
+</script>
+
 <a class="wa-btn" href="https://wa.me/33765254926" target="_blank" rel="noopener" aria-label="Contact WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
