@@ -1006,9 +1006,6 @@ function setView(v){
   }
 }
 
-// Store stable coords per property id to avoid jitter on re-render
-const _propCoords = {};
-
 function renderMap(){
   const mapWrap = document.getElementById('map-wrap');
   if(!mapWrap) return;
@@ -1035,12 +1032,8 @@ function renderMap(){
 
   items.forEach((p, i) => {
     const n = i + 1;
-    // Stable coords
-    if(!_propCoords[p.id]){
-      const base = getPropCoords(p.city);
-      _propCoords[p.id] = [base[0]+(Math.random()-.5)*.012, base[1]+(Math.random()-.5)*.012];
-    }
-    const coords = _propCoords[p.id];
+    // Exact city centre — no offset for privacy/security
+    const coords = getPropCoords(p.city);
     const img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
     const price = p.priceFrom ? `${p.priceFrom.toLocaleString('fr-FR')} € / nuit` : 'Sur devis';
 
