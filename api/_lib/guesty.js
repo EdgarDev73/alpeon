@@ -40,18 +40,24 @@ async function getToken() {
   const secret = process.env.GUESTY_CLIENT_SECRET;
   if (!id || !secret) throw new Error('Missing GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET');
 
-  const res = await fetch(OAUTH_URL, {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
-  });
-  if (!res.ok) throw new Error(`Guesty OAuth failed ${res.status}: ${await res.text()}`);
-
-  const json   = await res.json();
-  _cachedToken = json.access_token;
-  _tokenExpiry = Date.now() + (json.expires_in || 86400) * 1000;
-  _saveTokenCache();
-  return _cachedToken;
+  // Retry up to 4 times with exponential backoff (handles 429 rate-limit on Vercel cold starts)
+  let lastErr;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    if (attempt > 0) await new Promise(r => setTimeout(r, 500 * Math.pow(2, attempt - 1)));
+    const res = await fetch(OAUTH_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
+    });
+    if (res.status === 429) { lastErr = new Error('Guesty OAuth rate-limited (429)'); continue; }
+    if (!res.ok) throw new Error(`Guesty OAuth failed ${res.status}: ${await res.text()}`);
+    const json   = await res.json();
+    _cachedToken = json.access_token;
+    _tokenExpiry = Date.now() + (json.expires_in || 86400) * 1000;
+    _saveTokenCache();
+    return _cachedToken;
+  }
+  throw lastErr;
 }
 
 /* ── Generic request ── */

@@ -29,6 +29,8 @@ module.exports = async (req, res) => {
       properties = properties.filter(p => guests === '8+' ? p.guests >= 8 : p.guests >= n);
     }
 
+    // Cache at Vercel CDN edge: fresh 60s, stale-while-revalidate 5min
+    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
     return res.status(200).json({ properties, total: properties.length });
   } catch (err) {
     console.error('[properties] Guesty error:', err.message);
