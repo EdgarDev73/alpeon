@@ -471,9 +471,16 @@
   .view-btn.active{background:var(--green);color:var(--gold)}
   .view-btn svg{width:13px;height:13px}
 
-  /* MAP — layout Booking.com */
+  /* MAP — layout Booking.com, fixed sous la filter bar */
   #map-wrap{display:none;border-radius:0;overflow:hidden}
-  #map-wrap.visible{display:flex;margin:0 -3rem -6rem;height:calc(100vh - 132px);min-height:520px;border-top:1px solid var(--stone-2)}
+  #map-wrap.visible{
+    display:flex;
+    position:fixed;
+    left:0;right:0;bottom:0;
+    top:calc(var(--nav-h) + 58px); /* nav + filter bar */
+    z-index:50;
+    border-top:1px solid var(--stone-2);
+  }
   /* Liste gauche */
   #map-list{width:360px;flex-shrink:0;overflow-y:auto;background:#fff;border-right:1px solid var(--stone-2)}
   #map-list-header{padding:.75rem 1rem;border-bottom:1px solid var(--stone-2);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;position:sticky;top:0;background:#fff;z-index:1}
@@ -975,20 +982,22 @@ function setView(v){
   const btnMap = document.getElementById('btn-map');
   const gridHeader = document.querySelector('.grid-header');
   const emptyState = document.getElementById('empty-state');
-  const gridWrap = document.querySelector('.grid-wrap');
   if(v==='map'){
     if(grid) grid.style.display='none';
     if(gridHeader) gridHeader.style.display='none';
     if(emptyState) emptyState.style.display='none';
-    if(gridWrap) gridWrap.style.paddingTop='0';
+    document.body.style.overflow='hidden';
     if(mapWrap) mapWrap.classList.add('visible');
     btnList.classList.remove('active'); btnMap.classList.add('active');
+    // Adjust top dynamically based on actual filter bar height
+    const fb = document.querySelector('.filter-bar');
+    if(fb && mapWrap) mapWrap.style.top = (fb.getBoundingClientRect().bottom) + 'px';
     renderMap();
   } else {
     if(grid) grid.style.display='';
     if(gridHeader) gridHeader.style.display='';
-    if(gridWrap) gridWrap.style.paddingTop='';
-    if(mapWrap) mapWrap.classList.remove('visible');
+    document.body.style.overflow='';
+    if(mapWrap){ mapWrap.classList.remove('visible'); mapWrap.style.top=''; }
     btnList.classList.add('active'); btnMap.classList.remove('active');
   }
 }
