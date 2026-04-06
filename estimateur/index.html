@@ -192,9 +192,37 @@
     .site-header-inner { padding: 0 1.25rem; }
     .site-logo img { height: 48px; }
   }
+  /* ── Header phone dropdown ── */
+  .hdr-phone-wrap { position: relative; }
+  .hdr-phone-btn {
+    display: flex; align-items: center;
+    background: none; border: none;
+    padding: .35rem;
+    color: rgba(232,203,160,.55); cursor: pointer;
+    transition: color .2s; flex-shrink: 0;
+  }
+  .hdr-phone-btn:hover { color: var(--gold,#E8CBA0); }
+  .hdr-phone-btn svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.75; flex-shrink: 0; }
+  .hdr-phone-dropdown {
+    display: none; position: absolute; top: 100%; right: 0; padding-top: 6px;
+    background: #1a2a1e; border: 1px solid rgba(232,203,160,.15);
+    border-radius: 8px; min-width: 260px; overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,.45); z-index: 900;
+  }
+  .hdr-phone-wrap.open .hdr-phone-dropdown { display: block; }
+  .hdr-phone-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 18px; color: rgba(250,254,255,.75);
+    font-size: .82rem; transition: background .2s; text-decoration: none;
+    white-space: nowrap;
+  }
+  .hdr-phone-item:hover { background: rgba(232,203,160,.08); color: var(--gold,#E8CBA0); }
+  .hdr-phone-item + .hdr-phone-item { border-top: 1px solid rgba(250,254,255,.07); }
+  .hdr-phone-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .hdr-phone-item .hdr-phone-icon-tel { stroke: currentColor; fill: none; stroke-width: 2; }
   /* ── Header on cream estimateur background ── */
   .site-header.on-cream {
-    background: #b8afa3;
+    background: #c8bfb3;
     border-bottom: 1px solid transparent;
   }
   /* @@NAV-END@@ */
@@ -2307,35 +2335,6 @@
       .type-prop-pill { min-height: 48px; }
     }
 
-  
-  /* ── Header phone dropdown ── */
-  .hdr-phone-wrap { position: relative; }
-  .hdr-phone-btn {
-    display: flex; align-items: center;
-    background: none; border: none;
-    padding: .35rem;
-    color: rgba(232,203,160,.55); cursor: pointer;
-    transition: color .2s; flex-shrink: 0;
-  }
-  .hdr-phone-btn:hover { color: var(--gold,#E8CBA0); }
-  .hdr-phone-btn svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.75; flex-shrink: 0; }
-  .hdr-phone-dropdown {
-    display: none; position: absolute; top: 100%; right: 0; padding-top: 6px;
-    background: #1a2a1e; border: 1px solid rgba(232,203,160,.15);
-    border-radius: 8px; min-width: 260px; overflow: hidden;
-    box-shadow: 0 16px 48px rgba(0,0,0,.45); z-index: 900;
-  }
-  .hdr-phone-wrap.open .hdr-phone-dropdown { display: block; }
-  .hdr-phone-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 13px 18px; color: rgba(250,254,255,.75);
-    font-size: .82rem; transition: background .2s; text-decoration: none;
-    white-space: nowrap;
-  }
-  .hdr-phone-item:hover { background: rgba(232,203,160,.08); color: var(--gold,#E8CBA0); }
-  .hdr-phone-item + .hdr-phone-item { border-top: 1px solid rgba(250,254,255,.07); }
-  .hdr-phone-item svg { width: 16px; height: 16px; flex-shrink: 0; }
-  .hdr-phone-item .hdr-phone-icon-tel { stroke: currentColor; fill: none; stroke-width: 2; }
 
   </style>
   <!-- Config locale (gitignorée — contient les secrets) -->

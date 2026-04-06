@@ -48,7 +48,8 @@
 
   .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
 
-  /* ─── NAV ─── */
+/* @@NAV-START@@ */
+  :root { --nav-h: 88px; }
   .site-header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 300;
     height: var(--nav-h); background: transparent;
@@ -92,7 +93,7 @@
   .site-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
   .site-mobile-menu {
     display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
-    background: rgba(18,30,20,.98); backdrop-filter: blur(14px);
+    background: rgb(18,30,20);
     flex-direction: column; padding: 2rem 2rem 3rem; z-index: 299;
     opacity: 0; pointer-events: none; transition: opacity .25s;
   }
@@ -114,8 +115,7 @@
     .site-header-inner { padding: 0 1.25rem; }
     .site-logo img { height: 48px; }
   }
-
-  /* ─── HEADER PHONE ─── */
+  /* ── Header phone dropdown ── */
   .hdr-phone-wrap { position: relative; }
   .hdr-phone-btn {
     display: flex; align-items: center;
@@ -143,6 +143,7 @@
   .hdr-phone-item + .hdr-phone-item { border-top: 1px solid rgba(250,254,255,.07); }
   .hdr-phone-item svg { width: 16px; height: 16px; flex-shrink: 0; }
   .hdr-phone-item .hdr-phone-icon-tel { stroke: currentColor; fill: none; stroke-width: 2; }
+  /* @@NAV-END@@ */
 
   /* ─── HERO ─── */
   .page-hero {
