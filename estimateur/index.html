@@ -192,6 +192,16 @@
     .site-header-inner { padding: 0 1.25rem; }
     .site-logo img { height: 48px; }
   }
+  /* ── Header on light (cream) background ── */
+  .site-header.on-light .site-nav-link { color: rgba(44,61,48,.6); }
+  .site-header.on-light .site-nav-link:hover { color: #2C3D30; }
+  .site-header.on-light .site-nav-link.active { color: #a8956a; }
+  .site-header.on-light .site-lang a { color: rgba(44,61,48,.35); }
+  .site-header.on-light .site-lang a.active { color: #a8956a; }
+  .site-header.on-light .site-lang span { color: rgba(44,61,48,.2); }
+  .site-header.on-light .hdr-phone-btn { color: rgba(44,61,48,.45); }
+  .site-header.on-light .hdr-phone-btn:hover { color: #2C3D30; }
+  .site-header.on-light .site-burger span { background: rgba(44,61,48,.7); }
   /* @@NAV-END@@ */
   
 
@@ -440,20 +450,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center; /* le formulaire conserve sa taille naturelle, centré */
-      overflow: hidden;
     }
-    #est-bg-img {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity .6s ease;
-      filter: blur(2px) saturate(.85);
-      transform: scale(1.04); /* hide blur edges */
-      pointer-events: none;
-    }
-    #est-bg-img.loaded { opacity: .2; }
     .est-wrap.revealed {
       animation: estReveal .55s cubic-bezier(.22,1,.36,1) both;
     }
@@ -2477,7 +2474,6 @@
   <!-- ═══ PAGE 2 : ESTIMATEUR ═══ -->
   <div id="page-estimateur">
   <section class="est-wrap" id="estimateur">
-  <div id="est-bg-img"></div>
   <div class="est-layout">
   <div class="est-main">
     <div class="est-inner">
@@ -2985,12 +2981,12 @@
     const picker = document.getElementById('stationPick');
     const page2  = document.getElementById('page-estimateur');
     picker.classList.add('sp-hidden');
-    /* Forcer reflow pour que la transition démarre */
     void page2.offsetWidth;
     page2.classList.add('page-active');
     page2.scrollTop = 0;
-    /* Header toujours visible (fond clair) sur page 2 */
-    hdr.classList.add('scrolled');
+    /* Header transparent avec texte sombre sur fond crème */
+    hdr.classList.remove('scrolled');
+    hdr.classList.add('on-light');
   }
 
   function backToStations() {
@@ -2999,13 +2995,12 @@
     page2.classList.remove('page-active');
     picker.classList.remove('sp-hidden');
     picker.scrollTop = 0;
-    /* Rétablir l'état transparent du header sur le picker */
+    hdr.classList.remove('on-light');
     hdr.classList.toggle('scrolled', picker.scrollTop > 40);
   }
 
   /* ─── Header scroll ─── */
-  const hdr = document.getElementById('siteHeader');
-  /* Page 1 : window scroll (mais le picker est fixed donc scrollTop de l'élément) */
+  const hdr = document.getElementById('site-header');
   document.getElementById('stationPick').addEventListener('scroll', function() {
     if (!document.getElementById('page-estimateur').classList.contains('page-active')) {
       hdr.classList.toggle('scrolled', this.scrollTop > 40);
@@ -3587,21 +3582,6 @@
     /* Préparer le formulaire */
     if (S.typeBien) buildLocationPicker();
     updatePreview();
-    /* Fond de page : photo de la station */
-    const STATION_IMGS = {
-      valthorens: '/assets/images/dest-valthorens.jpg',
-      megeve:     '/assets/images/dest-megeve.webp',
-      courchevel: '/assets/images/dest-courchevel.webp',
-      meribel:    '/assets/images/dest-meribel.jpg',
-      tignes:     '/assets/images/dest-tignes.png',
-      valdisere:  '/assets/images/dest-valdisere.jpg',
-    };
-    const estBg = document.getElementById('est-bg-img');
-    if (estBg && STATION_IMGS[id]) {
-      estBg.classList.remove('loaded');
-      estBg.style.backgroundImage = `url('${STATION_IMGS[id]}')`;
-      requestAnimationFrame(() => requestAnimationFrame(() => estBg.classList.add('loaded')));
-    }
     /* Transition vers la page estimateur */
     openEstimateurPage();
     /* Entrer dans le formulaire à l'étape 2 */
