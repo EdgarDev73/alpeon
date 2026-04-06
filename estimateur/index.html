@@ -192,16 +192,11 @@
     .site-header-inner { padding: 0 1.25rem; }
     .site-logo img { height: 48px; }
   }
-  /* ── Header on light (cream) background ── */
-  .site-header.on-light .site-nav-link { color: rgba(44,61,48,.6); }
-  .site-header.on-light .site-nav-link:hover { color: #2C3D30; }
-  .site-header.on-light .site-nav-link.active { color: #a8956a; }
-  .site-header.on-light .site-lang a { color: rgba(44,61,48,.35); }
-  .site-header.on-light .site-lang a.active { color: #a8956a; }
-  .site-header.on-light .site-lang span { color: rgba(44,61,48,.2); }
-  .site-header.on-light .hdr-phone-btn { color: rgba(44,61,48,.45); }
-  .site-header.on-light .hdr-phone-btn:hover { color: #2C3D30; }
-  .site-header.on-light .site-burger span { background: rgba(44,61,48,.7); }
+  /* ── Header on cream estimateur background ── */
+  .site-header.on-cream {
+    background: #f2ede7;
+    border-bottom: 1px solid transparent;
+  }
   /* @@NAV-END@@ */
   
 
@@ -2984,9 +2979,9 @@
     void page2.offsetWidth;
     page2.classList.add('page-active');
     page2.scrollTop = 0;
-    /* Header transparent avec texte sombre sur fond crème */
+    /* Header fond crème = même couleur que la page */
     hdr.classList.remove('scrolled');
-    hdr.classList.add('on-light');
+    hdr.classList.add('on-cream');
   }
 
   function backToStations() {
@@ -2995,7 +2990,7 @@
     page2.classList.remove('page-active');
     picker.classList.remove('sp-hidden');
     picker.scrollTop = 0;
-    hdr.classList.remove('on-light');
+    hdr.classList.remove('on-cream');
     hdr.classList.toggle('scrolled', picker.scrollTop > 40);
   }
 
