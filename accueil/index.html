@@ -1038,7 +1038,7 @@
   .hdr-phone-dropdown {
     display: none; position: absolute; top: 100%; right: 0; padding-top: 6px;
     background: #1a2a1e; border: 1px solid rgba(232,203,160,.15);
-    border-radius: 8px; min-width: 220px; overflow: hidden;
+    border-radius: 8px; min-width: 260px; overflow: hidden;
     box-shadow: 0 16px 48px rgba(0,0,0,.45); z-index: 900;
   }
   .hdr-phone-wrap.open .hdr-phone-dropdown { display: block; }
@@ -1046,6 +1046,7 @@
     display: flex; align-items: center; gap: 12px;
     padding: 13px 18px; color: rgba(250,254,255,.75);
     font-size: .82rem; transition: background .2s; text-decoration: none;
+    white-space: nowrap;
   }
   .hdr-phone-item:hover { background: rgba(232,203,160,.08); color: var(--gold,#E8CBA0); }
   .hdr-phone-item + .hdr-phone-item { border-top: 1px solid rgba(250,254,255,.07); }
