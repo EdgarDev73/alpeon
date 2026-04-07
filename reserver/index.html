@@ -1103,20 +1103,37 @@ function render(list){
   initFavBtns();
 }
 
+const STATIC_PROPERTIES = [
+  { id:'s1',  title:'Chalet Le Chamois',       city:'Courchevel', area:'1850',        propertyType:'chalet',      guests:10, bedrooms:5, bathrooms:3, priceFrom:1714, rating:4.9, reviewsCount:32, tags:['Prestige'], amenities:['Ski','Sauna','fireplace'], image:'/assets/images/dest-courchevel.webp' },
+  { id:'s2',  title:'Apt. Les Grandes Bosses', city:'Courchevel', area:'1650',        propertyType:'appartement', guests:6,  bedrooms:3, bathrooms:2, priceFrom:643,  rating:4.7, reviewsCount:18, tags:[], amenities:['Ski','Wifi','Elevator'], image:'/assets/images/dest-courchevel.webp' },
+  { id:'s3',  title:'Penthouse Le Belvédère',  city:'Courchevel', area:'1850',        propertyType:'penthouse',   guests:4,  bedrooms:2, bathrooms:2, priceFrom:1000, rating:4.8, reviewsCount:24, tags:['Prestige'], amenities:['Ski','Hot tub','Gym'], image:'/assets/images/dest-courchevel.webp' },
+  { id:'s4',  title:'Chalet Dakota',           city:'Megève',     area:'Centre',      propertyType:'chalet',      guests:12, bedrooms:6, bathrooms:4, priceFrom:1357, rating:4.8, reviewsCount:41, tags:['Prestige','Grand groupe'], amenities:['Sauna','Pool','fireplace'], image:'/assets/images/dest-megeve.webp' },
+  { id:'s5',  title:'Apt. Silver Lodge',       city:'Megève',     area:"Mont d'Arbois",propertyType:'appartement',guests:4,  bedrooms:2, bathrooms:1, priceFrom:400,  rating:4.6, reviewsCount:15, tags:[], amenities:['Ski','Wifi','Parking'], image:'/assets/images/dest-megeve.webp' },
+  { id:'s6',  title:'Apt. Le Yéti',            city:'Méribel',    area:'Centre',      propertyType:'appartement', guests:6,  bedrooms:3, bathrooms:2, priceFrom:457,  rating:4.7, reviewsCount:27, tags:[], amenities:['Ski','Wifi','Washer'], image:'/assets/images/dest-meribel.jpg' },
+  { id:'s7',  title:'Chalet Apsara',           city:'Méribel',    area:'Les Allues',  propertyType:'chalet',      guests:8,  bedrooms:4, bathrooms:3, priceFrom:971,  rating:4.9, reviewsCount:38, tags:['Prestige'], amenities:['Sauna','fireplace','Gym'], image:'/assets/images/dest-meribel.jpg' },
+  { id:'s8',  title:'Apt. Home Club',          city:'Tignes',     area:'Val Claret',  propertyType:'appartement', guests:6,  bedrooms:3, bathrooms:2, priceFrom:371,  rating:4.5, reviewsCount:22, tags:[], amenities:['Ski','Wifi','Elevator'], image:'/assets/images/dest-tignes.png' },
+  { id:'s9',  title:'Apt. Le Palafour',        city:'Tignes',     area:'Le Lac',      propertyType:'appartement', guests:2,  bedrooms:1, bathrooms:1, priceFrom:200,  rating:4.4, reviewsCount:11, tags:[], amenities:['Ski','Wifi','Washer'], image:'/assets/images/dest-tignes.png' },
+  { id:'s10', title:'Chalet Les Centaurées',   city:"Val d'Isère", area:'Le Fornet',  propertyType:'chalet',      guests:10, bedrooms:5, bathrooms:3, priceFrom:1571, rating:4.9, reviewsCount:45, tags:['Prestige','Grand groupe'], amenities:['Sauna','Hot tub','fireplace'], image:'/assets/images/dest-valdisere.jpg' },
+  { id:'s11', title:'Apt. Le Chardon',         city:"Val d'Isère", area:'Centre',     propertyType:'appartement', guests:4,  bedrooms:2, bathrooms:1, priceFrom:486,  rating:4.6, reviewsCount:19, tags:[], amenities:['Ski','Wifi','Parking'], image:'/assets/images/dest-valdisere.jpg' },
+  { id:'s12', title:'Apt. Lac Blanc',          city:'Val Thorens', area:'Centre',     propertyType:'appartement', guests:4,  bedrooms:2, bathrooms:1, priceFrom:314,  rating:4.5, reviewsCount:16, tags:[], amenities:['Ski','Wifi','Washer'], image:'/assets/images/dest-valthorens.jpg' },
+  { id:'s13', title:'Apt. Sérac',              city:'Val Thorens', area:'Slalom',     propertyType:'appartement', guests:6,  bedrooms:3, bathrooms:2, priceFrom:443,  rating:4.7, reviewsCount:29, tags:[], amenities:['Ski','Wifi','Gym'], image:'/assets/images/dest-valthorens.jpg' },
+];
+
 async function load(){
   document.getElementById('property-grid').innerHTML = skel(6);
   try{
     const r = await fetch('/api/properties');
     if(!r.ok) throw new Error('Erreur ' + r.status);
-    const {properties} = await r.json();
+    const data = await r.json();
+    const properties = (data.properties && data.properties.length > 0) ? data.properties : STATIC_PROPERTIES;
     all = properties;
     filtered = [...properties];
     render(all);
   } catch(e){
-    document.getElementById('property-grid').innerHTML = '';
-    const empty = document.getElementById('empty-state');
-    empty.classList.add('visible');
-    empty.innerHTML = `<div class="empty-icon">⚠</div><h3>Impossible de charger</h3><p>${e.message}</p><button class="empty-btn" onclick="load()">Réessayer</button>`;
+    // API unavailable — use static showcase data
+    all = STATIC_PROPERTIES;
+    filtered = [...STATIC_PROPERTIES];
+    render(all);
   }
 }
 
