@@ -65,7 +65,7 @@
     color: rgba(250,254,255,.6); font-size: 1.1rem; font-weight: 300;
     letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
     padding: 1rem 0; border-bottom: 1px solid rgba(250,254,255,.06); transition: color .2s;
-    font-family: 'Lora', serif;
+    font-family: Georgia, 'Times New Roman', serif;
   }
   .site-mobile-link:hover, .site-mobile-link.active { color: #C9A97A; }
   .site-mobile-lang { display: flex; gap: .5rem; align-items: center; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,254,255,.3); margin-top: 1.5rem; }
@@ -76,7 +76,37 @@
     .site-burger { display: flex; }
     .site-mobile-menu { display: flex; }
     .site-header-inner { padding: 0 1.25rem; }
+    .site-logo img { height: 48px; }
+    .site-header-right { margin-left: auto; }
   }
+  /* ── Header phone dropdown ── */
+  .hdr-phone-wrap { position: relative; }
+  .hdr-phone-btn {
+    display: flex; align-items: center;
+    background: none; border: none;
+    padding: .35rem;
+    color: rgba(232,203,160,.55); cursor: pointer;
+    transition: color .2s; flex-shrink: 0;
+  }
+  .hdr-phone-btn:hover { color: var(--gold,#E8CBA0); }
+  .hdr-phone-btn svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.75; flex-shrink: 0; }
+  .hdr-phone-dropdown {
+    display: none; position: absolute; top: 100%; right: 0; padding-top: 6px;
+    background: #1a2a1e; border: 1px solid rgba(232,203,160,.15);
+    border-radius: 8px; min-width: 260px; overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,.45); z-index: 900;
+  }
+  .hdr-phone-wrap.open .hdr-phone-dropdown { display: block; }
+  .hdr-phone-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 18px; color: rgba(250,254,255,.75);
+    font-size: .82rem; transition: background .2s; text-decoration: none;
+    white-space: nowrap;
+  }
+  .hdr-phone-item:hover { background: rgba(232,203,160,.08); color: var(--gold,#E8CBA0); }
+  .hdr-phone-item + .hdr-phone-item { border-top: 1px solid rgba(250,254,255,.07); }
+  .hdr-phone-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .hdr-phone-item .hdr-phone-icon-tel { stroke: currentColor; fill: none; stroke-width: 2; }
   /* @@NAV-END@@ */
 
 
@@ -85,7 +115,7 @@
       --gold:#E8CBA0;--gold-d:#D4B48A;
       --white:#FAFEFF;--black:#111111;
       --stone-1:#F5F3EF;--stone-2:#EAE6DF;--stone-3:#D5CFC4;
-      --font-sans:'Poppins',sans-serif;--font-serif:'Lora',serif;
+      --font-sans:'Poppins',sans-serif;--font-serif: Georgia, 'Times New Roman', serif;
       --radius:4px;--shadow:0 2px 16px rgba(44,61,48,.10);--shadow-lg:0 8px 40px rgba(44,61,48,.16);
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -195,7 +225,7 @@
     .booking-card-header{background:var(--green);padding:1.5rem 1.75rem;position:relative}
     .booking-card-header::after{content:'';position:absolute;bottom:0;left:1.75rem;right:1.75rem;height:1px;background:rgba(232,203,160,.2)}
     .booking-price{font-size:.75rem;color:rgba(232,203,160,0.7);font-weight:500;letter-spacing:.08em;text-transform:uppercase}
-    .booking-price strong{display:block;font-family:'Lora',serif;font-style:italic;font-size:2.2rem;font-weight:300;color:var(--gold);line-height:1;margin-top:.15rem}
+    .booking-price strong{display:block;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:2.2rem;font-weight:300;color:var(--gold);line-height:1;margin-top:.15rem}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
     .form-group{display:flex;flex-direction:column;gap:.3rem}
     .form-label{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
@@ -373,7 +403,7 @@
     .modal-box{background:#FAFEFF;border-radius:8px;width:100%;max-width:480px;box-shadow:0 24px 80px rgba(0,0,0,.22);overflow:hidden;animation:modalIn .22s ease}
     @keyframes modalIn{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
     .modal-header{background:#2C3D30;padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
-    .modal-title{font-family:'Lora',serif;font-style:italic;font-size:1.1rem;font-weight:400;color:#E8CBA0}
+    .modal-title{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:1.1rem;font-weight:400;color:#E8CBA0}
     .modal-close{background:none;border:none;color:rgba(232,203,160,.6);font-size:1.6rem;cursor:pointer;line-height:1;padding:0;transition:color .2s}
     .modal-close:hover{color:#E8CBA0}
     .modal-body{padding:1.4rem}
@@ -396,7 +426,7 @@
     .sticky-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:#2C3D30;padding:.8rem 1.4rem;box-shadow:0 -4px 20px rgba(0,0,0,.15);align-items:center;justify-content:space-between;gap:1rem}
     .sticky-bar-price{color:#E8CBA0;line-height:1.15}
     .sticky-bar-price small{font-size:.65rem;opacity:.7;display:block}
-    .sticky-bar-price strong{font-family:'Lora',serif;font-style:italic;font-size:1.35rem;font-weight:400}
+    .sticky-bar-price strong{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:1.35rem;font-weight:400}
     .sticky-bar-btn{background:#E8CBA0;color:#2C3D30;border:none;border-radius:3px;padding:.65rem 1.4rem;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s}
     .sticky-bar-btn:hover{background:#f0d8b0}
     @media(max-width:1024px){.sticky-bar{display:flex}body{padding-bottom:72px}}
@@ -419,9 +449,24 @@
       <a href="/en/reserver" class="site-nav-link active">Book</a>
       <a href="/en/proprietaires" class="site-nav-link">Owners</a>
       <a href="/en/estimateur" class="site-nav-link">Estimator</a>
-      <a href="/about" class="site-nav-link">About</a>
+      <a href="/en/about" class="site-nav-link">About</a>
     </nav>
     <div class="site-header-right">
+      <div class="hdr-phone-wrap">
+        <button class="hdr-phone-btn" onclick="this.closest('.hdr-phone-wrap').classList.toggle('open')">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </button>
+        <div class="hdr-phone-dropdown">
+          <a href="tel:+33970703991" class="hdr-phone-item">
+            <svg class="hdr-phone-icon-tel" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Call us
+          </a>
+          <a href="https://wa.me/33765254926" class="hdr-phone-item">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
       <div class="site-lang">
         <a href="/propriete" data-lang-fr>FR</a>
         <span>|</span>
@@ -438,7 +483,7 @@
     <a href="/en/reserver" class="site-mobile-link active">Book</a>
     <a href="/en/proprietaires" class="site-mobile-link">Owners</a>
     <a href="/en/estimateur" class="site-mobile-link">Estimator</a>
-    <a href="/about" class="site-mobile-link">About</a>
+    <a href="/en/about" class="site-mobile-link">About</a>
     <div class="site-mobile-lang">
       <a href="/propriete" data-lang-fr>FR</a><span>|</span><a href="/en/propriete" class="active">EN</a>
     </div>
@@ -459,6 +504,13 @@ function toggleMobileMenu(){
     a.setAttribute('href', '/propriete' + (idParam ? '?id=' + idParam : ''));
   });
 })();
+</script>
+<script>
+document.addEventListener('click', function(e) {
+  document.querySelectorAll('.hdr-phone-wrap.open').forEach(function(wrap) {
+    if (!wrap.contains(e.target)) wrap.classList.remove('open');
+  });
+});
 </script>
 
 <!-- Gallery skeleton while loading -->
