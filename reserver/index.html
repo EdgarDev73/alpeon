@@ -201,63 +201,83 @@
 
     /* ── FILTER BAR ── */
     .filter-bar {
-      background: var(--white); position: sticky; top: var(--nav-h); z-index: 600;
-      box-shadow: 0 2px 24px rgba(0,0,0,.06);
-      border-bottom: 1px solid var(--stone);
+      background: #fff; position: sticky; top: var(--nav-h); z-index: 600;
+      border-bottom: 1px solid #e8e4dd;
+      box-shadow: 0 4px 32px rgba(0,0,0,.07);
     }
     .filter-inner {
-      max-width: var(--max); margin: 0 auto; padding: .9rem 3rem;
-      display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+      max-width: var(--max); margin: 0 auto;
+      padding: 0 3rem;
+      display: flex; align-items: stretch; gap: 0;
+      height: 72px;
     }
     .filter-group {
-      display: flex; align-items: center; gap: .6rem;
-      padding-right: 1.75rem; margin-right: 1.75rem;
-      border-right: 1px solid var(--stone);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 2rem; gap: .2rem;
+      border-right: 1px solid #ece8e2;
+      cursor: pointer; transition: background .18s;
+      min-width: 0;
     }
-    .filter-group:last-of-type { border-right: none }
+    .filter-group:first-child { padding-left: 0 }
+    .filter-group:hover { background: #faf9f7; }
     .filter-label {
-      font-size: .65rem; font-weight: 600; letter-spacing: .16em;
-      text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
+      font-size: .58rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: #9a9690; white-space: nowrap;
     }
     .filter-select {
-      border: none; border-bottom: 1.5px solid var(--stone-2);
-      padding: .3rem 1.6rem .3rem 0; font-family: var(--font-sans);
-      font-size: .82rem; font-weight: 400; color: var(--ink);
-      background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right .2rem center;
+      border: none; background: transparent;
+      padding: 0; font-family: var(--font-sans);
+      font-size: .88rem; font-weight: 500; color: var(--ink);
       cursor: pointer; outline: none; appearance: none;
-      transition: border-color .2s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%232C3D30' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right .1rem center;
+      padding-right: 1.4rem;
     }
-    .filter-select:focus { border-bottom-color: var(--green) }
-    .filter-actions { margin-left: auto; display: flex; align-items: center; gap: 1rem }
-    .filter-count {
-      font-size: .72rem; font-weight: 600; color: var(--green);
-      background: #EBF0EC; border-radius: 20px; padding: .3rem 1rem;
-      white-space: nowrap;
-    }
-    .filter-reset {
-      font-size: .72rem; color: var(--ink-3); text-decoration: underline;
-      text-underline-offset: 3px; cursor: pointer; border: none;
-      background: none; font-family: var(--font-sans); transition: color .2s;
-    }
-    .filter-reset:hover { color: var(--green) }
+    .filter-select:focus { color: var(--green) }
 
     /* ── PRICE SLIDER ── */
-    .price-wrap { display:flex; flex-direction:column; gap:.3rem; min-width:160px }
-    .price-track { position:relative; height:3px; background:#ddd; border-radius:2px; margin:.6rem 0 .2rem }
-    .price-fill  { position:absolute; height:100%; background:#2C3D30; border-radius:2px }
+    .price-wrap {
+      display: flex; flex-direction: column; justify-content: center;
+      gap: .2rem; padding: 0 2rem;
+      border-right: 1px solid #ece8e2;
+      min-width: 190px;
+    }
+    .price-label-row {
+      font-size: .58rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: #9a9690;
+    }
+    .price-value-row {
+      font-size: .88rem; font-weight: 500; color: var(--ink);
+      white-space: nowrap;
+    }
+    .price-track { position:relative; height:2px; background:#ddd; border-radius:2px; margin:.45rem 0 .1rem }
+    .price-fill  { position:absolute; height:100%; background: var(--green); border-radius:2px }
     .price-track input[type=range] {
       position:absolute; top:50%; transform:translateY(-50%);
-      width:100%; height:14px; margin:0; opacity:0; cursor:pointer; pointer-events:none;
+      width:100%; height:18px; margin:0; opacity:0; cursor:pointer; pointer-events:none;
     }
     .price-track input[type=range]:nth-child(2) { pointer-events:all }
     .price-track input[type=range]:nth-child(3) { pointer-events:all }
     .price-thumb {
       position:absolute; top:50%; transform:translate(-50%,-50%);
-      width:13px; height:13px; background:#fff; border:2px solid #2C3D30;
-      border-radius:50%; pointer-events:none;
+      width:14px; height:14px; background:#fff; border:2px solid var(--green);
+      border-radius:50%; pointer-events:none; box-shadow: 0 1px 4px rgba(0,0,0,.15);
     }
-    .price-labels { display:flex; justify-content:space-between; font-size:.62rem; color:#888 }
-    .price-labels b { color:#2C3D30; font-weight:600 }
+
+    /* ── FILTER ACTIONS ── */
+    .filter-actions { margin-left: auto; display: flex; align-items: center; gap: 1.25rem; padding-left: 2rem; flex-shrink: 0; }
+    .filter-count {
+      font-size: .7rem; font-weight: 600; letter-spacing: .06em;
+      color: var(--green); white-space: nowrap;
+    }
+    .filter-reset {
+      font-size: .68rem; color: #9a9690; text-decoration: none;
+      cursor: pointer; border: none; background: none;
+      font-family: var(--font-sans); transition: color .2s; letter-spacing: .04em;
+      display: flex; align-items: center; gap: .3rem;
+    }
+    .filter-reset:hover { color: var(--green) }
+    .filter-divider { width: 1px; height: 28px; background: #ece8e2; flex-shrink: 0; }
 
     /* ── AMENITY ICONS ON CARD ── */
     .prop-amenity-row { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem }
@@ -499,22 +519,16 @@
 
       /* Filter bar */
       .filter-bar { position: sticky; top: var(--nav-h); }
-      .filter-inner {
-        padding: .75rem 1.25rem;
-        flex-wrap: wrap; gap: .6rem;
-        overflow-x: visible;
-      }
+      .filter-inner { height: auto; padding: .75rem 1.25rem; flex-wrap: wrap; gap: .5rem; }
       .filter-group {
-        flex: 1 1 calc(50% - .3rem);
-        min-width: 0;
-        border-right: none;
-        padding-right: 0; margin-right: 0;
-        border-bottom: 1px solid var(--stone);
-        padding-bottom: .5rem;
+        flex: 1 1 calc(50% - .25rem); min-width: 0;
+        border-right: none; border-bottom: 1px solid #ece8e2;
+        padding: .6rem .5rem; padding-left: 0;
       }
-      .filter-group:last-of-type { border-bottom: none; }
-      .filter-actions { width: 100%; justify-content: space-between; margin-left: 0; }
-      .price-wrap { min-width: 0; width: 100%; }
+      .filter-group:first-child { padding-left: 0; }
+      .price-wrap { flex: 1 1 100%; min-width: 0; border-right: none; padding: .6rem 0; }
+      .filter-actions { width: 100%; justify-content: space-between; padding-left: 0; margin-left: 0; }
+      .filter-divider { display: none; }
 
       /* Grid */
       .grid-wrap { padding: 1.75rem 1.25rem 4rem; }
@@ -555,9 +569,10 @@
   .prop-fav.active svg{stroke:#e11d48;fill:#e11d48}
 
   /* VIEW TOGGLE */
-  .view-toggle{display:flex;border:1.5px solid var(--stone-3);border-radius:4px;overflow:hidden;flex-shrink:0}
-  .view-btn{padding:.42rem .85rem;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;background:var(--white);color:#6b7280;cursor:pointer;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:.35rem;transition:background .15s,color .15s}
-  .view-btn.active{background:var(--green);color:var(--gold)}
+  .view-toggle{display:flex;background:#f2efe9;border-radius:6px;padding:3px;gap:2px;flex-shrink:0}
+  .view-btn{padding:.38rem .9rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:none;background:transparent;color:#9a9690;cursor:pointer;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:.35rem;border-radius:4px;transition:all .18s}
+  .view-btn:hover{color:var(--ink)}
+  .view-btn.active{background:#fff;color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,.1)}
   .view-btn svg{width:13px;height:13px}
 
   /* MAP — layout Booking.com */
@@ -783,7 +798,7 @@ function toggleMobileMenu(){
 <div class="filter-bar">
   <div class="filter-inner">
     <div class="filter-group">
-      <label class="filter-label" for="f-station">Destination</label>
+      <span class="filter-label">Destination</span>
       <select class="filter-select" id="f-station">
         <option value="all">Toutes les stations</option>
         <option value="courchevel">Courchevel</option>
@@ -795,7 +810,7 @@ function toggleMobileMenu(){
       </select>
     </div>
     <div class="filter-group">
-      <label class="filter-label" for="f-type">Type de bien</label>
+      <span class="filter-label">Type de bien</span>
       <select class="filter-select" id="f-type">
         <option value="all">Tous types</option>
         <option value="appartement">Appartement</option>
@@ -804,7 +819,7 @@ function toggleMobileMenu(){
       </select>
     </div>
     <div class="filter-group">
-      <label class="filter-label" for="f-guests">Voyageurs</label>
+      <span class="filter-label">Voyageurs</span>
       <select class="filter-select" id="f-guests">
         <option value="all">Tous</option>
         <option value="2">2 pers. min.</option>
@@ -813,8 +828,9 @@ function toggleMobileMenu(){
         <option value="8+">8 pers. +</option>
       </select>
     </div>
-    <div class="filter-group price-wrap" id="price-filter-group">
-      <label class="filter-label">Prix / nuit</label>
+    <div class="price-wrap" id="price-filter-group">
+      <span class="price-label-row">Prix / nuit</span>
+      <div class="price-value-row"><span id="lbl-min">0</span> — <span id="lbl-max">10 000+</span> €</div>
       <div class="price-track" id="price-track">
         <div class="price-fill" id="price-fill"></div>
         <div class="price-thumb" id="thumb-min"></div>
@@ -822,11 +838,15 @@ function toggleMobileMenu(){
         <input type="range" id="f-price-min" min="0" max="10000" step="100" value="0" oninput="syncPriceSlider()">
         <input type="range" id="f-price-max" min="0" max="10000" step="100" value="10000" oninput="syncPriceSlider()">
       </div>
-      <div class="price-labels"><span><b id="lbl-min">0</b> €</span><span><b id="lbl-max">10 000+</b> €</span></div>
     </div>
     <div class="filter-actions">
-      <button class="filter-reset" id="btn-reset" style="display:none" onclick="resetFilters()">Effacer</button>
+      <button class="filter-reset" id="btn-reset" style="display:none" onclick="resetFilters()">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Effacer
+      </button>
+      <div class="filter-divider"></div>
       <div class="filter-count" id="filter-count">— biens</div>
+      <div class="filter-divider"></div>
       <div class="view-toggle">
         <button class="view-btn active" id="btn-list" onclick="setView('list')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
