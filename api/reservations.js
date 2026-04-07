@@ -40,17 +40,6 @@ async function sendConfirmationEmail({ guest, reservation, listing, quote, check
   const total    = (money.subTotalPrice || (accom + cleaning)) + taxes;
   const symbol   = money.currency === 'EUR' ? '€' : (money.currency || 'EUR');
 
-  // Cancellation policy
-  const policyMap = {
-    flexible:        'Flexible — annulation gratuite jusqu\'à 24h avant l\'arrivée.',
-    moderate:        'Modérée — annulation gratuite jusqu\'à 5 jours avant l\'arrivée.',
-    strict:          'Stricte — remboursement de 50% pour les annulations effectuées au moins 7 jours avant l\'arrivée.',
-    super_strict_30: 'Très stricte — remboursement de 50% pour les annulations effectuées au moins 30 jours avant l\'arrivée.',
-    super_strict_60: 'Très stricte — remboursement de 50% pour les annulations effectuées au moins 60 jours avant l\'arrivée.',
-  };
-  const policy      = quote?.rates?.ratePlans?.[0]?.ratePlan?.cancellationPolicy || '';
-  const policyLabel = policyMap[policy] || '';
-
   // ETA / ETD from reservation
   const etaTime = reservation.eta ? new Date(reservation.eta).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : '4:00 PM';
   const etdTime = reservation.etd ? new Date(reservation.etd).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : '10:00 AM';
@@ -280,6 +269,7 @@ module.exports = async (req, res) => {
 
   } catch (e) {
     console.error('[reservations] Erreur:', e.message);
-    res.status(500).json({ error: e.message });
+    // Return 502 (upstream failure) instead of 500 so monitoring can distinguish our errors from Guesty's
+    res.status(502).json({ error: 'Booking service temporarily unavailable. Please try again or contact us.' });
   }
 };

@@ -2,7 +2,7 @@ module.exports = async (req, res) => {
   const { amount, currency = 'eur', listingId, checkIn, checkOut, guests } = req.body || {};
   if (!amount || amount <= 0) return res.status(400).json({ error: 'Montant invalide' });
   const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) return res.status(500).json({ error: 'Stripe non configuré (STRIPE_SECRET_KEY manquant)' });
+  if (!key) return res.status(503).json({ error: 'Payment service temporarily unavailable' });
 
   const body = new URLSearchParams({
     amount: String(Math.round(Number(amount) * 100)),

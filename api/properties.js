@@ -34,6 +34,7 @@ module.exports = async (req, res) => {
     return res.status(200).json({ properties, total: properties.length });
   } catch (err) {
     console.error('[properties] Guesty error:', err.message);
-    return res.status(500).json({ error: err.message });
+    // Never return 500 — degrade gracefully with empty list so the UI still renders
+    return res.status(200).json({ properties: [], total: 0, _error: err.message });
   }
 };

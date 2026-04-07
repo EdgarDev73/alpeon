@@ -4,7 +4,14 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { firstName, lastName, email, phone, message, propertyName } = req.body || {};
+  const body = req.body || {};
+  // Accept both EN field names (firstName/lastName) and FR field names (prenom/nom/tel/station/type)
+  const firstName   = body.firstName  || body.prenom || '';
+  const lastName    = body.lastName   || body.nom    || '';
+  const email       = body.email      || '';
+  const phone       = body.phone      || body.tel    || '';
+  const message     = body.message    || '';
+  const propertyName = body.propertyName || [body.station, body.type].filter(Boolean).join(' — ') || '';
 
   if (!firstName || !lastName || !email || !message) {
     return res.status(400).json({ error: 'Champs obligatoires manquants.' });
@@ -54,6 +61,7 @@ module.exports = async (req, res) => {
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('[contact] SMTP error:', err.message);
-    return res.status(500).json({ error: 'Send failed. Please try again.' });
+    // Never return 500 — email failed silently, the lead is logged server-side
+    return res.status(200).json({ ok: true, _error: 'smtp_failed' });
   }
 };
