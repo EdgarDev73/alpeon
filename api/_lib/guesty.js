@@ -32,10 +32,18 @@ function _saveTokenCache() {
   catch { /* ignore write errors (e.g. read-only lambda) */ }
 }
 
+function _jwtExpiry(token) {
+  try {
+    const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+    return (payload.exp || 0) * 1000; // ms
+  } catch { return 0; }
+}
+
 async function getToken() {
-  // 1) Static token from env var (set manually via Vercel dashboard to avoid OAuth rate limits)
-  if (process.env.GUESTY_ACCESS_TOKEN) {
-    return process.env.GUESTY_ACCESS_TOKEN;
+  // 1) Static token from env var — only use if not expired (5 min safety margin)
+  const staticToken = process.env.GUESTY_ACCESS_TOKEN;
+  if (staticToken && _jwtExpiry(staticToken) > Date.now() + 300_000) {
+    return staticToken;
   }
 
   // 2) In-memory / file cache
