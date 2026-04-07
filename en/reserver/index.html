@@ -200,24 +200,61 @@
       display: flex; align-items: center; gap: 0; flex-wrap: wrap;
     }
     .filter-group {
-      display: flex; align-items: center; gap: .6rem;
-      padding-right: 1.75rem; margin-right: 1.75rem;
-      border-right: 1px solid var(--stone);
+      position: relative;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 2rem; gap: .2rem;
+      border-right: 1px solid #ece8e2;
+      cursor: pointer; transition: background .18s;
+      min-width: 0; user-select: none;
     }
-    .filter-group:last-of-type { border-right: none }
+    .filter-group:first-child { padding-left: 0 }
+    .filter-group:hover { background: #faf9f7; }
+    .filter-group.open { background: #faf9f7; }
     .filter-label {
-      font-size: .65rem; font-weight: 600; letter-spacing: .16em;
-      text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
+      font-size: .58rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: #9a9690; white-space: nowrap;
+      pointer-events: none;
     }
-    .filter-select {
-      border: none; border-bottom: 1.5px solid var(--stone-2);
-      padding: .3rem 1.6rem .3rem 0; font-family: var(--font-sans);
-      font-size: .82rem; font-weight: 400; color: var(--ink);
-      background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right .2rem center;
-      cursor: pointer; outline: none; appearance: none;
-      transition: border-color .2s;
+    /* Custom dropdown trigger */
+    .flt-trigger {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .88rem; font-weight: 500; color: var(--ink);
+      white-space: nowrap; pointer-events: none;
     }
-    .filter-select:focus { border-bottom-color: var(--green) }
+    .flt-trigger svg {
+      flex-shrink: 0; transition: transform .22s ease;
+      color: #9a9690;
+    }
+    .filter-group.open .flt-trigger svg { transform: rotate(180deg); }
+    .filter-group.active .flt-trigger { color: var(--green); }
+    /* Dropdown panel */
+    .flt-panel {
+      display: none; position: absolute; top: calc(100% + 4px); left: 0;
+      background: #fff; border: 1px solid #e8e4dd;
+      border-radius: 10px; min-width: 200px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.12);
+      z-index: 700; overflow: hidden;
+      animation: fltFadeIn .18s ease;
+    }
+    .filter-group.open .flt-panel { display: block; }
+    @keyframes fltFadeIn {
+      from { opacity:0; transform:translateY(-6px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .flt-option {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .72rem 1.1rem; font-size: .82rem; font-weight: 400; color: var(--ink);
+      cursor: pointer; transition: background .14s;
+      border-bottom: 1px solid #f4f2ee;
+    }
+    .flt-option:last-child { border-bottom: none; }
+    .flt-option:hover { background: #faf9f7; }
+    .flt-option.selected { color: var(--green); font-weight: 600; }
+    .flt-option.selected::after {
+      content: '';
+      display: block; width: 7px; height: 7px;
+      background: var(--green); border-radius: 50%; flex-shrink: 0;
+    }
     .filter-actions { margin-left: auto; display: flex; align-items: center; gap: 1rem }
     .filter-count {
       font-size: .72rem; font-weight: 600; color: var(--green);
@@ -693,36 +730,48 @@ function toggleMobileMenu(){
 <!-- ── FILTER BAR ── -->
 <div class="filter-bar">
   <div class="filter-inner">
-    <div class="filter-group">
-      <label class="filter-label" for="f-station">Destination</label>
-      <select class="filter-select" id="f-station">
-        <option value="all">All resorts</option>
-        <option value="courchevel">Courchevel</option>
-        <option value="megeve">Megève</option>
-        <option value="meribel">Méribel</option>
-        <option value="tignes">Tignes</option>
-        <option value="valdisere">Val d'Isère</option>
-        <option value="valthorens">Val Thorens</option>
-      </select>
+    <div class="filter-group" id="flt-station">
+      <span class="filter-label">Destination</span>
+      <div class="flt-trigger">
+        <span id="flt-station-val">All resorts</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+      </div>
+      <div class="flt-panel">
+        <div class="flt-option selected" data-val="all">All resorts</div>
+        <div class="flt-option" data-val="courchevel">Courchevel</div>
+        <div class="flt-option" data-val="megeve">Megève</div>
+        <div class="flt-option" data-val="meribel">Méribel</div>
+        <div class="flt-option" data-val="tignes">Tignes</div>
+        <div class="flt-option" data-val="valdisere">Val d'Isère</div>
+        <div class="flt-option" data-val="valthorens">Val Thorens</div>
+      </div>
     </div>
-    <div class="filter-group">
-      <label class="filter-label" for="f-type">Property type</label>
-      <select class="filter-select" id="f-type">
-        <option value="all">All types</option>
-        <option value="appartement">Apartment</option>
-        <option value="chalet">Chalet</option>
-        <option value="penthouse">Penthouse</option>
-      </select>
+    <div class="filter-group" id="flt-type">
+      <span class="filter-label">Property type</span>
+      <div class="flt-trigger">
+        <span id="flt-type-val">All types</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+      </div>
+      <div class="flt-panel">
+        <div class="flt-option selected" data-val="all">All types</div>
+        <div class="flt-option" data-val="appartement">Apartment</div>
+        <div class="flt-option" data-val="chalet">Chalet</div>
+        <div class="flt-option" data-val="penthouse">Penthouse</div>
+      </div>
     </div>
-    <div class="filter-group">
-      <label class="filter-label" for="f-guests">Guests</label>
-      <select class="filter-select" id="f-guests">
-        <option value="all">All</option>
-        <option value="2">2 guests min.</option>
-        <option value="4">4 guests min.</option>
-        <option value="6">6 guests min.</option>
-        <option value="8+">8 guests +</option>
-      </select>
+    <div class="filter-group" id="flt-guests">
+      <span class="filter-label">Guests</span>
+      <div class="flt-trigger">
+        <span id="flt-guests-val">Any</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+      </div>
+      <div class="flt-panel">
+        <div class="flt-option selected" data-val="all">Any</div>
+        <div class="flt-option" data-val="2">2 guests min.</div>
+        <div class="flt-option" data-val="4">4 guests min.</div>
+        <div class="flt-option" data-val="6">6 guests min.</div>
+        <div class="flt-option" data-val="8+">8 guests +</div>
+      </div>
     </div>
     <div class="filter-group price-wrap" id="price-filter-group">
       <label class="filter-label">Price / night</label>
@@ -1036,10 +1085,43 @@ async function load(){
     applyFilters();
   }
 
+const fltState = { station:'all', type:'all', guests:'all' };
+
+function initDropdowns(){
+  ['station','type','guests'].forEach(key => {
+    const grp = document.getElementById('flt-'+key);
+    if(!grp) return;
+    grp.addEventListener('click', function(e){
+      const isOpen = grp.classList.contains('open');
+      closeAllDropdowns();
+      if(!isOpen) grp.classList.add('open');
+      e.stopPropagation();
+    });
+    grp.querySelectorAll('.flt-option').forEach(opt => {
+      opt.addEventListener('click', function(e){
+        const val = opt.dataset.val;
+        fltState[key] = val;
+        document.getElementById('flt-'+key+'-val').textContent = opt.textContent;
+        grp.querySelectorAll('.flt-option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        grp.classList.toggle('active', val !== 'all');
+        closeAllDropdowns();
+        applyFilters();
+        e.stopPropagation();
+      });
+    });
+  });
+  document.addEventListener('click', closeAllDropdowns);
+}
+
+function closeAllDropdowns(){
+  document.querySelectorAll('.filter-group.open').forEach(g => g.classList.remove('open'));
+}
+
 function applyFilters(){
-  const station = document.getElementById('f-station').value;
-  const type    = document.getElementById('f-type').value;
-  const guests  = document.getElementById('f-guests').value;
+  const station = fltState.station;
+  const type    = fltState.type;
+  const guests  = fltState.guests;
   const priceMin=parseInt(document.getElementById('f-price-min')?.value||0);
   const priceMax=parseInt(document.getElementById('f-price-max')?.value||10000);
   const active  = station!=='all' || type!=='all' || guests!=='all' || priceMin>0 || priceMax<10000;
@@ -1061,16 +1143,23 @@ function applyFilters(){
 }
 
 function resetFilters(){
-  ['f-station','f-type','f-guests'].forEach(id => document.getElementById(id).value = 'all');
+  ['station','type','guests'].forEach(key => {
+    fltState[key] = 'all';
+    const grp = document.getElementById('flt-'+key);
+    if(!grp) return;
+    const first = grp.querySelector('.flt-option');
+    document.getElementById('flt-'+key+'-val').textContent = first.textContent;
+    grp.querySelectorAll('.flt-option').forEach(o => o.classList.remove('selected'));
+    first.classList.add('selected');
+    grp.classList.remove('active');
+  });
   const pMin=document.getElementById('f-price-min');
   const pMax=document.getElementById('f-price-max');
   if(pMin){pMin.value=0;pMax.value=10000;syncPriceSlider();}
   applyFilters();
 }
 
-document.getElementById('f-station').addEventListener('change', applyFilters);
-document.getElementById('f-type').addEventListener('change', applyFilters);
-document.getElementById('f-guests').addEventListener('change', applyFilters);
+initDropdowns();
 load();
 
 let leafletMap = null;
