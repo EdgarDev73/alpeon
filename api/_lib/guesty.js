@@ -42,8 +42,8 @@ async function getToken() {
   _loadTokenCache();
   if (_cachedToken && Date.now() < _tokenExpiry - 300_000) return _cachedToken;
 
-  const id     = process.env.GUESTY_CLIENT_ID;
-  const secret = process.env.GUESTY_CLIENT_SECRET;
+  const id     = process.env.GUESTY_CLIENT_ID     || '0oatxyy1lnqP1Rlwu5d7';
+  const secret = process.env.GUESTY_CLIENT_SECRET || '7LG2doVNI25O-1ekKfwkNwW-grUWy5kSZobsL1h_a2yBqvz4j-hgj_mP_9TiMyKk';
   if (!id || !secret) throw new Error('Missing GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET');
 
   // 3) OAuth with retry + backoff (handles 429 on Vercel cold-start bursts)
