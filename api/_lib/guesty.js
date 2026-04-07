@@ -50,11 +50,19 @@ async function getToken() {
   let lastErr;
   for (let attempt = 0; attempt < 5; attempt++) {
     if (attempt > 0) await new Promise(r => setTimeout(r, 1000 * Math.pow(2, attempt - 1)));
-    const res = await fetch(OAUTH_URL, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
-    });
+    const oauthCtrl = new AbortController();
+    const oauthTimer = setTimeout(() => oauthCtrl.abort(), 5000);
+    let res;
+    try {
+      res = await fetch(OAUTH_URL, {
+        method:  'POST',
+        signal:  oauthCtrl.signal,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
+      });
+    } finally {
+      clearTimeout(oauthTimer);
+    }
     if (res.status === 429) { lastErr = new Error('Guesty OAuth rate-limited (429)'); continue; }
     if (!res.ok) throw new Error(`Guesty OAuth failed ${res.status}: ${await res.text()}`);
     const json   = await res.json();
@@ -76,18 +84,28 @@ async function guestyFetch(path, { method = 'GET', body, params } = {}) {
     ).toString();
     if (qs) url += `?${qs}`;
   }
-  const res = await fetch(url, {
-    method,
-    headers: {
-      'Accept':        'application/json',
-      'Content-Type':  'application/json',
-      'Authorization': `Bearer ${token}`,
-      'g-aid-cs':      G_AID_CS,
-      'Origin':        ORIGIN,
-      'Referer':       `${ORIGIN}/en`,
-    },
-    ...(body ? { body: JSON.stringify(body) } : {}),
-  });
+  // 8s timeout — Vercel functions max out at 10s, never let Guesty hang the whole request
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+
+  let res;
+  try {
+    res = await fetch(url, {
+      method,
+      signal: controller.signal,
+      headers: {
+        'Accept':        'application/json',
+        'Content-Type':  'application/json',
+        'Authorization': `Bearer ${token}`,
+        'g-aid-cs':      G_AID_CS,
+        'Origin':        ORIGIN,
+        'Referer':       `${ORIGIN}/en`,
+      },
+      ...(body ? { body: JSON.stringify(body) } : {}),
+    });
+  } finally {
+    clearTimeout(timer);
+  }
   if (!res.ok) throw new Error(`Guesty ${method} ${path} → ${res.status}: ${await res.text()}`);
   return res.json();
 }

@@ -29,12 +29,17 @@ module.exports = async (req, res) => {
       properties = properties.filter(p => guests === '8+' ? p.guests >= 8 : p.guests >= n);
     }
 
-    // Cache at Vercel CDN edge: fresh 60s, stale-while-revalidate 5min
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
+    // Cache-Control strategy:
+    // - s-maxage=60        : Vercel edge serves fresh data for 60s
+    // - stale-while-revalidate=3600 : revalidate in background, serve stale for up to 1h
+    // - stale-if-error=86400       : if Guesty is down, serve last good response for 24h
+    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=3600, stale-if-error=86400');
     return res.status(200).json({ properties, total: properties.length });
   } catch (err) {
     console.error('[properties] Guesty error:', err.message);
-    // Never return 500 — degrade gracefully with empty list so the UI still renders
+    // Return a valid 200 so stale-if-error CDN cache kicks in on next request
+    // (CDN will serve last cached good response instead of this fallback)
+    res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json({ properties: [], total: 0, _error: err.message });
   }
 };

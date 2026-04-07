@@ -75,6 +75,6 @@ module.exports = async (req, res) => {
 
   } catch (err) {
     console.error('[quote]', err.message);
-    return res.status(500).json({ error: err.message });
+    return res.status(503).json({ error: 'Pricing temporarily unavailable. Please try again.' });
   }
 };
