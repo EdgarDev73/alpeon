@@ -454,6 +454,92 @@
     /* ─────────────────────────────────────────────
        STATS
     ───────────────────────────────────────────── */
+    /* ── Estimateur teaser ── */
+    .est-teaser {
+      background: var(--white);
+      padding: clamp(64px, 8vw, 100px) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .est-teaser .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 6vw, 100px);
+      align-items: center;
+    }
+    .est-teaser-left .eyebrow { margin-bottom: 22px; }
+    .est-teaser-left h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      color: var(--black);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .est-teaser-left h2 em { font-style: italic; color: var(--green); }
+    .est-teaser-left p {
+      font-size: .95rem;
+      color: rgba(17,17,17,.55);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 420px;
+    }
+    .est-teaser-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--green);
+      color: var(--white);
+      text-decoration: none;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: 18px 36px;
+      border-radius: 2px;
+      transition: background .25s;
+    }
+    .est-teaser-cta:hover { background: var(--green-d); }
+    .est-teaser-cta svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; flex-shrink: 0; }
+    .est-teaser-note {
+      display: block;
+      margin-top: 16px;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(17,17,17,.3);
+    }
+    .est-teaser-right {
+      background: var(--green-d);
+      border-radius: 4px;
+      padding: 40px 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 20px;
+    }
+    .est-stat-block {}
+    .est-stat-val {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .est-stat-label {
+      font-size: .62rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(250,254,255,.4);
+      line-height: 1.4;
+    }
+    @media (max-width: 900px) {
+      .est-teaser .container { grid-template-columns: 1fr; gap: 40px; }
+      .est-teaser-right { grid-template-columns: 1fr 1fr; padding: 28px 24px; }
+    }
+    @media (max-width: 500px) {
+      .est-teaser-right { grid-template-columns: 1fr 1fr; }
+    }
+
     .stats {
       background: var(--green);
     }
@@ -488,8 +574,12 @@
        PROMISE — white split
     ───────────────────────────────────────────── */
     /* ── MARQUES ── */
-    .marques { background: var(--green-d); padding: clamp(64px, 8vw, 100px) 0; }
-    .marques-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .marques { background: var(--green-d); padding: clamp(40px, 5vw, 64px) 0; }
+    .marques-header { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
+    .marques-header .eyebrow { justify-content: center; margin-bottom: 20px; }
+    .marques-header h2 { font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; color: var(--white); line-height: 1.15; }
+    .marques-header h2 em { font-style: italic; color: var(--gold); }
+    .marques-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .marque-card {
       position: relative; overflow: hidden; min-height: 420px;
       display: flex; align-items: flex-end; text-decoration: none;
@@ -514,37 +604,44 @@
     }
 
     .promise {
-      background: var(--white);
-      padding: clamp(80px, 10vw, 140px) 0;
+      background: var(--green-d);
+      padding: clamp(80px, 10vw, 120px) 0;
       overflow: visible;
     }
-    .promise .container {
+    .promise .container { display: flex; flex-direction: column; gap: 0; }
+    .promise-head {
       display: grid;
-      grid-template-columns: 5fr 7fr;
-      gap: clamp(60px, 8vw, 120px);
-      align-items: start;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: end;
+      margin-bottom: clamp(48px, 6vw, 80px);
     }
-    .promise-left {
-      position: sticky;
-      top: calc(var(--nav-h) + 40px);
-      align-self: start;
-    }
-    .promise-eyebrow { margin-bottom: 24px; }
+    .promise-eyebrow { margin-bottom: 20px; }
     .promise-h2 {
       font-family: var(--font-sans);
-      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
       font-weight: 600;
-      line-height: 1.1;
-      color: var(--black);
+      line-height: 1.08;
+      color: var(--white);
       letter-spacing: -.02em;
-      margin-bottom: 32px;
     }
     .promise-h2 em {
       font-family: var(--font-italic);
       font-style: italic;
       font-weight: 400;
-      color: var(--green);
+      color: var(--gold);
       font-size: 1.05em;
+    }
+    .promise-head-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+    .promise-intro {
+      font-size: .95rem;
+      color: rgba(250,254,255,.52);
+      line-height: 1.78;
     }
     .promise-link {
       display: inline-flex;
@@ -554,50 +651,59 @@
       font-weight: 600;
       letter-spacing: .15em;
       text-transform: uppercase;
-      color: var(--green);
-      border-bottom: 1px solid var(--green);
+      color: var(--gold);
+      border-bottom: 1px solid rgba(232,203,160,.35);
       padding-bottom: 3px;
-      transition: opacity .3s;
+      transition: border-color .3s, opacity .3s;
+      align-self: flex-start;
     }
-    .promise-link:hover { opacity: .65; }
+    .promise-link:hover { opacity: .75; border-color: var(--gold); }
     .promise-link svg { width: 13px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
     .promise-link:hover svg { transform: translateX(4px); }
 
-    .promise-right {
+    .promise-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .promise-card {
+      background: rgba(250,254,255,.04);
+      border: 1px solid rgba(250,254,255,.07);
+      padding: 44px 40px;
       display: flex;
       flex-direction: column;
-      gap: 0;
+      gap: 20px;
+      transition: background .3s;
     }
-    .promise-item {
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 28px;
-      padding: 36px 0;
-      border-bottom: 1px solid var(--border);
-      align-items: start;
-    }
-    .promise-item:first-child { border-top: 1px solid var(--border); }
+    .promise-card:hover { background: rgba(250,254,255,.07); }
     .promise-num {
-      font-family: var(--font-serif); font-style: italic;
-      font-size: 2rem;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 3rem;
       font-weight: 300;
-      color: var(--gold-d);
+      color: var(--gold);
       line-height: 1;
-      padding-top: 4px;
+      opacity: .6;
     }
     .promise-item-title {
       font-family: var(--font-sans);
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
-      color: var(--black);
-      margin-bottom: 10px;
+      color: var(--white);
       letter-spacing: -.01em;
+      line-height: 1.3;
     }
     .promise-item-text {
       font-size: .88rem;
       font-weight: 300;
-      color: #505850;
+      color: rgba(250,254,255,.5);
       line-height: 1.8;
+      flex: 1;
+    }
+    .promise-card-sep {
+      height: 1px;
+      background: rgba(232,203,160,.2);
+      width: 32px;
     }
 
     /* ─────────────────────────────────────────────
@@ -846,8 +952,8 @@
     @media (max-width: 1100px) {
       .hero-body .container { grid-template-columns: 1fr; }
       .hero-card { display: none; }
-      .promise .container { grid-template-columns: 1fr; gap: 48px; }
-      .promise-left { position: sticky; top: calc(var(--nav-h) + 24px); align-self: start; }
+      .promise-head { grid-template-columns: 1fr; gap: 28px; }
+      .promise-cards { grid-template-columns: 1fr; gap: 2px; }
       .dest-grid { grid-template-columns: repeat(3, 1fr); }
       .cta .container { grid-template-columns: 1fr; gap: 40px; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -899,9 +1005,7 @@
 
       /* Promise — single column, no sticky */
       .promise { padding: clamp(48px, 7vw, 80px) 0; }
-      .promise .container { grid-template-columns: 1fr; gap: 32px; }
-      .promise-left { position: static; }
-      .promise-item { grid-template-columns: 44px 1fr; gap: 18px; padding: 28px 0; }
+      .promise-card { padding: 32px 24px; }
 
       /* Destinations mosaic */
       .destinations { padding: clamp(48px, 7vw, 80px) 0 clamp(40px, 6vw, 64px); }
@@ -1162,6 +1266,42 @@ function toggleMobileMenu(){
 
 
 <!-- ═══════════════════════════════════════════
+     ESTIMATEUR TEASER
+═══════════════════════════════════════════ -->
+<section class="est-teaser">
+  <div class="container">
+    <div class="est-teaser-left">
+      <span class="eyebrow">Estimateur de revenus</span>
+      <h2>Combien rapporte <em>votre bien</em> en station ?</h2>
+      <p>En 2 minutes, obtenez une projection personnalisée basée sur les données réelles de nos 200+ biens gérés. Gratuit, sans inscription, résultat immédiat.</p>
+      <a href="/estimateur" class="est-teaser-cta">
+        Estimer mes revenus
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <span class="est-teaser-note">Gratuit · Sans engagement · 2 minutes</span>
+    </div>
+    <div class="est-teaser-right">
+      <div class="est-stat-block">
+        <div class="est-stat-val">80k€</div>
+        <div class="est-stat-label">Revenus annuels<br>max estimés</div>
+      </div>
+      <div class="est-stat-block">
+        <div class="est-stat-val">200+</div>
+        <div class="est-stat-label">Biens gérés<br>en référence</div>
+      </div>
+      <div class="est-stat-block">
+        <div class="est-stat-val">6</div>
+        <div class="est-stat-label">Stations<br>couvertes</div>
+      </div>
+      <div class="est-stat-block">
+        <div class="est-stat-val">2 min</div>
+        <div class="est-stat-label">Pour obtenir<br>votre résultat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
      STATS
 ═══════════════════════════════════════════ -->
 <div class="stats">
@@ -1191,40 +1331,42 @@ function toggleMobileMenu(){
 ═══════════════════════════════════════════ -->
 <section class="promise">
   <div class="container">
-    <div class="promise-left">
-      <div class="promise-eyebrow eyebrow">Notre approche</div>
-      <h2 class="promise-h2">
-        Votre bien mérite<br>
-        une gestion<br>
-        <em>sans compromis</em>
-      </h2>
-      <a href="/proprietaires" class="promise-link">
-        Découvrir nos formules
-        <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </a>
+    <div class="promise-head">
+      <div class="promise-head-left">
+        <div class="promise-eyebrow eyebrow">Notre approche</div>
+        <h2 class="promise-h2">
+          Votre bien mérite<br>
+          une gestion<br>
+          <em>sans compromis</em>
+        </h2>
+      </div>
+      <div class="promise-head-right">
+        <p class="promise-intro">Chez ALPÉON, chaque propriété est traitée comme un actif d'exception. Notre modèle repose sur trois engagements non négociables envers chacun de nos propriétaires.</p>
+        <a href="/proprietaires" class="promise-link">
+          Découvrir nos formules
+          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
     </div>
 
-    <div class="promise-right">
-      <div class="promise-item">
+    <div class="promise-cards">
+      <div class="promise-card">
         <div class="promise-num">01</div>
-        <div>
-          <div class="promise-item-title">Loyer fixe garanti chaque mois</div>
-          <p class="promise-item-text">Vous percevez un loyer défini contractuellement, indépendant du nombre de nuits louées, des annulations ou des variations saisonnières. Zéro aléa.</p>
-        </div>
+        <div class="promise-card-sep"></div>
+        <div class="promise-item-title">Loyer fixe garanti chaque mois</div>
+        <p class="promise-item-text">Vous percevez un loyer défini contractuellement, indépendant du nombre de nuits louées, des annulations ou des variations saisonnières. Zéro aléa.</p>
       </div>
-      <div class="promise-item">
+      <div class="promise-card">
         <div class="promise-num">02</div>
-        <div>
-          <div class="promise-item-title">Gestion intégrale de A à Z</div>
-          <p class="promise-item-text">Mise en marché, accueil des locataires, ménage, maintenance, comptabilité — nous gérons l'intégralité de la chaîne avec rigueur et discrétion.</p>
-        </div>
+        <div class="promise-card-sep"></div>
+        <div class="promise-item-title">Gestion intégrale de A à Z</div>
+        <p class="promise-item-text">Mise en marché, accueil des locataires, ménage, maintenance, comptabilité — nous gérons l'intégralité de la chaîne avec rigueur et discrétion.</p>
       </div>
-      <div class="promise-item">
+      <div class="promise-card">
         <div class="promise-num">03</div>
-        <div>
-          <div class="promise-item-title">Un interlocuteur unique, toujours disponible</div>
-          <p class="promise-item-text">Un gestionnaire dédié connaît votre bien dans ses moindres détails. Vous ne recevez qu'un seul rapport mensuel, clair et complet.</p>
-        </div>
+        <div class="promise-card-sep"></div>
+        <div class="promise-item-title">Un interlocuteur unique, toujours disponible</div>
+        <p class="promise-item-text">Un gestionnaire dédié connaît votre bien dans ses moindres détails. Vous ne recevez qu'un seul rapport mensuel, clair et complet.</p>
       </div>
     </div>
   </div>
@@ -1236,6 +1378,10 @@ function toggleMobileMenu(){
 ═══════════════════════════════════════════ -->
 <section class="marques">
   <div class="container">
+    <div class="marques-header">
+      <span class="eyebrow">Nos offres</span>
+      <h2>Deux gammes, une seule <em>exigence</em></h2>
+    </div>
     <div class="marques-grid">
       <a href="/proprietaires#offres" class="marque-card marque-residences">
         <div class="marque-inner">

@@ -9,6 +9,38 @@
   <title>Destinations — Courchevel, Megève, Val d'Isère, Val Thorens | ALPÉON</title>
   <meta name="description" content="ALPÉON operates in the most prestigious alpine resorts: Courchevel, Megève, Méribel, Tignes, Val d'Isère, Val Thorens. Discover our destinations and estimate your rental income." />
   <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="short-term rental Courchevel, rent apartment Megève ski season, property management Méribel, rental income Tignes, chalet rental Val d'Isère, property manager Val Thorens, ski resorts French Alps property management, mountain real estate investment Savoie" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Alpine Destinations — Courchevel, Megève, Val Thorens | ALPÉON" />
+  <meta name="twitter:description" content="6 exceptional alpine resorts: Courchevel, Megève, Méribel, Tignes, Val d'Isère, Val Thorens. Property management and guaranteed rent." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://alpeon.fr/en/accueil/" },
+          { "@type": "ListItem", "position": 2, "name": "Destinations", "item": "https://alpeon.fr/en/destinations/" }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "name": "ALPÉON Alpine Resorts",
+        "description": "The 6 ski resorts where ALPÉON manages short-term rental properties with guaranteed rent.",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Courchevel", "url": "https://alpeon.fr/en/destinations/#courchevel" },
+          { "@type": "ListItem", "position": 2, "name": "Megève", "url": "https://alpeon.fr/en/destinations/#megeve" },
+          { "@type": "ListItem", "position": 3, "name": "Méribel", "url": "https://alpeon.fr/en/destinations/#meribel" },
+          { "@type": "ListItem", "position": 4, "name": "Tignes", "url": "https://alpeon.fr/en/destinations/#tignes" },
+          { "@type": "ListItem", "position": 5, "name": "Val d'Isère", "url": "https://alpeon.fr/en/destinations/#valdisere" },
+          { "@type": "ListItem", "position": 6, "name": "Val Thorens", "url": "https://alpeon.fr/en/destinations/#valthorens" }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="canonical" href="https://alpeon.fr/en/destinations/" />
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/" />
   <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/" />
@@ -19,7 +51,7 @@
   <meta property="og:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
 /* @@NAV-START@@ */
   :root { --nav-h: 88px; }
@@ -119,164 +151,343 @@
   .hdr-phone-item .hdr-phone-icon-tel { stroke: currentColor; fill: none; stroke-width: 2; }
   /* @@NAV-END@@ */
 
-  :root {
-    --ink: #1C1B19; --ink-2: #2D2C28; --ink-3: #5C5A54;
-    --stone: #F4F1EC; --stone-2: #E8E3DA; --stone-3: #D0C9BC;
-    --accent: #A8956A; --accent-2: #8C7A55;
-    --white: #FAFEFF;
-    --font: 'Poppins', 'Lora', sans-serif;
-    --nav-h: 88px;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body { font-family: var(--font); font-weight: 300; background: var(--stone); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
-  img { display: block; max-width: 100%; }
-  a { text-decoration: none; color: inherit; }
-  ul { list-style: none; }
 
-  /* HERO */
-  .hero {
-    min-height: 62vh; display: flex; align-items: flex-end;
-    padding: 0 60px clamp(56px, 8vh, 90px);
-    padding-top: var(--nav-h);
-    background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2000&q=90') center 40% / cover no-repeat;
-    position: relative; overflow: hidden;
-  }
-  .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(28,27,25,.88) 40%, rgba(28,27,25,.35) 100%); }
-  .hero-content { position: relative; z-index: 2; max-width: 700px; }
-  .hero-kicker { font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
-  .hero-kicker::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
-  h1 { font-family: 'Lora', serif; font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 400; color: #fff; line-height: 1.08; margin-bottom: 20px; }
-  .hero-desc { font-size: .95rem; color: rgba(255,255,255,.68); line-height: 1.72; max-width: 480px; }
+    :root {
+      --stone:    #faf9f7;
+      --stone-2:  #f2efe9;
+      --stone-3:  #e5e0d8;
+      --stone-4:  #c8c1b5;
+      --ink:      #1c1b19;
+      --ink-3:    #4a4843;
+      --ink-4:    #7a7773;
+      --accent:   #a8956a;
+      --accent-2: #8a7a56;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--stone); color: var(--ink); line-height: 1.6; overflow-x: clip; }
 
-  /* INTRO */
-  .intro { padding: 80px 60px; background: var(--stone); display: flex; gap: 80px; align-items: flex-start; }
-  .intro-left { flex: 0 0 auto; }
-  .intro-num { font-family: 'Lora', serif; font-size: 6rem; font-weight: 300; color: var(--stone-3); line-height: 1; }
-  .intro-label { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
-  .intro-right { flex: 1; }
-  .sec-kicker { font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-  .sec-kicker::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
-  .sec-title { font-family: 'Lora', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.15; margin-bottom: 20px; }
-  .sec-title em { font-style: italic; color: var(--accent); }
-  .sec-desc { font-size: .95rem; color: var(--ink-3); line-height: 1.75; max-width: 560px; }
+    /* ── HEADER ── */
 
-  /* STATIONS GRID */
-  .stations-section { padding: 0 60px 100px; background: var(--stone); }
-  .stations-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .station-card:first-child { grid-column: span 2; }
-  .station-card {
-    position: relative; overflow: hidden;
-    min-height: 520px;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 40px 36px;
-    cursor: pointer; text-decoration: none;
-  }
-  .station-card::before {
-    content: ''; position: absolute; inset: 0;
-    background-size: cover; background-position: center;
-    transition: transform .7s cubic-bezier(.25,.46,.45,.94);
-  }
-  .station-card:hover::before { transform: scale(1.05); }
-  .station-card::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(28,27,25,.92) 30%, rgba(28,27,25,.15) 100%);
-    transition: opacity .4s;
-  }
-  .station-card:hover::after { opacity: .85; }
-  .sc-courchevel::before  { background-image: url('/assets/images/dest-courchevel.webp'); background-position: center 40%; }
-  .sc-megeve::before      { background-image: url('/assets/images/dest-megeve.webp'); background-position: center 50%; }
-  .sc-meribel::before     { background-image: url('/assets/images/dest-meribel.jpg'); background-position: center 50%; }
-  .sc-tignes::before      { background-image: url('/assets/images/dest-tignes.png'); background-position: center 40%; }
-  .sc-valdisere::before   { background-image: url('/assets/images/dest-valdisere.jpg'); background-position: center 40%; }
-  .sc-valthorens::before  { background-image: url('/assets/images/dest-valthorens.jpg'); background-position: center 50%; }
-  .station-content { position: relative; z-index: 2; }
-  .station-massif { display: inline-block; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(168,149,106,.5); padding: 4px 10px; margin-bottom: 14px; }
-  .station-name { font-family: 'Lora', serif; font-size: 2.4rem; font-weight: 400; color: #fff; line-height: 1; margin-bottom: 6px; }
-  .station-card:first-child .station-name { font-size: 3rem; }
-  .station-altitude { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.48); margin-bottom: 18px; }
-  .station-desc { font-size: .86rem; color: rgba(255,255,255,.65); line-height: 1.65; max-width: 380px; margin-bottom: 20px; }
-  .station-card:first-child .station-desc { max-width: 520px; }
-  .station-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
-  .station-tag { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.5); background: rgba(255,255,255,.08); padding: 4px 10px; border: 1px solid rgba(255,255,255,.12); }
-  .station-quartiers { margin-bottom: 24px; }
-  .sq-label { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 8px; }
-  .sq-list { display: flex; flex-wrap: wrap; gap: 6px; }
-  .sq-item { font-size: .75rem; color: rgba(255,255,255,.55); }
-  .sq-item + .sq-item::before { content: '·'; margin-right: 6px; color: rgba(255,255,255,.2); }
-  .station-cta { display: inline-flex; align-items: center; gap: 8px; font-size: .7rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(168,149,106,.4); padding-bottom: 2px; transition: color .3s, border-color .3s; }
-  .station-cta:hover { color: #fff; border-color: rgba(255,255,255,.5); }
-  .station-cta svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
-  .station-card:hover .station-cta svg { transform: translateX(3px); }
+    header.scrolled { background: rgba(250,249,247,.97); box-shadow: 0 1px 0 var(--stone-3); backdrop-filter: blur(8px); }
+    .logo { display: flex; align-items: center; text-decoration: none; }
+    .logo-name { font-family: 'Lora', serif; font-size: 1.15rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #fff; transition: color .4s; }
+    header.scrolled .logo-name { color: var(--ink); }
 
-  /* CTA SECTION */
-  .cta-section { background: var(--ink); padding: 100px 60px; text-align: center; }
-  .cta-section .sec-kicker { justify-content: center; }
-  .cta-section .sec-kicker::before { display: none; }
-  .cta-title { font-family: 'Lora', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; color: #fff; line-height: 1.15; margin-bottom: 20px; }
-  .cta-title em { font-style: italic; color: var(--accent); }
-  .cta-desc { font-size: .95rem; color: rgba(255,255,255,.55); line-height: 1.75; max-width: 520px; margin: 0 auto 48px; }
-  .cta-actions { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
-  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; text-decoration: none; padding: 16px 40px; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: background .3s; }
-  .btn-primary:hover { background: var(--accent-2); }
-  .btn-outline-white { border: 1px solid rgba(255,255,255,.3); color: rgba(255,255,255,.75); text-decoration: none; padding: 16px 40px; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: border-color .3s, color .3s; display: inline-block; }
-  .btn-outline-white:hover { border-color: #fff; color: #fff; }
 
-  /* FOOTER */
-  footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.07); padding: 64px 60px 40px; }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-  .f-brand-claim { font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; margin-top: 14px; }
-  .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.42); line-height: 1.7; }
-  .f-col-label { font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 18px; }
-  .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .f-links a { font-size: .84rem; color: rgba(255,255,255,.58); text-decoration: none; transition: color .2s; }
-  .f-links a:hover { color: #fff; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 24px; display: flex; justify-content: space-between; font-size: .74rem; color: rgba(255,255,255,.25); }
 
-  /* RESPONSIVE */
-  @media (max-width: 1100px) {
-    .stations-grid { grid-template-columns: 1fr 1fr; }
+
+    header.scrolled
+    header.scrolled
+    header.scrolled
+
+
+
+    header.scrolled
+    header.scrolled
+
+    header.scrolled
+
+    /* Hamburger */
+
+
+    header.scrolled
+
+
+
+
+
+    .mob-close { position:absolute; top:14px; right:18px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; background:none; border:none; cursor:pointer; color:rgba(255,255,255,.5); font-size:1.6rem; line-height:1; transition:color .2s; }
+    .mob-close:hover { color:#fff; }
+
+    .mob-nav { display:flex; flex-direction:column; align-items:center; gap:28px; }
+    .mob-nav a { font-family:'Lora',serif; font-size:2rem; color:rgba(255,255,255,.82); text-decoration:none; transition:color .2s; }
+    .mob-nav a:hover { color:#fff; }
+    .mob-lang { display:flex; align-items:center; gap:14px; }
+    .mob-lang-btn { font-size:.74rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,.35); transition:color .2s; padding:4px 8px; }
+    .mob-lang-btn.active { color:rgba(255,255,255,.9); }
+    .mob-lang-sep { color:rgba(255,255,255,.2); font-size:.55rem; }
+    @media (max-width:900px) {   }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; align-items: flex-end; padding: 0 60px 72px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('/assets/images/hero-reserver.jpg') center 40% / cover no-repeat;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,27,25,.88) 25%, rgba(28,27,25,.18) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .hero-kicker { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+    .hero h1 { font-family: 'Lora', serif; font-size: clamp(2.4rem, 4.5vw, 3.6rem); font-weight: 400; color: #fff; line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; }
+    .hero-desc { font-size: .95rem; color: rgba(255,255,255,.68); line-height: 1.72; max-width: 480px; }
+
+    /* ── INTRO ── */
+    .intro { padding: 80px 60px; background: var(--stone); display: flex; gap: 80px; align-items: flex-start; }
+    .intro-left { flex: 0 0 auto; }
+    .intro-num { font-family: 'Lora', serif; font-size: 6rem; font-weight: 300; color: var(--stone-3); line-height: 1; }
+    .intro-label { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+    .intro-right { flex: 1; }
+    .sec-kicker { font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .sec-kicker::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
+    .sec-title { font-family: 'Lora', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.15; margin-bottom: 20px; }
+    .sec-title em { font-style: italic; color: var(--accent); }
+    .sec-desc { font-size: .95rem; color: var(--ink-3); line-height: 1.75; max-width: 560px; }
+
+    /* ── STATIONS GRID ── */
+    .stations-section { padding: 0 60px 100px; background: var(--stone); }
+    .stations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    /* Featured first card spans 2 cols */
     .station-card:first-child { grid-column: span 2; }
-    .intro { gap: 48px; }
-  }
-  @media (max-width: 768px) {
-    :root { --nav-h: 72px; }
-    .hero { padding: 0 24px 60px; }
-    .intro { padding: 60px 24px; flex-direction: column; gap: 24px; }
-    .intro-num { font-size: 4rem; }
-    .stations-section { padding: 0 0 64px; }
-    .stations-grid { grid-template-columns: 1fr; gap: 2px; }
-    .station-card:first-child { grid-column: span 1; }
-    .station-card { min-height: 440px; padding: 32px 24px; }
-    .station-card:first-child .station-name { font-size: 2.4rem; }
-    .cta-section { padding: 64px 24px; }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-    .footer-bottom { flex-direction: column; gap: 8px; }
-  }
-  @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+    .station-card {
+      position: relative; overflow: hidden;
+      min-height: 520px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 40px 36px;
+      cursor: pointer; text-decoration: none;
+    }
+    .station-card::before {
+      content: ''; position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform .7s cubic-bezier(.25,.46,.45,.94);
+    }
+    .station-card:hover::before { transform: scale(1.05); }
+    .station-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,27,25,.92) 30%, rgba(28,27,25,.15) 100%);
+      transition: opacity .4s;
+    }
+    .station-card:hover::after { opacity: .85; }
+
+    /* station images */
+    .sc-courchevel::before  { background-image: url('/assets/images/dest-courchevel.webp'); background-position: center 40%; }
+    .sc-megeve::before      { background-image: url('/assets/images/dest-megeve.webp'); background-position: center 50%; }
+    .sc-meribel::before     { background-image: url('/assets/images/dest-meribel.jpg'); background-position: center 50%; }
+    .sc-tignes::before      { background-image: url('/assets/images/dest-tignes.png'); background-position: center 40%; }
+    .sc-valdisere::before   { background-image: url('/assets/images/dest-valdisere.jpg'); background-position: center 40%; }
+    .sc-valthorens::before  { background-image: url('/assets/images/dest-valthorens.jpg'); background-position: center 50%; }
+
+    .station-content { position: relative; z-index: 2; }
+    .station-massif {
+      display: inline-block; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid rgba(168,149,106,.5); padding: 4px 10px; margin-bottom: 14px;
+    }
+    .station-name {
+      font-family: 'Lora', serif;
+      font-size: 2.4rem; font-weight: 400; color: #fff; line-height: 1; margin-bottom: 6px;
+    }
+    .station-card:first-child .station-name { font-size: 3rem; }
+    .station-altitude {
+      font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.48); margin-bottom: 18px;
+    }
+    .station-desc {
+      font-size: .86rem; color: rgba(255,255,255,.65); line-height: 1.65;
+      max-width: 380px; margin-bottom: 20px;
+    }
+    .station-card:first-child .station-desc { max-width: 520px; }
+    .station-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+    .station-tag {
+      font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(255,255,255,.5); background: rgba(255,255,255,.08);
+      padding: 4px 10px; border: 1px solid rgba(255,255,255,.12);
+    }
+    .station-quartiers { margin-bottom: 24px; }
+    .sq-label { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 8px; }
+    .sq-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sq-item { font-size: .75rem; color: rgba(255,255,255,.55); }
+    .sq-item + .sq-item::before { content: '·'; margin-right: 6px; color: rgba(255,255,255,.2); }
+    .station-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .7rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); text-decoration: none;
+      border-bottom: 1px solid rgba(168,149,106,.4); padding-bottom: 2px;
+      transition: color .3s, border-color .3s;
+    }
+    .station-cta:hover { color: #fff; border-color: rgba(255,255,255,.5); }
+    .station-cta svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+    .station-card:hover .station-cta svg { transform: translateX(3px); }
+
+    /* ── CTA SECTION ── */
+    .cta-section { background: var(--ink); padding: 100px 60px; text-align: center; }
+    .cta-section .sec-kicker { justify-content: center; }
+    .cta-section .sec-kicker::before { display: none; }
+    .cta-title { font-family: 'Lora', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 400; color: #fff; line-height: 1.15; margin-bottom: 20px; }
+    .cta-title em { font-style: italic; color: var(--accent); }
+    .cta-desc { font-size: .95rem; color: rgba(255,255,255,.55); line-height: 1.75; max-width: 520px; margin: 0 auto 48px; }
+    .cta-actions { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: #fff; text-decoration: none; padding: 16px 40px; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: background .3s; }
+    .btn-primary:hover { background: var(--accent-2); }
+    .btn-outline-white { border: 1px solid rgba(255,255,255,.3); color: rgba(255,255,255,.75); text-decoration: none; padding: 16px 40px; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; transition: border-color .3s, color .3s; display: inline-block; }
+    .btn-outline-white:hover { border-color: #fff; color: #fff; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.07); padding: 64px 60px 40px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .f-brand-name { font-family: 'Lora', serif; font-size: 1.4rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 6px; }
+    .f-brand-claim { font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.42); line-height: 1.7; }
+    .f-col-label { font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 18px; }
+    .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .f-links a { font-size: .84rem; color: rgba(255,255,255,.58); text-decoration: none; transition: color .2s; }
+    .f-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 24px; display: flex; justify-content: space-between; font-size: .74rem; color: rgba(255,255,255,.25); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .stations-grid { grid-template-columns: 1fr 1fr; }
+      .station-card:first-child { grid-column: span 2; }
+      .intro { gap: 48px; }
+    }
+    @media (max-width: 768px) {
+
+      .hero { padding: 0 24px 60px; }
+      .intro { padding: 60px 24px; flex-direction: column; gap: 24px; }
+      .intro-num { font-size: 4rem; }
+      .stations-section { padding: 0 0 64px; }
+      .stations-grid { grid-template-columns: 1fr; gap: 2px; }
+      .station-card:first-child { grid-column: span 1; }
+      .station-card { min-height: 440px; padding: 32px 24px; }
+      .station-card:first-child .station-name { font-size: 2.4rem; }
+      .cta-section { padding: 64px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── MOBILE COMPREHENSIVE ─── */
+    @media (max-width: 768px) {
+      :root { --nav-h: 72px; }
+
+      /* Hero */
+      .hero { padding: 0 1.25rem 56px; min-height: 520px; }
+      .hero h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+      .hero-desc { font-size: .88rem; max-width: 100%; }
+
+      /* Intro */
+      .intro { padding: 48px 1.25rem; flex-direction: column; gap: 20px; }
+      .intro-num { font-size: 3.5rem; }
+
+      /* Stations */
+      .stations-section { padding: 0 0 48px; }
+      .stations-grid { grid-template-columns: 1fr; gap: 2px; }
+      .station-card:first-child { grid-column: span 1; }
+      .station-card { min-height: 380px; padding: 28px 1.25rem; }
+      .station-card:first-child .station-name { font-size: 2.2rem; }
+      .station-name { font-size: 1.9rem; }
+      .station-desc { font-size: .82rem; max-width: 100%; }
+
+      /* CTA */
+      .cta-section { padding: 56px 1.25rem; }
+      .cta-actions { flex-direction: column; align-items: stretch; gap: 14px; }
+      .btn-primary, .btn-outline-white { width: 100%; justify-content: center; min-height: 48px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: clamp(1.8rem, 7.5vw, 2.4rem); }
+      .station-card { min-height: 340px; }
+      .station-name { font-size: 1.7rem; }
+      .station-cta { min-height: 44px; display: inline-flex; align-items: center; }
+    }
+
+  /* ═══════════════════════════════════════════════
+     SITE HEADER — standard unified all pages
+  ═══════════════════════════════════════════════ */
+
 
   .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#2C3D30;box-shadow:0 4px 20px rgba(44,61,48,.45);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
   .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(44,61,48,.6)}
   .wa-btn svg{width:26px;height:26px}
-  /* Footer lower */
-  .footer-lower { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; padding: 40px 60px 48px; border-top: 1px solid rgba(255,255,255,.07); }
-  .footer-socials { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
-  .footer-social-link { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(250,254,255,.15); color: rgba(250,254,255,.48); transition: all .2s; }
-  .footer-social-link:hover { border-color: #E8CBA0; color: #E8CBA0; background: rgba(232,203,160,.07); }
-  .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
-  .footer-col-title { font-size: .6rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 18px; }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-  .footer-links a { font-size: .83rem; font-weight: 300; color: rgba(255,255,255,.48); transition: color .2s; text-decoration: none; }
-  .footer-links a:hover { color: #E8CBA0; }
-  .nl-form { display: flex; gap: 8px; margin-top: 4px; }
-  .nl-input { flex: 1; border: 1px solid rgba(250,254,255,.12); border-radius: 4px; background: rgba(250,254,255,.05); color: #fff; padding: .55rem .85rem; font-size: .8rem; font-family: inherit; outline: none; transition: border-color .2s; }
-  .nl-input::placeholder { color: rgba(250,254,255,.25); }
-  .nl-input:focus { border-color: rgba(232,203,160,.45); }
-  .nl-btn { background: #E8CBA0; color: #1a2a1e; border: none; border-radius: 4px; padding: .55rem 1.1rem; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: opacity .2s; font-family: inherit; }
-  .nl-btn:hover { opacity: .85; }
-  .nl-msg { font-size: .73rem; margin-top: .5rem; min-height: 1em; }
-  .nl-msg.ok { color: #86efac; } .nl-msg.err { color: #fca5a5; }
-  @media(max-width:1024px){ .footer-lower{ grid-template-columns:1fr; padding: 32px 24px 40px; } }
+
+    /* ── Standardised footer ─────────────────────────────── */
+    footer { background: #0d1410; padding: clamp(56px,7vw,88px) 0 0; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(250,254,255,.07);
+    }
+    .footer-brand-logo { margin-bottom: 14px; }
+    .footer-brand-claim {
+      font-size: .58rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold,#E8CBA0); margin-bottom: 16px; opacity: .85;
+    }
+    .footer-brand-text {
+      font-size: .81rem; font-weight: 300;
+      color: rgba(250,254,255,.32); line-height: 1.8; max-width: 270px;
+    }
+    .footer-col-title {
+      font-size: .58rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 18px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a {
+      font-size: .83rem; font-weight: 300;
+      color: rgba(250,254,255,.48); transition: color .2s; text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--gold,#E8CBA0); }
+    /* Social + Newsletter row */
+    .footer-lower {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      padding: 40px 0 48px;
+      border-bottom: 1px solid rgba(250,254,255,.07);
+    }
+    .footer-socials { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
+    .footer-social-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(250,254,255,.15);
+      color: rgba(250,254,255,.48); transition: all .2s;
+    }
+    .footer-social-link:hover { border-color: var(--gold,#E8CBA0); color: var(--gold,#E8CBA0); background: rgba(232,203,160,.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
+    /* Newsletter inline */
+    .nl-form { display: flex; gap: 8px; margin-top: 4px; }
+    .nl-input {
+      flex: 1; border: 1px solid rgba(250,254,255,.12); border-radius: 4px;
+      background: rgba(250,254,255,.05); color: #fff;
+      padding: .55rem .85rem; font-size: .8rem; font-family: inherit; outline: none;
+      transition: border-color .2s;
+    }
+    .nl-input::placeholder { color: rgba(250,254,255,.25); }
+    .nl-input:focus { border-color: rgba(232,203,160,.45); }
+    .nl-btn {
+      background: var(--gold,#E8CBA0); color: #1a2a1e; border: none; border-radius: 4px;
+      padding: .55rem 1.1rem; font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+      white-space: nowrap; transition: opacity .2s; font-family: inherit;
+    }
+    .nl-btn:hover { opacity: .85; }
+    .nl-msg { font-size: .73rem; margin-top: .5rem; min-height: 1em; }
+    .nl-msg.ok { color: #86efac; } .nl-msg.err { color: #fca5a5; }
+    /* Bottom bar */
+    .footer-bottom {
+      padding: 24px 0; display: flex;
+      justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
+    @media(max-width:1024px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } .footer-lower{ grid-template-columns:1fr; } }
+    @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; } .footer-bottom{ flex-direction:column; text-align:center; } }
+
+
   </style>
 </head>
 <body>
@@ -288,7 +499,7 @@
     </a>
     <nav class="site-nav">
       <a href="/en/accueil" class="site-nav-link">Home</a>
-      <a href="/en/destinations" class="site-nav-link active">Destinations</a>
+      <a href="/en/destinations" class="site-nav-link  active">Destinations</a>
       <a href="/en/reserver" class="site-nav-link">Book</a>
       <a href="/en/proprietaires" class="site-nav-link">Owners</a>
       <a href="/en/estimateur" class="site-nav-link">Estimator</a>
@@ -298,6 +509,7 @@
       <div class="hdr-phone-wrap">
         <button class="hdr-phone-btn" onclick="this.closest('.hdr-phone-wrap').classList.toggle('open')">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+
         </button>
         <div class="hdr-phone-dropdown">
           <a href="tel:+33970703991" class="hdr-phone-item">
@@ -310,6 +522,7 @@
           </a>
         </div>
       </div>
+
       <div class="site-lang">
         <a href="/destinations">FR</a>
         <span>|</span>
@@ -322,7 +535,7 @@
   </div>
   <div class="site-mobile-menu" id="site-mobile-menu">
     <a href="/en/accueil" class="site-mobile-link">Home</a>
-    <a href="/en/destinations" class="site-mobile-link active">Destinations</a>
+    <a href="/en/destinations" class="site-mobile-link  active">Destinations</a>
     <a href="/en/reserver" class="site-mobile-link">Book</a>
     <a href="/en/proprietaires" class="site-mobile-link">Owners</a>
     <a href="/en/estimateur" class="site-mobile-link">Estimator</a>
@@ -332,292 +545,295 @@
     </div>
   </div>
 </header>
-<script>
-function toggleMobileMenu(){
-  const menu = document.getElementById('site-mobile-menu');
-  const burger = document.getElementById('site-burger');
-  menu.classList.toggle('open');
-  burger.classList.toggle('open');
-  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
-}
-</script>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <p class="hero-kicker">ALPÉON Resorts</p>
-    <h1>6 exceptional<br>alpine destinations</h1>
-    <p class="hero-desc">From the most exclusive resorts to the most snow-sure domains — ALPÉON manages your property where rental demand is highest in the French Alps.</p>
-  </div>
-</section>
-
-<!-- INTRO -->
-<div class="intro">
-  <div class="intro-left">
-    <div class="intro-num">6</div>
-    <div class="intro-label">Resorts</div>
-  </div>
-  <div class="intro-right">
-    <div class="sec-kicker">Our presence</div>
-    <h2 class="sec-title">A curated network<br>in the heart of the <em>finest resorts</em></h2>
-    <p class="sec-desc">Courchevel, Megève, Méribel, Tignes, Val d'Isère, Val Thorens. Each resort was chosen for the robustness of its rental demand, the quality of its ski domain and the profile of its international clientele. ALPÉON operates with deep knowledge of the local market.</p>
-  </div>
-</div>
-
-<!-- STATIONS GRID -->
-<div class="stations-section">
-  <div class="stations-grid">
-
-    <!-- COURCHEVEL -->
-    <a class="station-card sc-courchevel" href="/en/estimateur?station=courchevel">
-      <div class="station-content">
-        <span class="station-massif">Les 3 Vallées</span>
-        <div class="station-name">Courchevel</div>
-        <div class="station-altitude">1 300 — 1 850 m altitude</div>
-        <p class="station-desc">The world reference for luxury skiing. Courchevel 1850 boasts the highest density of exceptional chalets and high-net-worth clients in the Alps. A rental yield at the summit.</p>
-        <div class="station-tags">
-          <span class="station-tag">Prestige</span>
-          <span class="station-tag">3 Valleys</span>
-          <span class="station-tag">600 km of runs</span>
-          <span class="station-tag">International clientele</span>
-        </div>
-        <div class="station-quartiers">
-          <div class="sq-label">Neighbourhoods</div>
-          <div class="sq-list">
-            <span class="sq-item">1850</span>
-            <span class="sq-item">1650 · Moriond</span>
-            <span class="sq-item">1550</span>
-            <span class="sq-item">Le Praz · 1300</span>
-            <span class="sq-item">Saint-Bon</span>
-          </div>
-        </div>
-        <span class="station-cta">Estimate my property
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- MEGÈVE -->
-    <a class="station-card sc-megeve" href="/en/estimateur?station=megeve">
-      <div class="station-content">
-        <span class="station-massif">Mont-Blanc</span>
-        <div class="station-name">Megève</div>
-        <div class="station-altitude">1 113 m — historic village</div>
-        <p class="station-desc">French elegance at its finest. A pedestrian village at the foot of Mont-Blanc, Megève attracts a refined, gastronomic and loyal clientele throughout the winter season.</p>
-        <div class="station-tags">
-          <span class="station-tag">Charming village</span>
-          <span class="station-tag">Mont-Blanc</span>
-          <span class="station-tag">Art de vivre</span>
-        </div>
-        <div class="station-quartiers">
-          <div class="sq-label">Neighbourhoods</div>
-          <div class="sq-list">
-            <span class="sq-item">Centre</span>
-            <span class="sq-item">Mont d'Arbois</span>
-            <span class="sq-item">Rochebrune</span>
-            <span class="sq-item">Combloux</span>
-            <span class="sq-item">Jaillet</span>
-          </div>
-        </div>
-        <span class="station-cta">Estimate my property
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- MÉRIBEL -->
-    <a class="station-card sc-meribel" href="/en/estimateur?station=meribel">
-      <div class="station-content">
-        <span class="station-massif">Les 3 Vallées</span>
-        <div class="station-name">Méribel</div>
-        <div class="station-altitude">1 400 — 1 700 m altitude</div>
-        <p class="station-desc">At the geographical and strategic heart of the 3 Valleys, Méribel combines authentic Savoyard architecture with direct access to 600 km of runs. Highly popular with British and French families.</p>
-        <div class="station-tags">
-          <span class="station-tag">Heart of 3 Valleys</span>
-          <span class="station-tag">Family-friendly</span>
-          <span class="station-tag">Savoyard architecture</span>
-        </div>
-        <div class="station-quartiers">
-          <div class="sq-label">Neighbourhoods</div>
-          <div class="sq-list">
-            <span class="sq-item">Centre</span>
-            <span class="sq-item">Les Allues</span>
-            <span class="sq-item">Méribel-Mottaret</span>
-            <span class="sq-item">Brides-les-Bains</span>
-            <span class="sq-item">Raffort</span>
-          </div>
-        </div>
-        <span class="station-cta">Estimate my property
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- TIGNES -->
-    <a class="station-card sc-tignes" href="/en/estimateur?station=tignes">
-      <div class="station-content">
-        <span class="station-massif">Espace Killy</span>
-        <div class="station-name">Tignes</div>
-        <div class="station-altitude">1 550 — 3 456 m — Glacier</div>
-        <p class="station-desc">The resort with the longest season in France. Thanks to its glacier, Tignes guarantees snow from October to May and attracts a passionate, highly loyal skiing clientele year after year.</p>
-        <div class="station-tags">
-          <span class="station-tag">Extended season</span>
-          <span class="station-tag">Glacier</span>
-          <span class="station-tag">Espace Killy</span>
-        </div>
-        <div class="station-quartiers">
-          <div class="sq-label">Neighbourhoods</div>
-          <div class="sq-list">
-            <span class="sq-item">Val Claret</span>
-            <span class="sq-item">Le Lac</span>
-            <span class="sq-item">Les Brévières</span>
-            <span class="sq-item">Les Boisses</span>
-            <span class="sq-item">Le Lavachet</span>
-          </div>
-        </div>
-        <span class="station-cta">Estimate my property
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- VAL D'ISÈRE -->
-    <a class="station-card sc-valdisere" href="/en/estimateur?station=valdisere">
-      <div class="station-content">
-        <span class="station-massif">Espace Killy</span>
-        <div class="station-name">Val d'Isère</div>
-        <div class="station-altitude">1 850 — 3 456 m altitude</div>
-        <p class="station-desc">One of the world's greatest resorts, on a single slope. Val d'Isère draws the best skiers in the world and a wealthy clientele that returns every season. Among the highest rental yields in the Alps.</p>
-        <div class="station-tags">
-          <span class="station-tag">World-class domain</span>
-          <span class="station-tag">Espace Killy</span>
-          <span class="station-tag">High altitude</span>
-        </div>
-        <div class="station-quartiers">
-          <div class="sq-label">Neighbourhoods</div>
-          <div class="sq-list">
-            <span class="sq-item">Centre-val</span>
-            <span class="sq-item">La Daille</span>
-            <span class="sq-item">Le Fornet</span>
-            <span class="sq-item">Le Laisinant</span>
-            <span class="sq-item">La Légettaz</span>
-          </div>
-        </div>
-        <span class="station-cta">Estimate my property
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <!-- VAL THORENS -->
-    <a class="station-card sc-valthorens" href="/en/estimateur?station=valthorens">
-      <div class="station-content">
-        <span class="station-massif">Les 3 Vallées</span>
-        <div class="station-name">Val Thorens</div>
-        <div class="station-altitude">2 300 m — Highest resort in Europe</div>
-        <p class="station-desc">Europe's highest resort guarantees impeccable snow from the start to the end of season. Val Thorens offers the highest occupancy rate in the ALPÉON portfolio and ski-in/ski-out access from every residence.</p>
-        <div class="station-tags">
-          <span class="station-tag">Guaranteed snow</span>
-          <span class="station-tag">3 Valleys</span>
-          <span class="station-tag">Ski-in/ski-out</span>
-        </div>
-        <div class="station-quartiers">
-          <div class="sq-label">Neighbourhoods</div>
-          <div class="sq-list">
-            <span class="sq-item">Centre</span>
-            <span class="sq-item">Les Balcons</span>
-            <span class="sq-item">Soleil</span>
-            <span class="sq-item">Slalom</span>
-          </div>
-        </div>
-        <span class="station-cta">Estimate my property
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </span>
-      </div>
-    </a>
-
-  </div>
-</div>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="sec-kicker" style="justify-content:center;"><span>Your property</span></div>
-  <h2 class="cta-title">Estimate the rental potential<br>of your <em>alpine property</em></h2>
-  <p class="cta-desc">Our simulator calculates in 2 minutes a revenue projection based on real data from our portfolio — surface area, resort, quality level and capacity.</p>
-  <div class="cta-actions">
-    <a href="/en/estimateur" class="btn-primary">Launch the estimator</a>
-    <a href="/en/proprietaires" class="btn-outline-white">Discover our services</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer id="contact">
-  <div class="footer-grid">
-    <div>
-      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="120" style="height:120px;width:auto;display:block;margin-bottom:4px">
-      <div class="f-brand-claim">Alpine Property Management</div>
-      <p class="f-brand-desc">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency for every owner.</p>
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-kicker">ALPÉON Resorts</p>
+      <h1>6 exceptional<br>alpine destinations</h1>
+      <p class="hero-desc">From the most exclusive resorts to the most snow-sure domains — ALPÉON manages your property where rental demand is highest in the French Alps.</p>
     </div>
-    <div>
-      <div class="f-col-label">Destinations</div>
-      <ul class="f-links">
-        <li><a href="/en/destinations">Courchevel</a></li>
-        <li><a href="/en/destinations">Megève</a></li>
-        <li><a href="/en/destinations">Val d'Isère</a></li>
-        <li><a href="/en/destinations">Val Thorens</a></li>
-        <li><a href="/en/destinations">Méribel</a></li>
-        <li><a href="/en/destinations">Tignes</a></li>
-      </ul>
+  </section>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <div class="intro-left">
+      <div class="intro-num">6</div>
+      <div class="intro-label">Resorts</div>
     </div>
-    <div>
-      <div class="f-col-label">Services</div>
-      <ul class="f-links">
-        <li><a href="/en/proprietaires">Owners</a></li>
-        <li><a href="/en/proprietaires">ALPÉON Signatures</a></li>
-        <li><a href="/en/estimateur">Revenue estimator</a></li>
-        <li><a href="/en/about">About</a></li>
-        <li><a href="/en/faq">FAQ</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Contact</div>
-      <ul class="footer-links">
-        <li><a href="tel:+33970703991">Call us</a></li>
-        <li><a href="/en/contact">Send us an email</a></li>
-        <li><a href="https://wa.me/33765254926">WhatsApp</a></li>
-      </ul>
+    <div class="intro-right">
+      <div class="sec-kicker">Our presence</div>
+      <h2 class="sec-title">A curated network<br>in the heart of the <em>finest resorts</em></h2>
+      <p class="sec-desc">Courchevel, Megève, Méribel, Tignes, Val d'Isère, Val Thorens. Each resort was chosen for the robustness of its rental demand, the quality of its ski domain and the profile of its international clientele. ALPÉON operates with deep knowledge of the local market.</p>
     </div>
   </div>
 
-  <div class="footer-lower">
-    <div>
-      <div class="footer-col-title">Social media</div>
-      <div class="footer-socials">
-        <a href="https://www.instagram.com/alpeon_residences?igsh=MWkyNmN2czIweml4Ng==" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/company/jupiter-residences1/?viewAsMember=true" target="_blank" rel="noopener" class="footer-social-link" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <a href="https://wa.me/33765254926" class="footer-social-link footer-social-wa" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Newsletter</div>
-      <p style="font-size:.78rem;color:rgba(250,254,255,.35);line-height:1.6;margin-bottom:.75rem">New properties, seasonal offers and alpine news.</p>
-      <form class="nl-form" onsubmit="submitNewsletter(event)">
-        <input class="nl-input" type="email" id="nl-email" placeholder="your@email.com" required>
-        <button class="nl-btn" type="submit">Subscribe</button>
-      </form>
-      <p class="nl-msg" id="nl-msg"></p>
+  <!-- STATIONS GRID -->
+  <div class="stations-section">
+    <div class="stations-grid">
+
+      <!-- COURCHEVEL -->
+      <a class="station-card sc-courchevel" href="/en/estimateur?station=courchevel">
+        <div class="station-content">
+          <span class="station-massif">Les 3 Vallées</span>
+          <div class="station-name">Courchevel</div>
+          <div class="station-altitude">1 300 — 1 850 m altitude</div>
+          <p class="station-desc">The world reference for luxury skiing. Courchevel 1850 boasts the highest density of exceptional chalets and high-net-worth clients in the Alps. A rental yield at the summit.</p>
+          <div class="station-tags">
+            <span class="station-tag">Prestige</span>
+            <span class="station-tag">3 Valleys</span>
+            <span class="station-tag">600 km of runs</span>
+            <span class="station-tag">International clientele</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Neighbourhoods</div>
+            <div class="sq-list">
+              <span class="sq-item">1850</span>
+              <span class="sq-item">1650 · Moriond</span>
+              <span class="sq-item">1550</span>
+              <span class="sq-item">Le Praz · 1300</span>
+              <span class="sq-item">Saint-Bon</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimate my property
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- MEGÈVE -->
+      <a class="station-card sc-megeve" href="/en/estimateur?station=megeve">
+        <div class="station-content">
+          <span class="station-massif">Mont-Blanc</span>
+          <div class="station-name">Megève</div>
+          <div class="station-altitude">1 113 m — historic village</div>
+          <p class="station-desc">French elegance at its finest. A pedestrian village at the foot of Mont-Blanc, Megève attracts a refined, gastronomic and loyal clientele throughout the winter season.</p>
+          <div class="station-tags">
+            <span class="station-tag">Charming village</span>
+            <span class="station-tag">Mont-Blanc</span>
+            <span class="station-tag">Art de vivre</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Neighbourhoods</div>
+            <div class="sq-list">
+              <span class="sq-item">Centre</span>
+              <span class="sq-item">Mont d'Arbois</span>
+              <span class="sq-item">Rochebrune</span>
+              <span class="sq-item">Combloux</span>
+              <span class="sq-item">Jaillet</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimate my property
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- MÉRIBEL -->
+      <a class="station-card sc-meribel" href="/en/estimateur?station=meribel">
+        <div class="station-content">
+          <span class="station-massif">Les 3 Vallées</span>
+          <div class="station-name">Méribel</div>
+          <div class="station-altitude">1 400 — 1 700 m altitude</div>
+          <p class="station-desc">At the geographical and strategic heart of the 3 Valleys, Méribel combines authentic Savoyard architecture with direct access to 600 km of runs. Highly popular with British and French families.</p>
+          <div class="station-tags">
+            <span class="station-tag">Heart of 3 Valleys</span>
+            <span class="station-tag">Family-friendly</span>
+            <span class="station-tag">Savoyard architecture</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Neighbourhoods</div>
+            <div class="sq-list">
+              <span class="sq-item">Centre</span>
+              <span class="sq-item">Les Allues</span>
+              <span class="sq-item">Méribel-Mottaret</span>
+              <span class="sq-item">Brides-les-Bains</span>
+              <span class="sq-item">Raffort</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimate my property
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- TIGNES -->
+      <a class="station-card sc-tignes" href="/en/estimateur?station=tignes">
+        <div class="station-content">
+          <span class="station-massif">Espace Killy</span>
+          <div class="station-name">Tignes</div>
+          <div class="station-altitude">1 550 — 3 456 m — Glacier</div>
+          <p class="station-desc">The resort with the longest season in France. Thanks to its glacier, Tignes guarantees snow from October to May and attracts a passionate, highly loyal skiing clientele year after year.</p>
+          <div class="station-tags">
+            <span class="station-tag">Extended season</span>
+            <span class="station-tag">Glacier</span>
+            <span class="station-tag">Espace Killy</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Neighbourhoods</div>
+            <div class="sq-list">
+              <span class="sq-item">Val Claret</span>
+              <span class="sq-item">Le Lac</span>
+              <span class="sq-item">Les Brévières</span>
+              <span class="sq-item">Les Boisses</span>
+              <span class="sq-item">Le Lavachet</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimate my property
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- VAL D'ISÈRE -->
+      <a class="station-card sc-valdisere" href="/en/estimateur?station=valdisere">
+        <div class="station-content">
+          <span class="station-massif">Espace Killy</span>
+          <div class="station-name">Val d'Isère</div>
+          <div class="station-altitude">1 850 — 3 456 m altitude</div>
+          <p class="station-desc">One of the world's greatest resorts, on a single slope. Val d'Isère draws the best skiers in the world and a wealthy clientele that returns every season. Among the highest rental yields in the Alps.</p>
+          <div class="station-tags">
+            <span class="station-tag">World-class domain</span>
+            <span class="station-tag">Espace Killy</span>
+            <span class="station-tag">High altitude</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Neighbourhoods</div>
+            <div class="sq-list">
+              <span class="sq-item">Centre-val</span>
+              <span class="sq-item">La Daille</span>
+              <span class="sq-item">Le Fornet</span>
+              <span class="sq-item">Le Laisinant</span>
+              <span class="sq-item">La Légettaz</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimate my property
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- VAL THORENS -->
+      <a class="station-card sc-valthorens" href="/en/estimateur?station=valthorens">
+        <div class="station-content">
+          <span class="station-massif">Les 3 Vallées</span>
+          <div class="station-name">Val Thorens</div>
+          <div class="station-altitude">2 300 m — Highest resort in Europe</div>
+          <p class="station-desc">Europe's highest resort guarantees impeccable snow from the start to the end of season. Val Thorens offers the highest occupancy rate in the ALPÉON portfolio and ski-in/ski-out access from every residence.</p>
+          <div class="station-tags">
+            <span class="station-tag">Guaranteed snow</span>
+            <span class="station-tag">3 Valleys</span>
+            <span class="station-tag">Ski-in/ski-out</span>
+          </div>
+          <div class="station-quartiers">
+            <div class="sq-label">Neighbourhoods</div>
+            <div class="sq-list">
+              <span class="sq-item">Centre</span>
+              <span class="sq-item">Les Balcons</span>
+              <span class="sq-item">Soleil</span>
+              <span class="sq-item">Slalom</span>
+            </div>
+          </div>
+          <span class="station-cta">Estimate my property
+            <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
     </div>
   </div>
 
-  <div class="footer-bottom">
-    <span>© 2026 ALPÉON. All rights reserved.</span>
-    <span>Premium alpine property management · French Alps</span>
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="sec-kicker" style="justify-content:center;"><span>Your property</span></div>
+    <h2 class="cta-title">Estimate the rental potential<br>of your <em>alpine property</em></h2>
+    <p class="cta-desc">Our simulator calculates in 2 minutes a revenue projection based on real data from our portfolio — surface area, resort, quality level and capacity.</p>
+    <div class="cta-actions">
+      <a href="/en/estimateur" class="btn-primary">Launch the estimator</a>
+      <a href="/en/proprietaires" class="btn-outline-white">Discover our services</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="110" style="height:110px;width:auto;display:block">
+        </div>
+        <div class="footer-brand-claim">Alpine Property Management</div>
+        <p class="footer-brand-text">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency for every owner.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Destinations</div>
+        <ul class="footer-links">
+          <li><a href="/en/destinations">Courchevel</a></li>
+          <li><a href="/en/destinations">Megève</a></li>
+          <li><a href="/en/destinations">Val d'Isère</a></li>
+          <li><a href="/en/destinations">Val Thorens</a></li>
+          <li><a href="/en/destinations">Méribel</a></li>
+          <li><a href="/en/destinations">Tignes</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="/en/proprietaires">Owners</a></li>
+          <li><a href="/en/proprietaires">ALPÉON Signatures</a></li>
+          <li><a href="/en/estimateur">Revenue estimator</a></li>
+          <li><a href="/en/about">About</a></li>
+          <li><a href="/en/faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+33970703991">Call us</a></li>
+          <li><a href="/en/contact">Send us an email</a></li>
+          <li><a href="https://wa.me/33765254926">WhatsApp</a></li>
+        </ul>
+        <div style="margin-top:20px">
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="/en/mentions-legales">Legal notice</a></li>
+            <li><a href="/en/politique-confidentialite">Privacy policy</a></li>
+            <li><a href="/en/cgv">Terms and conditions</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-lower">
+      <div>
+        <div class="footer-col-title">Social media</div>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/alpeon_residences?igsh=MWkyNmN2czIweml4Ng==" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/jupiter-residences1/?viewAsMember=true" target="_blank" rel="noopener" class="footer-social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://wa.me/33765254926" class="footer-social-link footer-social-wa" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Newsletter</div>
+        <p style="font-size:.78rem;color:rgba(250,254,255,.35);line-height:1.6;margin-bottom:.75rem">New properties, seasonal offers and alpine news.</p>
+        <form class="nl-form" onsubmit="submitNewsletter(event)">
+          <input class="nl-input" type="email" id="nl-email" placeholder="your@email.com" required>
+          <button class="nl-btn" type="submit">Subscribe</button>
+        </form>
+        <p class="nl-msg" id="nl-msg"></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 ALPÉON. All rights reserved.</span>
+      <span>Premium alpine property management · French Alps</span>
+    </div>
   </div>
 </footer>
 
@@ -631,6 +847,13 @@ function toggleMobileMenu(){
 })();
 </script>
 <script>
+function toggleMobileMenu(){
+  const menu = document.getElementById('site-mobile-menu');
+  const burger = document.getElementById('site-burger');
+  menu.classList.toggle('open');
+  burger.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
 document.addEventListener('click', function(e) {
   document.querySelectorAll('.hdr-phone-wrap.open').forEach(function(wrap) {
     if (!wrap.contains(e.target)) wrap.classList.remove('open');
