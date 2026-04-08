@@ -220,7 +220,7 @@ function normalizeListing(l) {
     : 'appartement';
 
   const tags = [];
-  if ((l.tags || []).includes('Luxe')) tags.push('Prestige');
+  if ((l.tags || []).includes('Luxe')) tags.push('Signatures');
   if ((l.accommodates || 0) >= 10) tags.push('Grand groupe');
 
   // Guesty reviews avg is 0–10, convert to 0–5

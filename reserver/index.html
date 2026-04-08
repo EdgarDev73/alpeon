@@ -375,11 +375,19 @@
       background: rgba(0,0,0,.5); color: rgba(255,255,255,.8);
       padding: .3rem .6rem; backdrop-filter: blur(8px);
     }
-    .badge-prestige {
+    .badge-signatures {
       position: absolute; top: .9rem; right: .9rem; z-index: 2;
-      font-size: .58rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-      background: var(--gold); color: var(--green-d);
-      padding: .28rem .65rem;
+      font-size: .58rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+      background: rgba(18,30,20,.88); color: #C9A97A;
+      padding: .3rem .7rem;
+      border: 1px solid rgba(201,169,122,.5);
+      backdrop-filter: blur(8px);
+    }
+    .badge-residences {
+      position: absolute; top: .9rem; left: .9rem; z-index: 2;
+      font-size: .55rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      background: rgba(255,255,255,.9); color: #2C3D30;
+      padding: .25rem .6rem;
     }
     .prop-body { padding: 1.4rem 1.5rem 1.1rem; flex: 1; display: flex; flex-direction: column }
     .prop-type {
@@ -857,6 +865,18 @@ function toggleMobileMenu(){
         <div class="flt-option" data-val="penthouse">Penthouse</div>
       </div>
     </div>
+    <div class="filter-group" id="flt-gamme">
+      <span class="filter-label">Gamme</span>
+      <div class="flt-trigger">
+        <span id="flt-gamme-val">Toutes</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+      </div>
+      <div class="flt-panel">
+        <div class="flt-option selected" data-val="all">Toutes</div>
+        <div class="flt-option" data-val="residences">Résidences</div>
+        <div class="flt-option" data-val="signatures">Signatures</div>
+      </div>
+    </div>
     <div class="filter-group" id="flt-guests">
       <span class="filter-label">Voyageurs</span>
       <div class="flt-trigger">
@@ -1090,7 +1110,10 @@ let all = [], filtered = [];
 
   function card(p){
     const typeLabel = p.propertyType==='chalet'?'Chalet':p.propertyType==='penthouse'?'Penthouse':'Appartement';
-    const prestige = (p.tags||[]).includes('Prestige') ? `<span class="badge-prestige">Prestige</span>` : '';
+    const isSignatures = (p.tags||[]).includes('Signatures');
+    const gammeBadge = isSignatures
+      ? `<span class="badge-signatures">Signatures</span>`
+      : `<span class="badge-residences">Résidences</span>`;
     const priceStr = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' €' : 'Sur devis';
     const ratingBlock = p.rating>0 ? `<div class="prop-rating"><div class="prop-stars">${stars(p.rating)}</div>${p.reviewsCount>0?`<div class="prop-reviews">${p.reviewsCount} avis</div>`:''}</div>` : '';
     const iGuests=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
@@ -1106,7 +1129,7 @@ let all = [], filtered = [];
         <img src="${p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70'}" alt="${p.title}" loading="lazy">
         <div class="prop-photo-overlay"></div>
         <div class="prop-station"><span class="badge-city">${p.city}</span>${p.area?`<span class="badge-area">${p.area}</span>`:''}</div>
-        ${prestige}
+        ${gammeBadge}
         <button class="prop-fav" data-fav-id="${p.id}" onclick="event.preventDefault();toggleFav('${p.id}',this)" aria-label="Sauvegarder">
           <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </button>
@@ -1198,10 +1221,10 @@ async function load(){
   }
 
 /* ── Custom dropdown state ── */
-const fltState = { station:'all', type:'all', guests:'all' };
+const fltState = { station:'all', type:'all', guests:'all', gamme:'all' };
 
 function initDropdowns(){
-  ['station','type','guests'].forEach(key => {
+  ['station','type','guests','gamme'].forEach(key => {
     const grp = document.getElementById('flt-'+key);
     if(!grp) return;
     // Toggle open on click
@@ -1237,9 +1260,10 @@ function applyFilters(){
   const station = fltState.station;
   const type    = fltState.type;
   const guests  = fltState.guests;
+  const gamme   = fltState.gamme;
   const priceMin=parseInt(document.getElementById('f-price-min')?.value||0);
   const priceMax=parseInt(document.getElementById('f-price-max')?.value||10000);
-  const active  = station!=='all' || type!=='all' || guests!=='all' || priceMin>0 || priceMax<10000;
+  const active  = station!=='all' || type!=='all' || guests!=='all' || gamme!=='all' || priceMin>0 || priceMax<10000;
   document.getElementById('btn-reset').style.display = active ? 'inline-block' : 'none';
   filtered = all.filter(p=>{
     if(station !== 'all' && norm(p.city) !== station) return false;
@@ -1249,6 +1273,8 @@ function applyFilters(){
       if(guests === '8+'){ if(p.guests < 8) return false }
       else { if(p.guests < n) return false }
     }
+    if(gamme === 'signatures' && !(p.tags||[]).includes('Signatures')) return false;
+    if(gamme === 'residences' && (p.tags||[]).includes('Signatures')) return false;
     if(p.priceFrom && priceMax<10000 && p.priceFrom>priceMax) return false;
     if(p.priceFrom && p.priceFrom<priceMin) return false;
     return true;
@@ -1258,7 +1284,7 @@ function applyFilters(){
 }
 
 function resetFilters(){
-  ['station','type','guests'].forEach(key => {
+  ['station','type','guests','gamme'].forEach(key => {
     fltState[key] = 'all';
     const grp = document.getElementById('flt-'+key);
     if(!grp) return;
