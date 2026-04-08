@@ -12,24 +12,35 @@ const OAUTH_URL  = 'https://booking.guesty.com/oauth2/token';
 const BASE       = 'https://booking.guesty.com/api';
 const ORIGIN     = 'https://jupiter-residences.guestybookings.com';
 const G_AID_CS   = 'G-89C7E-9FB65-B6F69';
-const TOKEN_FILE = path.join(__dirname, '.token_cache.json');
+// /tmp is writable on Vercel Lambdas; __dirname is read-only in prod
+const TOKEN_FILE = '/tmp/.guesty_token.json';
 
-/* ── Token cache (in-memory + file, survives restarts in dev) ── */
-let _cachedToken = null;
+/* ── Token cache (in-memory + file, survives warm Vercel instances) ── */
+let _cachedToken  = null;
 let _tokenExpiry  = 0;
 
 function _loadTokenCache() {
   if (_cachedToken) return;
-  try {
-    const raw = fs.readFileSync(TOKEN_FILE, 'utf8');
-    const { token, expiry } = JSON.parse(raw);
-    if (token && expiry > Date.now()) { _cachedToken = token; _tokenExpiry = expiry; }
-  } catch { /* no cache file yet */ }
+  // Try /tmp first (prod), then __dirname (local dev)
+  const files = [TOKEN_FILE, path.join(__dirname, '.token_cache.json')];
+  for (const f of files) {
+    try {
+      const raw = fs.readFileSync(f, 'utf8');
+      const { token, expiry } = JSON.parse(raw);
+      // Accept slightly stale tokens (up to 30 min past expiry) as emergency fallback
+      if (token && expiry > Date.now() - 30 * 60_000) {
+        _cachedToken = token; _tokenExpiry = expiry; return;
+      }
+    } catch { /* file missing or corrupt */ }
+  }
 }
 
 function _saveTokenCache() {
-  try { fs.writeFileSync(TOKEN_FILE, JSON.stringify({ token: _cachedToken, expiry: _tokenExpiry })); }
-  catch { /* ignore write errors (e.g. read-only lambda) */ }
+  const data = JSON.stringify({ token: _cachedToken, expiry: _tokenExpiry });
+  // Write to /tmp (Vercel) — fall back to __dirname (local dev)
+  for (const f of [TOKEN_FILE, path.join(__dirname, '.token_cache.json')]) {
+    try { fs.writeFileSync(f, data); return; } catch { /* try next */ }
+  }
 }
 
 function _jwtExpiry(token) {
@@ -46,7 +57,7 @@ async function getToken() {
     return staticToken;
   }
 
-  // 2) In-memory / file cache
+  // 2) In-memory / file cache (5 min safety margin, or stale fallback)
   _loadTokenCache();
   if (_cachedToken && Date.now() < _tokenExpiry - 300_000) return _cachedToken;
 
@@ -54,10 +65,10 @@ async function getToken() {
   const secret = process.env.GUESTY_CLIENT_SECRET || '7LG2doVNI25O-1ekKfwkNwW-grUWy5kSZobsL1h_a2yBqvz4j-hgj_mP_9TiMyKk';
   if (!id || !secret) throw new Error('Missing GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET');
 
-  // 3) OAuth with retry + backoff (handles 429 on Vercel cold-start bursts)
+  // 3) OAuth with retry + short backoff (max 3 attempts to stay under Vercel 10s timeout)
   let lastErr;
-  for (let attempt = 0; attempt < 5; attempt++) {
-    if (attempt > 0) await new Promise(r => setTimeout(r, 1000 * Math.pow(2, attempt - 1)));
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt > 0) await new Promise(r => setTimeout(r, 500 * attempt));
     const oauthCtrl = new AbortController();
     const oauthTimer = setTimeout(() => oauthCtrl.abort(), 5000);
     let res;
@@ -79,6 +90,13 @@ async function getToken() {
     _saveTokenCache();
     return _cachedToken;
   }
+
+  // 4) If OAuth failed due to 429 but we have a stale cached token, use it as emergency fallback
+  if (lastErr && _cachedToken) {
+    console.warn('[guesty] OAuth rate-limited, using stale token as fallback');
+    return _cachedToken;
+  }
+
   throw lastErr;
 }
 
