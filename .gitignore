@@ -2,7 +2,7 @@ assets/presentation-alpeon.mp4
 .DS_Store
 .env.local
 .env
-# api/_lib/.token_cache.json  # committed intentionally as bootstrap token
+api/_lib/.token_cache.json
 node_modules/
 .claude/
 .vercel

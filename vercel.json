@@ -15,7 +15,7 @@
   ],
   "crons": [
     {
-      "path": "/api/refresh-token?secret=alpeon-refresh-2026",
+      "path": "/api/refresh-token",
       "schedule": "0 */20 * * *"
     }
   ]

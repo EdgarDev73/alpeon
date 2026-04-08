@@ -3,6 +3,11 @@
  * Token: POST https://booking.guesty.com/oauth2/token  (client_credentials)
  * API:   GET  https://booking.guesty.com/api/listings
  * Required headers: g-aid-cs + Origin (booking engine origin)
+ *
+ * Required env vars (set in Vercel dashboard):
+ *   GUESTY_CLIENT_ID
+ *   GUESTY_CLIENT_SECRET
+ *   GUESTY_ACCESS_TOKEN  (optional — bootstrapped by cron /api/refresh-token)
  */
 
 const fs        = require('fs');
@@ -21,7 +26,7 @@ let _tokenExpiry  = 0;
 
 function _loadTokenCache() {
   if (_cachedToken) return;
-  // Try /tmp first (prod), then __dirname (local dev)
+  // Try /tmp first (prod), then __dirname (local dev / bundled bootstrap)
   const files = [TOKEN_FILE, path.join(__dirname, '.token_cache.json')];
   for (const f of files) {
     try {
@@ -61,9 +66,9 @@ async function getToken() {
   _loadTokenCache();
   if (_cachedToken && Date.now() < _tokenExpiry - 300_000) return _cachedToken;
 
-  const id     = process.env.GUESTY_CLIENT_ID     || '0oatxyy1lnqP1Rlwu5d7';
-  const secret = process.env.GUESTY_CLIENT_SECRET || '7LG2doVNI25O-1ekKfwkNwW-grUWy5kSZobsL1h_a2yBqvz4j-hgj_mP_9TiMyKk';
-  if (!id || !secret) throw new Error('Missing GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET');
+  const id     = process.env.GUESTY_CLIENT_ID;
+  const secret = process.env.GUESTY_CLIENT_SECRET;
+  if (!id || !secret) throw new Error('Missing GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET env vars');
 
   // 3) OAuth with retry + short backoff (max 3 attempts to stay under Vercel 10s timeout)
   let lastErr;

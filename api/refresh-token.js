@@ -15,17 +15,20 @@ const path = require('path');
 const OAUTH_URL  = 'https://booking.guesty.com/oauth2/token';
 const TOKEN_FILE = '/tmp/.guesty_token.json';
 const LOCAL_FILE = path.join(__dirname, '_lib/.token_cache.json');
-const SECRET     = process.env.REFRESH_SECRET || 'alpeon-refresh-2026';
+const SECRET     = process.env.REFRESH_SECRET;
+if (!SECRET) console.warn('[refresh-token] REFRESH_SECRET env var not set');
 
 module.exports = async (req, res) => {
-  // Cron calls use GET with Authorization header or ?secret= param
-  const provided = req.headers['x-refresh-secret'] || req.query.secret;
-  if (provided !== SECRET) {
+  // Allow: Vercel cron (sets x-vercel-cron:1), or manual call with REFRESH_SECRET
+  const isVercelCron = req.headers['x-vercel-cron'] === '1';
+  const provided     = req.headers['x-refresh-secret'] || req.query.secret;
+  if (!isVercelCron && provided !== SECRET) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const id     = process.env.GUESTY_CLIENT_ID     || '0oatxyy1lnqP1Rlwu5d7';
-  const secret = process.env.GUESTY_CLIENT_SECRET || '7LG2doVNI25O-1ekKfwkNwW-grUWy5kSZobsL1h_a2yBqvz4j-hgj_mP_9TiMyKk';
+  const id     = process.env.GUESTY_CLIENT_ID;
+  const secret = process.env.GUESTY_CLIENT_SECRET;
+  if (!id || !secret) return res.status(500).json({ ok: false, error: 'Missing GUESTY credentials env vars' });
 
   try {
     const r = await fetch(OAUTH_URL, {
