@@ -584,7 +584,7 @@
     .marques-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .marque-card {
       position: relative; overflow: hidden; min-height: 420px;
-      display: flex; align-items: flex-end; text-decoration: none;
+      display: flex; align-items: flex-end; cursor: pointer;
       background-size: cover; background-position: center;
       transition: opacity .3s;
     }
@@ -1373,8 +1373,8 @@ function toggleMobileMenu(){
       <h2>Two ranges, one single <em>standard</em></h2>
     </div>
     <div class="marques-grid">
-      <a href="/en/proprietaires#offres" class="marque-card marque-residences">
-        <a href="/en/propriete?id=6838837b2f08c7001389a5b0" class="marque-prop-link">
+      <div class="marque-card marque-residences" onclick="window.location.href='/en/proprietaires#offres'">
+        <a href="/en/propriete?id=6838837b2f08c7001389a5b0" class="marque-prop-link" onclick="event.stopPropagation()">
           View this property
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -1383,9 +1383,9 @@ function toggleMobileMenu(){
           <p class="marque-desc">Full rental management for ski resort apartments and chalets. Guaranteed rent, zero constraints.</p>
           <span class="marque-link">Discover →</span>
         </div>
-      </a>
-      <a href="/en/proprietaires#offres" class="marque-card marque-signatures">
-        <a href="/en/propriete?id=68e99dd16ceb6500112d36d3" class="marque-prop-link">
+      </div>
+      <div class="marque-card marque-signatures" onclick="window.location.href='/en/proprietaires#offres'">
+        <a href="/en/propriete?id=68e99dd16ceb6500112d36d3" class="marque-prop-link" onclick="event.stopPropagation()">
           View this property
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -1394,7 +1394,7 @@ function toggleMobileMenu(){
           <p class="marque-desc">Bespoke concierge and premium management for exceptional properties. 5-star service.</p>
           <span class="marque-link">Discover →</span>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>

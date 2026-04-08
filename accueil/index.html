@@ -582,7 +582,7 @@
     .marques-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .marque-card {
       position: relative; overflow: hidden; min-height: 420px;
-      display: flex; align-items: flex-end; text-decoration: none;
+      display: flex; align-items: flex-end; cursor: pointer;
       background-size: cover; background-position: center;
       transition: opacity .3s;
     }
@@ -1369,8 +1369,8 @@ function toggleMobileMenu(){
       <h2>Deux gammes, une seule <em>exigence</em></h2>
     </div>
     <div class="marques-grid">
-      <a href="/proprietaires#offres" class="marque-card marque-residences">
-        <a href="/propriete?id=6838837b2f08c7001389a5b0" class="marque-prop-link">
+      <div class="marque-card marque-residences" onclick="window.location.href='/proprietaires#offres'">
+        <a href="/propriete?id=6838837b2f08c7001389a5b0" class="marque-prop-link" onclick="event.stopPropagation()">
           Découvrir cette propriété
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -1379,9 +1379,9 @@ function toggleMobileMenu(){
           <p class="marque-desc">Gestion locative complète pour appartements et chalets de station. Loyer garanti, zéro contrainte.</p>
           <span class="marque-link">Découvrir →</span>
         </div>
-      </a>
-      <a href="/proprietaires#offres" class="marque-card marque-signatures">
-        <a href="/propriete?id=68e99dd16ceb6500112d36d3" class="marque-prop-link">
+      </div>
+      <div class="marque-card marque-signatures" onclick="window.location.href='/proprietaires#offres'">
+        <a href="/propriete?id=68e99dd16ceb6500112d36d3" class="marque-prop-link" onclick="event.stopPropagation()">
           Découvrir cette propriété
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -1390,7 +1390,7 @@ function toggleMobileMenu(){
           <p class="marque-desc">Conciergerie sur-mesure et gestion premium pour les propriétés d'exception. Prestations 5 étoiles.</p>
           <span class="marque-link">Découvrir →</span>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
