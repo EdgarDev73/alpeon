@@ -1069,9 +1069,10 @@ async function load(){
     const empty = document.getElementById('empty-state');
     empty.classList.add('visible');
     empty.innerHTML = `<div class="empty-icon">⚠</div><h3>Unable to load</h3><p>${e.message}</p><button class="empty-btn" onclick="load()">Try again</button>`;
+  }
 }
 
-  function syncPriceSlider(){
+function syncPriceSlider(){
     const mn=parseInt(document.getElementById('f-price-min').value);
     const mx=parseInt(document.getElementById('f-price-max').value);
     const safe_mn=Math.min(mn,mx-500);
