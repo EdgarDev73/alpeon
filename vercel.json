@@ -12,5 +12,11 @@
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type,Authorization" }
       ]
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/refresh-token?secret=alpeon-refresh-2026",
+      "schedule": "0 */20 * * *"
+    }
   ]
 }
