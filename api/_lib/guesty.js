@@ -23,6 +23,8 @@ const TOKEN_FILE = '/tmp/.guesty_token.json';
 /* ── Token cache (in-memory + file, survives warm Vercel instances) ── */
 let _cachedToken  = null;
 let _tokenExpiry  = 0;
+// Circuit-breaker: don't retry OAuth until this timestamp (prevents hammering after 429)
+let _oauthBackoffUntil = 0;
 
 function _loadTokenCache() {
   if (_cachedToken) return;
@@ -70,30 +72,42 @@ async function getToken() {
   const secret = process.env.GUESTY_CLIENT_SECRET;
   if (!id || !secret) throw new Error('Missing GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET env vars');
 
-  // 3) OAuth with retry + short backoff (max 3 attempts to stay under Vercel 10s timeout)
+  // 3) OAuth — skip entirely if circuit-breaker is open (rate-limited recently)
   let lastErr;
-  for (let attempt = 0; attempt < 3; attempt++) {
-    if (attempt > 0) await new Promise(r => setTimeout(r, 500 * attempt));
-    const oauthCtrl = new AbortController();
-    const oauthTimer = setTimeout(() => oauthCtrl.abort(), 5000);
-    let res;
-    try {
-      res = await fetch(OAUTH_URL, {
-        method:  'POST',
-        signal:  oauthCtrl.signal,
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
-      });
-    } finally {
-      clearTimeout(oauthTimer);
+  if (Date.now() < _oauthBackoffUntil) {
+    lastErr = new Error('Guesty OAuth rate-limited (429)');
+    console.warn('[guesty] Circuit-breaker open, skipping OAuth until', new Date(_oauthBackoffUntil).toISOString());
+  } else {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      if (attempt > 0) await new Promise(r => setTimeout(r, 500));
+      const oauthCtrl = new AbortController();
+      const oauthTimer = setTimeout(() => oauthCtrl.abort(), 5000);
+      let res;
+      try {
+        res = await fetch(OAUTH_URL, {
+          method:  'POST',
+          signal:  oauthCtrl.signal,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
+        });
+      } finally {
+        clearTimeout(oauthTimer);
+      }
+      if (res.status === 429) {
+        // Open circuit-breaker for 30 min to stop hammering Guesty
+        _oauthBackoffUntil = Date.now() + 30 * 60_000;
+        lastErr = new Error('Guesty OAuth rate-limited (429)');
+        console.warn('[guesty] OAuth 429 — circuit-breaker open for 30 min');
+        break;
+      }
+      if (!res.ok) throw new Error(`Guesty OAuth failed ${res.status}: ${await res.text()}`);
+      const json   = await res.json();
+      _cachedToken = json.access_token;
+      _tokenExpiry = Date.now() + (json.expires_in || 86400) * 1000;
+      _oauthBackoffUntil = 0; // reset circuit-breaker on success
+      _saveTokenCache();
+      return _cachedToken;
     }
-    if (res.status === 429) { lastErr = new Error('Guesty OAuth rate-limited (429)'); continue; }
-    if (!res.ok) throw new Error(`Guesty OAuth failed ${res.status}: ${await res.text()}`);
-    const json   = await res.json();
-    _cachedToken = json.access_token;
-    _tokenExpiry = Date.now() + (json.expires_in || 86400) * 1000;
-    _saveTokenCache();
-    return _cachedToken;
   }
 
   // 4) If OAuth failed due to 429 but we have a stale cached token, use it as emergency fallback
