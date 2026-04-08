@@ -53,7 +53,7 @@ module.exports = async (req, res) => {
     return res.status(200).json({
       ok: true,
       expires: new Date(expiry).toISOString(),
-      token_preview: token.slice(0, 20) + '...',
+      access_token: token,
     });
   } catch (err) {
     return res.status(500).json({ ok: false, error: err.message });
