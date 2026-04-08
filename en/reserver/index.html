@@ -16,7 +16,7 @@
 /* @@NAV-START@@ */
   :root { --nav-h: 88px; }
   .site-header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 700;
     height: var(--nav-h); background: transparent;
     border-bottom: 1px solid transparent;
     transition: background .35s ease, border-color .35s ease;
@@ -75,7 +75,6 @@
   @media (max-width: 900px) {
     .site-nav, .site-lang { display: none; }
     .site-burger { display: flex; }
-    .site-mobile-menu { display: flex; }
     .site-header-inner { padding: 0 1.25rem; }
     .site-logo img { height: 48px; }
     .site-header-right { margin-left: auto; }
@@ -131,7 +130,7 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
     html { scroll-behavior: smooth }
-    body { font-family: var(--font-sans); background: var(--white); color: var(--ink); -webkit-font-smoothing: antialiased }
+    body { font-family: var(--font-sans); background: var(--white); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 
     /* ── HERO ── */
     .hero {
@@ -190,13 +189,15 @@
 
     /* ── FILTER BAR ── */
     .filter-bar {
-      background: var(--white); position: sticky; top: var(--nav-h); z-index: 600;
-      box-shadow: 0 2px 24px rgba(0,0,0,.06);
-      border-bottom: 1px solid var(--stone);
+      background: #fff; position: sticky; top: var(--nav-h); z-index: 600;
+      border-bottom: 1px solid #e8e4dd;
+      box-shadow: 0 4px 32px rgba(0,0,0,.07);
     }
     .filter-inner {
-      max-width: var(--max); margin: 0 auto; padding: .9rem 3rem;
-      display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+      max-width: var(--max); margin: 0 auto;
+      padding: 0 3rem;
+      display: flex; align-items: stretch; gap: 0;
+      height: 72px;
     }
     .filter-group {
       position: relative;
@@ -214,7 +215,6 @@
       text-transform: uppercase; color: #9a9690; white-space: nowrap;
       pointer-events: none;
     }
-    /* Custom dropdown trigger */
     .flt-trigger {
       display: flex; align-items: center; gap: .5rem;
       font-size: .88rem; font-weight: 500; color: var(--ink);
@@ -226,7 +226,6 @@
     }
     .filter-group.open .flt-trigger svg { transform: rotate(180deg); }
     .filter-group.active .flt-trigger { color: var(--green); }
-    /* Dropdown panel */
     .flt-panel {
       display: none; position: absolute; top: calc(100% + 4px); left: 0;
       background: #fff; border: 1px solid #e8e4dd;
@@ -254,38 +253,50 @@
       display: block; width: 7px; height: 7px;
       background: var(--green); border-radius: 50%; flex-shrink: 0;
     }
-    .filter-actions { margin-left: auto; display: flex; align-items: center; gap: 1rem }
-    .filter-count {
-      font-size: .72rem; font-weight: 600; color: var(--green);
-      background: #EBF0EC; border-radius: 20px; padding: .3rem 1rem;
-      white-space: nowrap;
-    }
-    .filter-reset {
-      font-size: .72rem; color: var(--ink-3); text-decoration: underline;
-      text-underline-offset: 3px; cursor: pointer; border: none;
-      background: none; font-family: var(--font-sans); transition: color .2s;
-    }
-    .filter-reset:hover { color: var(--green) }
 
     /* ── PRICE SLIDER ── */
-    .price-wrap { display:flex; flex-direction:column; gap:.3rem; min-width:160px }
-    .price-track { position:relative; height:3px; background:#ddd; border-radius:2px; margin:.6rem 0 .2rem }
-    .price-fill  { position:absolute; height:100%; background:#2C3D30; border-radius:2px }
+    .price-wrap {
+      display: flex; flex-direction: column; justify-content: center;
+      gap: .2rem; padding: 0 2rem;
+      border-right: 1px solid #ece8e2;
+      min-width: 190px;
+    }
+    .price-label-row {
+      font-size: .58rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: #9a9690;
+    }
+    .price-value-row {
+      font-size: .88rem; font-weight: 500; color: var(--ink);
+      white-space: nowrap;
+    }
+    .price-track { position:relative; height:2px; background:#ddd; border-radius:2px; margin:.45rem 0 .1rem }
+    .price-fill  { position:absolute; height:100%; background: var(--green); border-radius:2px }
     .price-track input[type=range] {
       position:absolute; top:50%; transform:translateY(-50%);
-      width:100%; height:14px; margin:0; opacity:0; cursor:pointer; pointer-events:none;
+      width:100%; height:18px; margin:0; opacity:0; cursor:pointer; pointer-events:all;
     }
-    .price-track input[type=range]:nth-child(2) { pointer-events:all }
-    .price-track input[type=range]:nth-child(3) { pointer-events:all }
     .price-thumb {
       position:absolute; top:50%; transform:translate(-50%,-50%);
-      width:13px; height:13px; background:#fff; border:2px solid #2C3D30;
-      border-radius:50%; pointer-events:none;
+      width:14px; height:14px; background:#fff; border:2px solid var(--green);
+      border-radius:50%; pointer-events:none; box-shadow: 0 1px 4px rgba(0,0,0,.15);
     }
-    .price-labels { display:flex; justify-content:space-between; font-size:.62rem; color:#888 }
-    .price-labels b { color:#2C3D30; font-weight:600 }
 
-    /* ── AMENITY ICONS ON CARD ── */
+    /* ── FILTER ACTIONS ── */
+    .filter-actions { margin-left: auto; display: flex; align-items: center; gap: 1.25rem; padding-left: 2rem; flex-shrink: 0; }
+    .filter-count {
+      font-size: .7rem; font-weight: 600; letter-spacing: .06em;
+      color: var(--green); white-space: nowrap;
+    }
+    .filter-reset {
+      font-size: .68rem; color: #9a9690; text-decoration: none;
+      cursor: pointer; border: none; background: none;
+      font-family: var(--font-sans); transition: color .2s; letter-spacing: .04em;
+      display: flex; align-items: center; gap: .3rem;
+    }
+    .filter-reset:hover { color: var(--green) }
+    .filter-divider { width: 1px; height: 28px; background: #ece8e2; flex-shrink: 0; }
+
+    /* ── AMENITY CHIPS ── */
     .prop-amenity-row { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem }
     .prop-amenity-chip {
       display:flex; align-items:center; gap:.25rem;
@@ -308,10 +319,6 @@
       color: var(--ink); letter-spacing: .01em;
     }
     .grid-title em { font-style: italic; color: var(--green-l) }
-    .grid-sort {
-      font-size: .72rem; color: var(--ink-3); border: none; background: none;
-      font-family: var(--font-sans); cursor: pointer; display: flex; align-items: center; gap: .4rem;
-    }
     .property-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
     }
@@ -371,12 +378,6 @@
     }
     .prop-spec { display: flex; align-items: center; gap: .3rem }
     .prop-divider { width: 1px; height: 10px; background: var(--stone-2) }
-    .prop-amenities { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: auto }
-    .amenity-tag {
-      font-size: .63rem; font-weight: 500; color: var(--green);
-      background: #EBF0EC; padding: .22rem .65rem; white-space: nowrap;
-      letter-spacing: .04em;
-    }
     .prop-foot {
       margin-top: 1.2rem; padding-top: 1.1rem;
       border-top: 1px solid var(--stone);
@@ -442,7 +443,7 @@
     .ra-title { font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: .35rem }
     .ra-desc { font-size: .78rem; color: var(--ink-3); line-height: 1.65; max-width: 200px; margin: 0 auto }
 
-    /* ── CTA PROPRIO ── */
+    /* ── CTA OWNERS ── */
     .cta-proprio {
       background: var(--green-d);
       padding: 6rem 3rem;
@@ -469,96 +470,6 @@
     .cta-btn:hover { background: var(--gold); color: var(--green-d) }
 
     /* ── FOOTER ── */
-    footer { background: var(--ink); padding: clamp(64px, 8vw, 96px) 0 0 }
-    .footer-grid {
-      display: grid; grid-template-columns: 2.2fr 1fr 1fr 1fr;
-      gap: 56px; padding-bottom: 64px;
-      border-bottom: 1px solid rgba(250,254,255,.07);
-    }
-    .footer-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 14px }
-    .footer-brand-claim { font-size: .6rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; opacity: .8 }
-    .footer-brand-text { font-size: .82rem; font-weight: 300; color: rgba(250,254,255,.32); line-height: 1.8; max-width: 280px }
-    .footer-col-title { font-size: .6rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 20px }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px }
-    .footer-links a { font-size: .84rem; font-weight: 300; color: rgba(250,254,255,.48); text-decoration: none; transition: color .2s }
-    .footer-links a:hover { color: var(--gold) }
-    .footer-bottom { padding: 28px 0; display: flex; justify-content: space-between; align-items: center }
-    .footer-bottom span { font-size: .7rem; color: rgba(250,254,255,.2) }
-    @media (max-width: 1100px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px } }
-    @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr } }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1100px) { .property-grid { grid-template-columns: repeat(2,1fr) } .reassurance-inner { grid-template-columns: repeat(2,1fr) } }
-    @media (max-width: 700px) {
-      .hero-content { padding: 0 1.25rem 2.5rem }
-      .filter-inner { padding: .85rem 1.25rem; gap: .75rem }
-      .filter-group { padding-right: 1rem; margin-right: 1rem }
-      .grid-wrap { padding: 2rem 1.25rem 4rem }
-      .property-grid { grid-template-columns: 1fr; gap: 1.75rem }
-      .reassurance { padding: 3rem 1.25rem }
-      .reassurance-inner { grid-template-columns: 1fr 1fr; gap: 1.75rem }
-      .cta-proprio { padding: 4rem 1.25rem }
-      footer { padding: 3rem 1.25rem 2rem }
-      .footer-links { margin-left: 0 }
-      .trust-inner { flex-wrap: wrap; gap: 0 }
-      .trust-item { padding: .65rem 0; border-right: none; margin-right: 0; width: 50% }
-    }
-    @media (max-width: 480px) {
-      .property-grid { grid-template-columns: 1fr }
-      .reassurance-inner { grid-template-columns: 1fr }
-    }
-
-  .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#2C3D30;box-shadow:0 4px 20px rgba(44,61,48,.45);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
-  .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(44,61,48,.6)}
-  .wa-btn svg{width:26px;height:26px}
-  .prop-fav{position:absolute;top:.6rem;right:.6rem;z-index:2;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.88);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;backdrop-filter:blur(4px)}
-  .prop-fav:hover{transform:scale(1.12);background:#fff}
-  .prop-fav svg{width:16px;height:16px;stroke:#6b7280;fill:none;transition:stroke .2s,fill .2s}
-  .prop-fav.active svg{stroke:#e11d48;fill:#e11d48}
-
-  /* VIEW TOGGLE */
-  .view-toggle{display:flex;border:1.5px solid var(--stone-3);border-radius:4px;overflow:hidden;flex-shrink:0}
-  .view-btn{padding:.42rem .85rem;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;background:var(--white);color:#6b7280;cursor:pointer;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:.35rem;transition:background .15s,color .15s}
-  .view-btn.active{background:var(--green);color:var(--gold)}
-  .view-btn svg{width:13px;height:13px}
-
-  /* MAP */
-  #map-wrap{display:none;overflow:hidden;border-radius:0}
-  #map-wrap.visible{
-    display:flex;
-    height:calc(100vh - var(--nav-h) - 58px);
-    min-height:480px;
-    margin:0 -3rem;
-    border-top:1px solid var(--stone-2);
-    border-bottom:1px solid var(--stone-2);
-  }
-  #map-list{width:360px;flex-shrink:0;overflow-y:auto;background:#fff;border-right:1px solid var(--stone-2)}
-  #map-list-header{padding:.75rem 1rem;border-bottom:1px solid var(--stone-2);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;position:sticky;top:0;background:#fff;z-index:1}
-  .ml-item{display:flex;gap:.75rem;padding:.75rem 1rem;border-bottom:1px solid var(--stone-2);cursor:pointer;transition:background .15s;text-decoration:none;color:inherit}
-  .ml-item:hover,.ml-item.active{background:var(--stone-1)}
-  .ml-num{width:22px;height:22px;border-radius:50%;background:var(--green);color:var(--gold);font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-  .ml-item.active .ml-num{background:var(--gold);color:var(--green)}
-  .ml-img{width:72px;height:56px;border-radius:4px;object-fit:cover;flex-shrink:0}
-  .ml-body{flex:1;min-width:0}
-  .ml-station{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);margin-bottom:.15rem}
-  .ml-name{font-family:Georgia,serif;font-style:italic;font-size:.82rem;font-weight:300;color:#111;line-height:1.25;margin-bottom:.25rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .ml-meta{font-size:.68rem;color:#6b7280}
-  .ml-price{font-size:.75rem;font-weight:600;color:var(--green);margin-top:.2rem}
-  #map-canvas{flex:1;min-width:0}
-  .leaflet-top,.leaflet-bottom{z-index:500!important}
-  .leaflet-popup-pane{z-index:520!important}
-  .leaflet-marker-pane{z-index:510!important}
-  .leaflet-popup-content-wrapper{border-radius:6px;padding:0;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.18)}
-  .leaflet-popup-content{margin:0;width:200px !important}
-  .map-popup-img{width:100%;height:100px;object-fit:cover;display:block}
-  .map-popup-body{padding:.55rem .75rem .7rem}
-  .map-popup-name{font-family:Georgia,serif;font-style:italic;font-size:.85rem;font-weight:300;color:#111;line-height:1.2;margin-bottom:.25rem}
-  .map-popup-price{font-size:.72rem;color:var(--green);font-weight:600;margin-bottom:.45rem}
-  .map-popup-link{display:block;text-align:center;background:#2C3D30;color:#E8CBA0;text-decoration:none;border-radius:4px;padding:.35rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Poppins',sans-serif;transition:background .2s}
-  .map-popup-link:hover{background:#3d5442}
-  @media(max-width:768px){#map-list{width:280px}}
-
-    /* ── Footer ── */
     footer { background: #0d1410; padding: clamp(56px,7vw,88px) 0 0; }
     .footer-grid {
       display: grid;
@@ -628,6 +539,118 @@
     @media(max-width:1024px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } .footer-lower{ grid-template-columns:1fr; } }
     @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; } .footer-bottom{ flex-direction:column; text-align:center; } }
 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) { .property-grid { grid-template-columns: repeat(2,1fr) } .reassurance-inner { grid-template-columns: repeat(2,1fr) } }
+    @media (max-width: 700px) {
+      .hero-content { padding: 0 1.25rem 2.5rem }
+      .filter-inner { padding: .85rem 1.25rem; gap: .75rem }
+      .filter-group { padding-right: 1rem; margin-right: 1rem }
+      .grid-wrap { padding: 2rem 1.25rem 4rem }
+      .property-grid { grid-template-columns: 1fr; gap: 1.75rem }
+      .reassurance { padding: 3rem 1.25rem }
+      .reassurance-inner { grid-template-columns: 1fr 1fr; gap: 1.75rem }
+      .cta-proprio { padding: 4rem 1.25rem }
+      footer { padding: 3rem 1.25rem 2rem }
+      .footer-links { margin-left: 0 }
+      .trust-inner { flex-wrap: wrap; gap: 0 }
+      .trust-item { padding: .65rem 0; border-right: none; margin-right: 0; width: 50% }
+    }
+    @media (max-width: 480px) {
+      .property-grid { grid-template-columns: 1fr }
+      .reassurance-inner { grid-template-columns: 1fr }
+    }
+
+    /* ─── MOBILE COMPREHENSIVE ─── */
+    @media (max-width: 768px) {
+      :root { --nav-h: 72px; }
+      .hero { min-height: 480px; }
+      .hero-h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+      .hero-content { padding: 0 1.25rem 2.5rem; }
+      .hero-sub { font-size: .82rem; }
+      .trust-inner { padding: 0 1.25rem; flex-wrap: wrap; }
+      .trust-item { width: 50%; border-right: none; margin-right: 0; padding: .6rem 0; }
+      .filter-bar { position: sticky; top: var(--nav-h); }
+      .filter-inner { height: auto; padding: .75rem 1.25rem; flex-wrap: wrap; gap: .5rem; }
+      .filter-group {
+        flex: 1 1 calc(50% - .25rem); min-width: 0;
+        border-right: none; border-bottom: 1px solid #ece8e2;
+        padding: .6rem .5rem; padding-left: 0;
+      }
+      .filter-group:first-child { padding-left: 0; }
+      .price-wrap { flex: 1 1 100%; min-width: 0; border-right: none; padding: .6rem 0; }
+      .filter-actions { width: 100%; justify-content: space-between; padding-left: 0; margin-left: 0; }
+      .filter-divider { display: none; }
+      .grid-wrap { padding: 1.75rem 1.25rem 4rem; }
+      .grid-header { flex-direction: column; gap: .75rem; align-items: flex-start; }
+      .property-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .reassurance { padding: 2.5rem 1.25rem; }
+      .reassurance-inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .cta-proprio { padding: 3.5rem 1.25rem; }
+      .cta-btn { display: block; width: 100%; text-align: center; min-height: 48px; line-height: 48px; padding: 0; }
+    }
+    @media (max-width: 480px) {
+      .filter-group { flex: 1 1 100%; }
+      .trust-item { width: 100%; }
+      .reassurance-inner { grid-template-columns: 1fr; }
+      .prop-cta { min-height: 48px; }
+      .empty-btn { min-height: 48px; }
+    }
+
+  .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#2C3D30;box-shadow:0 4px 20px rgba(44,61,48,.45);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
+  .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(44,61,48,.6)}
+  .wa-btn svg{width:26px;height:26px}
+  .prop-fav{position:absolute;top:.6rem;right:.6rem;z-index:2;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.88);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;backdrop-filter:blur(4px)}
+  .prop-fav:hover{transform:scale(1.12);background:#fff}
+  .prop-fav svg{width:16px;height:16px;stroke:#6b7280;fill:none;transition:stroke .2s,fill .2s}
+  .prop-fav.active svg{stroke:#e11d48;fill:#e11d48}
+
+  /* VIEW TOGGLE */
+  .view-toggle{display:flex;background:#f2efe9;border-radius:6px;padding:3px;gap:2px;flex-shrink:0}
+  .view-btn{padding:.38rem .9rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:none;background:transparent;color:#9a9690;cursor:pointer;font-family:'Poppins',sans-serif;display:flex;align-items:center;gap:.35rem;border-radius:4px;transition:all .18s}
+  .view-btn:hover{color:var(--ink)}
+  .view-btn.active{background:#fff;color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  .view-btn svg{width:13px;height:13px}
+
+  /* MAP */
+  #map-wrap{display:none;overflow:hidden;border-radius:0}
+  #map-wrap.visible{
+    display:flex;
+    height:calc(100vh - var(--nav-h) - 58px);
+    min-height:480px;
+    margin:0 -3rem;
+    border-top:1px solid var(--stone-2);
+    border-bottom:1px solid var(--stone-2);
+  }
+  #map-list{width:360px;flex-shrink:0;overflow-y:auto;background:#fff;border-right:1px solid var(--stone-2)}
+  #map-list-header{padding:.75rem 1rem;border-bottom:1px solid var(--stone-2);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6b7280;position:sticky;top:0;background:#fff;z-index:1}
+  .ml-item{display:flex;gap:.75rem;padding:.75rem 1rem;border-bottom:1px solid var(--stone-2);cursor:pointer;transition:background .15s;text-decoration:none;color:inherit}
+  .ml-item:hover,.ml-item.active{background:var(--stone-1)}
+  .ml-num{width:22px;height:22px;border-radius:50%;background:var(--green);color:var(--gold);font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .ml-item.active .ml-num{background:var(--gold);color:var(--green)}
+  .ml-img{width:72px;height:56px;border-radius:4px;object-fit:cover;flex-shrink:0}
+  .ml-body{flex:1;min-width:0}
+  .ml-station{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);margin-bottom:.15rem}
+  .ml-name{font-family:Georgia,serif;font-style:italic;font-size:.82rem;font-weight:300;color:#111;line-height:1.25;margin-bottom:.25rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ml-meta{font-size:.68rem;color:#6b7280}
+  .ml-price{font-size:.75rem;font-weight:600;color:var(--green);margin-top:.2rem}
+  #map-canvas{flex:1;min-width:0}
+  .leaflet-top,.leaflet-bottom{z-index:500!important}
+  .leaflet-popup-pane{z-index:520!important}
+  .leaflet-marker-pane{z-index:510!important}
+  .leaflet-popup-content-wrapper{border-radius:6px;padding:0;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.18)}
+  .leaflet-popup-content{margin:0;width:200px !important}
+  .map-popup-img{width:100%;height:100px;object-fit:cover;display:block}
+  .map-popup-body{padding:.55rem .75rem .7rem}
+  .map-popup-name{font-family:Georgia,serif;font-style:italic;font-size:.85rem;font-weight:300;color:#111;line-height:1.2;margin-bottom:.25rem}
+  .map-popup-price{font-size:.72rem;color:var(--green);font-weight:600;margin-bottom:.45rem}
+  .map-popup-link{display:block;text-align:center;background:#2C3D30;color:#E8CBA0;text-decoration:none;border-radius:4px;padding:.35rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Poppins',sans-serif;transition:background .2s}
+  .map-popup-link:hover{background:#3d5442}
+  @media(max-width:768px){#map-list{width:260px}}
+  @media(max-width:480px){
+    #map-wrap.visible{flex-direction:column}
+    #map-list{width:100%;height:200px;overflow-y:auto;border-right:none;border-bottom:1px solid var(--stone-2)}
+    #map-canvas{flex:1;min-height:300px}
+  }
   </style>
 </head>
 <body>
@@ -673,21 +696,21 @@
     </div>
   </div>
 </header>
-  <div class="site-mobile-menu" id="site-mobile-menu">
-    <a href="/en/accueil" class="site-mobile-link">Home</a>
-    <a href="/en/proprietaires" class="site-mobile-link">Owners</a>
-    <a href="/en/estimateur" class="site-mobile-link">Estimator</a>
-    <a href="/en/reserver" class="site-mobile-link active">Book</a>
-    <a href="/en/destinations" class="site-mobile-link">Destinations</a>
-    <a href="/en/about" class="site-mobile-link">About</a>
-    <div class="site-mobile-lang">
-      <a href="/reserver">FR</a><span>|</span><a href="/en/reserver" class="active">EN</a>
-    </div>
+<div class="site-mobile-menu" id="site-mobile-menu">
+  <a href="/en/accueil" class="site-mobile-link">Home</a>
+  <a href="/en/proprietaires" class="site-mobile-link">Owners</a>
+  <a href="/en/estimateur" class="site-mobile-link">Estimator</a>
+  <a href="/en/reserver" class="site-mobile-link active">Book</a>
+  <a href="/en/destinations" class="site-mobile-link">Destinations</a>
+  <a href="/en/about" class="site-mobile-link">About</a>
+  <div class="site-mobile-lang">
+    <a href="/reserver">FR</a><span>|</span><a href="/en/reserver" class="active">EN</a>
   </div>
+</div>
 <script>
 function toggleMobileMenu(){
-  const menu = document.getElementById('site-mobile-menu');
-  const burger = document.getElementById('site-burger');
+  var menu = document.getElementById('site-mobile-menu');
+  var burger = document.getElementById('site-burger');
   menu.classList.toggle('open');
   burger.classList.toggle('open');
   document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
@@ -772,8 +795,9 @@ function toggleMobileMenu(){
         <div class="flt-option" data-val="8+">8 guests +</div>
       </div>
     </div>
-    <div class="filter-group price-wrap" id="price-filter-group">
-      <label class="filter-label">Price / night</label>
+    <div class="price-wrap" id="price-filter-group">
+      <span class="price-label-row">Price / night</span>
+      <div class="price-value-row"><span id="lbl-min">0</span> — <span id="lbl-max">10 000+</span> €</div>
       <div class="price-track" id="price-track">
         <div class="price-fill" id="price-fill"></div>
         <div class="price-thumb" id="thumb-min"></div>
@@ -781,11 +805,15 @@ function toggleMobileMenu(){
         <input type="range" id="f-price-min" min="0" max="10000" step="100" value="0" oninput="syncPriceSlider()">
         <input type="range" id="f-price-max" min="0" max="10000" step="100" value="10000" oninput="syncPriceSlider()">
       </div>
-      <div class="price-labels"><span><b id="lbl-min">0</b> €</span><span><b id="lbl-max">10 000+</b> €</span></div>
     </div>
     <div class="filter-actions">
-      <button class="filter-reset" id="btn-reset" style="display:none" onclick="resetFilters()">Clear</button>
+      <button class="filter-reset" id="btn-reset" style="display:none" onclick="resetFilters()">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Clear
+      </button>
+      <div class="filter-divider"></div>
       <div class="filter-count" id="filter-count">— properties</div>
+      <div class="filter-divider"></div>
       <div class="view-toggle">
         <button class="view-btn active" id="btn-list" onclick="setView('list')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
@@ -961,87 +989,78 @@ function stars(rating){
 
 let all = [], filtered = [];
 
-  const FAV_KEY = 'alpeon_favs';
-  function getFavs(){ try{ return JSON.parse(localStorage.getItem(FAV_KEY)||'[]'); }catch(e){ return []; } }
-  function toggleFav(id, el){
-    let favs = getFavs();
-    const idx = favs.indexOf(id);
-    if(idx>=0){ favs.splice(idx,1); el.classList.remove('active'); }
-    else { favs.push(id); el.classList.add('active'); }
-    localStorage.setItem(FAV_KEY, JSON.stringify(favs));
-  }
-  function initFavBtns(){
-    document.querySelectorAll('[data-fav-id]').forEach(btn=>{
-      if(getFavs().includes(btn.dataset.favId)) btn.classList.add('active');
-    });
-  }
+const FAV_KEY = 'alpeon_favs';
+function getFavs(){ try{ return JSON.parse(localStorage.getItem(FAV_KEY)||'[]'); }catch(e){ return []; } }
+function toggleFav(id, el){
+  var favs = getFavs();
+  var idx = favs.indexOf(id);
+  if(idx>=0){ favs.splice(idx,1); el.classList.remove('active'); }
+  else { favs.push(id); el.classList.add('active'); }
+  localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+}
+function initFavBtns(){
+  document.querySelectorAll('[data-fav-id]').forEach(function(btn){
+    if(getFavs().includes(btn.dataset.favId)) btn.classList.add('active');
+  });
+}
 
-  function card(p){
-    const typeLabel = p.propertyType==='chalet'?'Chalet':p.propertyType==='penthouse'?'Penthouse':'Apartment';
-    const prestige = (p.tags||[]).includes('Prestige') ? `<span class="badge-prestige">Prestige</span>` : '';
-    const priceStr = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' €' : 'On request';
-    const ratingBlock = p.rating>0 ? `<div class="prop-rating"><div class="prop-stars">${stars(p.rating)}</div>${p.reviewsCount>0?`<div class="prop-reviews">${p.reviewsCount} reviews</div>`:''}</div>` : '';
-    const iGuests=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
-    const iBed=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 4v16M22 4v16M2 8h20M2 12h20"/></svg>`;
-    const iBath=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6 C9 4.3 7.7 3 6 3 4.3 3 3 4.3 3 6v6h18v-2a4 4 0 0 0-4-4H9z"/><path d="M5 18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4H5v4z"/></svg>`;
-    // Amenity chips — top 3
-    const TOP_AM = ['Ski in/out','Sauna','Swimming pool','Hot tub','Fireplace','Mountain view','Parking','Wi-Fi'];
-    const translated = (p.amenities||[]).map(a=>AMENITY_EN[a]||a);
-    const chips = TOP_AM.filter(a=>translated.includes(a)).slice(0,3)
-      .map(a=>`<span class="prop-amenity-chip"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2C3D30" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>${a}</span>`).join('');
-    return `<a class="prop-card" href="/en/propriete?id=${p.id}">
-      <div class="prop-photo">
-        <img src="${p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70'}" alt="${p.title}" loading="lazy">
-        <div class="prop-photo-overlay"></div>
-        <div class="prop-station"><span class="badge-city">${p.city}</span>${p.area?`<span class="badge-area">${p.area}</span>`:''}</div>
-        ${prestige}
-        <button class="prop-fav" data-fav-id="${p.id}" onclick="event.preventDefault();toggleFav('${p.id}',this)" aria-label="Save">
-          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </button>
-      </div>
-      <div class="prop-body">
-        <div class="prop-type">${typeLabel}</div>
-        <h3 class="prop-name">${p.title}</h3>
-        <div class="prop-specs">
-          <span class="prop-spec">${iGuests} ${p.guests} guests</span>
-          <div class="prop-divider"></div>
-          <span class="prop-spec">${iBed} ${p.bedrooms} br.</span>
-          ${p.bathrooms?`<div class="prop-divider"></div><span class="prop-spec">${iBath} ${p.bathrooms} ba.`:''}
-        </div>
-        ${chips?`<div class="prop-amenity-row">${chips}</div>`:''}
-        <div class="prop-foot">
-          <div>
-            <div class="prop-price-from">From</div>
-            <div class="prop-price-val">${priceStr}</div>
-            ${p.priceFrom?'<div class="prop-price-unit">/ night</div>':''}
-          </div>
-          ${ratingBlock}
-        </div>
-      </div>
-      <div class="prop-cta">
-        <span>View property</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
-    </a>`;
-  }
+function card(p){
+  var typeLabel = p.propertyType==='chalet'?'Chalet':p.propertyType==='penthouse'?'Penthouse':'Apartment';
+  var prestige = (p.tags||[]).includes('Prestige') ? '<span class="badge-prestige">Prestige</span>' : '';
+  var priceStr = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' €' : 'On request';
+  var ratingBlock = p.rating>0 ? '<div class="prop-rating"><div class="prop-stars">'+stars(p.rating)+'</div>'+(p.reviewsCount>0?'<div class="prop-reviews">'+p.reviewsCount+' reviews</div>':'')+'</div>' : '';
+  var iGuests='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+  var iBed='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 4v16M22 4v16M2 8h20M2 12h20"/></svg>';
+  var iBath='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6 C9 4.3 7.7 3 6 3 4.3 3 3 4.3 3 6v6h18v-2a4 4 0 0 0-4-4H9z"/><path d="M5 18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4H5v4z"/></svg>';
+  var TOP_AM = ['Ski in/out','Sauna','Swimming pool','Hot tub','Fireplace','Mountain view','Parking','Wi-Fi'];
+  var translated = (p.amenities||[]).map(function(a){ return AMENITY_EN[a]||a; });
+  var chips = TOP_AM.filter(function(a){ return translated.includes(a); }).slice(0,3)
+    .map(function(a){ return '<span class="prop-amenity-chip"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2C3D30" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>'+a+'</span>'; }).join('');
+  return '<a class="prop-card" href="/en/propriete?id='+p.id+'">'
+    +'<div class="prop-photo">'
+    +'<img src="'+(p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70')+'" alt="'+p.title+'" loading="lazy">'
+    +'<div class="prop-photo-overlay"></div>'
+    +'<div class="prop-station"><span class="badge-city">'+p.city+'</span>'+(p.area?'<span class="badge-area">'+p.area+'</span>':'')+'</div>'
+    +prestige
+    +'<button class="prop-fav" data-fav-id="'+p.id+'" onclick="event.preventDefault();toggleFav(\''+p.id+'\',this)" aria-label="Save">'
+    +'<svg viewBox="0 0 24 24" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
+    +'</button>'
+    +'</div>'
+    +'<div class="prop-body">'
+    +'<div class="prop-type">'+typeLabel+'</div>'
+    +'<h3 class="prop-name">'+p.title+'</h3>'
+    +'<div class="prop-specs">'
+    +'<span class="prop-spec">'+iGuests+' '+p.guests+' guests</span>'
+    +'<div class="prop-divider"></div>'
+    +'<span class="prop-spec">'+iBed+' '+p.bedrooms+' br.</span>'
+    +(p.bathrooms?'<div class="prop-divider"></div><span class="prop-spec">'+iBath+' '+p.bathrooms+' ba.</span>':'')
+    +'</div>'
+    +(chips?'<div class="prop-amenity-row">'+chips+'</div>':'')
+    +'<div class="prop-foot">'
+    +'<div>'
+    +'<div class="prop-price-from">From</div>'
+    +'<div class="prop-price-val">'+priceStr+'</div>'
+    +(p.priceFrom?'<div class="prop-price-unit">/ night</div>':'')
+    +'</div>'
+    +ratingBlock
+    +'</div>'
+    +'</div>'
+    +'<div class="prop-cta"><span>View property</span>'
+    +'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>'
+    +'</div>'
+    +'</a>';
+}
 
 function skel(n){
-  return Array.from({length:n},()=>`
-    <div class="skel">
-      <div class="skel-photo"></div>
-      <div class="skel-body">
-        <div class="skel-line w40" style="height:.5rem;margin-bottom:.2rem"></div>
-        <div class="skel-line w80"></div>
-        <div class="skel-line w60" style="height:.6rem;margin-top:.4rem"></div>
-        <div class="skel-line w40" style="height:.6rem"></div>
-      </div>
-    </div>`).join('');
+  var s = '';
+  for(var i=0;i<n;i++) s += '<div class="skel"><div class="skel-photo"></div><div class="skel-body"><div class="skel-line w40" style="height:.5rem;margin-bottom:.2rem"></div><div class="skel-line w80"></div><div class="skel-line w60" style="height:.6rem;margin-top:.4rem"></div><div class="skel-line w40" style="height:.6rem"></div></div></div>';
+  return s;
 }
 
 function render(list){
-  const grid = document.getElementById('property-grid');
-  const empty = document.getElementById('empty-state');
-  const count = document.getElementById('filter-count');
+  var grid = document.getElementById('property-grid');
+  var empty = document.getElementById('empty-state');
+  var count = document.getElementById('filter-count');
   if(!list.length){
     grid.innerHTML = '';
     empty.classList.add('visible');
@@ -1049,7 +1068,7 @@ function render(list){
     return;
   }
   empty.classList.remove('visible');
-  count.textContent = `${list.length} propert${list.length>1?'ies':'y'}`;
+  count.textContent = list.length+' propert'+(list.length>1?'ies':'y');
   grid.innerHTML = list.map(card).join('');
   initFavBtns();
 }
@@ -1057,52 +1076,52 @@ function render(list){
 async function load(){
   document.getElementById('property-grid').innerHTML = skel(6);
   try{
-    const r = await fetch('/api/properties');
+    var r = await fetch('/api/properties');
     if(!r.ok) throw new Error('Error ' + r.status);
-    const {properties} = await r.json();
-    all = properties;
-    filtered = [...properties];
+    var data = await r.json();
+    all = data.properties;
+    filtered = all.slice();
     render(all);
   } catch(e){
     document.getElementById('property-grid').innerHTML = '';
-    const empty = document.getElementById('empty-state');
+    var empty = document.getElementById('empty-state');
     empty.classList.add('visible');
-    empty.innerHTML = `<div class="empty-icon">⚠</div><h3>Unable to load</h3><p>${e.message}</p><button class="empty-btn" onclick="load()">Try again</button>`;
+    empty.innerHTML = '<div class="empty-icon">⚠</div><h3>Unable to load</h3><p>'+e.message+'</p><button class="empty-btn" onclick="load()">Try again</button>';
   }
 }
 
 function syncPriceSlider(){
-    const mn=parseInt(document.getElementById('f-price-min').value);
-    const mx=parseInt(document.getElementById('f-price-max').value);
-    const safe_mn=Math.min(mn,mx-500);
-    document.getElementById('f-price-min').value=safe_mn;
-    const pct=v=>(v/10000*100)+'%';
-    document.getElementById('price-fill').style.cssText=`left:${pct(safe_mn)};width:${pct(mx-safe_mn)}`;
-    document.getElementById('thumb-min').style.left=pct(safe_mn);
-    document.getElementById('thumb-max').style.left=pct(mx);
-    document.getElementById('lbl-min').textContent=safe_mn.toLocaleString('fr-FR');
-    document.getElementById('lbl-max').textContent=mx>=10000?'10 000+':mx.toLocaleString('fr-FR');
-    applyFilters();
-  }
+  var mn=parseInt(document.getElementById('f-price-min').value);
+  var mx=parseInt(document.getElementById('f-price-max').value);
+  var safe_mn=Math.min(mn,mx-500);
+  document.getElementById('f-price-min').value=safe_mn;
+  var pct=function(v){ return (v/10000*100)+'%'; };
+  document.getElementById('price-fill').style.cssText='left:'+pct(safe_mn)+';width:'+pct(mx-safe_mn);
+  document.getElementById('thumb-min').style.left=pct(safe_mn);
+  document.getElementById('thumb-max').style.left=pct(mx);
+  document.getElementById('lbl-min').textContent=safe_mn.toLocaleString('fr-FR');
+  document.getElementById('lbl-max').textContent=mx>=10000?'10 000+':mx.toLocaleString('fr-FR');
+  applyFilters();
+}
 
-const fltState = { station:'all', type:'all', guests:'all' };
+var fltState = { station:'all', type:'all', guests:'all' };
 
 function initDropdowns(){
-  ['station','type','guests'].forEach(key => {
-    const grp = document.getElementById('flt-'+key);
+  ['station','type','guests'].forEach(function(key){
+    var grp = document.getElementById('flt-'+key);
     if(!grp) return;
     grp.addEventListener('click', function(e){
-      const isOpen = grp.classList.contains('open');
+      var isOpen = grp.classList.contains('open');
       closeAllDropdowns();
       if(!isOpen) grp.classList.add('open');
       e.stopPropagation();
     });
-    grp.querySelectorAll('.flt-option').forEach(opt => {
+    grp.querySelectorAll('.flt-option').forEach(function(opt){
       opt.addEventListener('click', function(e){
-        const val = opt.dataset.val;
+        var val = opt.dataset.val;
         fltState[key] = val;
         document.getElementById('flt-'+key+'-val').textContent = opt.textContent;
-        grp.querySelectorAll('.flt-option').forEach(o => o.classList.remove('selected'));
+        grp.querySelectorAll('.flt-option').forEach(function(o){ o.classList.remove('selected'); });
         opt.classList.add('selected');
         grp.classList.toggle('active', val !== 'all');
         closeAllDropdowns();
@@ -1115,24 +1134,24 @@ function initDropdowns(){
 }
 
 function closeAllDropdowns(){
-  document.querySelectorAll('.filter-group.open').forEach(g => g.classList.remove('open'));
+  document.querySelectorAll('.filter-group.open').forEach(function(g){ g.classList.remove('open'); });
 }
 
 function applyFilters(){
-  const station = fltState.station;
-  const type    = fltState.type;
-  const guests  = fltState.guests;
-  const priceMin=parseInt(document.getElementById('f-price-min')?.value||0);
-  const priceMax=parseInt(document.getElementById('f-price-max')?.value||10000);
-  const active  = station!=='all' || type!=='all' || guests!=='all' || priceMin>0 || priceMax<10000;
-  document.getElementById('btn-reset').style.display = active ? 'inline-block' : 'none';
-  filtered = all.filter(p=>{
+  var station = fltState.station;
+  var type    = fltState.type;
+  var guests  = fltState.guests;
+  var priceMin=parseInt(document.getElementById('f-price-min').value||0);
+  var priceMax=parseInt(document.getElementById('f-price-max').value||10000);
+  var active  = station!=='all' || type!=='all' || guests!=='all' || priceMin>0 || priceMax<10000;
+  document.getElementById('btn-reset').style.display = active ? 'inline-flex' : 'none';
+  filtered = all.filter(function(p){
     if(station !== 'all' && norm(p.city) !== station) return false;
     if(type !== 'all' && p.propertyType !== type) return false;
     if(guests !== 'all'){
-      const n = parseInt(guests);
-      if(guests === '8+'){ if(p.guests < 8) return false }
-      else { if(p.guests < n) return false }
+      var n = parseInt(guests);
+      if(guests === '8+'){ if(p.guests < 8) return false; }
+      else { if(p.guests < n) return false; }
     }
     if(p.priceFrom && priceMax<10000 && p.priceFrom>priceMax) return false;
     if(p.priceFrom && p.priceFrom<priceMin) return false;
@@ -1143,29 +1162,39 @@ function applyFilters(){
 }
 
 function resetFilters(){
-  ['station','type','guests'].forEach(key => {
+  ['station','type','guests'].forEach(function(key){
     fltState[key] = 'all';
-    const grp = document.getElementById('flt-'+key);
+    var grp = document.getElementById('flt-'+key);
     if(!grp) return;
-    const first = grp.querySelector('.flt-option');
+    var first = grp.querySelector('.flt-option');
     document.getElementById('flt-'+key+'-val').textContent = first.textContent;
-    grp.querySelectorAll('.flt-option').forEach(o => o.classList.remove('selected'));
+    grp.querySelectorAll('.flt-option').forEach(function(o){ o.classList.remove('selected'); });
     first.classList.add('selected');
     grp.classList.remove('active');
   });
-  const pMin=document.getElementById('f-price-min');
-  const pMax=document.getElementById('f-price-max');
+  var pMin=document.getElementById('f-price-min');
+  var pMax=document.getElementById('f-price-max');
   if(pMin){pMin.value=0;pMax.value=10000;syncPriceSlider();}
   applyFilters();
+}
+
+function submitNewsletter(e){
+  e.preventDefault();
+  var email = document.getElementById('nl-email').value;
+  var msg = document.getElementById('nl-msg');
+  fetch('/api/newsletter', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})})
+    .then(function(r){ return r.json(); })
+    .then(function(){ msg.textContent='Thank you for subscribing!'; msg.className='nl-msg ok'; })
+    .catch(function(){ msg.textContent='An error occurred. Please try again.'; msg.className='nl-msg err'; });
 }
 
 initDropdowns();
 load();
 
-let leafletMap = null;
-let currentView = 'list';
+var leafletMap = null;
+var currentView = 'list';
 
-const STATION_COORDS = {
+var STATION_COORDS = {
   'courchevel': [45.4153, 6.6350],
   'megeve':     [45.8565, 6.6162],
   'megève':     [45.8565, 6.6162],
@@ -1178,23 +1207,23 @@ const STATION_COORDS = {
 };
 
 function getPropCoords(city){
-  const k = (city||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['\s]/g,'');
-  for(const [key, val] of Object.entries(STATION_COORDS)){
-    const nk = key.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['\s]/g,'');
-    if(k===nk||k.includes(nk)||nk.includes(k)) return val;
+  var k = (city||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['\s]/g,'');
+  for(var key in STATION_COORDS){
+    var nk = key.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['\s]/g,'');
+    if(k===nk||k.includes(nk)||nk.includes(k)) return STATION_COORDS[key];
   }
   return [45.5, 6.7];
 }
 
 function setView(v){
   currentView = v;
-  const grid = document.getElementById('property-grid');
-  const mapWrap = document.getElementById('map-wrap');
-  const btnList = document.getElementById('btn-list');
-  const btnMap = document.getElementById('btn-map');
-  const gridHeader = document.querySelector('.grid-header');
-  const emptyState = document.getElementById('empty-state');
-  const gridWrap = document.querySelector('.grid-wrap');
+  var grid = document.getElementById('property-grid');
+  var mapWrap = document.getElementById('map-wrap');
+  var btnList = document.getElementById('btn-list');
+  var btnMap = document.getElementById('btn-map');
+  var gridHeader = document.querySelector('.grid-header');
+  var emptyState = document.getElementById('empty-state');
+  var gridWrap = document.querySelector('.grid-wrap');
   if(v==='map'){
     if(grid) grid.style.display='none';
     if(gridHeader) gridHeader.style.display='none';
@@ -1203,7 +1232,7 @@ function setView(v){
     if(mapWrap) mapWrap.classList.add('visible');
     btnList.classList.remove('active'); btnMap.classList.add('active');
     renderMap();
-    window.scrollTo({top: document.querySelector('.filter-bar')?.offsetTop || 0, behavior:'smooth'});
+    window.scrollTo({top: document.querySelector('.filter-bar') ? document.querySelector('.filter-bar').offsetTop : 0, behavior:'smooth'});
   } else {
     if(grid) grid.style.display='';
     if(gridHeader) gridHeader.style.display='';
@@ -1213,106 +1242,53 @@ function setView(v){
   }
 }
 
-
 function renderMap(){
-  const mapWrap = document.getElementById('map-wrap');
+  var mapWrap = document.getElementById('map-wrap');
   if(!mapWrap) return;
-
   if(!leafletMap){
     leafletMap = L.map('map-canvas').setView([45.5, 6.7], 9);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap',
-      maxZoom: 18,
+      attribution: '© OpenStreetMap', maxZoom: 18,
     }).addTo(leafletMap);
   } else {
-    leafletMap.eachLayer(l=>{ if(l instanceof L.Marker) leafletMap.removeLayer(l); });
+    leafletMap.eachLayer(function(l){ if(l instanceof L.Marker) leafletMap.removeLayer(l); });
   }
-
-  const items = typeof filtered !== 'undefined' ? filtered : (typeof all !== 'undefined' ? all : []);
-  const markers = [];
-
-  // Build list
-  const listEl = document.getElementById('map-list');
-  const header = document.getElementById('map-list-header');
-  if(header) header.textContent = `${items.length} propert${items.length>1?'ies':'y'} displayed`;
-  listEl.querySelectorAll('.ml-item').forEach(el=>el.remove());
-
-  items.forEach((p, i) => {
-    const n = i + 1;
-    const coords = getPropCoords(p.city);
-    const img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
-    const price = p.priceFrom ? `${p.priceFrom.toLocaleString('fr-FR')} € / night` : 'On request';
-
-    // Numbered marker
-    const icon = L.divIcon({
+  var items = filtered.length || all.length ? filtered : all;
+  var listEl = document.getElementById('map-list');
+  var header = document.getElementById('map-list-header');
+  if(header) header.textContent = items.length+' propert'+(items.length!==1?'ies':'y')+' displayed';
+  listEl.querySelectorAll('.ml-item').forEach(function(el){ el.remove(); });
+  items.forEach(function(p, i){
+    var n = i + 1;
+    var coords = getPropCoords(p.city);
+    var img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
+    var price = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' € / night' : 'On request';
+    var icon = L.divIcon({
       className:'',
-      html:`<div style="width:26px;height:26px;border-radius:50%;background:#2C3D30;color:#E8CBA0;font-size:11px;font-weight:700;font-family:sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3);border:2px solid #fff">${n}</div>`,
-      iconSize:[26,26],
-      iconAnchor:[13,13],
+      html:'<div style="width:26px;height:26px;border-radius:50%;background:#2C3D30;color:#E8CBA0;font-size:11px;font-weight:700;font-family:sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3);border:2px solid #fff">'+n+'</div>',
+      iconSize:[26,26], iconAnchor:[13,13],
     });
-
-    const popup = `<div>
-      <img class="map-popup-img" src="${img}" alt="${p.title}" loading="lazy">
-      <div class="map-popup-body">
-        <div class="map-popup-name">${n}. ${p.title}</div>
-        <div class="map-popup-price">${price}</div>
-        <a class="map-popup-link" href="/en/propriete?id=${p.id}">View property</a>
-      </div>
-    </div>`;
-
-    const marker = L.marker(coords, {icon}).addTo(leafletMap).bindPopup(popup, {maxWidth:200});
-    markers.push(marker);
-
-    // List item
-    const item = document.createElement('a');
+    var popup = '<div><img class="map-popup-img" src="'+img+'" alt="'+p.title+'" loading="lazy"><div class="map-popup-body"><div class="map-popup-name">'+n+'. '+p.title+'</div><div class="map-popup-price">'+price+'</div><a class="map-popup-link" href="/en/propriete?id='+p.id+'">View property</a></div></div>';
+    var marker = L.marker(coords, {icon:icon}).addTo(leafletMap).bindPopup(popup, {maxWidth:200});
+    var item = document.createElement('a');
     item.className = 'ml-item';
-    item.href = `/en/propriete?id=${p.id}`;
+    item.href = '/en/propriete?id='+p.id;
     item.dataset.idx = i;
-    item.innerHTML = `
-      <div class="ml-num">${n}</div>
-      <img class="ml-img" src="${img}" alt="${p.title}" loading="lazy">
-      <div class="ml-body">
-        <div class="ml-station">${p.city}</div>
-        <div class="ml-name">${p.title}</div>
-        <div class="ml-meta">${p.guests} guests · ${p.bedrooms} br.</div>
-        <div class="ml-price">${price}</div>
-      </div>`;
-
-    // Hover list → open popup + highlight
-    item.addEventListener('mouseenter', ()=>{
-      document.querySelectorAll('.ml-item').forEach(el=>el.classList.remove('active'));
+    item.innerHTML = '<div class="ml-num">'+n+'</div><img class="ml-img" src="'+img+'" alt="'+p.title+'" loading="lazy"><div class="ml-body"><div class="ml-station">'+p.city+'</div><div class="ml-name">'+p.title+'</div><div class="ml-meta">'+p.guests+' guests · '+p.bedrooms+' br.</div><div class="ml-price">'+price+'</div></div>';
+    item.addEventListener('mouseenter', function(){
+      document.querySelectorAll('.ml-item').forEach(function(el){ el.classList.remove('active'); });
       item.classList.add('active');
       marker.openPopup();
     });
-    item.addEventListener('click', e=>{ e.preventDefault(); marker.openPopup(); leafletMap.panTo(coords); });
-
+    item.addEventListener('click', function(e){ e.preventDefault(); marker.openPopup(); leafletMap.panTo(coords); });
     listEl.appendChild(item);
-
-    // Click marker → highlight list item
-    marker.on('click', ()=>{
-      document.querySelectorAll('.ml-item').forEach(el=>el.classList.remove('active'));
+    marker.on('click', function(){
+      document.querySelectorAll('.ml-item').forEach(function(el){ el.classList.remove('active'); });
       item.classList.add('active');
       item.scrollIntoView({behavior:'smooth', block:'nearest'});
     });
   });
-
-  setTimeout(()=>leafletMap.invalidateSize(), 50);
-}
-
-async function submitNewsletter(e){
-  e.preventDefault();
-  const email = document.getElementById('nl-email').value.trim();
-  const msg = document.getElementById('nl-msg');
-  if(!email){ msg.textContent='Please enter your email.'; msg.className='nl-msg err'; return; }
-  msg.textContent='Subscribing…'; msg.className='nl-msg';
-  try {
-    const r = await fetch('/api/newsletter', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
-    const d = await r.json();
-    if(d.ok){ msg.textContent='✓ Thank you, you are subscribed!'; msg.className='nl-msg ok'; document.getElementById('nl-email').value=''; }
-    else { msg.textContent=d.error||'Error, please try again.'; msg.className='nl-msg err'; }
-  } catch {
-    msg.textContent = 'Network error.'; msg.className = 'nl-msg err';
-  }
+  setTimeout(function(){ leafletMap.invalidateSize(); }, 50);
 }
 </script>
 
@@ -1324,13 +1300,6 @@ async function submitNewsletter(e){
   window.addEventListener('scroll',u,{passive:true});
   u();
 })();
-</script>
-<script>
-document.addEventListener('click', function(e) {
-  document.querySelectorAll('.hdr-phone-wrap.open').forEach(function(wrap) {
-    if (!wrap.contains(e.target)) wrap.classList.remove('open');
-  });
-});
 </script>
 <a class="wa-btn" href="https://wa.me/33765254926" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
