@@ -1,25 +1,71 @@
 /**
  * GET /api/refresh-token
- * Fetches a fresh Guesty OAuth token and writes it to /tmp so future Lambda
- * invocations (same instance) can reuse it without calling OAuth again.
+ * Fetches a fresh Guesty OAuth token, writes it to /tmp AND updates the
+ * GUESTY_ACCESS_TOKEN env var in Vercel so all Lambda cold starts use it
+ * directly without ever calling OAuth again.
  *
- * Called by Vercel Cron every 20 hours — keeps the token perpetually fresh
- * without cold-start hammering.
- *
- * Protected by a simple secret so it's not publicly abusable.
+ * Called by Vercel Cron every day at 3AM — keeps the token perpetually fresh.
+ * Protected by REFRESH_SECRET so it's not publicly abusable.
  */
 
 const fs   = require('fs');
 const path = require('path');
 
-const OAUTH_URL  = 'https://booking.guesty.com/oauth2/token';
-const TOKEN_FILE = '/tmp/.guesty_token.json';
-const LOCAL_FILE = path.join(__dirname, '_lib/.token_cache.json');
-const SECRET     = process.env.REFRESH_SECRET;
-if (!SECRET) console.warn('[refresh-token] REFRESH_SECRET env var not set');
+const OAUTH_URL   = 'https://booking.guesty.com/oauth2/token';
+const TOKEN_FILE  = '/tmp/.guesty_token.json';
+const LOCAL_FILE  = path.join(__dirname, '_lib/.token_cache.json');
+const SECRET      = process.env.REFRESH_SECRET;
+const VERCEL_TOKEN      = process.env.VERCEL_TOKEN;
+const VERCEL_PROJECT_ID = process.env.VERCEL_PROJECT_ID || 'prj_lkINpF7Y4ucOpVPDyEdAwJLefCaf';
+
+async function updateVercelEnvVar(token) {
+  if (!VERCEL_TOKEN) return { ok: false, reason: 'VERCEL_TOKEN not set' };
+  try {
+    // Upsert GUESTY_ACCESS_TOKEN for all environments
+    const r = await fetch(
+      `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${VERCEL_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          key:    'GUESTY_ACCESS_TOKEN',
+          value:  token,
+          type:   'encrypted',
+          target: ['production', 'preview', 'development'],
+        }),
+      }
+    );
+    if (r.status === 409) {
+      // Already exists — find its ID and patch it
+      const list = await fetch(
+        `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
+        { headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}` } }
+      ).then(x => x.json());
+      const env = (list.envs || []).find(e => e.key === 'GUESTY_ACCESS_TOKEN');
+      if (!env) return { ok: false, reason: 'env var not found after 409' };
+      const patch = await fetch(
+        `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env/${env.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${VERCEL_TOKEN}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ value: token, target: ['production', 'preview', 'development'] }),
+        }
+      );
+      return { ok: patch.ok, status: patch.status };
+    }
+    return { ok: r.ok, status: r.status };
+  } catch (e) {
+    return { ok: false, reason: e.message };
+  }
+}
 
 module.exports = async (req, res) => {
-  // Allow: Vercel cron (sets x-vercel-cron:1), or manual call with REFRESH_SECRET
   const isVercelCron = req.headers['x-vercel-cron'] === '1';
   const provided     = req.headers['x-refresh-secret'] || req.query.secret;
   if (!isVercelCron && provided !== SECRET) {
@@ -36,24 +82,26 @@ module.exports = async (req, res) => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
     });
-    if (!r.ok) {
-      const txt = await r.text();
-      throw new Error(`OAuth failed ${r.status}: ${txt}`);
-    }
-    const json    = await r.json();
-    const token   = json.access_token;
-    const expiry  = Date.now() + (json.expires_in || 86400) * 1000;
-    const payload = JSON.stringify({ token, expiry });
+    if (!r.ok) throw new Error(`OAuth failed ${r.status}: ${await r.text()}`);
 
-    // Write to both /tmp and __dirname (best-effort)
+    const json   = await r.json();
+    const token  = json.access_token;
+    const expiry = Date.now() + (json.expires_in || 86400) * 1000;
+
+    // 1) Write to /tmp for warm instances on this Lambda
     for (const f of [TOKEN_FILE, LOCAL_FILE]) {
-      try { fs.writeFileSync(f, payload); } catch { /* ignore */ }
+      try { fs.writeFileSync(f, JSON.stringify({ token, expiry })); } catch { /* ignore */ }
     }
+
+    // 2) Update Vercel env var so ALL cold-start instances use fresh token
+    const vercelResult = await updateVercelEnvVar(token);
+    console.log('[refresh-token] Vercel env var update:', vercelResult);
 
     return res.status(200).json({
       ok: true,
       expires: new Date(expiry).toISOString(),
       access_token: token,
+      vercel_env_updated: vercelResult.ok,
     });
   } catch (err) {
     return res.status(500).json({ ok: false, error: err.message });
