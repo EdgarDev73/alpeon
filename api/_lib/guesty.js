@@ -102,6 +102,12 @@ async function getToken() {
     return _cachedToken;
   }
 
+  // 5) Last resort: use expired env var token rather than crashing (Guesty may honour a short grace period)
+  if (lastErr && staticToken) {
+    console.warn('[guesty] OAuth rate-limited, using expired env var token as last resort');
+    return staticToken;
+  }
+
   throw lastErr;
 }
 
