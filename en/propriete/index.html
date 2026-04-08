@@ -1477,7 +1477,12 @@ document.addEventListener('keydown', e => {
 
 // Load property
 async function loadProperty(){
-  const id = new URLSearchParams(location.search).get('id');
+  // Support /en/propriete/slug/ID (new clean URL) and /en/propriete/?id=ID (legacy)
+  const pathParts = location.pathname.replace(/\/$/, '').split('/');
+  const lastSeg = pathParts[pathParts.length - 1];
+  const id = /^[a-f0-9]{24}$/.test(lastSeg)
+    ? lastSeg
+    : new URLSearchParams(location.search).get('id');
   if(!id){ document.getElementById('detail-left').innerHTML='<p style="padding:2rem;color:#b91c1c">Missing property ID.</p>'; return; }
 
   try{

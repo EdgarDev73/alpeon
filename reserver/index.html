@@ -1101,7 +1101,7 @@ let all = [], filtered = [];
     const translated = (p.amenities||[]).map(a=>AMENITY_FR[a]||a);
     const chips = TOP_AM.filter(a=>translated.includes(a)).slice(0,3)
       .map(a=>`<span class="prop-amenity-chip"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2C3D30" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>${a}</span>`).join('');
-    return `<a class="prop-card" href="/propriete/?id=${p.id}">
+    return `<a class="prop-card" href="/propriete/${p.slug||p.id}/${p.id}">
       <div class="prop-photo">
         <img src="${p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70'}" alt="${p.title}" loading="lazy">
         <div class="prop-photo-overlay"></div>
@@ -1374,7 +1374,7 @@ function renderMap(){
       <div class="map-popup-body">
         <div class="map-popup-name">${n}. ${p.title}</div>
         <div class="map-popup-price">${price}</div>
-        <a class="map-popup-link" href="/propriete?id=${p.id}">Voir le bien</a>
+        <a class="map-popup-link" href="/propriete/${p.slug||p.id}/${p.id}">Voir le bien</a>
       </div>
     </div>`;
 
@@ -1384,7 +1384,7 @@ function renderMap(){
     // List item
     const item = document.createElement('a');
     item.className = 'ml-item';
-    item.href = `/propriete?id=${p.id}`;
+    item.href = `/propriete/${p.slug||p.id}/${p.id}`;
     item.dataset.idx = i;
     item.innerHTML = `
       <div class="ml-num">${n}</div>

@@ -2,7 +2,9 @@
   "version": 2,
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/:path*" }
+    { "source": "/api/:path*",              "destination": "/api/:path*" },
+    { "source": "/propriete/:slug/:id",     "destination": "/propriete/" },
+    { "source": "/en/propriete/:slug/:id",  "destination": "/en/propriete/" }
   ],
   "redirects": [
     { "source": "/404", "destination": "/404.html", "permanent": false },

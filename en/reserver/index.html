@@ -1016,7 +1016,7 @@ function card(p){
   var translated = (p.amenities||[]).map(function(a){ return AMENITY_EN[a]||a; });
   var chips = TOP_AM.filter(function(a){ return translated.includes(a); }).slice(0,3)
     .map(function(a){ return '<span class="prop-amenity-chip"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2C3D30" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>'+a+'</span>'; }).join('');
-  return '<a class="prop-card" href="/en/propriete?id='+p.id+'">'
+  return '<a class="prop-card" href="/en/propriete/'+(p.slug||p.id)+'/'+p.id+'">'
     +'<div class="prop-photo">'
     +'<img src="'+(p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70')+'" alt="'+p.title+'" loading="lazy">'
     +'<div class="prop-photo-overlay"></div>'
@@ -1268,11 +1268,11 @@ function renderMap(){
       html:'<div style="width:26px;height:26px;border-radius:50%;background:#2C3D30;color:#E8CBA0;font-size:11px;font-weight:700;font-family:sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3);border:2px solid #fff">'+n+'</div>',
       iconSize:[26,26], iconAnchor:[13,13],
     });
-    var popup = '<div><img class="map-popup-img" src="'+img+'" alt="'+p.title+'" loading="lazy"><div class="map-popup-body"><div class="map-popup-name">'+n+'. '+p.title+'</div><div class="map-popup-price">'+price+'</div><a class="map-popup-link" href="/en/propriete?id='+p.id+'">View property</a></div></div>';
+    var popup = '<div><img class="map-popup-img" src="'+img+'" alt="'+p.title+'" loading="lazy"><div class="map-popup-body"><div class="map-popup-name">'+n+'. '+p.title+'</div><div class="map-popup-price">'+price+'</div><a class="map-popup-link" href="/en/propriete/'+(p.slug||p.id)+'/'+p.id+'">View property</a></div></div>';
     var marker = L.marker(coords, {icon:icon}).addTo(leafletMap).bindPopup(popup, {maxWidth:200});
     var item = document.createElement('a');
     item.className = 'ml-item';
-    item.href = '/en/propriete?id='+p.id;
+    item.href = '/en/propriete/'+(p.slug||p.id)+'/'+p.id;
     item.dataset.idx = i;
     item.innerHTML = '<div class="ml-num">'+n+'</div><img class="ml-img" src="'+img+'" alt="'+p.title+'" loading="lazy"><div class="ml-body"><div class="ml-station">'+p.city+'</div><div class="ml-name">'+p.title+'</div><div class="ml-meta">'+p.guests+' guests · '+p.bedrooms+' br.</div><div class="ml-price">'+price+'</div></div>';
     item.addEventListener('mouseenter', function(){

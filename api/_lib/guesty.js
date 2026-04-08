@@ -232,8 +232,21 @@ function normalizeListing(l) {
     .filter(a => PRIORITY.some(p => a.toLowerCase().includes(p.toLowerCase())))
     .slice(0, 5);
 
+  const titleSlug = (l.title || l.nickname || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim().replace(/\s+/g, '-')
+    .replace(/-+/g, '-').slice(0, 60);
+  const citySlug = (addr.city || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  const slug = citySlug ? `${titleSlug}-${citySlug}` : titleSlug;
+
   return {
     id:           l._id,
+    slug,
     title:        (l.title || l.nickname || '').trim(),
     city:         addr.city || '',
     area:         addr.neighborhood || '',
