@@ -1704,9 +1704,6 @@ function renderMap(){
 
 <script>
 (function(){
-  const STORAGE_KEY = 'alpeon_cb_shown';
-  if(sessionStorage.getItem(STORAGE_KEY)) return;
-
   const backdrop = document.getElementById('cb-backdrop');
   const form     = document.getElementById('cb-form');
   const success  = document.getElementById('cb-success');
@@ -1714,7 +1711,6 @@ function renderMap(){
 
   function openPopup(){
     backdrop.classList.add('open');
-    sessionStorage.setItem(STORAGE_KEY, '1');
   }
   function closePopup(){
     backdrop.classList.remove('open');
