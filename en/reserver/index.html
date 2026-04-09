@@ -1179,6 +1179,10 @@ function applyFilters(){
     if(p.priceFrom && priceMax<10000 && p.priceFrom>priceMax) return false;
     if(p.priceFrom && p.priceFrom<priceMin) return false;
     return true;
+  }).sort(function(a,b){
+    var aS = (a.tags||[]).includes('Signatures') ? 0 : 1;
+    var bS = (b.tags||[]).includes('Signatures') ? 0 : 1;
+    return aS - bS;
   });
   render(filtered);
   if(currentView === 'map') renderMap();
