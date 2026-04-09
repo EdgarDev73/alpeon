@@ -1869,7 +1869,7 @@ function renderMap(){
       await fetch('/api/callback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, lang: 'fr' })
+        body: JSON.stringify({ type: 'callback', name, phone, lang: 'fr' })
       });
     } catch(err) { console.warn('[cb]', err); }
 

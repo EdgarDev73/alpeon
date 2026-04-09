@@ -5,13 +5,45 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const body = req.body || {};
+
+  // ── Callback request (popup Réserver / Book) ──────────────────────────────
+  if (body.type === 'callback') {
+    const name  = (body.name  || '').trim();
+    const phone = (body.phone || '').trim();
+    const lang  = body.lang === 'en' ? 'en' : 'fr';
+    if (!name || !phone) return res.status(400).json({ error: 'Nom et téléphone requis.' });
+    console.log(`[callback] ${name} · ${phone} (${lang})`);
+
+    const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS } = process.env;
+    if (!EMAIL_HOST || !EMAIL_USER || !EMAIL_PASS) return res.status(200).json({ ok: true, dev: true });
+
+    const transporter = nodemailer.createTransport({
+      host: EMAIL_HOST, port: parseInt(EMAIL_PORT || '465'),
+      secure: parseInt(EMAIL_PORT || '465') === 465,
+      auth: { user: EMAIL_USER, pass: EMAIL_PASS },
+    });
+    const subject = lang === 'en' ? `Callback request — ${name} · ${phone}` : `Demande de rappel — ${name} · ${phone}`;
+    const html = `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;color:#111">
+      <div style="background:#2C3D30;padding:20px 28px"><p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E8CBA0">ALPÉON — ${lang === 'en' ? 'Callback Request' : 'Demande de rappel'}</p></div>
+      <div style="padding:28px"><table style="width:100%;border-collapse:collapse;font-size:14px">
+        <tr><td style="padding:10px 0;color:#6b7280;width:120px">${lang === 'en' ? 'Name' : 'Nom'}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30">${name}</td></tr>
+        <tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">${lang === 'en' ? 'Phone' : 'Téléphone'}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30"><a href="tel:${phone}" style="color:#2C3D30;text-decoration:none">${phone}</a></td></tr>
+        <tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">Source</td><td style="padding:10px 0;color:#2C3D30">Page ${lang === 'en' ? 'Book' : 'Réserver'} — popup</td></tr>
+      </table></div></div>`;
+    try {
+      await transporter.sendMail({ from: `ALPÉON <${EMAIL_USER}>`, to: 'reservations@alpeon.fr', subject, html, text: `${name}\n${phone}` });
+    } catch (e) { console.error('[callback] SMTP:', e.message); }
+    return res.status(200).json({ ok: true });
+  }
+
+  // ── Standard contact form ─────────────────────────────────────────────────
   // Accept both EN field names (firstName/lastName) and FR field names (prenom/nom/tel/station/type)
   const firstName   = body.firstName  || body.prenom || '';
   const lastName    = body.lastName   || body.nom    || '';
   const email       = body.email      || '';
   const phone       = body.phone      || body.tel    || '';
   const message     = body.message    || '';
-  const propertyName = body.propertyName || [body.station, body.type].filter(Boolean).join(' — ') || '';
+  const propertyName = body.propertyName || [body.station, body.formType].filter(Boolean).join(' — ') || '';
 
   if (!firstName || !lastName || !email || !message) {
     return res.status(400).json({ error: 'Champs obligatoires manquants.' });
