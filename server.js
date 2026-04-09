@@ -112,10 +112,14 @@ const server = http.createServer(async (req, res) => {
   }
 
   // === Static files ===
-  // Map clean URLs → index.html
+  // Map clean URLs → index.html (mirrors Vercel rewrites)
   let filePath;
   if (pathname === '/' || pathname === '/accueil') {
     filePath = path.join(ROOT, 'accueil', 'index.html');
+  } else if (/^\/propriete\/[^/]+\/[a-f0-9]{24}$/.test(pathname)) {
+    filePath = path.join(ROOT, 'propriete', 'index.html');
+  } else if (/^\/en\/propriete\/[^/]+\/[a-f0-9]{24}$/.test(pathname)) {
+    filePath = path.join(ROOT, 'en', 'propriete', 'index.html');
   } else if (pathname === '/propriete' || pathname === '/propriete/') {
     filePath = path.join(ROOT, 'propriete', 'index.html');
   } else {
