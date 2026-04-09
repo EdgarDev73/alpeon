@@ -37,14 +37,15 @@ async function updateVercelEnvVar(token) {
         }),
       }
     );
-    if (r.status === 409) {
+    // Vercel returns 403 (ENV_ALREADY_EXISTS) when the env var already exists
+    if (r.status === 403 || r.status === 409) {
       // Already exists — find its ID and patch it
       const list = await fetch(
         `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
         { headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}` } }
       ).then(x => x.json());
       const env = (list.envs || []).find(e => e.key === 'GUESTY_ACCESS_TOKEN');
-      if (!env) return { ok: false, reason: 'env var not found after 409' };
+      if (!env) return { ok: false, reason: 'env var not found after conflict' };
       const patch = await fetch(
         `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env/${env.id}`,
         {
