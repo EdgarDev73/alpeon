@@ -1047,16 +1047,22 @@ async function loadCalendar(listingId){
   const end = in180.toISOString().slice(0,10);
   try {
     const r = await fetch(`/api/properties/${listingId}/calendar?startDate=${start}&endDate=${end}`);
+    if(!r.ok) throw new Error(`API calendar ${r.status}`);
     const data = await r.json();
-    const days = data.days || data.data || data.calendar || (Array.isArray(data) ? data : []);
+    if(data.error) throw new Error(data.error);
+    // Guesty returns a plain array OR { days: [...] }
+    const days = Array.isArray(data) ? data : (data.days || data.data || data.calendar || []);
+    if(!days.length) throw new Error('Empty calendar');
     calData = {};
     days.forEach(d => {
       const date = d.date || d.day;
       if(!date) return;
       calData[date] = {
-        available: d.available === true,
+        available: d.available === true || d.status === 'available',
         minNights: d.minNights || d.minimumNights || 1,
         price: d.price || d.basePrice || 0,
+        cta: d.cta || false,
+        ctd: d.ctd || false,
       };
     });
     calLoaded = true;

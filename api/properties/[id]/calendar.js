@@ -13,15 +13,21 @@ module.exports = async (req, res) => {
 
   try {
     const raw = await getListingCalendar(id, { startDate, endDate });
-    console.log('[calendar raw sample]', JSON.stringify((raw.data || raw.days || raw || [])[0]));
-    const rawDays = raw.data || raw.days || (Array.isArray(raw) ? raw : []);
+    // Guesty booking engine returns a plain array; other endpoints may wrap in { data: [], days: [] }
+    const rawDays = Array.isArray(raw) ? raw : (raw.data || raw.days || []);
+    console.log('[calendar] total days:', rawDays.length, '| sample:', JSON.stringify(rawDays[0]));
+    if (!rawDays.length) {
+      console.warn('[calendar] empty response from Guesty for listing', id);
+    }
     const days = rawDays.map(d => ({
-      date: d.date || d.day,
+      date:      d.date || d.day,
       available: d.status === 'available',
       minNights: d.minNights || d.minimumNights || d.min_nights || 1,
-      price: d.price || d.basePrice || d.nightly_price || null,
-      currency: d.currency || 'EUR',
-      status: d.status,
+      price:     d.price || d.basePrice || d.nightly_price || null,
+      currency:  d.currency || 'EUR',
+      status:    d.status,
+      cta:       d.cta || false,
+      ctd:       d.ctd || false,
     }));
     return res.status(200).json({ days });
   } catch (err) {
