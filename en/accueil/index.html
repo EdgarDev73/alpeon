@@ -638,11 +638,33 @@
 
     .promise {
       background: linear-gradient(160deg, #1c2e1f 0%, var(--green-d) 60%);
-      padding: clamp(80px, 10vw, 120px) 0;
+      padding: clamp(80px, 10vw, 120px) 0 clamp(64px, 8vw, 96px);
       overflow: visible;
       border-top: 1px solid rgba(232,203,160,.12);
     }
     .promise .container { display: flex; flex-direction: column; gap: 0; }
+    .promise-pillars {
+      background: #fff;
+      padding: clamp(56px, 7vw, 88px) 0;
+      border-bottom: 1px solid #e8e4dd;
+    }
+    .promise-pillars .promise-cards { gap: 24px; }
+    .promise-pillars .promise-card {
+      background: #fff;
+      border: 1px solid #e8e4dd;
+      border-radius: 4px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.04);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .promise-pillars .promise-card:hover {
+      background: #faf9f7;
+      box-shadow: 0 8px 40px rgba(0,0,0,.09);
+      transform: translateY(-2px);
+    }
+    .promise-pillars .promise-num { color: var(--gold); opacity: .65; }
+    .promise-pillars .promise-item-title { color: var(--ink); }
+    .promise-pillars .promise-item-text { color: rgba(42,32,18,.52); }
+    .promise-pillars .promise-card-sep { background: rgba(201,169,122,.35); }
     .promise-head {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1344,6 +1366,11 @@ function toggleMobileMenu(){
       </div>
     </div>
 
+  </div>
+</section>
+
+<section class="promise-pillars">
+  <div class="container">
     <div class="promise-cards">
       <div class="promise-card">
         <div class="promise-num">01</div>
