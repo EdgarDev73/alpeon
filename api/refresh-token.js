@@ -14,7 +14,7 @@ const { saveToken } = require('./_lib/guesty');
 
 const OAUTH_URL   = 'https://booking.guesty.com/oauth2/token';
 const SECRET      = process.env.REFRESH_SECRET;
-const VERCEL_TOKEN      = process.env.VERCEL_TOKEN;
+const VERCEL_TOKEN      = process.env.VRL_API_TOKEN || process.env.VERCEL_TOKEN;
 const VERCEL_PROJECT_ID = process.env.VERCEL_PROJECT_ID || 'prj_lkINpF7Y4ucOpVPDyEdAwJLefCaf';
 
 async function updateVercelEnvVar(token) {
