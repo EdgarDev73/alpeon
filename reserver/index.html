@@ -1852,12 +1852,8 @@ function renderMap(){
     backdrop.classList.remove('open');
   }
 
-  // Trigger at 10% scroll
-  function onScroll(){
-    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-    if(pct >= 0.10){ openPopup(); window.removeEventListener('scroll', onScroll); }
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
+  // Trigger after 4s on page
+  setTimeout(openPopup, 4000);
 
   // Close buttons
   document.getElementById('cb-close').addEventListener('click', closePopup);
