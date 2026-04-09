@@ -611,6 +611,119 @@
       .empty-btn { min-height: 48px; }
     }
 
+  /* ── CALLBACK POPUP ── */
+  .cb-backdrop {
+    position: fixed; inset: 0; z-index: 1100;
+    background: rgba(18,28,20,.65);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .32s ease;
+  }
+  .cb-backdrop.open { opacity: 1; pointer-events: all; }
+  .cb-modal {
+    position: fixed; z-index: 1101;
+    bottom: 0; left: 0; right: 0;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 0;
+    max-width: 480px;
+    margin: 0 auto;
+    transform: translateY(100%);
+    transition: transform .38s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 -12px 60px rgba(0,0,0,.22);
+    overflow: hidden;
+  }
+  @media (min-width: 600px) {
+    .cb-modal {
+      bottom: auto; top: 50%; left: 50%; right: auto;
+      transform: translate(-50%, calc(-50% + 24px));
+      border-radius: 12px;
+      opacity: 0;
+      transition: transform .34s cubic-bezier(.4,0,.2,1), opacity .28s ease;
+    }
+    .cb-backdrop.open .cb-modal {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+  }
+  .cb-backdrop.open .cb-modal { transform: translateY(0); }
+  .cb-header {
+    background: var(--green);
+    padding: 28px 28px 24px;
+    position: relative;
+  }
+  .cb-header-eyebrow {
+    font-size: .58rem; font-weight: 700; letter-spacing: .22em;
+    text-transform: uppercase; color: rgba(232,203,160,.7);
+    margin-bottom: 10px; font-family: var(--font-sans);
+  }
+  .cb-header-title {
+    font-family: var(--font-sans); font-size: 1.15rem; font-weight: 600;
+    color: #fff; line-height: 1.3; max-width: 320px;
+  }
+  .cb-header-title em {
+    font-family: var(--font-italic); font-style: italic;
+    color: var(--gold); font-size: 1.05em;
+  }
+  .cb-close {
+    position: absolute; top: 16px; right: 16px;
+    background: rgba(255,255,255,.12); border: none; border-radius: 50%;
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: rgba(255,255,255,.7); transition: background .18s;
+  }
+  .cb-close:hover { background: rgba(255,255,255,.22); color: #fff; }
+  .cb-body { padding: 24px 28px 28px; }
+  .cb-subtitle {
+    font-size: .82rem; color: rgba(42,32,18,.55); line-height: 1.65;
+    margin-bottom: 22px;
+  }
+  .cb-fields { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+  .cb-field {
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .cb-label {
+    font-size: .6rem; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: #9a9690;
+    font-family: var(--font-sans);
+  }
+  .cb-input {
+    height: 46px; border: 1.5px solid #e0dbd4; border-radius: 8px;
+    padding: 0 14px; font-family: var(--font-sans); font-size: .9rem;
+    color: var(--ink); background: #fff; outline: none;
+    transition: border-color .18s;
+  }
+  .cb-input:focus { border-color: var(--green); }
+  .cb-input::placeholder { color: #bbb; }
+  .cb-submit {
+    width: 100%; height: 50px; background: var(--green); border: none;
+    border-radius: 10px; font-family: var(--font-sans);
+    font-size: .85rem; font-weight: 600; color: #fff;
+    cursor: pointer; transition: background .2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .cb-submit:hover { background: var(--green-d, #1e2f22); }
+  .cb-submit svg { width: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+  .cb-decline {
+    display: block; text-align: center; margin-top: 14px;
+    font-size: .72rem; color: rgba(42,32,18,.35);
+    cursor: pointer; transition: color .18s;
+    font-family: var(--font-sans); letter-spacing: .03em;
+    background: none; border: none; width: 100%;
+  }
+  .cb-decline:hover { color: rgba(42,32,18,.6); }
+  .cb-success {
+    padding: 36px 28px; text-align: center;
+    display: none; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .cb-success.show { display: flex; }
+  .cb-success-icon {
+    width: 52px; height: 52px; background: rgba(44,61,48,.08);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .cb-success-icon svg { width: 22px; stroke: var(--green); fill: none; stroke-width: 2.5; }
+  .cb-success-title { font-size: 1rem; font-weight: 600; color: var(--ink); }
+  .cb-success-text { font-size: .82rem; color: rgba(42,32,18,.5); line-height: 1.6; max-width: 280px; }
+
   /* ── MOBILE FILTER TRIGGER BAR ── */
   .filter-mobile-bar {
     display: none;
@@ -1684,5 +1797,102 @@ function renderMap(){
 <a class="wa-btn" href="https://wa.me/33765254926" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
 </a>
+
+<!-- ── CALLBACK POPUP ── -->
+<div class="cb-backdrop" id="cb-backdrop" role="dialog" aria-modal="true" aria-label="Demande de rappel">
+  <div class="cb-modal" id="cb-modal">
+    <div class="cb-header">
+      <div class="cb-header-eyebrow">Sélection sur-mesure</div>
+      <h3 class="cb-header-title">Vous cherchez<br>un bien <em>d'exception</em> ?</h3>
+      <button class="cb-close" id="cb-close" aria-label="Fermer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="cb-form-wrap">
+      <div class="cb-body">
+        <p class="cb-subtitle">Laissez vos coordonnées — un conseiller ALPÉON vous rappelle pour vous préparer une sélection personnalisée selon vos critères.</p>
+        <form class="cb-fields" id="cb-form" novalidate>
+          <div class="cb-field">
+            <label class="cb-label" for="cb-name">Prénom &amp; Nom</label>
+            <input class="cb-input" id="cb-name" name="name" type="text" placeholder="Jean Dupont" autocomplete="name" required>
+          </div>
+          <div class="cb-field">
+            <label class="cb-label" for="cb-phone">Téléphone</label>
+            <input class="cb-input" id="cb-phone" name="phone" type="tel" placeholder="+33 6 12 34 56 78" autocomplete="tel" required>
+          </div>
+          <button class="cb-submit" type="submit">
+            Être rappelé par un conseiller
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.13 1 .39 1.98.77 2.91a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.17-1.17a2 2 0 012.11-.45c.93.38 1.91.64 2.91.77A2 2 0 0122 16.92z"/></svg>
+          </button>
+        </form>
+        <button class="cb-decline" id="cb-decline">Non merci, je continue ma recherche</button>
+      </div>
+    </div>
+    <div class="cb-success" id="cb-success">
+      <div class="cb-success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="cb-success-title">Demande envoyée !</div>
+      <p class="cb-success-text">Un conseiller ALPÉON vous contactera dans les plus brefs délais pour préparer votre sélection sur-mesure.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'alpeon_cb_shown';
+  if(sessionStorage.getItem(STORAGE_KEY)) return; // already shown this session
+
+  const backdrop = document.getElementById('cb-backdrop');
+  const form     = document.getElementById('cb-form');
+  const success  = document.getElementById('cb-success');
+  const formWrap = document.getElementById('cb-form-wrap');
+
+  function openPopup(){
+    backdrop.classList.add('open');
+    sessionStorage.setItem(STORAGE_KEY, '1');
+  }
+  function closePopup(){
+    backdrop.classList.remove('open');
+  }
+
+  // Trigger at 10% scroll
+  function onScroll(){
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    if(pct >= 0.10){ openPopup(); window.removeEventListener('scroll', onScroll); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Close buttons
+  document.getElementById('cb-close').addEventListener('click', closePopup);
+  document.getElementById('cb-decline').addEventListener('click', closePopup);
+  backdrop.addEventListener('click', function(e){ if(e.target === backdrop) closePopup(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closePopup(); });
+
+  // Form submit
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name  = document.getElementById('cb-name').value.trim();
+    const phone = document.getElementById('cb-phone').value.trim();
+    if(!name || !phone) return;
+
+    const btn = form.querySelector('.cb-submit');
+    btn.textContent = 'Envoi…';
+    btn.disabled = true;
+
+    try {
+      await fetch('/api/callback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, lang: 'fr' })
+      });
+    } catch(err) { console.warn('[cb]', err); }
+
+    formWrap.style.display = 'none';
+    success.classList.add('show');
+    setTimeout(closePopup, 3200);
+  });
+})();
+</script>
 </body>
 </html>
