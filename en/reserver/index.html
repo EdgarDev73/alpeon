@@ -1099,9 +1099,13 @@ async function load(){
     var r = await fetch('/api/properties');
     if(!r.ok) throw new Error('Error ' + r.status);
     var data = await r.json();
-    all = data.properties;
+    all = data.properties.sort(function(a,b){
+      var aS = (a.tags||[]).includes('Signatures') ? 0 : 1;
+      var bS = (b.tags||[]).includes('Signatures') ? 0 : 1;
+      return aS - bS;
+    });
     filtered = all.slice();
-    render(all);
+    applyFilters();
   } catch(e){
     document.getElementById('property-grid').innerHTML = '';
     var empty = document.getElementById('empty-state');

@@ -1196,9 +1196,13 @@ async function load(){
     const r = await fetch('/api/properties');
     if(!r.ok) throw new Error('Erreur ' + r.status);
     const {properties} = await r.json();
-    all = properties;
-    filtered = [...properties];
-    render(all);
+    all = properties.sort((a,b) => {
+      const aS = (a.tags||[]).includes('Signatures') ? 0 : 1;
+      const bS = (b.tags||[]).includes('Signatures') ? 0 : 1;
+      return aS - bS;
+    });
+    filtered = [...all];
+    applyFilters();
   } catch(e){
     document.getElementById('property-grid').innerHTML = '';
     const empty = document.getElementById('empty-state');
