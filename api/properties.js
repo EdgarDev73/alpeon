@@ -1,9 +1,19 @@
 /**
  * GET /api/properties
  * Returns live Guesty Booking Engine listings, normalised for ALPÉON UI.
+ *
+ * Architecture cache multi-niveaux :
+ * 1. Cache mémoire Lambda (instance chaude) — TTL 30 min
+ * 2. Vercel Edge CDN — s-maxage=1800, stale-while-revalidate=3600, stale-if-error=7j
+ * 3. Cron /api/warm-cache toutes les 30 min préchauffe le CDN
+ * → Guesty n'est appelé que ~48x/jour, jamais par les visiteurs directement
  */
 
 const { getListings, normalizeListings } = require('./_lib/guesty');
+
+// Cache mémoire pour les instances Lambda chaudes
+let _cache = { properties: null, fetchedAt: 0 };
+const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -11,12 +21,25 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { city, type, guests, limit = '100' } = req.query;
+  const { city, type, guests, limit = '100', bust } = req.query;
+  const bustCache = bust === '1'; // ?bust=1 pour forcer le refresh (cron warm-cache)
 
   try {
-    const raw = await getListings({ limit: parseInt(limit) });
-    let properties = normalizeListings(raw);
+    // 1. Mémoire Lambda : réutiliser si frais et pas de bust
+    const now = Date.now();
+    if (!bustCache && _cache.properties && now - _cache.fetchedAt < CACHE_TTL) {
+      console.log('[properties] Served from Lambda memory cache');
+    } else {
+      // 2. Fetch depuis Guesty (appel réseau)
+      const raw  = await getListings({ limit: parseInt(limit) });
+      _cache.properties = normalizeListings(raw);
+      _cache.fetchedAt  = now;
+      console.log(`[properties] Fetched ${_cache.properties.length} listings from Guesty`);
+    }
 
+    let properties = _cache.properties;
+
+    // Filtres optionnels (server-side)
     if (city && city !== 'all') {
       const norm = s => s.toLowerCase().replace(/['\s]/g, '').replace(/[éè]/g, 'e');
       properties = properties.filter(p => norm(p.city) === norm(city));
@@ -29,17 +52,22 @@ module.exports = async (req, res) => {
       properties = properties.filter(p => guests === '8+' ? p.guests >= 8 : p.guests >= n);
     }
 
-    // Cache-Control strategy:
-    // - s-maxage=60        : Vercel edge serves fresh data for 60s
-    // - stale-while-revalidate=3600 : revalidate in background, serve stale for up to 1h
-    // - stale-if-error=86400       : if Guesty is down, serve last good response for 24h
-    res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=3600, stale-if-error=86400');
+    // Vercel Edge CDN : cache 30 min, stale-while-revalidate 1h, stale-if-error 7 jours
+    res.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate=3600, stale-if-error=604800');
     return res.status(200).json({ properties, total: properties.length });
+
   } catch (err) {
     console.error('[properties] Guesty error:', err.message);
-    // Return a valid 200 so stale-if-error CDN cache kicks in on next request
-    // (CDN will serve last cached good response instead of this fallback)
+
+    // Servir le cache mémoire stale si disponible plutôt qu'une erreur vide
+    if (_cache.properties) {
+      console.warn('[properties] Serving stale memory cache after Guesty error');
+      res.setHeader('Cache-Control', 'no-store');
+      return res.status(200).json({ properties: _cache.properties, total: _cache.properties.length, _stale: true });
+    }
+
+    // Pas de cache — erreur propre (le CDN servira son stale-if-error)
     res.setHeader('Cache-Control', 'no-store');
-    return res.status(200).json({ properties: [], total: 0, _error: err.message });
+    return res.status(503).json({ properties: [], total: 0, _error: err.message });
   }
 };
