@@ -1,160 +1,112 @@
 /**
  * ALPÉON — Guesty Booking Engine API
- * Token: POST https://booking.guesty.com/oauth2/token  (client_credentials)
- * API:   GET  https://booking.guesty.com/api/listings
- * Required headers: g-aid-cs + Origin (booking engine origin)
  *
- * Required env vars (set in Vercel dashboard):
- *   GUESTY_CLIENT_ID
- *   GUESTY_CLIENT_SECRET
- *   GUESTY_ACCESS_TOKEN  (optional — bootstrapped by cron /api/refresh-token)
+ * Architecture token (fix rate-limit structurel) :
+ * ─────────────────────────────────────────────────
+ * Les Lambdas user-facing (properties, calendar, etc.) ne font JAMAIS d'OAuth.
+ * Elles lisent uniquement GUESTY_ACCESS_TOKEN depuis l'env Vercel.
+ *
+ * Seul /api/refresh-token (cron 3h + 15h) appelle OAuth et met à jour
+ * GUESTY_ACCESS_TOKEN dans Vercel via l'API Vercel.
+ *
+ * En cas de token manquant/expiré → erreur 503 claire, jamais de flood OAuth.
+ *
+ * Required env vars (Vercel dashboard) :
+ *   GUESTY_ACCESS_TOKEN   — mis à jour automatiquement par le cron
+ *   GUESTY_CLIENT_ID      — utilisé uniquement par refresh-token
+ *   GUESTY_CLIENT_SECRET  — utilisé uniquement par refresh-token
  */
 
-const fs        = require('fs');
-const path      = require('path');
+const fs   = require('fs');
+const path = require('path');
 
-const OAUTH_URL  = 'https://booking.guesty.com/oauth2/token';
-const BASE       = 'https://booking.guesty.com/api';
-const ORIGIN     = 'https://jupiter-residences.guestybookings.com';
-const G_AID_CS   = 'G-89C7E-9FB65-B6F69';
-// /tmp is writable on Vercel Lambdas; __dirname is read-only in prod
+const BASE   = 'https://booking.guesty.com/api';
+const ORIGIN = 'https://jupiter-residences.guestybookings.com';
+const G_AID  = 'G-89C7E-9FB65-B6F69';
+
+// /tmp survives entre requêtes sur une instance Lambda chaude
 const TOKEN_FILE = '/tmp/.guesty_token.json';
 
-/* ── Token cache (in-memory + file, survives warm Vercel instances) ── */
-let _cachedToken  = null;
-let _tokenExpiry  = 0;
-// Circuit-breaker: don't retry OAuth until this timestamp (prevents hammering after 429)
-let _oauthBackoffUntil = 0;
-
-const BACKOFF_FILE = '/tmp/.guesty_backoff.json';
-
-function _loadTokenCache() {
-  if (_cachedToken) return;
-  // Try /tmp first (prod), then __dirname (local dev / bundled bootstrap)
-  const files = [TOKEN_FILE, path.join(__dirname, '.token_cache.json')];
-  for (const f of files) {
-    try {
-      const raw = fs.readFileSync(f, 'utf8');
-      const { token, expiry } = JSON.parse(raw);
-      // Accept slightly stale tokens (up to 30 min past expiry) as emergency fallback
-      if (token && expiry > Date.now() - 30 * 60_000) {
-        _cachedToken = token; _tokenExpiry = expiry; return;
-      }
-    } catch { /* file missing or corrupt */ }
-  }
-}
-
-function _saveTokenCache() {
-  const data = JSON.stringify({ token: _cachedToken, expiry: _tokenExpiry });
-  // Write to /tmp (Vercel) — fall back to __dirname (local dev)
-  for (const f of [TOKEN_FILE, path.join(__dirname, '.token_cache.json')]) {
-    try { fs.writeFileSync(f, data); return; } catch { /* try next */ }
-  }
-}
-
-// Persist circuit-breaker state to /tmp so all warm Lambda instances share it
-function _loadBackoff() {
-  if (_oauthBackoffUntil > Date.now()) return; // already set in memory
-  try {
-    const { until } = JSON.parse(fs.readFileSync(BACKOFF_FILE, 'utf8'));
-    if (until > Date.now()) { _oauthBackoffUntil = until; }
-  } catch { /* no file */ }
-}
-function _saveBackoff(until) {
-  _oauthBackoffUntil = until;
-  try { fs.writeFileSync(BACKOFF_FILE, JSON.stringify({ until })); } catch { /* ignore */ }
-}
-function _clearBackoff() {
-  _oauthBackoffUntil = 0;
-  try { fs.unlinkSync(BACKOFF_FILE); } catch { /* ignore */ }
-}
+/* ── Token en mémoire (instance chaude) ── */
+let _mem = { token: null, expiry: 0 };
 
 function _jwtExpiry(token) {
   try {
-    const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
-    return (payload.exp || 0) * 1000; // ms
+    const p = JSON.parse(Buffer.from(token.split('.')[1], 'base64url').toString());
+    return (p.exp || 0) * 1000;
   } catch { return 0; }
 }
 
-async function getToken() {
-  // 1) Static token from env var — only use if not expired (5 min safety margin)
-  const staticToken = process.env.GUESTY_ACCESS_TOKEN;
-  if (staticToken && _jwtExpiry(staticToken) > Date.now() + 300_000) {
-    return staticToken;
+/**
+ * Retourne le meilleur token disponible sans jamais appeler OAuth.
+ * Priorité : env var → cache /tmp → env var périmé (grace period Guesty)
+ * Lance une erreur si aucun token utilisable.
+ */
+function getToken() {
+  const envToken = process.env.GUESTY_ACCESS_TOKEN;
+
+  // 1) Env var frais (5 min de marge)
+  if (envToken && _jwtExpiry(envToken) > Date.now() + 300_000) {
+    return envToken;
   }
 
-  // 2) In-memory / file cache (5 min safety margin, or stale fallback)
-  _loadTokenCache();
-  if (_cachedToken && Date.now() < _tokenExpiry - 300_000) return _cachedToken;
+  // 2) Cache mémoire frais
+  if (_mem.token && _mem.expiry > Date.now() + 300_000) {
+    return _mem.token;
+  }
 
-  const id     = process.env.GUESTY_CLIENT_ID;
-  const secret = process.env.GUESTY_CLIENT_SECRET;
-  if (!id || !secret) throw new Error('Missing GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET env vars');
-
-  // 3) OAuth — skip entirely if circuit-breaker is open (rate-limited recently)
-  _loadBackoff(); // sync backoff state from /tmp across Lambda instances
-  let lastErr;
-  if (Date.now() < _oauthBackoffUntil) {
-    lastErr = new Error('Guesty OAuth rate-limited (429)');
-    console.warn('[guesty] Circuit-breaker open, skipping OAuth until', new Date(_oauthBackoffUntil).toISOString());
-  } else {
-    // Single attempt only — never retry on 429 to avoid hammering Guesty
-    const oauthCtrl = new AbortController();
-    const oauthTimer = setTimeout(() => oauthCtrl.abort(), 5000);
-    let res;
-    try {
-      res = await fetch(OAUTH_URL, {
-        method:  'POST',
-        signal:  oauthCtrl.signal,
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
-      });
-    } finally {
-      clearTimeout(oauthTimer);
+  // 3) Cache /tmp frais
+  try {
+    const { token, expiry } = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8'));
+    if (token && expiry > Date.now() + 300_000) {
+      _mem = { token, expiry };
+      return token;
     }
-    if (res.status === 429) {
-      // Open circuit-breaker for 60 min, persisted to /tmp so all Lambda instances see it
-      _saveBackoff(Date.now() + 60 * 60_000);
-      lastErr = new Error('Guesty OAuth rate-limited (429)');
-      console.warn('[guesty] OAuth 429 — circuit-breaker open 60 min (shared via /tmp)');
-    } else if (!res.ok) {
-      throw new Error(`Guesty OAuth failed ${res.status}: ${await res.text()}`);
-    } else {
-      const json   = await res.json();
-      _cachedToken = json.access_token;
-      _tokenExpiry = Date.now() + (json.expires_in || 86400) * 1000;
-      _clearBackoff(); // reset circuit-breaker on success
-      _saveTokenCache();
-      return _cachedToken;
+  } catch { /* pas de fichier */ }
+
+  // 4) Env var légèrement périmé — Guesty honore souvent une grace period de quelques heures
+  if (envToken) {
+    const exp = _jwtExpiry(envToken);
+    const staleMs = Date.now() - exp;
+    if (staleMs < 4 * 3600_000) { // moins de 4h de retard
+      console.warn(`[guesty] Token expiré depuis ${Math.round(staleMs/60000)}min — utilisation grace period`);
+      return envToken;
     }
   }
 
-  // 4) If OAuth failed due to 429 but we have a stale cached token, use it as emergency fallback
-  if (lastErr && _cachedToken) {
-    console.warn('[guesty] OAuth rate-limited, using stale token as fallback');
-    return _cachedToken;
-  }
+  // 5) Cache /tmp périmé en dernier recours
+  try {
+    const { token } = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8'));
+    if (token) {
+      console.warn('[guesty] Utilisation token /tmp périmé en dernier recours');
+      return token;
+    }
+  } catch { /* pas de fichier */ }
 
-  // 5) Last resort: use expired env var token rather than crashing (Guesty may honour a short grace period)
-  if (lastErr && staticToken) {
-    console.warn('[guesty] OAuth rate-limited, using expired env var token as last resort');
-    return staticToken;
-  }
-
-  throw lastErr;
+  throw new Error('GUESTY_ACCESS_TOKEN manquant ou expiré — le cron refresh-token doit être exécuté');
 }
 
-/* ── Generic request ── */
-async function guestyFetch(path, { method = 'GET', body, params } = {}) {
-  const token = await getToken();
-  let url = `${BASE}${path}`;
+/**
+ * Sauvegarde un token frais en mémoire + /tmp.
+ * Appelé uniquement par refresh-token.js après un OAuth réussi.
+ */
+function saveToken(token, expiresIn) {
+  const expiry = Date.now() + (expiresIn || 86400) * 1000;
+  _mem = { token, expiry };
+  try { fs.writeFileSync(TOKEN_FILE, JSON.stringify({ token, expiry })); } catch { /* ignore */ }
+}
+
+/* ── Requête générique Guesty ── */
+async function guestyFetch(apiPath, { method = 'GET', body, params } = {}) {
+  const token = getToken(); // synchrone, jamais d'OAuth
+  let url = `${BASE}${apiPath}`;
   if (params) {
     const qs = new URLSearchParams(
       Object.entries(params).filter(([, v]) => v != null)
     ).toString();
     if (qs) url += `?${qs}`;
   }
-  // 8s timeout — Vercel functions max out at 10s, never let Guesty hang the whole request
+
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 8000);
 
@@ -167,7 +119,7 @@ async function guestyFetch(path, { method = 'GET', body, params } = {}) {
         'Accept':        'application/json',
         'Content-Type':  'application/json',
         'Authorization': `Bearer ${token}`,
-        'g-aid-cs':      G_AID_CS,
+        'g-aid-cs':      G_AID,
         'Origin':        ORIGIN,
         'Referer':       `${ORIGIN}/en`,
       },
@@ -176,7 +128,8 @@ async function guestyFetch(path, { method = 'GET', body, params } = {}) {
   } finally {
     clearTimeout(timer);
   }
-  if (!res.ok) throw new Error(`Guesty ${method} ${path} → ${res.status}: ${await res.text()}`);
+
+  if (!res.ok) throw new Error(`Guesty ${method} ${apiPath} → ${res.status}: ${await res.text()}`);
   return res.json();
 }
 
@@ -192,8 +145,8 @@ async function getListing(id) {
 
 /* ── Calendar ── */
 async function getListingCalendar(listingId, { startDate, endDate } = {}) {
-  const today = new Date();
-  const in180 = new Date(today.getTime() + 180 * 86_400_000);
+  const today  = new Date();
+  const in180  = new Date(today.getTime() + 180 * 86_400_000);
   return guestyFetch(`/listings/${listingId}/calendar`, {
     params: {
       from: startDate || today.toISOString().slice(0, 10),
@@ -202,13 +155,12 @@ async function getListingCalendar(listingId, { startDate, endDate } = {}) {
   });
 }
 
-/* ── Nightly rates for a specific listing + date range ── */
+/* ── Nightly rates ── */
 async function getNightlyRates(listingId, checkIn, checkOut) {
-  // Guesty returns nightlyRates only via the /listings list endpoint with checkIn/checkOut
-  const data = await guestyFetch('/listings', { params: { checkIn, checkOut, limit: 100 } });
+  const data    = await guestyFetch('/listings', { params: { checkIn, checkOut, limit: 100 } });
   const results = data.results || data.listings || data.data || (Array.isArray(data) ? data : []);
   const listing = results.find(l => l._id === listingId);
-  return listing?.nightlyRates || null; // null = listing not available for these dates
+  return listing?.nightlyRates || null;
 }
 
 /* ── Quote ── */
@@ -226,11 +178,11 @@ function normalizeListings(raw) {
 }
 
 function normalizeListing(l) {
-  const addr  = l.address  || {};
-  const price = l.prices   || {};
-  const pics  = l.pictures || [];
-  const desc  = l.publicDescription || {};
-  const reviews = l.reviews || {};
+  const addr    = l.address  || {};
+  const price   = l.prices   || {};
+  const pics    = l.pictures || [];
+  const desc    = l.publicDescription || {};
+  const reviews = l.reviews  || {};
 
   const pt = (l.propertyType || '').toLowerCase();
   const propertyType = pt.includes('chalet') ? 'chalet'
@@ -242,8 +194,7 @@ function normalizeListing(l) {
   if ((l.tags || []).includes('Luxe')) tags.push('Signatures');
   if ((l.accommodates || 0) >= 10) tags.push('Grand groupe');
 
-  // Guesty reviews avg is 0–10, convert to 0–5
-  const avg = reviews.avg || 0;
+  const avg    = reviews.avg || 0;
   const rating = avg ? Math.round((avg / 10 * 5) * 10) / 10 : 0;
 
   const PRIORITY = ['Sauna','Hot tub','Pool','Gym','Cinema','fireplace','Ski','Parking','Wifi','Wireless','Dishwasher','Washer','Dryer','Elevator','Family'];
@@ -264,29 +215,29 @@ function normalizeListing(l) {
   const slug = citySlug ? `${titleSlug}-${citySlug}` : titleSlug;
 
   return {
-    id:           l._id,
+    id:              l._id,
     slug,
-    title:        (l.title || l.nickname || '').trim(),
-    city:         addr.city || '',
-    area:         addr.neighborhood || '',
-    country:      addr.country || 'France',
+    title:           (l.title || l.nickname || '').trim(),
+    city:            addr.city || '',
+    area:            addr.neighborhood || '',
+    country:         addr.country || 'France',
     propertyType,
-    guests:       l.accommodates || 0,
-    bedrooms:     l.bedrooms  || 0,
-    bathrooms:    l.bathrooms || 0,
-    priceFrom:    price.basePrice || price.weeklyRate || 0,
-    currency:     price.currency || 'EUR',
+    guests:          l.accommodates || 0,
+    bedrooms:        l.bedrooms  || 0,
+    bathrooms:       l.bathrooms || 0,
+    priceFrom:       price.basePrice || price.weeklyRate || 0,
+    currency:        price.currency || 'EUR',
     rating,
-    reviewsCount: reviews.total || 0,
-    summary:      (typeof desc === 'object' ? desc.summary : desc || '').replace(/\n- /g, ' ').replace(/^- /,'').trim().slice(0, 220),
+    reviewsCount:    reviews.total || 0,
+    summary:         (typeof desc === 'object' ? desc.summary : desc || '').replace(/\n- /g, ' ').replace(/^- /,'').trim().slice(0, 220),
     fullDescription: (typeof desc === 'object' ? (desc.summary || '') + (desc.space ? '\n\n' + desc.space : '') + (desc.access ? '\n\n' + desc.access : '') : desc || '').trim(),
     amenities,
-    allAmenities: l.amenities || [],
-    image:        pics[0]?.original || pics[0]?.thumbnail || '',
-    images:       pics.slice(0, 8).map(p => p.original || p.thumbnail).filter(Boolean),
+    allAmenities:    l.amenities || [],
+    image:           pics[0]?.original || pics[0]?.thumbnail || '',
+    images:          pics.slice(0, 8).map(p => p.original || p.thumbnail).filter(Boolean),
     tags,
-    bookingUrl:   `${ORIGIN}/en/listing/${l._id}`,
+    bookingUrl:      `${ORIGIN}/en/listing/${l._id}`,
   };
 }
 
-module.exports = { getToken, guestyFetch, getListings, getListing, getListingCalendar, getNightlyRates, createQuote, normalizeListings, normalizeListing };
+module.exports = { getToken, saveToken, guestyFetch, getListings, getListing, getListingCalendar, getNightlyRates, createQuote, normalizeListings, normalizeListing };

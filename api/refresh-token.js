@@ -1,19 +1,18 @@
 /**
  * GET /api/refresh-token
- * Fetches a fresh Guesty OAuth token, writes it to /tmp AND updates the
- * GUESTY_ACCESS_TOKEN env var in Vercel so all Lambda cold starts use it
- * directly without ever calling OAuth again.
+ * Seul endpoint autorisé à appeler l'OAuth Guesty.
+ * Exécuté par le cron Vercel 2x/jour (3h + 15h) et manuellement via secret.
  *
- * Called by Vercel Cron every day at 3AM — keeps the token perpetually fresh.
- * Protected by REFRESH_SECRET so it's not publicly abusable.
+ * Met à jour :
+ *   - GUESTY_ACCESS_TOKEN dans Vercel (toutes les Lambda cold-start l'utilisent)
+ *   - /tmp/.guesty_token.json (instances Lambda chaudes)
+ *
+ * Les autres Lambdas (properties, calendar, etc.) ne font JAMAIS d'OAuth.
  */
 
-const fs   = require('fs');
-const path = require('path');
+const { saveToken } = require('./_lib/guesty');
 
 const OAUTH_URL   = 'https://booking.guesty.com/oauth2/token';
-const TOKEN_FILE  = '/tmp/.guesty_token.json';
-const LOCAL_FILE  = path.join(__dirname, '_lib/.token_cache.json');
 const SECRET      = process.env.REFRESH_SECRET;
 const VERCEL_TOKEN      = process.env.VERCEL_TOKEN;
 const VERCEL_PROJECT_ID = process.env.VERCEL_PROJECT_ID || 'prj_lkINpF7Y4ucOpVPDyEdAwJLefCaf';
@@ -84,19 +83,17 @@ module.exports = async (req, res) => {
     });
     if (!r.ok) throw new Error(`OAuth failed ${r.status}: ${await r.text()}`);
 
-    const json   = await r.json();
-    const token  = json.access_token;
-    const expiry = Date.now() + (json.expires_in || 86400) * 1000;
+    const json  = await r.json();
+    const token = json.access_token;
 
-    // 1) Write to /tmp for warm instances on this Lambda
-    for (const f of [TOKEN_FILE, LOCAL_FILE]) {
-      try { fs.writeFileSync(f, JSON.stringify({ token, expiry })); } catch { /* ignore */ }
-    }
+    // 1) Persist to /tmp + mémoire via guesty.js (instances chaudes)
+    saveToken(token, json.expires_in);
 
     // 2) Update Vercel env var so ALL cold-start instances use fresh token
     const vercelResult = await updateVercelEnvVar(token);
     console.log('[refresh-token] Vercel env var update:', vercelResult);
 
+    const expiry = Date.now() + (json.expires_in || 86400) * 1000;
     return res.status(200).json({
       ok: true,
       expires: new Date(expiry).toISOString(),
