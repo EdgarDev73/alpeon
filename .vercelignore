@@ -1,0 +1,8 @@
+node_modules
+.env
+.env.local
+.env.vercel
+.DS_Store
+.claude/
+assets/presentation-alpeon.mp4
+api/_lib/.token_cache.json
