@@ -793,10 +793,14 @@
     .dest-card:hover .dest-card-bg { transform: scale(1.06); }
     .dest-card-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(10,18,12,.08) 0%, rgba(10,18,12,.75) 65%, rgba(10,18,12,.92) 100%);
+      background: linear-gradient(to top,
+        rgba(42,32,18,.88) 0%,
+        rgba(42,32,18,.55) 40%,
+        rgba(42,32,18,.08) 75%,
+        transparent 100%);
       transition: opacity .4s;
     }
-    .dest-card:hover .dest-card-overlay { opacity: .88; }
+    .dest-card:hover .dest-card-overlay { opacity: .95; }
     .dest-card-body {
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 28px 28px 32px; z-index: 2;
