@@ -252,20 +252,75 @@
     @media (max-width: 1024px) { .process-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } .footer-lower { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
       :root { --nav-h: 72px; }
-      section { padding: 64px 24px; }
-      .hero { padding: 0 24px 60px; }
-      .stats { padding: 32px 24px; gap: 32px; flex-wrap: wrap; }
-      .offres-grid { grid-template-columns: 1fr; }
-      .process-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
-      .eng-grid { grid-template-columns: 1fr; }
-      .cta-section { padding: 64px 24px; }
+
+      /* Container padding */
+      .container { padding: 0 1.5rem; }
+
+      /* Hero */
+      .hero { padding: 0 1.5rem 60px; min-height: 480px; }
+      .hero h1 { font-size: clamp(2rem, 7vw, 3rem); margin-bottom: 18px; }
+      .hero-desc { font-size: .9rem; max-width: 100%; margin-bottom: 28px; }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 14px; }
+      .btn-primary, .btn-ghost {
+        width: 100%; text-align: center; justify-content: center;
+        min-height: 48px; display: inline-flex; align-items: center;
+      }
+
+      /* Stats — 2×2 grid */
+      .stats { display: grid; grid-template-columns: 1fr 1fr; padding: 32px 1.5rem; gap: 24px; }
+      .stat-num { font-size: 2rem; }
+
+      /* Sections */
+      section { padding: clamp(48px, 8vw, 100px) 1.5rem; }
+
+      /* Offres — single col */
+      .offres-grid { grid-template-columns: 1fr; margin-top: 40px; }
+      .offre-card { min-height: 380px; padding: 36px 1.5rem; }
+
+      /* Process — single column (steps stack vertically) */
+      .process-grid { grid-template-columns: 1fr; gap: 20px; margin-top: 40px; }
+
+      /* Engagements — 2 columns at 768px */
+      .eng-grid { grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+      .eng-card { padding: 28px 24px; }
+
+      /* CTA — single column, buttons full width */
+      .cta-section { padding: 64px 1.5rem; }
+      .cta-actions { flex-direction: column; align-items: stretch; gap: 14px; }
+      .btn-white, .btn-outline-white {
+        width: 100%; justify-content: center; min-height: 48px; text-align: center; display: inline-block;
+      }
+
+      /* Footer */
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 8px; }
     }
     @media (max-width: 480px) {
+      /* Container padding */
+      .container { padding: 0 1.25rem; }
+
+      /* Hero */
+      .hero { padding: 0 1.25rem 48px; min-height: 420px; }
+      .hero h1 { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+
+      /* Stats — 2×2 with smaller padding */
+      .stats { grid-template-columns: 1fr 1fr; padding: 24px 1.25rem; gap: 16px; }
+      .stat-num { font-size: 1.8rem; }
+
+      /* Sections */
+      section { padding: clamp(40px, 8vw, 80px) 1.25rem; }
+
+      /* Engagements — single column */
+      .eng-grid { grid-template-columns: 1fr; }
+
+      /* Process */
       .process-grid { grid-template-columns: 1fr; }
+
+      /* Footer */
       .footer-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2.2rem; }
+
+      /* Buttons */
+      .btn-primary, .btn-ghost, .btn-white, .btn-outline-white { padding: 14px 20px; }
     }
 
   .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#2C3D30;box-shadow:0 4px 20px rgba(44,61,48,.45);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}

@@ -251,20 +251,25 @@
 
     @media(max-width:1024px){
       .detail-layout{grid-template-columns:1fr;gap:2rem}
-      .booking-card{position:static;max-height:none;overflow:hidden}
+      .booking-card{position:static;max-height:none;overflow:hidden;width:100%;max-width:100%;border-radius:0}
       .gallery{grid-template-rows:25vh 25vh}
     }
+    @media(max-width:900px){
+      .reco-grid{grid-template-columns:1fr 1fr}
+    }
     @media(max-width:640px){
-      .gallery{grid-template-columns:1fr;grid-template-rows:50vw}
+      .gallery{grid-template-columns:1fr;grid-template-rows:60vw}
       .gallery-thumb{display:none}
       .gallery-main{grid-row:1}
       .prop-specs{gap:0;flex-wrap:wrap}
-      .detail-layout{padding:0 1.25rem 5rem}
+      .detail-layout{padding:0 1.25rem 4rem}
       .breadcrumb{padding:1rem 1.25rem .5rem}
       .amenities-grid{grid-template-columns:repeat(2,1fr)}
       .form-row{grid-template-columns:1fr}
       .reco-grid{grid-template-columns:1fr}
       #reco-section{padding-left:1.25rem;padding-right:1.25rem}
+      .prop-section{padding-top:clamp(32px,5vw,64px);margin-top:0}
+      .section{padding-top:clamp(32px,5vw,64px);margin-top:0}
     }
 
     /* ── MULTI-STEP BOOKING ── */
@@ -404,14 +409,14 @@
     /* ── ASK QUESTION BTN ── */
     .btn-ask{width:100%;background:transparent;border:1.5px solid #ddd;border-radius:4px;padding:.58rem;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#2C3D30;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.45rem;margin-bottom:.9rem;transition:border-color .2s,background .2s}
     .btn-ask:hover{border-color:#2C3D30;background:#f5f3ef}
-    /* ── STICKY MOBILE BAR ── */
-    .sticky-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:#2C3D30;padding:.8rem 1.4rem;box-shadow:0 -4px 20px rgba(0,0,0,.15);align-items:center;justify-content:space-between;gap:1rem}
-    .sticky-bar-price{color:#E8CBA0;line-height:1.15}
-    .sticky-bar-price small{font-size:.65rem;opacity:.7;display:block}
-    .sticky-bar-price strong{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:1.35rem;font-weight:400}
-    .sticky-bar-btn{background:#E8CBA0;color:#2C3D30;border:none;border-radius:3px;padding:.65rem 1.4rem;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s}
-    .sticky-bar-btn:hover{background:#f0d8b0}
-    @media(max-width:1024px){.sticky-bar{display:flex}body{padding-bottom:72px}}
+    /* ── STICKY MOBILE PRICE BAR ── */
+    .sticky-price-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:#2C3D30;padding:.8rem 1.4rem;box-shadow:0 -4px 20px rgba(0,0,0,.15);align-items:center;justify-content:space-between;gap:1rem}
+    .sticky-price-bar-price{color:#E8CBA0;line-height:1.15}
+    .sticky-price-bar-price small{font-size:.65rem;opacity:.7;display:block}
+    .sticky-price-bar-price strong{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:1.35rem;font-weight:400}
+    .sticky-price-bar-btn{background:#E8CBA0;color:#2C3D30;border:none;border-radius:3px;padding:.65rem 1.4rem;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s;min-height:44px}
+    .sticky-price-bar-btn:hover{background:#f0d8b0}
+    @media(max-width:900px){.sticky-price-bar{display:flex}body{padding-bottom:72px}}
 
     /* ─── MOBILE COMPREHENSIVE ─── */
     @media (max-width: 768px) {
@@ -422,7 +427,7 @@
 
       /* Layout */
       .detail-layout { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1.25rem 5rem; }
-      .booking-card { position: static; max-height: none; overflow: visible; }
+      .booking-card { position: static; max-height: none; overflow: visible; width: 100%; max-width: 100%; border-radius: 0; }
       .breadcrumb { padding: .75rem 1.25rem .5rem; }
 
       /* Property header */
@@ -437,9 +442,11 @@
       /* Recommendations */
       .reco-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
 
-      /* Forms */
+      /* Forms — touch targets */
       .form-row { grid-template-columns: 1fr; }
-      .guests-btn { width: 44px; height: 44px; }
+      .guests-btn { min-width: 44px; min-height: 44px; width: 44px; height: 44px; }
+      .form-input { min-height: 44px; }
+      .form-field input { min-height: 44px; }
 
       /* Booking card buttons */
       .btn-quote { min-height: 48px; }
@@ -449,7 +456,7 @@
 
     @media (max-width: 640px) {
       /* Gallery - single column */
-      .gallery { grid-template-columns: 1fr; grid-template-rows: 50vw; }
+      .gallery { grid-template-columns: 1fr; grid-template-rows: 60vw; }
       .gallery-thumb { display: none; }
       .gallery-main { grid-row: 1; }
 
@@ -464,15 +471,22 @@
       .reco-grid { grid-template-columns: 1fr; }
 
       /* Sticky bar touch targets */
-      .sticky-bar { padding: .9rem 1.25rem; gap: .75rem; }
-      .sticky-bar-btn { min-height: 44px; padding: .7rem 1.5rem; }
+      .sticky-price-bar { padding: .9rem 1.25rem; gap: .75rem; }
+      .sticky-price-bar-btn { min-height: 44px; padding: .7rem 1.5rem; }
     }
 
     @media (max-width: 480px) {
+      /* Gallery taller on small phones */
+      .gallery { grid-template-rows: 72vw; }
+
+      /* Prop specs — stack vertically */
       .prop-specs { gap: 0; flex-wrap: wrap; }
-      .spec-item { flex: 1 1 100%; border-bottom: 1px solid var(--stone-2); padding: .5rem 0; }
+      .spec-item { flex: 1 1 100%; border-bottom: 1px solid var(--stone-2); padding: .5rem 0; display: flex; align-items: center; gap: .65rem; justify-content: flex-start; }
       .spec-item:last-child { border-bottom: none; }
       .spec-sep { display: none; }
+
+      /* Amenities 2-col on small phones */
+      .amenities-grid { grid-template-columns: 1fr 1fr; }
       .amenity-item { min-height: 44px; }
     }
 
@@ -1786,6 +1800,19 @@ loadProperty();
     const el=document.getElementById('sticky-price-val');
     if(el && price) el.textContent=price.toLocaleString('fr-FR');
   }
+  // Hide sticky price bar when booking card is visible
+  const stickyBar = document.getElementById('sticky-price-bar');
+  if(stickyBar){
+    const bookingCard = document.getElementById('booking-card');
+    if(bookingCard && 'IntersectionObserver' in window){
+      const obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          stickyBar.style.display = entry.isIntersecting ? 'none' : '';
+        });
+      }, { threshold: 0.1 });
+      obs.observe(bookingCard);
+    }
+  }
 </script>
 
 <script id="nav-scroll-js">
@@ -1797,13 +1824,13 @@ loadProperty();
   u();
 })();
 </script>
-  <!-- STICKY MOBILE BAR -->
-  <div class="sticky-bar" id="sticky-bar">
-    <div class="sticky-bar-price">
-      <small>From</small>
-      <strong id="sticky-price-val">—</strong> <small style="display:inline;font-size:.7rem">€ / night</small>
+  <!-- STICKY MOBILE PRICE BAR -->
+  <div class="sticky-price-bar" id="sticky-price-bar">
+    <div class="sticky-price-bar-price">
+      <small>À partir de</small>
+      <strong id="sticky-price-val">—</strong> <small style="display:inline;font-size:.7rem">€ / nuit</small>
     </div>
-    <button class="sticky-bar-btn" onclick="document.getElementById('booking-card')?.scrollIntoView({behavior:'smooth'})">Book this property</button>
+    <button class="sticky-price-bar-btn" onclick="document.getElementById('booking-card')?.scrollIntoView({behavior:'smooth'})">Demander une disponibilité</button>
   </div>
 
   <!-- CONTACT MODAL -->

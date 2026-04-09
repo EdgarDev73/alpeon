@@ -325,19 +325,30 @@
       .station-card:first-child { grid-column: span 2; }
       .intro { gap: 48px; }
     }
+    /* 2-column station grid at ≤900px */
+    @media (max-width: 900px) {
+      .stations-grid { grid-template-columns: 1fr 1fr; }
+      .station-card:first-child { grid-column: span 2; }
+    }
+    /* 1-column station grid at ≤600px */
+    @media (max-width: 600px) {
+      .stations-grid { grid-template-columns: 1fr; gap: 2px; }
+      .station-card:first-child { grid-column: span 1; }
+    }
     @media (max-width: 768px) {
-      
-      .hero { padding: 0 24px 60px; }
-      .intro { padding: 60px 24px; flex-direction: column; gap: 24px; }
+      .hero { padding: 0 1.25rem 2rem; }
+      .intro { padding: 60px 1.25rem; flex-direction: column; gap: 24px; }
       .intro-num { font-size: 4rem; }
       .stations-section { padding: 0 0 64px; }
       .stations-grid { grid-template-columns: 1fr; gap: 2px; }
       .station-card:first-child { grid-column: span 1; }
-      .station-card { min-height: 440px; padding: 32px 24px; }
+      .station-card { min-height: 440px; padding: 32px 1.25rem; }
       .station-card:first-child .station-name { font-size: 2.4rem; }
-      .cta-section { padding: 64px 24px; }
+      .cta-section { padding: 64px 1.25rem; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 8px; }
+      /* Fixed-width containers override */
+      .intro, .stations-section, .cta-section, footer { width: 100%; }
     }
     @media (max-width: 480px) {
       .footer-grid { grid-template-columns: 1fr; }
@@ -348,7 +359,7 @@
       :root { --nav-h: 72px; }
 
       /* Hero */
-      .hero { padding: 0 1.25rem 56px; min-height: 520px; }
+      .hero { padding: 0 1.25rem 2rem; min-height: 520px; }
       .hero h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
       .hero-desc { font-size: .88rem; max-width: 100%; }
 
@@ -356,7 +367,7 @@
       .intro { padding: 48px 1.25rem; flex-direction: column; gap: 20px; }
       .intro-num { font-size: 3.5rem; }
 
-      /* Stations */
+      /* Stations — 1 column at ≤768px */
       .stations-section { padding: 0 0 48px; }
       .stations-grid { grid-template-columns: 1fr; gap: 2px; }
       .station-card:first-child { grid-column: span 1; }

@@ -235,6 +235,36 @@
   }
   .contact-card-email svg { width: 13px; height: 13px; flex-shrink: 0; }
 
+  /* ─── MOBILE COMPREHENSIVE ─── */
+  @media (max-width: 768px) {
+    :root { --nav-h: 72px; }
+
+    /* Hero responsive */
+    .page-hero { min-height: 280px; }
+    .page-hero-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .page-hero-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+    .page-hero-sub { font-size: .88rem; }
+
+    /* Container */
+    .container { padding: 0 1.5rem; width: 100%; }
+
+    /* Contact section spacing */
+    .contact-section { padding: clamp(40px, 6vw, 64px) 0; }
+    .contact-intro { margin-bottom: clamp(28px, 4vw, 44px); }
+
+    /* Two-column contact grid → 1 column at ≤768px */
+    .contact-grid { grid-template-columns: 1fr; }
+
+    /* Contact card min tap target */
+    .contact-card { min-height: 44px; }
+  }
+
+  @media (max-width: 480px) {
+    .page-hero-body { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .container { padding: 0 1.25rem; }
+    .contact-card { padding: clamp(20px, 4vw, 28px); }
+  }
+
   @media (max-width: 640px) {
     .contact-grid { grid-template-columns: 1fr; }
   }

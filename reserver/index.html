@@ -523,8 +523,10 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) { .property-grid { grid-template-columns: repeat(2,1fr) } .reassurance-inner { grid-template-columns: repeat(2,1fr) } }
+    @media (max-width: 900px) { .property-grid { grid-template-columns: repeat(2,1fr) } }
+    @media (max-width: 640px) { .property-grid { grid-template-columns: 1fr } }
     @media (max-width: 700px) {
-      
+
       .hero-content { padding: 0 1.25rem 2.5rem }
       .filter-inner { padding: .85rem 1.25rem; gap: .75rem }
       .filter-group { padding-right: 1rem; margin-right: 1rem }
@@ -557,11 +559,11 @@
       .trust-inner { padding: 0 1.25rem; flex-wrap: wrap; }
       .trust-item { width: 50%; border-right: none; margin-right: 0; padding: .6rem 0; }
 
-      /* Filter bar */
+      /* Filter bar — sticky offset accounts for 72px header */
       .filter-bar { position: sticky; top: var(--nav-h); }
-      .filter-inner { height: auto; padding: .75rem 1.25rem; flex-wrap: wrap; gap: .5rem; }
+      .filter-inner { height: auto; padding: 12px 16px; flex-wrap: wrap; gap: .5rem; }
       .filter-group {
-        flex: 1 1 calc(50% - .25rem); min-width: 0;
+        flex: 1 1 calc(50% - 8px); min-width: 0;
         border-right: none; border-bottom: 1px solid #ece8e2;
         padding: .6rem .5rem; padding-left: 0;
       }
@@ -573,7 +575,7 @@
       /* Grid */
       .grid-wrap { padding: 1.75rem 1.25rem 4rem; }
       .grid-header { flex-direction: column; gap: .75rem; align-items: flex-start; }
-      .property-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .property-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 
       /* Reassurance */
       .reassurance { padding: 2.5rem 1.25rem; }
@@ -585,7 +587,21 @@
     }
 
     @media (max-width: 480px) {
+      /* Hero height on small phones */
+      .hero { min-height: 200px; height: 30vh; }
+
+      /* Filter bar — full-width groups and panel overflow fix */
+      .filter-inner { padding: 12px 16px; }
       .filter-group { flex: 1 1 100%; }
+      .flt-panel { min-width: calc(100vw - 2rem); left: 0 !important; right: auto; }
+
+      /* Cards — single column */
+      .property-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+
+      /* Card text */
+      .prop-name { font-size: 1.1rem; }
+
+      /* Trust items — full width */
       .trust-item { width: 100%; }
       .reassurance-inner { grid-template-columns: 1fr; }
 

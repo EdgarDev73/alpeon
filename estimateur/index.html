@@ -1904,6 +1904,36 @@
     .est-main { padding: 44px 48px 72px; }
   }
 
+  /* ─── Tablet / small desktop ≤ 768px ─── */
+  @media (max-width: 768px) {
+    /* Hero padding */
+    .si-content { padding: 0 1.5rem 80px; }
+    /* Estimateur main padding */
+    .est-wrap { padding: 32px 0 100px; }
+    .est-main { padding: 28px 24px 48px; }
+    /* max-width containers become full-width */
+    .est-layout { max-width: 100%; width: 100%; }
+    .res-inner { max-width: 100%; width: 100%; }
+    .cta-inner { max-width: 100%; width: 100%; padding: 60px 1.5rem; }
+    /* Results section */
+    .res-section { padding: 48px 1.5rem 56px; }
+    /* CTA section */
+    .cta-text h2 { font-size: clamp(2rem, 5vw, 2.8rem); }
+    /* Trust strip */
+    .trust-strip { padding: 56px 1.5rem 64px; }
+    .trust-strip-inner { grid-template-columns: 1fr 1fr; gap: 16px; }
+    /* Footer */
+    footer { padding: 56px 1.5rem 0; }
+    /* Input touch targets */
+    .inp { min-height: 44px; }
+    .cs-input { min-height: 44px; }
+    .loc-select { min-height: 44px; }
+    .sn-next { min-height: 48px; }
+    .sn-back { min-height: 44px; }
+    .cnt-btn { min-height: 44px; width: 44px; }
+    .type-prop-pill { min-height: 44px; }
+  }
+
   /* ═══════════════════════════════════════
      MOBILE — ≤ 640px
   ═══════════════════════════════════════ */
