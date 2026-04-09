@@ -515,9 +515,28 @@
       background: var(--stone, #F5F3EF);
       border-radius: 4px;
       padding: 40px 44px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 14px;
+    }
+    .est-guarantee-val {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(4rem, 6vw, 5.5rem);
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .est-guarantee-sub {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--green);
+      line-height: 1.6;
     }
     .est-stat-block {}
     .est-stat-val {
@@ -1301,22 +1320,8 @@ function toggleMobileMenu(){
       <span class="est-teaser-note">Free · No commitment · 2 minutes</span>
     </div>
     <div class="est-teaser-right">
-      <div class="est-stat-block">
-        <div class="est-stat-val">1000+</div>
-        <div class="est-stat-label">Properties<br>estimated</div>
-      </div>
-      <div class="est-stat-block">
-        <div class="est-stat-val">200+</div>
-        <div class="est-stat-label">Reference properties<br>managed</div>
-      </div>
-      <div class="est-stat-block">
-        <div class="est-stat-val">6</div>
-        <div class="est-stat-label">Resorts<br>covered</div>
-      </div>
-      <div class="est-stat-block">
-        <div class="est-stat-val">2 min</div>
-        <div class="est-stat-label">To get<br>your result</div>
-      </div>
+      <div class="est-guarantee-val">100%</div>
+      <div class="est-guarantee-sub">Guaranteed<br>income</div>
     </div>
   </div>
 </section>
