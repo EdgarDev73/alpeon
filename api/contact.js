@@ -10,9 +10,10 @@ module.exports = async (req, res) => {
   if (body.type === 'callback') {
     const name  = (body.name  || '').trim();
     const phone = (body.phone || '').trim();
+    const dest  = (body.destination || '').trim();
     const lang  = body.lang === 'en' ? 'en' : 'fr';
     if (!name || !phone) return res.status(400).json({ error: 'Nom et téléphone requis.' });
-    console.log(`[callback] ${name} · ${phone} (${lang})`);
+    console.log(`[callback] ${name} · ${phone} · ${dest || '—'} (${lang})`);
 
     const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS } = process.env;
     if (!EMAIL_HOST || !EMAIL_USER || !EMAIL_PASS) return res.status(200).json({ ok: true, dev: true });
@@ -22,16 +23,20 @@ module.exports = async (req, res) => {
       secure: parseInt(EMAIL_PORT || '465') === 465,
       auth: { user: EMAIL_USER, pass: EMAIL_PASS },
     });
-    const subject = lang === 'en' ? `Callback request — ${name} · ${phone}` : `Demande de rappel — ${name} · ${phone}`;
+    const destLabel = lang === 'en' ? 'Destination' : 'Destination';
+    const subject = lang === 'en'
+      ? `Stay enquiry — ${name}${dest ? ' · ' + dest : ''} · ${phone}`
+      : `Demande de séjour — ${name}${dest ? ' · ' + dest : ''} · ${phone}`;
     const html = `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;color:#111">
-      <div style="background:#2C3D30;padding:20px 28px"><p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E8CBA0">ALPÉON — ${lang === 'en' ? 'Callback Request' : 'Demande de rappel'}</p></div>
+      <div style="background:#2C3D30;padding:20px 28px"><p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E8CBA0">ALPÉON — ${lang === 'en' ? 'Stay Enquiry' : 'Demande de séjour'}</p></div>
       <div style="padding:28px"><table style="width:100%;border-collapse:collapse;font-size:14px">
-        <tr><td style="padding:10px 0;color:#6b7280;width:120px">${lang === 'en' ? 'Name' : 'Nom'}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30">${name}</td></tr>
+        <tr><td style="padding:10px 0;color:#6b7280;width:140px">${lang === 'en' ? 'Name' : 'Prénom'}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30">${name}</td></tr>
         <tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">${lang === 'en' ? 'Phone' : 'Téléphone'}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30"><a href="tel:${phone}" style="color:#2C3D30;text-decoration:none">${phone}</a></td></tr>
+        ${dest ? `<tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">${destLabel}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30">${dest}</td></tr>` : ''}
         <tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">Source</td><td style="padding:10px 0;color:#2C3D30">Page ${lang === 'en' ? 'Book' : 'Réserver'} — popup</td></tr>
       </table></div></div>`;
     try {
-      await transporter.sendMail({ from: `ALPÉON <${EMAIL_USER}>`, to: 'reservations@alpeon.fr', subject, html, text: `${name}\n${phone}` });
+      await transporter.sendMail({ from: `ALPÉON <${EMAIL_USER}>`, to: 'reservations@alpeon.fr', subject, html, text: `${name}\n${phone}${dest ? '\n' + dest : ''}` });
     } catch (e) { console.error('[callback] SMTP:', e.message); }
     return res.status(200).json({ ok: true });
   }

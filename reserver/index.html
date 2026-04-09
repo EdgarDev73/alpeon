@@ -658,6 +658,10 @@
     font-family: var(--font-italic); font-style: italic;
     color: var(--gold); font-size: 1.05em;
   }
+  .cb-header-sub {
+    font-size: .78rem; color: rgba(232,203,160,.65); line-height: 1.55;
+    margin: 10px 0 0; font-family: var(--font-sans); max-width: 300px;
+  }
   .cb-close {
     position: absolute; top: 16px; right: 16px;
     background: rgba(255,255,255,.12); border: none; border-radius: 50%;
@@ -666,9 +670,11 @@
   }
   .cb-close:hover { background: rgba(255,255,255,.22); color: #fff; }
   .cb-body { padding: 24px 28px 28px; }
-  .cb-subtitle {
-    font-size: .82rem; color: rgba(42,32,18,.55); line-height: 1.65;
-    margin-bottom: 22px;
+  .cb-select {
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a9690' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+    padding-right: 36px; cursor: pointer;
   }
   .cb-fields { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
   .cb-field {
@@ -1792,41 +1798,53 @@ function renderMap(){
 </a>
 
 <!-- ── CALLBACK POPUP ── -->
-<div class="cb-backdrop" id="cb-backdrop" role="dialog" aria-modal="true" aria-label="Demande de rappel">
+<div class="cb-backdrop" id="cb-backdrop" role="dialog" aria-modal="true" aria-label="Planifiez votre séjour">
   <div class="cb-modal" id="cb-modal">
     <div class="cb-header">
-      <div class="cb-header-eyebrow">Sélection sur-mesure</div>
-      <h3 class="cb-header-title">Vous cherchez<br>un bien <em>d'exception</em> ?</h3>
+      <div class="cb-header-eyebrow">Séjour sur-mesure · Gratuit · Sans engagement</div>
+      <h3 class="cb-header-title">Vous planifiez un<br>séjour <em>en montagne</em> ?</h3>
+      <p class="cb-header-sub">Un conseiller vous construit un programme complet en moins de 2h : chalet, dates, activités.</p>
       <button class="cb-close" id="cb-close" aria-label="Fermer">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div id="cb-form-wrap">
       <div class="cb-body">
-        <p class="cb-subtitle">Laissez vos coordonnées — un conseiller ALPÉON vous rappelle pour vous préparer une sélection personnalisée selon vos critères.</p>
         <form class="cb-fields" id="cb-form" novalidate>
           <div class="cb-field">
-            <label class="cb-label" for="cb-name">Prénom &amp; Nom</label>
-            <input class="cb-input" id="cb-name" name="name" type="text" placeholder="Jean Dupont" autocomplete="name" required>
+            <label class="cb-label" for="cb-name">Votre prénom</label>
+            <input class="cb-input" id="cb-name" name="name" type="text" placeholder="Jean" autocomplete="given-name" required>
+          </div>
+          <div class="cb-field">
+            <label class="cb-label" for="cb-dest">Destination envisagée</label>
+            <select class="cb-input cb-select" id="cb-dest" name="destination">
+              <option value="">Pas encore décidé</option>
+              <option value="Courchevel">Courchevel</option>
+              <option value="Megève">Megève</option>
+              <option value="Méribel">Méribel</option>
+              <option value="Tignes">Tignes</option>
+              <option value="Val d'Isère">Val d'Isère</option>
+              <option value="Val Thorens">Val Thorens</option>
+            </select>
           </div>
           <div class="cb-field">
             <label class="cb-label" for="cb-phone">Téléphone</label>
             <input class="cb-input" id="cb-phone" name="phone" type="tel" placeholder="+33 6 12 34 56 78" autocomplete="tel" required>
           </div>
           <button class="cb-submit" type="submit">
-            Être rappelé par un conseiller
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.13 1 .39 1.98.77 2.91a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.17-1.17a2 2 0 012.11-.45c.93.38 1.91.64 2.91.77A2 2 0 0122 16.92z"/></svg>
+            Construire mon séjour
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
         </form>
-        <button class="cb-decline" id="cb-decline">Non merci, je continue ma recherche</button>
+        <button class="cb-decline" id="cb-decline">Non merci, je continue à explorer</button>
       </div>
     </div>
     <div class="cb-success" id="cb-success">
       <div class="cb-success-icon">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <div class="cb-success-title">Demande envoyée !</div>
-      <p class="cb-success-text">Un conseiller ALPÉON vous contactera dans les plus brefs délais pour préparer votre sélection sur-mesure.</p>
+      <div class="cb-success-title">C'est noté !</div>
+      <p class="cb-success-text">Un conseiller ALPÉON vous rappelle sous 2h pour construire votre séjour idéal.</p>
     </div>
   </div>
 </div>
@@ -1859,6 +1877,7 @@ function renderMap(){
     e.preventDefault();
     const name  = document.getElementById('cb-name').value.trim();
     const phone = document.getElementById('cb-phone').value.trim();
+    const dest  = document.getElementById('cb-dest').value;
     if(!name || !phone) return;
 
     const btn = form.querySelector('.cb-submit');
@@ -1866,10 +1885,10 @@ function renderMap(){
     btn.disabled = true;
 
     try {
-      await fetch('/api/callback', {
+      await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'callback', name, phone, lang: 'fr' })
+        body: JSON.stringify({ type: 'callback', name, phone, destination: dest, lang: 'fr' })
       });
     } catch(err) { console.warn('[cb]', err); }
 
