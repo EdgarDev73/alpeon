@@ -709,40 +709,33 @@
 
   /* ── CALLBACK POPUP ── */
   .cb-backdrop {
-    position: fixed; inset: 0; z-index: 1100;
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
     background: rgba(18,28,20,.65);
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    opacity: 0; pointer-events: none;
-    transition: opacity .32s ease;
+    align-items: flex-end; justify-content: center;
   }
-  .cb-backdrop.open { opacity: 1; pointer-events: all; }
+  .cb-backdrop.open { display: flex; }
   .cb-modal {
-    position: fixed; z-index: 1101;
-    bottom: 0; left: 0; right: 0;
     background: #fff;
     border-radius: 20px 20px 0 0;
-    padding: 0;
-    max-width: 480px;
-    margin: 0 auto;
-    transform: translateY(100%);
-    transition: transform .38s cubic-bezier(.4,0,.2,1);
+    width: 100%; max-width: 480px;
     box-shadow: 0 -12px 60px rgba(0,0,0,.22);
     overflow: hidden;
+    animation: cbSlideUp .35s ease;
+  }
+  @keyframes cbSlideUp {
+    from { transform: translateY(60px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
   }
   @media (min-width: 600px) {
-    .cb-modal {
-      bottom: auto; top: 50%; left: 50%; right: auto;
-      transform: translate(-50%, calc(-50% + 24px));
-      border-radius: 12px;
-      opacity: 0;
-      transition: transform .34s cubic-bezier(.4,0,.2,1), opacity .28s ease;
-    }
-    .cb-backdrop.open .cb-modal {
-      transform: translate(-50%, -50%);
-      opacity: 1;
+    .cb-backdrop { align-items: center; }
+    .cb-modal { border-radius: 12px; animation: cbFadeIn .28s ease; }
+    @keyframes cbFadeIn {
+      from { transform: translateY(16px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
     }
   }
-  .cb-backdrop.open .cb-modal { transform: translateY(0); }
   .cb-header {
     background: var(--green);
     padding: 28px 28px 24px;
