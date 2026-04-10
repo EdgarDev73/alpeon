@@ -1,35 +1,24 @@
 const nodemailer = require('nodemailer');
 
-/* ── Brevo Contacts API ── */
-async function addBrevoContact(email, source) {
-  const apiKey = process.env.BREVO_API_KEY;
-  if (!apiKey) return { skipped: true };
-
-  const res = await fetch('https://api.brevo.com/v3/contacts', {
-    method: 'POST',
-    headers: {
-      'api-key': apiKey,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    body: JSON.stringify({
-      email,
-      updateEnabled: true,                     // update if already exists
-      listIds: [process.env.BREVO_LIST_ID ? parseInt(process.env.BREVO_LIST_ID) : 2],
-      attributes: {
-        SOURCE: source || 'footer',
-        SIGNUP_DATE: new Date().toISOString().slice(0, 10),
-      },
-    }),
-  });
-
-  // 204 = created, 400 with "Contact already exist" = ok (updateEnabled)
-  const text = await res.text();
-  const data = text ? JSON.parse(text) : {};
-  if (!res.ok && res.status !== 204) {
-    console.warn('[newsletter] Brevo contact error:', res.status, text);
+/* ── Zapier Webhook ── */
+async function pingZapier(email, source) {
+  const url = process.env.ZAPIER_NEWSLETTER_WEBHOOK;
+  if (!url) return { skipped: true };
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        source: source || 'footer',
+        signup_date: new Date().toISOString().slice(0, 10),
+      }),
+    });
+    return { ok: true };
+  } catch (e) {
+    console.warn('[newsletter] Zapier webhook error:', e.message);
+    return { error: e.message };
   }
-  return { status: res.status, data };
 }
 
 module.exports = async (req, res) => {
@@ -43,11 +32,8 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Adresse email invalide.' });
   }
 
-  // 1) Store in Brevo contacts list (non-blocking on failure)
-  const brevoResult = await addBrevoContact(email, source).catch(e => {
-    console.warn('[newsletter] Brevo API unreachable:', e.message);
-    return { error: e.message };
-  });
+  // 1) Send to Zapier (non-blocking)
+  const zapierResult = await pingZapier(email, source);
 
   const dev = !process.env.EMAIL_HOST;
   if (!dev) {
@@ -65,7 +51,7 @@ module.exports = async (req, res) => {
       from: process.env.EMAIL_FROM || 'ALPÉON <reservations@alpeon.fr>',
       to: 'marketing@alpeon.fr',
       subject: `Nouvelle inscription newsletter — ${email}`,
-      text: `Nouvelle inscription newsletter : ${email}\nSource : ${source || 'footer'}\nDate : ${new Date().toLocaleString('fr-FR')}\nBrevo : ${JSON.stringify(brevoResult)}`,
+      text: `Nouvelle inscription newsletter : ${email}\nSource : ${source || 'footer'}\nDate : ${new Date().toLocaleString('fr-FR')}\nZapier : ${JSON.stringify(zapierResult)}`,
     });
 
     // 3) Email de bienvenue à l'inscrit
