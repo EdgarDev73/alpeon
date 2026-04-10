@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
         <tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">Source</td><td style="padding:10px 0;color:#2C3D30">Page ${lang === 'en' ? 'Book' : 'Réserver'} — popup</td></tr>
       </table></div></div>`;
     // Zapier webhook (parallel, non-blocking)
-    const ZAPIER_URL = process.env.ZAPIER_CALLBACK_WEBHOOK || 'https://hooks.zapier.com/hooks/catch/18120855/u7fby48/';
+    const ZAPIER_URL = process.env.ZAPIER_CALLBACK_WEBHOOK;
     fetch(ZAPIER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

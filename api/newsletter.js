@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 /* ── Zapier Webhook ── */
 async function pingZapier(email, source) {
-  const url = process.env.ZAPIER_NEWSLETTER_WEBHOOK || 'https://hooks.zapier.com/hooks/catch/18120855/u7f6dmg/';
+  const url = process.env.ZAPIER_NEWSLETTER_WEBHOOK;
   if (!url) return { skipped: true };
   try {
     await fetch(url, {
