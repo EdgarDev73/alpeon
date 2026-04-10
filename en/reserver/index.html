@@ -478,12 +478,10 @@
     .cta-btn:hover { background: var(--gold); color: var(--green-d) }
 
     /* ── FOOTER ── */
-    footer { background: #0d1410; padding: clamp(56px,7vw,88px) 0 0; }
+    footer { background: var(--ink); padding: clamp(64px, 8vw, 96px) 0 0 }
     .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 48px;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
       border-bottom: 1px solid rgba(250,254,255,.07);
     }
     .footer-brand-logo { margin-bottom: 14px; }
@@ -505,11 +503,10 @@
       color: rgba(250,254,255,.48); transition: color .2s; text-decoration: none;
     }
     .footer-links a:hover { color: var(--gold,#E8CBA0); }
+    /* Social + Newsletter row */
     .footer-lower {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 48px;
-      padding: 40px 0 48px;
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 48px; padding: 40px 0 48px;
       border-bottom: 1px solid rgba(250,254,255,.07);
     }
     .footer-socials { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
@@ -521,7 +518,8 @@
     }
     .footer-social-link:hover { border-color: var(--gold,#E8CBA0); color: var(--gold,#E8CBA0); background: rgba(232,203,160,.07); }
     .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
-    .nl-form { display: flex; gap: 8px; margin-top: 4px; }
+    /* Newsletter inline */
+    .nl-form { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
     .nl-input {
       flex: 1; border: 1px solid rgba(250,254,255,.12); border-radius: 4px;
       background: rgba(250,254,255,.05); color: #fff;
@@ -539,13 +537,14 @@
     .nl-btn:hover { opacity: .85; }
     .nl-msg { font-size: .73rem; margin-top: .5rem; min-height: 1em; }
     .nl-msg.ok { color: #86efac; } .nl-msg.err { color: #fca5a5; }
+    /* Bottom bar */
     .footer-bottom {
       padding: 24px 0; display: flex;
       justify-content: space-between; align-items: center; gap: 12px;
     }
     .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
     @media(max-width:1024px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } .footer-lower{ grid-template-columns:1fr; } }
-    @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; } .footer-bottom{ flex-direction:column; text-align:center; } }
+    @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; gap:28px; } .footer-bottom{ flex-direction:column; text-align:center; } }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) { .property-grid { grid-template-columns: repeat(2,1fr) } .reassurance-inner { grid-template-columns: repeat(2,1fr) } }
@@ -1220,7 +1219,7 @@ function toggleMobileMenu(){
           <li><a href="/en/proprietaires">Owners</a></li>
           <li><a href="/en/proprietaires">ALPÉON Signatures</a></li>
           <li><a href="/en/estimateur">Revenue estimator</a></li>
-          <li><a href="/en/about">About</a></li>
+          <li><a href="/en/about">About us</a></li>
           <li><a href="/en/faq">FAQ</a></li>
         </ul>
       </div>
@@ -1228,12 +1227,19 @@ function toggleMobileMenu(){
         <div class="footer-col-title">Contact</div>
         <ul class="footer-links">
           <li><a href="tel:+33970703991">Call us</a></li>
-          <li><a href="/en/contact">Send us an email</a></li>
+          <li><a href="mailto:contact@alpeon.fr" style="color:var(--gold);font-weight:500">contact@alpeon.fr</a></li>
           <li><a href="https://wa.me/33765254926">WhatsApp</a></li>
         </ul>
+        <div style="margin-top:20px">
+          <div class="footer-col-title">Legal</div>
+          <ul class="footer-links">
+            <li><a href="/en/mentions-legales">Legal notice</a></li>
+            <li><a href="/en/politique-confidentialite">Privacy policy</a></li>
+            <li><a href="/en/cgv">Terms &amp; conditions</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-
     <div class="footer-lower">
       <div>
         <div class="footer-col-title">Social media</div>
@@ -1259,7 +1265,6 @@ function toggleMobileMenu(){
         <p class="nl-msg" id="nl-msg"></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       <span>© 2026 ALPÉON. All rights reserved.</span>
       <span>Premium alpine property management · French Alps</span>
@@ -1494,14 +1499,18 @@ function resetFilters(){
   updateMobileBar();
 }
 
-function submitNewsletter(e){
+async function submitNewsletter(e){
   e.preventDefault();
-  var email = document.getElementById('nl-email').value;
-  var msg = document.getElementById('nl-msg');
-  fetch('/api/newsletter', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})})
-    .then(function(r){ return r.json(); })
-    .then(function(){ msg.textContent='Thank you for subscribing!'; msg.className='nl-msg ok'; })
-    .catch(function(){ msg.textContent='An error occurred. Please try again.'; msg.className='nl-msg err'; });
+  const email = document.getElementById('nl-email').value.trim();
+  const msg = document.getElementById('nl-msg');
+  if(!email){ msg.textContent='Please enter your email.'; msg.className='nl-msg err'; return; }
+  msg.textContent='Subscribing…'; msg.className='nl-msg';
+  try{
+    const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'footer'})});
+    const d = await r.json();
+    if(d.ok){ msg.textContent='Thank you! You\'re subscribed.'; msg.className='nl-msg ok'; }
+    else { msg.textContent='Error. Please try again.'; msg.className='nl-msg err'; }
+  } catch(err){ msg.textContent='Network error.'; msg.className='nl-msg err'; }
 }
 
 initDropdowns();

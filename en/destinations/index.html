@@ -336,16 +336,73 @@
     .btn-outline-white:hover { border-color: #fff; color: #fff; }
 
     /* ── FOOTER ── */
-    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.07); padding: 64px 60px 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-    .f-brand-name { font-family: var(--font-sans); font-size: 1.4rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 6px; }
-    .f-brand-claim { font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-    .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.42); line-height: 1.7; }
-    .f-col-label { font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 18px; }
-    .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .f-links a { font-size: .84rem; color: rgba(255,255,255,.58); text-decoration: none; transition: color .2s; }
-    .f-links a:hover { color: #fff; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 24px; display: flex; justify-content: space-between; font-size: .74rem; color: rgba(255,255,255,.25); }
+    footer { background: var(--ink); padding: clamp(64px, 8vw, 96px) 0 0 }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(250,254,255,.07);
+    }
+    .footer-brand-logo { margin-bottom: 14px; }
+    .footer-brand-claim {
+      font-size: .58rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold,#E8CBA0); margin-bottom: 16px; opacity: .85;
+    }
+    .footer-brand-text {
+      font-size: .81rem; font-weight: 300;
+      color: rgba(250,254,255,.32); line-height: 1.8; max-width: 270px;
+    }
+    .footer-col-title {
+      font-size: .58rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 18px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a {
+      font-size: .83rem; font-weight: 300;
+      color: rgba(250,254,255,.48); transition: color .2s; text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--gold,#E8CBA0); }
+    /* Social + Newsletter row */
+    .footer-lower {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 48px; padding: 40px 0 48px;
+      border-bottom: 1px solid rgba(250,254,255,.07);
+    }
+    .footer-socials { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
+    .footer-social-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(250,254,255,.15);
+      color: rgba(250,254,255,.48); transition: all .2s;
+    }
+    .footer-social-link:hover { border-color: var(--gold,#E8CBA0); color: var(--gold,#E8CBA0); background: rgba(232,203,160,.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
+    /* Newsletter inline */
+    .nl-form { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+    .nl-input {
+      flex: 1; border: 1px solid rgba(250,254,255,.12); border-radius: 4px;
+      background: rgba(250,254,255,.05); color: #fff;
+      padding: .55rem .85rem; font-size: .8rem; font-family: inherit; outline: none;
+      transition: border-color .2s;
+    }
+    .nl-input::placeholder { color: rgba(250,254,255,.25); }
+    .nl-input:focus { border-color: rgba(232,203,160,.45); }
+    .nl-btn {
+      background: var(--gold,#E8CBA0); color: #1a2a1e; border: none; border-radius: 4px;
+      padding: .55rem 1.1rem; font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+      white-space: nowrap; transition: opacity .2s; font-family: inherit;
+    }
+    .nl-btn:hover { opacity: .85; }
+    .nl-msg { font-size: .73rem; margin-top: .5rem; min-height: 1em; }
+    .nl-msg.ok { color: #86efac; } .nl-msg.err { color: #fca5a5; }
+    /* Bottom bar */
+    .footer-bottom {
+      padding: 24px 0; display: flex;
+      justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
+    @media(max-width:1024px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } .footer-lower{ grid-template-columns:1fr; } }
+    @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; gap:28px; } .footer-bottom{ flex-direction:column; text-align:center; } }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
@@ -414,79 +471,6 @@
   .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#2C3D30;box-shadow:0 4px 20px rgba(44,61,48,.45);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
   .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(44,61,48,.6)}
   .wa-btn svg{width:26px;height:26px}
-
-    /* ── Standardised footer ─────────────────────────────── */
-    footer { background: #0d1410; padding: clamp(56px,7vw,88px) 0 0; }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(250,254,255,.07);
-    }
-    .footer-brand-logo { margin-bottom: 14px; }
-    .footer-brand-claim {
-      font-size: .58rem; font-weight: 600; letter-spacing: .22em;
-      text-transform: uppercase; color: var(--gold,#E8CBA0); margin-bottom: 16px; opacity: .85;
-    }
-    .footer-brand-text {
-      font-size: .81rem; font-weight: 300;
-      color: rgba(250,254,255,.32); line-height: 1.8; max-width: 270px;
-    }
-    .footer-col-title {
-      font-size: .58rem; font-weight: 600; letter-spacing: .2em;
-      text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 18px;
-    }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-    .footer-links a {
-      font-size: .83rem; font-weight: 300;
-      color: rgba(250,254,255,.48); transition: color .2s; text-decoration: none;
-    }
-    .footer-links a:hover { color: var(--gold,#E8CBA0); }
-    /* Social + Newsletter row */
-    .footer-lower {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 48px;
-      padding: 40px 0 48px;
-      border-bottom: 1px solid rgba(250,254,255,.07);
-    }
-    .footer-socials { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
-    .footer-social-link {
-      display: flex; align-items: center; justify-content: center;
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid rgba(250,254,255,.15);
-      color: rgba(250,254,255,.48); transition: all .2s;
-    }
-    .footer-social-link:hover { border-color: var(--gold,#E8CBA0); color: var(--gold,#E8CBA0); background: rgba(232,203,160,.07); }
-    .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
-    /* Newsletter inline */
-    .nl-form { display: flex; gap: 8px; margin-top: 4px; }
-    .nl-input {
-      flex: 1; border: 1px solid rgba(250,254,255,.12); border-radius: 4px;
-      background: rgba(250,254,255,.05); color: #fff;
-      padding: .55rem .85rem; font-size: .8rem; font-family: inherit; outline: none;
-      transition: border-color .2s;
-    }
-    .nl-input::placeholder { color: rgba(250,254,255,.25); }
-    .nl-input:focus { border-color: rgba(232,203,160,.45); }
-    .nl-btn {
-      background: var(--gold,#E8CBA0); color: #1a2a1e; border: none; border-radius: 4px;
-      padding: .55rem 1.1rem; font-size: .72rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
-      white-space: nowrap; transition: opacity .2s; font-family: inherit;
-    }
-    .nl-btn:hover { opacity: .85; }
-    .nl-msg { font-size: .73rem; margin-top: .5rem; min-height: 1em; }
-    .nl-msg.ok { color: #86efac; } .nl-msg.err { color: #fca5a5; }
-    /* Bottom bar */
-    .footer-bottom {
-      padding: 24px 0; display: flex;
-      justify-content: space-between; align-items: center; gap: 12px;
-    }
-    .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
-    @media(max-width:1024px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } .footer-lower{ grid-template-columns:1fr; } }
-    @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; } .footer-bottom{ flex-direction:column; text-align:center; } }
 
 
   </style>
@@ -755,8 +739,8 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer id="contact">
+<!-- ── FOOTER ── -->
+<footer id="contact">
   <div class="container">
     <div class="footer-grid">
       <div>
@@ -764,7 +748,7 @@
           <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" height="110" style="height:110px;width:auto;display:block">
         </div>
         <div class="footer-brand-claim">Alpine Property Management</div>
-        <p class="footer-brand-text">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency for every owner.</p>
+        <p class="footer-brand-text">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency.</p>
       </div>
       <div>
         <div class="footer-col-title">Destinations</div>
@@ -783,7 +767,7 @@
           <li><a href="/en/proprietaires">Owners</a></li>
           <li><a href="/en/proprietaires">ALPÉON Signatures</a></li>
           <li><a href="/en/estimateur">Revenue estimator</a></li>
-          <li><a href="/en/about">About</a></li>
+          <li><a href="/en/about">About us</a></li>
           <li><a href="/en/faq">FAQ</a></li>
         </ul>
       </div>
@@ -791,7 +775,7 @@
         <div class="footer-col-title">Contact</div>
         <ul class="footer-links">
           <li><a href="tel:+33970703991">Call us</a></li>
-          <li><a href="/en/contact">Send us an email</a></li>
+          <li><a href="mailto:contact@alpeon.fr" style="color:var(--gold);font-weight:500">contact@alpeon.fr</a></li>
           <li><a href="https://wa.me/33765254926">WhatsApp</a></li>
         </ul>
         <div style="margin-top:20px">
@@ -799,12 +783,11 @@
           <ul class="footer-links">
             <li><a href="/en/mentions-legales">Legal notice</a></li>
             <li><a href="/en/politique-confidentialite">Privacy policy</a></li>
-            <li><a href="/en/cgv">Terms and conditions</a></li>
+            <li><a href="/en/cgv">Terms &amp; conditions</a></li>
           </ul>
         </div>
       </div>
     </div>
-
     <div class="footer-lower">
       <div>
         <div class="footer-col-title">Social media</div>
@@ -830,7 +813,6 @@
         <p class="nl-msg" id="nl-msg"></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       <span>© 2026 ALPÉON. All rights reserved.</span>
       <span>Premium alpine property management · French Alps</span>
@@ -867,11 +849,11 @@ async function submitNewsletter(e){
   if(!email){ msg.textContent='Please enter your email.'; msg.className='nl-msg err'; return; }
   msg.textContent='Subscribing…'; msg.className='nl-msg';
   try{
-    const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'footer'})});
     const d = await r.json();
-    if(d.ok){ msg.textContent='✓ Thank you, you are subscribed!'; msg.className='nl-msg ok'; document.getElementById('nl-email').value=''; }
-    else { msg.textContent=d.error||'Error, please try again.'; msg.className='nl-msg err'; }
-  }catch(e){ msg.textContent='Network error.'; msg.className='nl-msg err'; }
+    if(d.ok){ msg.textContent='Thank you! You\'re subscribed.'; msg.className='nl-msg ok'; }
+    else { msg.textContent='Error. Please try again.'; msg.className='nl-msg err'; }
+  } catch(err){ msg.textContent='Network error.'; msg.className='nl-msg err'; }
 }
 </script>
 <a class="wa-btn" href="https://wa.me/33765254926" aria-label="WhatsApp">

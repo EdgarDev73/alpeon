@@ -308,16 +308,73 @@
     .btn-outline-white:hover { border-color: #fff; color: #fff; }
 
     /* ── FOOTER ── */
-    footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,.07); padding: 64px 60px 40px; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-    .f-brand-name { font-family: var(--font-sans); font-size: 1.4rem; letter-spacing: .14em; text-transform: uppercase; color: #fff; margin-bottom: 6px; }
-    .f-brand-claim { font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-    .f-brand-desc { font-size: .82rem; color: rgba(255,255,255,.42); line-height: 1.7; }
-    .f-col-label { font-size: .64rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 18px; }
-    .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .f-links a { font-size: .84rem; color: rgba(255,255,255,.58); text-decoration: none; transition: color .2s; }
-    .f-links a:hover { color: #fff; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 24px; display: flex; justify-content: space-between; font-size: .74rem; color: rgba(255,255,255,.25); }
+    footer { background: var(--ink); padding: clamp(64px, 8vw, 96px) 0 0 }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(250,254,255,.07);
+    }
+    .footer-brand-logo { margin-bottom: 14px; }
+    .footer-brand-claim {
+      font-size: .58rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold,#E8CBA0); margin-bottom: 16px; opacity: .85;
+    }
+    .footer-brand-text {
+      font-size: .81rem; font-weight: 300;
+      color: rgba(250,254,255,.32); line-height: 1.8; max-width: 270px;
+    }
+    .footer-col-title {
+      font-size: .58rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 18px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a {
+      font-size: .83rem; font-weight: 300;
+      color: rgba(250,254,255,.48); transition: color .2s; text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--gold,#E8CBA0); }
+    /* Social + Newsletter row */
+    .footer-lower {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 48px; padding: 40px 0 48px;
+      border-bottom: 1px solid rgba(250,254,255,.07);
+    }
+    .footer-socials { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
+    .footer-social-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(250,254,255,.15);
+      color: rgba(250,254,255,.48); transition: all .2s;
+    }
+    .footer-social-link:hover { border-color: var(--gold,#E8CBA0); color: var(--gold,#E8CBA0); background: rgba(232,203,160,.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
+    /* Newsletter inline */
+    .nl-form { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+    .nl-input {
+      flex: 1; border: 1px solid rgba(250,254,255,.12); border-radius: 4px;
+      background: rgba(250,254,255,.05); color: #fff;
+      padding: .55rem .85rem; font-size: .8rem; font-family: inherit; outline: none;
+      transition: border-color .2s;
+    }
+    .nl-input::placeholder { color: rgba(250,254,255,.25); }
+    .nl-input:focus { border-color: rgba(232,203,160,.45); }
+    .nl-btn {
+      background: var(--gold,#E8CBA0); color: #1a2a1e; border: none; border-radius: 4px;
+      padding: .55rem 1.1rem; font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+      white-space: nowrap; transition: opacity .2s; font-family: inherit;
+    }
+    .nl-btn:hover { opacity: .85; }
+    .nl-msg { font-size: .73rem; margin-top: .5rem; min-height: 1em; }
+    .nl-msg.ok { color: #86efac; } .nl-msg.err { color: #fca5a5; }
+    /* Bottom bar */
+    .footer-bottom {
+      padding: 24px 0; display: flex;
+      justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
+    @media(max-width:1024px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } .footer-lower{ grid-template-columns:1fr; } }
+    @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; gap:28px; } .footer-bottom{ flex-direction:column; text-align:center; } }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
@@ -398,79 +455,6 @@
   .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(44,61,48,.6)}
   .wa-btn svg{width:26px;height:26px}
   
-    /* ── Footer standardisé ─────────────────────────────── */
-    footer { background: #0d1410; padding: clamp(56px,7vw,88px) 0 0; }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(250,254,255,.07);
-    }
-    .footer-brand-logo { margin-bottom: 14px; }
-    .footer-brand-claim {
-      font-size: .58rem; font-weight: 600; letter-spacing: .22em;
-      text-transform: uppercase; color: var(--gold,#E8CBA0); margin-bottom: 16px; opacity: .85;
-    }
-    .footer-brand-text {
-      font-size: .81rem; font-weight: 300;
-      color: rgba(250,254,255,.32); line-height: 1.8; max-width: 270px;
-    }
-    .footer-col-title {
-      font-size: .58rem; font-weight: 600; letter-spacing: .2em;
-      text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 18px;
-    }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-    .footer-links a {
-      font-size: .83rem; font-weight: 300;
-      color: rgba(250,254,255,.48); transition: color .2s; text-decoration: none;
-    }
-    .footer-links a:hover { color: var(--gold,#E8CBA0); }
-    /* Social + Newsletter row */
-    .footer-lower {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 48px;
-      padding: 40px 0 48px;
-      border-bottom: 1px solid rgba(250,254,255,.07);
-    }
-    .footer-socials { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
-    .footer-social-link {
-      display: flex; align-items: center; justify-content: center;
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid rgba(250,254,255,.15);
-      color: rgba(250,254,255,.48); transition: all .2s;
-    }
-    .footer-social-link:hover { border-color: var(--gold,#E8CBA0); color: var(--gold,#E8CBA0); background: rgba(232,203,160,.07); }
-    .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
-    /* Newsletter inline */
-    .nl-form { display: flex; gap: 8px; margin-top: 4px; }
-    .nl-input {
-      flex: 1; border: 1px solid rgba(250,254,255,.12); border-radius: 4px;
-      background: rgba(250,254,255,.05); color: #fff;
-      padding: .55rem .85rem; font-size: .8rem; font-family: inherit; outline: none;
-      transition: border-color .2s;
-    }
-    .nl-input::placeholder { color: rgba(250,254,255,.25); }
-    .nl-input:focus { border-color: rgba(232,203,160,.45); }
-    .nl-btn {
-      background: var(--gold,#E8CBA0); color: #1a2a1e; border: none; border-radius: 4px;
-      padding: .55rem 1.1rem; font-size: .72rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
-      white-space: nowrap; transition: opacity .2s; font-family: inherit;
-    }
-    .nl-btn:hover { opacity: .85; }
-    .nl-msg { font-size: .73rem; margin-top: .5rem; min-height: 1em; }
-    .nl-msg.ok { color: #86efac; } .nl-msg.err { color: #fca5a5; }
-    /* Bottom bar */
-    .footer-bottom {
-      padding: 24px 0; display: flex;
-      justify-content: space-between; align-items: center; gap: 12px;
-    }
-    .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
-    @media(max-width:1024px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } .footer-lower{ grid-template-columns:1fr; } }
-    @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; } .footer-bottom{ flex-direction:column; text-align:center; } }
-
 
   </style>
 </head>
@@ -747,8 +731,8 @@ function toggleMobileMenu(){
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer id="contact">
+<!-- ── FOOTER ── -->
+<footer id="contact">
   <div class="container">
     <div class="footer-grid">
       <div>
@@ -783,7 +767,7 @@ function toggleMobileMenu(){
         <div class="footer-col-title">Contact</div>
         <ul class="footer-links">
           <li><a href="tel:+33970703991">Appelez-nous</a></li>
-          <li><a href="/contact">Envoyez-nous un email</a></li>
+          <li><a href="mailto:contact@alpeon.fr" style="color:var(--gold);font-weight:500">contact@alpeon.fr</a></li>
           <li><a href="https://wa.me/33765254926">WhatsApp</a></li>
         </ul>
         <div style="margin-top:20px">
@@ -796,7 +780,6 @@ function toggleMobileMenu(){
         </div>
       </div>
     </div>
-
     <div class="footer-lower">
       <div>
         <div class="footer-col-title">Réseaux sociaux</div>
@@ -822,7 +805,6 @@ function toggleMobileMenu(){
         <p class="nl-msg" id="nl-msg"></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       <span>© 2026 ALPÉON. Tous droits réservés.</span>
       <span>Gestion locative alpine premium · Alpes françaises</span>
@@ -842,5 +824,20 @@ function toggleMobileMenu(){
 <a class="wa-btn" href="https://wa.me/33765254926" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
 </a>
+<script>
+async function submitNewsletter(e){
+  e.preventDefault();
+  const email = document.getElementById('nl-email').value.trim();
+  const msg = document.getElementById('nl-msg');
+  if(!email){ msg.textContent='Entrez votre email.'; msg.className='nl-msg err'; return; }
+  msg.textContent='Inscription…'; msg.className='nl-msg';
+  try{
+    const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'footer'})});
+    const d = await r.json();
+    if(d.ok){ msg.textContent='Merci ! Vous êtes inscrit.'; msg.className='nl-msg ok'; }
+    else { msg.textContent='Erreur. Réessayez.'; msg.className='nl-msg err'; }
+  } catch(err){ msg.textContent='Erreur réseau.'; msg.className='nl-msg err'; }
+}
+</script>
 </body>
 </html>
