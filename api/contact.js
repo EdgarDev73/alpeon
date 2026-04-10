@@ -35,6 +35,14 @@ module.exports = async (req, res) => {
         ${dest ? `<tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">${destLabel}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30">${dest}</td></tr>` : ''}
         <tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">Source</td><td style="padding:10px 0;color:#2C3D30">Page ${lang === 'en' ? 'Book' : 'Réserver'} — popup</td></tr>
       </table></div></div>`;
+    // Zapier webhook (parallel, non-blocking)
+    const ZAPIER_URL = process.env.ZAPIER_CALLBACK_WEBHOOK || 'https://hooks.zapier.com/hooks/catch/18120855/u7fby48/';
+    fetch(ZAPIER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, destination: dest || '—', lang, source: 'popup-reserver' }),
+    }).catch(e => console.warn('[zapier]', e.message));
+
     try {
       await transporter.sendMail({ from: `ALPÉON <${EMAIL_USER}>`, to: 'reservations@alpeon.fr', subject, html, text: `${name}\n${phone}${dest ? '\n' + dest : ''}` });
     } catch (e) { console.error('[callback] SMTP:', e.message); }
