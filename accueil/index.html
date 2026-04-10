@@ -1680,16 +1680,16 @@ async function submitNewsletter(e){
   <div class="nl-popup">
     <div class="nl-popup-hero">
       <button class="nl-popup-close" onclick="closeNlPopup()" aria-label="Fermer">&times;</button>
-      <div class="nl-popup-badge">Offre exclusive</div>
-      <div class="nl-popup-offer"><span>-</span>10<span>%</span></div>
-      <div class="nl-popup-tagline">sur votre premier séjour ALPÉON</div>
+      <div class="nl-popup-badge">Accès exclusif</div>
+      <div class="nl-popup-offer" style="font-size:1.6rem;letter-spacing:.06em;font-style:italic">Offres &amp; Nouveautés</div>
+      <div class="nl-popup-tagline">Propriétés alpines d'exception en avant-première</div>
     </div>
     <div class="nl-popup-body">
       <div class="nl-popup-title">Rejoignez la communauté ALPÉON</div>
-      <p class="nl-popup-sub">Inscrivez-vous à notre newsletter et recevez votre code de réduction de 10% ainsi que nos nouvelles propriétés et offres de saison en avant-première.</p>
+      <p class="nl-popup-sub">Inscrivez-vous à notre newsletter et accédez en exclusivité à nos nouvelles propriétés, offres de saison et actualités des stations alpines.</p>
       <div class="nl-popup-form">
         <input class="nl-popup-input" type="email" id="nl-popup-email" placeholder="votre@email.fr" autocomplete="email">
-        <button class="nl-popup-btn" id="nl-popup-btn" onclick="submitNlPopup()">J'en profite</button>
+        <button class="nl-popup-btn" id="nl-popup-btn" onclick="submitNlPopup()">Accéder aux offres</button>
       </div>
       <p class="nl-popup-msg" id="nl-popup-msg"></p>
       <p class="nl-popup-legal">En vous inscrivant, vous acceptez de recevoir nos communications. Désabonnement possible à tout moment.</p>
@@ -1725,7 +1725,7 @@ async function submitNlPopup(){
     const r = await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email, source:'popup-10pct'})});
     const d = await r.json();
     if(d.ok){
-      msg.textContent = '✓ Merci ! Votre code de réduction vous a été envoyé par email.';
+      msg.textContent = '✓ Bienvenue ! Vous recevrez nos offres exclusives en avant-première.';
       msg.className = 'nl-popup-msg ok';
       localStorage.setItem('alpeon_nl_seen','1');
       setTimeout(closeNlPopup, 4000);
