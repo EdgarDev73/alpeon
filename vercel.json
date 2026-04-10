@@ -28,9 +28,7 @@
     }
   ],
   "crons": [
-    {
-      "path": "/api/refresh-token",
-      "schedule": "0 4 * * *"
-    }
+    { "path": "/api/refresh-token", "schedule": "0 4 * * *" },
+    { "path": "/api/refresh-token", "schedule": "0 16 * * *" }
   ]
 }
