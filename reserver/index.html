@@ -439,7 +439,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display: flex; align-items: baseline; justify-content: space-between;
       margin-bottom: 2.5rem; padding-bottom: 1.25rem;
       border-bottom: 1px solid var(--stone);
+      flex-wrap: wrap; gap: .5rem;
     }
+    .results-count-bar {
+      font-size: .8rem; font-weight: 600; color: var(--green);
+      background: rgba(44,61,48,.07); border-radius: 20px;
+      padding: .3rem .9rem; letter-spacing: .04em;
+      transition: all .25s;
+    }
+    @keyframes countPop { 0%{transform:scale(1.15);opacity:.6} 100%{transform:scale(1);opacity:1} }
+    .results-count-bar.pop { animation: countPop .3s ease; }
     .grid-title {
       font-family: var(--font-serif); font-style: italic; font-size: 1.6rem; font-weight: 300;
       color: var(--ink); letter-spacing: .01em;
@@ -1339,9 +1348,12 @@ function toggleMobileMenu(){
 </div>
 
 <!-- ── GRID ── -->
-<div class="grid-wrap">
+<div class="grid-wrap" id="grid-wrap">
   <div class="grid-header">
     <h2 class="grid-title">Notre sélection <em>alpine</em></h2>
+    <div class="results-count-bar" id="results-count-bar" style="display:none">
+      <span id="results-count-text"></span>
+    </div>
   </div>
   <div class="property-grid" id="property-grid">
     <!-- skeletons injected by JS -->
@@ -1608,9 +1620,34 @@ function render(list, filtersActive){
   const empty = document.getElementById('empty-state');
   const noResults = document.getElementById('no-results-msg');
   const count = document.getElementById('filter-count');
+  const countBar = document.getElementById('results-count-bar');
+  const countText = document.getElementById('results-count-text');
+  const label = list.length === 0 ? '0 bien' : `${list.length} bien${list.length>1?'s':''}`;
+
+  // Barre de filtre (petite)
+  if(count) count.textContent = label;
+  // Compteur mobile
+  const mobCount = document.getElementById('flt-mob-count');
+  if(mobCount) mobCount.textContent = label;
+  const applyBtn = document.getElementById('flt-mob-apply');
+  if(applyBtn) applyBtn.textContent = list.length ? `Voir ${label}` : 'Aucun résultat';
+
+  // Badge visible au-dessus de la grille — affiché dès qu'un filtre est actif
+  if(countBar && countText){
+    if(filtersActive){
+      countText.textContent = list.length === 0 ? 'Aucun bien correspondant' : `${label} correspondant${list.length>1?'s':''} à votre recherche`;
+      countBar.style.display = 'block';
+      countBar.classList.remove('pop');
+      void countBar.offsetWidth; // reflow
+      countBar.classList.add('pop');
+    } else {
+      countText.textContent = `${label} disponibles`;
+      countBar.style.display = 'block';
+    }
+  }
+
   if(!list.length){
     grid.innerHTML = '';
-    count.textContent = '0 bien';
     if(filtersActive){
       empty.classList.remove('visible');
       if(noResults) noResults.classList.add('visible');
@@ -1622,12 +1659,6 @@ function render(list, filtersActive){
   }
   empty.classList.remove('visible');
   if(noResults) noResults.classList.remove('visible');
-  const label = `${list.length} bien${list.length>1?'s':''}`;
-  count.textContent = label;
-  const mobCount = document.getElementById('flt-mob-count');
-  if(mobCount) mobCount.textContent = label;
-  const applyBtn = document.getElementById('flt-mob-apply');
-  if(applyBtn) applyBtn.textContent = list.length ? `Voir ${label}` : 'Aucun résultat';
   grid.innerHTML = list.map(card).join('');
   initFavBtns();
 }

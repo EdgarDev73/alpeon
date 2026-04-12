@@ -424,7 +424,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display: flex; align-items: baseline; justify-content: space-between;
       margin-bottom: 2.5rem; padding-bottom: 1.25rem;
       border-bottom: 1px solid var(--stone);
+      flex-wrap: wrap; gap: .5rem;
     }
+    .results-count-bar {
+      font-size: .8rem; font-weight: 600; color: var(--green);
+      background: rgba(44,61,48,.07); border-radius: 20px;
+      padding: .3rem .9rem; letter-spacing: .04em;
+      transition: all .25s;
+    }
+    @keyframes countPop { 0%{transform:scale(1.15);opacity:.6} 100%{transform:scale(1);opacity:1} }
+    .results-count-bar.pop { animation: countPop .3s ease; }
     .grid-title {
       font-family: var(--font-serif); font-style: italic; font-size: 1.6rem; font-weight: 300;
       color: var(--ink); letter-spacing: .01em;
@@ -1284,9 +1293,12 @@ function toggleMobileMenu(){
 </div>
 
 <!-- ── GRID ── -->
-<div class="grid-wrap">
+<div class="grid-wrap" id="grid-wrap">
   <div class="grid-header">
     <h2 class="grid-title">Our <em>alpine</em> selection</h2>
+    <div class="results-count-bar" id="results-count-bar" style="display:none">
+      <span id="results-count-text"></span>
+    </div>
   </div>
   <div class="property-grid" id="property-grid">
     <!-- skeletons injected by JS -->
@@ -1541,9 +1553,31 @@ function render(list, filtersActive){
   var empty = document.getElementById('empty-state');
   var noResults = document.getElementById('no-results-msg');
   var count = document.getElementById('filter-count');
+  var countBar = document.getElementById('results-count-bar');
+  var countText = document.getElementById('results-count-text');
+  var label = list.length === 0 ? '0 properties' : list.length+' propert'+(list.length>1?'ies':'y');
+
+  if(count) count.textContent = label;
+  var mobCount = document.getElementById('flt-mob-count');
+  if(mobCount) mobCount.textContent = label;
+  var applyBtn = document.getElementById('flt-mob-apply');
+  if(applyBtn) applyBtn.textContent = list.length ? 'View '+label : 'No results';
+
+  if(countBar && countText){
+    if(filtersActive){
+      countText.textContent = list.length === 0 ? 'No matching properties' : label+' matching your search';
+      countBar.style.display = 'block';
+      countBar.classList.remove('pop');
+      void countBar.offsetWidth;
+      countBar.classList.add('pop');
+    } else {
+      countText.textContent = label+' available';
+      countBar.style.display = 'block';
+    }
+  }
+
   if(!list.length){
     grid.innerHTML = '';
-    count.textContent = '0 properties';
     if(filtersActive){
       empty.classList.remove('visible');
       if(noResults) noResults.classList.add('visible');
@@ -1555,12 +1589,6 @@ function render(list, filtersActive){
   }
   empty.classList.remove('visible');
   if(noResults) noResults.classList.remove('visible');
-  var label = list.length+' propert'+(list.length>1?'ies':'y');
-  count.textContent = label;
-  var mobCount = document.getElementById('flt-mob-count');
-  if(mobCount) mobCount.textContent = label;
-  var applyBtn = document.getElementById('flt-mob-apply');
-  if(applyBtn) applyBtn.textContent = list.length ? 'View '+label : 'No results';
   grid.innerHTML = list.map(card).join('');
   initFavBtns();
 }
