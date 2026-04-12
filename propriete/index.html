@@ -252,9 +252,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .btn-book-main{display:block;width:100%;background:var(--green);color:var(--gold);border:none;border-radius:var(--radius);padding:.75rem 1rem;font-family:var(--font-sans);font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-align:center;text-decoration:none;cursor:pointer;transition:background .2s}
     .btn-book-main:hover{background:var(--green-l)}
     .booking-note{font-size:.72rem;color:#9ca3af;text-align:center;margin-top:.75rem;line-height:1.5}
-    .btn-wa-sidebar{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;background:#fff;color:#1a1a1a;border:1.5px solid #25D366;border-radius:var(--radius);padding:.65rem 1rem;font-family:var(--font-sans);font-size:.77rem;font-weight:600;letter-spacing:.06em;text-decoration:none;text-align:center;cursor:pointer;transition:background .2s;margin-top:.75rem}
-    .btn-wa-sidebar:hover{background:#f0fdf4}
-    .wa-sidebar-note{font-size:.7rem;color:#9ca3af;text-align:center;margin-top:.4rem;line-height:1.4}
+    .btn-wa-sidebar{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;background:transparent;color:#2C3D30;border:1.5px solid #2C3D30;border-radius:var(--radius);padding:.65rem 1rem;font-family:var(--font-sans);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;text-align:center;cursor:pointer;transition:background .2s,color .2s;margin-top:.75rem}
+    .btn-wa-sidebar:hover{background:#2C3D30;color:#E8CBA0}
+    .btn-wa-sidebar svg{flex-shrink:0;transition:fill .2s}
+    .btn-wa-sidebar:hover svg{fill:#E8CBA0}
+    .wa-sidebar-note{font-size:.68rem;color:#9ca3af;text-align:center;margin-top:.4rem;line-height:1.4}
 
     /* LIGHTBOX */
     .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:800;align-items:center;justify-content:center;padding:2rem}
@@ -526,9 +528,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   ═══════════════════════════════════════════════ */
 
 
-  .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#2C3D30;box-shadow:0 4px 20px rgba(44,61,48,.45);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
-  .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(44,61,48,.6)}
-  .wa-btn svg{width:26px;height:26px}
+  /* ── WhatsApp floating button ── */
+  .wa-btn {
+    position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 400;
+    display: flex; align-items: center; gap: .55rem;
+    background: #2C3D30; color: #E8CBA0;
+    border-radius: 50px; padding: .7rem 1.2rem .7rem .95rem;
+    text-decoration: none; font-family: 'Poppins', sans-serif;
+    font-size: .72rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+    box-shadow: 0 6px 28px rgba(44,61,48,.38);
+    transition: transform .22s, box-shadow .22s, background .2s;
+    border: 1px solid rgba(232,203,160,.18);
+    white-space: nowrap;
+  }
+  .wa-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(44,61,48,.5); background: #3d5442; }
+  .wa-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .wa-btn-label { line-height: 1; }
+  @media (max-width: 640px) {
+    .wa-btn { padding: .65rem; border-radius: 50%; bottom: 5.5rem; }
+    .wa-btn-label { display: none; }
+    .wa-btn svg { width: 22px; height: 22px; }
+  }
   
     /* ── Footer standardisé ─────────────────────────────── */
     footer { background: #0d1410; padding: clamp(56px,7vw,88px) 0 0; }
@@ -792,10 +812,10 @@ function toggleMobileMenu(){
         <p class="bk-error" id="err-step1"></p>
         <button class="btn-next" id="btn-step1-next" onclick="goStep2()">Continuer</button>
         <a id="wa-sidebar-btn" class="btn-wa-sidebar" href="https://wa.me/33765254926?text=Bonjour%2C+je+suis+int%C3%A9ress%C3%A9(e)+par+une+propri%C3%A9t%C3%A9" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="#25D366" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Question&nbsp;? Écrivez-nous
+          <svg viewBox="0 0 24 24" fill="#2C3D30" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Une question ? Contactez-nous
         </a>
-        <p class="wa-sidebar-note">Réponse en moins d'1h</p>
+        <p class="wa-sidebar-note">Réponse en moins d'1h · 7j/7</p>
       </div>
 
       <!-- STEP 2: Guest info -->
@@ -1949,8 +1969,9 @@ loadProperty();
       </div>
     </div>
   </div>
-<a class="wa-btn" href="https://wa.me/33765254926" target="_blank" rel="noopener" aria-label="Contact WhatsApp">
-  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+<a class="wa-btn" id="wa-float-btn" href="https://wa.me/33765254926" target="_blank" rel="noopener" aria-label="Nous contacter sur WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#E8CBA0" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-btn-label">Besoin d'aide ?</span>
 </a>
 
 <!-- ── COOKIE BANNER RGPD ── -->
