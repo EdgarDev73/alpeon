@@ -49,6 +49,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <style>
 /* @@NAV-START@@ */
   :root { --nav-h: 88px; }
@@ -333,49 +335,75 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .filter-reset:hover { color: var(--green) }
     .filter-divider { width: 1px; height: 28px; background: #ece8e2; flex-shrink: 0; }
 
-    /* ── DATE PICKER INPUTS ── */
-    .flt-dates {
-      display: flex; align-items: center; gap: .5rem;
-      padding: 0 1.5rem; border-right: 1px solid #ece8e2;
-      flex-shrink: 0;
+    /* ── DATE PICKER (flatpickr) ── */
+    .flt-date-group {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 1.75rem; gap: .2rem;
+      border-right: 1px solid #ece8e2;
+      cursor: pointer; transition: background .18s;
+      min-width: 0; user-select: none; flex-shrink: 0;
     }
-    .flt-dates-inner {
-      display: flex; flex-direction: column; justify-content: center; gap: .15rem;
-    }
-    .flt-dates-label {
+    .flt-date-group:hover { background: #faf9f7; }
+    .flt-date-group.active .flt-date-trigger { color: var(--green); }
+    .flt-date-label {
       font-size: .58rem; font-weight: 700; letter-spacing: .18em;
       text-transform: uppercase; color: #9a9690; white-space: nowrap;
+      pointer-events: none;
     }
-    .flt-dates-row { display: flex; align-items: center; gap: .4rem; }
-    .flt-date-input {
-      height: 28px; min-width: 130px;
-      border: 1px solid #ddd; border-radius: 6px;
-      font-family: var(--font-sans); font-size: .82rem; font-weight: 500;
-      color: var(--ink); padding: 0 .55rem;
-      background: #fff; outline: none; cursor: pointer;
-      transition: border-color .18s;
+    .flt-date-trigger {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .88rem; font-weight: 500; color: var(--ink);
+      white-space: nowrap; pointer-events: none;
     }
-    .flt-date-input:focus { border-color: #2C3D30; }
-    .flt-date-sep { font-size: .7rem; color: #bbb; flex-shrink: 0; }
-    .flt-dates-hint {
-      font-size: .55rem; color: #b0aca5; letter-spacing: .03em;
-      white-space: nowrap; margin-top: .1rem;
+    .flt-date-trigger svg { flex-shrink: 0; color: #9a9690; }
+    #flt-date-hidden { position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; }
+
+    /* Flatpickr theme overrides */
+    .flatpickr-calendar {
+      font-family: 'Poppins', sans-serif !important;
+      border-radius: 12px !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,.14) !important;
+      border: 1px solid #e8e4dd !important;
     }
+    .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange {
+      background: #2C3D30 !important; border-color: #2C3D30 !important; color: #E8CBA0 !important;
+    }
+    .flatpickr-day.inRange {
+      background: rgba(44,61,48,.1) !important; border-color: transparent !important;
+      box-shadow: -5px 0 0 rgba(44,61,48,.1), 5px 0 0 rgba(44,61,48,.1) !important;
+    }
+    .flatpickr-day.today { border-color: #2C3D30 !important; }
+    .flatpickr-day:hover { background: #f0f4f1 !important; }
+    .flatpickr-months .flatpickr-month { background: #2C3D30 !important; border-radius: 12px 12px 0 0 !important; }
+    .flatpickr-current-month, .flatpickr-monthDropdown-months { color: #E8CBA0 !important; }
+    .flatpickr-weekday { color: rgba(44,61,48,.6) !important; font-weight: 600 !important; }
+    .flatpickr-prev-month svg, .flatpickr-next-month svg { fill: #E8CBA0 !important; }
+    .flatpickr-prev-month:hover svg, .flatpickr-next-month:hover svg { fill: #fff !important; }
+    .numInputWrapper span { border-color: rgba(232,203,160,.3) !important; }
+
+    /* Search button */
+    .filter-search-btn {
+      height: 40px; padding: 0 1.4rem;
+      background: #2C3D30; color: #E8CBA0;
+      border: none; border-radius: 6px;
+      font-family: 'Poppins', sans-serif; font-size: .74rem;
+      font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      transition: background .2s;
+    }
+    .filter-search-btn:hover { background: #3d5442; }
+
     /* Mobile drawer date inputs */
-    .flt-mob-dates { display: flex; flex-direction: column; gap: .5rem; }
-    .flt-mob-date-row { display: flex; gap: .5rem; }
-    .flt-mob-date-input {
-      flex: 1; height: 40px;
-      border: 1px solid #ddd; border-radius: 8px;
-      font-family: var(--font-sans); font-size: .84rem; font-weight: 500;
-      color: var(--ink); padding: 0 .75rem;
-      background: #fff; outline: none; cursor: pointer;
-      transition: border-color .18s;
+    .flt-mob-date-group { display: flex; flex-direction: column; gap: .5rem; }
+    .flt-mob-date-label { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #6b7280; }
+    .flt-mob-date-trigger {
+      width: 100%; height: 44px; border: 1.5px solid #ddd; border-radius: 8px;
+      background: #fff; padding: 0 1rem;
+      font-family: 'Poppins', sans-serif; font-size: .84rem; font-weight: 500; color: var(--ink);
+      display: flex; align-items: center; cursor: pointer; gap: .6rem;
     }
-    .flt-mob-date-input:focus { border-color: #2C3D30; }
-    .flt-mob-dates-hint {
-      font-size: .62rem; color: #b0aca5; letter-spacing: .03em;
-    }
+    .flt-mob-date-trigger.has-dates { border-color: #2C3D30; color: #2C3D30; }
+    #flt-mob-date-hidden { position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; }
 
     /* ── AMENITY CHIPS ── */
     .prop-amenity-row { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem }
@@ -1135,13 +1163,13 @@ function toggleMobileMenu(){
         </div>
       </div>
       <div class="flt-mob-section">
-        <div class="flt-mob-sec-label">Stay dates</div>
-        <div class="flt-mob-dates">
-          <div class="flt-mob-date-row">
-            <input type="date" id="flt-mob-checkin" class="flt-mob-date-input" placeholder="Check-in" title="Check-in">
-            <input type="date" id="flt-mob-checkout" class="flt-mob-date-input" placeholder="Check-out" title="Check-out">
+        <div class="flt-mob-label">Dates</div>
+        <div class="flt-mob-date-group">
+          <div class="flt-mob-date-trigger" id="flt-mob-date-trigger" onclick="fpMobile.open()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span id="flt-mob-dates-val">Check-in — Check-out</span>
           </div>
-          <div class="flt-mob-dates-hint">Availability checked at next step</div>
+          <input type="text" id="flt-mob-date-hidden" readonly>
         </div>
       </div>
     </div>
@@ -1198,16 +1226,14 @@ function toggleMobileMenu(){
         <div class="flt-option" data-val="8+">8 guests +</div>
       </div>
     </div>
-    <div class="flt-dates">
-      <div class="flt-dates-inner">
-        <span class="flt-dates-label">Dates</span>
-        <div class="flt-dates-row">
-          <input type="date" id="flt-checkin" class="flt-date-input" placeholder="Check-in" title="Check-in">
-          <span class="flt-date-sep">→</span>
-          <input type="date" id="flt-checkout" class="flt-date-input" placeholder="Check-out" title="Check-out">
-        </div>
-        <div class="flt-dates-hint">Availability checked at next step</div>
+    <div class="flt-date-group" id="flt-date-group" onclick="fpDesktop.open()">
+      <span class="flt-date-label">Dates</span>
+      <div class="flt-date-trigger" id="flt-date-trigger">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span id="flt-dates-val">Check-in — Check-out</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
       </div>
+      <input type="text" id="flt-date-hidden" readonly>
     </div>
     <div class="price-wrap" id="price-filter-group">
       <span class="price-label-row">Price / night</span>
@@ -1233,6 +1259,7 @@ function toggleMobileMenu(){
       </div>
     </div>
     <div class="filter-actions">
+      <button class="filter-search-btn" id="filter-search-btn" onclick="applyFilters()">Search</button>
       <button class="filter-reset" id="btn-reset" style="display:none" onclick="resetFilters()">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         Clear
@@ -1446,9 +1473,9 @@ function initFavBtns(){
 }
 
 function getDateParams(){
-  var ci = ((document.getElementById('flt-checkin') && document.getElementById('flt-checkin').value) || (document.getElementById('flt-mob-checkin') && document.getElementById('flt-mob-checkin').value) || '').trim();
-  var co = ((document.getElementById('flt-checkout') && document.getElementById('flt-checkout').value) || (document.getElementById('flt-mob-checkout') && document.getElementById('flt-mob-checkout').value) || '').trim();
-  if(ci && co) return '?checkIn='+ci+'&checkOut='+co;
+  if (_fpDates[0] && _fpDates[1]) {
+    return '?checkIn=' + formatFpDate(_fpDates[0]) + '&checkOut=' + formatFpDate(_fpDates[1]);
+  }
   return '';
 }
 
@@ -1651,6 +1678,10 @@ function resetFilters(){
   var pMin=document.getElementById('f-price-min');
   var pMax=document.getElementById('f-price-max');
   if(pMin){pMin.value=0;pMax.value=10000;syncPriceSlider();}
+  _fpDates = [null, null];
+  if (typeof fpDesktop !== 'undefined') fpDesktop.clear();
+  if (typeof fpMobile !== 'undefined') fpMobile.clear();
+  updateDateDisplay();
   applyFilters();
   syncMobileDrawer();
   updateMobileBar();
@@ -1715,58 +1746,53 @@ function initMobileDrawer(){
 initMobileDrawer();
 load();
 
-/* ── DATE PICKER INIT ── */
-(function initDatePickers(){
-  var today = new Date().toISOString().slice(0,10);
-  var ciDsk = document.getElementById('flt-checkin');
-  var coDsk = document.getElementById('flt-checkout');
-  var ciMob = document.getElementById('flt-mob-checkin');
-  var coMob = document.getElementById('flt-mob-checkout');
+/* ── FLATPICKR DATE RANGE ── */
+var _fpDates = [null, null]; // [checkIn, checkOut]
 
-  function addOneDay(dateStr){
-    var d = new Date(dateStr); d.setDate(d.getDate()+1);
-    return d.toISOString().slice(0,10);
+function formatFpDate(d) {
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+  return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
+}
+function formatDisplay(d) {
+  return d.toLocaleDateString('en-GB', {day:'numeric', month:'short'});
+}
+function updateDateDisplay() {
+  var val = _fpDates[0] && _fpDates[1]
+    ? formatDisplay(_fpDates[0]) + ' → ' + formatDisplay(_fpDates[1])
+    : (_fpDates[0] ? formatDisplay(_fpDates[0]) + ' → ?' : 'Check-in — Check-out');
+  document.getElementById('flt-dates-val').textContent = val;
+  var mob = document.getElementById('flt-mob-dates-val');
+  if (mob) mob.textContent = val;
+  var g = document.getElementById('flt-date-group');
+  if (g) g.classList.toggle('active', !!(_fpDates[0] && _fpDates[1]));
+  var mt = document.getElementById('flt-mob-date-trigger');
+  if (mt) mt.classList.toggle('has-dates', !!(_fpDates[0] && _fpDates[1]));
+}
+
+var fpConfig = {
+  mode: 'range',
+  minDate: 'today',
+  dateFormat: 'Y-m-d',
+  showMonths: window.innerWidth > 900 ? 2 : 1,
+  locale: 'default',
+  disableMobile: true,
+  onChange: function(dates) {
+    _fpDates = [dates[0] || null, dates[1] || null];
+    updateDateDisplay();
   }
+};
 
-  function syncCheckout(ci, co){
-    if(!ci || !co) return;
-    co.min = ci.value ? addOneDay(ci.value) : today;
-    if(co.value && co.value <= ci.value) co.value = '';
+var fpDesktop = flatpickr('#flt-date-hidden', Object.assign({}, fpConfig, {
+  appendTo: document.querySelector('.filter-bar'),
+  positionElement: document.getElementById('flt-date-group'),
+}));
+var fpMobile = flatpickr('#flt-mob-date-hidden', Object.assign({}, fpConfig));
+
+function syncFp(src, dst) {
+  if (_fpDates[0] && _fpDates[1]) {
+    dst.setDate([_fpDates[0], _fpDates[1]], false);
   }
-
-  function syncMobFromDsk(){
-    if(ciMob) ciMob.value = ciDsk ? ciDsk.value : '';
-    if(coMob) coMob.value = coDsk ? coDsk.value : '';
-  }
-
-  function syncDskFromMob(){
-    if(ciDsk) ciDsk.value = ciMob ? ciMob.value : '';
-    if(coDsk) coDsk.value = coMob ? coMob.value : '';
-  }
-
-  if(ciDsk){ ciDsk.min = today; }
-  if(coDsk){ coDsk.min = today; }
-  if(ciMob){ ciMob.min = today; }
-  if(coMob){ coMob.min = today; }
-
-  if(ciDsk) ciDsk.addEventListener('change', function(){
-    syncCheckout(ciDsk, coDsk);
-    syncMobFromDsk();
-    render(filtered, false);
-  });
-  if(coDsk) coDsk.addEventListener('change', function(){
-    syncMobFromDsk();
-    render(filtered, false);
-  });
-  if(ciMob) ciMob.addEventListener('change', function(){
-    syncCheckout(ciMob, coMob);
-    syncDskFromMob();
-    syncCheckout(ciDsk, coDsk);
-  });
-  if(coMob) coMob.addEventListener('change', function(){
-    syncDskFromMob();
-  });
-})();
+}
 
 var leafletMap = null;
 var currentView = 'list';
