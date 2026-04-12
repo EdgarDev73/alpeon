@@ -1147,6 +1147,30 @@ function renderDetail(p){
   guestsCount = Math.min(2, p.guests);
   document.getElementById('bk-guests-count').textContent = guestsCount;
   updateStickyBar(p.title, p.priceFrom);
+  injectSchema(p);
+}
+
+function injectSchema(p) {
+  const existing = document.getElementById('property-schema');
+  if (existing) existing.remove();
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": p.title,
+    "description": p.summary || '',
+    "image": p.images || [],
+    "address": { "@type": "PostalAddress", "addressLocality": p.city, "addressCountry": "FR" },
+    "numberOfRooms": p.bedrooms || 0,
+    "amenityFeature": (p.amenities || []).map(a => ({ "@type": "LocationFeatureSpecification", "name": a, "value": true })),
+    "priceRange": "€€€",
+    "url": window.location.href
+  };
+  if (p.rating > 0) schema.aggregateRating = { "@type": "AggregateRating", "ratingValue": p.rating, "reviewCount": p.reviewsCount || 1 };
+  const s = document.createElement('script');
+  s.id = 'property-schema';
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify(schema);
+  document.head.appendChild(s);
 }
 
 // ── BOOKING STATE ──

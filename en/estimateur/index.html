@@ -649,6 +649,105 @@
     .est-station-chip { display:inline-flex; align-items:center; gap:8px; background:#f3efe9; border:1px solid var(--stone-3); border-radius:2px; padding:6px 12px 6px 10px; font-size:.75rem; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3); margin-bottom:20px; cursor:pointer; transition:background .2s; }
     .est-station-chip:hover { background:var(--stone-3); }
     .est-station-chip svg { width:12px; height:12px; stroke:var(--accent); stroke-width:2; fill:none; }
+  /* ── CALLBACK POPUP ESTIMATEUR ── */
+  .est-cb-backdrop {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(18,28,20,.65);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    align-items: flex-end; justify-content: center;
+  }
+  .est-cb-backdrop.open { display: flex; }
+  .est-cb-modal {
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    width: 100%; max-width: 480px;
+    box-shadow: 0 -12px 60px rgba(0,0,0,.22);
+    overflow: hidden;
+    animation: estCbSlideUp .35s ease;
+  }
+  @keyframes estCbSlideUp {
+    from { transform: translateY(60px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+  @media (min-width: 600px) {
+    .est-cb-backdrop { align-items: center; }
+    .est-cb-modal { border-radius: 12px; animation: estCbFadeIn .28s ease; }
+    @keyframes estCbFadeIn {
+      from { transform: translateY(16px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+  }
+  .est-cb-header {
+    background: #2C3D30;
+    padding: 28px 28px 24px;
+    position: relative;
+  }
+  .est-cb-eyebrow {
+    font-size: .58rem; font-weight: 700; letter-spacing: .22em;
+    text-transform: uppercase; color: rgba(232,203,160,.7);
+    margin-bottom: 10px;
+  }
+  .est-cb-title {
+    font-size: 1.15rem; font-weight: 600;
+    color: #fff; line-height: 1.3; max-width: 320px;
+  }
+  .est-cb-sub {
+    font-size: .78rem; color: rgba(232,203,160,.65); line-height: 1.55;
+    margin: 10px 0 0; max-width: 300px;
+  }
+  .est-cb-close {
+    position: absolute; top: 16px; right: 16px;
+    background: rgba(255,255,255,.12); border: none; border-radius: 50%;
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: rgba(255,255,255,.7); transition: background .18s;
+  }
+  .est-cb-close:hover { background: rgba(255,255,255,.22); color: #fff; }
+  .est-cb-body { padding: 24px 28px 28px; }
+  .est-cb-fields { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+  .est-cb-field { display: flex; flex-direction: column; gap: 5px; }
+  .est-cb-label {
+    font-size: .6rem; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: #9a9690;
+  }
+  .est-cb-input {
+    height: 46px; border: 1.5px solid #e0dbd4; border-radius: 8px;
+    padding: 0 14px; font-family: 'Inter', sans-serif; font-size: .9rem;
+    color: #1c1b19; background: #fff; outline: none;
+    transition: border-color .18s;
+  }
+  .est-cb-input:focus { border-color: #2C3D30; }
+  .est-cb-input::placeholder { color: #bbb; }
+  .est-cb-submit {
+    width: 100%; height: 50px; background: #2C3D30; border: none;
+    border-radius: 10px; font-family: 'Inter', sans-serif;
+    font-size: .85rem; font-weight: 600; color: #fff;
+    cursor: pointer; transition: background .2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .est-cb-submit:hover { background: #1e2f22; }
+  .est-cb-submit svg { width: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+  .est-cb-decline {
+    display: block; text-align: center; margin-top: 14px;
+    font-size: .72rem; color: rgba(42,32,18,.35);
+    cursor: pointer; transition: color .18s;
+    font-family: 'Inter', sans-serif; letter-spacing: .03em;
+    background: none; border: none; width: 100%;
+  }
+  .est-cb-decline:hover { color: rgba(42,32,18,.6); }
+  .est-cb-success {
+    padding: 36px 28px; text-align: center;
+    display: none; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .est-cb-success.show { display: flex; }
+  .est-cb-success-icon {
+    width: 52px; height: 52px; background: rgba(44,61,48,.08);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  .est-cb-success-icon svg { width: 22px; stroke: #2C3D30; fill: none; stroke-width: 2.5; }
+  .est-cb-success-title { font-size: 1rem; font-weight: 600; color: #1c1b19; }
+  .est-cb-success-text { font-size: .82rem; color: rgba(42,32,18,.5); line-height: 1.6; max-width: 280px; }
+
   </style>
   <script src="/alpeon-config.js"></script>
 </head>
@@ -1823,6 +1922,10 @@
       document.querySelector('.step-nav').style.display = 'none';
       setTimeout(() => { resSection.scrollIntoView({ behavior:'smooth', block:'start' }); }, 80);
       setTimeout(() => { document.getElementById('callpop').classList.add('open'); }, 3500);
+      /* Callback popup after 4s */
+      setTimeout(() => {
+        if (!localStorage.getItem('alpeon_cb_estimateur_seen')) openCbPopup();
+      }, 4000);
       /* Auto-play video after 5s */
       setTimeout(() => {
         const video = document.getElementById('resVideoEl');
@@ -1867,5 +1970,94 @@
   renderNav();
   </script>
 
+<!-- ── CALLBACK POPUP ESTIMATEUR ── -->
+<div class="est-cb-backdrop" id="est-cb-backdrop" role="dialog" aria-modal="true" aria-label="Request a callback">
+  <div class="est-cb-modal">
+    <div class="est-cb-header">
+      <div class="est-cb-eyebrow">Personalised offer · Free · No commitment</div>
+      <h3 class="est-cb-title">Turn your property into guaranteed income</h3>
+      <p class="est-cb-sub">Our experts will review your estimate and provide a personalised offer.</p>
+      <button class="est-cb-close" id="est-cb-close" aria-label="Close">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="est-cb-form-wrap">
+      <div class="est-cb-body">
+        <form class="est-cb-fields" id="est-cb-form" novalidate>
+          <div class="est-cb-field">
+            <label class="est-cb-label" for="est-cb-name">First name</label>
+            <input class="est-cb-input" id="est-cb-name" name="name" type="text" placeholder="John" autocomplete="given-name" required>
+          </div>
+          <div class="est-cb-field">
+            <label class="est-cb-label" for="est-cb-phone">Phone</label>
+            <input class="est-cb-input" id="est-cb-phone" name="phone" type="tel" placeholder="+33 6 12 34 56 78" autocomplete="tel" required>
+          </div>
+          <button class="est-cb-submit" type="submit">
+            Request a callback
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </form>
+        <button class="est-cb-decline" id="est-cb-decline">No thanks, I'll come back later</button>
+      </div>
+    </div>
+    <div class="est-cb-success" id="est-cb-success">
+      <div class="est-cb-success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="est-cb-success-title">Got it!</div>
+      <p class="est-cb-success-text">An ALPÉON expert will call you back shortly to refine your estimate.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const backdrop = document.getElementById('est-cb-backdrop');
+  const form     = document.getElementById('est-cb-form');
+  const success  = document.getElementById('est-cb-success');
+  const formWrap = document.getElementById('est-cb-form-wrap');
+
+  function openCbPopup() {
+    if (localStorage.getItem('alpeon_cb_estimateur_seen')) return;
+    backdrop.classList.add('open');
+  }
+  function closeCbPopup() {
+    localStorage.setItem('alpeon_cb_estimateur_seen', '1');
+    backdrop.classList.remove('open');
+  }
+
+  window.openCbPopup  = openCbPopup;
+  window.closeCbPopup = closeCbPopup;
+
+  document.getElementById('est-cb-close').addEventListener('click', closeCbPopup);
+  document.getElementById('est-cb-decline').addEventListener('click', closeCbPopup);
+  backdrop.addEventListener('click', function(e){ if (e.target === backdrop) closeCbPopup(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeCbPopup(); });
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name  = document.getElementById('est-cb-name').value.trim();
+    const phone = document.getElementById('est-cb-phone').value.trim();
+    if (!name || !phone) return;
+
+    const btn = form.querySelector('.est-cb-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'callback', name, phone, destination: 'Estimateur', lang: 'en' })
+      });
+    } catch(err) { console.warn('[est-cb]', err); }
+
+    localStorage.setItem('alpeon_cb_estimateur_seen', '1');
+    formWrap.style.display = 'none';
+    success.classList.add('show');
+    setTimeout(closeCbPopup, 3200);
+  });
+})();
+</script>
 </body>
 </html>

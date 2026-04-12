@@ -35,6 +35,16 @@ module.exports = async (req, res) => {
       _cache.properties = normalizeListings(raw);
       _cache.fetchedAt  = now;
       console.log(`[properties] Fetched ${_cache.properties.length} listings from Guesty`);
+
+      // Write fallback (best-effort, non-blocking — silently fails on Vercel read-only FS)
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        fs.writeFileSync(
+          path.join(__dirname, '../assets/data/properties-fallback.json'),
+          JSON.stringify(_cache.properties)
+        );
+      } catch(e) { /* ignore */ }
     }
 
     let properties = _cache.properties;
@@ -65,6 +75,15 @@ module.exports = async (req, res) => {
       res.setHeader('Cache-Control', 'no-store');
       return res.status(200).json({ properties: _cache.properties, total: _cache.properties.length, _stale: true });
     }
+
+    // Tenter le fallback statique si disponible
+    try {
+      const fallback = require('../assets/data/properties-fallback.json');
+      if (fallback && fallback.length > 0) {
+        res.setHeader('Cache-Control', 'no-store');
+        return res.status(200).json({ properties: fallback, total: fallback.length, _fallback: true });
+      }
+    } catch(e) { /* no fallback file */ }
 
     // Pas de cache — erreur propre (le CDN servira son stale-if-error)
     res.setHeader('Cache-Control', 'no-store');

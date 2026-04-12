@@ -680,16 +680,16 @@
   }
   .flt-drawer.open { pointer-events: all; visibility: visible; }
   .flt-drawer-backdrop {
-    position: absolute; inset: 0; background: rgba(0,0,0,.45);
+    position: absolute; inset: 0; background: rgba(0,0,0,.4);
     opacity: 0; transition: opacity .28s;
   }
   .flt-drawer.open .flt-drawer-backdrop { opacity: 1; }
   .flt-drawer-panel {
     position: absolute; bottom: 0; left: 0; right: 0;
-    background: #fff; border-radius: 20px 20px 0 0;
+    background: #fff; border-radius: 16px 16px 0 0;
     max-height: 88vh; display: flex; flex-direction: column;
-    transform: translateY(100%); transition: transform .32s cubic-bezier(.4,0,.2,1);
-    box-shadow: 0 -8px 48px rgba(0,0,0,.16);
+    transform: translateY(100%); transition: transform .35s cubic-bezier(.34,1.46,.64,1);
+    box-shadow: 0 -8px 40px rgba(0,0,0,.15);
   }
   .flt-drawer.open .flt-drawer-panel { transform: translateY(0); }
   .flt-drawer-hdr {
@@ -702,6 +702,7 @@
     width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; color: var(--ink);
   }
   .flt-drawer-body { flex: 1; overflow-y: auto; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1.4rem; -webkit-overflow-scrolling: touch; }
+  .flt-mob-section { display: flex; flex-direction: column; }
   .flt-mob-sec-label { font-size: .57rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #9a9690; margin-bottom: .6rem; }
   .flt-mob-pills { display: flex; flex-wrap: wrap; gap: .45rem; }
   .flt-mob-pill {
@@ -713,7 +714,7 @@
   }
   .flt-mob-pill.active { border-color: var(--green); background: var(--green); color: #fff; font-weight: 500; }
   .flt-drawer-footer {
-    padding: .9rem 1.5rem 1.4rem; display: flex; gap: .65rem; flex-shrink: 0;
+    padding: .9rem 1.5rem calc(1.4rem + env(safe-area-inset-bottom, 0px)); display: flex; gap: .65rem; flex-shrink: 0;
     border-top: 1px solid #ece8e2;
   }
   .flt-mob-reset {
@@ -728,6 +729,10 @@
   @media (max-width: 768px) {
     .filter-bar { display: none !important; }
     .filter-mobile-bar { display: flex; }
+  }
+  @media (min-width: 769px) {
+    .filter-mobile-bar { display: none !important; }
+    .flt-drawer { display: none !important; }
   }
 
   .wa-btn{position:fixed;bottom:1.75rem;right:1.75rem;z-index:400;width:52px;height:52px;border-radius:50%;background:#2C3D30;box-shadow:0 4px 20px rgba(44,61,48,.45);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
@@ -998,7 +1003,7 @@ function toggleMobileMenu(){
 <div class="filter-mobile-bar" id="filter-mobile-bar">
   <button class="flt-mob-btn" id="flt-mob-btn" onclick="openFilterDrawer()">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
-    Filters
+    <span id="flt-mob-btn-label">Filter</span>
     <span class="flt-mob-badge" id="flt-mob-badge" style="display:none">0</span>
   </button>
   <span class="flt-mob-count" id="flt-mob-count">— properties</span>
@@ -1568,8 +1573,10 @@ function updateMobileBar(){
   var active = ['station','type','gamme','guests'].filter(function(k){ return fltState[k] !== 'all'; }).length;
   var badge = document.getElementById('flt-mob-badge');
   var btn   = document.getElementById('flt-mob-btn');
+  var lbl   = document.getElementById('flt-mob-btn-label');
   if(badge){ badge.textContent = active; badge.style.display = active ? 'inline-flex' : 'none'; }
   if(btn)  btn.classList.toggle('active', active > 0);
+  if(lbl)  lbl.textContent = active > 0 ? 'Filter (' + active + ')' : 'Filter';
 }
 function syncMobileDrawer(){
   ['station','type','gamme','guests'].forEach(function(key){
