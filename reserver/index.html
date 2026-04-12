@@ -405,8 +405,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
       cursor: pointer; white-space: nowrap; flex-shrink: 0;
       transition: background .2s;
+      position: relative; z-index: 100000;
     }
     .filter-search-btn:hover { background: #3d5442; }
+    .filter-search-btn:active { background: #1e2e22; transform: scale(.97); }
 
     /* Mobile drawer date inputs */
     .flt-mob-date-group { display: flex; flex-direction: column; gap: .5rem; }
@@ -1314,7 +1316,7 @@ function toggleMobileMenu(){
       </div>
     </div>
     <div class="filter-actions">
-      <button class="filter-search-btn" id="filter-search-btn" onclick="applyFilters()">Rechercher</button>
+      <button class="filter-search-btn" id="filter-search-btn" onclick="try{fpDesktop.close();}catch(e){} applyFilters(); document.getElementById('grid-wrap')?.scrollIntoView({behavior:'smooth',block:'start'})">Rechercher</button>
       <button class="filter-reset" id="btn-reset" style="display:none" onclick="resetFilters()">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         Effacer
@@ -1730,6 +1732,9 @@ function applyFilters(){
   });
   render(filtered, active);
   if(currentView === 'map') renderMap();
+  // Flash animation to confirm action
+  const grid = document.getElementById('property-grid');
+  if(grid){ grid.style.opacity='.4'; setTimeout(()=>{ grid.style.transition='opacity .25s'; grid.style.opacity='1'; setTimeout(()=>grid.style.transition='',300); },30); }
 }
 
 function resetFilters(){
