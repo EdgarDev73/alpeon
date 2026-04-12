@@ -1851,7 +1851,36 @@ async function loadProperty(){
     renderDetail(prop);
     loadRecommendations(prop);
     initCalendar();
-    loadCalendar(prop.id);
+    await loadCalendar(prop.id);
+
+    // ── Pré-remplir les dates depuis les query params (/reserver → /propriete) ──
+    const _up = new URLSearchParams(location.search);
+    const preIn  = _up.get('checkIn');
+    const preOut = _up.get('checkOut');
+    if(preIn && preOut
+       && /^\d{4}-\d{2}-\d{2}$/.test(preIn)
+       && /^\d{4}-\d{2}-\d{2}$/.test(preOut)
+       && preIn < preOut){
+      // Naviguer le calendrier au mois de l'arrivée
+      const d = new Date(preIn + 'T12:00:00');
+      calYear  = d.getFullYear();
+      calMonth = d.getMonth();
+      // Pré-sélectionner les dates
+      selectedCheckIn  = preIn;
+      selectedCheckOut = preOut;
+      selectingEnd = false;
+      renderCal();
+      updateDatesSummary();
+      autoQuote(); // déclenche le calcul de prix automatiquement
+      // Mettre à jour le bouton WA avec les dates
+      const waBtn = document.getElementById('wa-sidebar-btn');
+      if(waBtn){
+        const fmtD = s => s.split('-').reverse().join('/');
+        const waText = encodeURIComponent(`Bonjour, je suis intéressé(e) par ${prop.title} du ${fmtD(preIn)} au ${fmtD(preOut)}`);
+        waBtn.href = 'https://wa.me/33765254926?text=' + waText;
+      }
+    }
+
     loadMonthRates();
   } catch(e){
     document.getElementById('detail-left').innerHTML=`<p style="padding:2rem;color:#b91c1c">Impossible de charger ce bien : ${e.message}</p>`;

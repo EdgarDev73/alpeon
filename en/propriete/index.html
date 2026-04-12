@@ -1739,7 +1739,36 @@ async function loadProperty(){
     renderDetail(prop);
     loadRecommendations(prop);
     initCalendar();
-    loadCalendar(prop.id);
+    await loadCalendar(prop.id);
+
+    // ── Pre-fill dates from URL query params (/book → /property) ──
+    const _up = new URLSearchParams(location.search);
+    const preIn  = _up.get('checkIn');
+    const preOut = _up.get('checkOut');
+    if(preIn && preOut
+       && /^\d{4}-\d{2}-\d{2}$/.test(preIn)
+       && /^\d{4}-\d{2}-\d{2}$/.test(preOut)
+       && preIn < preOut){
+      // Navigate calendar to check-in month
+      const d = new Date(preIn + 'T12:00:00');
+      calYear  = d.getFullYear();
+      calMonth = d.getMonth();
+      // Pre-select dates
+      selectedCheckIn  = preIn;
+      selectedCheckOut = preOut;
+      selectingEnd = false;
+      renderCal();
+      updateDatesSummary();
+      autoQuote(); // auto-trigger price calculation
+      // Update WA button with dates
+      const waBtn = document.getElementById('wa-sidebar-btn');
+      if(waBtn){
+        const fmtD = s => s.split('-').reverse().join('/');
+        const waText = encodeURIComponent(`Hello, I'm interested in ${prop.title} from ${fmtD(preIn)} to ${fmtD(preOut)}`);
+        waBtn.href = 'https://wa.me/33765254926?text=' + waText;
+      }
+    }
+
     loadMonthRates();
   } catch(e){
     document.getElementById('detail-left').innerHTML=`<p style="padding:2rem;color:#b91c1c">Unable to load this property: ${e.message}</p>`;
