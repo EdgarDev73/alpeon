@@ -247,14 +247,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .filter-inner {
       max-width: var(--max); margin: 0 auto;
-      padding: 0 3rem;
+      padding: 0 1.5rem;
       display: flex; align-items: stretch; gap: 0;
       height: 72px;
     }
     .filter-group {
       position: relative;
       display: flex; flex-direction: column; justify-content: center;
-      padding: 0 2rem; gap: .2rem;
+      padding: 0 1.1rem; gap: .2rem;
       border-right: 1px solid #ece8e2;
       cursor: pointer; transition: background .18s;
       min-width: 0; user-select: none;
@@ -311,9 +311,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* ── PRICE SLIDER ── */
     .price-wrap {
       display: flex; flex-direction: column; justify-content: center;
-      gap: .2rem; padding: 0 2rem;
+      gap: .2rem; padding: 0 1.1rem;
       border-right: 1px solid #ece8e2;
-      min-width: 190px;
+      min-width: 150px;
     }
     .price-label-row {
       font-size: .58rem; font-weight: 700; letter-spacing: .18em;
@@ -336,7 +336,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ── FILTER ACTIONS ── */
-    .filter-actions { margin-left: auto; display: flex; align-items: center; gap: 1.25rem; padding-left: 2rem; flex-shrink: 0; }
+    .filter-actions { margin-left: auto; display: flex; align-items: center; gap: .75rem; padding-left: 1rem; flex-shrink: 0; }
     .filter-count {
       font-size: .7rem; font-weight: 600; letter-spacing: .06em;
       color: var(--green); white-space: nowrap;
@@ -353,7 +353,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* ── DATE PICKER (flatpickr) ── */
     .flt-date-group {
       display: flex; flex-direction: column; justify-content: center;
-      padding: 0 1.75rem; gap: .2rem;
+      padding: 0 1.1rem; gap: .2rem;
       border-right: 1px solid #ece8e2;
       cursor: pointer; transition: background .18s;
       min-width: 0; user-select: none; flex-shrink: 0;
@@ -1664,7 +1664,6 @@ async function load(){
     document.getElementById('thumb-max').style.left=pct(mx);
     document.getElementById('lbl-min').textContent=safe_mn.toLocaleString('fr-FR');
     document.getElementById('lbl-max').textContent=mx>=10000?'10 000+':mx.toLocaleString('fr-FR');
-    applyFilters();
   }
 
 /* ── Custom dropdown state ── */
@@ -1691,7 +1690,6 @@ function initDropdowns(){
         opt.classList.add('selected');
         grp.classList.toggle('active', val !== 'all');
         closeAllDropdowns();
-        applyFilters();
         e.stopPropagation();
       });
     });
@@ -1845,11 +1843,7 @@ const fpConfig = {
   }
 };
 
-const fpDesktop = flatpickr('#flt-date-hidden', {
-  ...fpConfig,
-  appendTo: document.querySelector('.filter-bar'),
-  positionElement: document.getElementById('flt-date-group'),
-});
+const fpDesktop = flatpickr('#flt-date-hidden', { ...fpConfig });
 const fpMobile = flatpickr('#flt-mob-date-hidden', { ...fpConfig });
 
 function syncFp(src, dst) {
