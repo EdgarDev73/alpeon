@@ -1492,9 +1492,7 @@ function card(p){
   var chips = TOP_AM.filter(function(a){ return translated.includes(a); }).slice(0,3)
     .map(function(a){ return '<span class="prop-amenity-chip"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2C3D30" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>'+a+'</span>'; }).join('');
   var dateParams = getDateParams();
-  var cardHref = dateParams && p.bookingUrl
-    ? p.bookingUrl + dateParams
-    : '/en/propriete/'+(p.slug||p.id)+'/'+p.id;
+  var cardHref = '/en/propriete/'+(p.slug||p.id)+'/'+p.id + dateParams;
   return '<a class="prop-card" href="'+cardHref+'">'
     +'<div class="prop-photo">'
     +'<img src="'+(p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70')+'" alt="'+p.title+'" loading="lazy">'
