@@ -1022,10 +1022,10 @@ function renderGallery(p){
       <img src="${main}" alt="${p.title}">
     </div>
     <div class="gallery-thumb" onclick="openLightbox(1)">
-      <img src="${t1}" alt="" loading="lazy">
+      <img src="${t1}" alt="${p.title}" loading="lazy">
     </div>
     <div class="gallery-thumb" onclick="openLightbox(2)" style="position:relative">
-      <img src="${t2}" alt="" loading="lazy">
+      <img src="${t2}" alt="${p.title}" loading="lazy">
       ${imgs.length > 3 ? `<button class="gallery-see-all" onclick="openLightbox(2);event.stopPropagation()">+${imgs.length-3} photos</button>` : ''}
     </div>`;
 }
@@ -1097,6 +1097,7 @@ function toggleDesc(){
 }
 
 function renderDetail(p){
+  window._propTitle = p.title;
   document.title = `${p.title} — ALPÉON`;
   // OG dynamique
   const setMeta = (prop, content) => {
