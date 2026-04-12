@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Consent Mode v2 — RGPD (avant GTM) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    var _ac = localStorage.getItem('alpeon_cookie_consent');
+    gtag('consent', 'default', {
+      'analytics_storage': _ac === 'granted' ? 'granted' : 'denied',
+      'ad_storage': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -801,6 +812,53 @@ function toggleFaq(btn) {
   if (!isOpen) {
     item.classList.add('open');
   }
+}
+</script>
+
+<!-- ── COOKIE BANNER RGPD ── -->
+<style>
+.ck-bar{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#fff;border-top:1px solid #e8cba0;box-shadow:0 -4px 32px rgba(0,0,0,.10);padding:1.1rem 1.5rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;font-family:'Poppins',sans-serif;transform:translateY(0);transition:transform .35s ease}
+.ck-bar.ck-hidden{transform:translateY(110%)}
+.ck-text{flex:1;min-width:200px;font-size:.75rem;color:#4b5563;line-height:1.6}
+.ck-text a{color:#2C3D30;text-decoration:underline}
+.ck-btns{display:flex;gap:.65rem;flex-shrink:0}
+.ck-btn{padding:.5rem 1.2rem;border-radius:5px;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:1.5px solid #2C3D30;transition:background .2s,color .2s;white-space:nowrap}
+.ck-btn-refuse{background:#fff;color:#2C3D30}
+.ck-btn-refuse:hover{background:#f3f4f6}
+.ck-btn-accept{background:#2C3D30;color:#E8CBA0;border-color:#2C3D30}
+.ck-btn-accept:hover{background:#3d5442}
+@media(max-width:560px){.ck-bar{flex-direction:column;align-items:flex-start;gap:.85rem}.ck-btns{width:100%;justify-content:flex-end}}
+</style>
+
+<div class="ck-bar" id="ck-bar">
+  <p class="ck-text">
+    Nous utilisons des cookies analytiques pour mesurer l'audience et améliorer votre expérience.
+    <a href="/politique-confidentialite">En savoir plus</a>
+  </p>
+  <div class="ck-btns">
+    <button class="ck-btn ck-btn-refuse" onclick="ckRefuse()">Refuser</button>
+    <button class="ck-btn ck-btn-accept" onclick="ckAccept()">Accepter</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var bar = document.getElementById('ck-bar');
+  if(!bar) return;
+  var stored = localStorage.getItem('alpeon_cookie_consent');
+  if(stored) { bar.classList.add('ck-hidden'); return; }
+  // Show after small delay
+  setTimeout(function(){ bar.style.display='flex'; }, 600);
+})();
+
+function ckAccept(){
+  localStorage.setItem('alpeon_cookie_consent','granted');
+  if(typeof gtag==='function') gtag('consent','update',{'analytics_storage':'granted'});
+  document.getElementById('ck-bar').classList.add('ck-hidden');
+}
+function ckRefuse(){
+  localStorage.setItem('alpeon_cookie_consent','denied');
+  document.getElementById('ck-bar').classList.add('ck-hidden');
 }
 </script>
 </body>
