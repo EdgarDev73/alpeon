@@ -4039,6 +4039,191 @@ function toggleMobileMenu(){
   </div>
 </div>
 
+<!-- ═══ EXIT-INTENT POPUP ═══ -->
+<style>
+  .exit-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: exitFadeIn .22s ease;
+  }
+  .exit-backdrop.open { display: flex; }
+  @keyframes exitFadeIn { from { opacity:0; } to { opacity:1; } }
+  .exit-modal {
+    background: #fff;
+    border-radius: 14px;
+    max-width: 440px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.28);
+    animation: exitSlideUp .26s ease;
+    position: relative;
+  }
+  @keyframes exitSlideUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+  .exit-header {
+    background: #2C3D30;
+    padding: 26px 28px 22px;
+    position: relative;
+  }
+  .exit-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #C9A84C;
+    margin: 0 0 6px;
+    line-height: 1.25;
+    letter-spacing: -.01em;
+  }
+  .exit-sub {
+    font-size: .875rem;
+    color: rgba(255,255,255,.78);
+    margin: 0;
+    line-height: 1.55;
+  }
+  .exit-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,.12);
+    color: rgba(255,255,255,.7);
+    font-size: 1.1rem;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .exit-close:hover { background: rgba(255,255,255,.22); color: #fff; }
+  .exit-body {
+    padding: 24px 28px 28px;
+  }
+  .exit-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .exit-label {
+    font-size: .8rem;
+    font-weight: 600;
+    color: #2C3D30;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .exit-select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-size: .95rem;
+    color: #1c1b19;
+    background: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3 5l4 4 4-4' stroke='%232C3D30' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    cursor: pointer;
+    transition: border-color .15s;
+  }
+  .exit-select:focus { outline: none; border-color: #2C3D30; }
+  .exit-cta {
+    width: 100%;
+    padding: 13px 20px;
+    background: #C9A84C;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: .02em;
+    transition: background .15s;
+  }
+  .exit-cta:hover { background: #b5943d; }
+</style>
+
+<div class="exit-backdrop" id="exit-backdrop" role="dialog" aria-modal="true" aria-label="Avant de partir">
+  <div class="exit-modal">
+    <div class="exit-header">
+      <button class="exit-close" id="exit-close" aria-label="Fermer">&#x2715;</button>
+      <p class="exit-title">Avant de partir...</p>
+      <p class="exit-sub">Obtenez votre estimation de revenus gratuitement en 2&nbsp;minutes.</p>
+    </div>
+    <div class="exit-body">
+      <div class="exit-field">
+        <label class="exit-label" for="exit-station-sel">Votre station</label>
+        <select class="exit-select" id="exit-station-sel">
+          <option value="">Sélectionner une station…</option>
+          <option value="courchevel">Courchevel</option>
+          <option value="megeve">Megève</option>
+          <option value="meribel">Méribel</option>
+          <option value="tignes">Tignes</option>
+          <option value="valdisere">Val d'Isère</option>
+          <option value="valthorens">Val Thorens</option>
+        </select>
+      </div>
+      <button class="exit-cta" id="exit-cta">Calculer mon estimation &#x2192;</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var LS_KEY = 'alpeon_exit_est_seen';
+  var triggered = false;
+
+  function closePopup() {
+    localStorage.setItem(LS_KEY, '1');
+    document.getElementById('exit-backdrop').classList.remove('open');
+  }
+
+  function showPopup() {
+    if (triggered) return;
+    if (localStorage.getItem(LS_KEY)) return;
+    if (window.innerWidth < 768) return;
+    /* Skip if result section is already visible */
+    var res = document.getElementById('res-section');
+    if (res && res.classList.contains('visible')) return;
+    triggered = true;
+    document.getElementById('exit-backdrop').classList.add('open');
+  }
+
+  document.addEventListener('mouseleave', function (e) {
+    if (e.clientY < 50) showPopup();
+  });
+
+  document.getElementById('exit-close').addEventListener('click', closePopup);
+
+  document.getElementById('exit-backdrop').addEventListener('click', function (e) {
+    if (e.target === this) closePopup();
+  });
+
+  document.getElementById('exit-cta').addEventListener('click', function () {
+    var val = document.getElementById('exit-station-sel').value;
+    localStorage.setItem(LS_KEY, '1');
+    document.getElementById('exit-backdrop').classList.remove('open');
+    /* Scroll to station picker */
+    var target = document.getElementById('stationPick');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    /* Pre-fill station if one was selected */
+    if (val && typeof pickStation === 'function') {
+      setTimeout(function () { pickStation(val); }, 400);
+    }
+  });
+})();
+</script>
+
 <script>
 (function(){
   var bar = document.getElementById('ck-bar');

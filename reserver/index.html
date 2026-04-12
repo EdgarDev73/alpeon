@@ -347,6 +347,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .filter-reset:hover { color: var(--green) }
     .filter-divider { width: 1px; height: 28px; background: #ece8e2; flex-shrink: 0; }
 
+    /* ── DATE PICKER INPUTS ── */
+    .flt-dates {
+      display: flex; align-items: center; gap: .5rem;
+      padding: 0 1.5rem; border-right: 1px solid #ece8e2;
+      flex-shrink: 0;
+    }
+    .flt-dates-inner {
+      display: flex; flex-direction: column; justify-content: center; gap: .15rem;
+    }
+    .flt-dates-label {
+      font-size: .58rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: #9a9690; white-space: nowrap;
+    }
+    .flt-dates-row { display: flex; align-items: center; gap: .4rem; }
+    .flt-date-input {
+      height: 28px; min-width: 130px;
+      border: 1px solid #ddd; border-radius: 6px;
+      font-family: var(--font-sans); font-size: .82rem; font-weight: 500;
+      color: var(--ink); padding: 0 .55rem;
+      background: #fff; outline: none; cursor: pointer;
+      transition: border-color .18s;
+    }
+    .flt-date-input:focus { border-color: #2C3D30; }
+    .flt-date-sep { font-size: .7rem; color: #bbb; flex-shrink: 0; }
+    .flt-dates-hint {
+      font-size: .55rem; color: #b0aca5; letter-spacing: .03em;
+      white-space: nowrap; margin-top: .1rem;
+    }
+    /* Mobile drawer date inputs */
+    .flt-mob-dates { display: flex; flex-direction: column; gap: .5rem; }
+    .flt-mob-date-row { display: flex; gap: .5rem; }
+    .flt-mob-date-input {
+      flex: 1; height: 40px;
+      border: 1px solid #ddd; border-radius: 8px;
+      font-family: var(--font-sans); font-size: .84rem; font-weight: 500;
+      color: var(--ink); padding: 0 .75rem;
+      background: #fff; outline: none; cursor: pointer;
+      transition: border-color .18s;
+    }
+    .flt-mob-date-input:focus { border-color: #2C3D30; }
+    .flt-mob-dates-hint {
+      font-size: .62rem; color: #b0aca5; letter-spacing: .03em;
+    }
+
     /* ── AMENITY ICONS ON CARD ── */
     .prop-amenity-row { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem }
     .prop-amenity-chip {
@@ -1144,6 +1188,16 @@ function toggleMobileMenu(){
           <button class="flt-mob-pill" data-val="8+">8 pers. +</button>
         </div>
       </div>
+      <div class="flt-mob-section">
+        <div class="flt-mob-sec-label">Dates de séjour</div>
+        <div class="flt-mob-dates">
+          <div class="flt-mob-date-row">
+            <input type="date" id="flt-mob-checkin" class="flt-mob-date-input" placeholder="Arrivée" title="Arrivée">
+            <input type="date" id="flt-mob-checkout" class="flt-mob-date-input" placeholder="Départ" title="Départ">
+          </div>
+          <div class="flt-mob-dates-hint">Disponibilités vérifiées à l'étape suivante</div>
+        </div>
+      </div>
     </div>
     <div class="flt-drawer-footer">
       <button class="flt-mob-reset" onclick="resetFiltersMob()">Effacer tout</button>
@@ -1208,6 +1262,17 @@ function toggleMobileMenu(){
         <div class="flt-option" data-val="4">4 pers. min.</div>
         <div class="flt-option" data-val="6">6 pers. min.</div>
         <div class="flt-option" data-val="8+">8 pers. +</div>
+      </div>
+    </div>
+    <div class="flt-dates">
+      <div class="flt-dates-inner">
+        <span class="flt-dates-label">Dates</span>
+        <div class="flt-dates-row">
+          <input type="date" id="flt-checkin" class="flt-date-input" placeholder="Arrivée" title="Arrivée">
+          <span class="flt-date-sep">→</span>
+          <input type="date" id="flt-checkout" class="flt-date-input" placeholder="Départ" title="Départ">
+        </div>
+        <div class="flt-dates-hint">Disponibilités vérifiées à l'étape suivante</div>
       </div>
     </div>
     <div class="price-wrap" id="price-filter-group">
@@ -1315,6 +1380,11 @@ function toggleMobileMenu(){
 
 <!-- ── FOOTER ── -->
 <footer id="contact">
+<div class="footer-owner-cta">
+  <span class="footer-owner-text">Vous êtes propriétaire d'un bien alpin ?</span>
+  <a href="/estimateur" class="footer-owner-btn">Estimez vos revenus →</a>
+</div>
+
   <div class="container">
     <div class="footer-grid">
       <div>
@@ -1429,6 +1499,13 @@ let all = [], filtered = [];
     });
   }
 
+  function getDateParams(){
+    const ci = (document.getElementById('flt-checkin')?.value || document.getElementById('flt-mob-checkin')?.value || '').trim();
+    const co = (document.getElementById('flt-checkout')?.value || document.getElementById('flt-mob-checkout')?.value || '').trim();
+    if(ci && co) return '?checkIn='+ci+'&checkOut='+co;
+    return '';
+  }
+
   function card(p){
     const typeLabel = p.propertyType==='chalet'?'Chalet':p.propertyType==='penthouse'?'Penthouse':'Appartement';
     const isSignatures = (p.tags||[]).includes('Signatures');
@@ -1445,7 +1522,11 @@ let all = [], filtered = [];
     const translated = (p.amenities||[]).map(a=>AMENITY_FR[a]||a);
     const chips = TOP_AM.filter(a=>translated.includes(a)).slice(0,3)
       .map(a=>`<span class="prop-amenity-chip"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2C3D30" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>${a}</span>`).join('');
-    return `<a class="prop-card" href="/propriete/${p.slug||p.id}/${p.id}">
+    const dateParams = getDateParams();
+    const cardHref = dateParams && p.bookingUrl
+      ? p.bookingUrl + dateParams
+      : `/propriete/${p.slug||p.id}/${p.id}`;
+    return `<a class="prop-card" href="${cardHref}">
       <div class="prop-photo">
         <img src="${p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70'}" alt="${p.title}" loading="lazy">
         <div class="prop-photo-overlay"></div>
@@ -1695,6 +1776,59 @@ function initMobileDrawer(){
 
 initMobileDrawer();
 load();
+
+/* ── DATE PICKER INIT ── */
+(function initDatePickers(){
+  const today = new Date().toISOString().slice(0,10);
+  const ciDsk = document.getElementById('flt-checkin');
+  const coDsk = document.getElementById('flt-checkout');
+  const ciMob = document.getElementById('flt-mob-checkin');
+  const coMob = document.getElementById('flt-mob-checkout');
+
+  function addOneDay(dateStr){
+    const d = new Date(dateStr); d.setDate(d.getDate()+1);
+    return d.toISOString().slice(0,10);
+  }
+
+  function syncCheckout(ci, co){
+    if(!ci || !co) return;
+    co.min = ci.value ? addOneDay(ci.value) : today;
+    if(co.value && co.value <= ci.value) co.value = '';
+  }
+
+  function syncMobFromDsk(){
+    if(ciMob) ciMob.value = ciDsk?.value || '';
+    if(coMob) coMob.value = coDsk?.value || '';
+  }
+
+  function syncDskFromMob(){
+    if(ciDsk) ciDsk.value = ciMob?.value || '';
+    if(coDsk) coDsk.value = coMob?.value || '';
+  }
+
+  if(ciDsk){ ciDsk.min = today; }
+  if(coDsk){ coDsk.min = today; }
+  if(ciMob){ ciMob.min = today; }
+  if(coMob){ coMob.min = today; }
+
+  if(ciDsk) ciDsk.addEventListener('change', function(){
+    syncCheckout(ciDsk, coDsk);
+    syncMobFromDsk();
+    render(filtered, false);
+  });
+  if(coDsk) coDsk.addEventListener('change', function(){
+    syncMobFromDsk();
+    render(filtered, false);
+  });
+  if(ciMob) ciMob.addEventListener('change', function(){
+    syncCheckout(ciMob, coMob);
+    syncDskFromMob();
+    syncCheckout(ciDsk, coDsk);
+  });
+  if(coMob) coMob.addEventListener('change', function(){
+    syncDskFromMob();
+  });
+})();
 
 let leafletMap = null;
 let currentView = 'list';
@@ -1980,6 +2114,10 @@ async function submitNewsletter(e){
 .ck-btn-accept{background:#2C3D30;color:#E8CBA0;border-color:#2C3D30}
 .ck-btn-accept:hover{background:#3d5442}
 @media(max-width:560px){.ck-bar{flex-direction:column;align-items:flex-start;gap:.85rem}.ck-btns{width:100%;justify-content:flex-end}}
+.footer-owner-cta{background:rgba(232,203,160,.08);border-top:1px solid rgba(232,203,160,.15);border-bottom:1px solid rgba(232,203,160,.15);padding:.9rem clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.footer-owner-text{color:rgba(250,254,255,.7);font-size:.82rem;font-family:'Poppins',sans-serif}
+.footer-owner-btn{color:var(--gold,#E8CBA0);font-size:.82rem;font-weight:600;font-family:'Poppins',sans-serif;text-decoration:none;border:1px solid rgba(232,203,160,.35);border-radius:20px;padding:.3rem .9rem;transition:background .2s,border-color .2s;white-space:nowrap}
+.footer-owner-btn:hover{background:rgba(232,203,160,.1);border-color:var(--gold,#E8CBA0)}
 </style>
 
 <div class="ck-bar" id="ck-bar">

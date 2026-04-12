@@ -333,6 +333,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .filter-reset:hover { color: var(--green) }
     .filter-divider { width: 1px; height: 28px; background: #ece8e2; flex-shrink: 0; }
 
+    /* ── DATE PICKER INPUTS ── */
+    .flt-dates {
+      display: flex; align-items: center; gap: .5rem;
+      padding: 0 1.5rem; border-right: 1px solid #ece8e2;
+      flex-shrink: 0;
+    }
+    .flt-dates-inner {
+      display: flex; flex-direction: column; justify-content: center; gap: .15rem;
+    }
+    .flt-dates-label {
+      font-size: .58rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: #9a9690; white-space: nowrap;
+    }
+    .flt-dates-row { display: flex; align-items: center; gap: .4rem; }
+    .flt-date-input {
+      height: 28px; min-width: 130px;
+      border: 1px solid #ddd; border-radius: 6px;
+      font-family: var(--font-sans); font-size: .82rem; font-weight: 500;
+      color: var(--ink); padding: 0 .55rem;
+      background: #fff; outline: none; cursor: pointer;
+      transition: border-color .18s;
+    }
+    .flt-date-input:focus { border-color: #2C3D30; }
+    .flt-date-sep { font-size: .7rem; color: #bbb; flex-shrink: 0; }
+    .flt-dates-hint {
+      font-size: .55rem; color: #b0aca5; letter-spacing: .03em;
+      white-space: nowrap; margin-top: .1rem;
+    }
+    /* Mobile drawer date inputs */
+    .flt-mob-dates { display: flex; flex-direction: column; gap: .5rem; }
+    .flt-mob-date-row { display: flex; gap: .5rem; }
+    .flt-mob-date-input {
+      flex: 1; height: 40px;
+      border: 1px solid #ddd; border-radius: 8px;
+      font-family: var(--font-sans); font-size: .84rem; font-weight: 500;
+      color: var(--ink); padding: 0 .75rem;
+      background: #fff; outline: none; cursor: pointer;
+      transition: border-color .18s;
+    }
+    .flt-mob-date-input:focus { border-color: #2C3D30; }
+    .flt-mob-dates-hint {
+      font-size: .62rem; color: #b0aca5; letter-spacing: .03em;
+    }
+
     /* ── AMENITY CHIPS ── */
     .prop-amenity-row { display:flex; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem }
     .prop-amenity-chip {
@@ -1090,6 +1134,16 @@ function toggleMobileMenu(){
           <button class="flt-mob-pill" data-val="8+">8+ guests</button>
         </div>
       </div>
+      <div class="flt-mob-section">
+        <div class="flt-mob-sec-label">Stay dates</div>
+        <div class="flt-mob-dates">
+          <div class="flt-mob-date-row">
+            <input type="date" id="flt-mob-checkin" class="flt-mob-date-input" placeholder="Check-in" title="Check-in">
+            <input type="date" id="flt-mob-checkout" class="flt-mob-date-input" placeholder="Check-out" title="Check-out">
+          </div>
+          <div class="flt-mob-dates-hint">Availability checked at next step</div>
+        </div>
+      </div>
     </div>
     <div class="flt-drawer-footer">
       <button class="flt-mob-reset" onclick="resetFiltersMob()">Clear all</button>
@@ -1142,6 +1196,17 @@ function toggleMobileMenu(){
         <div class="flt-option" data-val="4">4 guests min.</div>
         <div class="flt-option" data-val="6">6 guests min.</div>
         <div class="flt-option" data-val="8+">8 guests +</div>
+      </div>
+    </div>
+    <div class="flt-dates">
+      <div class="flt-dates-inner">
+        <span class="flt-dates-label">Dates</span>
+        <div class="flt-dates-row">
+          <input type="date" id="flt-checkin" class="flt-date-input" placeholder="Check-in" title="Check-in">
+          <span class="flt-date-sep">→</span>
+          <input type="date" id="flt-checkout" class="flt-date-input" placeholder="Check-out" title="Check-out">
+        </div>
+        <div class="flt-dates-hint">Availability checked at next step</div>
       </div>
     </div>
     <div class="price-wrap" id="price-filter-group">
@@ -1261,6 +1326,11 @@ function toggleMobileMenu(){
 
 <!-- ── FOOTER ── -->
 <footer id="contact">
+<div class="footer-owner-cta">
+  <span class="footer-owner-text">Do you own an alpine property?</span>
+  <a href="/en/estimateur" class="footer-owner-btn">Estimate your income →</a>
+</div>
+
   <div class="container">
     <div class="footer-grid">
       <div>
@@ -1375,6 +1445,13 @@ function initFavBtns(){
   });
 }
 
+function getDateParams(){
+  var ci = ((document.getElementById('flt-checkin') && document.getElementById('flt-checkin').value) || (document.getElementById('flt-mob-checkin') && document.getElementById('flt-mob-checkin').value) || '').trim();
+  var co = ((document.getElementById('flt-checkout') && document.getElementById('flt-checkout').value) || (document.getElementById('flt-mob-checkout') && document.getElementById('flt-mob-checkout').value) || '').trim();
+  if(ci && co) return '?checkIn='+ci+'&checkOut='+co;
+  return '';
+}
+
 function card(p){
   var typeLabel = p.propertyType==='chalet'?'Chalet':p.propertyType==='penthouse'?'Penthouse':'Apartment';
   var gammeBadge = (p.tags||[]).includes('Signatures') ? '<span class="badge-signatures">Signatures</span>' : '<span class="badge-residences">Résidences</span>';
@@ -1387,7 +1464,11 @@ function card(p){
   var translated = (p.amenities||[]).map(function(a){ return AMENITY_EN[a]||a; });
   var chips = TOP_AM.filter(function(a){ return translated.includes(a); }).slice(0,3)
     .map(function(a){ return '<span class="prop-amenity-chip"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#2C3D30" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>'+a+'</span>'; }).join('');
-  return '<a class="prop-card" href="/en/propriete/'+(p.slug||p.id)+'/'+p.id+'">'
+  var dateParams = getDateParams();
+  var cardHref = dateParams && p.bookingUrl
+    ? p.bookingUrl + dateParams
+    : '/en/propriete/'+(p.slug||p.id)+'/'+p.id;
+  return '<a class="prop-card" href="'+cardHref+'">'
     +'<div class="prop-photo">'
     +'<img src="'+(p.image||'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=800&q=70')+'" alt="'+p.title+'" loading="lazy">'
     +'<div class="prop-photo-overlay"></div>'
@@ -1634,6 +1715,59 @@ function initMobileDrawer(){
 initMobileDrawer();
 load();
 
+/* ── DATE PICKER INIT ── */
+(function initDatePickers(){
+  var today = new Date().toISOString().slice(0,10);
+  var ciDsk = document.getElementById('flt-checkin');
+  var coDsk = document.getElementById('flt-checkout');
+  var ciMob = document.getElementById('flt-mob-checkin');
+  var coMob = document.getElementById('flt-mob-checkout');
+
+  function addOneDay(dateStr){
+    var d = new Date(dateStr); d.setDate(d.getDate()+1);
+    return d.toISOString().slice(0,10);
+  }
+
+  function syncCheckout(ci, co){
+    if(!ci || !co) return;
+    co.min = ci.value ? addOneDay(ci.value) : today;
+    if(co.value && co.value <= ci.value) co.value = '';
+  }
+
+  function syncMobFromDsk(){
+    if(ciMob) ciMob.value = ciDsk ? ciDsk.value : '';
+    if(coMob) coMob.value = coDsk ? coDsk.value : '';
+  }
+
+  function syncDskFromMob(){
+    if(ciDsk) ciDsk.value = ciMob ? ciMob.value : '';
+    if(coDsk) coDsk.value = coMob ? coMob.value : '';
+  }
+
+  if(ciDsk){ ciDsk.min = today; }
+  if(coDsk){ coDsk.min = today; }
+  if(ciMob){ ciMob.min = today; }
+  if(coMob){ coMob.min = today; }
+
+  if(ciDsk) ciDsk.addEventListener('change', function(){
+    syncCheckout(ciDsk, coDsk);
+    syncMobFromDsk();
+    render(filtered, false);
+  });
+  if(coDsk) coDsk.addEventListener('change', function(){
+    syncMobFromDsk();
+    render(filtered, false);
+  });
+  if(ciMob) ciMob.addEventListener('change', function(){
+    syncCheckout(ciMob, coMob);
+    syncDskFromMob();
+    syncCheckout(ciDsk, coDsk);
+  });
+  if(coMob) coMob.addEventListener('change', function(){
+    syncDskFromMob();
+  });
+})();
+
 var leafletMap = null;
 var currentView = 'list';
 
@@ -1863,6 +1997,10 @@ function renderMap(){
 .ck-btn-accept{background:#2C3D30;color:#E8CBA0;border-color:#2C3D30}
 .ck-btn-accept:hover{background:#3d5442}
 @media(max-width:560px){.ck-bar{flex-direction:column;align-items:flex-start;gap:.85rem}.ck-btns{width:100%;justify-content:flex-end}}
+.footer-owner-cta{background:rgba(232,203,160,.08);border-top:1px solid rgba(232,203,160,.15);border-bottom:1px solid rgba(232,203,160,.15);padding:.9rem clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.footer-owner-text{color:rgba(250,254,255,.7);font-size:.82rem;font-family:'Poppins',sans-serif}
+.footer-owner-btn{color:var(--gold,#E8CBA0);font-size:.82rem;font-weight:600;font-family:'Poppins',sans-serif;text-decoration:none;border:1px solid rgba(232,203,160,.35);border-radius:20px;padding:.3rem .9rem;transition:background .2s,border-color .2s;white-space:nowrap}
+.footer-owner-btn:hover{background:rgba(232,203,160,.1);border-color:var(--gold,#E8CBA0)}
 </style>
 
 <div class="ck-bar" id="ck-bar">
