@@ -1871,7 +1871,7 @@ async function loadProperty(){
       selectingEnd = false;
       renderCal();
       updateDatesSummary();
-      autoQuote(); // déclenche le calcul de prix automatiquement
+      await autoQuote(); // déclenche le calcul de prix et attend le résultat
       // Mettre à jour le bouton WA avec les dates
       const waBtn = document.getElementById('wa-sidebar-btn');
       if(waBtn){
@@ -1879,6 +1879,8 @@ async function loadProperty(){
         const waText = encodeURIComponent(`Bonjour, je suis intéressé(e) par ${prop.title} du ${fmtD(preIn)} au ${fmtD(preOut)}`);
         waBtn.href = 'https://wa.me/33765254926?text=' + waText;
       }
+      // Avancer directement à l'étape 2 (infos voyageur) si le prix est calculé
+      if(currentQuote) setTimeout(() => goStep2(), 120);
     }
 
     loadMonthRates();
@@ -2046,7 +2048,8 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   if(!bar) return;
   var stored = localStorage.getItem('alpeon_cookie_consent');
   if(stored) { bar.classList.add('ck-hidden'); return; }
-  // Show after small delay
+  if(sessionStorage.getItem('alp_ck_shown')) { bar.classList.add('ck-hidden'); return; }
+  sessionStorage.setItem('alp_ck_shown', '1');
   setTimeout(function(){ bar.style.display='flex'; }, 600);
 })();
 

@@ -1499,7 +1499,12 @@ function getDateParams(){
 function card(p){
   var typeLabel = p.propertyType==='chalet'?'Chalet':p.propertyType==='penthouse'?'Penthouse':'Apartment';
   var gammeBadge = (p.tags||[]).includes('Signatures') ? '<span class="badge-signatures">Signatures</span>' : '<span class="badge-residences">Résidences</span>';
-  var priceStr = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' €' : 'On request';
+  var nights = (_fpDates[0] && _fpDates[1]) ? Math.round((_fpDates[1]-_fpDates[0])/86400000) : 0;
+  var totalEst = nights && p.priceFrom ? p.priceFrom * nights : 0;
+  var priceStr  = totalEst ? totalEst.toLocaleString('fr-FR')+' €'
+                : p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' €' : 'On request';
+  var priceLabel = totalEst ? nights+' night'+(nights>1?'s':'') : (p.priceFrom ? '/ night' : '');
+  var pricePre   = totalEst ? 'Estimated total' : 'From';
   var ratingBlock = p.rating>0 ? '<div class="prop-rating"><div class="prop-stars">'+stars(p.rating)+'</div>'+(p.reviewsCount>0?'<div class="prop-reviews">'+p.reviewsCount+' reviews</div>':'')+'</div>' : '';
   var iGuests='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
   var iBed='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 4v16M22 4v16M2 8h20M2 12h20"/></svg>';
@@ -1532,9 +1537,9 @@ function card(p){
     +(chips?'<div class="prop-amenity-row">'+chips+'</div>':'')
     +'<div class="prop-foot">'
     +'<div>'
-    +'<div class="prop-price-from">From</div>'
+    +'<div class="prop-price-from">'+pricePre+'</div>'
     +'<div class="prop-price-val">'+priceStr+'</div>'
-    +(p.priceFrom?'<div class="prop-price-unit">/ night</div>':'')
+    +(priceLabel?'<div class="prop-price-unit">'+priceLabel+'</div>':'')
     +'</div>'
     +ratingBlock
     +'</div>'
@@ -1698,7 +1703,18 @@ function _filterAndRender(source){
   if(grid){ grid.style.opacity='.4'; setTimeout(function(){ grid.style.transition='opacity .25s'; grid.style.opacity='1'; setTimeout(function(){ grid.style.transition=''; },300); },30); }
 }
 
+function saveSession(){
+  var ci = _fpDates[0] ? formatFpDate(_fpDates[0]) : '';
+  var co = _fpDates[1] ? formatFpDate(_fpDates[1]) : '';
+  sessionStorage.setItem('alp_ci', ci);
+  sessionStorage.setItem('alp_co', co);
+  sessionStorage.setItem('alp_st', document.getElementById('f-station')&&document.getElementById('f-station').value||'all');
+  sessionStorage.setItem('alp_tp', document.getElementById('f-type')&&document.getElementById('f-type').value||'all');
+  sessionStorage.setItem('alp_gs', document.getElementById('f-guests')&&document.getElementById('f-guests').value||'all');
+}
+
 function applyFilters(){
+  saveSession();
   if(!(_fpDates[0] && _fpDates[1])){
     _filterAndRender(all);
     return;
@@ -1845,6 +1861,27 @@ function syncFp(src, dst) {
     dst.setDate([_fpDates[0], _fpDates[1]], false);
   }
 }
+
+// ── Restore session on back-navigation from /property ──
+(function(){
+  var ref = document.referrer || '';
+  if(ref.indexOf('/propriete') === -1 && ref.indexOf('/property') === -1) return;
+  var ci = sessionStorage.getItem('alp_ci');
+  var co = sessionStorage.getItem('alp_co');
+  if(ci && co){
+    _fpDates = [new Date(ci+'T12:00:00'), new Date(co+'T12:00:00')];
+    fpDesktop.setDate([ci, co], false);
+    fpMobile.setDate([ci, co], false);
+    updateDateDisplay();
+  }
+  var st = sessionStorage.getItem('alp_st');
+  var tp = sessionStorage.getItem('alp_tp');
+  var gs = sessionStorage.getItem('alp_gs');
+  if(st && st!=='all') document.getElementById('f-station').value = st;
+  if(tp && tp!=='all') document.getElementById('f-type').value = tp;
+  if(gs && gs!=='all') document.getElementById('f-guests').value = gs;
+  if(ci && co) applyFilters();
+})();
 
 var leafletMap = null;
 var currentView = 'list';
@@ -2100,7 +2137,8 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   if(!bar) return;
   var stored = localStorage.getItem('alpeon_cookie_consent');
   if(stored) { bar.classList.add('ck-hidden'); return; }
-  // Show after small delay
+  if(sessionStorage.getItem('alp_ck_shown')) { bar.classList.add('ck-hidden'); return; }
+  sessionStorage.setItem('alp_ck_shown', '1');
   setTimeout(function(){ bar.style.display='flex'; }, 600);
 })();
 

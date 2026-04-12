@@ -1557,7 +1557,15 @@ let all = [], filtered = [];
     const gammeBadge = isSignatures
       ? `<span class="badge-signatures">Signatures</span>`
       : `<span class="badge-residences">Résidences</span>`;
-    const priceStr = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' €' : 'Sur devis';
+    // Prix : total estimé si dates sélectionnées, sinon prix / nuit
+    const nights = (_fpDates[0] && _fpDates[1])
+      ? Math.round((_fpDates[1]-_fpDates[0])/86400000) : 0;
+    const totalEst = nights && p.priceFrom ? p.priceFrom * nights : 0;
+    const priceStr  = totalEst ? totalEst.toLocaleString('fr-FR')+' €'
+                    : p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' €' : 'Sur devis';
+    const priceLabel = totalEst ? `${nights} nuit${nights>1?'s':''}`
+                     : p.priceFrom ? '/ nuit' : '';
+    const pricePre   = totalEst ? 'Total estimé' : 'À partir de';
     const ratingBlock = p.rating>0 ? `<div class="prop-rating"><div class="prop-stars">${stars(p.rating)}</div>${p.reviewsCount>0?`<div class="prop-reviews">${p.reviewsCount} avis</div>`:''}</div>` : '';
     const iGuests=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
     const iBed=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 4v16M22 4v16M2 8h20M2 12h20"/></svg>`;
@@ -1591,9 +1599,9 @@ let all = [], filtered = [];
         ${chips?`<div class="prop-amenity-row">${chips}</div>`:''}
         <div class="prop-foot">
           <div>
-            <div class="prop-price-from">À partir de</div>
+            <div class="prop-price-from">${pricePre}</div>
             <div class="prop-price-val">${priceStr}</div>
-            ${p.priceFrom?'<div class="prop-price-unit">/ nuit</div>':''}
+            ${priceLabel?`<div class="prop-price-unit">${priceLabel}</div>`:''}
           </div>
           ${ratingBlock}
         </div>
@@ -1771,7 +1779,19 @@ function _filterAndRender(source){
   if(grid){ grid.style.opacity='.4'; setTimeout(()=>{ grid.style.transition='opacity .25s'; grid.style.opacity='1'; setTimeout(()=>grid.style.transition='',300); },30); }
 }
 
+// ── Persistance filtres (back-navigation /propriete → /reserver) ──
+function saveSession(){
+  const ci = _fpDates[0] ? formatFpDate(_fpDates[0]) : '';
+  const co = _fpDates[1] ? formatFpDate(_fpDates[1]) : '';
+  sessionStorage.setItem('alp_ci', ci);
+  sessionStorage.setItem('alp_co', co);
+  sessionStorage.setItem('alp_st', document.getElementById('f-station')?.value||'all');
+  sessionStorage.setItem('alp_tp', document.getElementById('f-type')?.value||'all');
+  sessionStorage.setItem('alp_gs', document.getElementById('f-guests')?.value||'all');
+}
+
 function applyFilters(){
+  saveSession();
   // Sans dates : filtrer sur la liste complète en mémoire
   if(!(_fpDates[0] && _fpDates[1])){
     _filterAndRender(all);
@@ -1921,6 +1941,27 @@ function syncFp(src, dst) {
     dst.setDate([_fpDates[0], _fpDates[1]], false);
   }
 }
+
+// ── Restauration session si retour depuis /propriete ──
+(function(){
+  const ref = document.referrer || '';
+  if(!ref.includes('/propriete') && !ref.includes('/property')) return;
+  const ci = sessionStorage.getItem('alp_ci');
+  const co = sessionStorage.getItem('alp_co');
+  if(ci && co){
+    _fpDates = [new Date(ci+'T12:00:00'), new Date(co+'T12:00:00')];
+    fpDesktop.setDate([ci, co], false);
+    fpMobile.setDate([ci, co], false);
+    updateDateDisplay();
+  }
+  const st = sessionStorage.getItem('alp_st');
+  const tp = sessionStorage.getItem('alp_tp');
+  const gs = sessionStorage.getItem('alp_gs');
+  if(st && st!=='all') document.getElementById('f-station').value = st;
+  if(tp && tp!=='all') document.getElementById('f-type').value = tp;
+  if(gs && gs!=='all') document.getElementById('f-guests').value = gs;
+  if(ci && co) applyFilters();
+})();
 
 let leafletMap = null;
 let currentView = 'list';
@@ -2231,6 +2272,9 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   if(!bar) return;
   var stored = localStorage.getItem('alpeon_cookie_consent');
   if(stored) { bar.classList.add('ck-hidden'); return; }
+  // Ne pas re-afficher si déjà vu cette session (navigation AR entre pages)
+  if(sessionStorage.getItem('alp_ck_shown')) { bar.classList.add('ck-hidden'); return; }
+  sessionStorage.setItem('alp_ck_shown', '1');
   // Show after small delay
   setTimeout(function(){ bar.style.display='flex'; }, 600);
 })();

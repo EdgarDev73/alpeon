@@ -1759,7 +1759,7 @@ async function loadProperty(){
       selectingEnd = false;
       renderCal();
       updateDatesSummary();
-      autoQuote(); // auto-trigger price calculation
+      await autoQuote(); // auto-trigger price calculation and await result
       // Update WA button with dates
       const waBtn = document.getElementById('wa-sidebar-btn');
       if(waBtn){
@@ -1767,6 +1767,8 @@ async function loadProperty(){
         const waText = encodeURIComponent(`Hello, I'm interested in ${prop.title} from ${fmtD(preIn)} to ${fmtD(preOut)}`);
         waBtn.href = 'https://wa.me/33765254926?text=' + waText;
       }
+      // Auto-advance to step 2 (guest info) once quote is ready
+      if(currentQuote) setTimeout(() => goStep2(), 120);
     }
 
     loadMonthRates();
@@ -1962,7 +1964,8 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   if(!bar) return;
   var stored = localStorage.getItem('alpeon_cookie_consent');
   if(stored) { bar.classList.add('ck-hidden'); return; }
-  // Show after small delay
+  if(sessionStorage.getItem('alp_ck_shown')) { bar.classList.add('ck-hidden'); return; }
+  sessionStorage.setItem('alp_ck_shown', '1');
   setTimeout(function(){ bar.style.display='flex'; }, 600);
 })();
 
