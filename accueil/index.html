@@ -27,14 +27,48 @@
   {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://alpeon.fr/accueil/" }] },
+      {
+        "@type": "WebSite",
+        "@id": "https://alpeon.fr/#website",
+        "url": "https://alpeon.fr",
+        "name": "ALPÉON",
+        "description": "Résidences alpines d'exception — Courchevel, Megève, Val d'Isère, Méribel, Tignes, Val Thorens",
+        "inLanguage": ["fr-FR", "en"],
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": { "@type": "EntryPoint", "urlTemplate": "https://alpeon.fr/reserver/?q={search_term_string}" },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://alpeon.fr/accueil/#webpage",
+        "url": "https://alpeon.fr/accueil/",
+        "name": "Accueil — ALPÉON",
+        "isPartOf": { "@id": "https://alpeon.fr/#website" },
+        "about": { "@id": "https://alpeon.fr/#organization" },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://alpeon.fr/accueil/" }]
+        }
+      },
       {
         "@type": ["RealEstateAgent", "LocalBusiness"],
         "@id": "https://alpeon.fr/#organization",
-        "name": "ALPÉON", "url": "https://alpeon.fr", "email": "proprietaires@alpeon.fr",
+        "name": "ALPÉON",
+        "url": "https://alpeon.fr",
+        "email": "proprietaires@alpeon.fr",
         "description": "Gestionnaire premium de biens en location saisonnière alpine. Loyer fixe et garanti pour les propriétaires.",
         "priceRange": "€€€€",
-        "areaServed": [{"@type":"Place","name":"Val Thorens"},{"@type":"Place","name":"Megève"},{"@type":"Place","name":"Courchevel"},{"@type":"Place","name":"Méribel"},{"@type":"Place","name":"Tignes"},{"@type":"Place","name":"Val d'Isère"}]
+        "sameAs": ["https://www.instagram.com/alpeon.alps"],
+        "areaServed": [
+          {"@type":"Place","name":"Val Thorens"},
+          {"@type":"Place","name":"Megève"},
+          {"@type":"Place","name":"Courchevel"},
+          {"@type":"Place","name":"Méribel"},
+          {"@type":"Place","name":"Tignes"},
+          {"@type":"Place","name":"Val d'Isère"}
+        ]
       }
     ]
   }
