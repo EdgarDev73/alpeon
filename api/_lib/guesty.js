@@ -1,34 +1,37 @@
 /**
  * ALPÉON — Guesty Booking Engine API
  *
- * Architecture token (fix rate-limit structurel) :
+ * Architecture token (self-healing) :
  * ─────────────────────────────────────────────────
- * Les Lambdas user-facing (properties, calendar, etc.) ne font JAMAIS d'OAuth.
- * Elles lisent uniquement GUESTY_ACCESS_TOKEN depuis l'env Vercel.
+ * getToken() est async et rafraîchit le token automatiquement si expiré.
+ * Plus jamais de 503 dû à un token expiré.
  *
- * Seul /api/refresh-token (cron 3h + 15h) appelle OAuth et met à jour
- * GUESTY_ACCESS_TOKEN dans Vercel via l'API Vercel.
+ * Priorité : env var frais → mémoire → /tmp → OAuth auto (fallback)
  *
- * En cas de token manquant/expiré → erreur 503 claire, jamais de flood OAuth.
+ * Un cooldown de 60s évite de flooder OAuth sur des requêtes concurrentes.
  *
  * Required env vars (Vercel dashboard) :
- *   GUESTY_ACCESS_TOKEN   — mis à jour automatiquement par le cron
- *   GUESTY_CLIENT_ID      — utilisé uniquement par refresh-token
- *   GUESTY_CLIENT_SECRET  — utilisé uniquement par refresh-token
+ *   GUESTY_CLIENT_ID      — pour OAuth
+ *   GUESTY_CLIENT_SECRET  — pour OAuth
+ *   GUESTY_ACCESS_TOKEN   — mis à jour par le cron ET par getToken() auto
+ *   VRL_API_TOKEN         — pour mettre à jour l'env Vercel après refresh
  */
 
-const fs   = require('fs');
-const path = require('path');
+const fs = require('fs');
 
-const BASE   = 'https://booking.guesty.com/api';
-const ORIGIN = 'https://jupiter-residences.guestybookings.com';
-const G_AID  = 'G-89C7E-9FB65-B6F69';
+const BASE             = 'https://booking.guesty.com/api';
+const OAUTH_URL        = 'https://booking.guesty.com/oauth2/token';
+const ORIGIN           = 'https://jupiter-residences.guestybookings.com';
+const G_AID            = 'G-89C7E-9FB65-B6F69';
+const TOKEN_FILE       = '/tmp/.guesty_token.json';
+const VERCEL_PROJECT_ID = process.env.VERCEL_PROJECT_ID || 'prj_lkINpF7Y4ucOpVPDyEdAwJLefCaf';
 
-// /tmp survives entre requêtes sur une instance Lambda chaude
-const TOKEN_FILE = '/tmp/.guesty_token.json';
-
-/* ── Token en mémoire (instance chaude) ── */
+/* ── Cache mémoire (instance Lambda chaude) ── */
 let _mem = { token: null, expiry: 0 };
+
+/* ── Cooldown OAuth (évite flood sur requêtes concurrentes) ── */
+let _oauthInFlight = null;   // Promise en cours
+let _oauthLastTry  = 0;      // timestamp dernier essai
 
 function _jwtExpiry(token) {
   try {
@@ -37,23 +40,70 @@ function _jwtExpiry(token) {
   } catch { return 0; }
 }
 
+function saveToken(token, expiresIn) {
+  const expiry = Date.now() + (expiresIn || 86400) * 1000;
+  _mem = { token, expiry };
+  try { fs.writeFileSync(TOKEN_FILE, JSON.stringify({ token, expiry })); } catch { /* ignore */ }
+}
+
+/* ── Persistance Vercel env var (best-effort, non-bloquant) ── */
+async function _updateVercelEnv(token) {
+  const vToken = process.env.VRL_API_TOKEN || process.env.VERCEL_TOKEN;
+  if (!vToken) return;
+  try {
+    const list = await fetch(
+      `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
+      { headers: { 'Authorization': `Bearer ${vToken}` } }
+    ).then(r => r.json());
+    const env = (list.envs || []).find(e => e.key === 'GUESTY_ACCESS_TOKEN');
+    if (!env) return;
+    await fetch(
+      `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env/${env.id}`,
+      {
+        method: 'PATCH',
+        headers: { 'Authorization': `Bearer ${vToken}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ value: token, target: ['production', 'preview', 'development'] }),
+      }
+    );
+    console.log('[guesty] Vercel env GUESTY_ACCESS_TOKEN mis à jour');
+  } catch (e) {
+    console.warn('[guesty] Impossible de mettre à jour Vercel env:', e.message);
+  }
+}
+
+/* ── OAuth auto-refresh ── */
+async function _doOAuth() {
+  const id     = process.env.GUESTY_CLIENT_ID;
+  const secret = process.env.GUESTY_CLIENT_SECRET;
+  if (!id || !secret) throw new Error('GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET manquants');
+
+  console.log('[guesty] Token expiré — OAuth auto-refresh...');
+  const r = await fetch(OAUTH_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
+  });
+  if (!r.ok) throw new Error(`OAuth failed ${r.status}: ${await r.text()}`);
+  const json = await r.json();
+  saveToken(json.access_token, json.expires_in);
+  // Mise à jour Vercel env en arrière-plan (best-effort)
+  _updateVercelEnv(json.access_token).catch(() => {});
+  console.log('[guesty] Token rafraîchi, expire dans', Math.round((json.expires_in || 86400) / 3600), 'h');
+  return json.access_token;
+}
+
 /**
- * Retourne le meilleur token disponible sans jamais appeler OAuth.
- * Priorité : env var → cache /tmp → env var périmé (grace period Guesty)
- * Lance une erreur si aucun token utilisable.
+ * Retourne un token valide. Rafraîchit automatiquement via OAuth si nécessaire.
+ * Async — appelé avec await dans guestyFetch.
  */
-function getToken() {
+async function getToken() {
   const envToken = process.env.GUESTY_ACCESS_TOKEN;
 
-  // 1) Env var frais (5 min de marge)
-  if (envToken && _jwtExpiry(envToken) > Date.now() + 300_000) {
-    return envToken;
-  }
+  // 1) Env var frais
+  if (envToken && _jwtExpiry(envToken) > Date.now() + 300_000) return envToken;
 
   // 2) Cache mémoire frais
-  if (_mem.token && _mem.expiry > Date.now() + 300_000) {
-    return _mem.token;
-  }
+  if (_mem.token && _mem.expiry > Date.now() + 300_000) return _mem.token;
 
   // 3) Cache /tmp frais
   try {
@@ -64,41 +114,31 @@ function getToken() {
     }
   } catch { /* pas de fichier */ }
 
-  // 4) Env var légèrement périmé — Guesty honore souvent une grace period de quelques heures
-  if (envToken) {
-    const exp = _jwtExpiry(envToken);
-    const staleMs = Date.now() - exp;
-    if (staleMs < 4 * 3600_000) { // moins de 4h de retard
-      console.warn(`[guesty] Token expiré depuis ${Math.round(staleMs/60000)}min — utilisation grace period`);
-      return envToken;
+  // 4) OAuth auto-refresh (dédupliqué si plusieurs requêtes simultanées)
+  const now = Date.now();
+  if (_oauthInFlight) {
+    console.log('[guesty] OAuth déjà en cours, attente...');
+    return _oauthInFlight;
+  }
+  // Cooldown 60s si dernier essai récent (évite flood sur erreur OAuth)
+  if (now - _oauthLastTry < 60_000) {
+    // Retourner le token périmé comme fallback plutôt que bloquer
+    const stale = _mem.token || envToken;
+    if (stale) {
+      console.warn('[guesty] Cooldown OAuth actif — utilisation token périmé');
+      return stale;
     }
+    throw new Error('Token expiré et cooldown OAuth actif — réessayez dans 60s');
   }
 
-  // 5) Cache /tmp périmé en dernier recours
-  try {
-    const { token } = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8'));
-    if (token) {
-      console.warn('[guesty] Utilisation token /tmp périmé en dernier recours');
-      return token;
-    }
-  } catch { /* pas de fichier */ }
-
-  throw new Error('GUESTY_ACCESS_TOKEN manquant ou expiré — le cron refresh-token doit être exécuté');
-}
-
-/**
- * Sauvegarde un token frais en mémoire + /tmp.
- * Appelé uniquement par refresh-token.js après un OAuth réussi.
- */
-function saveToken(token, expiresIn) {
-  const expiry = Date.now() + (expiresIn || 86400) * 1000;
-  _mem = { token, expiry };
-  try { fs.writeFileSync(TOKEN_FILE, JSON.stringify({ token, expiry })); } catch { /* ignore */ }
+  _oauthLastTry = now;
+  _oauthInFlight = _doOAuth().finally(() => { _oauthInFlight = null; });
+  return _oauthInFlight;
 }
 
 /* ── Requête générique Guesty ── */
 async function guestyFetch(apiPath, { method = 'GET', body, params } = {}) {
-  const token = getToken(); // synchrone, jamais d'OAuth
+  const token = await getToken();
   let url = `${BASE}${apiPath}`;
   if (params) {
     const qs = new URLSearchParams(
@@ -145,8 +185,8 @@ async function getListing(id) {
 
 /* ── Calendar ── */
 async function getListingCalendar(listingId, { startDate, endDate } = {}) {
-  const today  = new Date();
-  const in180  = new Date(today.getTime() + 180 * 86_400_000);
+  const today = new Date();
+  const in180 = new Date(today.getTime() + 180 * 86_400_000);
   return guestyFetch(`/listings/${listingId}/calendar`, {
     params: {
       from: startDate || today.toISOString().slice(0, 10),
