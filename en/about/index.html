@@ -801,7 +801,10 @@ function toggleMobileMenu(){
 <footer id="contact">
 <div class="footer-owner-cta">
   <span class="footer-owner-text">Do you own an alpine property?</span>
-  <a href="/en/estimateur" class="footer-owner-btn">Estimate your income →</a>
+  <a href="/en/estimateur" class="footer-owner-btn">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Estimate your income
+  </a>
 </div>
 
   <div class="container">
@@ -938,10 +941,10 @@ async function submitNewsletter(e) {
 .ck-btn-accept{background:#2C3D30;color:#E8CBA0;border-color:#2C3D30}
 .ck-btn-accept:hover{background:#3d5442}
 @media(max-width:560px){.ck-bar{flex-direction:column;align-items:flex-start;gap:.85rem}.ck-btns{width:100%;justify-content:flex-end}}
-.footer-owner-cta{background:rgba(232,203,160,.08);border-top:1px solid rgba(232,203,160,.15);border-bottom:1px solid rgba(232,203,160,.15);padding:.9rem clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
-.footer-owner-text{color:rgba(250,254,255,.7);font-size:.82rem;font-family:'Poppins',sans-serif}
-.footer-owner-btn{color:var(--gold,#E8CBA0);font-size:.82rem;font-weight:600;font-family:'Poppins',sans-serif;text-decoration:none;border:1px solid rgba(232,203,160,.35);border-radius:20px;padding:.3rem .9rem;transition:background .2s,border-color .2s;white-space:nowrap}
-.footer-owner-btn:hover{background:rgba(232,203,160,.1);border-color:var(--gold,#E8CBA0)}
+.footer-owner-cta{background:rgba(232,203,160,.07);border-top:1px solid rgba(232,203,160,.18);border-bottom:1px solid rgba(232,203,160,.18);padding:1.2rem clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
+.footer-owner-text{color:rgba(250,254,255,.62);font-size:.84rem;font-family:'Poppins',sans-serif;font-weight:300;letter-spacing:.01em}
+.footer-owner-btn{display:inline-flex;align-items:center;gap:.4rem;color:#E8CBA0;font-size:.7rem;font-weight:600;font-family:'Poppins',sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(232,203,160,.4);border-radius:3px;padding:.5rem 1.2rem;transition:background .2s,border-color .2s;white-space:nowrap}
+.footer-owner-btn:hover{background:rgba(232,203,160,.12);border-color:#E8CBA0}
 </style>
 
 <div class="ck-bar" id="ck-bar">

@@ -522,13 +522,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     footer { background:var(--ink); padding:72px 60px 48px; }
     .footer-grid { max-width:1300px; margin:0 auto; display:grid; grid-template-columns:1.8fr 1fr 1fr 1fr; gap:60px; padding-bottom:56px; border-bottom:1px solid rgba(255,255,255,0.05); margin-bottom:32px; }
     .f-brand-name { font-family:Georgia,'Times New Roman',serif; font-size:1.35rem; font-weight:400; letter-spacing:0.24em; color:white; margin-bottom:3px; }
-    .f-brand-claim { font-size:0.62rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
-    .f-brand-desc { font-size:0.82rem; color:rgba(255,255,255,0.44); line-height:1.7; max-width:240px; }
-    .f-col-label { font-size:0.68rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.38); margin-bottom:18px; }
-    .f-links { list-style:none; display:flex; flex-direction:column; gap:11px; }
-    .f-links a { font-size:0.82rem; color:rgba(255,255,255,0.52); text-decoration:none; transition:color 0.2s; }
-    .f-links a:hover { color:rgba(255,255,255,0.75); }
+    .footer-brand-claim { font-size:0.62rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+    .footer-brand-text { font-size:0.82rem; color:rgba(255,255,255,0.44); line-height:1.7; max-width:240px; }
+    .footer-col-title { font-size:0.68rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.38); margin-bottom:18px; }
+    .footer-links { list-style:none; display:flex; flex-direction:column; gap:11px; }
+    .footer-links a { font-size:0.82rem; color:rgba(255,255,255,0.52); text-decoration:none; transition:color 0.2s; }
+    .footer-links a:hover { color:rgba(255,255,255,0.75); }
     .footer-bottom { max-width:1300px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; font-size:0.74rem; color:rgba(255,255,255,0.28); flex-wrap:wrap; gap:8px; }
+    .footer-owner-cta{background:rgba(232,203,160,.07);border-top:1px solid rgba(232,203,160,.18);border-bottom:1px solid rgba(232,203,160,.18);padding:1.2rem clamp(24px,5vw,80px);display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
+    .footer-owner-text{color:rgba(250,254,255,.62);font-size:.84rem;font-family:'Poppins',sans-serif;font-weight:300;letter-spacing:.01em}
+    .footer-owner-btn{display:inline-flex;align-items:center;gap:.4rem;color:#E8CBA0;font-size:.7rem;font-weight:600;font-family:'Poppins',sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(232,203,160,.4);border-radius:3px;padding:.5rem 1.2rem;transition:background .2s,border-color .2s;white-space:nowrap}
+    .footer-owner-btn:hover{background:rgba(232,203,160,.12);border-color:#E8CBA0}
 
     /* MODAL */
     .modal-bg { position:fixed; inset:0; z-index:300; background:rgba(28,27,25,.72); backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; }
@@ -1267,16 +1271,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- FOOTER -->
-  <footer>
+  <footer id="contact">
+<div class="footer-owner-cta">
+  <span class="footer-owner-text">Do you own an alpine property?</span>
+  <a href="/en/estimateur" class="footer-owner-btn">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Estimate your income
+  </a>
+</div>
     <div class="footer-grid">
       <div>
         <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON" style="height:120px;width:auto;display:block;margin-bottom:4px">
-        <div class="f-brand-claim">Alpine Property Management</div>
-        <p class="f-brand-desc">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency for every owner.</p>
+        <div class="footer-brand-claim">Alpine Property Management</div>
+        <p class="footer-brand-text">Premium short-term rental management operator in the French Alps. Discretion, excellence and transparency for every owner.</p>
       </div>
       <div>
-        <div class="f-col-label">Destinations</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Destinations</div>
+        <ul class="footer-links">
           <li><a href="#">Megève</a></li>
           <li><a href="#">Courchevel</a></li>
           <li><a href="#">Val d'Isère</a></li>
@@ -1287,8 +1298,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
       <div>
-        <div class="f-col-label">Services</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
           <li><a href="#">Property Management</a></li>
           <li><a href="#">ALPÉON Signature</a></li>
           <li><a href="/en/estimateur">Revenue Estimator</a></li>
@@ -1296,8 +1307,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
       <div>
-        <div class="f-col-label">Contact</div>
-        <ul class="f-links">
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
           <li><a href="tel:+33600000000">+33 6 00 00 00 00</a></li>
           <li><a href="mailto:owners@alpeon.fr">owners@alpeon.fr</a></li>
           <li><a href="/mentions-legales">Legal notice</a></li>
