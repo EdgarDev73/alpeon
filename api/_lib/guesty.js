@@ -211,6 +211,12 @@ async function createQuote({ listingId, checkIn, checkOut, guests }) {
   });
 }
 
+/* ── Cloudinary WebP transform helper ── */
+function transformImg(url, w) {
+  if (!url || !url.includes('image/upload/')) return url;
+  return url.replace('image/upload/', `image/upload/f_webp,q_auto:good,w_${w}/`);
+}
+
 /* ── Normalizer ── */
 function normalizeListings(raw) {
   const results = raw.results || raw.listings || raw.data || (Array.isArray(raw) ? raw : []);
@@ -273,8 +279,9 @@ function normalizeListing(l) {
     fullDescription: (typeof desc === 'object' ? (desc.summary || '') + (desc.space ? '\n\n' + desc.space : '') + (desc.access ? '\n\n' + desc.access : '') : desc || '').trim(),
     amenities,
     allAmenities:    l.amenities || [],
-    image:           pics[0]?.original || pics[0]?.thumbnail || '',
-    images:          pics.slice(0, 8).map(p => p.original || p.thumbnail).filter(Boolean),
+    image:           transformImg(pics[0]?.original || pics[0]?.thumbnail || '', 800),
+    imageLg:         transformImg(pics[0]?.original || pics[0]?.thumbnail || '', 1400),
+    images:          pics.slice(0, 20).map(p => transformImg(p.original || p.thumbnail, 1400)).filter(Boolean),
     tags,
     bookingUrl:      `${ORIGIN}/en/listing/${l._id}`,
   };

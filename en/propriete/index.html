@@ -434,14 +434,16 @@
     /* ── ASK QUESTION BTN ── */
     .btn-ask{width:100%;background:transparent;border:1.5px solid #ddd;border-radius:4px;padding:.58rem;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#2C3D30;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.45rem;margin-bottom:.9rem;transition:border-color .2s,background .2s}
     .btn-ask:hover{border-color:#2C3D30;background:#f5f3ef}
-    /* ── STICKY MOBILE PRICE BAR ── */
-    .sticky-price-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:#2C3D30;padding:.8rem 1.4rem;box-shadow:0 -4px 20px rgba(0,0,0,.15);align-items:center;justify-content:space-between;gap:1rem}
-    .sticky-price-bar-price{color:#E8CBA0;line-height:1.15}
-    .sticky-price-bar-price small{font-size:.65rem;opacity:.7;display:block}
-    .sticky-price-bar-price strong{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:1.35rem;font-weight:400}
-    .sticky-price-bar-btn{background:#E8CBA0;color:#2C3D30;border:none;border-radius:3px;padding:.65rem 1.4rem;font-family:'Poppins',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s;min-height:44px}
-    .sticky-price-bar-btn:hover{background:#f0d8b0}
-    @media(max-width:900px){.sticky-price-bar{display:flex}body{padding-bottom:72px}}
+    /* ── STICKY BOOK BAR ── */
+    .sticky-book-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;background:#2C3D30;height:64px;box-shadow:0 -4px 24px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:space-between;gap:1.25rem;padding:0 2rem;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+    .sticky-book-bar.visible{transform:translateY(0)}
+    .sbb-left{display:flex;flex-direction:column;justify-content:center;min-width:0;flex:1}
+    .sbb-title{color:rgba(232,203,160,.75);font-size:.72rem;font-weight:500;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2;max-width:100%}
+    .sbb-price{color:#E8CBA0;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:1.1rem;font-weight:400;line-height:1.2;white-space:nowrap}
+    .sbb-price small{font-family:'Poppins',sans-serif;font-style:normal;font-size:.65rem;opacity:.65;font-weight:400}
+    .sbb-btn{background:#E8CBA0;color:#2C3D30;border:none;border-radius:3px;padding:.6rem 1.5rem;font-family:'Poppins',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s;min-height:42px;flex-shrink:0}
+    .sbb-btn:hover{background:#f0d8b0}
+    @media(max-width:640px){.sticky-book-bar{padding:0 1.25rem;gap:.75rem}.sbb-title{font-size:.65rem}.sbb-price{font-size:1rem}body{padding-bottom:64px}}
 
     /* ─── MOBILE COMPREHENSIVE ─── */
     @media (max-width: 768px) {
@@ -493,8 +495,7 @@
       .reco-grid { grid-template-columns: 1fr; }
 
       /* Sticky bar touch targets */
-      .sticky-price-bar { padding: .9rem 1.25rem; gap: .75rem; }
-      .sticky-price-bar-btn { min-height: 44px; padding: .7rem 1.5rem; }
+      .sbb-btn { min-height: 44px; padding: .7rem 1.5rem; }
     }
 
     @media (max-width: 480px) {
@@ -850,10 +851,10 @@ function renderGallery(p){
       <img src="${main}" alt="${p.title}">
     </div>
     <div class="gallery-thumb" onclick="openLightbox(1)">
-      <img src="${t1}" alt="">
+      <img src="${t1}" alt="" loading="lazy">
     </div>
     <div class="gallery-thumb" onclick="openLightbox(2)" style="position:relative">
-      <img src="${t2}" alt="">
+      <img src="${t2}" alt="" loading="lazy">
       ${imgs.length > 3 ? `<button class="gallery-see-all" onclick="openLightbox(2);event.stopPropagation()">+${imgs.length-3} photos</button>` : ''}
     </div>`;
 }
@@ -1001,7 +1002,7 @@ function renderDetail(p){
   document.getElementById('bk-max-label').textContent = `guests (max ${p.guests})`;
   guestsCount = Math.min(2, p.guests);
   document.getElementById('bk-guests-count').textContent = guestsCount;
-  updateStickyBar(p.priceFrom);
+  updateStickyBar(p.title, p.priceFrom);
 }
 
 // ── BOOKING STATE ──
@@ -1643,19 +1644,31 @@ loadProperty();
   }
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeContactModal();});
 
-  // ── STICKY PRICE BAR ──
-  function updateStickyBar(price){
-    const el=document.getElementById('sticky-price-val');
-    if(el && price) el.textContent=price.toLocaleString('en-GB');
+  // ── STICKY BOOK BAR ──
+  function updateStickyBar(title, price){
+    const titleEl = document.getElementById('sbb-title');
+    const priceEl = document.getElementById('sbb-price-val');
+    if(titleEl && title) titleEl.textContent = title;
+    if(priceEl && price) priceEl.textContent = price.toLocaleString('en-GB');
   }
-  // Hide sticky price bar when booking card is visible
-  const stickyBar = document.getElementById('sticky-price-bar');
+  // Scroll-triggered visibility (show after 400px, hide when booking card visible)
+  const stickyBar = document.getElementById('sticky-book-bar');
   if(stickyBar){
+    let scrollVisible = false;
+    let cardVisible = false;
+    function updateBarVisibility(){
+      stickyBar.classList.toggle('visible', scrollVisible && !cardVisible);
+    }
+    window.addEventListener('scroll', function(){
+      scrollVisible = window.scrollY > 400;
+      updateBarVisibility();
+    }, {passive: true});
     const bookingCard = document.getElementById('booking-card');
     if(bookingCard && 'IntersectionObserver' in window){
       const obs = new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
-          stickyBar.style.display = entry.isIntersecting ? 'none' : '';
+          cardVisible = entry.isIntersecting;
+          updateBarVisibility();
         });
       }, { threshold: 0.1 });
       obs.observe(bookingCard);
@@ -1672,13 +1685,13 @@ loadProperty();
   u();
 })();
 </script>
-  <!-- STICKY MOBILE PRICE BAR -->
-  <div class="sticky-price-bar" id="sticky-price-bar">
-    <div class="sticky-price-bar-price">
-      <small>From</small>
-      <strong id="sticky-price-val">—</strong> <small style="display:inline;font-size:.7rem">€ / night</small>
+  <!-- STICKY BOOK BAR -->
+  <div class="sticky-book-bar" id="sticky-book-bar">
+    <div class="sbb-left">
+      <span class="sbb-title" id="sbb-title"></span>
+      <span class="sbb-price">From <strong id="sbb-price-val">—</strong> <small>€ / night</small></span>
     </div>
-    <button class="sticky-price-bar-btn" onclick="document.getElementById('booking-card')?.scrollIntoView({behavior:'smooth'})">Request availability</button>
+    <button class="sbb-btn" onclick="document.getElementById('booking-card')?.scrollIntoView({behavior:'smooth'})">Book</button>
   </div>
 
   <!-- CONTACT MODAL -->

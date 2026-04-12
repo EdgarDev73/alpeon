@@ -470,6 +470,24 @@
     }
     .empty-btn:hover { background: var(--green); color: var(--gold) }
 
+    /* ── NO-RESULTS MESSAGE ── */
+    .no-results-msg {
+      display: none; text-align: center; max-width: 480px; margin: 3rem auto;
+      background: rgba(44,61,48,.06); border-radius: 12px; padding: 2.5rem;
+    }
+    .no-results-msg.visible { display: block }
+    .no-results-msg p {
+      font-family: var(--font-sans); font-size: .95rem; color: var(--ink-3);
+      line-height: 1.6; margin-bottom: 1.5rem;
+    }
+    .no-results-msg .no-results-btn {
+      display: inline-block; background: transparent; border: 1.5px solid var(--green);
+      color: var(--green); padding: .7rem 2rem; font-family: var(--font-sans);
+      font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none; transition: all .2s;
+    }
+    .no-results-msg .no-results-btn:hover { background: var(--green); color: var(--gold) }
+
     /* ── REASSURANCE ── */
     .reassurance {
       background: var(--off); border-top: 1px solid var(--stone);
@@ -1203,6 +1221,10 @@ function toggleMobileMenu(){
     <p>Élargissez vos critères ou explorez l'ensemble de nos destinations.</p>
     <button class="empty-btn" onclick="resetFilters()">Voir tous les biens</button>
   </div>
+  <div class="no-results-msg" id="no-results-msg">
+    <p>Aucune propriété ne correspond à vos critères. Contactez-nous, nous trouverons le bien idéal pour votre séjour.</p>
+    <a class="no-results-btn" href="/contact">Nous contacter</a>
+  </div>
   <div id="map-wrap">
     <div id="map-list">
       <div id="map-list-header">0 biens affichés</div>
@@ -1436,17 +1458,25 @@ function skel(n){
     </div>`).join('');
 }
 
-function render(list){
+function render(list, filtersActive){
   const grid = document.getElementById('property-grid');
   const empty = document.getElementById('empty-state');
+  const noResults = document.getElementById('no-results-msg');
   const count = document.getElementById('filter-count');
   if(!list.length){
     grid.innerHTML = '';
-    empty.classList.add('visible');
     count.textContent = '0 bien';
+    if(filtersActive){
+      empty.classList.remove('visible');
+      if(noResults) noResults.classList.add('visible');
+    } else {
+      empty.classList.add('visible');
+      if(noResults) noResults.classList.remove('visible');
+    }
     return;
   }
   empty.classList.remove('visible');
+  if(noResults) noResults.classList.remove('visible');
   const label = `${list.length} bien${list.length>1?'s':''}`;
   count.textContent = label;
   const mobCount = document.getElementById('flt-mob-count');
@@ -1555,7 +1585,7 @@ function applyFilters(){
     const bS = (b.tags||[]).includes('Signatures') ? 0 : 1;
     return aS - bS;
   });
-  render(filtered);
+  render(filtered, active);
   if(currentView === 'map') renderMap();
 }
 
