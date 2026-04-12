@@ -21,8 +21,8 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { city, type, guests, limit = '100', bust } = req.query;
-  const bustCache = bust === '1'; // ?bust=1 pour forcer le refresh (cron warm-cache)
+  const { city, type, guests, limit = '100', bust, checkIn, checkOut } = req.query;
+  const bustCache = bust === '1' || !!(checkIn && checkOut); // dates → toujours fresh
 
   try {
     // 1. Mémoire Lambda : réutiliser si frais et pas de bust
@@ -31,7 +31,27 @@ module.exports = async (req, res) => {
       console.log('[properties] Served from Lambda memory cache');
     } else {
       // 2. Fetch depuis Guesty (appel réseau)
-      const raw  = await getListings({ limit: parseInt(limit) });
+      const raw  = await getListings({ limit: parseInt(limit), checkIn, checkOut });
+      // Ne mettre en cache que les résultats sans filtre de dates
+      if (!checkIn && !checkOut) {
+        _cache.properties = normalizeListings(raw);
+        _cache.fetchedAt  = now;
+      }
+      if (checkIn && checkOut) {
+        // Résultat avec dates : retourner directement sans écraser le cache
+        let properties = normalizeListings(raw);
+        if (city && city !== 'all') {
+          const norm = s => s.toLowerCase().replace(/['\s]/g, '').replace(/[éè]/g, 'e');
+          properties = properties.filter(p => norm(p.city) === norm(city));
+        }
+        if (type && type !== 'all') properties = properties.filter(p => p.propertyType === type.toLowerCase());
+        if (guests && guests !== 'all') {
+          const n = parseInt(guests);
+          properties = properties.filter(p => guests === '8+' ? p.guests >= 8 : p.guests >= n);
+        }
+        res.setHeader('Cache-Control', 'no-store');
+        return res.status(200).json({ properties, total: properties.length });
+      }
       _cache.properties = normalizeListings(raw);
       _cache.fetchedAt  = now;
       console.log(`[properties] Fetched ${_cache.properties.length} listings from Guesty`);

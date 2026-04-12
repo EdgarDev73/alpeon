@@ -1633,16 +1633,17 @@ function closeAllDropdowns(){
   document.querySelectorAll('.filter-group.open').forEach(function(g){ g.classList.remove('open'); });
 }
 
-function applyFilters(){
+function _filterAndRender(source){
   var station = fltState.station;
   var type    = fltState.type;
   var guests  = fltState.guests;
   var gamme   = fltState.gamme;
   var priceMin=parseInt(document.getElementById('f-price-min').value||0);
   var priceMax=parseInt(document.getElementById('f-price-max').value||10000);
-  var active  = station!=='all' || type!=='all' || guests!=='all' || gamme!=='all' || priceMin>0 || priceMax<10000;
+  var datesActive = !!(_fpDates[0] && _fpDates[1]);
+  var active  = station!=='all' || type!=='all' || guests!=='all' || gamme!=='all' || priceMin>0 || priceMax<10000 || datesActive;
   document.getElementById('btn-reset').style.display = active ? 'inline-flex' : 'none';
-  filtered = all.filter(function(p){
+  filtered = source.filter(function(p){
     if(station !== 'all' && norm(p.city) !== station) return false;
     if(type !== 'all' && p.propertyType !== type) return false;
     if(guests !== 'all'){
@@ -1664,6 +1665,24 @@ function applyFilters(){
   if(currentView === 'map') renderMap();
   var grid = document.getElementById('property-grid');
   if(grid){ grid.style.opacity='.4'; setTimeout(function(){ grid.style.transition='opacity .25s'; grid.style.opacity='1'; setTimeout(function(){ grid.style.transition=''; },300); },30); }
+}
+
+function applyFilters(){
+  if(!(_fpDates[0] && _fpDates[1])){
+    _filterAndRender(all);
+    return;
+  }
+  var checkIn  = formatFpDate(_fpDates[0]);
+  var checkOut = formatFpDate(_fpDates[1]);
+  var btn = document.getElementById('filter-search-btn');
+  var grid = document.getElementById('property-grid');
+  if(btn){ btn.disabled=true; btn.textContent='Loading…'; }
+  if(grid) grid.innerHTML = skel(6);
+  fetch('/api/properties?checkIn='+checkIn+'&checkOut='+checkOut)
+    .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function(d){ _filterAndRender(d.properties || []); })
+    .catch(function(){ _filterAndRender(all); })
+    .finally(function(){ if(btn){ btn.disabled=false; btn.textContent='Search'; } });
 }
 
 function resetFilters(){

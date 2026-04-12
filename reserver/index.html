@@ -1703,16 +1703,17 @@ function closeAllDropdowns(){
   document.querySelectorAll('.filter-group.open').forEach(g => g.classList.remove('open'));
 }
 
-function applyFilters(){
+function _filterAndRender(source){
   const station = fltState.station;
   const type    = fltState.type;
   const guests  = fltState.guests;
   const gamme   = fltState.gamme;
   const priceMin=parseInt(document.getElementById('f-price-min')?.value||0);
   const priceMax=parseInt(document.getElementById('f-price-max')?.value||10000);
-  const active  = station!=='all' || type!=='all' || guests!=='all' || gamme!=='all' || priceMin>0 || priceMax<10000;
+  const datesActive = !!(_fpDates[0] && _fpDates[1]);
+  const active  = station!=='all' || type!=='all' || guests!=='all' || gamme!=='all' || priceMin>0 || priceMax<10000 || datesActive;
   document.getElementById('btn-reset').style.display = active ? 'inline-block' : 'none';
-  filtered = all.filter(p=>{
+  filtered = source.filter(p=>{
     if(station !== 'all' && norm(p.city) !== station) return false;
     if(type !== 'all' && p.propertyType !== type) return false;
     if(guests !== 'all'){
@@ -1732,9 +1733,35 @@ function applyFilters(){
   });
   render(filtered, active);
   if(currentView === 'map') renderMap();
-  // Flash animation to confirm action
   const grid = document.getElementById('property-grid');
   if(grid){ grid.style.opacity='.4'; setTimeout(()=>{ grid.style.transition='opacity .25s'; grid.style.opacity='1'; setTimeout(()=>grid.style.transition='',300); },30); }
+}
+
+function applyFilters(){
+  // Sans dates : filtrer sur la liste complète en mémoire
+  if(!(_fpDates[0] && _fpDates[1])){
+    _filterAndRender(all);
+    return;
+  }
+  // Avec dates : re-fetch les dispo depuis Guesty
+  const checkIn  = formatFpDate(_fpDates[0]);
+  const checkOut = formatFpDate(_fpDates[1]);
+  const btn = document.getElementById('filter-search-btn');
+  const grid = document.getElementById('property-grid');
+  if(btn){ btn.disabled=true; btn.textContent='Chargement…'; }
+  if(grid) grid.innerHTML = skel(6);
+  fetch(`/api/properties?checkIn=${checkIn}&checkOut=${checkOut}`)
+    .then(r=>r.ok?r.json():Promise.reject(r.status))
+    .then(({properties})=>{
+      _filterAndRender(properties || []);
+    })
+    .catch(()=>{
+      // En cas d'erreur API, filtrer sur la liste locale
+      _filterAndRender(all);
+    })
+    .finally(()=>{
+      if(btn){ btn.disabled=false; btn.textContent='Rechercher'; }
+    });
 }
 
 function resetFilters(){

@@ -174,8 +174,8 @@ async function guestyFetch(apiPath, { method = 'GET', body, params } = {}) {
 }
 
 /* ── Listings ── */
-async function getListings({ limit = 100 } = {}) {
-  return guestyFetch('/listings', { params: { limit } });
+async function getListings({ limit = 100, checkIn, checkOut } = {}) {
+  return guestyFetch('/listings', { params: { limit, checkIn, checkOut } });
 }
 
 /* ── Single listing ── */
