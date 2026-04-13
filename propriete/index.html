@@ -1920,8 +1920,9 @@ loadProperty();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){fb.textContent='Invalid email address.';fb.className='modal-fb err';return;}
     btn.disabled=true; btn.textContent='Sending…';
     try{
+      const _lang = location.pathname.startsWith('/en') ? 'en' : 'fr';
       const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({firstName:fn,lastName:ln,email:em,phone:ph,message:msg,propertyName:prop?.title||''})});
+        body:JSON.stringify({firstName:fn,lastName:ln,email:em,phone:ph,message:msg,propertyName:prop?.title||'',source:'propriete-contact',lang:_lang})});
       const d=await r.json();
       if(!r.ok) throw new Error(d.error||'Server error');
       fb.textContent='Message sent. Our team will reply within 2 hours.'; fb.className='modal-fb ok';

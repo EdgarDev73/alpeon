@@ -94,6 +94,24 @@ module.exports = async (req, res) => {
       </div>
     </div>`;
 
+  // Zapier webhook (parallel, non-blocking)
+  const ZAPIER_URL = process.env.ZAPIER_CALLBACK_WEBHOOK;
+  if (ZAPIER_URL) {
+    const source = body.source || 'propriete-contact';
+    const lang   = body.lang   || 'fr';
+    fetch(ZAPIER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:        `${firstName} ${lastName}`.trim(),
+        phone:       phone || '—',
+        source,
+        destination: propertyName || '—',
+        lang,
+      }),
+    }).catch(e => console.warn('[zapier-contact]', e.message));
+  }
+
   try {
     await transporter.sendMail({
       from: `ALPÉON <${EMAIL_USER}>`,
