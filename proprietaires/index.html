@@ -1034,8 +1034,10 @@ async function submitContact(e) {
     tel: document.getElementById('cf-tel').value,
     email: document.getElementById('cf-email').value,
     station: document.getElementById('cf-station').value,
-    type: document.getElementById('cf-type').value,
+    formType: document.getElementById('cf-type').value,
     message: document.getElementById('cf-message').value,
+    source: 'proprietaires-contact',
+    lang: 'fr',
   };
   try {
     await fetch('/api/contact', {

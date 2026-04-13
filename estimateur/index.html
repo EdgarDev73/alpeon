@@ -3776,13 +3776,9 @@ function toggleMobileMenu(){
      SUBMIT — seul moment où les vrais
      chiffres entrent dans le DOM
   ══════════════════════════════════════ */
-  /* ─── Webhook Zapier (URL chargée depuis alpeon-config.js, gitignorée) ─── */
-  const ZAPIER_WEBHOOK = (window.ALPEON_CONFIG && window.ALPEON_CONFIG.zapierWebhook) || '';
-
   function sendToZapier(r) {
-    if (!ZAPIER_WEBHOOK || ZAPIER_WEBHOOK.startsWith('REMPLACE')) return;
-    const ETAT_FR   = { budget:'Entrée de gamme', correct:'Correct', standing:'Standing', prestige:'Prestige', luxe:'Luxe' };
-    const EQ_FR     = { spa:'Spa / Jacuzzi', ski:'Ski au pied', parking:'Parking privatif', terrasse:'Terrasse / balcon', cheminee:'Cheminée / poêle', concierge:'Conciergerie', sauna:'Sauna / Hammam', piscine:'Piscine intérieure', salle:'Salle de sport', cinema:'Home cinéma' };
+    const ETAT_FR = { budget:'Entrée de gamme', correct:'Correct', standing:'Standing', prestige:'Prestige', luxe:'Luxe' };
+    const EQ_FR   = { spa:'Spa / Jacuzzi', ski:'Ski au pied', parking:'Parking privatif', terrasse:'Terrasse / balcon', cheminee:'Cheminée / poêle', concierge:'Conciergerie', sauna:'Sauna / Hammam', piscine:'Piscine intérieure', salle:'Salle de sport', cinema:'Home cinéma' };
     const payload = {
       /* ── Contact ── */
       prenom:    document.getElementById('cPrenom').value.trim(),
@@ -3807,11 +3803,11 @@ function toggleMobileMenu(){
       date_iso:     new Date().toISOString(),
       date_lisible: new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
     };
-    /* mode no-cors : évite le preflight CORS bloqué par Zapier */
-    fetch(ZAPIER_WEBHOOK, {
-      method: 'POST',
-      mode:   'no-cors',
-      body:   JSON.stringify(payload)
+    /* Envoi via endpoint serveur pour garder l'URL du webhook secret */
+    fetch('/api/lead', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
     }).catch(() => {}); /* silencieux — ne bloque pas l'UX */
   }
 

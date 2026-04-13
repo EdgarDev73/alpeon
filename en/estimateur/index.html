@@ -1918,10 +1918,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   /* SUBMIT */
-  const ZAPIER_WEBHOOK = (window.ALPEON_CONFIG && window.ALPEON_CONFIG.zapierWebhook) || '';
-
   function sendToZapier(r) {
-    if (!ZAPIER_WEBHOOK || ZAPIER_WEBHOOK.startsWith('REMPLACE')) return;
     const ETAT_EN = { budget:'Budget', correct:'Standard', standing:'Good', prestige:'Prestige', luxe:'Luxury' };
     const EQ_EN   = { spa:'Spa / Jacuzzi', ski:'Ski-in/ski-out', parking:'Private parking', terrasse:'Terrace / balcony', cheminee:'Fireplace / stove', concierge:'Concierge services', sauna:'Sauna / Hammam', piscine:'Indoor pool', salle:'Gym / Fitness room', cinema:'Home cinema' };
     const payload = {
@@ -1944,7 +1941,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       date_iso:     new Date().toISOString(),
       date_lisible: new Date().toLocaleString('en-GB', { timeZone: 'Europe/Paris' })
     };
-    fetch(ZAPIER_WEBHOOK, { method:'POST', mode:'no-cors', body:JSON.stringify(payload) }).catch(() => {});
+    fetch('/api/lead', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    }).catch(() => {});
   }
 
   function submit() {
