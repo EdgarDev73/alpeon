@@ -1072,16 +1072,21 @@ function renderGallery(p){
 }
 
 function toggleAmen(){
-  const hidden = document.querySelectorAll('.amen-hidden');
   const btn = document.getElementById('btn-amen');
-  const isHidden = hidden.length && hidden[0].style.display === '';
-  if(isHidden || !hidden[0].classList.contains('amen-hidden')){
-    // currently visible → hide
-    hidden.forEach(el=>el.classList.add('amen-hidden'));
-    if(btn) btn.textContent = `Voir les ${hidden.length} équipements supplémentaires`;
+  if(!btn) return;
+  // Mémorise les éléments la première fois (avant de retirer la classe)
+  if(!btn._amenItems){
+    btn._amenItems = [...document.querySelectorAll('.amen-hidden')];
+  }
+  const items = btn._amenItems;
+  if(!items.length) return;
+  const isExpanded = !items[0].classList.contains('amen-hidden');
+  if(isExpanded){
+    items.forEach(el => el.classList.add('amen-hidden'));
+    btn.textContent = `Voir les ${items.length} équipements supplémentaires`;
   } else {
-    hidden.forEach(el=>el.classList.remove('amen-hidden'));
-    if(btn) btn.textContent = 'Réduire les équipements';
+    items.forEach(el => el.classList.remove('amen-hidden'));
+    btn.textContent = 'Réduire les équipements';
   }
 }
 
