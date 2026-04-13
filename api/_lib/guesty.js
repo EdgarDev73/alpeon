@@ -72,6 +72,9 @@ async function _updateVercelEnv(token) {
 }
 
 /* ── OAuth auto-refresh ── */
+// Cooldown dynamique : 60s normal, 15min si rate-limited
+let _oauthCooldown = 60_000;
+
 async function _doOAuth() {
   const id     = process.env.GUESTY_CLIENT_ID;
   const secret = process.env.GUESTY_CLIENT_SECRET;
@@ -83,7 +86,22 @@ async function _doOAuth() {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
   });
-  if (!r.ok) throw new Error(`OAuth failed ${r.status}: ${await r.text()}`);
+
+  if (!r.ok) {
+    const body = await r.text();
+    if (r.status === 429) {
+      // Rate limited → cooldown 15min pour éviter le flood
+      _oauthCooldown = 15 * 60_000;
+      console.warn('[guesty] OAuth 429 — cooldown 15min activé');
+      // Retourner le token périmé plutôt que casser le site
+      const stale = _mem.token || process.env.GUESTY_ACCESS_TOKEN;
+      if (stale) return stale;
+    }
+    throw new Error(`OAuth failed ${r.status}: ${body}`);
+  }
+
+  // Succès → reset cooldown normal
+  _oauthCooldown = 60_000;
   const json = await r.json();
   saveToken(json.access_token, json.expires_in);
   // Mise à jour Vercel env en arrière-plan (best-effort)
@@ -120,15 +138,14 @@ async function getToken() {
     console.log('[guesty] OAuth déjà en cours, attente...');
     return _oauthInFlight;
   }
-  // Cooldown 60s si dernier essai récent (évite flood sur erreur OAuth)
-  if (now - _oauthLastTry < 60_000) {
-    // Retourner le token périmé comme fallback plutôt que bloquer
+  // Cooldown dynamique (60s normal, 15min si 429)
+  if (now - _oauthLastTry < _oauthCooldown) {
     const stale = _mem.token || envToken;
     if (stale) {
-      console.warn('[guesty] Cooldown OAuth actif — utilisation token périmé');
+      console.warn(`[guesty] Cooldown OAuth actif (${_oauthCooldown/1000}s) — token périmé en fallback`);
       return stale;
     }
-    throw new Error('Token expiré et cooldown OAuth actif — réessayez dans 60s');
+    throw new Error('Token expiré et cooldown OAuth actif');
   }
 
   _oauthLastTry = now;
