@@ -1941,10 +1941,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       date_iso:     new Date().toISOString(),
       date_lisible: new Date().toLocaleString('en-GB', { timeZone: 'Europe/Paris' })
     };
-    fetch('/api/lead', {
+    fetch('/api/contact', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload)
+      body:    JSON.stringify(Object.assign({ type: 'lead' }, payload))
     }).catch(() => {});
   }
 

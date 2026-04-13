@@ -6,6 +6,19 @@ module.exports = async (req, res) => {
 
   const body = req.body || {};
 
+  // ── Lead estimateur ───────────────────────────────────────────────────────
+  if (body.type === 'lead') {
+    const ZAPIER_URL = process.env.ZAPIER_ESTIMATEUR_WEBHOOK;
+    if (ZAPIER_URL) {
+      fetch(ZAPIER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      }).catch(e => console.warn('[zapier-lead]', e.message));
+    }
+    return res.status(200).json({ ok: true });
+  }
+
   // ── Callback request (popup Réserver / Book) ──────────────────────────────
   if (body.type === 'callback') {
     const name  = (body.name  || '').trim();

@@ -3804,10 +3804,10 @@ function toggleMobileMenu(){
       date_lisible: new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
     };
     /* Envoi via endpoint serveur pour garder l'URL du webhook secret */
-    fetch('/api/lead', {
+    fetch('/api/contact', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload)
+      body:    JSON.stringify(Object.assign({ type: 'lead' }, payload))
     }).catch(() => {}); /* silencieux — ne bloque pas l'UX */
   }
 
