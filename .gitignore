@@ -7,3 +7,5 @@ node_modules/
 .claude/
 .vercel
 .env.vercel
+.env*.local
+.env.check
