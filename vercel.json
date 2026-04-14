@@ -11,6 +11,7 @@
   "redirects": [
     { "source": "/",        "destination": "/accueil/",    "permanent": true },
     { "source": "/en",      "destination": "/en/accueil/", "permanent": true },
+    { "source": "/en/",     "destination": "/en/accueil/", "permanent": true },
     { "source": "/index",   "destination": "/accueil/",    "permanent": true },
     { "source": "/index.html", "destination": "/accueil/", "permanent": true },
     { "source": "/404",     "destination": "/404.html",    "permanent": false },
