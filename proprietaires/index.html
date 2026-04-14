@@ -140,18 +140,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .site-logo img { height: 48px; }
     .site-header-right { margin-left: auto; }
   }
-  /* ── Portal button ── */
-  .site-portal-btn {
-    display: inline-flex; align-items: center; gap: .4rem;
-    font-size: .65rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
-    color: rgba(232,203,160,.7); text-decoration: none;
-    border: 1px solid rgba(232,203,160,.25); border-radius: 4px;
-    padding: .38rem .75rem; transition: color .2s, border-color .2s;
-    white-space: nowrap;
-  }
-  .site-portal-btn:hover { color: #E8CBA0; border-color: rgba(232,203,160,.55); }
-  .site-portal-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
-  @media (max-width: 900px) { .site-portal-btn { display: none; } }
   /* ── Header phone dropdown ── */
   .hdr-phone-wrap { position: relative; }
   .hdr-phone-btn {
@@ -644,10 +632,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       
-      <a href="/proprietaires/portail" target="_blank" rel="noopener" class="site-portal-btn" title="Accéder à votre espace propriétaire Guesty">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Mon espace
-      </a>
       <div class="site-lang">
         <a href="/proprietaires" class="active">FR</a>
         <span>|</span>
@@ -919,6 +903,7 @@ function toggleMobileMenu(){
           <li><a href="/estimateur">Estimateur de revenus</a></li>
           <li><a href="/about">À propos</a></li>
           <li><a href="/faq">FAQ</a></li>
+          <li><a href="/proprietaires/portail" target="_blank" rel="noopener">Espace propriétaire</a></li>
         </ul>
       </div>
       <div>
