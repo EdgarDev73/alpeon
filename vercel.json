@@ -11,6 +11,8 @@
     { "source": "/en/propriete/:slug/:id/", "destination": "/en/propriete/" }
   ],
   "redirects": [
+    { "source": "/proprietaires/portail",  "destination": "https://alpeon.guestyowners.com", "permanent": false },
+    { "source": "/proprietaires/portail/", "destination": "https://alpeon.guestyowners.com", "permanent": false },
     { "source": "/",        "destination": "/accueil/",    "permanent": true },
     { "source": "/en",      "destination": "/en/accueil/", "permanent": true },
     { "source": "/en/",     "destination": "/en/accueil/", "permanent": true },
