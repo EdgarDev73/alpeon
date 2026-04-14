@@ -151,7 +151,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
   /* ─── RESET & TOKENS ─────────────────────────────── */
@@ -163,7 +163,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     --ink: #0d1410;
     --ink2: #111a13;
     --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'Poppins', system-ui, sans-serif;
+    --display: 'Yeseva One', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
     --max: 1380px;
     --pad: clamp(24px, 5vw, 80px);
   }
@@ -263,7 +264,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   .dest-hero-content { position: relative; z-index: 2; max-width: var(--max); width: 100%; margin: 0 auto; }
   .dest-hero-eyebrow { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: .75rem; }
-  .dest-hero-title { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.15; margin-bottom: 1rem; }
+  .dest-hero-title { font-family: var(--display); font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.15; margin-bottom: 1rem; }
   .dest-hero-title em { color: var(--gold); font-style: italic; }
   .dest-hero-sub { font-size: .9rem; color: rgba(250,254,255,.65); max-width: 560px; line-height: 1.7; margin-bottom: 1.75rem; }
   .dest-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -298,7 +299,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .dest-section { padding: clamp(56px, 7vw, 100px) var(--pad); }
   .dest-section-inner { max-width: var(--max); margin: 0 auto; }
   .sec-eyebrow { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-  .sec-title { font-family: var(--serif); font-size: clamp(1.7rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.25; margin-bottom: 1.25rem; }
+  .sec-title { font-family: var(--display); font-size: clamp(1.7rem, 3.5vw, 2.8rem); font-weight: 400; line-height: 1.25; margin-bottom: 1.25rem; }
   .sec-title em { color: var(--gold); font-style: italic; }
   .sec-lead { font-size: .95rem; color: rgba(250,254,255,.65); line-height: 1.8; max-width: 680px; }
 
@@ -509,6 +510,60 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .dest-stats { gap: 0; }
     .dest-stat { min-width: 110px; padding: 1.1rem .75rem; }
     .dest-stat-val { font-size: 1.5rem; }
+  }
+
+  /* ── DÉCOUVREZ NOS BIENS ── */
+  .dest-biens {
+    background: var(--ink2);
+    padding: clamp(64px, 8vw, 100px) var(--pad);
+    border-top: 1px solid rgba(232,203,160,.08);
+  }
+  .dest-biens-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 5vw, 80px);
+    align-items: center;
+  }
+  .dest-biens-media {
+    position: relative;
+    height: 420px;
+  }
+  .dest-biens-card {
+    position: absolute;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .dest-biens-card--1 {
+    width: 72%;
+    height: 100%;
+    left: 0; top: 0;
+  }
+  .dest-biens-card--2 {
+    width: 48%;
+    height: 58%;
+    right: 0; bottom: 0;
+    border: 3px solid var(--ink2);
+  }
+  .dest-biens-img {
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform .6s ease;
+  }
+  .dest-biens-card:hover .dest-biens-img { transform: scale(1.04); }
+  .dest-biens-text { padding-left: clamp(0px, 2vw, 24px); }
+  .dest-biens-desc {
+    font-size: .95rem;
+    color: rgba(250,254,255,.6);
+    line-height: 1.8;
+    margin: 20px 0 36px;
+    max-width: 480px;
+  }
+  @media (max-width: 768px) {
+    .dest-biens-inner { grid-template-columns: 1fr; }
+    .dest-biens-media { height: 280px; margin-bottom: 32px; }
   }
   </style>
 </head>
@@ -943,6 +998,30 @@ function toggleMobileMenu(){
         <div class="maillage-cat">Contact</div>
         <div class="maillage-label">Parler à un expert</div>
         <div class="maillage-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── DÉCOUVREZ NOS BIENS ── -->
+<section class="dest-biens">
+  <div class="dest-biens-inner">
+    <div class="dest-biens-media">
+      <div class="dest-biens-card dest-biens-card--1">
+        <div class="dest-biens-img" style="background-image:url('/assets/images/dest-val-thorens.webp')"></div>
+      </div>
+      <div class="dest-biens-card dest-biens-card--2">
+        <div class="dest-biens-img" style="background-image:url('/assets/images/9.jpg')"></div>
+      </div>
+    </div>
+    <div class="dest-biens-text">
+      <div class="sec-eyebrow">Location saisonnière</div>
+      <h2 class="sec-title">Séjourner à<br><em>Val Thorens</em></h2>
+      <p class="dest-biens-desc">Profitez du plus grand domaine skiable du monde depuis notre sélection de propriétés à Val Thorens. Appartements slope-side, résidences de luxe — à deux pas des pistes les plus enneigées d'Europe.</p>
+      <a href="/reserver?station=valthorens" class="btn-primary">
+        Voir les biens disponibles
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
   </div>

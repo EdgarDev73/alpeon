@@ -1846,6 +1846,28 @@ function resetFilters(){
 
 initDropdowns();
 
+// ── Pre-select station from ?station= URL param ──
+(function(){
+  var params = new URLSearchParams(location.search);
+  var st = params.get('station');
+  if(!st) return;
+  var grp = document.getElementById('flt-station');
+  if(!grp) return;
+  var opt = grp.querySelector('.flt-option[data-val="' + st + '"]');
+  if(!opt) return;
+  fltState.station = st;
+  var valEl = document.getElementById('flt-station-val');
+  if(valEl) valEl.textContent = opt.textContent;
+  grp.querySelectorAll('.flt-option').forEach(function(o){ o.classList.remove('selected'); });
+  opt.classList.add('selected');
+  grp.classList.add('active');
+  applyFilters();
+  setTimeout(function(){
+    var grid = document.getElementById('grid-wrap');
+    if(grid) grid.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 400);
+})();
+
 /* ── MOBILE FILTER DRAWER ── */
 function openFilterDrawer(){
   document.getElementById('flt-drawer').classList.add('open');
