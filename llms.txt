@@ -1,0 +1,24 @@
+# ALPÉON
+
+> Gestionnaire premium de résidences alpines. Loyer fixe garanti chaque mois pour les propriétaires de chalets et appartements à Val Thorens, Megève, Courchevel, Méribel, Tignes et Val d'Isère.
+
+## Services principaux
+
+- Gestion locative saisonnière clés en main avec loyer garanti
+- Conciergerie haut de gamme (accueil, ménage, linge, maintenance)
+- Commercialisation multi-canaux du bien
+- Reporting transparent aux propriétaires
+
+## Pages clés
+
+- [Accueil](https://alpeon.fr/accueil/) — présentation du service
+- [Propriétaires](https://alpeon.fr/proprietaires/) — confier son bien
+- [Destinations](https://alpeon.fr/destinations/) — stations couvertes
+- [Estimateur](https://alpeon.fr/estimateur/) — calcul de revenus locatifs
+- [FAQ](https://alpeon.fr/faq/) — questions fréquentes
+- [Contact](https://alpeon.fr/contact/) — prendre contact
+
+## Contact
+
+- Email propriétaires : proprietaires@alpeon.fr
+- Zones couvertes : Val Thorens, Megève, Courchevel, Méribel, Tignes, Val d'Isère

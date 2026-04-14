@@ -1,6 +1,7 @@
 {
   "version": 2,
   "cleanUrls": true,
+  "trailingSlash": true,
   "rewrites": [
     { "source": "/api/:path*",              "destination": "/api/:path*" },
     { "source": "/sitemap.xml",             "destination": "/api/sitemap" },
@@ -8,14 +9,18 @@
     { "source": "/en/propriete/:slug/:id",  "destination": "/en/propriete/" }
   ],
   "redirects": [
-    { "source": "/404", "destination": "/404.html", "permanent": false },
-    { "source": "/500", "destination": "/500.html", "permanent": false }
+    { "source": "/",        "destination": "/accueil/",    "permanent": true },
+    { "source": "/en",      "destination": "/en/accueil/", "permanent": true },
+    { "source": "/index",   "destination": "/accueil/",    "permanent": true },
+    { "source": "/index.html", "destination": "/accueil/", "permanent": true },
+    { "source": "/404",     "destination": "/404.html",    "permanent": false },
+    { "source": "/500",     "destination": "/500.html",    "permanent": false }
   ],
   "headers": [
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Origin",  "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET,POST,OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type,Authorization" }
       ]

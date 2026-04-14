@@ -2,3 +2,16 @@ User-agent: *
 Allow: /
 
 Sitemap: https://alpeon.fr/sitemap.xml
+
+# IA crawlers autorisés pour citation dans réponses IA
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
