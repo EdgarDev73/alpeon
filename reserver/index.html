@@ -430,6 +430,111 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       padding:.18rem .5rem; border-radius:3px; white-space:nowrap;
     }
 
+    /* ── TOP PICKS ── */
+    .top-picks {
+      background: #111A14;
+      padding: 4rem 3rem;
+    }
+    .top-picks-inner { max-width: var(--max); margin: 0 auto; }
+    .top-picks-header {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .top-picks-eyebrow {
+      font-size: .6rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); white-space: nowrap;
+    }
+    .top-picks-title {
+      font-family: var(--font-serif); font-style: italic; font-size: 1.55rem; font-weight: 300;
+      color: rgba(250,254,255,.92); letter-spacing: .01em;
+    }
+    .top-picks-line {
+      flex: 1; height: 1px; background: rgba(232,203,160,.18);
+    }
+    .top-picks-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem;
+    }
+    .tp-card {
+      display: flex; flex-direction: column;
+      text-decoration: none; background: #1A2820;
+      border: 1px solid rgba(232,203,160,.12);
+      transition: border-color .3s, transform .3s;
+    }
+    .tp-card:hover { border-color: rgba(232,203,160,.35); transform: translateY(-4px); }
+    .tp-photo {
+      position: relative; aspect-ratio: 16/9; overflow: hidden;
+    }
+    .tp-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s ease;
+    }
+    .tp-card:hover .tp-photo img { transform: scale(1.05); }
+    .tp-photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .tp-badge {
+      position: absolute; top: 1rem; left: 1rem; z-index: 2;
+      font-size: .55rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+      padding: .3rem .75rem;
+    }
+    .tp-badge--new {
+      background: var(--gold); color: #111A14;
+    }
+    .tp-badge--fav {
+      background: rgba(18,30,20,.9); color: var(--gold);
+      border: 1px solid rgba(232,203,160,.5);
+      backdrop-filter: blur(8px);
+    }
+    .tp-station {
+      position: absolute; bottom: .9rem; left: 1rem; z-index: 2;
+      font-size: .58rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(255,255,255,.85);
+    }
+    .tp-body {
+      padding: 1.5rem 1.75rem 1.75rem; flex: 1; display: flex; flex-direction: column;
+    }
+    .tp-type {
+      font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold-d); margin-bottom: .5rem;
+    }
+    .tp-name {
+      font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; font-weight: 300;
+      color: rgba(250,254,255,.92); line-height: 1.2; margin-bottom: .9rem;
+    }
+    .tp-desc {
+      font-size: .8rem; line-height: 1.7; color: rgba(250,254,255,.5);
+      margin-bottom: 1.1rem; flex: 1;
+    }
+    .tp-specs {
+      display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+      font-size: .7rem; color: rgba(250,254,255,.45);
+      margin-bottom: 1.25rem;
+    }
+    .tp-dot { color: rgba(232,203,160,.35); }
+    .tp-foot {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      padding-top: 1.25rem; border-top: 1px solid rgba(232,203,160,.12);
+    }
+    .tp-from { font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(250,254,255,.4); margin-bottom: .2rem; }
+    .tp-price {
+      font-family: var(--font-serif); font-style: italic; font-size: 1.65rem; font-weight: 300;
+      color: var(--gold); line-height: 1;
+    }
+    .tp-price span { font-size: .7rem; color: rgba(232,203,160,.55); font-style: normal; }
+    .tp-cta {
+      font-size: .65rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(232,203,160,.35);
+      padding: .55rem 1rem; transition: background .2s, color .2s;
+      white-space: nowrap;
+    }
+    .tp-card:hover .tp-cta { background: var(--gold); color: #111A14; }
+    @media (max-width: 900px) {
+      .top-picks { padding: 3rem 1.25rem; }
+      .top-picks-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+    }
+
     /* ── GRID ── */
     .grid-wrap {
       max-width: var(--max); margin: 0 auto;
@@ -1343,6 +1448,76 @@ function toggleMobileMenu(){
           Carte
         </button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOP PICKS ── -->
+<div class="top-picks">
+  <div class="top-picks-inner">
+    <div class="top-picks-header">
+      <span class="top-picks-eyebrow">Sélection exclusive</span>
+      <h2 class="top-picks-title">Our Top Picks</h2>
+      <div class="top-picks-line"></div>
+    </div>
+    <div class="top-picks-grid">
+
+      <!-- Chalet 8 -->
+      <a href="/propriete/luxury-chalet-fireplace-heated-pool-sauna-megeve/69de911e7772e500140c9ec6/" class="tp-card">
+        <div class="tp-photo">
+          <img src="/assets/images/signature.jpg" alt="Chalet 8 — Megève" loading="lazy">
+          <div class="tp-photo-overlay"></div>
+          <span class="tp-badge tp-badge--new">Nouveau</span>
+          <span class="tp-station">Megève · Chalet</span>
+        </div>
+        <div class="tp-body">
+          <div class="tp-type">Chalet · Signatures</div>
+          <h3 class="tp-name">Chalet 8</h3>
+          <p class="tp-desc">Notre dernière adresse d'exception à Megève. Cheminée, piscine chauffée et sauna privatifs dans un cadre alpin d'exception.</p>
+          <div class="tp-specs">
+            <span>Piscine chauffée</span>
+            <span class="tp-dot">·</span>
+            <span>Sauna</span>
+            <span class="tp-dot">·</span>
+            <span>Cheminée</span>
+          </div>
+          <div class="tp-foot">
+            <div>
+              <div class="tp-from">Voir les disponibilités</div>
+            </div>
+            <span class="tp-cta">Voir le bien →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Chalet Black Mountain -->
+      <a href="/propriete/luxury-megeve-chalet-4br-10p-fireplace-mountain-views-and-ga-megeve/68e99dd16ceb6500112d36d3/" class="tp-card">
+        <div class="tp-photo">
+          <img src="/assets/images/hero-accueil.jpg" alt="Chalet Black Mountain — Megève" loading="lazy">
+          <div class="tp-photo-overlay"></div>
+          <span class="tp-badge tp-badge--fav">★ Coup de cœur clients</span>
+          <span class="tp-station">Megève · Chalet</span>
+        </div>
+        <div class="tp-body">
+          <div class="tp-type">Chalet · Signatures</div>
+          <h3 class="tp-name">Chalet Black Mountain</h3>
+          <p class="tp-desc">Le favori de notre clientèle. 4 chambres, jardins privatifs et vue panoramique sur les sommets du Mont Blanc depuis Megève.</p>
+          <div class="tp-specs">
+            <span>10 voyageurs</span>
+            <span class="tp-dot">·</span>
+            <span>4 chambres</span>
+            <span class="tp-dot">·</span>
+            <span>Jardin · Vue Mont Blanc</span>
+          </div>
+          <div class="tp-foot">
+            <div>
+              <div class="tp-from">Voir les disponibilités</div>
+            </div>
+            <span class="tp-cta">Voir le bien →</span>
+          </div>
+        </div>
+      </a>
+
     </div>
   </div>
 </div>
