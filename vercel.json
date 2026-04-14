@@ -5,8 +5,10 @@
   "rewrites": [
     { "source": "/api/:path*",              "destination": "/api/:path*" },
     { "source": "/sitemap.xml",             "destination": "/api/sitemap" },
-    { "source": "/propriete/:slug/:id",     "destination": "/propriete/" },
-    { "source": "/en/propriete/:slug/:id",  "destination": "/en/propriete/" }
+    { "source": "/propriete/:slug/:id",      "destination": "/propriete/" },
+    { "source": "/propriete/:slug/:id/",    "destination": "/propriete/" },
+    { "source": "/en/propriete/:slug/:id",  "destination": "/en/propriete/" },
+    { "source": "/en/propriete/:slug/:id/", "destination": "/en/propriete/" }
   ],
   "redirects": [
     { "source": "/",        "destination": "/accueil/",    "permanent": true },
