@@ -2057,6 +2057,7 @@ initDropdowns();
 function openFilterDrawer(){
   document.getElementById('flt-drawer').classList.add('open');
   document.body.style.overflow = 'hidden';
+  updateMobApplyCount(); // synchro du compteur à l'ouverture
 }
 function closeFilterDrawer(){
   document.getElementById('flt-drawer').classList.remove('open');
@@ -2083,6 +2084,34 @@ function syncMobileDrawer(){
 
 function resetFiltersMob(){
   resetFilters();
+  updateMobApplyCount();
+}
+
+/* ── Compte les résultats en live (sans re-render) pour le bouton mobile ── */
+function updateMobApplyCount(){
+  const btn = document.getElementById('flt-mob-apply');
+  if(!btn || !all.length) return;
+  const station  = fltState.station;
+  const type     = fltState.type;
+  const guests   = fltState.guests;
+  const gamme    = fltState.gamme;
+  const priceMin = parseInt(document.getElementById('f-price-min')?.value || 0);
+  const priceMax = parseInt(document.getElementById('f-price-max')?.value || 10000);
+  const n = all.filter(p => {
+    if(station !== 'all' && norm(p.city) !== station) return false;
+    if(type !== 'all' && p.propertyType !== type) return false;
+    if(guests !== 'all'){
+      if(guests === '8+'){ if(p.guests < 8) return false; }
+      else { if(p.guests < parseInt(guests)) return false; }
+    }
+    if(gamme === 'signatures' && !(p.tags||[]).includes('Signatures')) return false;
+    if(gamme === 'residences' &&  (p.tags||[]).includes('Signatures')) return false;
+    if(p.priceFrom && priceMax < 10000 && p.priceFrom > priceMax) return false;
+    if(p.priceFrom && p.priceFrom < priceMin) return false;
+    return true;
+  }).length;
+  btn.textContent = n > 0 ? `Voir ${n} bien${n > 1 ? 's' : ''}` : 'Aucun résultat';
+  btn.style.opacity = n > 0 ? '1' : '.5';
 }
 
 function initMobileDrawer(){
@@ -2093,7 +2122,7 @@ function initMobileDrawer(){
         row.querySelectorAll('.flt-mob-pill').forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
         fltState[key] = pill.dataset.val;
-        applyFilters();
+        updateMobApplyCount(); // live count — pas de re-render
         updateMobileBar();
       });
     });
