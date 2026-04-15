@@ -511,6 +511,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .dest-stat { min-width: 110px; padding: 1.1rem .75rem; }
     .dest-stat-val { font-size: 1.5rem; }
   }
+  @media (max-width: 768px) {
+    .dest-hero { min-height: 340px; }
+    .dest-hero-title { font-size: clamp(1.75rem, 6vw, 2.4rem); }
+    .dest-hero-sub { font-size: .82rem; max-width: 100%; margin-bottom: 1.25rem; }
+    .dest-hero-actions { flex-direction: column; gap: .75rem; }
+    .btn-primary, .btn-ghost { width: 100%; justify-content: center; text-align: center; }
+    .dest-biens-inner { grid-template-columns: 1fr; }
+    .dest-biens-media { height: 240px; margin-bottom: 24px; }
+  }
 
   /* ── DÉCOUVREZ NOS BIENS ── */
   .dest-biens {
