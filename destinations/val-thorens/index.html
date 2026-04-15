@@ -235,7 +235,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .site-mobile-lang { display: flex; gap: .5rem; align-items: center; color: rgba(250,254,255,.35); font-size: .8rem; letter-spacing: .1em; }
   .site-mobile-lang a { color: rgba(250,254,255,.45); }
   .site-mobile-lang a.active { color: var(--gold); }
-  @media (max-width: 900px) { .site-nav { display: none; } .site-burger { display: flex; } }
+  /* ── Header right (phone + burger) ── */
+  .site-header-right { display: flex; align-items: center; gap: 1.25rem; margin-left: 2.5rem; flex-shrink: 0; }
+  .hdr-phone-wrap { position: relative; }
+  .hdr-phone-btn {
+    display: flex; align-items: center;
+    color: rgba(250,254,255,.7); background: none; border: none; cursor: pointer; padding: .25rem;
+    transition: color .2s;
+  }
+  .hdr-phone-btn:hover { color: var(--gold,#E8CBA0); }
+  .hdr-phone-btn svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.75; flex-shrink: 0; }
+  .hdr-phone-dropdown {
+    display: none; position: absolute; top: calc(100% + .75rem); right: 0;
+    background: #fff; border: 1px solid #ece8e2; min-width: 200px; padding: .5rem 0;
+    z-index: 999; box-shadow: 0 8px 32px rgba(0,0,0,.12);
+  }
+  .hdr-phone-wrap.open .hdr-phone-dropdown { display: block; }
+  .hdr-phone-item {
+    display: flex; align-items: center; gap: .65rem;
+    padding: .7rem 1.1rem; font-size: .78rem; color: #333;
+    text-decoration: none; transition: background .15s;
+  }
+  .hdr-phone-item:hover { background: #f7f5f1; }
+  .hdr-phone-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .site-lang { display: flex; align-items: center; gap: .4rem; font-size: .72rem; color: rgba(250,254,255,.45); }
+  .site-lang a { color: rgba(250,254,255,.45); transition: color .2s; }
+  .site-lang a:hover, .site-lang a.active { color: var(--gold,#E8CBA0); }
+  @media (max-width: 900px) {
+    .site-nav { display: none; }
+    .site-logo img { height: 48px; }
+    .site-header-right { margin-left: auto; }
+    .site-burger { display: flex; }
+    .site-lang { display: none; }
+  }
 
   /* ─── BREADCRUMB ──────────────────────────────────── */
   .breadcrumb {
@@ -598,9 +630,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
       <a href="/estimateur" class="site-nav-cta">Estimer mon bien</a>
     </nav>
-    <button class="site-burger" id="site-burger" aria-label="Menu" onclick="toggleMobileMenu()">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="site-header-right">
+      <div class="hdr-phone-wrap">
+        <button class="hdr-phone-btn" onclick="this.closest('.hdr-phone-wrap').classList.toggle('open')">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </button>
+        <div class="hdr-phone-dropdown">
+          <a href="tel:+33970703991" class="hdr-phone-item">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Appelez-nous
+          </a>
+          <a href="https://wa.me/33698967306?text=Hello%2C%20I%27d%20like%20to%20get%20more%20information%20about%20ALPE%CC%81ON." class="hdr-phone-item">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="site-lang">
+        <a href="/destinations/val-thorens" class="active">FR</a>
+        <span>|</span>
+        <a href="/en/destinations/val-thorens">EN</a>
+      </div>
+      <button class="site-burger" id="site-burger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 <div class="site-mobile-menu" id="site-mobile-menu">
