@@ -23,14 +23,14 @@ module.exports = async (req, res) => {
     const properties = normalizeListings(raw);
     propertyUrls = properties.map(p => `
   <url>
-    <loc>${BASE}/propriete/${p.slug}/${p.id}</loc>
+    <loc>${BASE}/propriete/${p.slug}/${p.id}/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="${BASE}/propriete/${p.slug}/${p.id}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${BASE}/en/propriete/${p.slug}/${p.id}"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="${BASE}/propriete/${p.slug}/${p.id}/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${BASE}/en/propriete/${p.slug}/${p.id}/"/>
   </url>
   <url>
-    <loc>${BASE}/en/propriete/${p.slug}/${p.id}</loc>
+    <loc>${BASE}/en/propriete/${p.slug}/${p.id}/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`).join('');
