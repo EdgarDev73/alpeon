@@ -1,6 +1,13 @@
 /**
- * GET /api/refresh-token          → refresh OAuth token (cron 4h daily)
+ * GET /api/refresh-token          → refresh OAuth token (cron daily at 3h UTC)
  * GET /api/refresh-token?action=warm → warm Guesty cache
+ *
+ * Flow :
+ * 1. OAuth → new Guesty token
+ * 2. Save to Lambda memory + /tmp
+ * 3. Update GUESTY_ACCESS_TOKEN env var in Vercel
+ * 4. Trigger a Vercel redeploy → new cold-start Lambdas get the fresh token baked-in
+ *    (évite l'invalidation du token par les anciens Lambdas encore chauds)
  */
 
 const { getListings, normalizeListings, saveToken } = require('./_lib/guesty');
@@ -10,9 +17,28 @@ const SECRET            = process.env.REFRESH_SECRET;
 const VERCEL_TOKEN      = process.env.VRL_API_TOKEN || process.env.VERCEL_TOKEN;
 const VERCEL_PROJECT_ID = process.env.VERCEL_PROJECT_ID || 'prj_lkINpF7Y4ucOpVPDyEdAwJLefCaf';
 
+/* ── Met à jour GUESTY_ACCESS_TOKEN dans les env vars Vercel ── */
 async function updateVercelEnvVar(token) {
   if (!VERCEL_TOKEN) return { ok: false, reason: 'VERCEL_TOKEN not set' };
   try {
+    // Essai PATCH direct (l'env var existe déjà)
+    const list = await fetch(
+      `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
+      { headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}` } }
+    ).then(x => x.json());
+    const env = (list.envs || []).find(e => e.key === 'GUESTY_ACCESS_TOKEN');
+    if (env) {
+      const patch = await fetch(
+        `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env/${env.id}`,
+        {
+          method: 'PATCH',
+          headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ value: token, target: ['production', 'preview', 'development'] }),
+        }
+      );
+      return { ok: patch.ok, status: patch.status };
+    }
+    // Fallback : créer l'env var
     const r = await fetch(
       `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
       {
@@ -24,25 +50,38 @@ async function updateVercelEnvVar(token) {
         }),
       }
     );
-    if (r.status === 403 || r.status === 409) {
-      const list = await fetch(
-        `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
-        { headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}` } }
-      ).then(x => x.json());
-      const env = (list.envs || []).find(e => e.key === 'GUESTY_ACCESS_TOKEN');
-      if (!env) return { ok: false, reason: 'env var not found after conflict' };
-      const patch = await fetch(
-        `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env/${env.id}`,
-        {
-          method: 'PATCH',
-          headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ value: token, target: ['production', 'preview', 'development'] }),
-        }
-      );
-      return { ok: patch.ok, status: patch.status };
-    }
     return { ok: r.ok, status: r.status };
   } catch (e) {
+    return { ok: false, reason: e.message };
+  }
+}
+
+/* ── Déclenche un redéploiement Vercel (non-bloquant) ── */
+async function triggerRedeploy() {
+  if (!VERCEL_TOKEN) return { ok: false, reason: 'VERCEL_TOKEN not set' };
+  try {
+    // Récupérer le dernier déploiement production
+    const deploys = await fetch(
+      `https://api.vercel.com/v6/deployments?projectId=${VERCEL_PROJECT_ID}&target=production&limit=1`,
+      { headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}` } }
+    ).then(r => r.json());
+    const last = (deploys.deployments || [])[0];
+    if (!last) return { ok: false, reason: 'no production deployment found' };
+
+    // Redéployer avec les env vars fraîches
+    const r = await fetch(
+      `https://api.vercel.com/v13/deployments/${last.uid}/redeploy`,
+      {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ target: 'production' }),
+      }
+    );
+    const body = await r.json();
+    console.log('[refresh-token] Redeploy triggered:', body.id || body.url || r.status);
+    return { ok: r.ok, status: r.status, deployment: body.id };
+  } catch (e) {
+    console.warn('[refresh-token] Redeploy failed (non-critical):', e.message);
     return { ok: false, reason: e.message };
   }
 }
@@ -101,11 +140,14 @@ module.exports = async (req, res) => {
     const vercelResult = await updateVercelEnvVar(token);
     console.log('[refresh-token] Vercel env var update:', vercelResult);
 
+    // Redéploiement en arrière-plan (non-bloquant) pour que les nouveaux Lambdas
+    // démarrent avec le token frais baked-in dans leur process.env
+    triggerRedeploy().catch(e => console.warn('[refresh-token] redeploy bg error:', e.message));
+
     const expiry = Date.now() + (json.expires_in || 86400) * 1000;
     return res.status(200).json({
       ok: true,
       expires: new Date(expiry).toISOString(),
-      access_token: token,
       vercel_env_updated: vercelResult.ok,
     });
   } catch (err) {
