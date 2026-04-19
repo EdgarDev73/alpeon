@@ -1078,7 +1078,7 @@ function renderDetail(p){
     ? `<button class="btn-amen-toggle" id="btn-amen" onclick="toggleAmen()">Show all ${allAm.length - SHOW_AM} amenities</button>`
     : '';
 
-  const desc = (p.fullDescription || p.summary || '').trim();
+  const bodyDesc = (p.fullDescription || p.summary || '').trim();
 
   document.getElementById('detail-left').innerHTML = `
     <div class="prop-location-bar">
@@ -1110,7 +1110,7 @@ function renderDetail(p){
 
     <div class="prop-divider"></div>
 
-    ${desc ? `<div class="prop-section"><h2 class="prop-section-title">About</h2><p class="prop-desc" id="prop-desc-text">${desc}</p><button class="prop-desc-toggle" onclick="toggleDesc()">Read more</button></div>` : ''}
+    ${bodyDesc ? `<div class="prop-section"><h2 class="prop-section-title">About</h2><p class="prop-desc" id="prop-desc-text">${bodyDesc}</p><button class="prop-desc-toggle" onclick="toggleDesc()">Read more</button></div>` : ''}
 
     ${amenHtml ? `
     <div class="prop-divider"></div>
