@@ -1930,10 +1930,10 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
 
   /* ─── Tablette : sidebar masquée ≤ 960px ─── */
   @media (max-width: 960px) {
-    .est-wrap { display: block; padding: 48px 32px 72px; }
+    .est-wrap { display: block; padding: 48px 32px 72px; height: auto; min-height: 0; }
     .est-layout { grid-template-columns: 1fr; max-width: 720px; box-shadow: 0 4px 32px rgba(28,27,25,.08); }
     .est-side { display: none; }
-    .est-main { padding: 44px 48px 72px; }
+    .est-main { padding: 44px 48px 72px; overflow-y: visible; }
   }
 
   /* ─── Tablet / small desktop ≤ 768px ─── */
@@ -2172,7 +2172,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     padding-top: 72px;
     overflow-y: auto;
   }
-  @media (min-width: 641px) {
+  @media (min-width: 961px) {
     #page-estimateur { overflow: hidden; }
   }
   #page-estimateur.page-active {
@@ -2500,6 +2500,30 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   .est-cb-success-icon svg { width: 22px; stroke: #2C3D30; fill: none; stroke-width: 2.5; }
   .est-cb-success-title { font-size: 1rem; font-weight: 600; color: #1c1b19; }
   .est-cb-success-text { font-size: .82rem; color: rgba(42,32,18,.5); line-height: 1.6; max-width: 280px; }
+
+  /* ══════════════════════════════════════════════════════════
+     STATION PICKER — responsive (must come AFTER default CSS)
+  ══════════════════════════════════════════════════════════ */
+  @media (max-width: 960px) {
+    .sp-inner { padding: 80px 32px 24px; }
+    .sp-header h1 { font-size: 2rem; }
+    .sp-grid { gap: 10px; }
+  }
+  @media (max-width: 640px) {
+    .sp-inner { padding: 72px 14px 14px; }
+    .sp-header { margin-bottom: 14px; }
+    .sp-header h1 { font-size: 1.5rem; line-height: 1.2; margin: 8px 0 10px; }
+    .sp-header p { font-size: .78rem; }
+    .sp-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .sp-name { font-size: 1rem; }
+    .sp-alt { font-size: .6rem; }
+    .sp-card { min-height: 80px; }
+  }
+  @media (max-width: 430px) {
+    .sp-header h1 { font-size: 1.25rem; }
+    .sp-grid { grid-template-columns: 1fr; gap: 7px; }
+    .sp-card { min-height: 64px; }
+  }
 
   </style>
   <!-- Config locale (gitignorée — contient les secrets) -->
