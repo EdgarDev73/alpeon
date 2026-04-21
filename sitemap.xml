@@ -52,7 +52,8 @@
   <url>
     <loc>https://alpeon.fr/faq/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/faq/"/>
-    <lastmod>2026-04-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/faq/"/>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -60,7 +61,8 @@
   <url>
     <loc>https://alpeon.fr/about/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/about/"/>
-    <lastmod>2026-04-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/about/"/>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -177,22 +179,89 @@
     <loc>https://alpeon.fr/en/reserver/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/reserver/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/reserver/"/>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- ── PAGES STATIONS EN (à créer — Phase 4) ────────── -->
-  <!-- TODO: décommenter quand les pages EN stations seront créées
+  <url>
+    <loc>https://alpeon.fr/en/faq/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/faq/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/about/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ── PAGES STATIONS EN ────────────────────────────── -->
+
   <url>
     <loc>https://alpeon.fr/en/destinations/courchevel/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/courchevel/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/courchevel/"/>
-    <lastmod>2026-04-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/courchevel/"/>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  ... (megeve, val-thorens, val-d-isere, meribel, tignes)
-  -->
+
+  <url>
+    <loc>https://alpeon.fr/en/destinations/megeve/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/megeve/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/destinations/val-thorens/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-thorens/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/destinations/val-d-isere/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-d-isere/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/destinations/meribel/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/meribel/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/destinations/tignes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/tignes/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 
 </urlset>
