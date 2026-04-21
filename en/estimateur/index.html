@@ -1734,7 +1734,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function updateSurf(pos) {
     const v = sliderToSurface(pos);
     S.surface = v;
-    document.getElementById('surfNum').textContent = v >= 1000 ? v.toLocaleString('fr-FR') : v;
+    document.getElementById('surfNum').textContent = v >= 1000 ? v.toLocaleString('en-GB') : v;
     const pct = pos / 365 * 100;
     slSurface.style.background = `linear-gradient(to right, var(--accent) ${pct}%, var(--stone-3) ${pct}%)`;
   }

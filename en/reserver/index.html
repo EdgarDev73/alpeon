@@ -1666,8 +1666,8 @@ function card(p){
   var gammeBadge = (p.tags||[]).includes('Signatures') ? '<span class="badge-signatures">Signatures</span>' : '<span class="badge-residences">Résidences</span>';
   var nights = (_fpDates[0] && _fpDates[1]) ? Math.round((_fpDates[1]-_fpDates[0])/86400000) : 0;
   var totalEst = nights && p.priceFrom ? p.priceFrom * nights : 0;
-  var priceStr  = totalEst ? totalEst.toLocaleString('fr-FR')+' €'
-                : p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' €' : 'On request';
+  var priceStr  = totalEst ? totalEst.toLocaleString('en-GB')+' €'
+                : p.priceFrom ? p.priceFrom.toLocaleString('en-GB')+' €' : 'On request';
   var priceLabel = totalEst ? nights+' night'+(nights>1?'s':'') : (p.priceFrom ? '/ night' : '');
   var pricePre   = totalEst ? 'Estimated total' : 'From';
   var ratingBlock = p.rating>0 ? '<div class="prop-rating"><div class="prop-stars">'+stars(p.rating)+'</div>'+(p.reviewsCount>0?'<div class="prop-reviews">'+p.reviewsCount+' reviews</div>':'')+'</div>' : '';
@@ -1796,8 +1796,8 @@ function syncPriceSlider(){
   document.getElementById('price-fill').style.cssText='left:'+pct(safe_mn)+';width:'+pct(mx-safe_mn);
   document.getElementById('thumb-min').style.left=pct(safe_mn);
   document.getElementById('thumb-max').style.left=pct(mx);
-  document.getElementById('lbl-min').textContent=safe_mn.toLocaleString('fr-FR');
-  document.getElementById('lbl-max').textContent=mx>=10000?'10 000+':mx.toLocaleString('fr-FR');
+  document.getElementById('lbl-min').textContent=safe_mn.toLocaleString('en-GB');
+  document.getElementById('lbl-max').textContent=mx>=10000?'10,000+':mx.toLocaleString('en-GB');
   applyFilters();
 }
 
@@ -2119,7 +2119,7 @@ function renderMap(){
     var n = i + 1;
     var coords = getPropCoords(p.city);
     var img = p.image || 'https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=400&q=60';
-    var price = p.priceFrom ? p.priceFrom.toLocaleString('fr-FR')+' € / night' : 'On request';
+    var price = p.priceFrom ? p.priceFrom.toLocaleString('en-GB')+' € / night' : 'On request';
     var icon = L.divIcon({
       className:'',
       html:'<div style="width:26px;height:26px;border-radius:50%;background:#2C3D30;color:#E8CBA0;font-size:11px;font-weight:700;font-family:sans-serif;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3);border:2px solid #fff">'+n+'</div>',
