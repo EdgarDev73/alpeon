@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estimateur loyer Val d'Isère — Revenus locatifs 2025/2026 | ALPÉON</title>
+  <title>Estimateur loyer Val d'Isère · Revenus locatifs 2025/2026 | ALPÉON</title>
   <meta name="description" content="Combien rapporte votre appartement ou chalet à Val d'Isère en location courte durée ? Estimez vos revenus locatifs : de 20 000 € à 120 000 €/an. Espace Killy, Coupe du Monde, clientèle internationale. Simulation gratuite.">
   <link rel="canonical" href="https://alpeon.fr/estimateur/val-d-isere/">
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/val-d-isere/">
   <link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-d-isere/">
   <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico">
-  <meta property="og:title" content="Estimateur loyer Val d'Isère — Revenus locatifs 2025/2026 | ALPÉON">
+  <meta property="og:title" content="Estimateur loyer Val d'Isère · Revenus locatifs 2025/2026 | ALPÉON">
   <meta property="og:description" content="Combien rapporte votre appartement ou chalet à Val d'Isère ? De 20 000 € à 120 000 €/an. Espace Killy, Coupe du Monde, prestige international. Simulation gratuite.">
   <meta property="og:image" content="/assets/images/dest-valdisere.jpg">
   <meta property="og:type" content="website">
@@ -306,8 +306,8 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
 
 <header class="site-header" id="site-header">
   <div class="site-header-inner">
-    <a href="/accueil/" class="site-logo" aria-label="ALPÉON — Accueil">
-      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON — Gestion locative alpine" height="64">
+    <a href="/accueil/" class="site-logo" aria-label="ALPÉON · Accueil">
+      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON · Gestion locative alpine" height="64">
     </a>
     <nav class="site-nav" aria-label="Navigation principale">
       <a href="/accueil/" class="site-nav-link">Accueil</a>
@@ -366,13 +366,13 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
 
 <section class="dest-hero">
   <div class="dest-hero-bg">
-    <img src="/assets/images/dest-valdisere.jpg" alt="Val d'Isère Espace Killy — estimateur loyer locatif ALPÉON" fetchpriority="high">
+    <img src="/assets/images/dest-valdisere.jpg" alt="Val d'Isère Espace Killy · estimateur loyer locatif ALPÉON" fetchpriority="high">
   </div>
   <div class="dest-hero-overlay"></div>
   <div class="dest-hero-content">
     <div class="dest-hero-eyebrow">Val d'Isère · Espace Killy · Savoie</div>
-    <h1 class="dest-hero-title">Estimateur loyer Val d'Isère —<br><em>combien rapporte votre bien ?</em></h1>
-    <p class="dest-hero-sub">Station de prestige international à 1 850 m — Espace Killy 300 km, Coupe du Monde de ski chaque hiver, clientèle mondiale ultra-premium. L'une des meilleures stations du monde.</p>
+    <h1 class="dest-hero-title">Estimateur loyer Val d'Isère:<br><em>combien rapporte votre bien ?</em></h1>
+    <p class="dest-hero-sub">Station de prestige international à 1 850 m, Espace Killy 300 km, Coupe du Monde de ski chaque hiver, clientèle mondiale ultra-premium. L'une des meilleures stations du monde.</p>
     <div class="dest-hero-actions">
       <a href="/estimateur/val-d-isere/" class="btn-primary">
         Estimer mes revenus gratuitement
@@ -391,7 +391,7 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
   <div class="dest-stat-sep"></div>
   <div class="dest-stat">
     <div class="dest-stat-val">120<span> k€</span></div>
-    <div class="dest-stat-label">Revenus max/an</div>
+    <div class="dest-stat-label">Revenus moy/an</div>
   </div>
   <div class="dest-stat-sep"></div>
   <div class="dest-stat">
@@ -2454,18 +2454,29 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
        DARK THEME OVERRIDES — station pages
     ═══════════════════════════════════════ */
     .est-wrap {
-      background: var(--ink, #0d1410);
+      background: #ffffff;
       height: auto;
       min-height: 0;
       padding: clamp(48px, 6vw, 80px) var(--pad, clamp(24px,5vw,80px));
     }
     .est-layout {
-      border-radius: 4px;
+      border-radius: 8px;
       overflow: hidden;
+      box-shadow: 0 16px 64px rgba(0,0,0,.45);
     }
     .est-main {
-      background: rgba(17,26,19,.92);
+      background: rgba(20,34,23,.95);
       border-right: 1px solid rgba(232,203,160,.15);
+      overflow-y: visible;
+      overscroll-behavior: auto;
+    }
+    .est-side {
+      overflow-y: visible;
+    }
+    #sideVal, #s6BlurredVal {
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: none;
     }
     .est-head .sec-kicker { color: var(--gold, #E8CBA0); }
     .est-head .sec-kicker::before { background: var(--gold, #E8CBA0); }
@@ -2599,7 +2610,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     <div class="est-head">
       <a class="est-station-chip" style="cursor:default">
         <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4" stroke-width="2" fill="none" stroke="currentColor"/></svg>
-        <span class="est-station-name">—</span>
+        <span class="est-station-name">Val d'Isère</span>
       </a>
       <h2>3 questions pour affiner votre estimation</h2>
     </div>
@@ -2779,7 +2790,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
           </div>
           <div class="s6-locked-txt">
             <h4>Votre estimation est prête</h4>
-            <p>Calculée pour <span id="s4StationLabel">votre station</span> — plus qu'une étape.</p>
+            <p>Calculée pour <span id="s4StationLabel">votre station</span>, plus qu'une étape.</p>
           </div>
           <div class="s6-blurred-val" id="s6BlurredVal">38 400 €</div>
         </div>
@@ -2833,7 +2844,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
 <!-- ═══ SIDEBAR LIVE ═══ -->
 <div class="est-side">
   <div class="est-side-kicker">Votre projection</div>
-  <div class="est-side-val" id="sideVal">—</div>
+  <div class="est-side-val" id="sideVal"></div>
   <div class="est-side-unit">€ / an</div>
   <div class="est-side-note" id="sideNote">Complétez les étapes pour voir votre estimation.</div>
   <div class="est-side-divider"></div>
@@ -2844,7 +2855,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     </div>
     <div class="est-side-pt">
       <svg viewBox="0 0 14 14"><path d="M2 7l3.5 3.5 7-7"/></svg>
-      Données réelles — 200+ biens gérés
+      Données réelles · 200+ biens gérés
     </div>
     <div class="est-side-pt">
       <svg viewBox="0 0 14 14"><path d="M2 7l3.5 3.5 7-7"/></svg>
@@ -2855,7 +2866,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
       Visite gratuite, sans engagement
     </div>
   </div>
-  <div class="est-side-badge">ALPÉON — Alpine Property Management</div>
+  <div class="est-side-badge">ALPÉON · Alpine Property Management</div>
 </div>
 
 </div><!-- /est-layout -->
@@ -2866,19 +2877,19 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   <div class="res-inner">
     <span class="res-kicker">Votre estimation ALPÉON</span>
     <div class="res-title">Revenus estimés pour votre bien</div>
-    <div class="res-resort" id="resResort">—</div>
+    <div class="res-resort" id="resResort"></div>
     <div class="res-numbers">
       <div class="res-num-block">
         <div class="res-num-left">
           <span class="res-num-label">Revenus annuels estimés</span>
-          <div class="res-num-val" id="resYearly">—</div>
+          <div class="res-num-val" id="resYearly"></div>
           <div class="res-num-sub">nette de charges locatives</div>
         </div>
         <div class="res-num-badge">Loyer garanti</div>
       </div>
     </div>
     <div class="res-calendar" id="resCalendar" style="display:none">
-      <div class="res-cal-title">Calendrier des versements — Saison hiver</div>
+      <div class="res-cal-title">Calendrier des versements · Saison hiver</div>
       <div class="res-cal-months" id="resCalMonths"></div>
     </div>
 
@@ -2930,32 +2941,6 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   </div>
 </section>
 
-<section class="dest-section">
-  <div class="dest-section-inner">
-    <div class="sec-eyebrow">Marché locatif 2025/2026</div>
-    <h2 class="sec-title">Revenus locatifs à Val d'Isère</h2>
-    <div class="rev-table-wrap">
-      <table class="rev-table">
-        <thead>
-          <tr><th>Type de bien</th><th>Surface</th><th>Couchages</th><th>Standing</th><th>Revenus estimés</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Appartement</td><td>40 m²</td><td>6 couchages</td><td><span class="type-badge badge-correct">Correct</span></td><td><span class="rev-amount">20 000 €</span> <span class="rev-year">/an</span></td></tr>
-          <tr><td>Appartement</td><td>70 m²</td><td>10 couchages</td><td><span class="type-badge badge-standing">Standing</span></td><td><span class="rev-amount">40 000 €</span> <span class="rev-year">/an</span></td></tr>
-          <tr><td>Appartement</td><td>110 m²</td><td>14 couchages</td><td><span class="type-badge badge-prestige">Prestige</span></td><td><span class="rev-amount">65 000 €</span> <span class="rev-year">/an</span></td></tr>
-          <tr><td>Chalet</td><td>150 m²</td><td>—</td><td><span class="type-badge badge-standing">Standing</span></td><td><span class="rev-amount">55 000 €</span> <span class="rev-year">/an</span></td></tr>
-          <tr><td>Chalet</td><td>280 m²</td><td>—</td><td><span class="type-badge badge-prestige">Prestige</span></td><td><span class="rev-amount">90 000 €</span> <span class="rev-year">/an</span></td></tr>
-          <tr><td>Chalet</td><td>450 m²</td><td>—</td><td><span class="type-badge badge-luxe">Luxe</span></td><td><span class="rev-amount">120 000 €</span> <span class="rev-year">/an</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="section-body">
-      <p>Val d'Isère occupe une position d'élite dans le paysage des stations alpines mondiales. Régulièrement classée parmi les meilleures destinations de ski au monde, la station combine une haute altitude exceptionnelle (1 850 m en village, jusqu'à 3 456 m sur le glacier de Tignes), un domaine skiable immense (Espace Killy, 300 km), et une réputation sportive internationale entretenue par la Coupe du Monde de ski organisée chaque décembre. Cette combinaison rarissime génère une demande locative persistante, quelle que soit la conjoncture économique.</p>
-      <p>La clientèle de Val d'Isère est l'une des plus internationales des Alpes françaises : Britanniques, Scandinaves, Russes, Américains, Moyen-Orientaux — la station attire une clientèle fortunée venue des quatre coins du monde qui dispose de budgets locatifs très élevés. Les tarifs de location à Val d'Isère ne sont dépassés que par Courchevel 1850 parmi les stations françaises, ce qui se traduit par des revenus locatifs annuels pouvant atteindre 120 000 € pour les plus beaux chalets.</p>
-      <p>Le marché locatif de Val d'Isère est particulièrement dynamique en période de Coupe du Monde (décembre), à Noël et au Nouvel An, et pendant les vacances scolaires de février. Ces pics de demande permettent des tarifs exceptionnels sur ces semaines clés, qui contribuent significativement aux revenus annuels des propriétaires.</p>
-    </div>
-  </div>
-</section>
 
 <section class="dest-section" style="background: rgba(44,61,48,.08); border-top: 1px solid rgba(232,203,160,.07);">
   <div class="dest-section-inner">
@@ -2963,7 +2948,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
       <div class="why-text">
         <div class="sec-eyebrow">ALPÉON à Val d'Isère</div>
         <h2 class="sec-title">Service <em>premium</em> pour une clientèle internationale</h2>
-        <p>Val d'Isère exige un niveau de service irréprochable. La clientèle internationale de la station — habituée aux hôtels 5 étoiles du monde entier — attend une expérience locative sans faille : communication multilingue, accueil VIP, conciergerie de luxe avec carnet d'adresses exclusif. ALPÉON a développé une approche spécifique pour répondre à ces exigences et fidéliser les locataires les plus exigeants.</p>
+        <p>Val d'Isère exige un niveau de service irréprochable. La clientèle internationale de la station, habituée aux hôtels 5 étoiles du monde entier, attend une expérience locative sans faille : communication multilingue, accueil VIP, conciergerie de luxe avec carnet d'adresses exclusif. ALPÉON a développé une approche spécifique pour répondre à ces exigences et fidéliser les locataires les plus exigeants.</p>
         <p>Notre stratégie à Val d'Isère intègre une optimisation tarifaire fine des semaines de Coupe du Monde et des fêtes, une présence sur les agences haut de gamme qui adressent la clientèle internationale premium, et un service de conciergerie qui inclut réservations de restaurants, moniteurs de ski privés, et service de chauffeur pour les arrivées.</p>
         <ul class="alpeon-features">
           <li><span class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Service multilingue (FR, EN, RU, AR) pour la clientèle internationale</li>
@@ -3088,7 +3073,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand-logo"><img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON — Gestion locative alpine" height="110" style="height:110px;width:auto;display:block"></div>
+        <div class="footer-brand-logo"><img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON · Gestion locative alpine" height="110" style="height:110px;width:auto;display:block"></div>
         <div class="footer-brand-claim">Alpine Property Management</div>
         <p class="footer-brand-text">Gestionnaire premium de la location saisonnière alpine. Loyer fixe garanti, conciergerie haut de gamme, transparence totale.</p>
       </div>
@@ -3167,7 +3152,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
       </div>
       <div class="callpop-title">Obtenez une estimation précise</div>
       <div class="callpop-text">
-        Votre estimation est une première base solide. Un conseiller ALPÉON visite votre bien et affine la projection — gratuitement et sans engagement.
+        Votre estimation est une première base solide. Un conseiller ALPÉON visite votre bien et affine la projection, gratuitement et sans engagement.
       </div>
       <a href="https://calendar.app.google/KzXPtTdyTb9BTycq7" target="_blank" class="callpop-cta" onclick="closeCallpop()">
         Réserver un appel
@@ -3465,24 +3450,26 @@ function showToast(id, html) {
   toastTimer = setTimeout(() => el.classList.remove('visible'), 5000);
 }
 
-/* Update preview */
+/* Update preview — jamais le vrai chiffre dans le DOM avant soumission */
 function updatePreview() {
   const t = getTeaser();
-  const fmtV = v => new Intl.NumberFormat('fr-FR', { style:'currency', currency:'EUR', maximumFractionDigits:0 }).format(v);
+  /* s6BlurredVal : toujours des bullets, jamais le montant réel */
   const s6val = document.getElementById('s6BlurredVal');
-  if (s6val && t) s6val.textContent = fmtV(t);
+  if (s6val) s6val.textContent = t ? '•• ••• €' : '•• ••• €';
   const sideVal  = document.getElementById('sideVal');
   const sideNote = document.getElementById('sideNote');
   if (sideVal) {
     if (t) {
-      sideVal.textContent = fmtV(t);
-      sideVal.style.color = 'transparent';
-      sideVal.style.textShadow = '0 0 18px rgba(255,255,255,.65)';
-      if (sideNote) sideNote.textContent = 'Estimation indicative — complétez pour affiner.';
+      sideVal.textContent = '•• ••• €';
+      sideVal.style.color = 'rgba(255,255,255,.15)';
+      sideVal.style.textShadow = '0 0 22px rgba(232,203,160,.7)';
+      sideVal.style.filter = 'blur(6px)';
+      if (sideNote) sideNote.textContent = 'Complétez les étapes pour révéler votre estimation.';
     } else {
-      sideVal.textContent = '—';
+      sideVal.textContent = '';
       sideVal.style.color = '';
       sideVal.style.textShadow = '';
+      sideVal.style.filter = '';
       if (sideNote) sideNote.textContent = 'Renseignez les étapes pour voir votre projection.';
     }
   }
@@ -3567,7 +3554,7 @@ function buildLocationPicker() {
   const mults = (!isChalet && station.rm) ? station.rm : MULTS;
   if (!isChalet) {
     pillsEl.innerHTML = `<select class="loc-select" id="locationSelect">
-      <option value="" data-m="1">— Choisir une résidence —</option>
+      <option value="" data-m="1">Choisir une résidence</option>
       ${items.map((name, i) => `<option value="${name}" data-m="${mults[i] ?? 1.0}">${name}</option>`).join('')}
     </select>`;
     const sel = document.getElementById('locationSelect');
@@ -3578,9 +3565,9 @@ function buildLocationPicker() {
       S.quartierMult = S.quartier ? +opt.dataset.m : 1.0;
       updatePreview();
       if (S.quartier) {
-        const bonus = S.quartierMult >= 1.1 ? '— emplacement premium, <strong>+15%</strong> sur l\'estimation.'
-                    : S.quartierMult >= 1.0 ? '— bon emplacement, dans la moyenne.'
-                    : '— emplacement standard, estimation ajustée.';
+        const bonus = S.quartierMult >= 1.1 ? 'emplacement premium, <strong>+15%</strong> sur l\'estimation.'
+                    : S.quartierMult >= 1.0 ? 'bon emplacement, dans la moyenne.'
+                    : 'emplacement standard, estimation ajustée.';
         showToast('toast2', `<strong>${S.quartier}</strong> ${bonus}`);
       }
     });
@@ -3595,9 +3582,9 @@ function buildLocationPicker() {
         S.quartier     = pill.dataset.q;
         S.quartierMult = +pill.dataset.m;
         updatePreview();
-        const bonus = S.quartierMult >= 1.1 ? '— emplacement premium, <strong>+15%</strong> sur l\'estimation.'
-                    : S.quartierMult >= 1.0 ? '— bon emplacement, dans la moyenne.'
-                    : '— emplacement standard, estimation ajustée.';
+        const bonus = S.quartierMult >= 1.1 ? 'emplacement premium, <strong>+15%</strong> sur l\'estimation.'
+                    : S.quartierMult >= 1.0 ? 'bon emplacement, dans la moyenne.'
+                    : 'emplacement standard, estimation ajustée.';
         showToast('toast2', `<strong>${S.quartier}</strong> ${bonus}`);
       });
     });
@@ -3785,15 +3772,15 @@ function sendToZapier(r) {
     email:     emailEl  ? emailEl.value.trim()  : '',
     telephone: telEl    ? telEl.value.trim()    : '',
     station:              S.resortLabel,
-    type_bien:            S.typeBien || '—',
+    type_bien:            S.typeBien || '',
     surface_m2:           S.surface,
     capacite_personnes:   S.couchages,
-    etat:                 ETAT_FR[S.etat] || S.etat || '—',
-    quartier:             S.typeBien === 'chalet' ? (S.quartier || '—') : '—',
-    residence:            S.typeBien !== 'chalet' ? (S.quartier || '—') : '—',
-    equipements:          [...S.equipements].map(e => EQ_FR[e] || e).join(', ') || '—',
+    etat:                 ETAT_FR[S.etat] || S.etat || '',
+    quartier:             S.typeBien === 'chalet' ? (S.quartier || '') : '',
+    residence:            S.typeBien !== 'chalet' ? (S.quartier || '') : '',
+    equipements:          [...S.equipements].map(e => EQ_FR[e] || e).join(', ') || '',
     revenu_annuel_estime:  r ? r.yearly : null,
-    revenu_annuel_formate: r ? fmt(r.yearly) : '—',
+    revenu_annuel_formate: r ? fmt(r.yearly) : '',
     source:       'estimateur-station',
     page_url:     window.location.href,
     date_iso:     new Date().toISOString(),
@@ -3835,8 +3822,8 @@ function submit() {
     if (modal) modal.classList.remove('open');
     const resResort = document.getElementById('resResort');
     const resYearly = document.getElementById('resYearly');
-    if (resResort) resResort.textContent = S.resortLabel || '—';
-    if (resYearly) resYearly.textContent = r ? fmt(r.yearly) : '—';
+    if (resResort) resResort.textContent = S.resortLabel || '';
+    if (resYearly) resYearly.textContent = r ? fmt(r.yearly) : '';
     buildCalendar(r ? r.yearly : 0);
     buildResRecap();
     const resSection = document.getElementById('res-section');
@@ -3874,10 +3861,10 @@ function buildResRecap() {
   const typeBienLabels = { appartement:'Appartement', chalet:'Chalet', penthouse:'Penthouse' };
   const items = [
     { label:'Station',    val: S.resortLabel },
-    { label:'Type',       val: typeBienLabels[S.typeBien] || '—' },
+    { label:'Type',       val: typeBienLabels[S.typeBien] || '' },
     { label:'Surface',    val: S.surface + ' m²' },
     { label:'Capacité',   val: S.couchages + ' personnes' },
-    { label:'État',       val: etatLabels[S.etat] || '—' },
+    { label:'État',       val: etatLabels[S.etat] || '' },
   ];
   const resRecap = document.getElementById('resRecap');
   if (resRecap) resRecap.innerHTML = items.map(it =>

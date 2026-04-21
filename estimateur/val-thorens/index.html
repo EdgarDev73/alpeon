@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estimateur loyer Val Thorens — Revenus locatifs 2025/2026 | ALPÉON</title>
+  <title>Estimateur loyer Val Thorens · Revenus locatifs 2025/2026 | ALPÉON</title>
   <meta name="description" content="Combien rapporte votre appartement ou chalet à Val Thorens en location courte durée ? Estimez vos revenus locatifs : de 18 000 € à 90 000 €/an selon votre bien. Simulation gratuite en 2 min.">
   <link rel="canonical" href="https://alpeon.fr/estimateur/val-thorens/">
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/val-thorens/">
   <link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-thorens/">
   <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico">
-  <meta property="og:title" content="Estimateur loyer Val Thorens — Revenus locatifs 2025/2026 | ALPÉON">
+  <meta property="og:title" content="Estimateur loyer Val Thorens · Revenus locatifs 2025/2026 | ALPÉON">
   <meta property="og:description" content="Combien rapporte votre appartement ou chalet à Val Thorens en location courte durée ? De 18 000 € à 90 000 €/an selon votre bien. Simulation gratuite en 2 min.">
   <meta property="og:image" content="/assets/images/dest-valthorens.jpg">
   <meta property="og:type" content="website">
@@ -468,8 +468,8 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
 <!-- ── NAV ── -->
 <header class="site-header" id="site-header">
   <div class="site-header-inner">
-    <a href="/accueil/" class="site-logo" aria-label="ALPÉON — Accueil">
-      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON — Gestion locative alpine" height="64">
+    <a href="/accueil/" class="site-logo" aria-label="ALPÉON · Accueil">
+      <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON · Gestion locative alpine" height="64">
     </a>
     <nav class="site-nav" aria-label="Navigation principale">
       <a href="/accueil/" class="site-nav-link">Accueil</a>
@@ -535,8 +535,8 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
   <div class="dest-hero-overlay"></div>
   <div class="dest-hero-content">
     <div class="dest-hero-eyebrow">Val Thorens · Les 3 Vallées · Savoie</div>
-    <h1 class="dest-hero-title">Estimateur loyer Val Thorens —<br><em>combien rapporte votre bien ?</em></h1>
-    <p class="dest-hero-sub">Plus haute station d'Europe à 2 300 m — 7 mois de saison, neige garantie, domaine des 3 Vallées. Découvrez le potentiel locatif réel de votre appartement ou chalet.</p>
+    <h1 class="dest-hero-title">Estimateur loyer Val Thorens:<br><em>combien rapporte votre bien ?</em></h1>
+    <p class="dest-hero-sub">Plus haute station d'Europe à 2 300 m, 7 mois de saison, neige garantie, domaine des 3 Vallées. Découvrez le potentiel locatif réel de votre appartement ou chalet.</p>
     <div class="dest-hero-actions">
       <a href="/estimateur/val-thorens/" class="btn-primary">
         Estimer mes revenus gratuitement
@@ -561,7 +561,7 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
   <div class="dest-stat-sep"></div>
   <div class="dest-stat">
     <div class="dest-stat-val">90 k€</div>
-    <div class="dest-stat-label">Revenus max/an</div>
+    <div class="dest-stat-label">Revenus moy/an</div>
   </div>
   <div class="dest-stat-sep"></div>
   <div class="dest-stat">
@@ -2620,18 +2620,29 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
        DARK THEME OVERRIDES — station pages
     ═══════════════════════════════════════ */
     .est-wrap {
-      background: var(--ink, #0d1410);
+      background: #ffffff;
       height: auto;
       min-height: 0;
       padding: clamp(48px, 6vw, 80px) var(--pad, clamp(24px,5vw,80px));
     }
     .est-layout {
-      border-radius: 4px;
+      border-radius: 8px;
       overflow: hidden;
+      box-shadow: 0 16px 64px rgba(0,0,0,.45);
     }
     .est-main {
-      background: rgba(17,26,19,.92);
+      background: rgba(20,34,23,.95);
       border-right: 1px solid rgba(232,203,160,.15);
+      overflow-y: visible;
+      overscroll-behavior: auto;
+    }
+    .est-side {
+      overflow-y: visible;
+    }
+    #sideVal, #s6BlurredVal {
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: none;
     }
     .est-head .sec-kicker { color: var(--gold, #E8CBA0); }
     .est-head .sec-kicker::before { background: var(--gold, #E8CBA0); }
@@ -2765,7 +2776,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     <div class="est-head">
       <a class="est-station-chip" style="cursor:default">
         <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4" stroke-width="2" fill="none" stroke="currentColor"/></svg>
-        <span class="est-station-name">—</span>
+        <span class="est-station-name">Val Thorens</span>
       </a>
       <h2>3 questions pour affiner votre estimation</h2>
     </div>
@@ -2945,7 +2956,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
           </div>
           <div class="s6-locked-txt">
             <h4>Votre estimation est prête</h4>
-            <p>Calculée pour <span id="s4StationLabel">votre station</span> — plus qu'une étape.</p>
+            <p>Calculée pour <span id="s4StationLabel">votre station</span>, plus qu'une étape.</p>
           </div>
           <div class="s6-blurred-val" id="s6BlurredVal">38 400 €</div>
         </div>
@@ -2999,7 +3010,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
 <!-- ═══ SIDEBAR LIVE ═══ -->
 <div class="est-side">
   <div class="est-side-kicker">Votre projection</div>
-  <div class="est-side-val" id="sideVal">—</div>
+  <div class="est-side-val" id="sideVal"></div>
   <div class="est-side-unit">€ / an</div>
   <div class="est-side-note" id="sideNote">Complétez les étapes pour voir votre estimation.</div>
   <div class="est-side-divider"></div>
@@ -3010,7 +3021,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     </div>
     <div class="est-side-pt">
       <svg viewBox="0 0 14 14"><path d="M2 7l3.5 3.5 7-7"/></svg>
-      Données réelles — 200+ biens gérés
+      Données réelles · 200+ biens gérés
     </div>
     <div class="est-side-pt">
       <svg viewBox="0 0 14 14"><path d="M2 7l3.5 3.5 7-7"/></svg>
@@ -3021,7 +3032,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
       Visite gratuite, sans engagement
     </div>
   </div>
-  <div class="est-side-badge">ALPÉON — Alpine Property Management</div>
+  <div class="est-side-badge">ALPÉON · Alpine Property Management</div>
 </div>
 
 </div><!-- /est-layout -->
@@ -3032,19 +3043,19 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   <div class="res-inner">
     <span class="res-kicker">Votre estimation ALPÉON</span>
     <div class="res-title">Revenus estimés pour votre bien</div>
-    <div class="res-resort" id="resResort">—</div>
+    <div class="res-resort" id="resResort"></div>
     <div class="res-numbers">
       <div class="res-num-block">
         <div class="res-num-left">
           <span class="res-num-label">Revenus annuels estimés</span>
-          <div class="res-num-val" id="resYearly">—</div>
+          <div class="res-num-val" id="resYearly"></div>
           <div class="res-num-sub">nette de charges locatives</div>
         </div>
         <div class="res-num-badge">Loyer garanti</div>
       </div>
     </div>
     <div class="res-calendar" id="resCalendar" style="display:none">
-      <div class="res-cal-title">Calendrier des versements — Saison hiver</div>
+      <div class="res-cal-title">Calendrier des versements · Saison hiver</div>
       <div class="res-cal-months" id="resCalMonths"></div>
     </div>
 
@@ -3096,63 +3107,6 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
   </div>
 </section>
 
-<!-- MARCHÉ LOCATIF -->
-<section class="dest-section">
-  <div class="dest-section-inner">
-    <div class="sec-eyebrow">Marché locatif 2025/2026</div>
-    <h2 class="sec-title">Revenus locatifs à Val Thorens</h2>
-    <div class="rev-table-wrap">
-      <table class="rev-table">
-        <thead>
-          <tr>
-            <th>Type de bien</th>
-            <th>Surface</th>
-            <th>Couchages</th>
-            <th>Standing</th>
-            <th>Revenus estimés</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Appartement</td><td>40 m²</td><td>6 couchages</td>
-            <td><span class="type-badge badge-correct">Correct</span></td>
-            <td><span class="rev-amount">18 000 €</span> <span class="rev-year">/an</span></td>
-          </tr>
-          <tr>
-            <td>Appartement</td><td>70 m²</td><td>10 couchages</td>
-            <td><span class="type-badge badge-standing">Standing</span></td>
-            <td><span class="rev-amount">35 000 €</span> <span class="rev-year">/an</span></td>
-          </tr>
-          <tr>
-            <td>Appartement</td><td>100 m²</td><td>14 couchages</td>
-            <td><span class="type-badge badge-prestige">Prestige</span></td>
-            <td><span class="rev-amount">58 000 €</span> <span class="rev-year">/an</span></td>
-          </tr>
-          <tr>
-            <td>Chalet</td><td>150 m²</td><td>—</td>
-            <td><span class="type-badge badge-correct">Correct</span></td>
-            <td><span class="rev-amount">45 000 €</span> <span class="rev-year">/an</span></td>
-          </tr>
-          <tr>
-            <td>Chalet</td><td>250 m²</td><td>—</td>
-            <td><span class="type-badge badge-standing">Standing</span></td>
-            <td><span class="rev-amount">72 000 €</span> <span class="rev-year">/an</span></td>
-          </tr>
-          <tr>
-            <td>Chalet</td><td>400 m²</td><td>—</td>
-            <td><span class="type-badge badge-luxe">Luxe</span></td>
-            <td><span class="rev-amount">90 000 €</span> <span class="rev-year">/an</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="section-body">
-      <p>Val Thorens offre des conditions locatives exceptionnelles pour les propriétaires. Grâce à son altitude de 2 300 m — la plus élevée d'Europe — la station bénéficie d'un enneigement naturel garanti d'octobre à mai, soit une saison de 7 mois consécutifs. C'est la durée de saison la plus longue des Alpes françaises, et cela se traduit directement dans les revenus locatifs : les biens génèrent des loyers sur un nombre de semaines bien supérieur aux autres stations.</p>
-      <p>Le marché locatif de Val Thorens est porté par une clientèle internationale diversifiée : familles européennes, groupes sportifs scandinaves et britanniques, mais aussi clientèle française à fort pouvoir d'achat cherchant un accès privilégié aux 3 Vallées. Les semaines de Noël, Nouvel An, mi-février et Pâques voient des taux d'occupation de 95-100 % avec des loyers hebdomadaires atteignant 5 000 € à 12 000 € selon le bien.</p>
-      <p>Les biens ski-in ski-out — notamment dans les résidences haut de gamme autour du centre de Val Thorens — commandent une prime de 20 à 35 % sur les loyers par rapport aux biens nécessitant un trajet navette. La proximité des commerces, restaurants et des remontées mécaniques sont les critères de valorisation les plus importants pour les locataires à Val Thorens.</p>
-    </div>
-  </div>
-</section>
 
 <!-- ALPÉON SECTION -->
 <section class="dest-section" style="background: rgba(44,61,48,.12); border-top: 1px solid rgba(232,203,160,.07);">
@@ -3308,7 +3262,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     <div class="footer-grid">
       <div>
         <div class="footer-brand-logo">
-          <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON — Gestion locative alpine" height="110" style="height:110px;width:auto;display:block">
+          <img src="/assets/logo/logo-main-gold.svg" alt="ALPÉON · Gestion locative alpine" height="110" style="height:110px;width:auto;display:block">
         </div>
         <div class="footer-brand-claim">Alpine Property Management</div>
         <p class="footer-brand-text">Gestionnaire premium de la location saisonnière alpine. Loyer fixe garanti, conciergerie haut de gamme, transparence totale.</p>
@@ -3394,7 +3348,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
       </div>
       <div class="callpop-title">Obtenez une estimation précise</div>
       <div class="callpop-text">
-        Votre estimation est une première base solide. Un conseiller ALPÉON visite votre bien et affine la projection — gratuitement et sans engagement.
+        Votre estimation est une première base solide. Un conseiller ALPÉON visite votre bien et affine la projection, gratuitement et sans engagement.
       </div>
       <a href="https://calendar.app.google/KzXPtTdyTb9BTycq7" target="_blank" class="callpop-cta" onclick="closeCallpop()">
         Réserver un appel
@@ -3714,24 +3668,26 @@ function showToast(id, html) {
   toastTimer = setTimeout(() => el.classList.remove('visible'), 5000);
 }
 
-/* Update preview */
+/* Update preview — jamais le vrai chiffre dans le DOM avant soumission */
 function updatePreview() {
   const t = getTeaser();
-  const fmtV = v => new Intl.NumberFormat('fr-FR', { style:'currency', currency:'EUR', maximumFractionDigits:0 }).format(v);
+  /* s6BlurredVal : toujours des bullets, jamais le montant réel */
   const s6val = document.getElementById('s6BlurredVal');
-  if (s6val && t) s6val.textContent = fmtV(t);
+  if (s6val) s6val.textContent = t ? '•• ••• €' : '•• ••• €';
   const sideVal  = document.getElementById('sideVal');
   const sideNote = document.getElementById('sideNote');
   if (sideVal) {
     if (t) {
-      sideVal.textContent = fmtV(t);
-      sideVal.style.color = 'transparent';
-      sideVal.style.textShadow = '0 0 18px rgba(255,255,255,.65)';
-      if (sideNote) sideNote.textContent = 'Estimation indicative — complétez pour affiner.';
+      sideVal.textContent = '•• ••• €';
+      sideVal.style.color = 'rgba(255,255,255,.15)';
+      sideVal.style.textShadow = '0 0 22px rgba(232,203,160,.7)';
+      sideVal.style.filter = 'blur(6px)';
+      if (sideNote) sideNote.textContent = 'Complétez les étapes pour révéler votre estimation.';
     } else {
-      sideVal.textContent = '—';
+      sideVal.textContent = '';
       sideVal.style.color = '';
       sideVal.style.textShadow = '';
+      sideVal.style.filter = '';
       if (sideNote) sideNote.textContent = 'Renseignez les étapes pour voir votre projection.';
     }
   }
@@ -3816,7 +3772,7 @@ function buildLocationPicker() {
   const mults = (!isChalet && station.rm) ? station.rm : MULTS;
   if (!isChalet) {
     pillsEl.innerHTML = `<select class="loc-select" id="locationSelect">
-      <option value="" data-m="1">— Choisir une résidence —</option>
+      <option value="" data-m="1">Choisir une résidence</option>
       ${items.map((name, i) => `<option value="${name}" data-m="${mults[i] ?? 1.0}">${name}</option>`).join('')}
     </select>`;
     const sel = document.getElementById('locationSelect');
@@ -3827,9 +3783,9 @@ function buildLocationPicker() {
       S.quartierMult = S.quartier ? +opt.dataset.m : 1.0;
       updatePreview();
       if (S.quartier) {
-        const bonus = S.quartierMult >= 1.1 ? '— emplacement premium, <strong>+15%</strong> sur l\'estimation.'
-                    : S.quartierMult >= 1.0 ? '— bon emplacement, dans la moyenne.'
-                    : '— emplacement standard, estimation ajustée.';
+        const bonus = S.quartierMult >= 1.1 ? 'emplacement premium, <strong>+15%</strong> sur l\'estimation.'
+                    : S.quartierMult >= 1.0 ? 'bon emplacement, dans la moyenne.'
+                    : 'emplacement standard, estimation ajustée.';
         showToast('toast2', `<strong>${S.quartier}</strong> ${bonus}`);
       }
     });
@@ -3844,9 +3800,9 @@ function buildLocationPicker() {
         S.quartier     = pill.dataset.q;
         S.quartierMult = +pill.dataset.m;
         updatePreview();
-        const bonus = S.quartierMult >= 1.1 ? '— emplacement premium, <strong>+15%</strong> sur l\'estimation.'
-                    : S.quartierMult >= 1.0 ? '— bon emplacement, dans la moyenne.'
-                    : '— emplacement standard, estimation ajustée.';
+        const bonus = S.quartierMult >= 1.1 ? 'emplacement premium, <strong>+15%</strong> sur l\'estimation.'
+                    : S.quartierMult >= 1.0 ? 'bon emplacement, dans la moyenne.'
+                    : 'emplacement standard, estimation ajustée.';
         showToast('toast2', `<strong>${S.quartier}</strong> ${bonus}`);
       });
     });
@@ -4034,15 +3990,15 @@ function sendToZapier(r) {
     email:     emailEl  ? emailEl.value.trim()  : '',
     telephone: telEl    ? telEl.value.trim()    : '',
     station:              S.resortLabel,
-    type_bien:            S.typeBien || '—',
+    type_bien:            S.typeBien || '',
     surface_m2:           S.surface,
     capacite_personnes:   S.couchages,
-    etat:                 ETAT_FR[S.etat] || S.etat || '—',
-    quartier:             S.typeBien === 'chalet' ? (S.quartier || '—') : '—',
-    residence:            S.typeBien !== 'chalet' ? (S.quartier || '—') : '—',
-    equipements:          [...S.equipements].map(e => EQ_FR[e] || e).join(', ') || '—',
+    etat:                 ETAT_FR[S.etat] || S.etat || '',
+    quartier:             S.typeBien === 'chalet' ? (S.quartier || '') : '',
+    residence:            S.typeBien !== 'chalet' ? (S.quartier || '') : '',
+    equipements:          [...S.equipements].map(e => EQ_FR[e] || e).join(', ') || '',
     revenu_annuel_estime:  r ? r.yearly : null,
-    revenu_annuel_formate: r ? fmt(r.yearly) : '—',
+    revenu_annuel_formate: r ? fmt(r.yearly) : '',
     source:       'estimateur-station',
     page_url:     window.location.href,
     date_iso:     new Date().toISOString(),
@@ -4084,8 +4040,8 @@ function submit() {
     if (modal) modal.classList.remove('open');
     const resResort = document.getElementById('resResort');
     const resYearly = document.getElementById('resYearly');
-    if (resResort) resResort.textContent = S.resortLabel || '—';
-    if (resYearly) resYearly.textContent = r ? fmt(r.yearly) : '—';
+    if (resResort) resResort.textContent = S.resortLabel || '';
+    if (resYearly) resYearly.textContent = r ? fmt(r.yearly) : '';
     buildCalendar(r ? r.yearly : 0);
     buildResRecap();
     const resSection = document.getElementById('res-section');
@@ -4123,10 +4079,10 @@ function buildResRecap() {
   const typeBienLabels = { appartement:'Appartement', chalet:'Chalet', penthouse:'Penthouse' };
   const items = [
     { label:'Station',    val: S.resortLabel },
-    { label:'Type',       val: typeBienLabels[S.typeBien] || '—' },
+    { label:'Type',       val: typeBienLabels[S.typeBien] || '' },
     { label:'Surface',    val: S.surface + ' m²' },
     { label:'Capacité',   val: S.couchages + ' personnes' },
-    { label:'État',       val: etatLabels[S.etat] || '—' },
+    { label:'État',       val: etatLabels[S.etat] || '' },
   ];
   const resRecap = document.getElementById('resRecap');
   if (resRecap) resRecap.innerHTML = items.map(it =>
