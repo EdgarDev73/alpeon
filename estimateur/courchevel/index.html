@@ -387,7 +387,7 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
 <div class="dest-stats">
   <div class="dest-stat"><div class="dest-stat-val">1 850 m</div><div class="dest-stat-label">Altitude village haut</div></div>
   <div class="dest-stat-sep"></div>
-  <div class="dest-stat"><div class="dest-stat-val">130 k€</div><div class="dest-stat-label">Revenus max/an</div></div>
+  <div class="dest-stat"><div class="dest-stat-val">130 k€</div><div class="dest-stat-label">Revenus moy/an</div></div>
   <div class="dest-stat-sep"></div>
   <div class="dest-stat"><div class="dest-stat-val">600 km</div><div class="dest-stat-label">Les 3 Vallées</div></div>
   <div class="dest-stat-sep"></div>
@@ -2462,6 +2462,11 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     .est-side {
       overflow-y: visible;
     }
+    #sideVal, #s6BlurredVal {
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: none;
+    }
     .est-head .sec-kicker { color: var(--gold, #E8CBA0); }
     .est-head .sec-kicker::before { background: var(--gold, #E8CBA0); }
     .est-head h2 { color: #fff; }
@@ -2776,7 +2781,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
             <h4>Votre estimation est prête</h4>
             <p>Calculée pour <span id="s4StationLabel">votre station</span> — plus qu'une étape.</p>
           </div>
-          <div class="s6-blurred-val" id="s6BlurredVal">38 400 €</div>
+          <div class="s6-blurred-val" id="s6BlurredVal">•• ••• €</div>
         </div>
         <div class="contact-grid">
           <div>
@@ -3321,24 +3326,26 @@ function showToast(id, html) {
   toastTimer = setTimeout(() => el.classList.remove('visible'), 5000);
 }
 
-/* Update preview */
+/* Update preview — jamais le vrai chiffre dans le DOM avant soumission */
 function updatePreview() {
   const t = getTeaser();
-  const fmtV = v => new Intl.NumberFormat('fr-FR', { style:'currency', currency:'EUR', maximumFractionDigits:0 }).format(v);
+  /* s6BlurredVal : toujours des bullets, jamais le montant réel */
   const s6val = document.getElementById('s6BlurredVal');
-  if (s6val && t) s6val.textContent = fmtV(t);
+  if (s6val) s6val.textContent = t ? '•• ••• €' : '•• ••• €';
   const sideVal  = document.getElementById('sideVal');
   const sideNote = document.getElementById('sideNote');
   if (sideVal) {
     if (t) {
-      sideVal.textContent = fmtV(t);
-      sideVal.style.color = 'transparent';
-      sideVal.style.textShadow = '0 0 18px rgba(255,255,255,.65)';
-      if (sideNote) sideNote.textContent = 'Estimation indicative — complétez pour affiner.';
+      sideVal.textContent = '•• ••• €';
+      sideVal.style.color = 'rgba(255,255,255,.15)';
+      sideVal.style.textShadow = '0 0 22px rgba(232,203,160,.7)';
+      sideVal.style.filter = 'blur(6px)';
+      if (sideNote) sideNote.textContent = 'Complétez les étapes pour révéler votre estimation.';
     } else {
       sideVal.textContent = '—';
       sideVal.style.color = '';
       sideVal.style.textShadow = '';
+      sideVal.style.filter = '';
       if (sideNote) sideNote.textContent = 'Renseignez les étapes pour voir votre projection.';
     }
   }
