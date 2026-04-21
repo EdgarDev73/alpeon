@@ -17,9 +17,65 @@
     <loc>https://alpeon.fr/estimateur/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/estimateur/"/>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <!-- ── ESTIMATEURS PAR STATION ────────────────────── -->
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/val-thorens/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-thorens/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/courchevel/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/courchevel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/courchevel/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/megeve/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/megeve/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/meribel/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/meribel/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/tignes/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/tignes/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/val-d-isere/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-d-isere/"/>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
 
   <url>
