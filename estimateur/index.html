@@ -2636,6 +2636,7 @@ function toggleMobileMenu(){
             <span class="sp-name">Val Thorens</span>
             <span class="sp-alt">2 300 m · Savoie</span>
             <span class="sp-range">14 000 – 90 000 € / an</span>
+            <a href="/estimateur/val-thorens/" class="sp-page-link" onclick="event.stopPropagation()">En savoir plus <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
         </div>
 
@@ -2647,6 +2648,7 @@ function toggleMobileMenu(){
             <span class="sp-name">Megève</span>
             <span class="sp-alt">1 113 m · Haute-Savoie</span>
             <span class="sp-range">20 000 – 140 000 € / an</span>
+            <a href="/estimateur/megeve/" class="sp-page-link" onclick="event.stopPropagation()">En savoir plus <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
         </div>
 
@@ -2658,6 +2660,7 @@ function toggleMobileMenu(){
             <span class="sp-name">Courchevel</span>
             <span class="sp-alt">1 300 – 1 850 m · Savoie</span>
             <span class="sp-range">18 000 – 130 000 € / an</span>
+            <a href="/estimateur/courchevel/" class="sp-page-link" onclick="event.stopPropagation()">En savoir plus <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
         </div>
 
@@ -2669,6 +2672,7 @@ function toggleMobileMenu(){
             <span class="sp-name">Méribel</span>
             <span class="sp-alt">1 400 m · Savoie</span>
             <span class="sp-range">15 000 – 100 000 € / an</span>
+            <a href="/estimateur/meribel/" class="sp-page-link" onclick="event.stopPropagation()">En savoir plus <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
         </div>
 
@@ -2680,6 +2684,7 @@ function toggleMobileMenu(){
             <span class="sp-name">Tignes</span>
             <span class="sp-alt">2 100 m · Savoie</span>
             <span class="sp-range">14 000 – 90 000 € / an</span>
+            <a href="/estimateur/tignes/" class="sp-page-link" onclick="event.stopPropagation()">En savoir plus <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
         </div>
 
@@ -2691,6 +2696,7 @@ function toggleMobileMenu(){
             <span class="sp-name">Val d'Isère</span>
             <span class="sp-alt">1 850 m · Savoie</span>
             <span class="sp-range">18 000 – 120 000 € / an</span>
+            <a href="/estimateur/val-d-isere/" class="sp-page-link" onclick="event.stopPropagation()">En savoir plus <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
         </div>
 
@@ -4406,6 +4412,23 @@ function toggleMobileMenu(){
     transition: color .25s;
   }
   .sp-card:hover .sp-range { color: var(--accent); }
+  .sp-page-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    font-size: .65rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(232,203,160,.45);
+    text-decoration: none;
+    margin-top: 6px;
+    transition: color .2s;
+    position: relative;
+    z-index: 10;
+  }
+  .sp-page-link:hover { color: #E8CBA0; }
+  .sp-page-link svg { width: 9px; height: 9px; stroke: currentColor; fill: none; stroke-width: 2.2; flex-shrink: 0; }
   .sp-cta-arrow {
     position: absolute;
     top: 14px; right: 14px;
