@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
 
   // ── Lead estimateur ───────────────────────────────────────────────────────
   if (body.type === 'lead') {
+    // Zapier webhook (non-blocking)
     const ZAPIER_URL = process.env.ZAPIER_ESTIMATEUR_WEBHOOK;
     if (ZAPIER_URL) {
       fetch(ZAPIER_URL, {
@@ -16,6 +17,71 @@ module.exports = async (req, res) => {
         body: JSON.stringify(body),
       }).catch(e => console.warn('[zapier-lead]', e.message));
     }
+
+    // SMTP email notification (non-blocking — never delays the response)
+    const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS } = process.env;
+    if (EMAIL_HOST && EMAIL_USER && EMAIL_PASS) {
+      const prenom     = (body.prenom      || '').trim();
+      const nom        = (body.nom         || '').trim();
+      const email      = (body.email       || '').trim();
+      const tel        = (body.telephone   || '').trim();
+      const station    = (body.station     || '').trim();
+      const typeBien   = (body.type_bien   || '').trim();
+      const surface    = body.surface_m2         || '';
+      const couchages  = body.capacite_personnes || '';
+      const etat       = (body.etat        || '').trim();
+      const equipements= (body.equipements || '').trim();
+      const revenu     = (body.revenu_annuel_formate || '').trim();
+      const quartier   = (body.quartier || body.residence || '').trim();
+
+      const rows = [
+        ['Prénom',              prenom],
+        ['Nom',                 nom],
+        ['Email',               email ? `<a href="mailto:${email}" style="color:#2C3D30">${email}</a>` : ''],
+        ['Téléphone',           tel   ? `<a href="tel:${tel}" style="color:#2C3D30">${tel}</a>`       : ''],
+        ['Station',             station],
+        ['Type de bien',        typeBien],
+        ['Surface',             surface   ? surface + ' m²'        : ''],
+        ['Capacité',            couchages ? couchages + ' pers.'   : ''],
+        ['État',                etat],
+        quartier   ? ['Quartier / Résidence', quartier]   : null,
+        equipements? ['Équipements',          equipements]: null,
+        ['Revenus estimés / an',revenu],
+      ].filter(r => r && r[1] !== '');
+
+      const tableRows = rows.map(([label, value]) =>
+        `<tr style="border-top:1px solid #f0ece6">` +
+        `<td style="padding:10px 0;color:#6b7280;width:190px">${label}</td>` +
+        `<td style="padding:10px 0;font-weight:600;color:#2C3D30">${value}</td></tr>`
+      ).join('');
+
+      const subject = `Nouveau lead estimateur${station ? ' · ' + station : ''} — ${prenom} ${nom}`;
+      const html = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#111">
+        <div style="background:#2C3D30;padding:20px 28px">
+          <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E8CBA0">ALPÉON — Nouveau lead estimateur</p>
+        </div>
+        <div style="padding:28px">
+          <table style="width:100%;border-collapse:collapse;font-size:14px">${tableRows}</table>
+          <hr style="border:none;border-top:1px solid #eae6df;margin:24px 0">
+          <p style="font-size:11px;color:#9ca3af">Source&nbsp;: ${body.source || 'estimateur'} — ${body.page_url || ''}</p>
+        </div>
+      </div>`;
+
+      const transporter = nodemailer.createTransport({
+        host: EMAIL_HOST, port: parseInt(EMAIL_PORT || '465'),
+        secure: parseInt(EMAIL_PORT || '465') === 465,
+        auth: { user: EMAIL_USER, pass: EMAIL_PASS },
+      });
+      transporter.sendMail({
+        from:    `ALPÉON <${EMAIL_USER}>`,
+        to:      'reservations@alpeon.fr',
+        replyTo: email || undefined,
+        subject,
+        html,
+        text: `${prenom} ${nom}\n${email}${tel ? '\n' + tel : ''}\n\nStation: ${station}\nType: ${typeBien}\nSurface: ${surface} m²\nCapacité: ${couchages}\nÉtat: ${etat}\nÉquipements: ${equipements}\nRevenus estimés/an: ${revenu}`,
+      }).catch(e => console.warn('[lead] SMTP:', e.message));
+    }
+
     return res.status(200).json({ ok: true });
   }
 
