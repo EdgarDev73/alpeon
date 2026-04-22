@@ -2600,6 +2600,98 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     .est-station-chip { background: rgba(232,203,160,.08); border-color: rgba(232,203,160,.18); color: rgba(250,254,255,.65); }
     .est-station-chip:hover { background: rgba(232,203,160,.15); }
 
+  /* ════════════════════════════════════════════════════════
+     HIÉRARCHIE VISUELLE & LISIBILITÉ — améliorations UX
+  ════════════════════════════════════════════════════════ */
+
+  /* 1. Variables CSS manquantes — corrige notamment les SVG de la sidebar (étaient invisibles) */
+  .est-wrap {
+    --accent: #E8CBA0; --accent-2: #d4b078;
+    --font-sans: 'Poppins', sans-serif;
+    --stone: #f5f3ef;
+    --stone-2: rgba(232,203,160,.06);
+    --stone-3: rgba(232,203,160,.15);
+    --stone-4: rgba(232,203,160,.28);
+    --ink-2: rgba(250,254,255,.82); --ink-3: rgba(250,254,255,.52); --ink-4: rgba(250,254,255,.32);
+    --error: #ff5f5f;
+  }
+
+  /* 2. Layout légèrement plus large, sidebar plus présente */
+  .est-layout { grid-template-columns: 1fr 300px; max-width: 1100px; }
+
+  /* 3. Titre section — contexte clair, hiérarchiquement secondaire */
+  .est-head { padding-bottom: 22px; border-bottom: 1px solid rgba(232,203,160,.1); margin-bottom: 30px; }
+  .est-head h2 { font-size: clamp(1.45rem, 2vw, 2rem); font-weight: 300; letter-spacing: -.01em; line-height: 1.2; }
+
+  /* 4. Question de step — hero visuel de chaque étape */
+  .step-hd { padding-bottom: 22px; margin-bottom: 4px; }
+  .step-hd h3 { font-size: clamp(1.55rem, 2.4vw, 2.1rem); font-weight: 300; letter-spacing: -.01em; line-height: 1.2; margin-bottom: 8px; }
+  .step-hd p { font-size: .95rem; color: rgba(250,254,255,.6); }
+
+  /* 5. Labels de champ — clairs sans dominer */
+  .field-label { font-size: .7rem; letter-spacing: .13em; font-weight: 600; color: rgba(250,254,255,.72); margin-bottom: 12px; }
+
+  /* 6. Descriptions des cartes état (classe non stylée avant) */
+  .e-card-desc { font-size: .88rem; color: rgba(250,254,255,.48); margin-top: 3px; line-height: 1.45; }
+  .e-card { padding: 20px 22px; }
+  .e-card-title { font-size: 1rem; font-weight: 500; }
+
+  /* 7. Bouton Continuer — CTA primaire clairement identifiable */
+  .sn-next {
+    padding: 15px 52px; font-size: .82rem; font-weight: 700; letter-spacing: .13em;
+    min-width: 190px; box-shadow: 0 4px 20px rgba(232,203,160,.2);
+    transition: background .2s, transform .18s, box-shadow .2s;
+  }
+  .sn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,203,160,.32); }
+  .sn-next:active { transform: translateY(0); box-shadow: 0 2px 12px rgba(232,203,160,.18); }
+
+  /* 8. Step nav bar */
+  .step-nav { padding-top: 24px; margin-top: 24px; }
+  .sn-step-ind { font-size: .72rem; color: rgba(250,254,255,.5); }
+  .sn-progress { height: 2px; max-width: 100px; }
+
+  /* 9. Sidebar — l'estimation comme point focal */
+  .est-side { padding: 44px 32px 40px; background: #060a07; }
+  .est-side-kicker { font-size: .59rem; letter-spacing: .26em; margin-bottom: 22px; color: rgba(255,255,255,.42); }
+  .est-side-val {
+    font-family: 'Poppins', sans-serif; font-size: 3.5rem; font-weight: 300;
+    letter-spacing: -.02em; line-height: 1; margin-bottom: 8px;
+  }
+  .est-side-unit { font-size: .67rem; letter-spacing: .22em; color: rgba(255,255,255,.36); margin-bottom: 16px; }
+  .est-side-note { font-size: .84rem; line-height: 1.65; color: rgba(255,255,255,.46); margin-bottom: 36px; }
+  .est-side-divider { margin-bottom: 28px; }
+  .est-side-pts { gap: 16px; }
+  .est-side-pt { font-size: .85rem; color: rgba(255,255,255,.65); line-height: 1.55; gap: 12px; align-items: flex-start; }
+  /* Fix critique : SVG invisibles car --accent non défini dans ce contexte */
+  .est-side-pt svg { stroke: #E8CBA0 !important; width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; }
+  .est-side-badge { font-size: .78rem; color: rgba(255,255,255,.2); padding-top: 28px; letter-spacing: .05em; }
+
+  /* 10. S6 locked box — signal visuel clair "résultat verrouillé" */
+  .s6-locked-box { border-left: 3px solid #E8CBA0; border-radius: 6px; padding: 22px 26px; margin-bottom: 28px; }
+  .s6-locked-txt h4 { font-size: 1.05rem; font-weight: 500; margin-bottom: 4px; }
+  .s6-blurred-val { font-size: 1.75rem; }
+
+  /* 11. Mobile — strip de projection (sidebar cachée ≤960px) */
+  .est-mob-strip {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: rgba(232,203,160,.07);
+    border: 1px solid rgba(232,203,160,.13);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+  }
+  .est-mob-strip-left { display: flex; flex-direction: column; }
+  .est-mob-strip-label { font-size: .57rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(250,254,255,.4); margin-bottom: 4px; }
+  .est-mob-strip-val { font-size: 1.55rem; color: #fff; font-weight: 300; letter-spacing: -.01em; font-family: 'Poppins', sans-serif; user-select: none; pointer-events: none; filter: blur(4px); }
+  .est-mob-strip-right { display: flex; flex-direction: column; gap: 6px; text-align: right; }
+  .est-mob-strip-pt { font-size: .68rem; color: rgba(250,254,255,.4); display: flex; align-items: center; gap: 6px; justify-content: flex-end; }
+  .est-mob-strip-pt::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: rgba(232,203,160,.55); flex-shrink: 0; }
+  @media (max-width: 960px) { .est-mob-strip { display: flex; } }
+  @media (max-width: 640px) { .est-mob-strip { padding: 12px 16px; margin-bottom: 20px; } .est-mob-strip-val { font-size: 1.25rem; } .est-mob-strip-right { display: none; } }
+
 </style>
 <section class="est-wrap" id="estimateur">
 <div class="est-layout">
@@ -2613,6 +2705,19 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
         <span class="est-station-name">Tignes</span>
       </a>
       <h2>3 questions pour affiner votre estimation</h2>
+    </div>
+
+    <!-- Projection teaser mobile (sidebar masquée ≤960px) -->
+    <div class="est-mob-strip">
+      <div class="est-mob-strip-left">
+        <div class="est-mob-strip-label">Votre projection</div>
+        <div class="est-mob-strip-val">•• ••• €</div>
+      </div>
+      <div class="est-mob-strip-right">
+        <div class="est-mob-strip-pt">Loyer garanti</div>
+        <div class="est-mob-strip-pt">Données réelles</div>
+        <div class="est-mob-strip-pt">Sans engagement</div>
+      </div>
     </div>
 
     <!-- Step tracker -->
