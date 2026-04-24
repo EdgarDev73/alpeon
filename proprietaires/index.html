@@ -33,15 +33,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="icon" type="image/png" sizes="180x180" href="/assets/logo/favicon-180.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/favicon-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Propriétaires | Confier son bien | ALPÉON</title>
-  <meta name="description" content="Gestion locative premium dans les Alpes avec loyer fixe garanti. ALPÉON prend en charge votre chalet à Courchevel, Megève, Val d'Isère. Estimation gratuite en 2 min." />
+  <title>Gestion Locative Alpine Premium | Propriétaires | ALPÉON</title>
+  <meta name="description" content="ALPÉON gère, opère et valorise votre bien en location saisonnière dans les Alpes. Gestion immobilière alpine premium à Courchevel, Megève, Val d'Isère, Méribel, Tignes, Val Thorens." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://alpeon.fr/proprietaires/" />
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/proprietaires/" />
   <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/proprietaires/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Propriétaires — Loyer fixe garanti | ALPÉON" />
-  <meta name="twitter:description" content="Loyer fixe garanti chaque mois, indépendant du marché et de nos performances. Confiez votre bien alpin à ALPÉON." />
+  <meta name="twitter:title" content="Gestion Locative Alpine Premium | Propriétaires | ALPÉON" />
+  <meta name="twitter:description" content="ALPÉON gère, opère et valorise votre bien alpin en location saisonnière. Gestion immobilière premium dans les Alpes françaises." />
   <meta property="og:image" content="https://alpeon.fr/assets/images/hero-accueil.jpg" />
   <meta name="twitter:image" content="https://alpeon.fr/assets/images/hero-accueil.jpg" />
   <script type="application/ld+json">
@@ -59,10 +59,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "@type": "Service",
         "name": "Gestion locative saisonnière alpine",
         "provider": { "@type": "RealEstateAgent", "@id": "https://alpeon.fr/#organization" },
-        "description": "Service complet de gestion locative pour propriétaires de biens alpins. Loyer fixe garanti indépendant du marché, prise en charge intégrale des réservations, accueil, ménage et maintenance.",
+        "description": "Opérateur premium de gestion immobilière alpine. ALPÉON gère, opère et valorise les biens en location saisonnière dans les Alpes françaises avec rigueur et transparence.",
         "areaServed": ["Val Thorens", "Megève", "Courchevel", "Méribel", "Tignes", "Val d'Isère"],
         "serviceType": "Gestion locative saisonnière",
-        "offers": { "@type": "Offer", "description": "Loyer fixe garanti — indépendant du taux d'occupation et des conditions de marché" }
+        "offers": { "@type": "Offer", "description": "Gestion locative alpine premium — tarification dynamique, opérations complètes et reporting transparent pour les propriétaires de biens alpins" }
       }
     ]
   }
@@ -265,7 +265,122 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .sec-title em { font-style: italic; color: var(--accent); }
     .sec-desc { font-size: .95rem; color: var(--ink-3); line-height: 1.75; max-width: 560px; }
 
-    /* ── OFFRES (Résidences + Signatures) ── */
+    /* ── CE QUE VOUS OBTENEZ ── */
+    .wyg { background: var(--stone); }
+    .wyg-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .wyg-card {
+      background: #fff;
+      border-top: 3px solid var(--accent);
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .wyg-num {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--accent);
+      opacity: .4;
+      line-height: 1;
+    }
+    .wyg-title {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .wyg-desc {
+      font-size: .83rem;
+      color: var(--ink-3);
+      line-height: 1.72;
+      flex: 1;
+    }
+    @media (max-width: 1200px) { .wyg-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 1024px) { .wyg-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px)  { .wyg-grid { grid-template-columns: 1fr; } }
+
+    /* ── PROCESS DARK TIMELINE ── */
+    .process { background: var(--ink); }
+    .process .sec-kicker { color: var(--accent); }
+    .process .sec-kicker::before { background: var(--accent); }
+    .process .sec-title { color: #fff; }
+    .process .sec-title em { color: var(--accent); }
+    .process .sec-desc { color: rgba(255,255,255,.42); }
+    .process-list {
+      margin-top: 56px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .process-row {
+      display: grid;
+      grid-template-columns: 72px 1fr 2fr;
+      align-items: baseline;
+      gap: 40px;
+      padding: 36px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .process-row-num {
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--accent);
+      opacity: .35;
+      line-height: 1;
+    }
+    .process-row-title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .process-row-desc {
+      font-size: .87rem;
+      color: rgba(255,255,255,.48);
+      line-height: 1.78;
+    }
+    @media (max-width: 768px) {
+      .process-row { grid-template-columns: 48px 1fr; gap: 20px; }
+      .process-row-desc { grid-column: 2; }
+    }
+    @media (max-width: 480px) {
+      .process-row { grid-template-columns: 1fr; gap: 10px; }
+      .process-row-desc { grid-column: auto; }
+    }
+
+    /* ── LOCATIONS ── */
+    .locations { background: var(--stone-2); }
+    .locations-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    .loc-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1px solid var(--stone-3);
+      padding: 10px 20px;
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: .04em;
+    }
+    .loc-pill::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ── OFFRES (Résidences + Signatures) — kept for reference ── */
     .offres { background: var(--stone); }
     .offres-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 64px; }
     .offre-card {
@@ -667,15 +782,14 @@ function toggleMobileMenu(){
 <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <p class="hero-kicker">Pour les propriétaires</p>
-      <h1>Gestion locative premium Alpes —<br>loyer fixe garanti <em>chaque mois</em></h1>
-      <p class="hero-desc">Nous gérons votre propriété comme si c'était la nôtre — avec rigueur, discrétion et un seul objectif : vous garantir un loyer fixe chaque mois, indépendant du marché et de nos performances.</p>
+      <p class="hero-kicker">Gestion immobilière alpine</p>
+      <h1>Transformez votre bien alpin<br>en <em>actif performant</em></h1>
+      <p class="hero-desc">ALPÉON gère, opère et valorise votre propriété avec rigueur, transparence et une exécution structurée sur les meilleures stations des Alpes françaises.</p>
       <div class="hero-actions">
         <a href="/estimateur/" class="btn-primary">
-  Estimer mon bien
+  Estimer mes revenus
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
 </a>
-        <a href="#process" class="btn-ghost">Comment ça marche</a>
       </div>
     </div>
   </section>
@@ -683,66 +797,90 @@ function toggleMobileMenu(){
   <!-- STATS -->
   <div class="stats">
     <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Biens gérés</div></div>
-    <div class="stat"><div class="stat-num">15</div><div class="stat-label">Stations alpines</div></div>
-    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Propriétaires satisfaits</div></div>
-    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Loyer fixe garanti</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Destinations alpines</div></div>
+    <div class="stat"><div class="stat-num">€100M</div><div class="stat-label">Actifs sous gestion</div></div>
   </div>
 
-  <!-- OFFRES -->
-  <section class="offres" id="offres">
-    <div class="sec-kicker">Nos formules</div>
-    <h2 class="sec-title">Deux niveaux d'excellence,<br>une <em>ambition commune</em></h2>
-    <p class="sec-desc">Que votre bien soit un appartement de station ou un chalet d'exception, ALPÉON dispose d'une formule taillée pour lui.</p>
-    <div class="offres-grid">
-      <div class="offre-card offre-residences">
-        <a href="/propriete/spacious-apartment-wslopeaccess-les-belleville/68e9154d4874ca0011a3d0e8/" class="offre-prop-link">
-          Découvrir cette propriété
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <div class="offre-content">
-          <img src="/assets/logo/logo-residences-gold.svg" alt="ALPÉON Résidences" style="height:72px;width:auto;display:block;margin-bottom:20px">
-          <h3 class="offre-title">La gestion locative<br>professionnelle</h3>
-          <p class="offre-desc">Prise en charge complète de votre appartement ou chalet — réservations, accueil des locataires, ménage, maintenance et reporting mensuel.</p>
-          <a href="/estimateur/" class="offre-link">Estimer mes revenus →</a>
-        </div>
+  <!-- CE QUE VOUS OBTENEZ -->
+  <section class="wyg" id="services">
+    <div class="sec-kicker">Ce que vous obtenez</div>
+    <h2 class="sec-title">Un service complet,<br>une <em>exécution structurée</em></h2>
+    <p class="sec-desc">De la mise en marché au reporting mensuel, ALPÉON prend en charge chaque aspect de la gestion de votre bien alpin.</p>
+    <div class="wyg-grid">
+      <div class="wyg-card">
+        <div class="wyg-num">01</div>
+        <div class="wyg-title">Génération de revenus</div>
+        <p class="wyg-desc">Tarification dynamique, présence sur les plateformes premium et optimisation du taux d'occupation pour maximiser vos rendements locatifs.</p>
       </div>
-      <div class="offre-card offre-signatures">
-        <div class="offre-content">
-          <img src="/assets/logo/ALPE_ON_Logo_Champagne_1920x606.png" alt="ALPÉON Signatures" style="height:52px;width:auto;display:block;margin-bottom:20px">
-          <h3 class="offre-title">L'excellence pour<br>les biens d'exception</h3>
-          <p class="offre-desc">Pour les propriétés premium qui méritent un traitement sur-mesure — conciergerie haut de gamme, clientèle sélectionnée, prestations 5 étoiles.</p>
-          <a href="/accueil#contact" class="offre-link">Nous contacter →</a>
-        </div>
+      <div class="wyg-card">
+        <div class="wyg-num">02</div>
+        <div class="wyg-title">Gestion intégrale</div>
+        <p class="wyg-desc">Mise en marché, contrats, encaissements, comptabilité locative et gestion administrative — prise en charge complète de la chaîne opérationnelle.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-num">03</div>
+        <div class="wyg-title">Entretien du bien</div>
+        <p class="wyg-desc">Ménage professionnel, état des lieux systématique, suivi technique et maintenance préventive selon nos standards stricts.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-num">04</div>
+        <div class="wyg-title">Gestion des locataires</div>
+        <p class="wyg-desc">Sélection rigoureuse des profils, accueil sur place, assistance 7j/7 pendant le séjour et gestion de toutes les interactions locataires.</p>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-num">05</div>
+        <div class="wyg-title">Reporting propriétaire</div>
+        <p class="wyg-desc">Tableau de bord en temps réel, rapport mensuel détaillé et visibilité complète sur les réservations, les revenus et les interventions.</p>
       </div>
     </div>
   </section>
 
-  <!-- PROCESS -->
+  <!-- COMMENT ÇA FONCTIONNE -->
   <section class="process" id="process">
-    <div class="sec-kicker">Comment ça marche</div>
-    <h2 class="sec-title">De la première prise de contact<br>à vos <em>premiers revenus</em></h2>
-    <p class="sec-desc">Un accompagnement simple et transparent, de A à Z.</p>
-    <div class="process-grid">
-      <div class="process-step active-step">
-        <div class="step-num">01</div>
-        <h3 class="step-title">Estimation gratuite</h3>
-        <p class="step-desc">Utilisez notre simulateur pour connaître le montant de votre loyer garanti en 2 minutes, calculé sur les données réelles de notre portefeuille.</p>
+    <div class="sec-kicker">Comment ça fonctionne</div>
+    <h2 class="sec-title">De l'évaluation<br>à <em>la mise en œuvre</em></h2>
+    <p class="sec-desc">Un processus structuré pour transformer votre bien en actif locatif performant.</p>
+    <div class="process-list">
+      <div class="process-row">
+        <div class="process-row-num">01</div>
+        <div class="process-row-title">Évaluation du bien</div>
+        <div class="process-row-desc">Analyse de votre propriété, estimation des revenus potentiels et définition de la stratégie locative adaptée à votre bien et à vos objectifs.</div>
       </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
-        <h3 class="step-title">Visite & audit du bien</h3>
-        <p class="step-desc">Un conseiller ALPÉON se déplace pour visiter votre bien, affiner l'estimation et vous proposer la formule la plus adaptée.</p>
+      <div class="process-row">
+        <div class="process-row-num">02</div>
+        <div class="process-row-title">Mise en place & onboarding</div>
+        <div class="process-row-desc">Signature du contrat de gestion, visite technique, photographie professionnelle, création des annonces et paramétrage des outils de gestion.</div>
       </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
-        <h3 class="step-title">Mise en location</h3>
-        <p class="step-desc">Nous préparons votre bien (photographie professionnelle, annonces, tarification dynamique) et commençons à accueillir vos locataires.</p>
+      <div class="process-row">
+        <div class="process-row-num">03</div>
+        <div class="process-row-title">Mise en ligne</div>
+        <div class="process-row-desc">Diffusion sur les plateformes premium, tarification dynamique activée et premières réservations traitées par notre équipe opérationnelle.</div>
       </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <h3 class="step-title">Loyer fixe & reporting</h3>
-        <p class="step-desc">Votre loyer fixe est versé chaque mois, que votre bien soit occupé ou non. Votre tableau de bord propriétaire vous donne une visibilité complète en temps réel.</p>
+      <div class="process-row">
+        <div class="process-row-num">04</div>
+        <div class="process-row-title">Opérations</div>
+        <div class="process-row-desc">Gestion quotidienne des réservations, accueil des locataires, ménage, maintenance et suivi des équipements selon nos standards de qualité.</div>
       </div>
+      <div class="process-row">
+        <div class="process-row-num">05</div>
+        <div class="process-row-title">Reporting mensuel</div>
+        <div class="process-row-desc">Rapport détaillé envoyé chaque mois : taux d'occupation, revenus générés, interventions effectuées et projections pour la période suivante.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="locations" id="destinations">
+    <div class="sec-kicker">Nos stations</div>
+    <h2 class="sec-title">Présents dans les <em>6 meilleures stations</em><br>des Alpes françaises</h2>
+    <p class="sec-desc">Nous opérons sur les segments premium et haute demande des Alpes françaises, pour maximiser la valeur locative de votre bien quelle que soit la station.</p>
+    <div class="locations-pills">
+      <span class="loc-pill">Courchevel</span>
+      <span class="loc-pill">Megève</span>
+      <span class="loc-pill">Méribel</span>
+      <span class="loc-pill">Tignes</span>
+      <span class="loc-pill">Val d'Isère</span>
+      <span class="loc-pill">Val Thorens</span>
     </div>
   </section>
 
@@ -750,12 +888,12 @@ function toggleMobileMenu(){
   <section class="engagements" id="engagements">
     <div class="sec-kicker">Nos engagements</div>
     <h2 class="sec-title">Ce que nous vous <em>garantissons</em></h2>
-    <p class="sec-desc">Chez ALPÉON, chaque engagement est contractuel. Pas de promesses vagues — des résultats mesurables.</p>
+    <p class="sec-desc">Chez ALPÉON, chaque engagement est contractuel. Des standards élevés et des résultats mesurables pour chaque propriétaire.</p>
     <div class="eng-grid">
       <div class="eng-card">
         <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3 class="eng-title">Loyer fixe & garanti</h3>
-        <p class="eng-desc">Votre loyer est fixé contractuellement et versé chaque mois, indépendamment du taux d'occupation et des conditions du marché. Zéro aléa, zéro surprise.</p>
+        <h3 class="eng-title">Revenus optimisés</h3>
+        <p class="eng-desc">Tarification dynamique, multi-diffusion et stratégie de positionnement adaptée à chaque station pour maximiser les revenus locatifs de votre bien.</p>
       </div>
       <div class="eng-card">
         <div class="eng-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
@@ -775,7 +913,7 @@ function toggleMobileMenu(){
       <div class="eng-card">
         <div class="eng-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
         <h3 class="eng-title">Occupation maximisée</h3>
-        <p class="eng-desc">Notre algorithme de tarification dynamique maximise le taux d'occupation de votre bien — c'est nous qui portons le risque commercial, pas vous.</p>
+        <p class="eng-desc">Notre algorithme de tarification dynamique et notre présence sur les plateformes premium maximisent le taux d'occupation de votre bien tout au long de la saison.</p>
       </div>
       <div class="eng-card">
         <div class="eng-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
@@ -791,10 +929,10 @@ function toggleMobileMenu(){
 
       <div class="contact-left">
         <div class="sec-kicker">Parlons de votre bien</div>
-        <h2 class="sec-title">Un conseiller vous rappelle<br>pour <em>analyser votre situation</em></h2>
-        <p class="sec-desc">Chaque propriété est unique — et chaque propriétaire l'est tout autant. Notre équipe commerciale prend le temps de comprendre votre bien, vos objectifs et votre situation personnelle avant de vous proposer quoi que ce soit.</p>
+        <h2 class="sec-title">Un conseiller vous rappelle<br>pour <em>analyser votre projet</em></h2>
+        <p class="sec-desc">Chaque propriété alpine est unique. Notre équipe prend le temps de comprendre votre bien, son potentiel locatif et vos objectifs avant de vous proposer une stratégie adaptée.</p>
         <div class="contact-note">
-          <p>Nous ne croyons pas aux solutions génériques. Chaque entretien est une analyse sur-mesure, menée avec attention et sans engagement de votre part.</p>
+          <p>Nous ne croyons pas aux solutions génériques. Chaque entretien est une analyse personnalisée, menée avec attention et rigueur par un expert de la gestion locative alpine.</p>
         </div>
       </div>
 
