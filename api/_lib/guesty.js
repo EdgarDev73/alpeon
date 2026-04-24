@@ -212,12 +212,36 @@ async function getListingCalendar(listingId, { startDate, endDate } = {}) {
   });
 }
 
-/* ── Nightly rates ── */
+/* ── Nightly rates — via /reservations/quotes (accurate per-night pricing) ── */
 async function getNightlyRates(listingId, checkIn, checkOut) {
-  const data    = await guestyFetch('/listings', { params: { checkIn, checkOut, limit: 100 } });
-  const results = data.results || data.listings || data.data || (Array.isArray(data) ? data : []);
-  const listing = results.find(l => l._id === listingId);
-  return listing?.nightlyRates || null;
+  try {
+    const quote = await guestyFetch('/reservations/quotes', {
+      method: 'POST',
+      body: {
+        listingId,
+        checkInDateLocalized:  checkIn,
+        checkOutDateLocalized: checkOut,
+        guestsCount: 2,
+      },
+    });
+    const money  = quote?.rates?.ratePlans?.[0]?.ratePlan?.money || {};
+    const accom  = money.fareAccommodationAdjusted || money.fareAccommodation || 0;
+    const nights = Math.round((new Date(checkOut) - new Date(checkIn)) / 86_400_000);
+    if (!accom || !nights) return null;
+
+    // Build a per-night map (evenly distributed — Guesty doesn't expose nightly breakdown here)
+    const perNight = Math.round((accom / nights) * 100) / 100;
+    const map = {};
+    let cur = new Date(checkIn);
+    for (let i = 0; i < nights; i++) {
+      map[cur.toISOString().slice(0, 10)] = perNight;
+      cur = new Date(cur.getTime() + 86_400_000);
+    }
+    return map;
+  } catch (e) {
+    console.warn('[getNightlyRates] Quote failed:', e.message);
+    return null;
+  }
 }
 
 /* ── Quote ── */

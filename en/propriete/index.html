@@ -1383,7 +1383,7 @@ async function autoQuote(){
   document.getElementById('quote-result').style.display = 'block';
 
   try {
-    const r = await fetch('/api/quote', {
+    const r = await fetch('/api/quote/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ listingId: prop.id, checkIn: selectedCheckIn, checkOut: selectedCheckOut, guests: guestsCount })
@@ -1589,7 +1589,7 @@ async function initStripe(){
     }
     if(!stripeInstance) stripeInstance = Stripe(stripePublishableKey);
 
-    const intentRes = await fetch('/api/stripe-intent', {
+    const intentRes = await fetch('/api/stripe-intent/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1683,7 +1683,7 @@ async function submitPayment(){
     }
     if(paymentIntent && paymentIntent.status !== 'succeeded') throw new Error('Payment not completed — status: ' + paymentIntent.status);
 
-    const resRes = await fetch('/api/reservations', {
+    const resRes = await fetch('/api/reservations/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
