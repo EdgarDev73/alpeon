@@ -222,14 +222,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .locations-note { font-size: .85rem; color: var(--ink-4); font-style: italic; }
 
     /* PROCESS */
-    .process { background: var(--stone); }
-    .process-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; margin-top: 64px; }
-    .process-step { position: relative; padding-top: 32px; border-top: 2px solid var(--stone-3); }
-    .process-step.active-step { border-top-color: var(--accent); }
-    .step-num { font-family: var(--font-sans); font-size: 2.8rem; font-weight: 300; color: var(--stone-3); line-height: 1; margin-bottom: 20px; }
-    .process-step.active-step .step-num { color: var(--accent); opacity: .35; }
-    .step-title { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 500; color: var(--ink); margin-bottom: 12px; line-height: 1.2; }
-    .step-desc { font-size: .85rem; color: var(--ink-3); line-height: 1.7; }
+    .process { background: var(--ink); }
+    .process .sec-kicker { color: var(--accent); }
+    .process .sec-kicker::before { background: var(--accent); }
+    .process .sec-title { color: #fff; }
+    .process .sec-title em { color: var(--accent); }
+    .process .sec-desc { color: rgba(255,255,255,.45); }
+    .process-list { margin-top: 56px; border-top: 1px solid rgba(255,255,255,.08); }
+    .process-row { display: grid; grid-template-columns: 72px 1fr 2fr; align-items: baseline; gap: 40px; padding: 36px 0; border-bottom: 1px solid rgba(255,255,255,.08); transition: background .2s; }
+    .process-row:hover { background: rgba(255,255,255,.02); }
+    .process-row-num { font-family: var(--font-sans); font-size: 2.4rem; font-weight: 300; color: var(--accent); opacity: .35; line-height: 1; }
+    .process-row-title { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 500; color: #fff; line-height: 1.25; }
+    .process-row-desc { font-size: .87rem; color: rgba(255,255,255,.48); line-height: 1.78; }
 
     /* ENGAGEMENTS */
     .engagements { background: linear-gradient(160deg, #f7f5f0 0%, var(--stone-2) 100%); }
@@ -282,7 +286,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* RESPONSIVE */
     @media (max-width: 1200px) { .wyg-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 1024px) { .wyg-grid { grid-template-columns: repeat(2, 1fr); } .process-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } .footer-lower { grid-template-columns: 1fr; } }
+    @media (max-width: 1024px) { .wyg-grid { grid-template-columns: repeat(2, 1fr); } .process-row { grid-template-columns: 56px 1fr; gap: 20px; } .process-row-desc { grid-column: 2; } .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } .footer-lower { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
       :root { --nav-h: 72px; }
 
@@ -308,6 +312,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       /* Offres — single col */
       .wyg-grid { grid-template-columns: 1fr; margin-top: 40px; }
+      .process-row { grid-template-columns: 48px 1fr; gap: 16px; padding: 28px 0; }
+      .process-row-desc { grid-column: 1 / -1; padding-top: 0; }
       .offre-card { min-height: 380px; padding: 36px 1.5rem; }
 
       /* Process — single column (steps stack vertically) */
@@ -508,31 +514,31 @@ function toggleMobileMenu(){
   <div class="sec-kicker">How it works</div>
   <h2 class="sec-title">From evaluation<br>to <em>full operation</em></h2>
   <p class="sec-desc">A structured onboarding process, built for performance from day one.</p>
-  <div class="process-grid">
-    <div class="process-step active-step">
-      <div class="step-num">01</div>
-      <h3 class="step-title">Property evaluation</h3>
-      <p class="step-desc">We assess your property's positioning and revenue potential based on real market data across our portfolio.</p>
+  <div class="process-list">
+    <div class="process-row">
+      <div class="process-row-num">01</div>
+      <div class="process-row-title">Property evaluation</div>
+      <div class="process-row-desc">We assess your property's positioning and revenue potential based on real market data across our portfolio.</div>
     </div>
-    <div class="process-step">
-      <div class="step-num">02</div>
-      <h3 class="step-title">Setup & onboarding</h3>
-      <p class="step-desc">We prepare your property for the market: photography, standards audit, pricing strategy, and platform setup.</p>
+    <div class="process-row">
+      <div class="process-row-num">02</div>
+      <div class="process-row-title">Setup & onboarding</div>
+      <div class="process-row-desc">We prepare your property for the market: photography, standards audit, pricing strategy, and platform setup.</div>
     </div>
-    <div class="process-step">
-      <div class="step-num">03</div>
-      <h3 class="step-title">Go live</h3>
-      <p class="step-desc">Your property goes live across our distribution channels with optimized listings and dynamic pricing from day one.</p>
+    <div class="process-row">
+      <div class="process-row-num">03</div>
+      <div class="process-row-title">Go live</div>
+      <div class="process-row-desc">Your property goes live across our distribution channels with optimized listings and dynamic pricing from day one.</div>
     </div>
-    <div class="process-step">
-      <div class="step-num">04</div>
-      <h3 class="step-title">Operations</h3>
-      <p class="step-desc">Daily management and guest service handled end-to-end. Your property runs without requiring your involvement.</p>
+    <div class="process-row">
+      <div class="process-row-num">04</div>
+      <div class="process-row-title">Operations</div>
+      <div class="process-row-desc">Daily management and guest service handled end-to-end. Your property runs without requiring your involvement.</div>
     </div>
-    <div class="process-step">
-      <div class="step-num">05</div>
-      <h3 class="step-title">Reporting</h3>
-      <p class="step-desc">You receive clear performance insights every month. Full visibility, no surprises.</p>
+    <div class="process-row">
+      <div class="process-row-num">05</div>
+      <div class="process-row-title">Reporting</div>
+      <div class="process-row-desc">You receive clear performance insights every month. Full visibility, no surprises.</div>
     </div>
   </div>
 </section>
