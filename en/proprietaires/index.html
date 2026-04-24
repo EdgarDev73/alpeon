@@ -208,27 +208,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .sec-title em { font-style: italic; color: var(--accent); }
     .sec-desc { font-size: .95rem; color: var(--ink-3); line-height: 1.75; max-width: 560px; }
 
-    /* OFFRES */
-    .offres { background: var(--stone); }
-    .offres-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 64px; }
-    .offre-card { position: relative; overflow: hidden; min-height: 500px; display: flex; flex-direction: column; justify-content: flex-end; padding: 48px 44px; }
-    .offre-card::before { content: ''; position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .6s; }
-    .offre-card:hover::before { transform: scale(1.04); }
-    .offre-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.6) 40%, rgba(0,0,0,.1) 75%, transparent 100%); }
-    .offre-residences::before { background-image: url('/assets/images/9.jpg'); }
-    .offre-signatures::before { background-image: url('/assets/images/signature.jpg'); }
-    .offre-content { position: relative; z-index: 2; }
-    .offre-badge { display: inline-block; font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 5px 12px; margin-bottom: 16px; }
-    .offre-title { font-family: var(--font-sans); font-size: 2.2rem; font-weight: 400; color: #fff; line-height: 1.1; margin-bottom: 14px; }
-    .offre-desc { font-size: .88rem; color: rgba(255,255,255,.7); line-height: 1.65; margin-bottom: 24px; max-width: 380px; }
-    .offre-link { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
-    .offre-prop-link { position: absolute; top: 22px; right: 28px; z-index: 3; font-size: .62rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(232,203,160,.65); text-decoration: none; display: flex; align-items: center; gap: .4rem; transition: color .2s; }
-    .offre-prop-link:hover { color: var(--accent); }
-    .offre-prop-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+    /* WHAT YOU GET */
+    .what-you-get { background: var(--stone); }
+    .wyg-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-top: 64px; }
+    .wyg-card { background: #fff; border: 1px solid var(--stone-3); border-top: 3px solid var(--accent); padding: 36px 28px; }
+    .wyg-title { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 500; color: var(--ink); margin-bottom: 10px; line-height: 1.25; }
+    .wyg-desc { font-size: .84rem; color: var(--ink-3); line-height: 1.7; }
+
+    /* LOCATIONS */
+    .locations { background: var(--stone-2); }
+    .locations-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 40px 0 28px; }
+    .locations-item { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(168,149,106,.35); padding: 9px 20px; }
+    .locations-note { font-size: .85rem; color: var(--ink-4); font-style: italic; }
 
     /* PROCESS */
-    .process { background: var(--stone-2); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 64px; }
+    .process { background: var(--stone); }
+    .process-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px; margin-top: 64px; }
     .process-step { position: relative; padding-top: 32px; border-top: 2px solid var(--stone-3); }
     .process-step.active-step { border-top-color: var(--accent); }
     .step-num { font-family: var(--font-sans); font-size: 2.8rem; font-weight: 300; color: var(--stone-3); line-height: 1; margin-bottom: 20px; }
@@ -286,7 +281,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
 
     /* RESPONSIVE */
-    @media (max-width: 1024px) { .process-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } .footer-lower { grid-template-columns: 1fr; } }
+    @media (max-width: 1200px) { .wyg-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 1024px) { .wyg-grid { grid-template-columns: repeat(2, 1fr); } .process-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } .footer-lower { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
       :root { --nav-h: 72px; }
 
@@ -311,7 +307,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       section { padding: clamp(48px, 8vw, 100px) 1.5rem; }
 
       /* Offres — single col */
-      .offres-grid { grid-template-columns: 1fr; margin-top: 40px; }
+      .wyg-grid { grid-template-columns: 1fr; margin-top: 40px; }
       .offre-card { min-height: 380px; padding: 36px 1.5rem; }
 
       /* Process — single column (steps stack vertically) */
@@ -462,11 +458,10 @@ function toggleMobileMenu(){
 <section class="hero">
   <div class="hero-content">
     <p class="hero-kicker">For property owners</p>
-    <h1>Entrust your alpine property<br>to <em>passionate experts</em></h1>
-    <p class="hero-desc">We manage your property as if it were our own — with rigour, discretion and a single objective: to guarantee you a fixed rent every month, independent of the market and our performance.</p>
+    <h1>Turn your alpine property<br>into a <em>high-performing asset</em></h1>
+    <p class="hero-desc">ALPÉON manages, operates, and monetizes your property with full transparency and structured execution.</p>
     <div class="hero-actions">
       <a href="/en/estimateur/" class="btn-primary">Estimate my income</a>
-      <a href="#process" class="btn-ghost">How it works</a>
     </div>
   </div>
 </section>
@@ -479,31 +474,31 @@ function toggleMobileMenu(){
   <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Guaranteed fixed rent</div></div>
 </div>
 
-<!-- OFFRES -->
-<section class="offres" id="offres">
-  <div class="sec-kicker">Our plans</div>
-  <h2 class="sec-title">Two levels of excellence,<br>one <em>shared ambition</em></h2>
-  <p class="sec-desc">Whether your property is a resort apartment or an exceptional chalet, ALPÉON has a plan tailored for it.</p>
-  <div class="offres-grid">
-    <div class="offre-card offre-residences">
-        <a href="/en/propriete/spacious-apartment-wslopeaccess-les-belleville/68e9154d4874ca0011a3d0e8/" class="offre-prop-link">
-          View this property
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-      <div class="offre-content">
-        <img src="/assets/logo/logo-residences-gold.svg" alt="ALPÉON Résidences" style="height:72px;width:auto;display:block;margin-bottom:20px">
-        <h3 class="offre-title">Professional<br>rental management</h3>
-        <p class="offre-desc">Complete management of your apartment or chalet — reservations, guest reception, cleaning, maintenance and monthly reporting.</p>
-        <a href="/en/estimateur/" class="offre-link">Estimate my income →</a>
-      </div>
+<!-- WHAT YOU GET -->
+<section class="what-you-get" id="services">
+  <div class="sec-kicker">What you get</div>
+  <h2 class="sec-title">Everything handled,<br>nothing <em>left to chance</em></h2>
+  <p class="sec-desc">From your first contact to ongoing operations, ALPÉON covers every dimension of ski property management.</p>
+  <div class="wyg-grid">
+    <div class="wyg-card">
+      <h3 class="wyg-title">Revenue generation</h3>
+      <p class="wyg-desc">Optimized pricing and distribution strategy across all major platforms to maximize occupancy and yield.</p>
     </div>
-    <div class="offre-card offre-signatures">
-      <div class="offre-content">
-        <img src="/assets/logo/ALPE_ON_Logo_Champagne_1920x606.png" alt="ALPÉON Signatures" style="height:52px;width:auto;display:block;margin-bottom:20px">
-        <h3 class="offre-title">Excellence for<br>exceptional properties</h3>
-        <p class="offre-desc">For premium properties that deserve bespoke treatment — high-end concierge, curated clientele, 5-star services.</p>
-        <a href="/en/accueil#contact" class="offre-link">Contact us →</a>
-      </div>
+    <div class="wyg-card">
+      <h3 class="wyg-title">Full management</h3>
+      <p class="wyg-desc">End-to-end operational control of your property. We handle every aspect so you never have to.</p>
+    </div>
+    <div class="wyg-card">
+      <h3 class="wyg-title">Property care</h3>
+      <p class="wyg-desc">Maintenance, housekeeping, and ongoing supervision to keep your asset in perfect condition year-round.</p>
+    </div>
+    <div class="wyg-card">
+      <h3 class="wyg-title">Guest handling</h3>
+      <p class="wyg-desc">From booking confirmation to check-out, every guest interaction is managed with precision and care.</p>
+    </div>
+    <div class="wyg-card">
+      <h3 class="wyg-title">Owner reporting</h3>
+      <p class="wyg-desc">Clear and transparent performance tracking. One monthly report, real-time dashboard access.</p>
     </div>
   </div>
 </section>
@@ -511,28 +506,33 @@ function toggleMobileMenu(){
 <!-- PROCESS -->
 <section class="process" id="process">
   <div class="sec-kicker">How it works</div>
-  <h2 class="sec-title">From first contact<br>to your <em>first income</em></h2>
-  <p class="sec-desc">Simple and transparent support, from A to Z.</p>
+  <h2 class="sec-title">From evaluation<br>to <em>full operation</em></h2>
+  <p class="sec-desc">A structured onboarding process, built for performance from day one.</p>
   <div class="process-grid">
     <div class="process-step active-step">
       <div class="step-num">01</div>
-      <h3 class="step-title">Free estimation</h3>
-      <p class="step-desc">Use our simulator to find out the amount of your guaranteed rent in 2 minutes, calculated from real data in our portfolio.</p>
+      <h3 class="step-title">Property evaluation</h3>
+      <p class="step-desc">We assess your property's positioning and revenue potential based on real market data across our portfolio.</p>
     </div>
     <div class="process-step">
       <div class="step-num">02</div>
-      <h3 class="step-title">Property visit & audit</h3>
-      <p class="step-desc">An ALPÉON advisor visits your property to refine the estimate and propose the most suitable plan for you.</p>
+      <h3 class="step-title">Setup & onboarding</h3>
+      <p class="step-desc">We prepare your property for the market: photography, standards audit, pricing strategy, and platform setup.</p>
     </div>
     <div class="process-step">
       <div class="step-num">03</div>
-      <h3 class="step-title">Listing & launch</h3>
-      <p class="step-desc">We prepare your property (professional photography, listings, dynamic pricing) and begin welcoming your guests.</p>
+      <h3 class="step-title">Go live</h3>
+      <p class="step-desc">Your property goes live across our distribution channels with optimized listings and dynamic pricing from day one.</p>
     </div>
     <div class="process-step">
       <div class="step-num">04</div>
-      <h3 class="step-title">Fixed rent & reporting</h3>
-      <p class="step-desc">Your fixed rent is paid every month, whether your property is occupied or not. Your owner dashboard gives you complete real-time visibility.</p>
+      <h3 class="step-title">Operations</h3>
+      <p class="step-desc">Daily management and guest service handled end-to-end. Your property runs without requiring your involvement.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">05</div>
+      <h3 class="step-title">Reporting</h3>
+      <p class="step-desc">You receive clear performance insights every month. Full visibility, no surprises.</p>
     </div>
   </div>
 </section>
@@ -576,13 +576,28 @@ function toggleMobileMenu(){
   </div>
 </section>
 
+<!-- LOCATIONS -->
+<section class="locations">
+  <div class="sec-kicker">Where we operate</div>
+  <h2 class="sec-title">Six destinations<br>across the <em>French Alps</em></h2>
+  <div class="locations-list">
+    <span class="locations-item">Megève</span>
+    <span class="locations-item">Courchevel</span>
+    <span class="locations-item">Val Thorens</span>
+    <span class="locations-item">Méribel</span>
+    <span class="locations-item">Tignes</span>
+    <span class="locations-item">Val d'Isère</span>
+  </div>
+  <p class="locations-note">Focused on both premium and high-demand segments of the alpine rental market.</p>
+</section>
+
 <!-- CTA -->
 <section class="cta-section">
-  <div class="sec-kicker">Ready to start?</div>
-  <h2 class="sec-title" style="color:#fff;">Discover the potential of <em style="color:var(--accent);">your property</em></h2>
-  <p class="sec-desc">Get the amount of your guaranteed rent in 2 minutes. Free, no commitment, calculated from real data in our portfolio.</p>
+  <div class="sec-kicker">Property management</div>
+  <h2 class="sec-title" style="color:#fff;">Ready to turn your property<br>into a <em style="color:var(--accent);">performing asset?</em></h2>
+  <p class="sec-desc">Get a personalised revenue projection based on real data from our portfolio across the French Alps.</p>
   <div class="cta-actions">
-    <a href="/en/estimateur/" class="btn-white">Calculate my guaranteed rent</a>
+    <a href="/en/estimateur/" class="btn-white">Estimate my income</a>
     <a href="/en/accueil#contact" class="btn-outline-white">Speak to an advisor</a>
   </div>
 </section>
