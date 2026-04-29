@@ -2,12 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- ── PAGES PRINCIPALES FR ────────────────────────── -->
+  <!-- ══════════════════════════════════════════════
+       PAGES PRINCIPALES — FR
+  ══════════════════════════════════════════════ -->
 
   <url>
     <loc>https://alpeon.fr/accueil/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/accueil/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/accueil/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/accueil/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/accueil/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/accueil/"/>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -15,73 +18,19 @@
 
   <url>
     <loc>https://alpeon.fr/estimateur/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/estimateur/"/>
-    <lastmod>2026-04-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- ── ESTIMATEURS PAR STATION ────────────────────── -->
-
-  <url>
-    <loc>https://alpeon.fr/estimateur/val-thorens/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/val-thorens/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-thorens/"/>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://alpeon.fr/estimateur/courchevel/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/courchevel/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/courchevel/"/>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://alpeon.fr/estimateur/megeve/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/megeve/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/megeve/"/>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://alpeon.fr/estimateur/meribel/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/meribel/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/meribel/"/>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://alpeon.fr/estimateur/tignes/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/tignes/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/tignes/"/>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://alpeon.fr/estimateur/val-d-isere/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/val-d-isere/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-d-isere/"/>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
   <url>
     <loc>https://alpeon.fr/proprietaires/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/proprietaires/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/proprietaires/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/proprietaires/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/proprietaires/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/proprietaires/"/>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -89,17 +38,19 @@
 
   <url>
     <loc>https://alpeon.fr/destinations/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/"/>
-    <lastmod>2026-04-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/reserver/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/reserver/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/reserver/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/reserver/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/reserver/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/reserver/"/>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -107,36 +58,106 @@
 
   <url>
     <loc>https://alpeon.fr/faq/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/faq/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/faq/"/>
-    <lastmod>2026-04-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/faq/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/faq/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/about/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/about/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/about/"/>
-    <lastmod>2026-04-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/about/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/about/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/contact/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/contact/"/>
-    <lastmod>2026-04-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/contact/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
-  <!-- ── PAGES STATIONS FR (nouvelles — priorité 0.9) ── -->
+  <!-- ══════════════════════════════════════════════
+       ESTIMATEURS PAR STATION — FR
+  ══════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/courchevel/</loc>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/courchevel/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/courchevel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/courchevel/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/megeve/</loc>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/megeve/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/meribel/</loc>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/meribel/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/tignes/</loc>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/tignes/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/val-d-isere/</loc>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-d-isere/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/estimateur/val-thorens/</loc>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-thorens/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════════════
+       DESTINATIONS PAR STATION — FR
+  ══════════════════════════════════════════════ -->
 
   <url>
     <loc>https://alpeon.fr/destinations/courchevel/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/courchevel/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/courchevel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/courchevel/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/courchevel/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/courchevel/"/>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -145,8 +166,8 @@
 
   <url>
     <loc>https://alpeon.fr/destinations/megeve/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/megeve/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/megeve/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/megeve/"/>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -154,29 +175,9 @@
   </url>
 
   <url>
-    <loc>https://alpeon.fr/destinations/val-thorens/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/val-thorens/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/val-thorens/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-thorens/"/>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://alpeon.fr/destinations/val-d-isere/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/val-d-isere/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/val-d-isere/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-d-isere/"/>
-    <lastmod>2026-04-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
     <loc>https://alpeon.fr/destinations/meribel/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/meribel/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/meribel/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/meribel/"/>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
@@ -185,20 +186,43 @@
 
   <url>
     <loc>https://alpeon.fr/destinations/tignes/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/tignes/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/tignes/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/tignes/"/>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- ── PAGES PRINCIPALES EN ────────────────────────── -->
+  <url>
+    <loc>https://alpeon.fr/destinations/val-d-isere/</loc>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-d-isere/"/>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/destinations/val-thorens/</loc>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-thorens/"/>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════════════
+       PAGES PRINCIPALES — EN
+  ══════════════════════════════════════════════ -->
 
   <url>
     <loc>https://alpeon.fr/en/accueil/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/accueil/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/accueil/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/accueil/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/accueil/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/accueil/"/>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -206,17 +230,19 @@
 
   <url>
     <loc>https://alpeon.fr/en/estimateur/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/estimateur/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/"/>
-    <lastmod>2026-04-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/en/proprietaires/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/proprietaires/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/proprietaires/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/proprietaires/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/proprietaires/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/proprietaires/"/>
     <lastmod>2026-04-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -224,98 +250,178 @@
 
   <url>
     <loc>https://alpeon.fr/en/destinations/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/"/>
-    <lastmod>2026-04-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/en/reserver/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/reserver/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/reserver/"/>
-    <lastmod>2026-04-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/reserver/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/reserver/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/reserver/"/>
+    <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/en/faq/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/faq/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/faq/"/>
-    <lastmod>2026-04-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/faq/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/faq/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/en/about/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/about/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/about/"/>
-    <lastmod>2026-04-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/about/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- ── PAGES STATIONS EN ────────────────────────────── -->
+  <url>
+    <loc>https://alpeon.fr/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/contact/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════════════
+       ESTIMATEURS PAR STATION — EN
+  ══════════════════════════════════════════════ -->
+
+  <url>
+    <loc>https://alpeon.fr/en/estimateur/courchevel/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/courchevel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/courchevel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/courchevel/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/estimateur/megeve/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/megeve/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/estimateur/meribel/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/meribel/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/estimateur/tignes/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/tignes/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/estimateur/val-d-isere/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-d-isere/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/estimateur/val-thorens/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/estimateur/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/estimateur/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/estimateur/val-thorens/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════════════
+       DESTINATIONS PAR STATION — EN
+  ══════════════════════════════════════════════ -->
 
   <url>
     <loc>https://alpeon.fr/en/destinations/courchevel/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/courchevel/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/courchevel/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/courchevel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/courchevel/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/courchevel/"/>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/en/destinations/megeve/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/megeve/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/megeve/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/megeve/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/megeve/"/>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://alpeon.fr/en/destinations/val-thorens/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/val-thorens/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/val-thorens/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-thorens/"/>
-    <lastmod>2026-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://alpeon.fr/en/destinations/val-d-isere/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/val-d-isere/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/val-d-isere/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-d-isere/"/>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/en/destinations/meribel/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/meribel/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/meribel/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/meribel/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/meribel/"/>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://alpeon.fr/en/destinations/tignes/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alpeon.fr/en/destinations/tignes/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://alpeon.fr/destinations/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/tignes/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/tignes/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/tignes/"/>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/destinations/val-d-isere/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/val-d-isere/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-d-isere/"/>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://alpeon.fr/en/destinations/val-thorens/</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://alpeon.fr/en/destinations/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/destinations/val-thorens/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/destinations/val-thorens/"/>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

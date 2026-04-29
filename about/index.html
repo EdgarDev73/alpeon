@@ -32,8 +32,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="icon" type="image/png" sizes="180x180" href="/assets/logo/favicon-180.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo/favicon-180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>À propos | ALPÉON</title>
-  <meta name="description" content="Gestionnaire premium de locations saisonnières alpines depuis 2023. ALPÉON garantit un loyer fixe aux propriétaires à Courchevel, Megève, Val d'Isère et plus." />
+  <title>À propos — Opérateur Immobilier Alpin | ALPÉON</title>
+  <meta name="description" content="Opérateur de gestion immobilière alpine. Performance, structure et valorisation long terme. 200+ propriétés gérées dans les Alpes françaises." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://alpeon.fr/about/" />
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/about/" />
@@ -325,7 +325,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color: rgba(44,61,48,.7);
   }
 
-  /* ÉQUIPE — 2×2 */
+  /* ÉQUIPE — 3×2 */
   .team-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -341,8 +341,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-radius: 12px;
   }
   .team-avatar {
-    width: 64px;
-    height: 64px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     background: var(--stone-2);
     display: flex;
@@ -350,10 +350,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     justify-content: center;
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: var(--green);
     flex-shrink: 0;
     font-weight: 600;
+    position: relative;
+    overflow: hidden;
+  }
+  .team-avatar img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 50%;
   }
   .team-info {}
   .team-name {
@@ -588,6 +599,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   </style>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alpeon.fr/about/" />
+  <meta property="og:title" content="À propos — Opérateur Immobilier Alpin | ALPÉON" />
+  <meta property="og:description" content="Opérateur de gestion immobilière alpine. Performance, structure et valorisation long terme. 200+ propriétés gérées dans les Alpes françaises." />
+  <meta property="og:image" content="https://alpeon.fr/assets/images/hero-reserver.jpg" />
+  <meta property="og:site_name" content="ALPÉON" />
+
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -665,20 +683,22 @@ function toggleMobileMenu(){
   <div class="page-hero-overlay"></div>
   <div class="page-hero-body">
     <div class="container">
-      <h1 class="page-hero-title">Gestionnaire expert de la location alpine depuis 2023</h1>
-      <p class="page-hero-sub">L'excellence alpine depuis 2023</p>
+      <h1 class="page-hero-title">Opérateur de gestion<br>immobilière alpine</h1>
+      <p class="page-hero-sub">Performance · Structure · Valeur à long terme</p>
     </div>
   </div>
 </section>
 
-<!-- ═══ MISSION ═══ -->
+<!-- ═══ STORY ═══ -->
 <section class="section section-white">
   <div class="container">
     <div class="mission-grid">
       <div class="mission-text">
-        <h2 class="section-title">Notre mission</h2>
-        <p>ALPÉON est né d'une conviction simple — les propriétaires de biens d'exception méritent un gestionnaire à la hauteur de leur patrimoine. Depuis 2023, nous opérons dans les 6 stations alpines les plus prestigieuses de France, alliant technologie, discrétion et service hôtelier.</p>
-        <p>Chaque bien que nous gérons est traité comme un patrimoine unique. Nos équipes locales, présentes dans chaque station, assurent une qualité d'accueil et de service qui dépasse les standards de la location saisonnière classique.</p>
+        <h2 class="section-title">Notre histoire</h2>
+        <p>ALPÉON est un opérateur de gestion immobilière alpine axé sur la performance, la structure et la valorisation sur le long terme.</p>
+        <p>Nous gérons des chalets, appartements et résidences premium à travers les Alpes françaises, en traitant chaque bien comme un actif financier.</p>
+        <p>Notre approche allie une gestion rigoureuse, un positionnement stratégique et une exécution de service haut de gamme.</p>
+        <p>Nous travaillons avec des propriétaires qui attendent clarté, transparence et des résultats constants.</p>
       </div>
       <div>
         <div class="stats-grid">
@@ -687,16 +707,8 @@ function toggleMobileMenu(){
             <div class="stat-label">Stations alpines</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">120+</div>
-            <div class="stat-label">Biens gérés</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">98%</div>
-            <div class="stat-label">Taux de satisfaction</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">€12M+</div>
-            <div class="stat-label">Revenus générés</div>
+            <div class="stat-number">200+</div>
+            <div class="stat-label">Propriétés gérées</div>
           </div>
         </div>
       </div>
@@ -704,37 +716,40 @@ function toggleMobileMenu(){
   </div>
 </section>
 
-<!-- ═══ VALEURS ═══ -->
+<!-- ═══ APPROCHE ═══ -->
 <section class="section section-stone">
   <div class="container">
-    <h2 class="section-title" style="text-align:center">Nos valeurs</h2>
-    <p class="section-intro" style="margin:0 auto 0;text-align:center;">Les principes qui guident chacune de nos décisions, chaque jour, dans chaque station.</p>
+    <h2 class="section-title" style="text-align:center">Notre approche</h2>
+    <p class="section-intro" style="margin:0 auto 0;text-align:center;">Trois piliers opérationnels qui définissent notre façon de travailler, chaque jour, dans chaque station.</p>
     <div class="values-grid">
 
       <div class="value-card">
         <svg class="value-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 4L29.5 16.5L43 18.5L33.5 28L36 42L24 35.5L12 42L14.5 28L5 18.5L18.5 16.5L24 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="6" y="6" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="28" y="6" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="6" y="28" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="28" y="28" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
         </svg>
-        <h3 class="value-title">Excellence</h3>
-        <p class="value-text">Chaque bien est sélectionné, chaque séjour est orchestré avec le même niveau d'exigence qu'un palace alpin. Aucun compromis sur la qualité.</p>
+        <h3 class="value-title">Structuré</h3>
+        <p class="value-text">Des processus clairs et un contrôle opérationnel rigoureux à chaque étape — de l'onboarding au reporting mensuel. Aucune approximation.</p>
+      </div>
+
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="6,34 16,22 26,28 42,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="34,10 42,10 42,18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3 class="value-title">Orienté performance</h3>
+        <p class="value-text">Axé sur les revenus, le taux d'occupation et la valorisation long terme. Chaque décision est guidée par la donnée et orientée vers le résultat.</p>
       </div>
 
       <div class="value-card">
         <svg class="value-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M24 14v10l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M15 24l6 6 12-12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <h3 class="value-title">Transparence</h3>
-        <p class="value-text">Rapports mensuels détaillés, accès propriétaire en temps réel, aucun frais caché. Votre bien, votre vision. Nous vous donnons toutes les clés.</p>
-      </div>
-
-      <div class="value-card">
-        <svg class="value-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24 6C16 6 10 12 10 20c0 10 14 22 14 22s14-12 14-22c0-8-6-14-14-14z" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="24" cy="20" r="4" stroke="currentColor" stroke-width="1.5"/>
-        </svg>
-        <h3 class="value-title">Discrétion</h3>
-        <p class="value-text">Nous gérons vos hôtes avec tact et professionnalisme, en préservant la confidentialité de votre patrimoine. La discrétion est notre engagement.</p>
+        <h3 class="value-title">Full-service</h3>
+        <p class="value-text">De l'onboarding à la gestion quotidienne et l'accueil des voyageurs — un interlocuteur unique, une exécution complète, zéro souci pour le propriétaire.</p>
       </div>
 
     </div>
@@ -744,12 +759,14 @@ function toggleMobileMenu(){
 <!-- ═══ ÉQUIPE ═══ -->
 <section class="section section-white">
   <div class="container">
-    <h2 class="section-title">Une équipe passionnée de montagne</h2>
-    <p class="section-intro">Des professionnels de l'hospitalité alpine, unis par la même passion du service d'exception.</p>
+    <h2 class="section-title">L'équipe</h2>
+    <p class="section-intro">Une équipe structurée, dédiée à la performance opérationnelle et à la satisfaction de nos propriétaires comme de nos voyageurs.</p>
     <div class="team-grid">
 
       <div class="team-card">
-        <div class="team-avatar">H</div>
+        <div class="team-avatar">
+          <img src="/assets/team/hugo.jpg" alt="Hugo" loading="lazy">H
+        </div>
         <div class="team-info">
           <div class="team-name">Hugo</div>
           <div class="team-role">Fondateur & Directeur du développement</div>
@@ -758,7 +775,9 @@ function toggleMobileMenu(){
       </div>
 
       <div class="team-card">
-        <div class="team-avatar">E</div>
+        <div class="team-avatar">
+          <img src="/assets/team/edgar.jpg" alt="Edgar" loading="lazy">E
+        </div>
         <div class="team-info">
           <div class="team-name">Edgar</div>
           <div class="team-role">Fondateur & Directeur des opérations</div>
@@ -767,7 +786,9 @@ function toggleMobileMenu(){
       </div>
 
       <div class="team-card">
-        <div class="team-avatar">A</div>
+        <div class="team-avatar">
+          <img src="/assets/team/arslan.jpg" alt="Arslan" loading="lazy">A
+        </div>
         <div class="team-info">
           <div class="team-name">Arslan</div>
           <div class="team-role">Responsable des opérations</div>
@@ -776,11 +797,35 @@ function toggleMobileMenu(){
       </div>
 
       <div class="team-card">
-        <div class="team-avatar">J</div>
+        <div class="team-avatar">
+          <img src="/assets/team/jonah.jpg" alt="Jonah" loading="lazy">J
+        </div>
         <div class="team-info">
           <div class="team-name">Jonah</div>
           <div class="team-role">Réservations directes & Partenariats</div>
           <p class="team-bio">Jonah gère les réservations en direct et développe les partenariats stratégiques d'ALPÉON pour maximiser le taux d'occupation et diversifier les canaux de distribution.</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="/assets/team/lea.jpg" alt="Léa" loading="lazy">L
+        </div>
+        <div class="team-info">
+          <div class="team-name">Léa</div>
+          <div class="team-role">Responsable relation propriétaires</div>
+          <p class="team-bio">Léa accompagne nos propriétaires au quotidien. Elle pilote le suivi personnalisé, coordonne les demandes et assure la transparence complète du reporting mensuel.</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="/assets/team/thomas.jpg" alt="Thomas" loading="lazy">T
+        </div>
+        <div class="team-info">
+          <div class="team-name">Thomas</div>
+          <div class="team-role">Revenue & Distribution Manager</div>
+          <p class="team-bio">Thomas optimise la stratégie tarifaire et les canaux de distribution d'ALPÉON. Il maximise le taux d'occupation et les revenus de chaque propriété en temps réel.</p>
         </div>
       </div>
 
@@ -791,9 +836,9 @@ function toggleMobileMenu(){
 <!-- ═══ CTA ═══ -->
 <section class="cta-section section-green">
   <div class="container">
-    <h2 class="cta-title">Vous êtes propriétaire d'un bien d'exception ?</h2>
-    <p class="cta-sub">Confiez-nous votre patrimoine alpin et rejoignez les 120+ propriétaires qui nous font confiance.</p>
-    <a href="/proprietaires/" class="btn-gold">Découvrir nos formules</a>
+    <h2 class="cta-title">Propriétaire d'un bien alpin ?</h2>
+    <p class="cta-sub">Rejoignez les 200+ propriétaires qui nous confient la gestion et la valorisation de leur actif dans les Alpes françaises.</p>
+    <a href="/estimateur/" class="btn-gold">Soumettre mon bien</a>
   </div>
 </section>
 
