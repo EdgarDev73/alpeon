@@ -80,7 +80,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "name": "Combien peut rapporter un appartement de ski en location ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Un appartement en station de ski peut rapporter entre 15 000 € et 130 000 € par an selon la station, la surface, les finitions et l'emplacement. À Courchevel 1850, un appartement 4 pièces bien situé génère typiquement 40 000 à 65 000 €/an. À Val Thorens, station la plus haute d'Europe, un studio peut atteindre 18 000 €/saison. ALPÉON vous donne une estimation précise basée sur les données réelles de 200+ biens gérés."
+              "text": "Un appartement en station de ski peut rapporter entre 15 000 € et 200 000 € par an selon la station, la surface, les finitions et l'emplacement. À Courchevel 1850, un appartement 4 pièces bien situé génère typiquement 40 000 à 65 000 €/an. À Val Thorens, station la plus haute d'Europe, un studio peut atteindre 18 000 €/saison. ALPÉON vous donne une estimation précise basée sur les données réelles de 200+ biens gérés."
             }
           },
           {
@@ -373,6 +373,101 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
 .ck-btn-refuse:hover{background:#f3f4f6}
 .ck-btn-accept{background:#2C3D30;color:#E8CBA0;border-color:#2C3D30}
 .ck-btn-accept:hover{background:#3d5442}
+
+  /* ═══ LIGHT MODE — sections claires ═══ */
+  body { background: #faf9f7 !important; color: #1c1b19 !important; }
+  .site-header.scrolled { background: rgba(250,249,247,.97) !important; border-bottom-color: rgba(44,61,48,.12) !important; }
+  .site-header.scrolled .site-nav-link { color: #4a4843 !important; }
+  .site-header.scrolled .site-logo img { filter: none; }
+
+  /* Barre stats sous le hero */
+  .dest-stats { background: #f2efe9 !important; border-bottom: 1px solid #e5dfd4; }
+  .dest-stat-val { color: #2C3D30 !important; }
+  .dest-stat-label { color: #7a7773 !important; }
+  .dest-stat-sep { background: #d8d0c6 !important; }
+
+  /* Titres et textes des sections */
+  .sec-eyebrow { color: #a8956a !important; }
+  .sec-title { color: #1c1b19 !important; }
+  .sec-title em { color: #a8956a !important; }
+  .sec-desc, .sec-sub { color: #4a4843 !important; }
+  .why-text p, .alpeon-features li { color: #4a4843 !important; }
+  .feat-icon { background: rgba(44,61,48,.08) !important; }
+  .feat-icon svg { stroke: #2C3D30 !important; }
+
+  /* Carte ALPÉON en chiffres */
+  .alpeon-card { background: #fff !important; border: 1px solid #e5dfd4 !important; box-shadow: 0 2px 16px rgba(0,0,0,.06) !important; }
+  .alpeon-card-title { color: #1c1b19 !important; border-bottom-color: #e5dfd4 !important; }
+  .alpeon-num-val { color: #2C3D30 !important; }
+  .alpeon-num-label { color: #7a7773 !important; }
+  .alpeon-numbers { border-color: transparent !important; }
+
+  /* Tableau revenus */
+  .rev-table-wrap { border-color: #e5dfd4 !important; }
+  .rev-table th { color: #7a7773 !important; border-bottom-color: #e5dfd4 !important; background: #f2efe9 !important; }
+  .rev-table td { color: #1c1b19 !important; border-bottom-color: #f0ece6 !important; }
+  .rev-table tr:hover td { background: #f8f5f0 !important; }
+  .badge { background: #f2efe9 !important; color: #4a4843 !important; border-color: #e5dfd4 !important; }
+  .badge-standing { background: #f2efe9 !important; color: #4a4843 !important; border-color: #e5dfd4 !important; }
+  .badge-prestige { background: rgba(168,149,106,.12) !important; color: #8a7a56 !important; border-color: rgba(168,149,106,.3) !important; }
+  .badge-luxe { background: #a8956a !important; color: #fff !important; }
+
+  /* FAQ */
+  .faq-item { border-bottom-color: #e5dfd4 !important; }
+  .faq-q { color: #1c1b19 !important; }
+  .faq-q:hover { color: #2C3D30 !important; }
+  .faq-icon { border-color: rgba(44,61,48,.25) !important; }
+  .faq-icon svg { stroke: #4a4843 !important; }
+  .faq-a { color: #4a4843 !important; }
+
+  /* Autres stations */
+  .other-stations { background: #f2efe9 !important; border-top-color: #e5dfd4 !important; }
+  .os-card { background: #fff !important; border: 1px solid #e5dfd4 !important; }
+  .os-card-name { color: #1c1b19 !important; }
+  .os-card-range { color: #7a7773 !important; }
+  .os-card-link { color: #2C3D30 !important; }
+  .os-card-link svg { stroke: #2C3D30 !important; }
+
+  /* Sections contenu — fond blanc */
+  section.dest-section { background: #fff; }
+  section.dest-section + section.dest-section { background: #f8f5f0; }
+  section[style*="rgba(44,61,48"] { background: #f8f5f0 !important; }
+
+  /* CTA bas de page — garde le vert foncé pour le contraste */
+  .dest-cta { background: var(--green) !important; }
+  .dest-cta-title { color: #fff !important; }
+  .dest-cta-title em { color: var(--gold) !important; }
+  .dest-cta-sub { color: rgba(250,254,255,.7) !important; }
+
+  /* Trust bar (index) */
+  .trust-bar { background: #f2efe9 !important; }
+  .trust-item, .trust-item svg { color: #4a4843 !important; stroke: #4a4843 !important; }
+  .trust-sep { background: #d8d0c6 !important; }
+
+  /* Station cards (index) */
+  .st-card { background: #fff !important; border-color: #e5dfd4 !important; }
+  .st-card:hover { border-color: #a8956a !important; box-shadow: 0 6px 24px rgba(0,0,0,.1) !important; }
+  .st-card-name { color: #1c1b19 !important; }
+  .st-card-sub { color: #7a7773 !important; }
+  .st-card-range-label { color: #9a9390 !important; }
+  .st-card-range-val { color: #2C3D30 !important; }
+  .st-card-range-unit { color: #9a9390 !important; }
+  .st-card-link { color: #2C3D30 !important; }
+  .st-card-alt { color: #9a9390 !important; }
+
+  /* How-it-works (index) */
+  .how-step { background: #fff !important; border-color: #e5dfd4 !important; }
+  .how-step-num { color: rgba(44,61,48,.15) !important; }
+  .how-step-title { color: #1c1b19 !important; }
+  .how-step-desc { color: #4a4843 !important; }
+
+  /* Why / UVP section (index) */
+  .uvp-card, .why-card { background: #fff !important; border-color: #e5dfd4 !important; }
+  .uvp-title, .why-title-card { color: #1c1b19 !important; }
+  .uvp-desc, .why-desc { color: #4a4843 !important; }
+
+  /* Footer newsletter input (inside dark footer — keep as is) */
+
   </style>
 </head>
 <body>
@@ -506,7 +601,7 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
           <div class="st-card-range">
             <div class="st-card-range-label">Revenus estimés / an</div>
             <div>
-              <span class="st-card-range-val">20 000 – 130 000 €</span>
+              <span class="st-card-range-val">20 000 – 200 000 €</span>
               <span class="st-card-range-unit">/an</span>
             </div>
           </div>
@@ -560,7 +655,7 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
           <div class="st-card-range">
             <div class="st-card-range-label">Revenus estimés / an</div>
             <div>
-              <span class="st-card-range-val">22 000 – 140 000 €</span>
+              <span class="st-card-range-val">30 000 – 150 000 €</span>
               <span class="st-card-range-unit">/an</span>
             </div>
           </div>
@@ -769,7 +864,7 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
           Combien peut rapporter mon bien en location saisonnière alpine ?
           <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
         </button>
-        <div class="faq-a">Un bien en station alpine peut rapporter entre 15 000 € et 140 000 € par an selon la station, la surface, le standing et l'emplacement. À Courchevel 1850, un appartement 4 pièces bien situé génère typiquement 40 000 à 65 000 €/an. À Val Thorens, un studio peut atteindre 18 000 € la saison grâce à la haute altitude et à la longueur de la saison. À Megève, les grands chalets premium dépassent régulièrement 100 000 €/an. Utilisez notre estimateur pour obtenir une fourchette personnalisée.</div>
+        <div class="faq-a">Un bien en station alpine peut rapporter entre 15 000 € et 200 000 € par an selon la station, la surface, le standing et l'emplacement. À Courchevel 1850, un appartement 4 pièces bien situé génère typiquement 40 000 à 65 000 €/an. À Val Thorens, un studio peut atteindre 18 000 € la saison grâce à la haute altitude et à la longueur de la saison. À Megève, les grands chalets premium dépassent régulièrement 100 000 €/an. Utilisez notre estimateur pour obtenir une fourchette personnalisée.</div>
       </div>
 
       <div class="faq-item">

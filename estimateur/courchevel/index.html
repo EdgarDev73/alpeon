@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Estimateur loyer Courchevel · Revenus locatifs 2025/2026 | ALPÉON</title>
-  <meta name="description" content="Simulez vos revenus locatifs à Courchevel. ALPÉON estime votre potentiel entre 20 000 € et 130 000 €/an selon votre bien. Simulation gratuite en 2 min.">
+  <meta name="description" content="Simulez vos revenus locatifs à Courchevel. ALPÉON estime votre potentiel entre 20 000 € et 200 000 €/an selon votre bien. Simulation gratuite en 2 min.">
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://alpeon.fr/estimateur/courchevel/">
   <link rel="alternate" hreflang="fr" href="https://alpeon.fr/estimateur/courchevel/">
@@ -12,7 +12,7 @@
   <link rel="alternate" hreflang="en" href="https://alpeon.fr/en/estimateur/courchevel/">
   <link rel="icon" type="image/x-icon" href="/assets/logo/favicon.ico">
   <meta property="og:title" content="Estimateur loyer Courchevel · Revenus locatifs 2025/2026 | ALPÉON">
-  <meta property="og:description" content="Combien rapporte votre appartement ou chalet à Courchevel ? De 20 000 € à 130 000 €/an. Station la plus prestigieuse des Alpes. Simulation gratuite.">
+  <meta property="og:description" content="Combien rapporte votre appartement ou chalet à Courchevel ? De 20 000 € à 200 000 €/an. Station la plus prestigieuse des Alpes. Simulation gratuite.">
   <meta property="og:image" content="/assets/images/dest-courchevel.webp">
   <meta property="og:type" content="website">
 
@@ -67,7 +67,7 @@
             "name": "Quel loyer pour un chalet à Courchevel ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Les chalets à Courchevel affichent des loyers annuels parmi les plus élevés des Alpes : entre 60 000 € et 130 000 €/an selon la taille et les finitions. Un chalet de 150 m² standing génère environ 60 000 €/an, un chalet de 250 m² prestige atteint 95 000 €/an, et un chalet de 400 m² luxe dépasse régulièrement les 130 000 €/an en semaine de pointe. La clientèle UHNW (Ultra High Net Worth) de Courchevel accepte des loyers hebdomadaires sans équivalent dans les Alpes."
+              "text": "Les chalets à Courchevel affichent des loyers annuels parmi les plus élevés des Alpes : entre 60 000 € et 200 000 €/an selon la taille et les finitions. Un chalet de 150 m² standing génère environ 60 000 €/an, un chalet de 250 m² prestige atteint 95 000 €/an, et un chalet de 400 m² luxe dépasse régulièrement les 200 000 €/an en semaine de pointe. La clientèle UHNW (Ultra High Net Worth) de Courchevel accepte des loyers hebdomadaires sans équivalent dans les Alpes."
             }
           },
           {
@@ -75,7 +75,7 @@
             "name": "Courchevel 1850 ou Courchevel 1650 : quel loyer selon le village ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Courchevel se compose de quatre villages à des altitudes différentes. Courchevel 1850 (Le Belvédère) est le plus prestigieux et affiche les loyers les plus élevés : jusqu'à 130 000 €/an pour les meilleurs chalets. Courchevel 1650 (Moriond) et Courchevel 1550 offrent des biens plus accessibles avec des loyers entre 20 000 € et 65 000 €/an. Courchevel Village (anciennement 1300) constitue l'entrée de gamme de la destination. Quelle que soit l'altitude, la proximité des remontées mécaniques reste le facteur n°1 de valorisation."
+              "text": "Courchevel se compose de quatre villages à des altitudes différentes. Courchevel 1850 (Le Belvédère) est le plus prestigieux et affiche les loyers les plus élevés : jusqu'à 200 000 €/an pour les meilleurs chalets. Courchevel 1650 (Moriond) et Courchevel 1550 offrent des biens plus accessibles avec des loyers entre 20 000 € et 65 000 €/an. Courchevel Village (anciennement 1300) constitue l'entrée de gamme de la destination. Quelle que soit l'altitude, la proximité des remontées mécaniques reste le facteur n°1 de valorisation."
             }
           },
           {
@@ -302,6 +302,101 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
 .os-card:hover .os-card-link { gap: .6rem; }
 @media (max-width: 768px) { .dest-hero { min-height: 340px; } .dest-hero-actions { flex-direction: column; gap: .75rem; } .btn-primary, .btn-ghost { width: 100%; justify-content: center; } }
 @media (max-width: 600px) { .dest-stats { gap: 0; } .dest-stat { min-width: 110px; padding: 1.1rem .75rem; } .dest-stat-val { font-size: 1.5rem; } }
+
+  /* ═══ LIGHT MODE — sections claires ═══ */
+  body { background: #faf9f7 !important; color: #1c1b19 !important; }
+  .site-header.scrolled { background: rgba(250,249,247,.97) !important; border-bottom-color: rgba(44,61,48,.12) !important; }
+  .site-header.scrolled .site-nav-link { color: #4a4843 !important; }
+  .site-header.scrolled .site-logo img { filter: none; }
+
+  /* Barre stats sous le hero */
+  .dest-stats { background: #f2efe9 !important; border-bottom: 1px solid #e5dfd4; }
+  .dest-stat-val { color: #2C3D30 !important; }
+  .dest-stat-label { color: #7a7773 !important; }
+  .dest-stat-sep { background: #d8d0c6 !important; }
+
+  /* Titres et textes des sections */
+  .sec-eyebrow { color: #a8956a !important; }
+  .sec-title { color: #1c1b19 !important; }
+  .sec-title em { color: #a8956a !important; }
+  .sec-desc, .sec-sub { color: #4a4843 !important; }
+  .why-text p, .alpeon-features li { color: #4a4843 !important; }
+  .feat-icon { background: rgba(44,61,48,.08) !important; }
+  .feat-icon svg { stroke: #2C3D30 !important; }
+
+  /* Carte ALPÉON en chiffres */
+  .alpeon-card { background: #fff !important; border: 1px solid #e5dfd4 !important; box-shadow: 0 2px 16px rgba(0,0,0,.06) !important; }
+  .alpeon-card-title { color: #1c1b19 !important; border-bottom-color: #e5dfd4 !important; }
+  .alpeon-num-val { color: #2C3D30 !important; }
+  .alpeon-num-label { color: #7a7773 !important; }
+  .alpeon-numbers { border-color: transparent !important; }
+
+  /* Tableau revenus */
+  .rev-table-wrap { border-color: #e5dfd4 !important; }
+  .rev-table th { color: #7a7773 !important; border-bottom-color: #e5dfd4 !important; background: #f2efe9 !important; }
+  .rev-table td { color: #1c1b19 !important; border-bottom-color: #f0ece6 !important; }
+  .rev-table tr:hover td { background: #f8f5f0 !important; }
+  .badge { background: #f2efe9 !important; color: #4a4843 !important; border-color: #e5dfd4 !important; }
+  .badge-standing { background: #f2efe9 !important; color: #4a4843 !important; border-color: #e5dfd4 !important; }
+  .badge-prestige { background: rgba(168,149,106,.12) !important; color: #8a7a56 !important; border-color: rgba(168,149,106,.3) !important; }
+  .badge-luxe { background: #a8956a !important; color: #fff !important; }
+
+  /* FAQ */
+  .faq-item { border-bottom-color: #e5dfd4 !important; }
+  .faq-q { color: #1c1b19 !important; }
+  .faq-q:hover { color: #2C3D30 !important; }
+  .faq-icon { border-color: rgba(44,61,48,.25) !important; }
+  .faq-icon svg { stroke: #4a4843 !important; }
+  .faq-a { color: #4a4843 !important; }
+
+  /* Autres stations */
+  .other-stations { background: #f2efe9 !important; border-top-color: #e5dfd4 !important; }
+  .os-card { background: #fff !important; border: 1px solid #e5dfd4 !important; }
+  .os-card-name { color: #1c1b19 !important; }
+  .os-card-range { color: #7a7773 !important; }
+  .os-card-link { color: #2C3D30 !important; }
+  .os-card-link svg { stroke: #2C3D30 !important; }
+
+  /* Sections contenu — fond blanc */
+  section.dest-section { background: #fff; }
+  section.dest-section + section.dest-section { background: #f8f5f0; }
+  section[style*="rgba(44,61,48"] { background: #f8f5f0 !important; }
+
+  /* CTA bas de page — garde le vert foncé pour le contraste */
+  .dest-cta { background: var(--green) !important; }
+  .dest-cta-title { color: #fff !important; }
+  .dest-cta-title em { color: var(--gold) !important; }
+  .dest-cta-sub { color: rgba(250,254,255,.7) !important; }
+
+  /* Trust bar (index) */
+  .trust-bar { background: #f2efe9 !important; }
+  .trust-item, .trust-item svg { color: #4a4843 !important; stroke: #4a4843 !important; }
+  .trust-sep { background: #d8d0c6 !important; }
+
+  /* Station cards (index) */
+  .st-card { background: #fff !important; border-color: #e5dfd4 !important; }
+  .st-card:hover { border-color: #a8956a !important; box-shadow: 0 6px 24px rgba(0,0,0,.1) !important; }
+  .st-card-name { color: #1c1b19 !important; }
+  .st-card-sub { color: #7a7773 !important; }
+  .st-card-range-label { color: #9a9390 !important; }
+  .st-card-range-val { color: #2C3D30 !important; }
+  .st-card-range-unit { color: #9a9390 !important; }
+  .st-card-link { color: #2C3D30 !important; }
+  .st-card-alt { color: #9a9390 !important; }
+
+  /* How-it-works (index) */
+  .how-step { background: #fff !important; border-color: #e5dfd4 !important; }
+  .how-step-num { color: rgba(44,61,48,.15) !important; }
+  .how-step-title { color: #1c1b19 !important; }
+  .how-step-desc { color: #4a4843 !important; }
+
+  /* Why / UVP section (index) */
+  .uvp-card, .why-card { background: #fff !important; border-color: #e5dfd4 !important; }
+  .uvp-title, .why-title-card { color: #1c1b19 !important; }
+  .uvp-desc, .why-desc { color: #4a4843 !important; }
+
+  /* Footer newsletter input (inside dark footer — keep as is) */
+
   </style>
 </head>
 <body>
@@ -389,7 +484,7 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
 <div class="dest-stats">
   <div class="dest-stat"><div class="dest-stat-val">1 850 m</div><div class="dest-stat-label">Altitude village haut</div></div>
   <div class="dest-stat-sep"></div>
-  <div class="dest-stat"><div class="dest-stat-val">130 k€</div><div class="dest-stat-label">Revenus moy/an</div></div>
+  <div class="dest-stat"><div class="dest-stat-val">200 k€</div><div class="dest-stat-label">Revenus moy/an</div></div>
   <div class="dest-stat-sep"></div>
   <div class="dest-stat"><div class="dest-stat-val">600 km</div><div class="dest-stat-label">Les 3 Vallées</div></div>
   <div class="dest-stat-sep"></div>
@@ -3085,14 +3180,14 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
           Quel loyer pour un chalet à Courchevel ?
           <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         </button>
-        <div class="faq-a">Les chalets à Courchevel affichent les loyers annuels les plus élevés des Alpes françaises : entre 60 000 € et 130 000 €/an selon la taille et les finitions. En haute saison, les grands chalets luxe de Courchevel 1850 se louent entre 30 000 € et 60 000 € la semaine, avec des prestations de chef privé, spa intégré et piscine intérieure. La demande dépasse largement l'offre pour ce segment, ce qui justifie des loyers sans équivalent en France.</div>
+        <div class="faq-a">Les chalets à Courchevel affichent les loyers annuels les plus élevés des Alpes françaises : entre 60 000 € et 200 000 €/an selon la taille et les finitions. En haute saison, les grands chalets luxe de Courchevel 1850 se louent entre 30 000 € et 60 000 € la semaine, avec des prestations de chef privé, spa intégré et piscine intérieure. La demande dépasse largement l'offre pour ce segment, ce qui justifie des loyers sans équivalent en France.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
           Courchevel 1850 ou Courchevel 1650 : quel loyer selon le village ?
           <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         </button>
-        <div class="faq-a">Courchevel comprend quatre villages à altitudes différentes avec des marchés locatifs distincts. Courchevel 1850 (Le Belvédère) est le segment ultra-premium : loyers jusqu'à 130 000 €/an pour les grands chalets. Courchevel 1650 (Moriond) offre un excellent rapport qualité-loyer avec des revenus entre 30 000 € et 80 000 €/an selon le bien. Les villages 1550 et 1300 ciblent une clientèle plus régionale avec des loyers entre 15 000 € et 40 000 €/an. Quelle que soit l'altitude, la proximité des remontées mécaniques reste le facteur de valorisation numéro un.</div>
+        <div class="faq-a">Courchevel comprend quatre villages à altitudes différentes avec des marchés locatifs distincts. Courchevel 1850 (Le Belvédère) est le segment ultra-premium : loyers jusqu'à 200 000 €/an pour les grands chalets. Courchevel 1650 (Moriond) offre un excellent rapport qualité-loyer avec des revenus entre 30 000 € et 80 000 €/an selon le bien. Les villages 1550 et 1300 ciblent une clientèle plus régionale avec des loyers entre 15 000 € et 40 000 €/an. Quelle que soit l'altitude, la proximité des remontées mécaniques reste le facteur de valorisation numéro un.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
@@ -3128,7 +3223,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     <h2 class="sec-title">Autres stations alpines</h2>
     <div class="os-grid">
       <a href="/estimateur/val-thorens/" class="os-card"><div class="os-card-img"><img src="/assets/images/dest-valthorens.jpg" alt="Val Thorens" loading="lazy"></div><div class="os-card-body"><div class="os-card-name">Val Thorens</div><div class="os-card-range">18 000 – 90 000 €/an</div><span class="os-card-link">Estimer <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></a>
-      <a href="/estimateur/megeve/" class="os-card"><div class="os-card-img"><img src="/assets/images/dest-megeve.webp" alt="Megève" loading="lazy"></div><div class="os-card-body"><div class="os-card-name">Megève</div><div class="os-card-range">22 000 – 140 000 €/an</div><span class="os-card-link">Estimer <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></a>
+      <a href="/estimateur/megeve/" class="os-card"><div class="os-card-img"><img src="/assets/images/dest-megeve.webp" alt="Megève" loading="lazy"></div><div class="os-card-body"><div class="os-card-name">Megève</div><div class="os-card-range">30 000 – 150 000 €/an</div><span class="os-card-link">Estimer <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></a>
       <a href="/estimateur/meribel/" class="os-card"><div class="os-card-img"><img src="/assets/images/dest-meribel.jpg" alt="Méribel" loading="lazy"></div><div class="os-card-body"><div class="os-card-name">Méribel</div><div class="os-card-range">16 000 – 100 000 €/an</div><span class="os-card-link">Estimer <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></a>
       <a href="/estimateur/tignes/" class="os-card"><div class="os-card-img"><img src="/assets/images/dest-tignes.png" alt="Tignes" loading="lazy"></div><div class="os-card-body"><div class="os-card-name">Tignes</div><div class="os-card-range">17 000 – 90 000 €/an</div><span class="os-card-link">Estimer <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></a>
       <a href="/estimateur/val-d-isere/" class="os-card"><div class="os-card-img"><img src="/assets/images/dest-valdisere.jpg" alt="Val d'Isère" loading="lazy"></div><div class="os-card-body"><div class="os-card-name">Val d'Isère</div><div class="os-card-range">20 000 – 120 000 €/an</div><span class="os-card-link">Estimer <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></div></a>
