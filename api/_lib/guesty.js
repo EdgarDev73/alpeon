@@ -190,9 +190,41 @@ async function guestyFetch(apiPath, { method = 'GET', body, params } = {}) {
   return res.json();
 }
 
-/* ── Listings ── */
+/* ── Listings — avec pagination automatique ── */
 async function getListings({ limit = 100, checkIn, checkOut } = {}) {
-  return guestyFetch('/listings', { params: { limit, checkIn, checkOut } });
+  const PAGE_SIZE = 25; // Guesty Booking Engine plafonne à ~25 par page
+  let skip       = 0;
+  let allResults = [];
+  let meta       = {};
+
+  // Première page
+  const first = await guestyFetch('/listings', { params: { limit: PAGE_SIZE, skip: 0, checkIn, checkOut } });
+  meta = first;
+  const page1 = first.results || first.listings || first.data || (Array.isArray(first) ? first : []);
+  allResults = [...page1];
+
+  // Total déclaré par Guesty (peut être absent → on pagine jusqu'à page vide)
+  const total = first.total || first.count || first.pagination?.total || Infinity;
+  console.log(`[guesty] Page 1 → ${page1.length} listings (total déclaré: ${total === Infinity ? '?' : total})`);
+
+  // Pages suivantes
+  while (allResults.length < total && allResults.length < limit) {
+    skip += PAGE_SIZE;
+    try {
+      const page = await guestyFetch('/listings', { params: { limit: PAGE_SIZE, skip, checkIn, checkOut } });
+      const rows = page.results || page.listings || page.data || (Array.isArray(page) ? page : []);
+      if (!rows.length) break; // Guesty ne retourne rien → fin
+      allResults = [...allResults, ...rows];
+      console.log(`[guesty] Page skip=${skip} → +${rows.length} (total accumulé: ${allResults.length})`);
+    } catch (e) {
+      console.warn(`[guesty] Pagination skip=${skip} échouée:`, e.message);
+      break;
+    }
+  }
+
+  console.log(`[guesty] getListings total final: ${allResults.length}`);
+  // Retourner dans le même format que la réponse brute (normalizeListings lit .results)
+  return { ...meta, results: allResults };
 }
 
 /* ── Single listing ── */
