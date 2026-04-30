@@ -1762,6 +1762,17 @@ async function loadProperty(){
       const { properties } = await r2.json();
       property = (properties||[]).find(p => p.id === id) || null;
     }
+    // If still not found, listing may be new (outside stale CDN cache)
+    // → bypass CDN cache with bust=1 to force a fresh Guesty fetch
+    if(!property){
+      try {
+        const r3 = await fetch(`/api/properties?bust=1`);
+        if(r3.ok){
+          const { properties: freshProps } = await r3.json();
+          property = (freshProps||[]).find(p => p.id === id) || null;
+        }
+      } catch(e){ /* ignore */ }
+    }
     if(!property) throw new Error('Property not found');
     prop = property;
     renderGallery(prop);

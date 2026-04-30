@@ -1879,6 +1879,17 @@ async function loadProperty(){
       const { properties } = await r2.json();
       property = (properties||[]).find(p => p.id === id) || null;
     }
+    // Si toujours pas trouvé, le listing est peut-être nouveau (hors cache CDN stale)
+    // → bypass CDN cache avec bust=1 pour forcer un fetch Guesty frais
+    if(!property){
+      try {
+        const r3 = await fetch(`/api/properties?bust=1`);
+        if(r3.ok){
+          const { properties: freshProps } = await r3.json();
+          property = (freshProps||[]).find(p => p.id === id) || null;
+        }
+      } catch(e){ /* ignore, on affichera l'erreur en dessous */ }
+    }
     if(!property) throw new Error('Propriété introuvable');
     prop = property;
     renderGallery(prop);
