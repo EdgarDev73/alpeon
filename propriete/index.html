@@ -1229,7 +1229,7 @@ function renderDetail(p){
     </div>
 
     <h1 class="prop-title">${p.title}</h1>
-    ${(p.tags||[]).includes('Signatures') && p.nickname ? `<div class="prop-nickname">${p.nickname}</div>` : ''}
+    ${p.nickname ? `<div class="prop-nickname">${p.nickname}</div>` : ''}
 
     <div class="prop-specs">
       <div class="spec-item">
