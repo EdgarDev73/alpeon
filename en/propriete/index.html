@@ -979,16 +979,21 @@ function renderGallery(p){
 }
 
 function toggleAmen(){
-  const hidden = document.querySelectorAll('.amen-hidden');
   const btn = document.getElementById('btn-amen');
-  const isHidden = hidden.length && hidden[0].style.display === '';
-  if(isHidden || !hidden[0].classList.contains('amen-hidden')){
-    // currently visible → hide
-    hidden.forEach(el=>el.classList.add('amen-hidden'));
-    if(btn) btn.textContent = `Show all ${hidden.length} amenities`;
+  if(!btn) return;
+  // Memorise items on first call (before class is removed)
+  if(!btn._amenItems){
+    btn._amenItems = [...document.querySelectorAll('.amen-hidden')];
+  }
+  const items = btn._amenItems;
+  if(!items.length) return;
+  const isExpanded = !items[0].classList.contains('amen-hidden');
+  if(isExpanded){
+    items.forEach(el => el.classList.add('amen-hidden'));
+    btn.textContent = `Show all ${items.length} amenities`;
   } else {
-    hidden.forEach(el=>el.classList.remove('amen-hidden'));
-    if(btn) btn.textContent = 'Show less';
+    items.forEach(el => el.classList.remove('amen-hidden'));
+    btn.textContent = 'Show less';
   }
 }
 
