@@ -633,7 +633,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .prop-name {
       font-family: var(--font-serif); font-style: italic; font-size: 1.3rem; font-weight: 400;
-      color: var(--ink); line-height: 1.2; margin-bottom: .8rem;
+      color: var(--ink); line-height: 1.2; margin-bottom: .35rem;
+    }
+    .prop-nickname-card {
+      font-size: .6rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gold-d,#b8935a); background: rgba(184,147,90,.08);
+      border: 1px solid rgba(184,147,90,.2); display: inline-block;
+      padding: .18rem .5rem; border-radius: 3px; margin-bottom: .65rem;
     }
     .prop-specs {
       display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
@@ -1817,6 +1823,7 @@ let all = [], filtered = [];
       <div class="prop-body">
         <div class="prop-type">${typeLabel}</div>
         <h3 class="prop-name">${p.title}</h3>
+        ${p.nickname ? `<div class="prop-nickname-card">${p.nickname}</div>` : ''}
         <div class="prop-specs">
           <span class="prop-spec">${iGuests} ${p.guests} pers.</span>
           <div class="prop-divider"></div>
