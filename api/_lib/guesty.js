@@ -356,6 +356,7 @@ function normalizeListing(l) {
     imageLg:         transformImg(pics[0]?.original || pics[0]?.thumbnail || '', 1400),
     images:          pics.slice(0, 20).map(p => transformImg(p.original || p.thumbnail, 1400)).filter(Boolean),
     tags,
+    nickname:        l.nickname || '',
     bookingUrl:      `${ORIGIN}/en/listing/${l._id}`,
   };
 }
