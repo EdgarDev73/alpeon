@@ -296,7 +296,22 @@ function normalizeListings(raw) {
   return results.map(normalizeListing);
 }
 
+let _loggedFields = false;
 function normalizeListing(l) {
+  // Log raw field names once to identify the "internal name" field
+  if (!_loggedFields) {
+    _loggedFields = true;
+    const nameFields = Object.keys(l).filter(k =>
+      k.toLowerCase().includes('name') || k.toLowerCase().includes('title') ||
+      k.toLowerCase().includes('nick') || k.toLowerCase().includes('label') ||
+      k.toLowerCase().includes('intern') || k.toLowerCase().includes('alias')
+    );
+    console.log('[guesty] Raw name-like fields:', JSON.stringify(nameFields));
+    console.log('[guesty] Sample values:', JSON.stringify(
+      nameFields.reduce((o, k) => { o[k] = l[k]; return o; }, {})
+    ));
+  }
+
   const addr    = l.address  || {};
   const price   = l.prices   || {};
   const pics    = l.pictures || [];
