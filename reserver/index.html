@@ -633,13 +633,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .prop-name {
       font-family: var(--font-serif); font-style: italic; font-size: 1.3rem; font-weight: 400;
-      color: var(--ink); line-height: 1.2; margin-bottom: .35rem;
+      color: var(--ink); line-height: 1.2; margin-bottom: .3rem;
     }
     .prop-nickname-card {
-      font-size: .6rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--gold-d,#b8935a); background: rgba(184,147,90,.08);
-      border: 1px solid rgba(184,147,90,.2); display: inline-block;
-      padding: .18rem .5rem; border-radius: 3px; margin-bottom: .65rem;
+      font-size: .78rem; font-weight: 600; letter-spacing: .05em;
+      color: var(--gold-d,#9a7840); display: block; margin-bottom: .6rem;
     }
     .prop-specs {
       display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
@@ -1911,7 +1909,7 @@ function render(list, filtersActive){
 async function load(){
   document.getElementById('property-grid').innerHTML = skel(6);
   try{
-    const r = await fetch('/api/properties');
+    const r = await fetch('/api/properties?bust=1');
     if(!r.ok) throw new Error('Erreur ' + r.status);
     const {properties} = await r.json();
     all = properties.sort((a,b) => {
