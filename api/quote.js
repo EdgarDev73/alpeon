@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { listingId, checkIn, checkOut } = req.body || {};
+  const { listingId, checkIn, checkOut, guests, priceFromHint } = req.body || {};
   if (!listingId || !checkIn || !checkOut) {
     return res.status(400).json({ error: 'Missing listingId, checkIn or checkOut' });
   }
@@ -55,12 +55,23 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Fallback: basePrice × nights × factor
+    // Fallback: basePrice × nights × factor (ou weeklyRate/7, ou priceFromHint)
     console.warn('[quote] nightlyRates not available — using basePrice fallback');
-    const basePrice     = prices.basePrice || 0;
     const weeklyFactor  = prices.weeklyPriceFactor  || 1;
     const monthlyFactor = prices.monthlyPriceFactor || 1;
     const factor        = nights >= 28 ? monthlyFactor : nights >= 7 ? weeklyFactor : 1;
+
+    // Chercher le prix de base dans tous les champs disponibles
+    const basePrice = prices.basePrice
+      || (prices.weeklyRate ? Math.round(prices.weeklyRate / 7 * 100) / 100 : 0)
+      || (prices.monthlyRate ? Math.round(prices.monthlyRate / 30 * 100) / 100 : 0)
+      || Number(priceFromHint) || 0;
+
+    if (!basePrice) {
+      console.warn('[quote] No base price found anywhere — returning 503');
+      return res.status(503).json({ error: 'Pricing temporarily unavailable. Please contact us.' });
+    }
+
     const accommodation = Math.round(basePrice * nights * factor * 100) / 100;
     const subtotal      = Math.round((accommodation + cleaningFee) * 100) / 100;
     const taxAmount     = Math.round(subtotal * TAX_RATE * 100) / 100;

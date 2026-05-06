@@ -1429,7 +1429,7 @@ async function autoQuote(){
     const r = await fetch('/api/quote/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ listingId: prop.id, checkIn: selectedCheckIn, checkOut: selectedCheckOut, guests: guestsCount })
+      body: JSON.stringify({ listingId: prop.id, checkIn: selectedCheckIn, checkOut: selectedCheckOut, guests: guestsCount, priceFromHint: prop.priceFrom || 0 })
     });
     const data = await r.json();
     if(r.ok && data.totalPrice > 0){
@@ -1453,8 +1453,18 @@ async function autoQuote(){
     throw new Error(data.error || 'No price returned');
   } catch(e){
     console.warn('[quote]', e.message);
-    document.getElementById('quote-total').textContent = 'Price unavailable for these dates';
-    document.getElementById('quote-breakdown').textContent = '';
+    // Fallback frontend : estimation via priceFrom × nuits
+    if(prop?.priceFrom && nights > 0){
+      const est = Math.round(prop.priceFrom * nights * 1.05);
+      document.getElementById('quote-total').innerHTML =
+        `<span style="font-size:.7rem;color:#6b7280;font-family:var(--font-sans);letter-spacing:.06em;text-transform:uppercase">Estimated total</span><br>
+         <strong style="font-family:var(--font-serif);font-size:1.45rem;font-weight:400">~${est.toLocaleString('en-GB')} €</strong>`;
+      document.getElementById('quote-breakdown').innerHTML =
+        `Based on ${prop.priceFrom.toLocaleString('en-GB')} €/night · <em style="color:#9ca3af">Contact us to confirm availability</em>`;
+    } else {
+      document.getElementById('quote-total').textContent = 'Contact us for pricing';
+      document.getElementById('quote-breakdown').innerHTML = '<em style="color:#9ca3af">Dates may have special conditions</em>';
+    }
   }
 }
 

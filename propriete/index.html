@@ -1534,7 +1534,7 @@ async function autoQuote(){
     const r = await fetch('/api/quote/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ listingId: prop.id, checkIn: selectedCheckIn, checkOut: selectedCheckOut, guests: guestsCount })
+      body: JSON.stringify({ listingId: prop.id, checkIn: selectedCheckIn, checkOut: selectedCheckOut, guests: guestsCount, priceFromHint: prop.priceFrom || 0 })
     });
     const data = await r.json();
     if(r.ok && data.totalPrice > 0){
@@ -1552,15 +1552,24 @@ async function autoQuote(){
         fallback: data.fallback || false,
       };
       showQuoteResult();
-      // Also update per-night prices on calendar
       if(Object.keys(nightlyRates).length > 0) renderCal();
       return;
     }
     throw new Error(data.error || 'Aucun prix retourné');
   } catch(e){
     console.warn('[quote]', e.message);
-    document.getElementById('quote-total').textContent = 'Prix non disponible pour ces dates';
-    document.getElementById('quote-breakdown').textContent = '';
+    // Fallback frontend : estimation via priceFrom × nuits
+    if(prop?.priceFrom && nights > 0){
+      const est = Math.round(prop.priceFrom * nights * 1.05);
+      document.getElementById('quote-total').innerHTML =
+        `<span style="font-size:.7rem;color:#6b7280;font-family:var(--font-sans);letter-spacing:.06em;text-transform:uppercase">Total estimé</span><br>
+         <strong style="font-family:var(--font-serif);font-size:1.45rem;font-weight:400">~${est.toLocaleString('fr-FR')} €</strong>`;
+      document.getElementById('quote-breakdown').innerHTML =
+        `Basé sur ${prop.priceFrom.toLocaleString('fr-FR')} €/nuit · <em style="color:#9ca3af">Contactez-nous pour confirmer la disponibilité</em>`;
+    } else {
+      document.getElementById('quote-total').textContent = 'Nous contacter pour le tarif';
+      document.getElementById('quote-breakdown').innerHTML = '<em style="color:#9ca3af">Ces dates peuvent avoir des conditions particulières</em>';
+    }
   }
 }
 
