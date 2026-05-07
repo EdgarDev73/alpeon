@@ -463,10 +463,10 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
   .dest-stat-val { font-size: 1.5rem; }
 }
 
-    /* ═══ LIGHT MODE — fond blanc, textes sombres ═══ */
+      /* ═══ LIGHT MODE — fond blanc, textes sombres ═══ */
 
   /* ── Base ── */
-  body { background: #F2EFE9 !important; color: #1c1b19 !important; }
+  body { background: #faf9f7 !important; color: #1c1b19 !important; }
 
   /* ── Header (non scrollé : transparent sur fond blanc) ── */
   .site-nav-link { color: #2d2c2a !important; }
@@ -526,10 +526,11 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
   .st-card-alt { color: #9a9390 !important; }
 
   /* ── How-it-works ── */
-  .how-step { background: #fff !important; border-color: #e5dfd4 !important; }
-  .how-step-num { color: rgba(44,61,48,.15) !important; }
+  .how-step { background: #fff !important; border: 1px solid #e5dfd4 !important; border-radius: 14px !important; padding: 2rem 1.75rem !important; box-shadow: 0 2px 16px rgba(0,0,0,.06) !important; }
+  .how-step-num { color: var(--gold) !important; border-color: rgba(168,149,106,.35) !important; }
   .how-step-title, .how-step h3 { color: #1c1b19 !important; }
   .how-step-desc, .how-step p { color: #4a4843 !important; }
+  .how-step:not(:last-child)::after { border-top-color: rgba(168,149,106,.2) !important; }
 
   /* ── ALPÉON features ── */
   .feat-icon { background: rgba(44,61,48,.08) !important; }
@@ -591,22 +592,10 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
   .os-card-link svg { stroke: #2C3D30 !important; }
 
   /* ── Sections ── */
-  section.dest-section { background: #F2EFE9; }
-  section.dest-section + section.dest-section { background: #eae5dd; }
+  section.dest-section { background: #fff; }
+  section.dest-section + section.dest-section { background: #f8f5f0; }
   section[style*="rgba(44,61,48"] { background: #f8f5f0 !important; }
-  .stations, .how, .why, .faq-section, .alpeon-section { background: #F2EFE9 !important; }
-
-
-  /* ── Sections avec fond vert semi-transparent (non overridées) ── */
-  .why-card { background: #fff !important; border: 1px solid #e5dfd4 !important; }
-  .why-card-title { color: #a8956a !important; }
-  .why-divider { background: #e5dfd4 !important; }
-  .how { background: #e8e2d8 !important; border-top-color: #e5dfd4 !important; }
-  .est-cta { background: var(--green) !important; }
-  .est-cta h2 { color: #fff !important; }
-  .est-cta h2 em { color: var(--gold) !important; }
-  .est-cta-eyebrow { color: rgba(232,203,160,.7) !important; }
-  .est-cta p { color: rgba(250,254,255,.7) !important; }
+  .stations, .why, .faq-section, .alpeon-section { background: #faf9f7 !important; }
 
   /* ── CTA bas de page ── */
   .dest-cta { background: var(--green) !important; }
@@ -621,6 +610,7 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
   .nl-note { color: #9a9390 !important; }
 
   </style>
+
 
   <style>
   /* ── Header lang dropdown (mobile globe) ── */
