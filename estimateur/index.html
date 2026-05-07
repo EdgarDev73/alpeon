@@ -376,6 +376,14 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
 
   /* ═══ LIGHT MODE — sections claires ═══ */
   body { background: #faf9f7 !important; color: #1c1b19 !important; }
+
+  /* Hero garde son fond sombre (pas de background propre — dépend du body) */
+  .est-hero { background: var(--ink) !important; }
+  .est-hero h1 { color: #fff !important; }
+  .est-hero h1 em { color: var(--gold) !important; }
+  .est-hero-eyebrow { color: var(--gold) !important; opacity: .85; }
+  .est-hero-sub { color: rgba(250,254,255,.6) !important; }
+  .est-hero-scroll { color: rgba(232,203,160,.5) !important; }
   .site-header.scrolled { background: rgba(250,249,247,.97) !important; border-bottom-color: rgba(44,61,48,.12) !important; }
   .site-header.scrolled .site-nav-link { color: #4a4843 !important; }
   .site-header.scrolled .site-logo img { filter: none; }
