@@ -303,20 +303,29 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
 @media (max-width: 768px) { .dest-hero { min-height: 340px; } .dest-hero-actions { flex-direction: column; gap: .75rem; } .btn-primary, .btn-ghost { width: 100%; justify-content: center; } }
 @media (max-width: 600px) { .dest-stats { gap: 0; } .dest-stat { min-width: 110px; padding: 1.1rem .75rem; } .dest-stat-val { font-size: 1.5rem; } }
 
-      /* ═══ LIGHT MODE — fond blanc, textes sombres ═══ */
+        /* ═══ LIGHT MODE — fond blanc, textes sombres ═══ */
 
   /* ── Base ── */
   body { background: #faf9f7 !important; color: #1c1b19 !important; }
 
-  /* ── Header (non scrollé : transparent sur fond blanc) ── */
-  .site-nav-link { color: #2d2c2a !important; }
-  .site-nav-link:hover { color: #2C3D30 !important; }
-  .site-nav-lang, .site-nav-lang a { color: #7a7773 !important; }
-  .site-lang, .site-lang a { color: #7a7773 !important; }
-  .site-lang a.active { color: #C9A97A !important; }
-  .site-burger span { background: rgba(28,27,25,.8) !important; }
+  /* ── Header — même fond que la hero (var(--ink)) ── */
+  .site-header { background: var(--ink) !important; }
+  .site-nav-link { color: rgba(250,254,255,.75) !important; }
+  .site-nav-link:hover { color: #fff !important; }
+  .site-nav-lang, .site-nav-lang a { color: rgba(250,254,255,.45) !important; }
+  .site-lang, .site-lang a { color: rgba(250,254,255,.45) !important; }
+  .site-lang a.active { color: var(--gold) !important; }
+  .site-burger span { background: rgba(250,254,255,.8) !important; }
+  /* scrolled : fond beige, liens foncés */
   .site-header.scrolled { background: rgba(250,249,247,.97) !important; border-bottom-color: rgba(44,61,48,.12) !important; }
   .site-header.scrolled .site-nav-link { color: #2d2c2a !important; }
+  .site-header.scrolled .site-nav-link:hover { color: #2C3D30 !important; }
+  .site-header.scrolled .site-nav-lang,
+  .site-header.scrolled .site-nav-lang a { color: #7a7773 !important; }
+  .site-header.scrolled .site-lang,
+  .site-header.scrolled .site-lang a { color: #7a7773 !important; }
+  .site-header.scrolled .site-lang a.active { color: #C9A97A !important; }
+  .site-header.scrolled .site-burger span { background: rgba(28,27,25,.8) !important; }
 
   /* ── Hero (garde le fond sombre pour le contraste — index uniquement) ── */
   .est-hero { background: var(--ink) !important; }
@@ -450,6 +459,7 @@ footer .container { padding-inline: clamp(24px,5vw,80px); }
   .nl-note { color: #9a9390 !important; }
 
   </style>
+
 
 
   <style>
