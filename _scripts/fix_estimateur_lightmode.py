@@ -18,15 +18,24 @@ NEW_LIGHT_BLOCK = """  /* ═══ LIGHT MODE — fond blanc, textes sombres �
   /* ── Base ── */
   body { background: #faf9f7 !important; color: #1c1b19 !important; }
 
-  /* ── Header (non scrollé : transparent sur fond blanc) ── */
-  .site-nav-link { color: #2d2c2a !important; }
-  .site-nav-link:hover { color: #2C3D30 !important; }
-  .site-nav-lang, .site-nav-lang a { color: #7a7773 !important; }
-  .site-lang, .site-lang a { color: #7a7773 !important; }
-  .site-lang a.active { color: #C9A97A !important; }
-  .site-burger span { background: rgba(28,27,25,.8) !important; }
+  /* ── Header — même fond que la hero (var(--ink)) ── */
+  .site-header { background: var(--ink) !important; }
+  .site-nav-link { color: rgba(250,254,255,.75) !important; }
+  .site-nav-link:hover { color: #fff !important; }
+  .site-nav-lang, .site-nav-lang a { color: rgba(250,254,255,.45) !important; }
+  .site-lang, .site-lang a { color: rgba(250,254,255,.45) !important; }
+  .site-lang a.active { color: var(--gold) !important; }
+  .site-burger span { background: rgba(250,254,255,.8) !important; }
+  /* scrolled : fond beige, liens foncés */
   .site-header.scrolled { background: rgba(250,249,247,.97) !important; border-bottom-color: rgba(44,61,48,.12) !important; }
   .site-header.scrolled .site-nav-link { color: #2d2c2a !important; }
+  .site-header.scrolled .site-nav-link:hover { color: #2C3D30 !important; }
+  .site-header.scrolled .site-nav-lang,
+  .site-header.scrolled .site-nav-lang a { color: #7a7773 !important; }
+  .site-header.scrolled .site-lang,
+  .site-header.scrolled .site-lang a { color: #7a7773 !important; }
+  .site-header.scrolled .site-lang a.active { color: #C9A97A !important; }
+  .site-header.scrolled .site-burger span { background: rgba(28,27,25,.8) !important; }
 
   /* ── Hero (garde le fond sombre pour le contraste — index uniquement) ── */
   .est-hero { background: var(--ink) !important; }
@@ -76,10 +85,11 @@ NEW_LIGHT_BLOCK = """  /* ═══ LIGHT MODE — fond blanc, textes sombres �
   .st-card-alt { color: #9a9390 !important; }
 
   /* ── How-it-works ── */
-  .how-step { background: #fff !important; border-color: #e5dfd4 !important; }
-  .how-step-num { color: rgba(44,61,48,.15) !important; }
+  .how-step { background: #fff !important; border: 1px solid #e5dfd4 !important; border-radius: 14px !important; padding: 2rem 1.75rem !important; box-shadow: 0 2px 16px rgba(0,0,0,.06) !important; }
+  .how-step-num { color: var(--gold) !important; border-color: rgba(168,149,106,.35) !important; }
   .how-step-title, .how-step h3 { color: #1c1b19 !important; }
   .how-step-desc, .how-step p { color: #4a4843 !important; }
+  .how-step:not(:last-child)::after { border-top-color: rgba(168,149,106,.2) !important; }
 
   /* ── ALPÉON features ── */
   .feat-icon { background: rgba(44,61,48,.08) !important; }
@@ -144,7 +154,7 @@ NEW_LIGHT_BLOCK = """  /* ═══ LIGHT MODE — fond blanc, textes sombres �
   section.dest-section { background: #fff; }
   section.dest-section + section.dest-section { background: #f8f5f0; }
   section[style*="rgba(44,61,48"] { background: #f8f5f0 !important; }
-  .stations, .how, .why, .faq-section, .alpeon-section { background: #faf9f7 !important; }
+  .stations, .why, .faq-section, .alpeon-section { background: #faf9f7 !important; }
 
   /* ── CTA bas de page ── */
   .dest-cta { background: var(--green) !important; }

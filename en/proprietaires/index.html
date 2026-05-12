@@ -391,6 +391,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .wa-btn svg{width:26px;height:26px}
   .wa-notif{position:absolute;top:-1px;right:-1px;width:13px;height:13px;border-radius:50%;background:#E8CBA0;border:2px solid #fff;animation:waPulse 2.4s ease-in-out infinite}
   @keyframes waPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.7}}
+  
+  /* ── Breadcrumb ── */
+  .breadcrumb { padding: .75rem 0; }
+  .breadcrumb-list { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; }
+  .breadcrumb-list li { display: flex; align-items: center; gap: .4rem; }
+  .breadcrumb-list li::before { content: '›'; color: var(--mid, #4A5C4E); opacity: .4; font-size: .8rem; }
+  .breadcrumb-list li:first-child::before { display: none; }
+  .breadcrumb-list a { color: var(--mid, #4A5C4E); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; transition: color .2s; }
+  .breadcrumb-list a:hover { color: var(--green, #2C3D30); }
+  .breadcrumb-list span { color: var(--black, #111); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+
   </style>
   <style>
   /* ── Header lang dropdown (mobile globe) ── */
@@ -497,6 +508,12 @@ function toggleMobileMenu(){
 </script>
 
 <!-- HERO -->
+<nav class="breadcrumb" aria-label="Breadcrumb" style="padding: .75rem var(--pad,2rem); max-width:var(--max,1380px); margin:0 auto;">
+  <ol class="breadcrumb-list">
+    <li><a href="/en/accueil/">Home</a></li>
+    <li><span>Property Owners</span></li>
+  </ol>
+</nav>
 <section class="hero">
   <div class="hero-content">
     <p class="hero-kicker">For property owners</p>
@@ -644,6 +661,21 @@ function toggleMobileMenu(){
   </div>
 </section>
 
+<!-- GUARANTEED RENT CALLOUT -->
+<section style="padding:4rem var(--pad);background:rgba(44,61,48,.18);border-top:1px solid rgba(232,203,160,.06);border-bottom:1px solid rgba(232,203,160,.06)">
+  <div style="max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap">
+    <div>
+      <div style="font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:.75rem">Exclusive scheme</div>
+      <h3 style="font-family:var(--display);font-size:clamp(1.3rem,3vw,1.9rem);font-weight:600;color:#fff;margin-bottom:.6rem">Guaranteed rent — <em style="font-style:italic;color:var(--gold)">fixed every month</em></h3>
+      <p style="color:rgba(250,254,255,.5);font-size:.88rem;max-width:480px;line-height:1.75">ALPÉON becomes your direct tenant and pays you a fixed monthly rent whether your property is occupied or not. Zero vacancy, zero uncertainty.</p>
+    </div>
+    <a href="/en/guaranteed-rent/" style="flex-shrink:0;display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:var(--ink);padding:.85rem 1.75rem;border-radius:4px;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">
+      Learn more
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer id="contact">
 <div class="footer-owner-cta">
@@ -669,12 +701,12 @@ function toggleMobileMenu(){
       <div>
         <div class="footer-col-title">Destinations</div>
         <ul class="footer-links">
-          <li><a href="/en/destinations/">Courchevel</a></li>
-          <li><a href="/en/destinations/">Megève</a></li>
-          <li><a href="/en/destinations/">Val d'Isère</a></li>
-          <li><a href="/en/destinations/">Val Thorens</a></li>
-          <li><a href="/en/destinations/">Méribel</a></li>
-          <li><a href="/en/destinations/">Tignes</a></li>
+          <li><a href="/en/destinations/courchevel/">Courchevel</a></li>
+          <li><a href="/en/destinations/megeve/">Megève</a></li>
+          <li><a href="/en/destinations/val-d-isere/">Val d'Isère</a></li>
+          <li><a href="/en/destinations/val-thorens/">Val Thorens</a></li>
+          <li><a href="/en/destinations/meribel/">Méribel</a></li>
+          <li><a href="/en/destinations/tignes/">Tignes</a></li>
         </ul>
       </div>
       <div>
@@ -683,6 +715,8 @@ function toggleMobileMenu(){
           <li><a href="/en/proprietaires/">Owners</a></li>
           <li><a href="/en/proprietaires/">ALPÉON Signatures</a></li>
           <li><a href="/en/estimateur/">Revenue estimator</a></li>
+          <li><a href="/en/guaranteed-rent/">Guaranteed rent</a></li>
+          <li><a href="/en/magazine/">Magazine</a></li>
           <li><a href="/en/about/">About</a></li>
           <li><a href="/en/faq/">FAQ</a></li>
         </ul>

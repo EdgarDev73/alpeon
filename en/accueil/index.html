@@ -57,12 +57,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "@graph": [
       { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://alpeon.fr/en/accueil/" }] },
       {
-        "@type": ["RealEstateAgent", "LocalBusiness"],
+        "@type": ["RealEstateAgent", "LocalBusiness", "Organization"],
         "@id": "https://alpeon.fr/#organization",
-        "name": "ALPÉON", "url": "https://alpeon.fr", "email": "proprietaires@alpeon.fr",
-        "description": "Full-service ski property management and rental operator in the French Alps. ALPÉON manages 200+ premium properties across Courchevel, Megève, Val d'Isère, Val Thorens, Méribel and Tignes.",
+        "name": "ALPÉON",
+        "alternateName": "Alpéon Alpine Property Management",
+        "url": "https://alpeon.fr",
+        "logo": "https://alpeon.fr/assets/logo/logo-main-gold.svg",
+        "telephone": "+33970703991",
+        "email": "proprietaires@alpeon.fr",
+        "description": "Premium alpine property management operator. ALPÉON manages, operates and enhances short-term rental properties across the French Alps.",
         "priceRange": "€€€€",
-        "areaServed": [{"@type":"Place","name":"Val Thorens"},{"@type":"Place","name":"Megève"},{"@type":"Place","name":"Courchevel"},{"@type":"Place","name":"Méribel"},{"@type":"Place","name":"Tignes"},{"@type":"Place","name":"Val d'Isère"}]
+        "parentOrganization": { "@type": "Organization", "name": "VerSpi Real Estate" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+33970703991",
+          "contactType": "customer service",
+          "email": "contact@alpeon.fr",
+          "availableLanguage": ["French", "English"]
+        },
+        "sameAs": ["https://www.instagram.com/alpeon.alps"],
+        "areaServed": [
+          {"@type":"Place","name":"Val Thorens"},
+          {"@type":"Place","name":"Megève"},
+          {"@type":"Place","name":"Courchevel"},
+          {"@type":"Place","name":"Méribel"},
+          {"@type":"Place","name":"Tignes"},
+          {"@type":"Place","name":"Val d'Isère"}
+        ]
       }
     ]
   }
@@ -1497,14 +1518,14 @@ function toggleMobileMenu(){
       <h2>Two ranges, one single <em>standard</em></h2>
     </div>
     <div class="marques-grid">
-      <div class="marque-card marque-residences" onclick="window.location.href='/en/proprietaires#offres'">
+      <div class="marque-card marque-residences" onclick="window.location.href='/en/guaranteed-rent/'">
         <a href="/en/propriete/spacious-apartment-wslopeaccess-les-belleville/68e9154d4874ca0011a3d0e8/" class="marque-prop-link" onclick="event.stopPropagation()">
           View this property
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
         <div class="marque-inner">
           <img src="/assets/logo/logo-residences-gold.svg" alt="ALPÉON Résidences" class="marque-logo">
-          <p class="marque-desc">Full rental management for ski resort apartments and chalets. Guaranteed rent, zero constraints.</p>
+          <p class="marque-desc">Full rental management for ski resort apartments and chalets. <a href="/en/guaranteed-rent/" style="color:var(--gold);text-decoration:none" onclick="event.stopPropagation()">Guaranteed rent</a>, zero constraints.</p>
           <span class="marque-link">Discover →</span>
         </div>
       </div>
@@ -1665,12 +1686,12 @@ function toggleMobileMenu(){
       <div>
         <div class="footer-col-title">Destinations</div>
         <ul class="footer-links">
-          <li><a href="/en/destinations/">Courchevel</a></li>
-          <li><a href="/en/destinations/">Megève</a></li>
-          <li><a href="/en/destinations/">Val d'Isère</a></li>
-          <li><a href="/en/destinations/">Val Thorens</a></li>
-          <li><a href="/en/destinations/">Méribel</a></li>
-          <li><a href="/en/destinations/">Tignes</a></li>
+          <li><a href="/en/destinations/courchevel/">Courchevel</a></li>
+          <li><a href="/en/destinations/megeve/">Megève</a></li>
+          <li><a href="/en/destinations/val-d-isere/">Val d'Isère</a></li>
+          <li><a href="/en/destinations/val-thorens/">Val Thorens</a></li>
+          <li><a href="/en/destinations/meribel/">Méribel</a></li>
+          <li><a href="/en/destinations/tignes/">Tignes</a></li>
         </ul>
       </div>
       <div>
@@ -1679,6 +1700,8 @@ function toggleMobileMenu(){
           <li><a href="/en/proprietaires/">Owners</a></li>
           <li><a href="/en/proprietaires/">ALPÉON Signatures</a></li>
           <li><a href="/en/estimateur/">Revenue estimator</a></li>
+          <li><a href="/en/guaranteed-rent/">Guaranteed rent</a></li>
+          <li><a href="/en/magazine/">Magazine</a></li>
           <li><a href="/en/about/">About</a></li>
         </ul>
       </div>

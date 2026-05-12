@@ -79,13 +79,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
       },
       {
-        "@type": ["RealEstateAgent", "LocalBusiness"],
+        "@type": ["RealEstateAgent", "LocalBusiness", "Organization"],
         "@id": "https://alpeon.fr/#organization",
         "name": "ALPÉON",
+        "alternateName": "Alpéon Alpine Property Management",
         "url": "https://alpeon.fr",
+        "logo": "https://alpeon.fr/assets/logo/logo-main-gold.svg",
+        "telephone": "+33970703991",
         "email": "proprietaires@alpeon.fr",
         "description": "Opérateur premium de gestion immobilière alpine. ALPÉON gère, opère et valorise les biens en location saisonnière dans les Alpes françaises.",
         "priceRange": "€€€€",
+        "parentOrganization": { "@type": "Organization", "name": "VerSpi Real Estate" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+33970703991",
+          "contactType": "customer service",
+          "email": "contact@alpeon.fr",
+          "availableLanguage": ["French", "English"]
+        },
         "sameAs": ["https://www.instagram.com/alpeon.alps"],
         "areaServed": [
           {"@type":"Place","name":"Val Thorens"},
@@ -1538,14 +1549,14 @@ function toggleMobileMenu(){
       <h2>Deux gammes, une seule <em>exigence</em></h2>
     </div>
     <div class="marques-grid">
-      <div class="marque-card marque-residences" onclick="window.location.href='/proprietaires#offres'">
+      <div class="marque-card marque-residences" onclick="window.location.href='/loyer-garanti/'">
         <a href="/propriete/spacious-apartment-wslopeaccess-les-belleville/68e9154d4874ca0011a3d0e8/" class="marque-prop-link" onclick="event.stopPropagation()">
           Découvrir cette propriété
           <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
         <div class="marque-inner">
           <img src="/assets/logo/logo-residences-gold.svg" alt="ALPÉON Résidences" class="marque-logo">
-          <p class="marque-desc">Gestion locative complète pour appartements et chalets de station. Loyer garanti, zéro contrainte.</p>
+          <p class="marque-desc">Gestion locative complète pour appartements et chalets de station. <a href="/loyer-garanti/" style="color:var(--gold);text-decoration:none" onclick="event.stopPropagation()">Loyer garanti</a>, zéro contrainte.</p>
           <span class="marque-link">Découvrir →</span>
         </div>
       </div>
@@ -1581,7 +1592,7 @@ function toggleMobileMenu(){
   </div>
 
   <div class="dest-mosaic">
-    <a class="dest-card dc-courchevel" href="/destinations/">
+    <a class="dest-card dc-courchevel" href="/destinations/courchevel/">
       <div class="dest-card-bg"></div>
       <div class="dest-card-overlay"></div>
       <div class="dest-card-body">
@@ -1592,7 +1603,7 @@ function toggleMobileMenu(){
         <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
       </div>
     </a>
-    <a class="dest-card dc-megeve" href="/destinations/">
+    <a class="dest-card dc-megeve" href="/destinations/megeve/">
       <div class="dest-card-bg"></div>
       <div class="dest-card-overlay"></div>
       <div class="dest-card-body">
@@ -1603,7 +1614,7 @@ function toggleMobileMenu(){
         <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
       </div>
     </a>
-    <a class="dest-card dc-meribel" href="/destinations/">
+    <a class="dest-card dc-meribel" href="/destinations/meribel/">
       <div class="dest-card-bg"></div>
       <div class="dest-card-overlay"></div>
       <div class="dest-card-body">
@@ -1614,7 +1625,7 @@ function toggleMobileMenu(){
         <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
       </div>
     </a>
-    <a class="dest-card dc-tignes" href="/destinations/">
+    <a class="dest-card dc-tignes" href="/destinations/tignes/">
       <div class="dest-card-bg"></div>
       <div class="dest-card-overlay"></div>
       <div class="dest-card-body">
@@ -1625,7 +1636,7 @@ function toggleMobileMenu(){
         <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
       </div>
     </a>
-    <a class="dest-card dc-valdisere" href="/destinations/">
+    <a class="dest-card dc-valdisere" href="/destinations/val-d-isere/">
       <div class="dest-card-bg"></div>
       <div class="dest-card-overlay"></div>
       <div class="dest-card-body">
@@ -1636,7 +1647,7 @@ function toggleMobileMenu(){
         <div class="dest-cta">Découvrir <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
       </div>
     </a>
-    <a class="dest-card dc-valthorens" href="/destinations/">
+    <a class="dest-card dc-valthorens" href="/destinations/val-thorens/">
       <div class="dest-card-bg"></div>
       <div class="dest-card-overlay"></div>
       <div class="dest-card-body">
@@ -1700,12 +1711,12 @@ function toggleMobileMenu(){
       <div>
         <div class="footer-col-title">Destinations</div>
         <ul class="footer-links">
-          <li><a href="/destinations/">Courchevel</a></li>
-          <li><a href="/destinations/">Megève</a></li>
-          <li><a href="/destinations/">Val d'Isère</a></li>
-          <li><a href="/destinations/">Val Thorens</a></li>
-          <li><a href="/destinations/">Méribel</a></li>
-          <li><a href="/destinations/">Tignes</a></li>
+          <li><a href="/destinations/courchevel/">Courchevel</a></li>
+          <li><a href="/destinations/megeve/">Megève</a></li>
+          <li><a href="/destinations/val-d-isere/">Val d'Isère</a></li>
+          <li><a href="/destinations/val-thorens/">Val Thorens</a></li>
+          <li><a href="/destinations/meribel/">Méribel</a></li>
+          <li><a href="/destinations/tignes/">Tignes</a></li>
         </ul>
       </div>
       <div>
@@ -1714,6 +1725,8 @@ function toggleMobileMenu(){
           <li><a href="/proprietaires/">Propriétaires</a></li>
           <li><a href="/proprietaires/">ALPÉON Signatures</a></li>
           <li><a href="/estimateur/">Estimateur de revenus</a></li>
+          <li><a href="/loyer-garanti/">Loyer garanti</a></li>
+          <li><a href="/magazine/">Magazine</a></li>
           <li><a href="/about/">À propos</a></li>
           <li><a href="/faq/">FAQ</a></li>
         </ul>

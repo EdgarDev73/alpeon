@@ -707,6 +707,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; } .footer-bottom{ flex-direction:column; text-align:center; } }
 
 
+  
+  /* ── Breadcrumb ── */
+  .breadcrumb { padding: .75rem 0; }
+  .breadcrumb-list { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; }
+  .breadcrumb-list li { display: flex; align-items: center; gap: .4rem; }
+  .breadcrumb-list li::before { content: '›'; color: var(--mid, #4A5C4E); opacity: .4; font-size: .8rem; }
+  .breadcrumb-list li:first-child::before { display: none; }
+  .breadcrumb-list a { color: var(--mid, #4A5C4E); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; transition: color .2s; }
+  .breadcrumb-list a:hover { color: var(--green, #2C3D30); }
+  .breadcrumb-list span { color: var(--black, #111); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+
   </style>
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://alpeon.fr/proprietaires/" />
@@ -822,7 +833,13 @@ function toggleMobileMenu(){
 </script>
 
 <!-- HERO -->
-  <section class="hero">
+  <nav class="breadcrumb" aria-label="Fil d'Ariane" style="padding: .75rem var(--pad,2rem); max-width:var(--max,1380px); margin:0 auto;">
+  <ol class="breadcrumb-list">
+    <li><a href="/accueil/">Accueil</a></li>
+    <li><span>Propriétaires</span></li>
+  </ol>
+</nav>
+<section class="hero">
     <div class="hero-content">
       <p class="hero-kicker">Gestion immobilière alpine</p>
       <h1>Transformez votre bien alpin<br>en <em>actif performant</em></h1>
@@ -965,6 +982,21 @@ function toggleMobileMenu(){
     </div>
   </section>
 
+  <!-- LOYER GARANTI CALLOUT -->
+  <section style="padding:4rem var(--pad);background:rgba(44,61,48,.18);border-top:1px solid rgba(232,203,160,.06);border-bottom:1px solid rgba(232,203,160,.06)">
+    <div style="max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap">
+      <div>
+        <div style="font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:.75rem">Formule exclusive</div>
+        <h3 style="font-family:var(--display);font-size:clamp(1.3rem,3vw,1.9rem);font-weight:600;color:#fff;margin-bottom:.6rem">Loyer garanti — <em style="font-style:italic;color:var(--gold)">fixe chaque mois</em></h3>
+        <p style="color:rgba(250,254,255,.5);font-size:.88rem;max-width:480px;line-height:1.75">ALPÉON devient votre locataire direct et vous verse un loyer fixe mensuel, que votre bien soit occupé ou non. Zéro vacance, zéro aléa.</p>
+      </div>
+      <a href="/loyer-garanti/" style="flex-shrink:0;display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:var(--ink);padding:.85rem 1.75rem;border-radius:4px;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">
+        En savoir plus
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
   <!-- CONTACT / RAPPEL -->
   <section class="contact-section" id="contact">
     <div class="contact-inner">
@@ -1067,12 +1099,12 @@ function toggleMobileMenu(){
       <div>
         <div class="footer-col-title">Destinations</div>
         <ul class="footer-links">
-          <li><a href="/destinations/">Courchevel</a></li>
-          <li><a href="/destinations/">Megève</a></li>
-          <li><a href="/destinations/">Val d'Isère</a></li>
-          <li><a href="/destinations/">Val Thorens</a></li>
-          <li><a href="/destinations/">Méribel</a></li>
-          <li><a href="/destinations/">Tignes</a></li>
+          <li><a href="/destinations/courchevel/">Courchevel</a></li>
+          <li><a href="/destinations/megeve/">Megève</a></li>
+          <li><a href="/destinations/val-d-isere/">Val d'Isère</a></li>
+          <li><a href="/destinations/val-thorens/">Val Thorens</a></li>
+          <li><a href="/destinations/meribel/">Méribel</a></li>
+          <li><a href="/destinations/tignes/">Tignes</a></li>
         </ul>
       </div>
       <div>
@@ -1081,6 +1113,8 @@ function toggleMobileMenu(){
           <li><a href="/proprietaires/">Propriétaires</a></li>
           <li><a href="/proprietaires/">ALPÉON Signatures</a></li>
           <li><a href="/estimateur/">Estimateur de revenus</a></li>
+          <li><a href="/loyer-garanti/">Loyer garanti</a></li>
+          <li><a href="/magazine/">Magazine</a></li>
           <li><a href="/about/">À propos</a></li>
           <li><a href="/faq/">FAQ</a></li>
           <li><a href="/contact/" target="_blank" rel="noopener">Espace propriétaire</a></li>
