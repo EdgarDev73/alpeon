@@ -57,12 +57,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "@graph": [
       { "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://alpeon.fr/en/accueil/" }] },
       {
-        "@type": ["RealEstateAgent", "LocalBusiness"],
+        "@type": ["RealEstateAgent", "LocalBusiness", "Organization"],
         "@id": "https://alpeon.fr/#organization",
-        "name": "ALPÉON", "url": "https://alpeon.fr", "email": "proprietaires@alpeon.fr",
-        "description": "Full-service ski property management and rental operator in the French Alps. ALPÉON manages 200+ premium properties across Courchevel, Megève, Val d'Isère, Val Thorens, Méribel and Tignes.",
+        "name": "ALPÉON",
+        "alternateName": "Alpéon Alpine Property Management",
+        "url": "https://alpeon.fr",
+        "logo": "https://alpeon.fr/assets/logo/logo-main-gold.svg",
+        "telephone": "+33970703991",
+        "email": "proprietaires@alpeon.fr",
+        "description": "Premium alpine property management operator. ALPÉON manages, operates and enhances short-term rental properties across the French Alps.",
         "priceRange": "€€€€",
-        "areaServed": [{"@type":"Place","name":"Val Thorens"},{"@type":"Place","name":"Megève"},{"@type":"Place","name":"Courchevel"},{"@type":"Place","name":"Méribel"},{"@type":"Place","name":"Tignes"},{"@type":"Place","name":"Val d'Isère"}]
+        "parentOrganization": { "@type": "Organization", "name": "VerSpi Real Estate" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+33970703991",
+          "contactType": "customer service",
+          "email": "contact@alpeon.fr",
+          "availableLanguage": ["French", "English"]
+        },
+        "sameAs": ["https://www.instagram.com/alpeon.alps"],
+        "areaServed": [
+          {"@type":"Place","name":"Val Thorens"},
+          {"@type":"Place","name":"Megève"},
+          {"@type":"Place","name":"Courchevel"},
+          {"@type":"Place","name":"Méribel"},
+          {"@type":"Place","name":"Tignes"},
+          {"@type":"Place","name":"Val d'Isère"}
+        ]
       }
     ]
   }
