@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /email-estimation.html
+Disallow: /resultats.html
 
 Sitemap: https://alpeon.fr/sitemap.xml
 
