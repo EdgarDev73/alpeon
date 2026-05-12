@@ -602,6 +602,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .wa-btn:hover{transform:translateY(-2px);box-shadow:0 6px 32px rgba(0,0,0,.45)}
   .wa-btn svg{width:22px;height:22px;flex-shrink:0}
   .wa-btn-label{font-size:.72rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(250,254,255,.75);white-space:nowrap}
+  
+  /* ── Breadcrumb ── */
+  .breadcrumb { padding: .75rem 0; }
+  .breadcrumb-list { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; }
+  .breadcrumb-list li { display: flex; align-items: center; gap: .4rem; }
+  .breadcrumb-list li::before { content: '›'; color: var(--mid, #4A5C4E); opacity: .4; font-size: .8rem; }
+  .breadcrumb-list li:first-child::before { display: none; }
+  .breadcrumb-list a { color: var(--mid, #4A5C4E); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; transition: color .2s; }
+  .breadcrumb-list a:hover { color: var(--green, #2C3D30); }
+  .breadcrumb-list span { color: var(--black, #111); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+
   </style>
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://alpeon.fr/en/about/" />
@@ -715,6 +726,12 @@ function toggleMobileMenu(){
 }
 </script>
 
+<nav class="breadcrumb" aria-label="Breadcrumb" style="padding: .75rem var(--pad,2rem); max-width:var(--max,1380px); margin:0 auto;">
+  <ol class="breadcrumb-list">
+    <li><a href="/en/accueil/">Home</a></li>
+    <li><span>About</span></li>
+  </ol>
+</nav>
 <!-- ═══ HERO ═══ -->
 <section class="page-hero">
   <div class="page-hero-img"></div>

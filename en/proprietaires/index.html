@@ -391,6 +391,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .wa-btn svg{width:26px;height:26px}
   .wa-notif{position:absolute;top:-1px;right:-1px;width:13px;height:13px;border-radius:50%;background:#E8CBA0;border:2px solid #fff;animation:waPulse 2.4s ease-in-out infinite}
   @keyframes waPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.7}}
+  
+  /* ── Breadcrumb ── */
+  .breadcrumb { padding: .75rem 0; }
+  .breadcrumb-list { display: flex; align-items: center; gap: .4rem; list-style: none; flex-wrap: wrap; }
+  .breadcrumb-list li { display: flex; align-items: center; gap: .4rem; }
+  .breadcrumb-list li::before { content: '›'; color: var(--mid, #4A5C4E); opacity: .4; font-size: .8rem; }
+  .breadcrumb-list li:first-child::before { display: none; }
+  .breadcrumb-list a { color: var(--mid, #4A5C4E); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; transition: color .2s; }
+  .breadcrumb-list a:hover { color: var(--green, #2C3D30); }
+  .breadcrumb-list span { color: var(--black, #111); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+
   </style>
   <style>
   /* ── Header lang dropdown (mobile globe) ── */
@@ -497,6 +508,12 @@ function toggleMobileMenu(){
 </script>
 
 <!-- HERO -->
+<nav class="breadcrumb" aria-label="Breadcrumb" style="padding: .75rem var(--pad,2rem); max-width:var(--max,1380px); margin:0 auto;">
+  <ol class="breadcrumb-list">
+    <li><a href="/en/accueil/">Home</a></li>
+    <li><span>Property Owners</span></li>
+  </ol>
+</nav>
 <section class="hero">
   <div class="hero-content">
     <p class="hero-kicker">For property owners</p>
