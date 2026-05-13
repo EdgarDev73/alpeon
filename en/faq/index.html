@@ -579,14 +579,15 @@ function toggleMobileMenu(){
 }
 </script>
 
-<nav class="breadcrumb" aria-label="Breadcrumb" style="padding: .75rem var(--pad,2rem); max-width:var(--max,1380px); margin:0 auto;">
-  <ol class="breadcrumb-list">
-    <li><a href="/en/accueil/">Home</a></li>
-    <li><span>FAQ</span></li>
-  </ol>
-</nav>
 <!-- ═══ HERO ═══ -->
 <section class="page-hero">
+<nav class="breadcrumb" aria-label="Breadcrumb" style="position:absolute;top:calc(var(--nav-h) + .5rem);left:0;right:0;z-index:5;padding:0 var(--pad,2rem);">
+  <ol class="breadcrumb-list">
+  <li><a href="/en/accueil/">Home</a></li>
+  <li><span>FAQ</span></li>
+  </ol>
+</nav>
+
   <div class="page-hero-body">
     <div class="container">
       <h1 class="page-hero-title">Frequently asked questions</h1>
