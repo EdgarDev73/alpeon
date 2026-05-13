@@ -211,7 +211,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .lg-hero-sub { font-size: 1.05rem; color: rgba(250,254,255,.55); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.8; }
   .lg-hero-cta { display: inline-flex; align-items: center; gap: .6rem; background: var(--gold); color: var(--ink); padding: .9rem 2rem; border-radius: 4px; font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; transition: background .2s; }
   .lg-hero-cta:hover { background: var(--gold-d); }
-  .lg-steps { background: #fff; border-top: 1px solid #e8e4dd; border-bottom: 1px solid #e8e4dd; padding: 80px var(--pad); }
+  /* Steps — white section overrides */
+  .lg-steps { background: #fff; border-top: 1px solid #e8e4dd; border-bottom: 1px solid #e8e4dd; padding: 80px var(--pad); color: #1a2a1e; }
+  .lg-steps .sec-eyebrow { color: #9c7d45; opacity: 1; }
+  .lg-steps .sec-title { color: #1a2a1e; }
+  .lg-steps .sec-title em { color: #9c7d45; }
   .lg-steps-inner { max-width: var(--max); margin: 0 auto; }
   .lg-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3.5rem; }
   @media (max-width: 760px) { .lg-steps-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; } }
@@ -219,7 +223,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .lg-step-num { width: 44px; height: 44px; border: 1px solid rgba(168,149,106,.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1rem; color: #9c7d45; margin-bottom: 1.25rem; }
   .lg-step h3 { font-size: .95rem; font-weight: 500; color: #1a2a1e; margin-bottom: .6rem; }
   .lg-step p { font-size: .83rem; color: rgba(30,45,35,.55); line-height: 1.75; }
-  .lg-compare { padding: 80px var(--pad); max-width: var(--max); margin: 0 auto; }
+  /* Comparatif — white section overrides */
+  .lg-compare { padding: 80px var(--pad); max-width: var(--max); margin: 0 auto; color: #1a2a1e; }
+  .lg-compare .sec-eyebrow { color: #9c7d45; opacity: 1; }
+  .lg-compare .sec-title { color: #1a2a1e; }
+  .lg-compare .sec-title em { color: #9c7d45; }
+  .lg-compare .sec-desc { color: rgba(30,45,35,.55); }
   .lg-compare-table { width: 100%; border-collapse: collapse; margin-top: 2.5rem; }
   .lg-compare-table th, .lg-compare-table td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid #ece9e3; font-size: .85rem; }
   .lg-compare-table thead th { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(30,45,35,.4); font-weight: 400; }
@@ -445,7 +454,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </section>
 
-  <section style="background:#fff; border-top:1px solid #e8e4dd">
+  <section style="background:#fff; border-top:1px solid #e8e4dd; color:#1a2a1e">
     <div class="lg-compare">
       <div class="sec-eyebrow">Why choose ALPÉON</div>
       <h2 class="sec-title">Guaranteed rent <em>vs.</em> traditional management</h2>
@@ -478,7 +487,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </section>
 
-  <section style="background:#fff; border-top:1px solid #e8e4dd">
+  <section style="background:#fff; border-top:1px solid #e8e4dd; color:#1a2a1e">
     <div class="lg-faq">
       <h2>Frequently asked questions about <em style="font-style:italic;color:#9c7d45">guaranteed rent</em></h2>
       <div class="faq-item">
