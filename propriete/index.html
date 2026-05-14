@@ -1350,11 +1350,11 @@ async function loadMonthRates(){
 }
 
 async function loadCalendar(listingId){
-  // Load 6 months of calendar data
+  // Load 12 months of calendar data
   const today = new Date();
-  const in180 = new Date(today.getTime() + 180*86400000);
+  const in365 = new Date(today.getTime() + 365*86400000);
   const start = today.toISOString().slice(0,10);
-  const end = in180.toISOString().slice(0,10);
+  const end = in365.toISOString().slice(0,10);
   try {
     const r = await fetch(`/api/properties/${listingId}/calendar?startDate=${start}&endDate=${end}`);
     if(!r.ok) throw new Error(`API calendar ${r.status}`);

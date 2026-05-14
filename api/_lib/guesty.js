@@ -235,11 +235,11 @@ async function getListing(id) {
 /* ── Calendar ── */
 async function getListingCalendar(listingId, { startDate, endDate } = {}) {
   const today = new Date();
-  const in180 = new Date(today.getTime() + 180 * 86_400_000);
+  const in365 = new Date(today.getTime() + 365 * 86_400_000);
   return guestyFetch(`/listings/${listingId}/calendar`, {
     params: {
       from: startDate || today.toISOString().slice(0, 10),
-      to:   endDate   || in180.toISOString().slice(0, 10),
+      to:   endDate   || in365.toISOString().slice(0, 10),
     },
   });
 }
