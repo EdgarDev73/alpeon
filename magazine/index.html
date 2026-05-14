@@ -207,7 +207,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .breadcrumb-list span { color: rgba(250,254,255,.55); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
 
   /* ── Magazine hero ── */
-  .mag-hero { padding: calc(var(--nav-h) + 80px) var(--pad) 70px; text-align: center; max-width: 720px; margin: 0 auto; }
+  .mag-hero { padding: 32px var(--pad) 70px; text-align: center; max-width: 720px; margin: 0 auto; }
   .mag-eyebrow { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); opacity: .8; margin-bottom: 1.5rem; }
   .mag-hero h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 400; line-height: 1.2; color: #fff; margin-bottom: 1rem; }
   .mag-hero h1 em { font-style: italic; color: var(--gold); }
@@ -244,6 +244,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .mag-cta p { color: rgba(250,254,255,.55); margin-bottom: 2rem; font-size: .9rem; }
   .btn-gold { display: inline-flex; align-items: center; gap: .5rem; background: var(--gold); color: var(--ink); padding: .9rem 2rem; border-radius: 4px; font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; transition: background .2s; }
   .btn-gold:hover { background: var(--gold-d); }
+
+  /* ── Footer owner CTA ── */
+  .footer-owner-cta { border-top: none; padding: .85rem 0; }
+  .footer-owner-flex { display: flex; align-items: center; justify-content: center; gap: .7rem; flex-wrap: wrap; }
+  .footer-owner-sep { color: rgba(250,254,255,.18); font-size: .7rem; line-height: 1; }
+  .footer-owner-text { color: rgba(250,254,255,.3); font-size: .72rem; font-family: var(--font-sans); font-weight: 300; letter-spacing: .03em; }
+  .footer-owner-btn { display: inline-flex; align-items: center; gap: .3rem; color: rgba(232,203,160,.5); font-size: .72rem; font-family: var(--font-sans); font-weight: 400; letter-spacing: .03em; text-decoration: none; transition: color .2s; white-space: nowrap; }
+  .footer-owner-btn:hover { color: #E8CBA0; }
+
+  /* ── Footer ── */
+  footer { background: #0d1410; padding: 0; border-top: 1px solid rgba(232,203,160,.12); }
+  footer > .container { padding-top: clamp(48px,6vw,72px); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(250,254,255,.07); }
+  .footer-brand-logo { margin-bottom: 14px; }
+  .footer-brand-claim { font-size: .58rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold,#E8CBA0); margin-bottom: 16px; opacity: .85; }
+  .footer-brand-text { font-size: .81rem; font-weight: 300; color: rgba(250,254,255,.32); line-height: 1.8; max-width: 270px; }
+  .footer-col-title { font-size: .58rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(250,254,255,.22); margin-bottom: 18px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .footer-links a { font-size: .83rem; font-weight: 300; color: rgba(250,254,255,.48); transition: color .2s; text-decoration: none; }
+  .footer-links a:hover { color: var(--gold,#E8CBA0); }
+  .footer-lower { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; padding: 40px 0 48px; border-bottom: 1px solid rgba(250,254,255,.07); }
+  .footer-socials { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
+  .footer-social-link { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(250,254,255,.15); color: rgba(250,254,255,.48); transition: all .2s; }
+  .footer-social-link:hover { border-color: var(--gold,#E8CBA0); color: var(--gold,#E8CBA0); background: rgba(232,203,160,.07); }
+  .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
+  .nl-form { display: flex; gap: 8px; margin-top: 4px; }
+  .nl-input { flex: 1; border: 1px solid rgba(250,254,255,.12); border-radius: 4px; background: rgba(250,254,255,.05); color: #fff; padding: .55rem .85rem; font-size: .8rem; font-family: inherit; outline: none; transition: border-color .2s; }
+  .nl-input::placeholder { color: rgba(250,254,255,.25); }
+  .nl-input:focus { border-color: rgba(232,203,160,.45); }
+  .nl-btn { background: var(--gold,#E8CBA0); color: #1a2a1e; border: none; border-radius: 4px; padding: .55rem 1.1rem; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: opacity .2s; font-family: inherit; }
+  .nl-btn:hover { opacity: .85; }
+  .nl-msg { font-size: .73rem; margin-top: .5rem; min-height: 1em; }
+  .nl-msg.ok { color: #86efac; } .nl-msg.err { color: #fca5a5; }
+  .footer-bottom { padding: 24px 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .footer-bottom span { font-size: .68rem; color: rgba(250,254,255,.18); }
+  @media(max-width:1024px){ .footer-grid{ grid-template-columns:1fr 1fr; gap:36px; } .footer-lower{ grid-template-columns:1fr; } }
+  @media(max-width:600px){ .footer-grid{ grid-template-columns:1fr; } .footer-bottom{ flex-direction:column; text-align:center; } }
   </style>
 </head>
 <body>
@@ -257,7 +294,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </a>
     <nav class="site-nav">
       <a href="/accueil/" class="site-nav-link">Accueil</a>
-      <a href="/proprietaires/" class="site-nav-link active">Propriétaires</a>
+      <a href="/proprietaires/" class="site-nav-link">Propriétaires</a>
       <a href="/estimateur/" class="site-nav-link">Estimateur</a>
       <a href="/reserver/" class="site-nav-link">Réserver</a>
       <a href="/destinations/" class="site-nav-link">Destinations</a>
@@ -332,138 +369,114 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <h2 class="mag-section-title">Investir en station</h2>
     <div class="mag-grid">
-      <article class="mag-card">
+      <a class="mag-card" href="/magazine/investir-courchevel-2025/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Investir en station</div>
           <h3 class="mag-card-title">Investir à Courchevel en 2025 : les prix, les rendements, les pièges à éviter</h3>
           <div class="mag-card-meta"><span>5 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
-      <article class="mag-card">
+      </a>
+      <a class="mag-card" href="/magazine/val-d-isere-vs-meribel-rendement-locatif/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Investir en station</div>
           <h3 class="mag-card-title">Val d'Isère vs. Méribel : quel marché offre le meilleur rendement locatif ?</h3>
           <div class="mag-card-meta"><span>7 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
-      <article class="mag-card">
+      </a>
+      <a class="mag-card" href="/magazine/neuf-vs-ancien-station-ski/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Investir en station</div>
           <h3 class="mag-card-title">Neuf ou ancien en station de ski : ce que les chiffres disent vraiment</h3>
           <div class="mag-card-meta"><span>6 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
+      </a>
     </div>
 
     <h2 class="mag-section-title">Fiscalité LMNP</h2>
     <div class="mag-grid">
-      <article class="mag-card">
+      <a class="mag-card" href="/magazine/lmnp-2025-guide-complet/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Fiscalité LMNP</div>
           <h3 class="mag-card-title">LMNP en 2025 : guide complet pour les propriétaires de biens alpins</h3>
           <div class="mag-card-meta"><span>10 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
-      <article class="mag-card">
+      </a>
+      <a class="mag-card" href="/magazine/amortissement-lmnp-chalet/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Fiscalité LMNP</div>
           <h3 class="mag-card-title">Amortissement LMNP : comment optimiser la fiscalité de votre chalet</h3>
           <div class="mag-card-meta"><span>8 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
-      <article class="mag-card">
+      </a>
+      <a class="mag-card" href="/magazine/micro-bic-vs-regime-reel/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Fiscalité LMNP</div>
           <h3 class="mag-card-title">Micro-BIC vs. régime réel : quel choix pour un bien de station haut de gamme ?</h3>
           <div class="mag-card-meta"><span>6 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
+      </a>
     </div>
 
     <h2 class="mag-section-title">Stations</h2>
     <div class="mag-grid">
-      <article class="mag-card">
+      <a class="mag-card" href="/magazine/tignes-saison-2024-2025/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Stations</div>
           <h3 class="mag-card-title">Tignes : pourquoi la saison 2024-2025 a surpassé les attentes des propriétaires</h3>
           <div class="mag-card-meta"><span>5 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
-      <article class="mag-card">
+      </a>
+      <a class="mag-card" href="/magazine/megeve-demande-estivale/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Stations</div>
           <h3 class="mag-card-title">Megève hors-saison : la demande estivale qui change la donne pour les propriétaires</h3>
           <div class="mag-card-meta"><span>5 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
-      <article class="mag-card">
+      </a>
+      <a class="mag-card" href="/magazine/val-thorens-ete-diversification/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Stations</div>
           <h3 class="mag-card-title">Val Thorens en été : une opportunité de diversification pour les propriétaires d'altitude</h3>
           <div class="mag-card-meta"><span>4 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
+      </a>
     </div>
 
     <h2 class="mag-section-title">Vie d'opérateur</h2>
     <div class="mag-grid">
-      <article class="mag-card">
+      <a class="mag-card" href="/magazine/alpeon-gestion-200-proprietes/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Vie d'opérateur</div>
           <h3 class="mag-card-title">Comment ALPÉON coordonne 200+ propriétés sur 6 stations pendant la haute saison</h3>
           <div class="mag-card-meta"><span>8 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
-      <article class="mag-card">
+      </a>
+      <a class="mag-card" href="/magazine/tarification-dynamique-revpar/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Vie d'opérateur</div>
           <h3 class="mag-card-title">Tarification dynamique en station : comment maximiser le RevPAR sur un chalet haut de gamme</h3>
           <div class="mag-card-meta"><span>7 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
-      <article class="mag-card">
+      </a>
+      <a class="mag-card" href="/magazine/loyer-garanti-vs-commission/">
         <div class="mag-card-img"><span class="mag-card-img-placeholder">Image à venir</span></div>
         <div class="mag-card-body">
           <div class="mag-card-cat">Vie d'opérateur</div>
           <h3 class="mag-card-title">Loyer garanti vs. commission : les questions que tout propriétaire doit se poser</h3>
           <div class="mag-card-meta"><span>6 min</span><span>·</span><span>Équipe ALPÉON</span></div>
-          <!-- TODO: Rédiger le contenu complet de cet article -->
-          <span class="mag-card-todo">Article à rédiger</span>
         </div>
-      </article>
+      </a>
     </div>
 
   </div>
@@ -632,13 +645,7 @@ async function submitContact(e) {
 .ck-btn-accept{background:#2C3D30;color:#E8CBA0;border-color:#2C3D30}
 .ck-btn-accept:hover{background:#3d5442}
 @media(max-width:560px){.ck-bar{flex-direction:column;align-items:flex-start;gap:.85rem}.ck-btns{width:100%;justify-content:flex-end}}
-footer .container{padding-inline:clamp(24px,5vw,80px);}
-.footer-owner-cta{border-top:none;padding:.85rem 0}
-.footer-owner-flex{display:flex;align-items:center;justify-content:center;gap:.7rem;flex-wrap:wrap}
-.footer-owner-sep{color:rgba(250,254,255,.18);font-size:.7rem;line-height:1}
-.footer-owner-text{color:rgba(250,254,255,.3);font-size:.72rem;font-family:'Poppins',sans-serif;font-weight:300;letter-spacing:.03em}
-.footer-owner-btn{display:inline-flex;align-items:center;gap:.3rem;color:rgba(232,203,160,.5);font-size:.72rem;font-family:'Poppins',sans-serif;font-weight:400;letter-spacing:.03em;text-decoration:none;transition:color .2s;white-space:nowrap}
-.footer-owner-btn:hover{color:#E8CBA0}
+/* footer CSS moved to <head> */
 </style>
 
 <div class="ck-bar" id="ck-bar">
