@@ -47,6 +47,8 @@ module.exports = async (req, res) => {
       return res.status(200).json({ property: cached.data, _stale: true });
     }
 
-    return res.status(500).json({ error: err.message });
+    // Guesty renvoie 401 pour les listings supprimés — le traiter comme un 404 propre
+    const status = err.message.includes('401') ? 404 : 500;
+    return res.status(status).json({ error: err.message });
   }
 };
