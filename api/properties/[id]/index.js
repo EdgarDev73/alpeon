@@ -5,7 +5,7 @@
  * Cache mémoire Lambda 5 min + stale-if-error 1h côté Vercel CDN.
  * Même résilience que /api/properties : un token expiré ne casse pas la page.
  */
-const { getListing, normalizeListing } = require('../../_lib/guesty');
+const { getListing, getListings, normalizeListing, normalizeListings } = require('../../_lib/guesty');
 
 // Cache mémoire par listing (instance Lambda chaude)
 const _cache = new Map(); // id → { data, fetchedAt }
@@ -30,8 +30,27 @@ module.exports = async (req, res) => {
       return res.status(200).json({ property: cached.data });
     }
 
-    const raw = await getListing(id);
-    const property = normalizeListing(raw);
+    let property = null;
+
+    // Stratégie 1 : endpoint individuel Guesty /listings/:id
+    try {
+      const raw = await getListing(id);
+      property = normalizeListing(raw);
+    } catch (e) {
+      // Guesty peut retourner 401 sur /listings/:id pour certains listings
+      // même s'ils apparaissent dans la liste — fallback sur /listings
+      console.warn(`[properties/[id]] Direct fetch failed (${e.message.slice(0, 60)}), trying list fallback`);
+    }
+
+    // Stratégie 2 : chercher le listing dans la liste complète
+    if (!property) {
+      const rawList = await getListings({ limit: 200 });
+      const all = normalizeListings(rawList);
+      property = all.find(p => p.id === id) || null;
+    }
+
+    if (!property) return res.status(404).json({ error: 'Listing not found' });
+
     _cache.set(id, { data: property, fetchedAt: now });
 
     res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=60, stale-if-error=3600');
@@ -47,8 +66,6 @@ module.exports = async (req, res) => {
       return res.status(200).json({ property: cached.data, _stale: true });
     }
 
-    // Guesty renvoie 401 pour les listings supprimés — le traiter comme un 404 propre
-    const status = err.message.includes('401') ? 404 : 500;
-    return res.status(status).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 };

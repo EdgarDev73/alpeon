@@ -1920,11 +1920,6 @@ async function loadProperty(){
     try {
       const r = await fetch(`/api/properties/${id}`);
       if(r.ok){ const d = await r.json(); property = d.property || null; }
-      else if(r.status === 404){
-        // Listing supprimé de Guesty — afficher un message propre sans fallback inutile
-        document.getElementById('detail-left').innerHTML=`<div style="padding:3rem 2rem;text-align:center"><p style="color:rgba(250,254,255,.6);margin-bottom:1.5rem">Ce bien n'est plus disponible dans notre catalogue.</p><a href="/reserver/" style="display:inline-flex;align-items:center;gap:.5rem;background:#E8CBA0;color:#0d1a0f;padding:.8rem 1.8rem;border-radius:4px;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none">Voir les propriétés disponibles →</a></div>`;
-        return;
-      }
     } catch(e){ /* réseau — on tente le fallback */ }
 
     if(!property){
