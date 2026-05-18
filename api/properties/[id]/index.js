@@ -5,11 +5,31 @@
  * Cache mémoire Lambda 5 min + stale-if-error 1h côté Vercel CDN.
  * Même résilience que /api/properties : un token expiré ne casse pas la page.
  */
-const { getListing, getListings, normalizeListing, normalizeListings } = require('../../_lib/guesty');
+const { getListing, normalizeListing } = require('../../_lib/guesty');
 
 // Cache mémoire par listing (instance Lambda chaude)
 const _cache = new Map(); // id → { data, fetchedAt }
 const CACHE_TTL = 5 * 60 * 1000; // 5 min
+
+/**
+ * Fallback : chercher le listing dans /api/properties (qui a son propre cache chaud).
+ * Évite de refaire un appel Guesty direct quand le token est expiré sur cette instance.
+ */
+async function findInListCache(id, req) {
+  try {
+    const host = req.headers['x-forwarded-host'] || req.headers.host || 'alpeon.fr';
+    const proto = req.headers['x-forwarded-proto'] || 'https';
+    const r = await fetch(`${proto}://${host}/api/properties`, {
+      headers: { 'Accept': 'application/json' },
+    });
+    if (!r.ok) return null;
+    const { properties } = await r.json();
+    return (properties || []).find(p => p.id === id) || null;
+  } catch (e) {
+    console.warn('[properties/[id]] List fallback failed:', e.message);
+    return null;
+  }
+}
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,16 +57,10 @@ module.exports = async (req, res) => {
       const raw = await getListing(id);
       property = normalizeListing(raw);
     } catch (e) {
-      // Guesty peut retourner 401 sur /listings/:id pour certains listings
-      // même s'ils apparaissent dans la liste — fallback sur /listings
-      console.warn(`[properties/[id]] Direct fetch failed (${e.message.slice(0, 60)}), trying list fallback`);
-    }
-
-    // Stratégie 2 : chercher le listing dans la liste complète
-    if (!property) {
-      const rawList = await getListings({ limit: 200 });
-      const all = normalizeListings(rawList);
-      property = all.find(p => p.id === id) || null;
+      // Guesty peut retourner 401 sur /listings/:id (token expiré ou quirk API)
+      // → fallback sur notre propre /api/properties qui a son cache chaud
+      console.warn(`[properties/[id]] Direct fetch failed (${e.message.slice(0, 80)}), trying list cache`);
+      property = await findInListCache(id, req);
     }
 
     if (!property) return res.status(404).json({ error: 'Listing not found' });
@@ -61,7 +75,7 @@ module.exports = async (req, res) => {
 
     // Fallback : servir le cache stale plutôt qu'une 500
     if (cached) {
-      console.warn('[properties/[id]] Serving stale cache after Guesty error for', id);
+      console.warn('[properties/[id]] Serving stale cache after error for', id);
       res.setHeader('Cache-Control', 'no-store');
       return res.status(200).json({ property: cached.data, _stale: true });
     }
