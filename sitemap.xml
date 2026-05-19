@@ -466,4 +466,101 @@
     <priority>0.7</priority>
   </url>
 
+
+  <url>
+    <loc>https://alpeon.fr/magazine/alpeon-gestion-200-proprietes/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/alpeon-gestion-200-proprietes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/alpeon-gestion-200-proprietes/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/amortissement-lmnp-chalet/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/amortissement-lmnp-chalet/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/amortissement-lmnp-chalet/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/investir-courchevel-2025/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/investir-courchevel-2025/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/investir-courchevel-2025/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/lmnp-2025-guide-complet/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/lmnp-2025-guide-complet/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/lmnp-2025-guide-complet/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/loyer-garanti-vs-commission/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/loyer-garanti-vs-commission/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/loyer-garanti-vs-commission/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/megeve-demande-estivale/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/megeve-demande-estivale/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/megeve-demande-estivale/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/micro-bic-vs-regime-reel/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/micro-bic-vs-regime-reel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/micro-bic-vs-regime-reel/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/neuf-vs-ancien-station-ski/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/neuf-vs-ancien-station-ski/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/neuf-vs-ancien-station-ski/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/tarification-dynamique-revpar/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/tarification-dynamique-revpar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/tarification-dynamique-revpar/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/tignes-saison-2024-2025/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/tignes-saison-2024-2025/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/tignes-saison-2024-2025/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/val-d-isere-vs-meribel-rendement-locatif/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/val-d-isere-vs-meribel-rendement-locatif/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/val-d-isere-vs-meribel-rendement-locatif/"/>
+  </url>
+  <url>
+    <loc>https://alpeon.fr/magazine/val-thorens-ete-diversification/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://alpeon.fr/magazine/val-thorens-ete-diversification/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alpeon.fr/magazine/val-thorens-ete-diversification/"/>
+  </url>
 </urlset>
