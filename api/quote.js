@@ -21,13 +21,20 @@ module.exports = async (req, res) => {
   if (nights < 1) return res.status(400).json({ error: 'Invalid date range' });
 
   try {
-    // 1. Get real per-night prices from Guesty
-    const [nightlyRates, listing] = await Promise.all([
+    // 1. Get nightly rates + listing data in parallel
+    // Promise.allSettled so a getListing 401 doesn't kill the whole quote
+    const [nightlyRatesResult, listingResult] = await Promise.allSettled([
       getNightlyRates(listingId, checkIn, checkOut),
       getListing(listingId),
     ]);
 
-    const prices     = listing.prices || {};
+    const nightlyRates = nightlyRatesResult.status === 'fulfilled' ? nightlyRatesResult.value : null;
+    if (listingResult.status === 'rejected') {
+      console.warn('[quote] getListing failed (non-fatal):', listingResult.reason?.message || listingResult.reason);
+    }
+    const rawListing  = listingResult.status === 'fulfilled' ? listingResult.value : {};
+
+    const prices     = rawListing.prices || {};
     const cleaningFee = prices.cleaningFee || 0;
     const currency    = prices.currency || 'EUR';
 
