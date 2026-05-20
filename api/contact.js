@@ -116,11 +116,13 @@ module.exports = async (req, res) => {
       </table></div></div>`;
     // Zapier webhook (parallel, non-blocking)
     const ZAPIER_URL = process.env.ZAPIER_CALLBACK_WEBHOOK;
-    fetch(ZAPIER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone, destination: dest || '—', lang, source: 'popup-reserver' }),
-    }).catch(e => console.warn('[zapier]', e.message));
+    if (ZAPIER_URL) {
+      fetch(ZAPIER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, destination: dest || '—', lang, source: 'popup-reserver' }),
+      }).catch(e => console.warn('[zapier]', e.message));
+    }
 
     try {
       await transporter.sendMail({ from: `ALPÉON <${EMAIL_USER}>`, to: 'reservations@alpeon.fr', subject, html, text: `${name}\n${phone}${dest ? '\n' + dest : ''}` });
