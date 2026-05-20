@@ -1,5 +1,22 @@
 const nodemailer = require('nodemailer');
 
+/* ── Helper: fire Zapier with a 3s timeout, never throws ── */
+async function pingZapier(url, payload) {
+  if (!url) return;
+  try {
+    await Promise.race([
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 3000)),
+    ]);
+  } catch (e) {
+    console.warn('[zapier]', e.message);
+  }
+}
+
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -8,17 +25,10 @@ module.exports = async (req, res) => {
 
   // ── Lead estimateur ───────────────────────────────────────────────────────
   if (body.type === 'lead') {
-    // Zapier webhook (non-blocking)
-    const ZAPIER_URL = process.env.ZAPIER_ESTIMATEUR_WEBHOOK;
-    if (ZAPIER_URL) {
-      fetch(ZAPIER_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      }).catch(e => console.warn('[zapier-lead]', e.message));
-    }
+    // Zapier webhook (awaited with 3s timeout — Vercel kills fire-and-forget)
+    await pingZapier(process.env.ZAPIER_ESTIMATEUR_WEBHOOK, body);
 
-    // SMTP email notification (non-blocking — never delays the response)
+    // SMTP email notification
     const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS } = process.env;
     if (EMAIL_HOST && EMAIL_USER && EMAIL_PASS) {
       const prenom     = (body.prenom      || '').trim();
@@ -102,7 +112,6 @@ module.exports = async (req, res) => {
       secure: parseInt(EMAIL_PORT || '465') === 465,
       auth: { user: EMAIL_USER, pass: EMAIL_PASS },
     });
-    const destLabel = lang === 'en' ? 'Destination' : 'Destination';
     const subject = lang === 'en'
       ? `Stay enquiry — ${name}${dest ? ' · ' + dest : ''} · ${phone}`
       : `Demande de séjour — ${name}${dest ? ' · ' + dest : ''} · ${phone}`;
@@ -111,27 +120,20 @@ module.exports = async (req, res) => {
       <div style="padding:28px"><table style="width:100%;border-collapse:collapse;font-size:14px">
         <tr><td style="padding:10px 0;color:#6b7280;width:140px">${lang === 'en' ? 'Name' : 'Prénom'}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30">${name}</td></tr>
         <tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">${lang === 'en' ? 'Phone' : 'Téléphone'}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30"><a href="tel:${phone}" style="color:#2C3D30;text-decoration:none">${phone}</a></td></tr>
-        ${dest ? `<tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">${destLabel}</td><td style="padding:10px 0;font-weight:600;color:#2C3D30">${dest}</td></tr>` : ''}
+        ${dest ? `<tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">Destination</td><td style="padding:10px 0;font-weight:600;color:#2C3D30">${dest}</td></tr>` : ''}
         <tr style="border-top:1px solid #f0ece6"><td style="padding:10px 0;color:#6b7280">Source</td><td style="padding:10px 0;color:#2C3D30">Page ${lang === 'en' ? 'Book' : 'Réserver'} — popup</td></tr>
       </table></div></div>`;
-    // Zapier webhook (parallel, non-blocking)
-    const ZAPIER_URL = process.env.ZAPIER_CALLBACK_WEBHOOK;
-    if (ZAPIER_URL) {
-      fetch(ZAPIER_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, destination: dest || '—', lang, source: 'popup-reserver' }),
-      }).catch(e => console.warn('[zapier]', e.message));
-    }
 
-    try {
-      await transporter.sendMail({ from: `ALPÉON <${EMAIL_USER}>`, to: 'reservations@alpeon.fr', subject, html, text: `${name}\n${phone}${dest ? '\n' + dest : ''}` });
-    } catch (e) { console.error('[callback] SMTP:', e.message); }
+    // Zapier + SMTP en parallèle (awaited)
+    await Promise.allSettled([
+      pingZapier(process.env.ZAPIER_CALLBACK_WEBHOOK, { name, phone, destination: dest || '—', lang, source: 'popup-reserver' }),
+      transporter.sendMail({ from: `ALPÉON <${EMAIL_USER}>`, to: 'reservations@alpeon.fr', subject, html, text: `${name}\n${phone}${dest ? '\n' + dest : ''}` }),
+    ]);
+
     return res.status(200).json({ ok: true });
   }
 
   // ── Standard contact form ─────────────────────────────────────────────────
-  // Accept both EN field names (firstName/lastName) and FR field names (prenom/nom/tel/station/type)
   const firstName   = body.firstName  || body.prenom || '';
   const lastName    = body.lastName   || body.nom    || '';
   const email       = body.email      || '';
@@ -175,37 +177,31 @@ module.exports = async (req, res) => {
       </div>
     </div>`;
 
-  // Zapier webhook (parallel, non-blocking)
-  const ZAPIER_URL = process.env.ZAPIER_CALLBACK_WEBHOOK;
-  if (ZAPIER_URL) {
-    const source = body.source || 'propriete-contact';
-    const lang   = body.lang   || 'fr';
-    fetch(ZAPIER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name:        `${firstName} ${lastName}`.trim(),
-        phone:       phone || '—',
-        source,
-        destination: propertyName || '—',
-        lang,
-      }),
-    }).catch(e => console.warn('[zapier-contact]', e.message));
-  }
+  const source = body.source || 'propriete-contact';
+  const lang   = body.lang   || 'fr';
 
-  try {
-    await transporter.sendMail({
+  // Zapier + SMTP en parallèle (awaited)
+  const [, smtpResult] = await Promise.allSettled([
+    pingZapier(process.env.ZAPIER_CALLBACK_WEBHOOK, {
+      name:        `${firstName} ${lastName}`.trim(),
+      phone:       phone || '—',
+      source,
+      destination: propertyName || '—',
+      lang,
+    }),
+    transporter.sendMail({
       from: `ALPÉON <${EMAIL_USER}>`,
       to: TO,
       replyTo: email,
       subject: `Enquiry — ${propertyName || 'ALPÉON Property'} — ${firstName} ${lastName}`,
       html,
       text: `${firstName} ${lastName} <${email}>${phone ? ` · ${phone}` : ''}\nProperty: ${propertyName || '—'}\n\n${message}`,
-    });
-    return res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error('[contact] SMTP error:', err.message);
-    // Never return 500 — email failed silently, the lead is logged server-side
-    return res.status(200).json({ ok: true, _error: 'smtp_failed' });
+    }),
+  ]);
+
+  if (smtpResult.status === 'rejected') {
+    console.error('[contact] SMTP error:', smtpResult.reason?.message);
   }
+
+  return res.status(200).json({ ok: true });
 };
