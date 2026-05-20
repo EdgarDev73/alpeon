@@ -3931,7 +3931,6 @@ function changeCount(type, delta) {
   const el = document.getElementById(cfg.el);
   if (el) el.textContent = S[cfg.key];
   updatePreview();
-  scheduleAutoAdvance(3, 2800);
 }
 
 /* État */
@@ -3940,7 +3939,6 @@ function selEtat(card) {
   card.classList.add('sel');
   S.etat = card.dataset.e;
   updatePreview();
-  scheduleAutoAdvance(4, 1500);
 }
 
 /* Équipements */
