@@ -2093,20 +2093,20 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
     .mstep-dot {
       width: 20px; height: 20px;
       border-radius: 50%;
-      border: 2px solid var(--stone-3);
+      border: 2px solid #d1ccc5;
       flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       transition: border-color .3s, background .3s;
     }
     .modal-step.active .mstep-dot {
-      border-color: var(--accent);
+      border-color: #2C3D30;
       border-top-color: transparent;
       animation: spin .7s linear infinite;
     }
-    .modal-step.active { color: var(--ink-2); }
+    .modal-step.active { color: #2C3D30; font-weight: 500; }
     .modal-step.done .mstep-dot {
-      background: var(--accent);
-      border-color: var(--accent);
+      background: #2C3D30;
+      border-color: #2C3D30;
     }
     .modal-step.done .mstep-dot::after {
       content: '';
@@ -2116,7 +2116,7 @@ footer .container{padding-inline:clamp(24px,5vw,80px);}
       border-bottom: 1.5px solid #fff;
       transform: rotate(-45deg) translateY(-1px);
     }
-    .modal-step.done { color: var(--ink); }
+    .modal-step.done { color: #2C3D30; }
     @keyframes spin { to { transform: rotate(360deg); } }
   /* ═══════════════════════════════════════
      POPUP APPEL CONSEILLER
