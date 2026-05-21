@@ -19,8 +19,12 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
-  // ── TEMP DEBUG: POST {rawsearch:"term"} → scans all raw Guesty fields ──
+  const { city, type, guests, limit = '100', bust, checkIn, checkOut, rawsearch } = req.query;
+  const bustCache = bust === '1' || !!(checkIn && checkOut) || !!rawsearch;
+
+  // ── TEMP DEBUG: POST with body {rawsearch:"term"} dumps raw Guesty fields ──
   if (req.method === 'POST' && req.body?.rawsearch) {
     const raw = await getListings({ limit: 100 });
     const listings = raw.results || raw.listings || raw.data || [];
@@ -31,9 +35,9 @@ module.exports = async (req, res) => {
       const scan = (obj, path = '') => {
         if (!obj || typeof obj !== 'object') return;
         for (const [k, v] of Object.entries(obj)) {
-          const p2 = path ? `${path}.${k}` : k;
-          if (typeof v === 'string' && v.toLowerCase().includes(term)) hits[p2] = v;
-          else if (typeof v === 'object') scan(v, p2);
+          const fullKey = path ? `${path}.${k}` : k;
+          if (typeof v === 'string' && v.toLowerCase().includes(term)) hits[fullKey] = v;
+          else if (typeof v === 'object') scan(v, fullKey);
         }
       };
       scan(l);
@@ -41,11 +45,6 @@ module.exports = async (req, res) => {
     }
     return res.status(200).json({ term, matches: results });
   }
-
-  if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
-
-  const { city, type, guests, limit = '100', bust, checkIn, checkOut } = req.query;
-  const bustCache = bust === '1' || !!(checkIn && checkOut);
 
   try {
     // 1. Mémoire Lambda : réutiliser si frais et pas de bust
