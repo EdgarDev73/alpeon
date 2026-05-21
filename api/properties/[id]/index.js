@@ -53,17 +53,17 @@ module.exports = async (req, res) => {
     let property = null;
 
     // Stratégie 1 : endpoint individuel Guesty /listings/:id
+    let directError = null;
     try {
       const raw = await getListing(id);
       property = normalizeListing(raw);
     } catch (e) {
-      // Guesty peut retourner 401 sur /listings/:id (token expiré ou quirk API)
-      // → fallback sur notre propre /api/properties qui a son cache chaud
+      directError = e.message;
       console.warn(`[properties/[id]] Direct fetch failed (${e.message.slice(0, 80)}), trying list cache`);
       property = await findInListCache(id, req);
     }
 
-    if (!property) return res.status(404).json({ error: 'Listing not found' });
+    if (!property) return res.status(404).json({ error: 'Listing not found', _directError: directError?.slice(0, 120) });
 
     _cache.set(id, { data: property, fetchedAt: now });
 
