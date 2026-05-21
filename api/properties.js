@@ -21,31 +21,8 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { city, type, guests, limit = '100', bust, checkIn, checkOut, rawsearch } = req.query;
-  const bustCache = bust === '1' || !!(checkIn && checkOut) || !!rawsearch;
-
-  // ── TEMP DEBUG: rawsearch=<term> dumps all raw Guesty fields containing the term ──
-  if (rawsearch) {
-    const { getListings } = require('./_lib/guesty');
-    const raw = await getListings({ limit: 100 });
-    const listings = raw.results || raw.listings || raw.data || [];
-    const term = rawsearch.toLowerCase();
-    const results = [];
-    for (const l of listings) {
-      const hits = {};
-      const scan = (obj, path = '') => {
-        if (!obj || typeof obj !== 'object') return;
-        for (const [k, v] of Object.entries(obj)) {
-          const fullKey = path ? `${path}.${k}` : k;
-          if (typeof v === 'string' && v.toLowerCase().includes(term)) hits[fullKey] = v;
-          else if (typeof v === 'object') scan(v, fullKey);
-        }
-      };
-      scan(l);
-      if (Object.keys(hits).length) results.push({ id: l._id, title: l.title, hits });
-    }
-    return res.status(200).json({ term: rawsearch, matches: results });
-  }
+  const { city, type, guests, limit = '100', bust, checkIn, checkOut } = req.query;
+  const bustCache = bust === '1' || !!(checkIn && checkOut); // dates → toujours fresh
 
   try {
     // 1. Mémoire Lambda : réutiliser si frais et pas de bust
