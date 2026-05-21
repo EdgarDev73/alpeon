@@ -27,16 +27,17 @@ module.exports = async (req, res) => {
     const term = req.body.rawsearch.toLowerCase();
     const results = [];
     for (const l of listings) {
-      // Flatten via JSON.stringify to avoid circular refs / deep recursion
-      const flat = JSON.stringify(l);
-      if (!flat.toLowerCase().includes(term)) continue;
-      // Find which top-level fields contain the term
       const hits = {};
-      for (const [k, v] of Object.entries(l)) {
-        const s = typeof v === 'string' ? v : JSON.stringify(v) || '';
-        if (s.toLowerCase().includes(term)) hits[k] = s.slice(0, 200);
-      }
-      results.push({ id: l._id, title: l.title, hits });
+      const scan = (obj, path = '') => {
+        if (!obj || typeof obj !== 'object') return;
+        for (const [k, v] of Object.entries(obj)) {
+          const p2 = path ? `${path}.${k}` : k;
+          if (typeof v === 'string' && v.toLowerCase().includes(term)) hits[p2] = v;
+          else if (typeof v === 'object') scan(v, p2);
+        }
+      };
+      scan(l);
+      if (Object.keys(hits).length) results.push({ id: l._id, title: l.title, hits });
     }
     return res.status(200).json({ term, matches: results });
   }
