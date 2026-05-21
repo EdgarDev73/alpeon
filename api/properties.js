@@ -24,11 +24,12 @@ module.exports = async (req, res) => {
   const { city, type, guests, limit = '100', bust, checkIn, checkOut, rawsearch } = req.query;
   const bustCache = bust === '1' || !!(checkIn && checkOut) || !!rawsearch;
 
-  // ── TEMP DEBUG: POST with body {rawsearch:"term"} dumps raw Guesty fields ──
-  if (req.method === 'POST' && req.body?.rawsearch) {
+  // ── TEMP DEBUG: rawsearch=<term> dumps all raw Guesty fields containing the term ──
+  if (rawsearch) {
+    const { getListings } = require('./_lib/guesty');
     const raw = await getListings({ limit: 100 });
     const listings = raw.results || raw.listings || raw.data || [];
-    const term = req.body.rawsearch.toLowerCase();
+    const term = rawsearch.toLowerCase();
     const results = [];
     for (const l of listings) {
       const hits = {};
@@ -43,7 +44,7 @@ module.exports = async (req, res) => {
       scan(l);
       if (Object.keys(hits).length) results.push({ id: l._id, title: l.title, hits });
     }
-    return res.status(200).json({ term, matches: results });
+    return res.status(200).json({ term: rawsearch, matches: results });
   }
 
   try {
