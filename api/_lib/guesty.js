@@ -190,35 +190,36 @@ async function guestyFetch(apiPath, { method = 'GET', body, params } = {}) {
   return res.json();
 }
 
-/* ── Listings — avec pagination par `page` ── */
+/* ── Listings — pagination par curseur (Guesty Booking Engine) ── */
 async function getListings({ limit = 100, checkIn, checkOut } = {}) {
   const PAGE_SIZE = 25;
-  let pageNum    = 1;
   let allResults = [];
   let meta       = {};
 
-  // Première page — sans paramètre de pagination pour tester la réponse brute
+  // Première page
   const first = await guestyFetch('/listings', { params: { limit: PAGE_SIZE, checkIn, checkOut } });
   meta = first;
   const page1 = first.results || first.listings || first.data || (Array.isArray(first) ? first : []);
   allResults = [...page1];
 
-  // Log de debug des champs de pagination disponibles (une fois)
-  const total = first.total || first.count || first.pagination?.total || Infinity;
+  const total = first.pagination?.total || first.total || first.count || Infinity;
   console.log(`[guesty] Page 1 → ${page1.length} listings (total: ${total === Infinity ? '?' : total})`);
-  if (first.pagination) console.log('[guesty] pagination obj:', JSON.stringify(first.pagination));
 
-  // Pages suivantes via `page` param
-  while (allResults.length < total && allResults.length < limit && page1.length === PAGE_SIZE) {
+  // Pages suivantes via curseur (cursor-based pagination Guesty)
+  let nextCursor = first.pagination?.cursor?.next || null;
+  let pageNum = 1;
+
+  while (nextCursor && allResults.length < total && allResults.length < limit) {
     pageNum++;
     try {
-      const page = await guestyFetch('/listings', { params: { limit: PAGE_SIZE, page: pageNum, checkIn, checkOut } });
+      const page = await guestyFetch('/listings', { params: { limit: PAGE_SIZE, cursor: nextCursor, checkIn, checkOut } });
       const rows = page.results || page.listings || page.data || (Array.isArray(page) ? page : []);
       if (!rows.length) break;
       allResults = [...allResults, ...rows];
+      nextCursor = page.pagination?.cursor?.next || null;
       console.log(`[guesty] Page ${pageNum} → +${rows.length} (total: ${allResults.length})`);
     } catch (e) {
-      console.warn(`[guesty] Pagination page=${pageNum} échouée:`, e.message);
+      console.warn(`[guesty] Pagination cursor page=${pageNum} échouée:`, e.message);
       break;
     }
   }
