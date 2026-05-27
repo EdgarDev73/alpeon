@@ -1,8 +1,14 @@
 /**
  * GET /api/properties/[id]/calendar
  * Query params: startDate, endDate (YYYY-MM-DD)
+ *
+ * Cache mémoire Lambda 30 min + stale-if-error : en cas d'erreur Guesty
+ * on sert le dernier calendrier connu plutôt qu'une 500.
  */
 const { getListingCalendar } = require('../../_lib/guesty');
+
+const _cache = new Map(); // `${id}:${startDate}:${endDate}` → { days, fetchedAt }
+const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -11,14 +17,21 @@ module.exports = async (req, res) => {
   const { id, startDate, endDate } = req.query;
   if (!id) return res.status(400).json({ error: 'Missing listing id' });
 
+  const cacheKey = `${id}:${startDate || ''}:${endDate || ''}`;
+  const cached   = _cache.get(cacheKey);
+  const now      = Date.now();
+
   try {
-    const raw = await getListingCalendar(id, { startDate, endDate });
-    // Guesty booking engine returns a plain array; other endpoints may wrap in { data: [], days: [] }
-    const rawDays = Array.isArray(raw) ? raw : (raw.data || raw.days || []);
-    console.log('[calendar] total days:', rawDays.length, '| sample:', JSON.stringify(rawDays[0]));
-    if (!rawDays.length) {
-      console.warn('[calendar] empty response from Guesty for listing', id);
+    // Servir depuis le cache mémoire si frais
+    if (cached && now - cached.fetchedAt < CACHE_TTL) {
+      res.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate=300, stale-if-error=86400');
+      return res.status(200).json({ days: cached.days });
     }
+
+    const raw = await getListingCalendar(id, { startDate, endDate });
+    const rawDays = Array.isArray(raw) ? raw : (raw.data || raw.days || []);
+    if (!rawDays.length) console.warn('[calendar] empty response from Guesty for listing', id);
+
     const days = rawDays.map(d => ({
       date:      d.date || d.day,
       available: d.status === 'available',
@@ -29,9 +42,21 @@ module.exports = async (req, res) => {
       cta:       d.cta || false,
       ctd:       d.ctd || false,
     }));
+
+    _cache.set(cacheKey, { days, fetchedAt: now });
+    res.setHeader('Cache-Control', 's-maxage=1800, stale-while-revalidate=300, stale-if-error=86400');
     return res.status(200).json({ days });
+
   } catch (err) {
-    console.error('[/api/properties/calendar]', err.message);
+    console.error('[calendar]', id, err.message);
+
+    // Stale cache plutôt qu'une 500
+    if (cached) {
+      console.warn('[calendar] serving stale cache after error for', id);
+      res.setHeader('Cache-Control', 'no-store');
+      return res.status(200).json({ days: cached.days, _stale: true });
+    }
+
     return res.status(500).json({ error: err.message });
   }
 };

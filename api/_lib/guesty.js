@@ -154,7 +154,7 @@ async function getToken() {
 }
 
 /* ── Requête générique Guesty ── */
-async function guestyFetch(apiPath, { method = 'GET', body, params } = {}) {
+async function guestyFetch(apiPath, { method = 'GET', body, params, _retry = false } = {}) {
   const token = await getToken();
   let url = `${BASE}${apiPath}`;
   if (params) {
@@ -184,6 +184,16 @@ async function guestyFetch(apiPath, { method = 'GET', body, params } = {}) {
     });
   } finally {
     clearTimeout(timer);
+  }
+
+  // Auto-retry on 401 : token expiré/révoqué → force refresh + une seule relance
+  if (res.status === 401 && !_retry) {
+    console.warn('[guesty] 401 on', apiPath, '— forcing token refresh and retrying...');
+    _mem = { token: null, expiry: 0 };   // vider le cache mémoire
+    _oauthLastTry  = 0;                  // annuler le cooldown
+    _oauthCooldown = 60_000;             // reset cooldown normal
+    try { fs.unlinkSync(TOKEN_FILE); } catch { /* ignore */ }
+    return guestyFetch(apiPath, { method, body, params, _retry: true });
   }
 
   if (!res.ok) throw new Error(`Guesty ${method} ${apiPath} → ${res.status}: ${await res.text()}`);
