@@ -3,6 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "rewrites": [
+    { "source": "/.well-known/apple-developer-merchantid-domain-association", "destination": "/.well-known/apple-developer-merchantid-domain-association" },
     { "source": "/api/:path*",              "destination": "/api/:path*" },
     { "source": "/sitemap.xml",             "destination": "/api/sitemap" },
     { "source": "/propriete/:slug/:id",      "destination": "/propriete/" },
