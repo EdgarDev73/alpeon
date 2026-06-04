@@ -21,24 +21,32 @@ const VERCEL_PROJECT_ID = process.env.VERCEL_PROJECT_ID || 'prj_lkINpF7Y4ucOpVPD
 async function updateVercelEnvVar(token) {
   if (!VERCEL_TOKEN) return { ok: false, reason: 'VERCEL_TOKEN not set' };
   try {
-    // Essai PATCH direct (l'env var existe déjà)
     const list = await fetch(
       `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
       { headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}` } }
     ).then(x => x.json());
-    const env = (list.envs || []).find(e => e.key === 'GUESTY_ACCESS_TOKEN');
-    if (env) {
-      const patch = await fetch(
-        `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env/${env.id}`,
-        {
-          method: 'PATCH',
-          headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ value: token, target: ['production', 'preview', 'development'] }),
-        }
-      );
-      return { ok: patch.ok, status: patch.status };
+
+    const allEnvs = list.envs || [];
+    // Il peut exister plusieurs entrées GUESTY_ACCESS_TOKEN (production / preview+dev)
+    // On met à jour TOUTES pour éviter les désynchronisations
+    const targets = allEnvs.filter(e => e.key === 'GUESTY_ACCESS_TOKEN');
+
+    if (targets.length > 0) {
+      const results = await Promise.all(targets.map(env =>
+        fetch(
+          `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env/${env.id}`,
+          {
+            method: 'PATCH',
+            headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ value: token }),
+          }
+        ).then(r => ({ id: env.id, target: env.target, ok: r.ok, status: r.status }))
+      ));
+      console.log('[refresh-token] env vars updated:', JSON.stringify(results));
+      return { ok: results.every(r => r.ok), results };
     }
-    // Fallback : créer l'env var
+
+    // Fallback : créer l'env var si elle n'existe pas du tout
     const r = await fetch(
       `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
       {
