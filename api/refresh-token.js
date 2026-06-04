@@ -140,15 +140,25 @@ module.exports = async (req, res) => {
     const vercelResult = await updateVercelEnvVar(token);
     console.log('[refresh-token] Vercel env var update:', vercelResult);
 
-    // Redéploiement en arrière-plan (non-bloquant) pour que les nouveaux Lambdas
-    // démarrent avec le token frais baked-in dans leur process.env
-    triggerRedeploy().catch(e => console.warn('[refresh-token] redeploy bg error:', e.message));
+    // Redéploiement ATTENDU (await) pour que les nouveaux Lambdas démarrent
+    // avec le token frais baked-in. Non-bloquant pour la réponse HTTP grâce
+    // au timeout Vercel cron (10s) : on répond d'abord, redeploy en parallèle.
+    const redeployPromise = triggerRedeploy();
 
     const expiry = Date.now() + (json.expires_in || 86400) * 1000;
+
+    // Attendre le redeploy jusqu'à 8s max, puis répondre quoi qu'il arrive
+    const redeployResult = await Promise.race([
+      redeployPromise,
+      new Promise(resolve => setTimeout(() => resolve({ ok: false, reason: 'timeout' }), 8000)),
+    ]);
+    console.log('[refresh-token] Redeploy result:', redeployResult);
+
     return res.status(200).json({
       ok: true,
       expires: new Date(expiry).toISOString(),
       vercel_env_updated: vercelResult.ok,
+      redeployed: redeployResult.ok,
     });
   } catch (err) {
     return res.status(500).json({ ok: false, error: err.message });

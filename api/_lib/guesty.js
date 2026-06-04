@@ -90,9 +90,11 @@ async function _doOAuth() {
   if (!r.ok) {
     const body = await r.text();
     if (r.status === 429) {
-      // Rate limited → cooldown 15min pour éviter le flood
-      _oauthCooldown = 15 * 60_000;
-      console.warn('[guesty] OAuth 429 — cooldown 15min activé');
+      // Rate limited → cooldown court (90s + jitter) pour éviter le thundering herd
+      // Ne pas utiliser 15min : ça bloque toute la Lambda pendant trop longtemps
+      const jitter = Math.floor(Math.random() * 30_000); // 0–30s aléatoire
+      _oauthCooldown = 90_000 + jitter;
+      console.warn(`[guesty] OAuth 429 — cooldown ${Math.round(_oauthCooldown/1000)}s`);
       // Retourner le token périmé plutôt que casser le site
       const stale = _mem.token || process.env.GUESTY_ACCESS_TOKEN;
       if (stale) return stale;

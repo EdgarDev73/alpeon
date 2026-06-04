@@ -50,13 +50,19 @@ module.exports = async (req, res) => {
   } catch (err) {
     console.error('[calendar]', id, err.message);
 
-    // Stale cache plutôt qu'une 500
+    // 1. Stale cache → toujours servir en priorité
     if (cached) {
       console.warn('[calendar] serving stale cache after error for', id);
       res.setHeader('Cache-Control', 'no-store');
       return res.status(200).json({ days: cached.days, _stale: true });
     }
 
-    return res.status(500).json({ error: err.message });
+    // 2. Pas de cache : retourner 200 avec tableau vide plutôt qu'une 500.
+    // L'UI affiche "disponibilité non chargée" au lieu de planter.
+    // Un 401 répété = listing non accessible via Booking Engine (pb Guesty config).
+    const is401 = err.message.includes('401');
+    console.warn(`[calendar] no cache, returning empty days (${is401 ? '401-permanent' : 'error'})`);
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({ days: [], _unavailable: true });
   }
 };
