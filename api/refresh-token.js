@@ -64,19 +64,38 @@ async function updateVercelEnvVar(token) {
   }
 }
 
-/* ── Déclenche un redéploiement Vercel (non-bloquant) ── */
+/* ── Déclenche un redéploiement Vercel ── */
 async function triggerRedeploy() {
-  if (!VERCEL_TOKEN) return { ok: false, reason: 'VERCEL_TOKEN not set' };
+  // Méthode 1 : Deploy Hook (recommandé, le plus fiable)
+  // Créer dans Vercel Dashboard → Project → Settings → Git → Deploy Hooks
+  // Puis ajouter VERCEL_DEPLOY_HOOK=<url> dans les env vars Vercel
+  const deployHook = process.env.VERCEL_DEPLOY_HOOK;
+  if (deployHook) {
+    try {
+      const r = await fetch(deployHook, { method: 'POST' });
+      const body = await r.json().catch(() => ({}));
+      console.log('[refresh-token] Deploy hook triggered:', r.status, JSON.stringify(body).slice(0, 120));
+      return { ok: r.ok, status: r.status, method: 'hook', deployment: body.job?.id };
+    } catch (e) {
+      console.warn('[refresh-token] Deploy hook failed, trying API fallback:', e.message);
+    }
+  }
+
+  // Méthode 2 : Vercel API (fallback si pas de Deploy Hook)
+  if (!VERCEL_TOKEN) return { ok: false, reason: 'VERCEL_TOKEN not set and no VERCEL_DEPLOY_HOOK' };
   try {
     // Récupérer le dernier déploiement production
-    const deploys = await fetch(
+    const deploysRes = await fetch(
       `https://api.vercel.com/v6/deployments?projectId=${VERCEL_PROJECT_ID}&target=production&limit=1`,
       { headers: { 'Authorization': `Bearer ${VERCEL_TOKEN}` } }
-    ).then(r => r.json());
-    const last = (deploys.deployments || [])[0];
-    if (!last) return { ok: false, reason: 'no production deployment found' };
+    );
+    const deploys = await deploysRes.json();
+    console.log('[refresh-token] List deploys status:', deploysRes.status, 'count:', (deploys.deployments || []).length);
 
-    // Redéployer avec les env vars fraîches
+    const last = (deploys.deployments || [])[0];
+    if (!last) return { ok: false, reason: 'no production deployment found', raw: JSON.stringify(deploys).slice(0, 200) };
+
+    console.log('[refresh-token] Redeploying uid:', last.uid, 'url:', last.url);
     const r = await fetch(
       `https://api.vercel.com/v13/deployments/${last.uid}/redeploy`,
       {
@@ -86,8 +105,8 @@ async function triggerRedeploy() {
       }
     );
     const body = await r.json();
-    console.log('[refresh-token] Redeploy triggered:', body.id || body.url || r.status);
-    return { ok: r.ok, status: r.status, deployment: body.id };
+    console.log('[refresh-token] Redeploy API result:', r.status, JSON.stringify(body).slice(0, 200));
+    return { ok: r.ok, status: r.status, method: 'api', deployment: body.id || body.uid };
   } catch (e) {
     console.warn('[refresh-token] Redeploy failed (non-critical):', e.message);
     return { ok: false, reason: e.message };
