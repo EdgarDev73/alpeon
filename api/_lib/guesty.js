@@ -141,29 +141,31 @@ async function getToken() {
     }
   } catch { /* pas de fichier */ }
 
-  // 3) Env var baked-in (même si proche de l'expiry — le cron s'en occupe)
-  if (envToken && _jwtExpiry(envToken) > Date.now()) {
-    console.log('[guesty] Using baked-in env token');
+  // 3) Env var baked-in — utilisée MÊME SI expirée.
+  //    On laisse Guesty retourner 401 si elle est vraiment périmée.
+  //    Le retry-on-401 dans guestyFetch fera UNE tentative OAuth.
+  //    Cela évite que N Lambdas froids hammèrent OAuth simultanément.
+  if (envToken) {
+    const remainMs = _jwtExpiry(envToken) - Date.now();
+    if (remainMs > 0) {
+      console.log(`[guesty] Env token valide encore ${Math.round(remainMs/3600000)}h`);
+    } else {
+      console.warn(`[guesty] Env token expiré depuis ${Math.round(-remainMs/3600000)}h — on l'essaie quand même`);
+    }
     return envToken;
   }
 
-  // 4) Dernier recours : OAuth (uniquement si vraiment aucun token valide)
-  // Dédupliqué pour éviter les requêtes parallèles depuis la même instance
+  // 4) Dernier recours : OAuth (uniquement si process.env.GUESTY_ACCESS_TOKEN absent)
   const now = Date.now();
   if (_oauthInFlight) {
     console.log('[guesty] OAuth déjà en cours, attente...');
     return _oauthInFlight;
   }
   if (now - _oauthLastTry < _oauthCooldown) {
-    const stale = _mem.token || envToken;
-    if (stale) {
-      console.warn(`[guesty] Cooldown OAuth (${Math.round(_oauthCooldown/1000)}s) — token périmé`);
-      return stale;
-    }
-    throw new Error('Aucun token disponible et cooldown OAuth actif');
+    throw new Error('Aucun token et cooldown OAuth actif');
   }
 
-  console.warn('[guesty] Aucun token valide — OAuth fallback (le cron devrait s\'en charger)');
+  console.warn('[guesty] Aucun token du tout — OAuth (le cron devrait s\'en charger)');
   _oauthLastTry = now;
   _oauthInFlight = _doOAuth().finally(() => { _oauthInFlight = null; });
   return _oauthInFlight;
