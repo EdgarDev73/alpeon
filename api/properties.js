@@ -97,9 +97,11 @@ module.exports = async (req, res) => {
     }
 
     // Tenter le fallback statique si disponible
+    // Supporte les deux formats : tableau brut [...] ou objet {properties:[...]}
     try {
-      const fallback = require('../assets/data/properties-fallback.json');
-      if (fallback && fallback.length > 0) {
+      const fallbackRaw = require('../assets/data/properties-fallback.json');
+      const fallback = Array.isArray(fallbackRaw) ? fallbackRaw : (fallbackRaw.properties || []);
+      if (fallback.length > 0) {
         res.setHeader('Cache-Control', 'no-store');
         return res.status(200).json({ properties: fallback, total: fallback.length, _fallback: true });
       }
