@@ -241,14 +241,16 @@ async function getListings({ limit = 100, checkIn, checkOut } = {}) {
   const page1 = first.results || first.listings || first.data || (Array.isArray(first) ? first : []);
   allResults = [...page1];
 
+  // Guesty Booking Engine renvoie parfois total = PAGE_SIZE (pas le vrai total global).
+  // On ne s'y fie pas pour arrêter la boucle — on suit le cursor jusqu'à ce qu'il soit null.
   const total = first.pagination?.total || first.total || first.count || Infinity;
-  console.log(`[guesty] Page 1 → ${page1.length} listings (total: ${total === Infinity ? '?' : total})`);
+  console.log(`[guesty] Page 1 → ${page1.length} listings (pagination.total: ${total === Infinity ? '?' : total})`);
 
-  // Pages suivantes via curseur (cursor-based pagination Guesty)
+  // Pages suivantes via curseur — on s'arrête sur cursor null ou limite atteinte
   let nextCursor = first.pagination?.cursor?.next || null;
   let pageNum = 1;
 
-  while (nextCursor && allResults.length < total && allResults.length < limit) {
+  while (nextCursor && allResults.length < limit) {
     pageNum++;
     try {
       const page = await guestyFetch('/listings', { params: { limit: PAGE_SIZE, cursor: nextCursor, checkIn, checkOut } });
