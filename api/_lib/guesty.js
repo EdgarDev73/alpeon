@@ -29,10 +29,6 @@ const VERCEL_PROJECT_ID = process.env.VERCEL_PROJECT_ID || 'prj_lkINpF7Y4ucOpVPD
 /* ── Cache mémoire (instance Lambda chaude) ── */
 let _mem = { token: null, expiry: 0 };
 
-/* ── Cooldown OAuth (évite flood sur requêtes concurrentes) ── */
-let _oauthInFlight = null;   // Promise en cours
-let _oauthLastTry  = 0;      // timestamp dernier essai
-
 function _jwtExpiry(token) {
   try {
     const p = JSON.parse(Buffer.from(token.split('.')[1], 'base64url').toString());
@@ -46,143 +42,51 @@ function saveToken(token, expiresIn) {
   try { fs.writeFileSync(TOKEN_FILE, JSON.stringify({ token, expiry })); } catch { /* ignore */ }
 }
 
-/* ── Persistance Vercel env var (best-effort, non-bloquant) ── */
-async function _updateVercelEnv(token) {
-  const vToken = process.env.VRL_API_TOKEN || process.env.VERCEL_TOKEN;
-  if (!vToken) return;
-  try {
-    const list = await fetch(
-      `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env`,
-      { headers: { 'Authorization': `Bearer ${vToken}` } }
-    ).then(r => r.json());
-    const env = (list.envs || []).find(e => e.key === 'GUESTY_ACCESS_TOKEN');
-    if (!env) return;
-    await fetch(
-      `https://api.vercel.com/v9/projects/${VERCEL_PROJECT_ID}/env/${env.id}`,
-      {
-        method: 'PATCH',
-        headers: { 'Authorization': `Bearer ${vToken}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ value: token, target: ['production', 'preview', 'development'] }),
-      }
-    );
-    console.log('[guesty] Vercel env GUESTY_ACCESS_TOKEN mis à jour');
-  } catch (e) {
-    console.warn('[guesty] Impossible de mettre à jour Vercel env:', e.message);
-  }
-}
-
-/* ── OAuth auto-refresh ── */
-// Cooldown dynamique : 60s normal, 15min si rate-limited
-let _oauthCooldown = 60_000;
-
-async function _doOAuth() {
-  const id     = process.env.GUESTY_CLIENT_ID;
-  const secret = process.env.GUESTY_CLIENT_SECRET;
-  if (!id || !secret) throw new Error('GUESTY_CLIENT_ID / GUESTY_CLIENT_SECRET manquants');
-
-  console.log('[guesty] Token expiré — OAuth auto-refresh...');
-  const r = await fetch(OAUTH_URL, {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body:    new URLSearchParams({ grant_type: 'client_credentials', client_id: id, client_secret: secret }),
-  });
-
-  if (!r.ok) {
-    const body = await r.text();
-    if (r.status === 429) {
-      // Rate limited → cooldown court (90s + jitter) pour éviter le thundering herd
-      // Ne pas utiliser 15min : ça bloque toute la Lambda pendant trop longtemps
-      const jitter = Math.floor(Math.random() * 30_000); // 0–30s aléatoire
-      _oauthCooldown = 90_000 + jitter;
-      console.warn(`[guesty] OAuth 429 — cooldown ${Math.round(_oauthCooldown/1000)}s`);
-      // Retourner le token périmé plutôt que casser le site
-      const stale = _mem.token || process.env.GUESTY_ACCESS_TOKEN;
-      if (stale) return stale;
-    }
-    throw new Error(`OAuth failed ${r.status}: ${body}`);
-  }
-
-  // Succès → reset cooldown normal
-  _oauthCooldown = 60_000;
-  const json = await r.json();
-  saveToken(json.access_token, json.expires_in);
-  // Mise à jour Vercel env en arrière-plan (best-effort)
-  _updateVercelEnv(json.access_token).catch(() => {});
-  console.log('[guesty] Token rafraîchi, expire dans', Math.round((json.expires_in || 86400) / 3600), 'h');
-  return json.access_token;
-}
-
 /**
- * Retourne un token valide.
+ * Retourne le meilleur token disponible — SANS JAMAIS faire d'OAuth.
  *
- * ARCHITECTURE : les Lambdas API ne font JAMAIS OAuth eux-mêmes en temps normal.
- * L'OAuth est exclusivement fait par /api/refresh-token (cron toutes les 6h).
- * Cela évite le "thundering herd" : 28 Lambdas froids qui hammèrent OAuth
- * simultanément → 429 → cooldown → 401 → site cassé.
+ * ⚠️ RÈGLE ABSOLUE : les Lambdas API (properties, calendar, quotes…) ne font
+ * JAMAIS d'appel OAuth. L'OAuth est rate-limité TRÈS agressivement par Guesty :
+ * si N Lambdas froids tentent OAuth en même temps quand le token expire, Guesty
+ * bloque (429) le client OAUTH ENTIER — y compris le cron — et il faut alors
+ * recréer une nouvelle application Guesty. C'est LA cause des pannes quotidiennes.
  *
- * Ordre de priorité :
- * 1. Cache mémoire (instance chaude)             — sauf si forceOAuth
- * 2. Cache /tmp (instance rechauffée)            — sauf si forceOAuth
- * 3. Env var GUESTY_ACCESS_TOKEN (baked-in)      — sauf si forceOAuth
- * 4. OAuth (fallback ou retry après 401)
+ * Le SEUL composant autorisé à faire OAuth est /api/refresh-token (cron 6h),
+ * qui fait 1 appel toutes les 6h = 4/jour → jamais rate-limité.
  *
- * @param {boolean} forceOAuth - true lors d'un retry 401 : sauter les caches
- *   et l'env token (on sait qu'ils sont expirés) pour aller directement en OAuth.
+ * Ici on retourne simplement le token le plus frais qu'on ait sous la main.
+ * S'il est expiré, Guesty renverra 401 et l'appelant servira son cache/stale.
+ * On ne tente RIEN pour le rafraîchir — c'est le boulot du cron.
+ *
+ * Ordre : 1) mémoire  2) /tmp  3) env var baked-in (même expirée)
  */
-async function getToken({ forceOAuth = false } = {}) {
+async function getToken() {
+  // 1) Cache mémoire (instance chaude — ex: après que le cron ait fait saveToken)
+  if (_mem.token) return _mem.token;
+
+  // 2) Cache /tmp (instance réchauffée)
+  try {
+    const { token } = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8'));
+    if (token) { _mem.token = token; return token; }
+  } catch { /* pas de fichier */ }
+
+  // 3) Env var baked-in au deploy — utilisée même si expirée.
+  //    Guesty renverra 401 si périmée → l'appelant sert son cache/stale.
   const envToken = process.env.GUESTY_ACCESS_TOKEN;
-
-  // 1) Cache mémoire frais
-  if (!forceOAuth && _mem.token && _mem.expiry > Date.now() + 300_000) return _mem.token;
-
-  // 2) Cache /tmp frais
-  if (!forceOAuth) {
-    try {
-      const { token, expiry } = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8'));
-      if (token && expiry > Date.now() + 300_000) {
-        _mem = { token, expiry };
-        return token;
-      }
-    } catch { /* pas de fichier */ }
-  }
-
-  // 3) Env var baked-in — utilisée MÊME SI expirée (sauf si forceOAuth).
-  //    On laisse Guesty retourner 401 si elle est vraiment périmée.
-  //    Le retry-on-401 dans guestyFetch appellera getToken({ forceOAuth: true })
-  //    pour sauter ce bloc et aller directement en OAuth.
-  if (!forceOAuth && envToken) {
+  if (envToken) {
     const remainMs = _jwtExpiry(envToken) - Date.now();
-    if (remainMs > 0) {
-      console.log(`[guesty] Env token valide encore ${Math.round(remainMs/3600000)}h`);
-    } else {
-      console.warn(`[guesty] Env token expiré depuis ${Math.round(-remainMs/3600000)}h — on l'essaie quand même`);
+    if (remainMs <= 0) {
+      console.warn(`[guesty] Env token expiré depuis ${Math.round(-remainMs/3600000)}h — le cron /api/refresh-token doit le renouveler`);
     }
     return envToken;
   }
 
-  // 4) OAuth — soit dernier recours (pas de token du tout), soit retry forcé après 401
-  const now = Date.now();
-  if (_oauthInFlight) {
-    console.log('[guesty] OAuth déjà en cours, attente...');
-    return _oauthInFlight;
-  }
-  if (!forceOAuth && now - _oauthLastTry < _oauthCooldown) {
-    throw new Error('Aucun token et cooldown OAuth actif');
-  }
-
-  if (forceOAuth) {
-    console.warn('[guesty] forceOAuth=true (retry 401) — OAuth direct...');
-  } else {
-    console.warn('[guesty] Aucun token du tout — OAuth (le cron devrait s\'en charger)');
-  }
-  _oauthLastTry = now;
-  _oauthInFlight = _doOAuth().finally(() => { _oauthInFlight = null; });
-  return _oauthInFlight;
+  throw new Error('Aucun token Guesty disponible (le cron /api/refresh-token doit le renouveler)');
 }
 
 /* ── Requête générique Guesty ── */
-async function guestyFetch(apiPath, { method = 'GET', body, params, _retry = false } = {}) {
-  const token = await getToken({ forceOAuth: _retry });
+async function guestyFetch(apiPath, { method = 'GET', body, params } = {}) {
+  const token = await getToken();
   let url = `${BASE}${apiPath}`;
   if (params) {
     const qs = new URLSearchParams(
@@ -213,16 +117,15 @@ async function guestyFetch(apiPath, { method = 'GET', body, params, _retry = fal
     clearTimeout(timer);
   }
 
-  // Auto-retry on 401 : token expiré/révoqué → forceOAuth pour sauter l'env token
-  // et aller directement en OAuth (getToken sans forceOAuth renverrait le même
-  // token expiré depuis l'env var, ce qui provoquerait une boucle infinie de 401).
-  if (res.status === 401 && !_retry) {
-    console.warn('[guesty] 401 on', apiPath, '— forcing OAuth and retrying...');
-    _mem = { token: null, expiry: 0 };   // vider le cache mémoire
-    _oauthLastTry  = 0;                  // annuler le cooldown
-    _oauthCooldown = 60_000;             // reset cooldown normal
+  // 401 = token périmé. On NE fait PAS d'OAuth ici (cause du thundering herd
+  // → 429 → client OAuth bloqué). On vide juste le cache mémoire/tmp pour que
+  // la prochaine instance reparte de l'env var, et on remonte l'erreur :
+  // l'appelant (properties.js / calendar.js) sert alors son cache ou un fallback.
+  // C'est le cron /api/refresh-token qui renouvellera le token.
+  if (res.status === 401) {
+    console.warn('[guesty] 401 on', apiPath, '— token périmé, le cron doit le renouveler (pas d\'OAuth Lambda)');
+    _mem = { token: null, expiry: 0 };
     try { fs.unlinkSync(TOKEN_FILE); } catch { /* ignore */ }
-    return guestyFetch(apiPath, { method, body, params, _retry: true });
   }
 
   if (!res.ok) throw new Error(`Guesty ${method} ${apiPath} → ${res.status}: ${await res.text()}`);
